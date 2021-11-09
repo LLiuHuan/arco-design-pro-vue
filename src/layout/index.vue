@@ -1,10 +1,11 @@
 <template>
   <a-layout class="layout">
     <!--  <LoadingBar ref={loadingBarRef} />-->
-    <!--    <div v-if="showNavbar" class="layoutNavbar">-->
-    <!--      <Navbar />-->
-    <!--    </div>-->
-    <div style="background-color: red" class="layoutNavbar">1112222</div>
+    <!--    v-if="showNavbar" -->
+    <div class="layoutNavbar">
+      <NavBar />
+    </div>
+    <!--    <div style="background-color: red" class="layoutNavbar">1112222</div>-->
     <a-layout>
       <a-sider class="layoutSider" style="width: 220px; padding-top: 60px" width="200">
         <div class="menuWrapper">
@@ -60,10 +61,13 @@
   import { defineComponent } from 'vue';
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
+  import NavBar from '@/components/NavBar/index.vue';
 
   export default defineComponent({
     name: 'Layout',
-    components: {},
+    components: {
+      NavBar,
+    },
     setup() {
       const { headerSetting } = projectSetting;
       return {

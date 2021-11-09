@@ -1,6 +1,6 @@
 {
   "name": "arco-design-pro-vue",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "author": {
     "name": "LLiuHuan",
     "email": "184555556@qq.com",
@@ -9,11 +9,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0 -n ./changelog-option.js"
   },
   "private": true,
   "dependencies": {
     "@types/node": "^16.11.6",
+    "conventional-changelog-cmyr-config": "^1.2.3",
     "date-fns": "^2.25.0",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12"
@@ -26,6 +28,11 @@
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/eslint-config-prettier": "^6.0.0",
     "autoprefixer": "^9",
+    "commitizen": "^4.2.4",
+    "compare-func": "^2.0.0",
+    "conventional-changelog-cli": "^2.1.1",
+    "conventional-changelog-custom-config": "^0.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -48,6 +55,57 @@
     "vue-eslint-parser": "^8.0.1",
     "vue-tsc": "^0.3.0"
   },
+  "changelog": {
+    "authorName": true,
+    "authorEmail": true,
+    "language": "zh",
+    "settings": {
+      "feat": {
+        "title": "✨ 新功能",
+        "enable": true
+      },
+      "fix": {
+        "title": "🐛 Bug 修复",
+        "enable": true
+      },
+      "perf": {
+        "title": "⚡ 性能优化",
+        "enable": true
+      },
+      "revert": {
+        "title": "⏪ 回退",
+        "enable": true
+      },
+      "refactor": {
+        "title": "♻ 代码重构",
+        "enable": true
+      },
+      "docs": {
+        "title": "📝 文档",
+        "enable": true
+      },
+      "style": {
+        "title": "💄 风格",
+        "enable": true
+      },
+      "test": {
+        "title": "✅ 测试",
+        "enable": true
+      },
+      "build": {
+        "title": "👷‍ 构建",
+        "enable": true
+      },
+      "ci": {
+        "title": "🔧 CI 配置",
+        "enable": true
+      },
+      "chore": {
+        "title": "🎫 其他更新",
+        "enable": true
+      }
+    }
+  },
   "lint-staged": {
     "*.{vue,js,ts,tsx}": "eslint --fix"
   },
@@ -63,13 +121,14 @@
     "ts",
     "admin"
   ],
-  "resolutions": {
-    "type": "git",
-    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git"
-  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LLiuHuan/arco-design-pro-vue/issues"
+    "url": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+    "email": "184555556@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LLiuHuan/arco-design-pro-vue.git"
   },
   "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
   "engines": {

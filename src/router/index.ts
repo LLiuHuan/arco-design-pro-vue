@@ -1,5 +1,5 @@
 import { App } from 'vue';
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
@@ -34,7 +34,7 @@ export const asyncRoutes = [...routeModuleList];
 export const constantRouter: any[] = [...asyncRoutes, RootRouter];
 
 const router = createRouter({
-  history: createWebHistory(''),
+  history: createWebHashHistory(''),
   routes: constantRouter,
   strict: true,
   scrollBehavior: () => ({ left: 0, top: 0 }),

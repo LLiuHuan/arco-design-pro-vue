@@ -1,7 +1,7 @@
 <template>
   <a-spin :loading="false" style="width: 100%">
     <a-tabs type="rounded" default-active-key="message" destroyOnHide>
-      <a-tab-pane v-for="tab in tabList" :key="tab.key" :title="tab.title">
+      <a-tab-pane v-for="tab in tabList" :key="tab.key" :title="tab.title + '(2)'">
         Content of Tab Panel 1
       </a-tab-pane>
     </a-tabs>

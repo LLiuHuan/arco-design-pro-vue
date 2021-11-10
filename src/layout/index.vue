@@ -12,7 +12,6 @@
           <a-menu
             :defaultOpenKeys="['1']"
             :defaultSelectedKeys="['0_2']"
-            @menuItemClick="onClickMenuItem"
           >
             <a-menu-item key="0_1" disabled>
               <IconHome />

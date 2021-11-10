@@ -27,6 +27,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   return {
     plugins: [vue()],
     esbuild: {},
+    // base: '/arco-design-pro-vue/',
     resolve: {
       alias: [
         {

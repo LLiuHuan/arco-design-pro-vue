@@ -10,25 +10,13 @@
       <li>
         <a>文档中心</a>
       </li>
-      <!--      <li>-->
-      <!--        <Select-->
-      <!--          options={[-->
-      <!--          { label: '中文', value: 'zh-CN' },-->
-      <!--        { label: 'English', value: 'en-US' },-->
-      <!--        ]}-->
-      <!--        value={localStorage.getItem('arco-lang')}-->
-      <!--        bordered={false}-->
-      <!--        triggerProps={{-->
-      <!--          autoAlignPopupWidth: false,-->
-      <!--            autoAlignPopupMinWidth: true,-->
-      <!--            position: 'bl',-->
-      <!--        }}-->
-      <!--        onChange={(value) => {-->
-      <!--        localStorage.setItem('arco-lang', value);-->
-      <!--        window.location.reload();-->
-      <!--        }}-->
-      <!--        />-->
-      <!--      </li>-->
+      <li>
+        <a-select v-model:value="language" :bordered="false">
+          <a-option v-for="opt in options" :key="opt.value" :value="opt.value">{{
+            opt.label
+          }}</a-option>
+        </a-select>
+      </li>
       <!--      <li>-->
       <!--        <Tooltip-->
       <!--          content={-->
@@ -70,7 +58,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, reactive, toRefs } from 'vue';
   import Logo from '@/components/Logo/index.vue';
   import MessageBox from '@/components/MessageBox/index.vue';
   export default defineComponent({
@@ -80,7 +68,16 @@
       MessageBox,
     },
     setup() {
-      return {};
+      const state = reactive({
+        options: [
+          { label: '中文', value: 'zh-CN' },
+          { label: 'English', value: 'en-US' },
+        ],
+        language: 'zh-CN',
+      });
+      return {
+        ...toRefs(state),
+      };
     },
   });
 </script>

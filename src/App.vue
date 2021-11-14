@@ -14,6 +14,11 @@
       // 设置为暗黑主题
       document.body.setAttribute('arco-theme', 'dark');
 
+      const localeName = localStorage.getItem('arco-lang') || 'zh-CN';
+
+      if (!localStorage.getItem('arco-lang')) {
+        localStorage.setItem('arco-lang', localeName);
+      }
       return {
         zhCN,
       };

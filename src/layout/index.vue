@@ -7,12 +7,9 @@
     </div>
     <!--    <div style="background-color: red" class="layoutNavbar">1112222</div>-->
     <a-layout>
-      <a-sider class="layoutSider" style="width: 220px; padding-top: 60px" width="200">
+      <a-layout-sider class="layoutSider" style="width: 220px; padding-top: 60px">
         <div class="menuWrapper">
-          <a-menu
-            :defaultOpenKeys="['1']"
-            :defaultSelectedKeys="['0_2']"
-          >
+          <a-menu :defaultOpenKeys="['1']" :defaultSelectedKeys="['0_2']">
             <a-menu-item key="0_1" disabled>
               <IconHome />
               Menu 1
@@ -47,7 +44,7 @@
             </a-sub-menu>
           </a-menu>
         </div>
-      </a-sider>
+      </a-layout-sider>
       <a-layout class="layoutContent" style="padding-left: 220px; padding-top: 60px">
         <a-layout-content> <router-view /> </a-layout-content>
         <a-layout-footer>1111</a-layout-footer>

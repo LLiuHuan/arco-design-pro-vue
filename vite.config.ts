@@ -24,21 +24,23 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const viteEnv = wrapperEnv(env);
   const { VITE_PORT } = viteEnv;
 
+  const alias: Record<string, string> = {
+    // '@': `${resolve(__dirname, 'src')}/`,
+    '@': pathResolve('src') + '/',
+    '//#//': pathResolve('types') + '/',
+  };
+
+  if (env) {
+    // 解决警告You are running the esm-bundler build of vue-i18n.
+    alias['vue-i18n'] = 'vue-i18n/dist/vue-i18n.cjs.js';
+  }
+
   return {
     plugins: [vue()],
     esbuild: {},
-    // base: '/arco-design-pro-vue/',
+    base: '/arco-design-pro-vue/',
     resolve: {
-      alias: [
-        {
-          find: /\/#\//,
-          replacement: pathResolve('types') + '/',
-        },
-        {
-          find: '@',
-          replacement: pathResolve('src') + '/',
-        },
-      ],
+      alias: alias,
       dedupe: ['vue'],
     },
     define: {

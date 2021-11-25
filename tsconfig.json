@@ -21,7 +21,8 @@
       "esnext"
     ],
     "types": [
-      "vite/client"
+      "vite/client",
+      "node"
     ],
     "typeRoots": [
       "./node_modules/@types/",
@@ -47,7 +48,7 @@
     "types/**/*.ts",
     "build/**/*.ts",
     "build/**/*.d.ts",
-    "mock/**/*.ts",
+    "src/mock/**/*.ts",
     "vite.config.ts"
   ],
   "exclude": [

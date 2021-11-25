@@ -80,9 +80,11 @@
       console.log(locale);
 
       // 修改语言
-      const setLang = (value: string) => {
-        locale.value = value;
-        localStorage.setItem('arco-lang', value);
+      const setLang = (value: string | null) => {
+        if (value) {
+          locale.value = value;
+          localStorage.setItem('arco-lang', value);
+        }
       };
       return {
         ...toRefs(state),

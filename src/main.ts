@@ -3,8 +3,8 @@ import App from './App.vue';
 import { setupArco } from './plugins/arco-design';
 import '@arco-design/web-vue/dist/arco.css';
 import { setupRouter } from '@/router';
-import './styles/tailwind.css';
 import { setupI18n } from '@/plugins/i18n';
+import 'virtual:windi.css';
 
 const app = createApp(App);
 

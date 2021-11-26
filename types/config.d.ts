@@ -15,7 +15,7 @@ export interface GlobEnvConfig {
   VITE_GLOB_PROD_MOCK: boolean;
 }
 
-// axios config
+// api config
 export interface GlobConfig {
   title: string;
   apiUrl: string;

@@ -10,12 +10,12 @@
     Should Fill Something Here
   </div>
   <div class="p-20"> </div>
+  <a-button type="outline">Outline</a-button>
 </template>
 
 <script lang="ts">
   import { defineComponent, onBeforeMount } from 'vue';
   import { Notification } from '@arco-design/web-vue';
-  import { getTableList } from '@/axios/test1';
   export default defineComponent({
     name: 'WorkPlace',
     setup() {
@@ -23,11 +23,7 @@
         Notification.info({ content: 'This is an info message!' });
       };
 
-      onBeforeMount(() => {
-        getTableList({}).then((res: any) => {
-          console.log(res);
-        });
-      });
+      onBeforeMount(() => {});
 
       return {
         openNotification,

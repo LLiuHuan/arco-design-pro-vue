@@ -21,11 +21,13 @@ function pathResolve(dir: string) {
 }
 
 // https://vitejs.dev/config/
-export default ({ mode }: ConfigEnv): UserConfig => {
+export default ({ mode, command }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PORT } = viteEnv;
+  const { VITE_PORT, VITE_GLOB_PROD_MOCK } = viteEnv;
+  const isBuild = command === 'build';
+  const prodMock = VITE_GLOB_PROD_MOCK;
 
   const alias: Record<string, string> = {
     // '@': `${resolve(__dirname, 'src')}/`,
@@ -59,8 +61,17 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       }),
       WindiCSS(),
       viteMockServe({
-        mockPath: './src/mock',
-        supportTs: true,
+        ignore: /^\_/, // 忽略指定格式的文件
+        mockPath: 'mock', // mock文件夹
+        supportTs: true, // 读取ts，打开后就无法监视js了
+        localEnabled: !isBuild, // 开发打包开关
+        prodEnabled: isBuild && prodMock, // 生产打包开关
+        logger: true, //是否在控制台显示请求日志
+        injectCode: `
+         import { setupProdMockServer } from 'mock/_createProdMockServer';
+   
+         setupProdMockServer();
+         `,
       }),
     ],
     esbuild: {},

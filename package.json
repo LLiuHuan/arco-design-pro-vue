@@ -7,8 +7,10 @@
     "url": "https://github.com/LLiuHuan/arco-design-pro-vue"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development vite",
+    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "dev:mock": "cross-env NODE_ENV=development vite",
+    "build:mock": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0 -n ./changelog-option.js",
     "deploy": "vue-tsc --noEmit && vite build && gh-pages -d dist"
@@ -27,6 +29,7 @@
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.5",
     "@types/mockjs": "^1.0.4",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",

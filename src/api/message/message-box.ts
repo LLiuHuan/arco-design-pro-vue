@@ -1,9 +1,8 @@
 import http from '@/utils/http/axios';
 
-//获取table
-export function getTableList(params) {
+export function getMessageList(params) {
   return http.request({
-    url: '/getUsers',
+    url: '/message/list',
     method: 'get',
     params,
   });

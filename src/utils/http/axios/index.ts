@@ -22,7 +22,7 @@ const transform: AxiosTransform = {
    */
   transformRequestData: (res: AxiosResponse<Result>, options: RequestOptions) => {
     // @ts-ignore
-    // const { $message: Message, $dialog: Modal } = window;
+    const { $message: Message, $dialog: Modal } = window;
     const {
       isShowMessage = true, // 是否显示提示信息
       isShowErrorMessage, // 是否显示失败信息
@@ -45,54 +45,51 @@ const transform: AxiosTransform = {
 
     const reject = Promise.reject;
 
-    const { data } = res;
+    const result = res.data;
 
-    if (!data) {
+    if (!result) {
       // return '[HTTP] Request has no return value';
-      return reject(data);
+      return reject(result);
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data;
+    const { code, data, message } = result;
     // 请求成功
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
+    const hasSuccess = result && Reflect.has(result, 'code') && code === ResultEnum.SUCCESS;
     // 是否显示提示信息
     if (isShowMessage) {
       if (hasSuccess && (successMessageText || isShowSuccessMessage)) {
         // 是否显示自定义信息提示
-        console.log(successMessageText || message || '操作成功！');
-        // Message.success(successMessageText || message || '操作成功！');
+        Message.success(successMessageText || message || '操作成功！');
       } else if (!hasSuccess && (errorMessageText || isShowErrorMessage)) {
         // 是否显示自定义信息提示
-        console.error(message || errorMessageText || '操作失败！');
-        // Message.error(message || errorMessageText || '操作失败！');
+        Message.error(message || errorMessageText || '操作失败！');
       } else if (!hasSuccess && options.errorMessageMode === 'modal') {
-        // errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
-        // Modal.info({
-        //   title: '提示',
-        //   content: message,
-        //   positiveText: '确定',
-        //   onPositiveClick: () => {},
-        // });
-        console.log(
-          'model errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误'
-        );
+        Modal.info({
+          title: '提示',
+          content: message,
+          okText: '确定',
+          onOk: () => {},
+          onCancel: () => {},
+        });
+        // console.log(
+        //   'model errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误'
+        // );
       }
     }
 
     // 接口请求成功，直接返回结果
     if (code === ResultEnum.SUCCESS) {
-      return result;
+      return data;
     }
     // 接口请求错误，统一提示错误信息
     if (code === ResultEnum.ERROR) {
       if (message) {
         // Message.error(data.message);
-        console.error(data.message);
+        Message.error(message);
         Promise.reject(new Error(message));
       } else {
         const msg = '操作失败,系统异常!';
-        // Message.error(msg);
-        console.error(data.message);
+        Message.error(msg);
         Promise.reject(new Error(msg));
       }
       return reject();
@@ -199,7 +196,7 @@ const transform: AxiosTransform = {
    */
   responseInterceptorsCatch: (error: any) => {
     // @ts-ignore
-    // const { $message: Message, $dialog: Modal } = window;
+    const { $message: Message, $dialog: Modal } = window;
     const { response, code, message } = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg: string =
@@ -207,18 +204,17 @@ const transform: AxiosTransform = {
     const err: string = error.toString();
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
-        console.error('接口请求超时,请刷新页面重试!');
-        // Message.error('接口请求超时,请刷新页面重试!');
+        Message.error('接口请求超时,请刷新页面重试!');
         return;
       }
       if (err && err.includes('Network Error')) {
-        console.error('网络异常 请检查您的网络连接是否正常');
-        // Modal.info({
-        //   title: '网络异常',
-        //   content: '请检查您的网络连接是否正常!',
-        //   positiveText: '确定',
-        //   onPositiveClick: () => {},
-        // });
+        Modal.info({
+          title: '网络异常',
+          content: '请检查您的网络连接是否正常!',
+          okText: '确定',
+          onOk: () => {},
+          onCancel: () => {},
+        });
         return;
       }
     } catch (error) {
@@ -229,7 +225,8 @@ const transform: AxiosTransform = {
     if (!isCancel) {
       checkStatus(error.response && error.response.status, msg, console);
     } else {
-      console.warn(error, '请求被取消！');
+      Message.warning('请求被取消！');
+      // console.warn(error, '请求被取消！');
     }
     return error;
   },

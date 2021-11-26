@@ -19,7 +19,12 @@
       </li>
       <li>
         <a-tooltip :content="theme === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'">
-          <a-button class="p-0 w-8 h-8" type="text" style="font-size: 20px">
+          <a-button
+            @click="changeTheme(theme === 'light' ? 'dark' : 'light')"
+            class="p-0 w-8 h-8"
+            type="text"
+            style="font-size: 20px"
+          >
             <icon-moon-fill v-if="theme === 'light'" />
             <icon-sun-fill v-else />
           </a-button>
@@ -77,7 +82,7 @@
       });
       // 使用i18n
       const { locale } = useI18n();
-      console.log(locale);
+      // console.log(locale);
 
       // 修改语言
       const setLang = (value: string | null) => {
@@ -86,9 +91,21 @@
           localStorage.setItem('arco-lang', value);
         }
       };
+
+      // 修改亮色/黑暗模式
+      const changeTheme = (newTheme: string) => {
+        if (newTheme === 'dark') {
+          document.body.setAttribute('arco-theme', 'dark');
+          state.theme = newTheme;
+        } else {
+          document.body.removeAttribute('arco-theme');
+          state.theme = newTheme;
+        }
+      };
+
       return {
         ...toRefs(state),
-
+        changeTheme,
         setLang,
       };
     },

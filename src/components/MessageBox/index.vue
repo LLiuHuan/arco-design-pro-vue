@@ -7,7 +7,7 @@
     </div>
     <template #content>
       <div class="messageBox">
-        <drop-content />
+        <message-content />
       </div>
     </template>
   </a-dropdown>
@@ -15,11 +15,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import DropContent from '@/components/DropContent/index.vue';
+  import MessageContent from '@/components/MessageBox/content.vue';
   export default defineComponent({
     name: 'MessageBox',
     components: {
-      DropContent,
+      MessageContent,
     },
     setup() {
       return {};

@@ -2,11 +2,8 @@
   <a-spin :loading="messageLoading" style="width: 100%">
     <a-tabs type="rounded" default-active-key="message" destroyOnHide>
       <a-tab-pane v-for="tab in tabList" :key="tab.key">
-        <!-- TODO: 动态图标太费劲了 先对着显示吧 后期会改成 symbol 或者使用h函数  -->
         <template #title>
-          <icon-message v-if="tab.titleIcon === 'icon-message'" />
-          <icon-customer-service v-else-if="tab.titleIcon === 'icon-customer-service'" />
-          <icon-file v-else-if="tab.titleIcon === 'icon-file'" />
+          <SvgIcon :icon="tab.titleIcon" />
           {{ tab.title }} {{ tabListCont(tab.key) ? '(' + tabListCont(tab.key) + ')' : `` }}
         </template>
         <MessageList :list="groupData && groupData[tab.key]" avatar="123" />
@@ -22,11 +19,14 @@
   import { groupBy } from 'lodash-es';
   import { MessageListType } from '@/components/MessageBox/index';
   import MessageList from '@/components/MessageBox/list.vue';
+  import SvgIcon from '@/components/Icon/index.vue';
+  import { IconMessage, IconCustomerService, IconFile } from '@arco-design/web-vue/es/icon';
 
   export default defineComponent({
     name: 'MessageContent',
     components: {
       MessageList,
+      SvgIcon,
     },
     setup() {
       const { t } = useI18n();
@@ -40,17 +40,17 @@
         {
           key: 'message',
           title: t(`messageBox.tab.title.message`),
-          titleIcon: 'icon-message',
+          titleIcon: IconMessage,
         },
         {
           key: 'notice',
           title: t(`messageBox.tab.title.notice`),
-          titleIcon: 'icon-customer-service',
+          titleIcon: IconCustomerService,
         },
         {
           key: 'approve',
           title: t(`messageBox.tab.title.approve`),
-          titleIcon: 'icon-file',
+          titleIcon: IconFile,
           avatar: '',
         },
       ];

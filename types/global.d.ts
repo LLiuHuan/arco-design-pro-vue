@@ -1,3 +1,5 @@
+declare type Recordable<T = any> = Record<string, T>;
+
 declare global {
   const __APP_INFO__: {
     pkg: {
@@ -8,8 +10,6 @@ declare global {
     };
     lastBuildTime: string;
   };
-
-  declare type Recordable<T = any> = Record<string, T>;
 
   declare interface ViteEnv {
     VITE_PORT: number;

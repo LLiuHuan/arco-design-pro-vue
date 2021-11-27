@@ -16,7 +16,7 @@ const routeName = 'dashboard';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/dashboard',
-    name: routeName,
+    name: `${routeName}.index`,
     redirect: '/dashboard/workplace',
     component: Layout,
     meta: {
@@ -28,9 +28,9 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'workplace',
-        name: `${routeName}_workplace`,
+        name: `${routeName}.workplace`,
         meta: {
-          title: '工作台',
+          title: 'Workplace',
           permissions: ['dashboard_workplace'],
         },
         component: () => import('@/views/dashboard/workplace/workplace.vue'),

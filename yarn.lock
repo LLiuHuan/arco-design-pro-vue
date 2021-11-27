@@ -492,6 +492,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@rollup/plugin-alias@^3.1.8":
+  version "3.1.8"
+  resolved "https://registry.npmmirror.com/@rollup/plugin-alias/download/@rollup/plugin-alias-3.1.8.tgz#645fd84659e08d3d1b059408fcdf69c1dd435a6b"
+  integrity sha1-ZF/YRlngjT0bBZQI/N9pwd1DWms=
+  dependencies:
+    slash "^3.0.0"
+
 "@rollup/plugin-node-resolve@^13.0.4":
   version "13.0.6"
   resolved "https://registry.npmmirror.com/@rollup/plugin-node-resolve/download/@rollup/plugin-node-resolve-13.0.6.tgz#29629070bb767567be8157f575cfa8f2b8e9ef77"
@@ -587,6 +594,11 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/path-browserify@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@types/path-browserify/download/@types/path-browserify-1.0.0.tgz?cache=0&sync_timestamp=1637270048702&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fpath-browserify%2Fdownload%2F%40types%2Fpath-browserify-1.0.0.tgz#294ec6e88b6b0d340a3897b7120e5b393f16690e"
+  integrity sha1-KU7G6ItrDTQKOJe3Eg5bOT8WaQ4=
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -803,7 +815,7 @@
     "@vue/compiler-dom" "3.2.21"
     "@vue/shared" "3.2.21"
 
-"@vue/devtools-api@^6.0.0-beta.13":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13":
   version "6.0.0-beta.20.1"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.20.1.tgz#5b499647e929c35baf2a66a399578f9aa4601142"
   integrity sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==
@@ -4002,6 +4014,11 @@ pascal-case@^3.1.2:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+path-browserify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.nlark.com/path-browserify/download/path-browserify-1.0.1.tgz#d98454a9c3753d5790860f16f68867b9e46be1fd"
+  integrity sha1-2YRUqcN1PVeQhg8W9ohnueRr4f0=
+
 path-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/path-case/-/path-case-3.0.4.tgz#9168645334eb942658375c56f80b4c0cb5f82c6f"
@@ -4051,6 +4068,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+path-value@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.npmmirror.com/path-value/download/path-value-0.9.4.tgz#4ca96403b3b596950bcbb8cec2a19cdb79013d6d"
+  integrity sha512-7p49AvUZw71hyMWZstvKZ2cOM05hG+PrqxvZVpvHTLYXSkUYTmOtrJp/Uq8G+Ue8uewmpzIGw08dRHWOMhgq9Q==
 
 picocolors@^0.2.1:
   version "0.2.1"
@@ -5525,6 +5547,13 @@ vue@^3.2.16:
     "@vue/runtime-dom" "3.2.21"
     "@vue/server-renderer" "3.2.21"
     "@vue/shared" "3.2.21"
+
+vuex@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.nlark.com/vuex/download/vuex-4.0.2.tgz?cache=0&sync_timestamp=1623945218026&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvuex%2Fdownload%2Fvuex-4.0.2.tgz#f896dbd5bf2a0e963f00c67e9b610de749ccacc9"
+  integrity sha1-+Jbb1b8qDpY/AMZ+m2EN50nMrMk=
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

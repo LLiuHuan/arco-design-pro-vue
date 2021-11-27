@@ -11,14 +11,20 @@
   </div>
   <div class="p-20"> </div>
   <a-button type="outline">Outline</a-button>
+  {{ theme }}
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeMount } from 'vue';
+  import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { Notification } from '@arco-design/web-vue';
+  import { useStore } from 'vuex';
   export default defineComponent({
     name: 'WorkPlace',
     setup() {
+      const store = useStore();
+      const state = reactive({
+        theme: ref(store.getters.getTheme),
+      });
       const openNotification = () => {
         Notification.info({ content: 'This is an info message!' });
       };
@@ -27,6 +33,7 @@
 
       return {
         openNotification,
+        ...toRefs(state),
       };
     },
   });

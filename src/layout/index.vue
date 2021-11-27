@@ -9,40 +9,7 @@
     <a-layout>
       <a-layout-sider class="layoutSider" style="width: 220px; padding-top: 60px">
         <div class="menuWrapper">
-          <a-menu :defaultOpenKeys="['1']" :defaultSelectedKeys="['0_2']">
-            <a-menu-item key="0_1" disabled>
-              <IconHome />
-              Menu 1
-            </a-menu-item>
-            <a-menu-item key="0_2">
-              <IconCalendar />
-              Menu 2
-            </a-menu-item>
-            <a-sub-menu key="1">
-              <template #title>
-                <span><IconCalendar />Navigation 1</span>
-              </template>
-              <a-menu-item key="1_1">Menu 1</a-menu-item>
-              <a-menu-item key="1_2">Menu 2</a-menu-item>
-              <a-sub-menu key="2" title="Navigation 2">
-                <a-menu-item key="2_1">Menu 1</a-menu-item>
-                <a-menu-item key="2_2">Menu 2</a-menu-item>
-              </a-sub-menu>
-              <a-sub-menu key="3" title="Navigation 3">
-                <a-menu-item key="3_1">Menu 1</a-menu-item>
-                <a-menu-item key="3_2">Menu 2</a-menu-item>
-                <a-menu-item key="3_3">Menu 3</a-menu-item>
-              </a-sub-menu>
-            </a-sub-menu>
-            <a-sub-menu key="4">
-              <template #title>
-                <span><IconCalendar />Navigation 4</span>
-              </template>
-              <a-menu-item key="4_1">Menu 1</a-menu-item>
-              <a-menu-item key="4_2">Menu 2</a-menu-item>
-              <a-menu-item key="4_3">Menu 3</a-menu-item>
-            </a-sub-menu>
-          </a-menu>
+          <Menu />
         </div>
       </a-layout-sider>
       <a-layout class="layoutContent" style="padding-left: 220px; padding-top: 60px">
@@ -58,11 +25,13 @@
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
   import NavBar from '@/components/NavBar/index.vue';
+  import Menu from '@/components/Menu/index.vue';
 
   export default defineComponent({
     name: 'Layout',
     components: {
       NavBar,
+      Menu,
     },
     setup() {
       const { headerSetting } = projectSetting;

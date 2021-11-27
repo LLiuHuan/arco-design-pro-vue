@@ -9,7 +9,6 @@ module.exports = {
         note.title = 'BREAKING CHANGES';
         discard = false;
       });
-      console.log(commit.type);
       if (commit.type === 'feat') {
         commit.type = '✨ Features | 新功能';
       } else if (commit.type === 'fix') {

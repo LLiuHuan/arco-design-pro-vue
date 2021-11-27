@@ -42,12 +42,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, PropType } from 'vue';
+  import { MessageListType } from '@/components/MessageBox/index';
+
   export default defineComponent({
     name: 'MessageList',
     props: {
       list: {
-        type: Array,
+        type: Array as PropType<MessageListType>,
         default: null,
       },
     },

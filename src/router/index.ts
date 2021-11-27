@@ -32,11 +32,11 @@ export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
 export const constantRouter: any[] = [...asyncRoutes, RootRouter];
-
+console.log(constantRouter);
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,
-  strict: true,
+  // strict: true,
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 

@@ -8,7 +8,7 @@
         <MessageBox />
       </li>
       <li>
-        <a>{{ $t('navbar.docs') }}</a>
+        <a target="_blank" :href="docs">{{ $t('navbar.docs') }}</a>
       </li>
       <li>
         <a-select v-model="language" @change="setLang(language)">
@@ -18,7 +18,9 @@
         </a-select>
       </li>
       <li>
-        <a-tooltip :content="theme === 'light' ? '点击切换为暗黑模式' : '点击切换为亮色模式'">
+        <a-tooltip
+          :content="theme === 'light' ? '点击切换为暗黑模式' + theme : '点击切换为亮色模式' + theme"
+        >
           <a-button
             @click="changeTheme(theme === 'light' ? 'dark' : 'light')"
             class="p-0 w-8 h-8"
@@ -65,6 +67,7 @@
   import Logo from '@/components/Logo/index.vue';
   import MessageBox from '@/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
+  import { storage } from '@/utils/storage';
   export default defineComponent({
     name: 'NavBar',
     components: {
@@ -78,11 +81,11 @@
           { label: 'English', value: 'en-US' },
         ],
         language: localStorage.getItem('arco-lang'),
-        theme: 'dark', // light
+        theme: storage.get('theme'), // light
+        docs: 'https://arco.design/vue/docs/start',
       });
       // 使用i18n
       const { locale } = useI18n();
-      // console.log(locale);
 
       // 修改语言
       const setLang = (value: string | null) => {
@@ -96,11 +99,13 @@
       const changeTheme = (newTheme: string) => {
         if (newTheme === 'dark') {
           document.body.setAttribute('arco-theme', 'dark');
-          state.theme = newTheme;
+          // state.theme = newTheme;
         } else {
           document.body.removeAttribute('arco-theme');
-          state.theme = newTheme;
+          // state.theme = newTheme;
         }
+        storage.set('theme', newTheme);
+        state.theme = newTheme;
       };
 
       return {

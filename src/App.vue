@@ -8,11 +8,13 @@
   // import enUs from '@arco-design/web-vue/es/locale/lang/en-us';
   import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
   import { defineComponent } from 'vue';
+  import { storage } from '@/utils/storage';
   export default defineComponent({
     name: 'App',
     setup() {
+      const theme = storage.get('theme') || 'dark';
       // 设置为暗黑主题
-      document.body.setAttribute('arco-theme', 'dark');
+      document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
 
       const localeName = localStorage.getItem('arco-lang') || 'zh-CN';
 

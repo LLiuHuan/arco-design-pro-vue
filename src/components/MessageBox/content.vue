@@ -3,7 +3,7 @@
     <a-tabs type="rounded" default-active-key="message" destroyOnHide>
       <a-tab-pane v-for="tab in tabList" :key="tab.key">
         <template #title>
-          <SvgIcon :icon="tab.titleIcon" />
+          <component :is="tab.titleIcon" />
           {{ tab.title }} {{ tabListCont(tab.key) ? '(' + tabListCont(tab.key) + ')' : `` }}
         </template>
         <MessageList :list="groupData && groupData[tab.key]" avatar="123" />
@@ -19,14 +19,12 @@
   import { groupBy } from 'lodash-es';
   import { MessageListType } from '@/components/MessageBox/index';
   import MessageList from '@/components/MessageBox/list.vue';
-  import SvgIcon from '@/components/Icon/index.vue';
   import { IconMessage, IconCustomerService, IconFile } from '@arco-design/web-vue/es/icon';
 
   export default defineComponent({
     name: 'MessageContent',
     components: {
       MessageList,
-      SvgIcon,
     },
     setup() {
       const { t } = useI18n();

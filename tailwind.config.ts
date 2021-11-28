@@ -33,6 +33,7 @@ export default defineConfig({
       borderRadius: {
         '4xl': '2rem',
       },
+      inset: {},
     },
   },
   plugins: [

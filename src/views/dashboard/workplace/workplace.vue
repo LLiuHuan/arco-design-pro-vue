@@ -1,4 +1,8 @@
 <template>
+  <div class="container">
+    <banner />
+  </div>
+
   <h1>1234</h1>
   <div class="dark">
     <span class="cursor-pointer p-1 text-white dark:text-white container1">2345</span>
@@ -18,8 +22,12 @@
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { Notification } from '@arco-design/web-vue';
   import { useStore } from 'vuex';
+  import Banner from '@/views/dashboard/workplace/banner.vue';
   export default defineComponent({
     name: 'WorkPlace',
+    components: {
+      Banner,
+    },
     setup() {
       const store = useStore();
       const state = reactive({
@@ -46,3 +54,34 @@
 <!--    border: 1px solid var(&#45;&#45;color-border-1);-->
 <!--  }-->
 <!--</style>-->
+
+<style lang="less" scoped>
+  .container {
+    background-color: var(--color-fill-2);
+  }
+
+  .banner {
+    background-color: var(--color-bg-2);
+    padding: 20px;
+  }
+
+  .content {
+    padding: 20px;
+    display: flex;
+  }
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    width: 280px;
+    margin-left: 12px;
+  }
+
+  .panel {
+    background-color: var(--color-bg-2);
+    margin-bottom: 12px;
+    border-radius: 2px;
+  }
+</style>

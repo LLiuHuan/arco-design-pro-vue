@@ -1,6 +1,6 @@
 <template>
   <a-menu :defaultOpenKeys="['1']" :defaultSelectedKeys="['0_2']">
-    <menu-item v-for="menu in menus" :key="menu" :item="menu" />
+    <menu-item v-for="menu in menus" :key="menu.name" :item="menu" />
     <!--   不分组   -->
   </a-menu>
 </template>

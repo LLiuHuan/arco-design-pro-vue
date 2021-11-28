@@ -1,6 +1,7 @@
 import type { ConfigEnv, UserConfig } from 'vite';
 import { loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // import eslintPlugin from "vite-plugin-eslint";
 import { resolve } from 'path';
 import { wrapperEnv } from './build/utils';
@@ -41,6 +42,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
   return {
     plugins: [
       vue(),
+      vueJsx(),
       alias(),
       // 没弄懂有没有用
       styleImport({

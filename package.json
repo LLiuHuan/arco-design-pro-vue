@@ -13,7 +13,7 @@
     "build:mock": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0 -n ./changelog-option.js",
-    "deploy": "vue-tsc --noEmit && vite build && gh-pages -d dist"
+    "deploy": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build && gh-pages -d dist"
   },
   "private": true,
   "dependencies": {

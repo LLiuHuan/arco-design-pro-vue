@@ -3,7 +3,7 @@
     <template v-if="!item.children && !isArray(item.children)">
       <router-link :to="resolvePath(item.path)">
         <a-menu-item>
-          <SvgIcon :icon="item.meta.icon" />
+          <component :is="item.meta.icon" />
           {{ $t('menu.' + item.name) }}
         </a-menu-item>
       </router-link>
@@ -11,7 +11,7 @@
 
     <a-sub-menu v-else>
       <template #title>
-        <SvgIcon :icon="item.meta.icon" />
+        <component :is="item.meta.icon" />
         {{ $t('menu.' + item.name) }}
       </template>
       <menu-item v-for="child in item.children" :item="child" :base-path="item.path" :key="child" />
@@ -23,12 +23,9 @@
   import { defineComponent } from 'vue';
   import { isArray } from 'lodash-es';
   import { isExternal } from '@/utils';
-  import SvgIcon from '@/components/Icon/index.vue';
   export default defineComponent({
     name: 'MenuItem',
-    components: {
-      SvgIcon,
-    },
+    components: {},
     props: {
       item: {
         type: Object,

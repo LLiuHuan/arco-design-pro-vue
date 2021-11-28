@@ -1,6 +1,7 @@
 import { App } from 'vue';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
+import { createRouterGuards } from '@/router/router-guards';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 
@@ -32,7 +33,6 @@ export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
 export const constantRouter: any[] = [...asyncRoutes, RootRouter];
-console.log(constantRouter);
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,
@@ -43,6 +43,7 @@ const router = createRouter({
 export function setupRouter(app: App) {
   app.use(router);
   // 路由守卫
+  createRouterGuards(router);
 }
 
 export default router;

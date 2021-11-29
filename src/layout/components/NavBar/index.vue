@@ -50,9 +50,9 @@
       <!--        <Dropdown-->
       <!--          trigger="click"-->
       <!--          droplist={-->
-      <!--        <Menu onClickMenuItem={onMenuItemClick}>-->
-      <!--          <Menu.Item key="logout">登出</Menu.Item>-->
-      <!--        </Menu>-->
+      <!--        <MenuBox onClickMenuItem={onMenuItemClick}>-->
+      <!--          <MenuBox.Item key="logout">登出</MenuBox.Item>-->
+      <!--        </MenuBox>-->
       <!--        }-->
       <!--        >-->
       <!--        <Typography.Text class={styles.username}>{userInfo.name}</Typography.Text>-->
@@ -64,8 +64,8 @@
 
 <script lang="ts">
   import { defineComponent, reactive, toRefs } from 'vue';
-  import Logo from '@/components/Logo/index.vue';
-  import MessageBox from '@/components/MessageBox/index.vue';
+  import Logo from '@/layout/components/Logo/index.vue';
+  import MessageBox from '@/layout/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
   import { storage } from '@/utils/storage';
   export default defineComponent({

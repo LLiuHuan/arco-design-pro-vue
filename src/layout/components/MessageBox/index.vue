@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import MessageContent from '@/components/MessageBox/content.vue';
+  import MessageContent from '@/layout/components/MessageBox/content.vue';
   export default defineComponent({
     name: 'MessageBox',
     components: {

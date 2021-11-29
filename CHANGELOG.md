@@ -1,4 +1,4 @@
-## 0.0.1-beta (2021-11-27)
+## 0.0.1-beta (2021-11-28)
 
 
 ### ✨ Features | 新功能
@@ -9,6 +9,7 @@
 * **Menu:** 优化部分代码、动态Icon ([b09c11c](https://github.com/LLiuHuan/arco-design-pro-vue/commit/b09c11c)) by: **刘欢** (184555556@qq.com)
 * **NavBar:** NavBar部分样式、i18n ([284f697](https://github.com/LLiuHuan/arco-design-pro-vue/commit/284f697)) by: **刘欢** (184555556@qq.com)
 * **NavBar:** 显示模式、axios、消息、mock ([c8754bf](https://github.com/LLiuHuan/arco-design-pro-vue/commit/c8754bf)) by: **刘欢** (184555556@qq.com)
+* **NavBar:** 添加进度条 ([7d900d5](https://github.com/LLiuHuan/arco-design-pro-vue/commit/7d900d5)) by: **刘欢** (184555556@qq.com)
 * **setting:** 配置github pages ([30a879f](https://github.com/LLiuHuan/arco-design-pro-vue/commit/30a879f)) by: **刘欢** (184555556@qq.com)
 
 

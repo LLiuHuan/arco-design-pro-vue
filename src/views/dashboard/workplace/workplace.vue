@@ -58,6 +58,7 @@
 <style lang="less" scoped>
   .container {
     background-color: var(--color-fill-2);
+    max-width: 100%;
   }
 
   .banner {

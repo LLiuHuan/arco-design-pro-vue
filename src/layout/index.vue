@@ -1,36 +1,34 @@
 <template>
   <a-layout class="layout">
     <LoadingBar ref="loading" />
-    <!--    v-if="showNavbar" -->
     <div class="layoutNavbar">
-      <NavBar />
+      <nav-bar />
     </div>
-    <!--    <div style="background-color: red" class="layoutNavbar">1112222</div>-->
     <a-layout>
       <a-layout-sider
         collapsible
         :collapsed="collapsed"
-        @collapse="fold"
         class="layoutSider"
+        hide-trigger
         style="padding-top: 60px"
         :style="{ width: collapsed ? '48px' : '220px' }"
       >
-        <!-- trigger -->
-        <template #trigger="{ collapsed }">
-          <icon-caret-right v-if="collapsed" />
-          <icon-caret-left v-else />
-        </template>
-        <!--        <div class="menuWrapper">-->
-        <Menu />
-        <!--        </div>-->
+        <menu-box />
+        <div class="collapseBtn" @click="fold">
+          <icon-menu-unfold v-if="collapsed" />
+          <icon-menu-fold v-else />
+        </div>
       </a-layout-sider>
       <a-layout
         class="layoutContent"
         style="padding-top: 60px"
         :style="{ paddingLeft: collapsed ? '48px' : '220px' }"
       >
-        <a-layout-content> <router-view /> </a-layout-content>
-        <a-layout-footer>1111</a-layout-footer>
+        <a-layout-content>
+          <tags-view />
+          <router-view />
+        </a-layout-content>
+        <footer-bar />
       </a-layout>
     </a-layout>
   </a-layout>
@@ -40,18 +38,22 @@
   import { defineComponent, ref, watch } from 'vue';
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
-  import NavBar from '@/components/NavBar/index.vue';
-  import Menu from '@/components/Menu/index.vue';
-  import LoadingBar from '@/components/LoadingBar/index.vue';
   import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import LoadingBarType from '@/components/LoadingBar/LoadingBar';
+  import LoadingBarType from '@/layout/components/LoadingBar/LoadingBar';
+  import NavBar from '@/layout/components/NavBar/index.vue';
+  import MenuBox from '@/layout/components/MenuBox/index.vue';
+  import LoadingBar from '@/layout/components/LoadingBar/index.vue';
+  import FooterBar from '@/layout/components/FooterBar/index.vue';
+  import { TagsView } from '@/layout/components/TagsView';
 
   export default defineComponent({
     name: 'Layout',
     components: {
       NavBar,
-      Menu,
+      MenuBox,
       LoadingBar,
+      FooterBar,
+      TagsView,
     },
     setup: function () {
       const loading = ref<null | LoadingBarType>(null);

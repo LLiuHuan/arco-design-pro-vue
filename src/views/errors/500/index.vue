@@ -1,5 +1,13 @@
 <template>
-  <h1>500</h1>
+  <div class="container">
+    <a-result class="result" status="500" :title="$t('exception.result.500.description')">
+      <template #subtitle>
+        <a-button key="back" type="primary">
+          {{ $t('exception.result.500.back') }}
+        </a-button>
+      </template>
+    </a-result>
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,4 +20,21 @@
   });
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+  .container {
+    position: relative;
+    background-color: var(--color-bg-1);
+    height: 100%;
+    max-width: 100%;
+  }
+
+  .result {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :deep(.arco-result-subtitle) {
+    padding-top: 15px;
+  }
+</style>

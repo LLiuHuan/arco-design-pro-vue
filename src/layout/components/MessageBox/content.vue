@@ -17,8 +17,8 @@
   import { useI18n } from 'vue-i18n';
   import { getMessageList } from '@/api/message/message-box';
   import { groupBy } from 'lodash-es';
-  import { MessageListType } from '@/components/MessageBox/index';
-  import MessageList from '@/components/MessageBox/list.vue';
+  import { MessageListType } from '@/layout/components/MessageBox/index';
+  import MessageList from '@/layout/components/MessageBox/list.vue';
   import { IconMessage, IconCustomerService, IconFile } from '@arco-design/web-vue/es/icon';
 
   export default defineComponent({

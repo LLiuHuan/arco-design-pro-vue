@@ -6,6 +6,7 @@ export function createRouterGuards(router: Router) {
 
   // , failure
   router.afterEach((to, _) => {
+    // TODO: title暂时先不适配i18n
     document.title = (to?.meta?.title as string) || document.title;
   });
 

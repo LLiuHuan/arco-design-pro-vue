@@ -10,7 +10,7 @@
   import { generatorMenu } from '@/utils';
   import { asyncRoutes } from '@/router';
   import { isArray } from 'lodash-es';
-  import MenuItem from '@/components/Menu/MenuItem.vue';
+  import MenuItem from '@/layout/components/MenuBox/MenuItem.vue';
 
   export default defineComponent({
     name: 'Menu',

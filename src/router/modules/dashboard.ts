@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
+import { IconDashboard } from '@arco-design/web-vue/es/icon';
 
 const routeName = 'dashboard';
 
@@ -21,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: 'Dashboard',
-      icon: '',
+      icon: IconDashboard,
       permissions: ['dashboard_workplace'],
       sort: 0,
     },
@@ -34,6 +35,15 @@ const routes: Array<RouteRecordRaw> = [
           permissions: ['dashboard_workplace'],
         },
         component: () => import('@/views/dashboard/workplace/workplace.vue'),
+      },
+      {
+        path: 'monitor',
+        name: `${routeName}.monitor`,
+        meta: {
+          title: 'Monitor',
+          permissions: ['dashboard_monitor'],
+        },
+        component: () => import('@/views/dashboard/monitor/index.vue'),
       },
     ],
   },

@@ -1,3 +1,5 @@
+import { RouteLocationNormalized } from 'vue-router';
+
 export interface GlobEnvConfig {
   // 标题
   VITE_GLOB_APP_TITLE: string;
@@ -25,3 +27,9 @@ export interface GlobConfig {
   prodMock: boolean;
   imgUrl?: string;
 }
+
+// Tabs
+export type RouteItem = Partial<RouteLocationNormalized> & {
+  fullPath: string;
+  name: string;
+};

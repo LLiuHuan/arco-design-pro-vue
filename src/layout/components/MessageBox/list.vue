@@ -43,7 +43,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { MessageListType } from '@/components/MessageBox/index';
+  import { MessageListType } from '@/layout/components/MessageBox/index';
 
   export default defineComponent({
     name: 'MessageList',

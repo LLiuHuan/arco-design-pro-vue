@@ -5,7 +5,9 @@ const localeBase = {
   menu: {
     lang: '中文',
     dashboard: {
+      index: '仪表台',
       workplace: '工作台',
+      monitor: '实时监控',
     },
     errors: {
       index: '异常页',
@@ -23,6 +25,23 @@ const localeBase = {
       },
     },
     allRead: '全部已读',
+  },
+  exception: {
+    result: {
+      403: {
+        description: '对不起，您没有访问该资源的权限',
+        back: '返回',
+      },
+      404: {
+        description: '抱歉，页面不见了～',
+        retry: '重试',
+        back: '返回',
+      },
+      500: {
+        description: '抱歉，服务器出了点问题～',
+        back: '返回',
+      },
+    },
   },
 };
 

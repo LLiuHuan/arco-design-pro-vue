@@ -25,6 +25,23 @@ const localeBase = {
     },
     allRead: 'All Read',
   },
+  exception: {
+    result: {
+      403: {
+        description: 'Access to this resource on the server is denied',
+        back: 'Back',
+      },
+      404: {
+        description: 'Whoops, this page is gone.',
+        retry: 'Retry',
+        back: 'Back',
+      },
+      500: {
+        description: 'Internal server error',
+        back: 'Back',
+      },
+    },
+  },
 };
 
 export default {

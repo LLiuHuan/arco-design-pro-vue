@@ -8,7 +8,7 @@
     }"
   >
     <div class="tabs-view-main">
-      <div class="tabs-card">
+      <div ref="navWrap" class="tabs-card" :class="{ 'tabs-card-scrollable': scrollable }">
         <span
           class="tabs-card-prev"
           :class="{ 'tabs-card-prev-hide': !scrollable }"
@@ -91,7 +91,18 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, nextTick, reactive, ref, toRefs, unref, watch } from 'vue';
+  import {
+    computed,
+    defineComponent,
+    nextTick,
+    onMounted,
+    reactive,
+    ref,
+    toRefs,
+    unref,
+    UnwrapRef,
+    watch,
+  } from 'vue';
   import { useStore } from 'vuex';
   import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
   import { PageEnum } from '@/enums/pageEnum';
@@ -100,6 +111,8 @@
   import { Message } from '@arco-design/web-vue';
   import Draggable from 'vuedraggable';
   import { storage } from '@/utils/storage';
+  import elementResizeDetectorMaker from 'element-resize-detector';
+
   export default defineComponent({
     name: 'TagsView',
     components: {
@@ -111,6 +124,7 @@
       const router = useRouter();
       const isCurrent = ref(false);
       const navScroll: any = ref(null);
+      const navWrap: any = ref(null);
       const flex = ref(null);
       const theme = storage.get('theme') || 'dark';
       const state = reactive({
@@ -168,11 +182,13 @@
       };
 
       // 关闭其他
-      const closeOther = (route: RouteItem | RouteLocationNormalizedLoaded) => {
+      const closeOther = (
+        route: RouteItem | RouteLocationNormalizedLoaded | UnwrapRef<RouteLocationNormalizedLoaded>
+      ) => {
         store.commit(MutationType.SET_CLOSE_OTHER_TABS, route);
         state.activeKey = route.fullPath;
         router.replace(route.fullPath);
-        // updateNavScroll();
+        updateNavScroll();
       };
 
       // 关闭全部
@@ -180,7 +196,7 @@
         localStorage.removeItem('routes');
         store.commit(MutationType.SET_CLOSE_ALL_TABS, route);
         router.replace(PageEnum.BASE_HOME);
-        // updateNavScroll();
+        updateNavScroll();
       };
 
       //删除tab
@@ -191,8 +207,9 @@
       }
 
       // 关闭当前页面
-      const removeTab = (route: RouteItem | RouteLocationNormalizedLoaded) => {
-        console.log(tabsList);
+      const removeTab = (
+        route: RouteItem | RouteLocationNormalizedLoaded | UnwrapRef<RouteLocationNormalizedLoaded>
+      ) => {
         if (tabsList.value.length === 1) {
           Message.warning('这已经是最后一页，不能再关闭了！');
           return;
@@ -205,7 +222,7 @@
           state.activeKey = currentRoute.fullPath;
           router.push(currentRoute);
         }
-        // updateNavScroll();
+        updateNavScroll();
       };
 
       //tags 跳转页面
@@ -214,6 +231,22 @@
         if (fullPath === route.fullPath) return;
         state.activeKey = fullPath;
         router.push({ path: fullPath });
+      }
+
+      /**
+       * @param value 要滚动到的位置
+       * @param amplitude 每次滚动的长度
+       */
+      function scrollTo(value: number, amplitude: number): any {
+        const currentScroll = navScroll.value.scrollLeft;
+        const scrollWidth =
+          (amplitude > 0 && currentScroll + amplitude >= value) ||
+          (amplitude < 0 && currentScroll + amplitude <= value)
+            ? value
+            : currentScroll + amplitude;
+        navScroll.value && navScroll.value.scrollTo(scrollWidth, 0);
+        if (scrollWidth === value) return;
+        return window.requestAnimationFrame(() => scrollTo(value, amplitude));
       }
 
       // 滚动 左
@@ -240,24 +273,63 @@
         scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
       }
 
+      /**
+       * @param autoScroll 是否开启自动滚动功能
+       */
+      async function updateNavScroll(autoScroll?: boolean) {
+        await nextTick();
+        if (!navScroll.value) return;
+        const containerWidth = navScroll.value.offsetWidth;
+        const navWidth = navScroll.value.scrollWidth;
+
+        if (containerWidth < navWidth) {
+          state.scrollable = true;
+          if (autoScroll) {
+            let tagList = navScroll.value.querySelectorAll('.tabs-card-scroll-item') || [];
+            [...tagList].forEach((tag: HTMLElement) => {
+              // fix SyntaxError
+              if (tag.id === `tag${state.activeKey.split('/').join('\/')}`) {
+                tag.scrollIntoView && tag.scrollIntoView();
+              }
+            });
+          }
+        } else {
+          state.scrollable = false;
+        }
+      }
+
+      function handleResize() {
+        updateNavScroll(true);
+      }
+
       watch(
         () => route.fullPath,
         (to) => {
           if (whiteList.includes(route.name as string)) return;
           state.activeKey = to;
-          // console.log(getSimpleRoute(route));
-          // console.log(tabsList);
           store.commit(MutationType.SET_ADD_TABS, getSimpleRoute(route));
-          // updateNavScroll(true);
+          updateNavScroll(true);
         },
         { immediate: true }
       );
+
+      onMounted(() => {
+        onElementResize();
+      });
+
+      function onElementResize() {
+        let observer;
+        observer = elementResizeDetectorMaker();
+        observer.listenTo(navWrap.value, handleResize);
+      }
+
       return {
         ...toRefs(state),
         tabsList,
         isDisabled,
         flex,
         navScroll,
+        navWrap,
         isCurrent,
         route,
         unref,
@@ -272,6 +344,7 @@
         scrollPrev,
         scrollNext,
         theme,
+        updateNavScroll,
       };
     },
   });
@@ -283,6 +356,7 @@
     padding: 6px 0;
     display: flex;
     transition: all 0.2s ease-in-out;
+    background-color: var(--color-bg-3);
 
     &-main {
       height: 32px;

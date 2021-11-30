@@ -7,12 +7,16 @@ const localeBase = {
     dashboard: {
       index: 'Dashboard',
       workplace: 'Workplace',
+      monitor: 'Real-time Monitor',
     },
     errors: {
       index: 'Errors',
       403: '403',
       404: '404',
       500: '500',
+    },
+    about: {
+      index: 'About',
     },
   },
   messageBox: {

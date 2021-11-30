@@ -1,11 +1,11 @@
 <template>
-  <a-layout-footer class="footer text-center">Arco Design Pro Vue</a-layout-footer>
+  <h1>ProfileBasic</h1>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
   export default defineComponent({
-    name: 'FooterBar',
+    name: 'ProfileBasic',
     setup() {
       return {};
     },

@@ -5,6 +5,7 @@
       <nav-bar />
     </div>
     <a-layout>
+      <!--   TODO: 改为动态 48 220  -->
       <a-layout-sider
         collapsible
         :collapsed="collapsed"
@@ -25,8 +26,17 @@
         :style="{ paddingLeft: collapsed ? '48px' : '220px' }"
       >
         <a-layout-content>
+          <!--          <a-affix :offsetTop="60">-->
           <tags-view />
-          <router-view />
+          <!--          </a-affix>-->
+          <div
+            :class="{
+              'main-view-fix': true,
+              noMultiTabs: false,
+            }"
+          >
+            <router-view />
+          </div>
         </a-layout-content>
         <footer-bar />
       </a-layout>
@@ -87,6 +97,15 @@
         }
       );
 
+      // const watchWidth = () => {
+      //   const Width = document.body.clientWidth;
+      //   collapsed.value = Width <= 950;
+      // };
+
+      // onMounted(() => {
+      //   window.addEventListener('resize', watchWidth);
+      // });
+
       return {
         styles,
         headerSetting,
@@ -100,4 +119,14 @@
 
 <style lang="less" scoped>
   @import './style/layout.module.less';
+
+  .main-view-fix {
+    //padding-top: 24px;
+    height: calc(100% - 44px);
+  }
+
+  .noMultiTabs {
+    //padding-top: 0;
+    height: 100%;
+  }
 </style>

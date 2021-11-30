@@ -2,14 +2,14 @@
   <div v-if="!item.hidden">
     <template v-if="!item.children && !isArray(item.children)">
       <router-link :to="resolvePath(item.path)">
-        <a-menu-item>
+        <a-menu-item :key="'menu-item' + item.name">
           <component :is="item.meta.icon" />
           {{ $t('menu.' + item.name) }}
         </a-menu-item>
       </router-link>
     </template>
 
-    <a-sub-menu v-else>
+    <a-sub-menu v-else :key="'sub-menu-item' + item.name">
       <template #title>
         <component :is="item.meta.icon" />
         {{ $t('menu.' + item.name) }}

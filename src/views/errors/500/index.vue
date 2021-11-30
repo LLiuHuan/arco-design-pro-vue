@@ -24,7 +24,7 @@
   .container {
     position: relative;
     background-color: var(--color-bg-1);
-    height: 100%;
+    height: calc(100% - 40px);
     max-width: 100%;
   }
 

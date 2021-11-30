@@ -543,6 +543,11 @@
     "@babel/runtime" "^7"
     "@twin.arco/colors" "0.1.0"
 
+"@types/element-resize-detector@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.npmmirror.com/@types/element-resize-detector/download/@types/element-resize-detector-1.1.3.tgz#0154ef4117305d26ab7a5ac16b83ee51f6b9bb8c"
+  integrity sha1-AVTvQRcwXSarelrBa4PuUfa5u4w=
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.npmmirror.com/@types/estree/download/@types/estree-0.0.39.tgz?cache=0&sync_timestamp=1637265079861&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Festree%2Fdownload%2F%40types%2Festree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
@@ -1150,6 +1155,11 @@ balanced-match@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-2.0.0.tgz#dc70f920d78db8b858535795867bf48f820633d9"
   integrity sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==
+
+batch-processor@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/batch-processor/download/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
+  integrity sha1-dclcMrdI4IUNEMKxaPa9vpiRrOg=
 
 binary-extensions@^2.0.0:
   version "2.2.0"
@@ -1954,6 +1964,13 @@ electron-to-chromium@^1.3.896:
   version "1.3.907"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.907.tgz#c8e155a17cb642a1023481c601aa3ad9ee61f402"
   integrity sha512-xoUPSkjimw51d9ryeH38XUwmR3HmCA+eky4hk0YEgsWeBWGyhb35OCvT3lWAdmvIkcGYCRNOB8LvtO00dJQpOA==
+
+element-resize-detector@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.nlark.com/element-resize-detector/download/element-resize-detector-1.2.3.tgz?cache=0&sync_timestamp=1624540261948&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felement-resize-detector%2Fdownload%2Felement-resize-detector-1.2.3.tgz#5078d9b99398fe4c589f8c8df94ff99e5d413ff3"
+  integrity sha1-UHjZuZOY/kxYn4yN+U/5nl1BP/M=
+  dependencies:
+    batch-processor "1.0.0"
 
 email-addresses@^3.0.1:
   version "3.1.0"

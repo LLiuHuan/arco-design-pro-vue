@@ -19,7 +19,6 @@
     },
     setup() {
       const menus = generatorMenu(asyncRoutes);
-      console.log(menus);
       return {
         menus,
 

@@ -15,6 +15,9 @@ const localeBase = {
       404: '404',
       500: '500',
     },
+    about: {
+      index: '关于',
+    },
   },
   messageBox: {
     tab: {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -21,8 +21,7 @@
       "esnext"
     ],
     "types": [
-      "vite/client",
-      "node"
+      "vite/client"
     ],
     "typeRoots": [
       "./node_modules/@types/",
@@ -45,6 +44,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
+    "types/*.d.ts",
     "types/**/*.ts",
     "build/**/*.ts",
     "build/**/*.d.ts",

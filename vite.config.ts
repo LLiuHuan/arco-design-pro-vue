@@ -11,6 +11,7 @@ import WindiCSS from 'vite-plugin-windicss';
 import { viteMockServe } from 'vite-plugin-mock';
 import alias from '@rollup/plugin-alias';
 import pkg from './package.json';
+import { OUTPUT_DIR } from './build/constant';
 
 const { dependencies, devDependencies, name, version } = pkg;
 
@@ -28,7 +29,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PORT, VITE_GLOB_PROD_MOCK } = viteEnv;
+  const { VITE_PORT, VITE_GLOB_PROD_MOCK, VITE_DROP_CONSOLE } = viteEnv;
   const isBuild = command === 'build';
   // const alias: Record<string, string> = {
   //   // '@': `${resolve(__dirname, 'src')}/`,
@@ -116,8 +117,21 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       host: true,
       port: VITE_PORT,
     },
+    optimizeDeps: {
+      include: [],
+      exclude: ['vue-demi'],
+    },
     build: {
-      chunkSizeWarningLimit: 1500,
+      target: 'es2015',
+      outDir: OUTPUT_DIR,
+      terserOptions: {
+        compress: {
+          keep_infinity: true,
+          drop_console: VITE_DROP_CONSOLE,
+        },
+      },
+      brotliSize: false,
+      chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           manualChunks(id) {

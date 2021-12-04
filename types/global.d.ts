@@ -1,15 +1,19 @@
 declare type Recordable<T = any> = Record<string, T>;
 
-declare global {
-  const __APP_INFO__: {
-    pkg: {
-      name: string;
-      version: string;
-      dependencies: Recordable<string>;
-      devDependencies: Recordable<string>;
-    };
-    lastBuildTime: string;
+declare let __APP_INFO__: {
+  pkg: {
+    name: string;
+    version: string;
+    dependencies: Recordable<string>;
+    devDependencies: Recordable<string>;
   };
+  lastBuildTime: string;
+};
+
+declare global {
+  declare type Recordable<T = any> = Record<string, T>;
+
+  declare function parseInt(s: string | number, radix?: number): number;
 
   declare interface ViteEnv {
     VITE_PORT: number;
@@ -23,5 +27,24 @@ declare global {
     VITE_PROXY: [string, string][];
     VITE_BUILD_COMPRESS: 'gzip' | 'brotli' | 'none';
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
+  }
+
+  namespace JSX {
+    // tslint:disable no-empty-interface
+    type Element = VNode;
+    // tslint:disable no-empty-interface
+    type ElementClass = ComponentRenderProxy;
+
+    interface ElementAttributesProperty {
+      $props: any;
+    }
+
+    interface IntrinsicElements {
+      [elem: string]: any;
+    }
+
+    interface IntrinsicAttributes {
+      [elem: string]: any;
+    }
   }
 }

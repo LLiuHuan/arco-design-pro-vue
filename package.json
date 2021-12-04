@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:esno": "vite build && esno ./build/script/postBuild.ts",
     "dev:mock": "cross-env NODE_ENV=development vite",
     "build:mock": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build",
     "serve": "vite preview",
@@ -25,6 +26,7 @@
     "conventional-changelog-cmyr-config": "^1.2.3",
     "date-fns": "^2.25.0",
     "element-resize-detector": "^1.2.3",
+    "esno": "^0.12.1",
     "lodash-es": "^4.17.21",
     "path-browserify": "^1.0.1",
     "path-value": "^0.9.4",
@@ -36,6 +38,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/lodash-es": "^4.17.5",
     "@types/mockjs": "^1.0.4",
     "@types/path-browserify": "^1.0.0",
@@ -50,6 +53,7 @@
     "conventional-changelog-custom-config": "^0.3.1",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^10.0.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -142,6 +146,7 @@
     "typescript",
     "vue3",
     "ts",
+    "tsx",
     "admin"
   ],
   "license": "MIT",

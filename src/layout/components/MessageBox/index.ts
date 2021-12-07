@@ -9,3 +9,7 @@ export interface MessageItemData {
 }
 
 export type MessageListType = MessageItemData[];
+
+import MessageBox from './index.vue';
+
+export { MessageBox };

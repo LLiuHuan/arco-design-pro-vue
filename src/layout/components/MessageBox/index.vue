@@ -57,4 +57,8 @@
       align-items: flex-start;
     }
   }
+
+  .arco-dropdown {
+    max-height: 600px !important;
+  }
 </style>

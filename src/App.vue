@@ -21,6 +21,12 @@
       if (!localStorage.getItem('arco-lang')) {
         localStorage.setItem('arco-lang', localeName);
       }
+
+      document.body.style.setProperty(
+        `--arcoblue-6`,
+        localStorage.getItem('color') ?? '5, 160, 69'
+      );
+
       return {
         zhCN,
       };

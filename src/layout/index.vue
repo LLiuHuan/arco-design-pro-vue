@@ -42,6 +42,7 @@
       </a-layout>
     </a-layout>
   </a-layout>
+  <Settings />
 </template>
 
 <script lang="ts">
@@ -50,11 +51,12 @@
   import projectSetting from '@/settings/projectSetting';
   import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
   import LoadingBarType from '@/layout/components/LoadingBar/LoadingBar';
-  import NavBar from '@/layout/components/NavBar/index.vue';
-  import MenuBox from '@/layout/components/MenuBox/index.vue';
-  import LoadingBar from '@/layout/components/LoadingBar/index.vue';
-  import FooterBar from '@/layout/components/FooterBar/index.vue';
+  import { NavBar } from '@/layout/components/NavBar';
+  import { MenuBox } from '@/layout/components/MenuBox';
+  import { LoadingBar } from '@/layout/components/LoadingBar';
+  import { FooterBar } from '@/layout/components/FooterBar';
   import { TagsView } from '@/layout/components/TagsView';
+  import { Settings } from '@/layout/components/Settings';
 
   export default defineComponent({
     name: 'Layout',
@@ -64,6 +66,7 @@
       LoadingBar,
       FooterBar,
       TagsView,
+      Settings,
     },
     setup: function () {
       const loading = ref<null | LoadingBarType>(null);

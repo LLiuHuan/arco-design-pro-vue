@@ -39,9 +39,11 @@
                     @click.stop="goPage(element)"
                     @contextmenu="handleContextMenu($event, element)"
                   >
-                    <span v-if="activeKey !== element.path">{{ element.meta.title }}</span>
+                    <span v-if="activeKey !== element.path">{{ $t('menu.' + element.name) }}</span>
                     <span v-else
-                      ><a-badge class="pr-1.5" dot status="success" />{{ element.meta.title }}</span
+                      ><a-badge class="pr-1.5" dot status="success" />{{
+                        $t('menu.' + element.name)
+                      }}</span
                     >
                     <icon-close
                       size="14"

@@ -107,8 +107,9 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
           // Customize stylings here
           modifyVars: {
             // arcoblue-6 is the primary-color :)))
-            // 'arcoblue-6': '#1DA57A', // 绿色
-            'arcoblue-6': '#165DFF', // 蓝色
+            // TODO: 动态
+            'arcoblue-6': '#1DA57A', // 绿色
+            // 'arcoblue-6': '#165DFF', // 蓝色
           },
         },
       },

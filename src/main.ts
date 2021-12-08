@@ -6,6 +6,7 @@ import { setupRouter } from '@/router';
 import { setupI18n } from '@/plugins/i18n';
 import 'virtual:windi.css';
 import { setupStore } from '@/store';
+import { setupMarkDown } from '@/plugins/v-md-editor';
 
 const app = createApp(App);
 
@@ -13,6 +14,7 @@ const app = createApp(App);
 setupArco(app);
 setupRouter(app);
 setupI18n(app);
+setupMarkDown(app);
 setupStore(app);
 
 app.mount('#app');

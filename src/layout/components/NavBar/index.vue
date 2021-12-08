@@ -164,53 +164,5 @@
 </script>
 
 <style lang="less" scoped>
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--color-border);
-    box-sizing: border-box;
-    background-color: var(--color-bg-2);
-    height: 100%;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-  }
-
-  .right {
-    display: flex;
-    list-style: none;
-    padding-right: 20px;
-
-    li {
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--color-text-1);
-    }
-  }
-
-  .username {
-    cursor: pointer;
-  }
-
-  // 设置下拉无边框
-  :deep(.arco-select-view.arco-select-view-single) {
-    background-color: var(--color-fill-5);
-    border: none !important;
-  }
-  :deep(.arco-select-view.arco-select-view-single:hover) {
-    background-color: var(--color-fill-5);
-    border-color: var(--color-fill-5);
-    border: none !important;
-  }
-  :deep(.arco-select-view.arco-select-view-single .arco-select-view-suffix) {
-    padding: 5px;
-  }
+  @import 'styles/index.module.less';
 </style>

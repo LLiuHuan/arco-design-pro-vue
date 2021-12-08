@@ -18,6 +18,11 @@ const localeBase = {
     about: {
       index: '关于',
     },
+    components: {
+      index: '组件',
+      markdown: 'Markdown',
+      split: '分割面板',
+    },
   },
   messageBox: {
     tab: {

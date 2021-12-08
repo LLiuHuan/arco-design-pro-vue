@@ -10,7 +10,7 @@
       <a-typography-paragraph>
         <a-trigger class="demo-basic" trigger="click">
           <div class="input">
-            <div class="current-color" :style="{ backgroundColor: pureColor }"> </div>
+            <div class="current-color" :style="{ backgroundColor: `${pureColor}` }"> </div>
             <span>{{ pureColor }}</span>
           </div>
           <template #content>

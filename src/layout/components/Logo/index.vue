@@ -18,23 +18,5 @@
 </script>
 
 <style lang="less" scoped>
-  .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 64px;
-    line-height: 64px;
-    overflow: hidden;
-    white-space: nowrap;
-
-    img {
-      width: auto;
-      height: 33px;
-    }
-
-    .title {
-      margin: 0;
-      font-size: 18px;
-    }
-  }
+  @import 'styles/index.module.less';
 </style>

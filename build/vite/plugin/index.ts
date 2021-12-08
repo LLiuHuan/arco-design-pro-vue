@@ -1,3 +1,4 @@
+// TODO: 好像不需要了，暂时弃用
 // import type { Plugin } from 'vite';
 // import vue from '@vitejs/plugin-vue';
 // import vueJsx from '@vitejs/plugin-vue-jsx';

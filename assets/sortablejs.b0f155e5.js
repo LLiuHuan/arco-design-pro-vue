@@ -1,4 +1,4 @@
-import{g as Ue}from"./vue-i18n.164f95a6.js";/**!
+import{g as Ue}from"./@kangc.df515874.js";/**!
  * Sortable 1.14.0
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>

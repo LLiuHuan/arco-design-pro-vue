@@ -1,4 +1,4 @@
-import{c as commonjsGlobal}from"./vue-i18n.164f95a6.js";var mock={exports:{}};(function(module,exports){(function(x,n){module.exports=n()})(commonjsGlobal,function(){return function(l){var x={};function n(u){if(x[u])return x[u].exports;var a=x[u]={exports:{},id:u,loaded:!1};return l[u].call(a.exports,a,a.exports,n),a.loaded=!0,a.exports}return n.m=l,n.c=x,n.p="",n(0)}([function(l,x,n){var u=n(1),a=n(3),s=n(5),c=n(20),p=n(23),f=n(25),o;typeof window!="undefined"&&(o=n(27));/*!
+import{c as commonjsGlobal}from"./@kangc.df515874.js";var mock={exports:{}};(function(module,exports){(function(x,n){module.exports=n()})(commonjsGlobal,function(){return function(l){var x={};function n(u){if(x[u])return x[u].exports;var a=x[u]={exports:{},id:u,loaded:!1};return l[u].call(a.exports,a,a.exports,n),a.loaded=!0,a.exports}return n.m=l,n.c=x,n.p="",n(0)}([function(l,x,n){var u=n(1),a=n(3),s=n(5),c=n(20),p=n(23),f=n(25),o;typeof window!="undefined"&&(o=n(27));/*!
     Mock - 模拟请求 & 模拟数据
     https://github.com/nuysoft/Mock
     墨智 mozhi.gyy@taobao.com nuysoft@gmail.com

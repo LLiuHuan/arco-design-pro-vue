@@ -1,4 +1,4 @@
-import{c as Ce}from"./vue-i18n.164f95a6.js";import{s as Et}from"./source-map.8e70e1f9.js";var ce={exports:{}},D={};/*!
+import{c as Ce}from"./@kangc.df515874.js";import{s as Et}from"./source-map.8e70e1f9.js";var ce={exports:{}},D={};/*!
   * shared v9.2.0-beta.23
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.

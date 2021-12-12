@@ -1,15 +1,14 @@
-import { Store as VuexStore, Module, CommitOptions, DispatchOptions } from 'vuex';
-import { RootState } from '@/store';
-
 import type { State } from './state';
+import { CommitOptions, DispatchOptions, Module, Store as VuexStore } from 'vuex';
 import { getters, Getters } from './getters';
+import { mutations, Mutations } from './mutations';
+import { actions, Actions } from './actions';
+import { RootState } from '@/store';
 import { state } from './state';
-import { Mutations, mutations } from './mutations';
-import { Actions, actions } from './actions';
 
 export { State };
 
-export type SettingStore<S = State> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
+export type UserStore<S = State> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
   getters: {
     [K in keyof Getters]: ReturnType<Getters[K]>;
   };

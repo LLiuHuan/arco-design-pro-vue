@@ -117,6 +117,13 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: VITE_PORT,
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:8080',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
     },
     optimizeDeps: {
       include: [],

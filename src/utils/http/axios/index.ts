@@ -9,6 +9,11 @@ import { isString } from '@/utils/is';
 import { formatRequestDate, joinTimestamp } from '@/utils/http/axios/helper';
 import { setObjToUrlParams } from '@/utils/http/axios/utlUtil';
 import { checkStatus } from '@/utils/http/axios/checkStatus';
+import { Message, Modal } from '@arco-design/web-vue';
+import { PageEnum } from '@/enums/pageEnum';
+import router from '@/router';
+import { storage } from '@/utils/storage';
+import { useStore } from '@/store';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix || '';
@@ -20,9 +25,13 @@ const transform: AxiosTransform = {
   /**
    * @description: 处理请求数据
    */
-  transformRequestData: (res: AxiosResponse<Result>, options: RequestOptions) => {
+  transformRequestData: (
+    res: AxiosResponse<Result>,
+    options: RequestOptions,
+    reject: (reason?: any) => void
+  ) => {
     // @ts-ignore
-    const { $message: Message, $dialog: Modal } = window;
+    // const { $message: Message, $dialog: Modal } = window;
     const {
       isShowMessage = true, // 是否显示提示信息
       isShowErrorMessage, // 是否显示失败信息
@@ -43,7 +52,7 @@ const transform: AxiosTransform = {
       return res.data;
     }
 
-    const reject = Promise.reject;
+    // const reject = Promise.reject;
 
     const result = res.data;
 
@@ -83,42 +92,36 @@ const transform: AxiosTransform = {
     }
     // 接口请求错误，统一提示错误信息
     if (code === ResultEnum.ERROR) {
-      if (message) {
-        // Message.error(data.message);
-        Message.error(message);
-        Promise.reject(new Error(message));
-      } else {
-        const msg = '操作失败,系统异常!';
-        Message.error(msg);
-        Promise.reject(new Error(msg));
-      }
-      return reject();
+      const msg = message ? message : '操作失败,系统异常!';
+      Message.error(msg);
+      // Promise.reject(msg);
+      return reject(msg);
     }
 
     // 登录超时
-    // if (code === ResultEnum.TIMEOUT) {
-    //   const LoginName = PageEnum.BASE_LOGIN_NAME;
-    //   if (router.currentRoute.value.name == LoginName) return;
-    //   // 到登录页
-    //   const timeoutMsg = '登录超时,请重新登录!';
-    //   Modal.warning({
-    //     title: '提示',
-    //     content: '登录身份已失效，请重新登录!',
-    //     positiveText: '确定',
-    //     negativeText: '取消',
-    //     onPositiveClick: () => {
-    //       storage.clear();
-    //       router.replace({
-    //         name: LoginName,
-    //         query: {
-    //           redirect: router.currentRoute.value.fullPath,
-    //         },
-    //       });
-    //     },
-    //     onNegativeClick: () => {},
-    //   });
-    //   return reject(new Error(timeoutMsg));
-    // }
+    if (code === ResultEnum.TIMEOUT) {
+      const LoginName = PageEnum.BASE_LOGIN_NAME;
+      if (router.currentRoute.value.name == LoginName) return;
+      // 到登录页
+      const timeoutMsg = '登录超时,请重新登录!';
+      Modal.warning({
+        title: '提示',
+        content: '登录身份已失效，请重新登录!',
+        okText: '确定',
+        cancelText: '取消',
+        onOk: () => {
+          storage.clear();
+          router.replace({
+            name: LoginName,
+            query: {
+              redirect: router.currentRoute.value.fullPath,
+            },
+          });
+        },
+        onCancel: () => {},
+      });
+      return reject(new Error(timeoutMsg));
+    }
 
     // 这里逻辑可以根据项目进行修改
     if (!hasSuccess) {
@@ -182,11 +185,13 @@ const transform: AxiosTransform = {
   requestInterceptors: (config) => {
     // 请求之前处理config
     // const userStore = useUserStoreWidthOut();
-    const token = '1234';
+    const store = useStore();
+    const token = store.state.user.token;
+    console.log(token);
     if (token) {
       // jwt token
       if (config.headers) {
-        config.headers.token = token;
+        config.headers['x-token'] = token;
       }
     }
     return config;
@@ -256,6 +261,10 @@ const Axios = new VAxios({
     errorMessageMode: 'none',
     // 接口地址
     apiUrl: globSetting.apiUrl as string,
+    // 是否显示提示
+    // isShowMessage: true,
+    // isShowSuccessMessage: true,
+    // isShowErrorMessage: true,
   },
   withCredentials: false,
 });

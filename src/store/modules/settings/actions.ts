@@ -4,8 +4,7 @@ import { RootState } from '@/store';
 import { Mutations, MutationType } from './mutations';
 
 export enum ActionsType {
-  SetTheme = 'SET_THEME',
-  SetUser = 'SET_USER',
+  SET_THEME = 'SET_THEME',
 }
 
 type ActionAugments = Omit<ActionContext<State, RootState>, 'commit'> & {
@@ -16,15 +15,11 @@ type ActionAugments = Omit<ActionContext<State, RootState>, 'commit'> & {
 };
 
 export type Actions = {
-  [ActionsType.SetTheme](context: ActionAugments, payload: string): any;
-  [ActionsType.SetUser](context: ActionAugments, payload: State): any;
+  [ActionsType.SET_THEME](context: ActionAugments, payload: string): any;
 };
 
 export const actions: ActionTree<State, RootState> & Actions = {
-  async [ActionsType.SetTheme]({ commit }, payload) {
-    commit(MutationType.SetTheme, payload);
-  },
-  async [ActionsType.SetUser]({ commit }, payload) {
-    commit(MutationType.SetUser, payload);
+  async [ActionsType.SET_THEME]({ commit }, payload) {
+    commit(MutationType.SET_THEME, payload);
   },
 };

@@ -29,11 +29,20 @@ const RootRouter: RouteRecordRaw = {
   },
 };
 
+export const LoginRoute: RouteRecordRaw = {
+  path: '/login',
+  name: 'Login',
+  component: () => import('@/views/login/index.vue'),
+  meta: {
+    title: '登录',
+  },
+};
+
 //
 export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
-export const constantRouter: any[] = [...asyncRoutes, RootRouter, RedirectRoute];
+export const constantRouter: any[] = [...asyncRoutes, RootRouter, RedirectRoute, LoginRoute];
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,

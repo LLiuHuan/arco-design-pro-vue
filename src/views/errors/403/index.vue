@@ -21,7 +21,7 @@
 <style lang="less" scoped>
   .container {
     position: relative;
-    background-color: var(--color-bg-1);
+    //background-color: var(--color-bg-1);
     height: 100%;
     max-width: 100%;
   }

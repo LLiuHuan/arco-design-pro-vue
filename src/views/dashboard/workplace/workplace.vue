@@ -1,21 +1,25 @@
 <template>
   <div class="container">
     <banner />
-  </div>
 
-  <h1>1234</h1>
-  <div class="dark">
-    <span class="cursor-pointer p-1 text-white dark:text-white container1">2345</span>
-  </div>
-  <a-button @click="openNotification">Top Right Message</a-button>
-  <span class="cursor-pointer">{{ $t('menu.lang') }}</span>
+    <h1>1234</h1>
+    <div class="dark">
+      <span class="cursor-pointer p-1 text-white dark:text-white container1">2345</span>
+    </div>
+    <a-button
+      v-permission="{ action: ['RoleEnum.ADMIN, RoleEnum.NORMAL'], effect: 'disabled' }"
+      @click="openNotification"
+      >Top Right Message</a-button
+    >
+    <span class="cursor-pointer">{{ $t('menu.lang') }}</span>
 
-  <div class="text-red-1 bg-arcoblue-6 border-arco-border-1 border-solid">
-    Should Fill Something Here
+    <div class="text-red-1 bg-arcoblue-6 border-arco-border-1 border-solid">
+      Should Fill Something Here
+    </div>
+    <div class="p-20"> </div>
+    <a-button v-permission="['aaa']" type="outline">Outline</a-button>
+    {{ theme }}
   </div>
-  <div class="p-20"> </div>
-  <a-button type="outline">Outline</a-button>
-  {{ theme }}
 </template>
 
 <script lang="ts">
@@ -56,11 +60,6 @@
 <!--</style>-->
 
 <style lang="less" scoped>
-  .container {
-    background-color: var(--color-fill-2);
-    max-width: 100%;
-  }
-
   .banner {
     background-color: var(--color-bg-2);
     padding: 20px;

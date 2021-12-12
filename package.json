@@ -27,6 +27,7 @@
     "axios": "^0.24.0",
     "conventional-changelog-cmyr-config": "^1.2.3",
     "date-fns": "^2.25.0",
+    "echarts": "^5.2.2",
     "element-resize-detector": "^1.2.3",
     "esno": "^0.12.1",
     "lodash-es": "^4.17.21",
@@ -39,7 +40,8 @@
     "vue-router": "^4.0.12",
     "vue3-colorpicker": "^2.0.4",
     "vuedraggable": "^4.1.0",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",

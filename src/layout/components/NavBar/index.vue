@@ -62,7 +62,7 @@
         <a-dropdown>
           <a-typography-text> 王立群 </a-typography-text>
           <template #content>
-            <a-doption>登出</a-doption>
+            <a-doption @click="logout">登出</a-doption>
           </template>
         </a-dropdown>
       </li>
@@ -91,6 +91,9 @@
   import MessageBox from '@/layout/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
   import { storage } from '@/utils/storage';
+  import { useStore } from 'vuex';
+  import { ActionsType } from '@/store/modules/user/actions';
+  import { GettersType } from '@/store/modules/user/getters';
   export default defineComponent({
     name: 'NavBar',
     components: {
@@ -98,13 +101,14 @@
       MessageBox,
     },
     setup() {
+      const store = useStore();
       const state = reactive({
         options: [
           { label: '中文', value: 'zh-CN' },
           { label: 'English', value: 'en-US' },
         ],
-        language: ref<string | null>(localStorage.getItem('arco-lang')),
-        theme: storage.get('theme'), // light
+        language: ref<string | null>(store.getters[GettersType.GET_LANGUAGE]),
+        theme: store.getters[GettersType.GET_MODE], // light
         docs: 'https://arco.design/vue/docs/start',
         fullscreen: false,
       });
@@ -118,8 +122,8 @@
         console.log(value);
         if (value) {
           locale.value = value;
-          localStorage.setItem('arco-lang', value);
           state.language = value;
+          store.dispatch(ActionsType.SET_LANGUAGE, value);
         }
       };
 
@@ -132,7 +136,7 @@
           document.body.removeAttribute('arco-theme');
           // state.theme = newTheme;
         }
-        storage.set('theme', newTheme);
+        store.dispatch(ActionsType.SET_MODE, newTheme);
         state.theme = newTheme;
       };
 
@@ -153,11 +157,16 @@
       // 监听全屏切换事件
       document.addEventListener('fullscreenchange', toggleFullscreenIcon);
 
+      const logout = async () => {
+        await store.dispatch(ActionsType.LOGOUT);
+      };
+
       return {
         ...toRefs(state),
         changeTheme,
         setLang,
         toggleFullScreen,
+        logout,
       };
     },
   });

@@ -7,28 +7,27 @@
 <script lang="ts">
   // import enUs from '@arco-design/web-vue/es/locale/lang/en-us';
   import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
-  import { defineComponent } from 'vue';
-  import { storage } from '@/utils/storage';
+  import { defineComponent, ref } from 'vue';
+  import { useStore } from 'vuex';
+  import { GettersType as SettingGetters } from '@/store/modules/settings/getters';
+  import { GettersType as UserGetters } from '@/store/modules/user/getters';
   export default defineComponent({
     name: 'App',
     setup() {
-      const theme = storage.get('theme') || 'dark';
+      const store = useStore();
+      const loading = ref<Boolean>(store.getters[SettingGetters.GET_LOADING]);
+      const theme = store.getters[UserGetters.GET_MODE] || 'dark';
       // 设置为暗黑主题
       document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
 
-      const localeName = localStorage.getItem('arco-lang') || 'zh-CN';
-
-      if (!localStorage.getItem('arco-lang')) {
-        localStorage.setItem('arco-lang', localeName);
-      }
-
       document.body.style.setProperty(
         `--arcoblue-6`,
-        localStorage.getItem('color') ?? '5, 160, 69'
+        store.getters[UserGetters.GET_BASE_COLOR] ?? '5, 160, 69'
       );
 
       return {
         zhCN,
+        loading,
       };
     },
   });

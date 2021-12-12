@@ -5,16 +5,10 @@ const { Theme } = designSetting;
 export type State = {
   //主题
   theme: string;
-  userInfo?: {
-    name?: string;
-    avatar?: string;
-    job?: string;
-    organization?: string;
-    location?: string;
-    email?: string;
-  };
+  loading: boolean;
 };
 
 export const state: State = {
   theme: Theme,
+  loading: false,
 };

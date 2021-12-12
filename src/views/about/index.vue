@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a-card :bordered="false" title="项目信息" class="mt-4 proCard" size="small">
+    <a-card :bordered="false" title="项目信息" class="proCard" size="small">
       <a-row style="height: 500px">
         <a-col :span="12"> 介绍呀 </a-col>
         <a-col :span="12" style="height: 500px; overflow-y: auto">
@@ -99,10 +99,4 @@
   });
 </script>
 
-<style lang="less" scoped>
-  .container {
-    background-color: var(--color-fill-1);
-    max-width: 100%;
-    margin: 5px;
-  }
-</style>
+<style lang="less" scoped></style>

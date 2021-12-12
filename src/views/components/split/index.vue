@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <a-split :style="{ height: '500px', border: '1px solid var(--color-border)' }">
       <template #first>
         <div style="background-color: #f38181; width: 100%; height: 100%">Right</div>

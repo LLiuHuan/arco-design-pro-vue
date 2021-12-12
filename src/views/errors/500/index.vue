@@ -23,8 +23,7 @@
 <style lang="less" scoped>
   .container {
     position: relative;
-    background-color: var(--color-bg-1);
-    //height: calc(100% - 40px);
+    padding: 0;
     height: 100%;
     max-width: 100%;
   }

@@ -19,7 +19,7 @@ const localeBase = {
       index: 'About',
     },
     components: {
-      index: '组件',
+      index: 'Plugins',
       markdown: 'Markdown',
       split: 'Split',
     },

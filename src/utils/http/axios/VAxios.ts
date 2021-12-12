@@ -133,8 +133,8 @@ export class VAxios {
           // 请求是否被取消
           const isCancel = axios.isCancel(res);
           if (transformRequestData && isFunction(transformRequestData) && !isCancel) {
-            const ret = transformRequestData(res, opt);
-            // ret !== undefined ? resolve(ret) : reject(new Error('request error!'));
+            const ret = transformRequestData(res, opt, reject);
+            ret !== undefined ? resolve(ret) : reject(new Error('request error!'));
             return resolve(ret);
           }
           reject(res as unknown as Promise<T>);

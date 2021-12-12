@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a-card :bordered="false" title="v-md-editor" class="mt-4 proCard" size="small">
+    <a-card :bordered="false" title="v-md-editor" class="proCard" size="small">
       <div>
         <a-alert :show-icon="false"
           ><a-link href="https://ckang1229.gitee.io/vue-markdown-editor/zh/#%E4%BB%8B%E7%BB%8D"
@@ -71,10 +71,5 @@
 
   :deep(.CodeMirror-activeline-background) {
     background-color: var(--color-bg-4);
-  }
-
-  .container {
-    background-color: var(--color-fill-2);
-    max-width: 100%;
   }
 </style>

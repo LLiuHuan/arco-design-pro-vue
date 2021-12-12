@@ -82,6 +82,7 @@ module.exports = {
           'Monitor',
           'About',
           'Settings',
+          'Login',
         ],
       },
     ],

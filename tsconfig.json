@@ -18,7 +18,8 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "esnext"
+      "esnext",
+      "es2015.promise"
     ],
     "types": [
       "vite/client"

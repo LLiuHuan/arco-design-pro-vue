@@ -4,6 +4,7 @@ const localeBase = {
   },
   menu: {
     lang: '英文',
+    login: 'login',
     dashboard: {
       index: 'Dashboard',
       workplace: 'Workplace',

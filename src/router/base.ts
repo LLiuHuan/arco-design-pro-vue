@@ -25,19 +25,19 @@ export const RedirectRoute: AppRouteRecordRaw = {
 // 404 on a page
 export const ErrorPageRoute: AppRouteRecordRaw = {
   path: '/:path(.*)*',
-  name: 'ErrorPage',
+  name: 'errors',
   component: Layout,
   meta: {
-    title: 'ErrorPage',
+    title: 'errors',
     hideBreadcrumb: true,
   },
   children: [
     {
       path: '/:path(.*)*',
-      name: 'ErrorPageSon',
+      name: 'errors.404',
       component: ErrorPage,
       meta: {
-        title: 'ErrorPage',
+        title: 'errors.404',
         hideBreadcrumb: true,
       },
     },

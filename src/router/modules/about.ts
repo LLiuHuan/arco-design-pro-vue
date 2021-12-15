@@ -5,7 +5,6 @@ import { IconInfoCircle } from '@arco-design/web-vue/es/icon';
 const routeName = 'about';
 
 const about = import('@/views/about/index.vue');
-
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -33,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         name: `${routeName}.index`,
         meta: {
-          title: 'index',
+          title: `${routeName}.index`,
           icon: IconInfoCircle,
           permissions: ['about_index'],
         },

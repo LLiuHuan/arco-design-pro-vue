@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '403',
         name: `${routeName}.403`,
         meta: {
-          title: '403',
+          title: `${routeName}.403`,
           permissions: ['errors_403'],
         },
         component: () => import('@/views/errors/403/index.vue'),
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '404',
         name: `${routeName}.404`,
         meta: {
-          title: '404',
+          title: `${routeName}.404`,
           permissions: ['errors_404'],
         },
         component: () => import('@/views/errors/404/index.vue'),
@@ -49,7 +49,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '500',
         name: `${routeName}.500`,
         meta: {
-          title: '500',
+          title: `${routeName}.500`,
           permissions: ['errors_500'],
         },
         component: () => import('@/views/errors/500/index.vue'),

@@ -34,7 +34,6 @@ export const actions: ActionTree<State, RootState> & Actions = {
   // async [ActionsType.LOGIN]({ commit, dispatch, rootGetters, getters }, payload) {
   async [ActionsType.LOGIN]({ commit }, payload) {
     const res = await Login(payload);
-    console.log(res);
     commit(MutationType.SET_USER_INFO, res.user);
     commit(MutationType.SET_TOKEN, res.token);
     // await dispatch('router/SetAsyncRouter', {}, { root: true });

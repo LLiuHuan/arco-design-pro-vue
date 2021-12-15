@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'markdown',
         name: `${routeName}.markdown`,
         meta: {
-          title: 'markdown',
+          title: `${routeName}.markdown`,
           permissions: ['components_markdown'],
         },
         component: () => markdown,
@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'split',
         name: `${routeName}.split`,
         meta: {
-          title: 'split',
+          title: `${routeName}.split`,
           permissions: ['components_split'],
         },
         component: () => split,

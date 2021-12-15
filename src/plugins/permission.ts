@@ -38,7 +38,8 @@ export const permission: ObjectDirective = {
           el.style['disabled'] = 'disabled';
           el.classList.add('arco-btn-disabled');
         } else {
-          el.remove();
+          // el.remove();
+          el.parentNode && el.parentNode.removeChild(el);
         }
       }
     } else {

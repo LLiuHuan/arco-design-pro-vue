@@ -31,16 +31,16 @@ const routes: Array<RouteRecordRaw> = [
         path: 'workplace',
         name: `${routeName}.workplace`,
         meta: {
-          title: 'Workplace',
+          title: `${routeName}.workplace`,
           permissions: ['dashboard_workplace'],
         },
-        component: () => import('@/views/dashboard/workplace/workplace.vue'),
+        component: () => import('@/views/dashboard/workplace/index.vue'),
       },
       {
         path: 'monitor',
         name: `${routeName}.monitor`,
         meta: {
-          title: 'Monitor',
+          title: `${routeName}.monitor`,
           permissions: ['dashboard_monitor'],
         },
         component: () => import('@/views/dashboard/monitor/index.vue'),

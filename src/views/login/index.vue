@@ -26,7 +26,7 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, toRefs } from 'vue';
-  import { Captcha, Login } from '@/api/base/login';
+  import { Captcha } from '@/api/base/login';
   import { Message } from '@arco-design/web-vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useStore } from 'vuex';

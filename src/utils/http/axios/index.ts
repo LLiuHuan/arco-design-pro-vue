@@ -14,6 +14,7 @@ import { PageEnum } from '@/enums/pageEnum';
 import router from '@/router';
 import { storage } from '@/utils/storage';
 import { useStore } from '@/store';
+import { MutationType } from '@/store/modules/user/mutations';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix || '';
@@ -32,6 +33,11 @@ const transform: AxiosTransform = {
   ) => {
     // @ts-ignore
     // const { $message: Message, $dialog: Modal } = window;
+    if (res.headers['new-token']) {
+      const store = useStore();
+      store.commit(MutationType.SET_TOKEN, res.headers['new-token']);
+    }
+
     const {
       isShowMessage = true, // 是否显示提示信息
       isShowErrorMessage, // 是否显示失败信息
@@ -164,7 +170,6 @@ const transform: AxiosTransform = {
           config.params = undefined;
         }
         if (joinParamsToUrl) {
-          console.log(config.params);
           config.url = setObjToUrlParams(
             config.url as string,
             Object.assign({}, config.params, config.data)
@@ -187,7 +192,6 @@ const transform: AxiosTransform = {
     // const userStore = useUserStoreWidthOut();
     const store = useStore();
     const token = store.state.user.token;
-    console.log(token);
     if (token) {
       // jwt token
       if (config.headers) {
@@ -201,8 +205,8 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error: any) => {
+    console.log(error);
     // @ts-ignore
-    const { $message: Message, $dialog: Modal } = window;
     const { response, code, message } = error || {};
     // TODO 此处要根据后端接口返回格式修改
     const msg: string =

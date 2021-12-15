@@ -34,7 +34,7 @@ export const LoginRoute: RouteRecordRaw = {
   name: 'Login',
   component: () => import('@/views/login/index.vue'),
   meta: {
-    title: '登录',
+    title: 'login',
   },
 };
 
@@ -42,7 +42,7 @@ export const LoginRoute: RouteRecordRaw = {
 export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
-export const constantRouter: any[] = [...asyncRoutes, RootRouter, RedirectRoute, LoginRoute];
+export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute];
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,

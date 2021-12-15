@@ -1,17 +1,24 @@
 <template>
   <div v-if="!item.hidden">
     <template v-if="!item.children && !isArray(item.children)">
-      <router-link :to="resolvePath(item.path)">
+      <router-link :to="item.path">
         <a-menu-item :key="'menu-item' + item.name">
-          <component :is="item.meta.icon" />
+          <component v-if="item.meta.icon" :is="item.meta.icon" />
           {{ $t('menu.' + item.name) }}
         </a-menu-item>
       </router-link>
     </template>
-
+    <template v-else-if="item.children && item.children.length === 1">
+      <router-link :to="item.path">
+        <a-menu-item :key="'menu-item' + item.name">
+          <component v-if="item.meta.icon" :is="item.meta.icon" />
+          {{ $t('menu.' + item.name) }}
+        </a-menu-item>
+      </router-link>
+    </template>
     <a-sub-menu v-else :key="'sub-menu-item' + item.name">
       <template #title>
-        <component :is="item.meta.icon" />
+        <component v-if="item.meta.icon" :is="item.meta.icon" />
         {{ $t('menu.' + item.name) }}
       </template>
       <menu-item v-for="child in item.children" :item="child" :base-path="item.path" :key="child" />

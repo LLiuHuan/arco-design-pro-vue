@@ -2,12 +2,15 @@ import { Router, RouteRecordRaw } from 'vue-router';
 import { GettersType as UserGetters } from '@/store/modules/user/getters';
 import { PageEnum } from '@/enums/pageEnum';
 import { ErrorPageRoute } from '@/router/base';
+import { useI18n } from '@/hooks/web/useI18n';
+import { generatorDynamicRouter } from '@/router/generator-routers';
 import { useStore } from '@/store';
-import { storage } from '@/utils/storage';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
+const INIT_DB = PageEnum.INIT_DB;
 
-const whitePathList = [LOGIN_PATH]; // no redirect whitelist
+const whitePathList = [LOGIN_PATH, INIT_DB]; // no redirect whitelist
+let asyncRouterFlag = 0;
 
 export function createRouterGuards(router: Router) {
   // to, from, next
@@ -47,32 +50,43 @@ export function createRouterGuards(router: Router) {
       return;
     }
 
-    if (storage.get('DynamicAddedRoute')) {
+    if (!asyncRouterFlag) {
+      asyncRouterFlag++;
+      const routes = await generatorDynamicRouter();
+      console.log(routes);
+      if (routes) {
+        // 动态添加可访问路由表
+        routes.forEach((item) => {
+          router.addRoute(item as unknown as RouteRecordRaw);
+        });
+
+        //添加404
+        const isErrorPage = router
+          .getRoutes()
+          .findIndex((item) => item.name === ErrorPageRoute.name);
+        if (isErrorPage === -1) {
+          router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
+        }
+
+        const redirectPath = (from.query.redirect || to.path) as string;
+        const redirect = decodeURIComponent(redirectPath);
+        const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
+        // asyncRouteStore.setDynamicAddedRoute(true);
+        // storage.set('DynamicAddedRoute', true);
+        next(nextData);
+        // Loading && Loading.finish();
+      }
+    } else {
       next();
-      return;
     }
-
-    //添加404
-    const isErrorPage = router.getRoutes().findIndex((item) => item.name === ErrorPageRoute.name);
-    if (isErrorPage === -1) {
-      router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
-    }
-
-    const redirectPath = (from.query.redirect || to.path) as string;
-    const redirect = decodeURIComponent(redirectPath);
-    const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
-    console.log(redirectPath, redirect, nextData);
-    // asyncRouteStore.setDynamicAddedRoute(true);
-    storage.set('DynamicAddedRoute', true);
-    next(nextData);
-    // Loading && Loading.finish();
   });
 
-  // // , failure
-  // router.afterEach((to, _) => {
-  //   // TODO: title暂时先不适配i18n
-  //   document.title = (to?.meta?.title as string) || document.title;
-  // });
+  // , failure
+  router.afterEach((to, _) => {
+    // TODO: 有些大问题，暂时先这样吧
+    const { t } = useI18n('menu');
+    document.title = t(to?.meta?.title as string) || document.title;
+  });
 
   router.onError((error) => {
     console.log(error, '路由错误');

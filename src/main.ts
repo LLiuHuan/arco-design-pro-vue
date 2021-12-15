@@ -14,9 +14,9 @@ const app = createApp(App);
 // 初始化arco
 setupArco(app);
 setupStore(app);
-setupRouter(app);
 setupI18n(app);
 setupMarkDown(app);
 setupPermission(app);
+setupRouter(app);
 
 app.mount('#app');

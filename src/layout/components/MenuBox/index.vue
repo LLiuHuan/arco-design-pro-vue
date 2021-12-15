@@ -1,16 +1,18 @@
 <template>
-  <a-menu :defaultOpenKeys="['1']" :defaultSelectedKeys="['0_2']">
+  <a-menu @menu-item-click="openKey">
     <menu-item v-for="menu in menus" :key="menu.name" :item="menu" />
     <!--   不分组   -->
   </a-menu>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { generatorMenu } from '@/utils';
-  import { asyncRoutes } from '@/router';
+  import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
   import { isArray } from 'lodash-es';
   import MenuItem from '@/layout/components/MenuBox/MenuItem.vue';
+  import { asyncMenu } from '@/api/system/menu';
+  import { storage } from '@/utils/storage';
+  import { useStore } from '@/store';
+  import { GettersType } from '@/store/modules/route/getters';
 
   export default defineComponent({
     name: 'Menu',
@@ -18,11 +20,34 @@
       MenuItem,
     },
     setup() {
-      const menus = generatorMenu(asyncRoutes);
+      // const menus = generatorMenu(asyncRoutes);
+      const store = useStore();
+      const state = reactive({
+        menus: ref<any[]>([]),
+        defaultOpenKeys: ref(),
+        defaultSelectedKeys: ref(),
+      });
+
+      const openKey = (key: any) => {
+        console.log(key);
+        storage.setCookie('open-key', key);
+      };
+
+      state.menus = store.getters[GettersType.GET_ASYNC_ROUTER];
+
+      onMounted(() => {
+        state.defaultSelectedKeys = storage.getCookie('open-key');
+        let selected = state.defaultSelectedKeys.split('.');
+        if (selected.length > 0) {
+          state.defaultOpenKeys = selected[0];
+        }
+      });
+
       return {
-        menus,
+        ...toRefs(state),
 
         isArray,
+        openKey,
       };
     },
   });

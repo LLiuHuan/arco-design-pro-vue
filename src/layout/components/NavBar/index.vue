@@ -90,10 +90,10 @@
   import Logo from '@/layout/components/Logo/index.vue';
   import MessageBox from '@/layout/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
-  import { storage } from '@/utils/storage';
   import { useStore } from 'vuex';
   import { ActionsType } from '@/store/modules/user/actions';
   import { GettersType } from '@/store/modules/user/getters';
+  import { storage } from '@/utils/storage';
   export default defineComponent({
     name: 'NavBar',
     components: {
@@ -113,17 +113,18 @@
         fullscreen: false,
       });
       // 使用i18n
-      const { locale } = useI18n();
+      const { locale } = useI18n({ useScope: 'global' });
 
       locale.value = state.language ? state.language : 'zh-CN';
 
       // 修改语言
       const setLang = (value: string | null) => {
-        console.log(value);
         if (value) {
           locale.value = value;
           state.language = value;
           store.dispatch(ActionsType.SET_LANGUAGE, value);
+          storage.set('lang', value ? value : 'zh-CN');
+          location.replace(location.href);
         }
       };
 

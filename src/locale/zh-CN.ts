@@ -4,6 +4,7 @@ const localeBase = {
   },
   menu: {
     lang: '中文',
+    login: '登陆',
     dashboard: {
       index: '仪表台',
       workplace: '工作台',

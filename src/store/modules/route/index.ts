@@ -9,7 +9,7 @@ import { Actions, actions } from './actions';
 
 export { State };
 
-export type SettingStore<S = State> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
+export type RouteStore<S = State> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
   getters: {
     [K in keyof Getters]: ReturnType<Getters[K]>;
   };

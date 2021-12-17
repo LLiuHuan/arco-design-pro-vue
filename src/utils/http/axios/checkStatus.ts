@@ -1,3 +1,5 @@
+// import router from '@/router';
+
 export function checkStatus(status: number, msg: string, message: any): void {
   switch (status) {
     case 400:
@@ -23,6 +25,7 @@ export function checkStatus(status: number, msg: string, message: any): void {
       message.error('网络请求超时!');
       break;
     case 500:
+      // router.push('/500');
       message.error('服务器错误,请联系管理员!');
       break;
     case 501:

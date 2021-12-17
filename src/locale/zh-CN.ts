@@ -24,6 +24,11 @@ const localeBase = {
       markdown: 'Markdown',
       split: '分割面板',
     },
+    system: {
+      index: '系统管理',
+      menu: '菜单管理',
+      user: '用户管理',
+    },
   },
   messageBox: {
     tab: {

@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { getMessageList } from '@/api/message/message-box';
+  import { getMessageList } from '@/api/message';
   import { groupBy } from 'lodash-es';
   import { MessageListType } from '@/layout/components/MessageBox/index';
   import MessageList from '@/layout/components/MessageBox/list.vue';

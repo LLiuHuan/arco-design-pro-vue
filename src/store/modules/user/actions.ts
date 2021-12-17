@@ -4,7 +4,7 @@ import { Mutations, MutationType } from '@/store/modules/user/mutations';
 import { jsonInBlacklist, Login } from '@/api/base/login';
 import { LoginTypes } from '@/api/base/login-types';
 import { State } from '@/store/modules/user/state';
-import { setUserInfo } from '@/api/user/user';
+import { setUserInfo } from '@/api/system/user';
 import { Message } from '@arco-design/web-vue';
 
 export enum ActionsType {
@@ -41,7 +41,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
     // asyncRouters.forEach((asyncRouter) => {
     //   router.addRoute(asyncRouter);
     // });
-    // await router.push({ name: getters['userInfo'].authority.defaultRouter || '/' });
+    // await router.push({ name: getters['userInfo'].authorityTypes.defaultRouter || '/' });
     return true;
   },
   async [ActionsType.LOGOUT]({ commit }) {

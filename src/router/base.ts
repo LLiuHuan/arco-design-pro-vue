@@ -43,3 +43,13 @@ export const ErrorPageRoute: AppRouteRecordRaw = {
     },
   ],
 };
+
+export const Error: AppRouteRecordRaw = {
+  path: '/500',
+  name: 'errors',
+  component: ErrorPage,
+  meta: {
+    title: 'errors',
+    hideBreadcrumb: true,
+  },
+};

@@ -9,7 +9,6 @@
   import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
   import { isArray } from 'lodash-es';
   import MenuItem from '@/layout/components/MenuBox/MenuItem.vue';
-  import { asyncMenu } from '@/api/system/menu';
   import { storage } from '@/utils/storage';
   import { useStore } from '@/store';
   import { GettersType } from '@/store/modules/route/getters';

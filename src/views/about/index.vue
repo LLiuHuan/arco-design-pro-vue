@@ -34,7 +34,7 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
-  import { getCommit } from '@/api/github/github';
+  import { getCommit } from '@/api/github';
   import { format } from 'date-fns';
   export default defineComponent({
     name: 'About',

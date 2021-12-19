@@ -27,7 +27,7 @@
             <a-input v-model="form.username" placeholder="请输入用户名" />
           </a-form-item>
           <a-form-item field="password" hide-label>
-            <a-input v-model="form.password" placeholder="请输入密码" />
+            <a-input-password v-model="form.password" placeholder="请输入密码" allow-clear />
           </a-form-item>
           <a-row>
             <a-col :span="14">

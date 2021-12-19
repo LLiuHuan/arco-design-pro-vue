@@ -1,6 +1,6 @@
 export function usePermission() {
   // const userStore = useUserStore();
-  const roles = ['job:add', 'job:edit'];
+  const roles = ['job:add', 'job:edit', 'menu:user:add'];
 
   /**
    * 检查权限
@@ -9,8 +9,7 @@ export function usePermission() {
   function _somePermissions(accesses: string[]) {
     // return userStore.getPermissions.some((item) => {
     return roles.some((item) => {
-      const { value }: any = item;
-      return accesses.includes(value);
+      return accesses.includes(item);
     });
   }
 
@@ -23,5 +22,30 @@ export function usePermission() {
     return _somePermissions(accesses);
   }
 
-  return { hasPermission };
+  /**
+   * 是否包含指定的所有权限
+   * @param accesses
+   */
+  function hasEveryPermission(accesses: string[]): boolean {
+    const permissionsList = roles;
+    if (Array.isArray(accesses)) {
+      return permissionsList.every((access: any) => accesses.includes(access.value));
+    }
+    throw new Error(`[hasEveryPermission]: ${accesses} should be a array !`);
+  }
+
+  /**
+   * 是否包含其中某个权限
+   * @param accesses
+   * @param accessMap
+   */
+  function hasSomePermission(accesses: string[]): boolean {
+    const permissionsList = roles;
+    if (Array.isArray(accesses)) {
+      return permissionsList.some((access: any) => accesses.includes(access.value));
+    }
+    throw new Error(`[hasSomePermission]: ${accesses} should be a array !`);
+  }
+
+  return { hasPermission, hasEveryPermission, hasSomePermission };
 }

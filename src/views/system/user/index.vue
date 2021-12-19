@@ -3,65 +3,99 @@
     <div class="container-main">
       <div class="toolbar">
         <div>
-          <a-button type="primary">添加</a-button>
+          <a-button
+            type="primary"
+            @click="addUser"
+            v-permission="{ action: ['menu:user:add'], effect: 'disabled' }"
+            >添加</a-button
+          >
         </div>
       </div>
-      <a-table :data="data">
+      <a-table
+        :data="data"
+        :pagination="{
+          current: page,
+          onPageSize: pageSize,
+          change: setPage,
+          size: 'medium',
+          total: total,
+          onPageSizeChange: setPageSize,
+          showTotal: true,
+          showPageSize: true,
+        }"
+        :loading="tableLoading"
+      >
         <template #columns>
-          <a-table-column ellipsis title="头像" data-index="headerImg" />
+          <a-table-column ellipsis title="头像" data-index="headerImg" width="100">
+            <template #cell="{ record }">
+              <custom-pic style="margin-top: 8px" :pic-src="record.headerImg" />
+            </template>
+          </a-table-column>
           <a-table-column title="UUID" data-index="uuid" />
           <a-table-column title="用户名" data-index="userName" />
           <a-table-column title="昵称" data-index="nickName" />
-          <a-table-column title="用户角色" data-index="nickName">
+          <a-table-column title="用户角色" data-index="nickName" width="250">
             <template #cell="{ record }">
               <a-cascader
                 v-model:model-value="record.authorityIds"
-                :options="authorityData"
+                v-model:options="authorityData"
                 :format-label="formatLabel"
+                :max-tag-count="1"
+                @blur="changeAuthority(record)"
                 multiple
                 check-strictly
                 allow-search
+                :disabled="!hasPermission(['menu:user:auth'])"
               />
             </template>
           </a-table-column>
           <a-table-column title="操作">
             <template #cell="{ record }">
-              <a-button type="primary" @click="delUserInfo(record.ID)">
-                <template #icon>
-                  <icon-delete />
-                </template>
-                <template #default>删除</template>
-              </a-button>
+              <a-popconfirm
+                content="确定删除此用户吗?"
+                okText="确定"
+                cancelText="取消"
+                @ok="delUserInfo(record.ID)"
+              >
+                <a-button
+                  v-permission="{ action: ['menu:user:del'], effect: 'disabled' }"
+                  type="primary"
+                >
+                  <template #icon>
+                    <icon-delete />
+                  </template>
+                  <template #default>删除</template>
+                </a-button>
+              </a-popconfirm>
             </template>
           </a-table-column>
-        </template>
-        <template #footer>
-          <a-pagination
-            :total="total"
-            v-model:current="page"
-            :page-size="pageSize"
-            @change="setPage"
-            @page-size-change="setPageSize"
-            size="medium"
-            show-total
-            show-page-size
-          />
         </template>
       </a-table>
     </div>
   </div>
+
+  <add-and-update
+    v-model:user-model="addUserModel"
+    :authority-data="authorityData"
+    @get-all-user-list="getAllUserList"
+  />
 </template>
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-  import { delUser, getUserList } from '@/api/system/user';
+  import { delUser, getUserList, setUserAuthorities } from '@/api/system/user';
   import { getAuthorityList } from '@/api/authority';
-  import { ResponsePage } from '@/api/types/common/types';
   import { UserInfo } from '@/api/system/user-types';
-  import { authorityInfo } from '@/api/authority/authority-types';
-
+  import { Message } from '@arco-design/web-vue';
+  import { CustomPic } from '@/components/CustomPic';
+  import { AddAndUpdate } from './model';
+  import { usePermission } from '@/hooks/web/usePermission';
   export default defineComponent({
     name: 'SystemUser',
+    components: {
+      CustomPic,
+      AddAndUpdate,
+    },
     setup() {
       const state = reactive({
         data: ref<Array<UserInfo>>([]),
@@ -72,29 +106,28 @@
           page: 1,
           pageSize: 10,
         },
-        authorityData: [],
+        authorityData: ref([]),
+        addUserModel: ref(false),
+        tableLoading: ref(false),
       });
+      const { hasPermission } = usePermission();
 
       // 查询全部用户信息
-      const getAllUserList = () => {
-        console.log(state.authorityData);
-        getUserList(state.pageInfo).then((res: ResponsePage<UserInfo>) => {
-          setAuthorityIds(res.list);
-          [state.data, state.page, state.pageSize, state.total] = [
-            res.list,
-            res.page,
-            res.pageSize,
-            res.total,
-          ];
-        });
+      const getAllUserList = async () => {
+        const userList = await getUserList(state.pageInfo);
+        setAuthorityIds(userList.list);
+        [state.data, state.page, state.pageSize, state.total] = [
+          userList.list,
+          userList.page,
+          userList.pageSize,
+          userList.total,
+        ];
       };
 
       // 获取权限列表
-      const getAllAuthorityList = () => {
-        getAuthorityList({ page: 1, pageSize: 999 }).then((res: ResponsePage<authorityInfo>) => {
-          setAuthorityOptions(res.list, state.authorityData);
-          console.log(state.authorityData);
-        });
+      const getAllAuthorityList = async () => {
+        const authority = await getAuthorityList({ page: 1, pageSize: 999 });
+        setAuthorityOptions(authority.list, state.authorityData);
       };
 
       // 修改页数
@@ -103,6 +136,7 @@
 
         getAllUserList();
       };
+
       // 修改每页数量
       const setPageSize = (pageSize: number) => {
         state.pageInfo.pageSize = pageSize;
@@ -112,8 +146,9 @@
 
       // 删除用户
       const delUserInfo = (id: number) => {
-        delUser({ id }).then((res: any) => {
-          console.log(res);
+        delUser({ id }).then(() => {
+          Message.success('删除成功');
+          getAllUserList();
         });
       };
 
@@ -140,6 +175,7 @@
           });
       };
 
+      // 生成用户权限组
       const setAuthorityIds = (tableData) => {
         tableData &&
           tableData.forEach((user) => {
@@ -151,23 +187,35 @@
           });
       };
 
-      const changeAuthority = (row, flag) => {
-        if (flag) {
-          return;
-        }
-        console.log(row);
+      // 设置用户权限组
+      const changeAuthority = async (row) => {
+        await setUserAuthorities({
+          ID: row.ID,
+          authorityIds: row.authorityIds,
+        }).then(() => {
+          Message.success('修改成功');
+        });
       };
 
+      // 格式化用户组
       const formatLabel = (options) => {
         const labels = options.map((option) => option.label);
         return labels[labels.length - 1];
       };
 
+      const addUser = () => {
+        state.addUserModel = true;
+      };
+
+      const initialize = async () => {
+        state.tableLoading = true;
+        await getAllAuthorityList();
+        await getAllUserList();
+        state.tableLoading = false;
+      };
+
       onBeforeMount(() => {
-        getAllAuthorityList();
-        setTimeout(() => {
-          getAllUserList();
-        }, 100);
+        initialize();
       });
 
       return {
@@ -178,6 +226,10 @@
         delUserInfo,
         changeAuthority,
         formatLabel,
+
+        addUser,
+        getAllUserList,
+        hasPermission,
       };
     },
   });

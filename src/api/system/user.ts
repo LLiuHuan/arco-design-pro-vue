@@ -41,3 +41,19 @@ export const setUserInfo = (data) => {
     data: data,
   });
 };
+
+export const setUserAuthorities = (data) => {
+  return http.request({
+    url: '/v1/user/setUserAuthorities',
+    method: 'post',
+    data: data,
+  });
+};
+
+export const register = (data) => {
+  return http.request({
+    url: '/v1/user/register',
+    method: 'post',
+    data: data,
+  });
+};

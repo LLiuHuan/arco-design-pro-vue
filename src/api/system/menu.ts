@@ -10,3 +10,41 @@ export const asyncMenu = () => {
     method: 'post',
   });
 };
+
+// @Summary 获取menu列表
+// @Produce  application/json
+// @Param {
+//  page     int
+//	pageSize int
+// }
+// @Router /v1/menu/getMenuList [post]
+export const getMenuList = (data) => {
+  return http.request({
+    url: '/v1/menu/getMenuList',
+    method: 'post',
+    data: data,
+  });
+};
+
+// @Summary 根据id获取menu
+// @Produce  application/json
+// @Param {
+//  page     int
+//	pageSize int
+// }
+// @Router /v1/menu/getBaseMenuById [post]
+export const getBaseMenuById = (data) => {
+  return http.request({
+    url: '/v1/menu/getBaseMenuById',
+    method: 'post',
+    data: data,
+  });
+};
+
+export const updateBaseMenu = (data) => {
+  return http.request({
+    url: '/v1/menu/updateBaseMenu',
+    method: 'post',
+    data: data,
+  });
+};

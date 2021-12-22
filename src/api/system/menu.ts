@@ -48,3 +48,39 @@ export const updateBaseMenu = (data) => {
     data: data,
   });
 };
+
+// @Summary 新增基础menu
+// @Produce  application/json
+// @Param menu Object
+// @Router /menu/getMenuList [post]
+export const addBaseMenu = (data) => {
+  return http.request({
+    url: '/v1/menu/addBaseMenu',
+    method: 'post',
+    data,
+  });
+};
+
+// @Summary 删除基础菜单
+// @Produce  application/json
+// @Param ID float64
+// @Router /menu/deleteBaseMenu [post]
+export const deleteBaseMenu = (data) => {
+  return http.request({
+    url: '/v1/menu/deleteBaseMenu',
+    method: 'post',
+    data,
+  });
+};
+
+// @Summary 删除基础菜单s
+// @Produce  application/json
+// @Param IDS []float64
+// @Router /menu/deleteBaseMenu [post]
+export const deleteBaseMenus = (data) => {
+  return http.request({
+    url: '/v1/menu/deleteBaseMenus',
+    method: 'post',
+    data,
+  });
+};

@@ -12,7 +12,7 @@
         <a target="_blank" :href="docs"><icon-github /></a>
       </li>
       <li>
-        <!--        <a-select v-model="language" @change="setLang(language)">-->
+        <!--        <a-select v-compoments="language" @change="setLang(language)">-->
         <!--          <a-option v-for="opt in options" :key="opt.value" :value="opt.value">{{-->
         <!--            opt.label-->
         <!--          }}</a-option>-->

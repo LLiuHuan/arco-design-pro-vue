@@ -11,9 +11,11 @@
                   <icon-down />
                 </a-button>
                 <template #content>
-                  <a-doption>添加顶级菜单</a-doption>
-                  <a-doption>添加子菜单</a-doption>
-                  <a-doption>删除选中菜单</a-doption>
+                  <a-doption @click="addBaseMenu('添加顶级菜单')">添加顶级菜单</a-doption>
+                  <a-doption @click="addBaseMenu(treeItemTitle)" :disabled="parentId === 0"
+                    >添加子菜单 {{ treeItemTitle ? ': ' + treeItemTitle : '' }}</a-doption
+                  >
+                  <a-doption @click="removeBaseMenus">删除选中菜单</a-doption>
                 </template>
               </a-dropdown>
               <a-button type="outline" @click="toggleExpanded">
@@ -33,6 +35,7 @@
             :blockNode="true"
             :checkable="true"
             v-model:expanded-keys="expandedKeys"
+            v-model:checked-keys="checkedKeys"
             @select="getEditMenu"
           >
             <template #title="nodeData">
@@ -52,7 +55,7 @@
       <a-col :span="14">
         <a-card>
           <template #title>
-            <icon-edit />编辑菜单<span v-if="isForm">: {{ $t('menu.' + form.name) }}</span>
+            <icon-edit />编辑菜单<span v-if="isForm">: {{ treeItemTitle }}</span>
           </template>
           <a-space direction="vertical" fill>
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
@@ -103,24 +106,33 @@
       </a-col>
     </a-row>
   </div>
+  <create-menu
+    ref="addMenu"
+    v-model:title="drawerTitle"
+    v-model:parent-id="parentId"
+    @close="getTableData"
+  />
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
   import { TreeType } from '@/views/system/menu/menu-types';
-  import { getBaseMenuById, getMenuList, updateBaseMenu } from '@/api/system/menu';
+  import { deleteBaseMenus, getBaseMenuById, getMenuList, updateBaseMenu } from '@/api/system/menu';
   import { useI18n } from 'vue-i18n';
   import { MenuTypes } from '@/api/system/menu-types';
   import { ArcoIcon } from '@/components/ArcoIcons';
   import { Message } from '@arco-design/web-vue';
+  import CreateMenu from '@/views/system/menu/compoments/CreateMenu.vue';
   export default defineComponent({
     name: 'SystemMenu',
     components: {
+      CreateMenu,
       ArcoIcon,
     },
     setup() {
       const { t } = useI18n();
       const searchKey = ref('');
+      const addMenu = ref();
       const state = reactive({
         originTreeData: [] as Array<TreeType>,
         pageInfo: {
@@ -141,7 +153,16 @@
         ],
         allExpandedKeys: ref<Array<string>>([]),
         expandedKeys: ref<Array<string>>([]),
+        checkedKeys: ref<Array<string>>([]),
+
+        parentId: ref<number>(0),
+        treeItemTitle: ref(''),
+        drawerTitle: '',
       });
+
+      const treeTitle = (title: string): string => {
+        return t('menu.' + title).indexOf('menu.') != -1 ? title : t('menu.' + title);
+      };
 
       // region 处理tree 菜单树
 
@@ -188,14 +209,14 @@
           if (!item.children) {
             result.push({
               key: item.ID,
-              title: t('menu.' + item.name),
+              title: treeTitle(item.name),
             });
           } else {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const filterData = tableToTree(item.children);
             result.push({
               key: item.ID,
-              title: t('menu.' + item.name),
+              title: treeTitle(item.name),
               children: filterData,
             });
             state.allExpandedKeys.push(item.ID);
@@ -220,6 +241,8 @@
         state.isForm = true;
         const res = await getBaseMenuById({ id: node.key });
         state.form = res.menu;
+        state.parentId = node.key;
+        state.treeItemTitle = treeTitle(state.form.name);
         setOptions();
       };
 
@@ -265,11 +288,24 @@
         });
       };
 
-      // endregion
-
       const toggleExpanded = () => {
         state.expandedKeys = state.expandedKeys.length ? [] : state.allExpandedKeys;
       };
+
+      // endregion
+
+      const addBaseMenu = (title: string) => {
+        state.drawerTitle = title === '添加顶级菜单' ? title : '添加子级菜单：' + title;
+        addMenu.value.open();
+      };
+
+      const removeBaseMenus = () => {
+        deleteBaseMenus({ ids: state.checkedKeys }).then(() => {
+          Message.success('删除成功！');
+          getTableData();
+        });
+      };
+
       onMounted(() => {
         getTableData();
       });
@@ -282,6 +318,11 @@
         getEditMenu,
         editMenu,
         toggleExpanded,
+        getTableData,
+
+        addMenu,
+        addBaseMenu,
+        removeBaseMenus,
       };
     },
   });

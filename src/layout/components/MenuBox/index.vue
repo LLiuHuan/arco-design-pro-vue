@@ -28,7 +28,6 @@
       });
 
       const openKey = (key: any) => {
-        console.log(key);
         storage.setCookie('open-key', key);
       };
 

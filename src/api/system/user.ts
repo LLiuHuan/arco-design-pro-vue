@@ -6,7 +6,7 @@ import { PageInfo } from '@/api/types/common/types';
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.SysUser true "设置用户信息"
+// @Param data body compoments.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
 // @Router /user/getUserList [get]
 export const getUserList = (data: PageInfo) => {
@@ -31,7 +31,7 @@ export const delUser = (data) => {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.SysUser true "设置用户信息"
+// @Param data body compoments.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
 // @Router /user/setUserInfo [put]
 export const setUserInfo = (data) => {

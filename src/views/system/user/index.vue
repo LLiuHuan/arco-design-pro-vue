@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <add-and-update
+  <create-user
     v-model:user-model="addUserModel"
     :authority-data="authorityData"
     @get-all-user-list="getAllUserList"
@@ -88,13 +88,13 @@
   import { UserInfo } from '@/api/system/user-types';
   import { Message } from '@arco-design/web-vue';
   import { CustomPic } from '@/components/CustomPic';
-  import { AddAndUpdate } from './model';
+  import { CreateUser } from './compoments';
   import { usePermission } from '@/hooks/web/usePermission';
   export default defineComponent({
     name: 'SystemUser',
     components: {
       CustomPic,
-      AddAndUpdate,
+      CreateUser,
     },
     setup() {
       const state = reactive({

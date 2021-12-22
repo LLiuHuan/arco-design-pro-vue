@@ -87,7 +87,7 @@ const transform: AxiosTransform = {
           onCancel: () => {},
         });
         // console.log(
-        //   'model errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误'
+        //   'compoments errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误'
         // );
       }
     }

@@ -63,21 +63,21 @@
     </div>
   </div>
   <!--  <div>-->
-  <!--    <a-form :model="form" :style="{ width: '600px' }">-->
+  <!--    <a-form :compoments="form" :style="{ width: '600px' }">-->
   <!--      <a-form-item field="username" label="用户名">-->
-  <!--        <a-input v-model="form.username" placeholder="" />-->
+  <!--        <a-input v-compoments="form.username" placeholder="" />-->
   <!--        <template #help>-->
   <!--          <div>help message</div>-->
   <!--        </template>-->
   <!--      </a-form-item>-->
   <!--      <a-form-item field="password" label="密码">-->
-  <!--        <a-input v-model="form.password" placeholder="" />-->
+  <!--        <a-input v-compoments="form.password" placeholder="" />-->
   <!--      </a-form-item>-->
   <!--      <a-form-item field="captcha">-->
   <!--        <img @click="resetCaptcha" :src="form.picPath" />-->
   <!--      </a-form-item>-->
   <!--      <a-form-item field="captcha" label="验证码">-->
-  <!--        <a-input v-model="form.captcha" placeholder="" />-->
+  <!--        <a-input v-compoments="form.captcha" placeholder="" />-->
   <!--      </a-form-item>-->
   <!--      <a-form-item>-->
   <!--        <a-button @click="handleSubmit">Submit</a-button>-->

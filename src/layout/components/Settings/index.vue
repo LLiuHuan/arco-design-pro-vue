@@ -3,7 +3,13 @@
     <icon-settings />
   </div>
 
-  <a-drawer :visible="visible" placement="right" @cancel="closeDrawer" unmountOnClose>
+  <a-drawer
+    :visible="visible"
+    placement="right"
+    @cancel="closeDrawer"
+    :footer="false"
+    unmountOnClose
+  >
     <template #title> 页面配置 </template>
     <a-typography>
       <a-typography-title :heading="6"> 主题色 </a-typography-title>
@@ -18,6 +24,29 @@
           </template>
         </a-trigger>
       </a-typography-paragraph>
+      <a-typography-title :heading="6"> 主题 </a-typography-title>
+      <a-typography-paragraph>
+        <a-trigger class="demo-basic" trigger="click">
+          <a-space>
+            <a-card
+              v-for="theme in themes"
+              class="card-theme"
+              hoverable
+              :style="{
+                width: '100px',
+                marginBottom: '20px',
+                textAlign: 'center',
+                borderColor: theme.value === baseTheme ? pureColor : '',
+              }"
+              :key="theme.value"
+            >
+              <div class="cursor-pointer select-none" @click="setTheme(theme.value)">
+                {{ theme.title }}
+              </div>
+            </a-card>
+          </a-space>
+        </a-trigger>
+      </a-typography-paragraph>
     </a-typography>
   </a-drawer>
 </template>
@@ -30,6 +59,7 @@
   import { useStore } from '@/store';
   import { ActionsType } from '@/store/modules/user/actions';
   import { GettersType } from '@/store/modules/user/getters';
+  import { storage } from '@/utils/storage';
 
   export default defineComponent({
     name: 'Settings',
@@ -43,10 +73,21 @@
         pureColor: ref<ColorInputWithoutInstance>(
           `rgb(${store.getters[GettersType.GET_BASE_COLOR]})` ?? 'rgb(5, 160, 69)'
         ),
+        themes: [
+          { title: '默认', value: 'default' },
+          { title: '圣诞主题', value: 'theme-christmas' },
+        ],
+        baseTheme: storage.get('_theme') ?? 'default',
       });
 
       const closeDrawer = () => {
         state.visible = false;
+      };
+
+      const setTheme = (val: string) => {
+        storage.set('_theme', val);
+        state.baseTheme = val;
+        location.reload();
       };
 
       watch(
@@ -61,6 +102,7 @@
       return {
         ...toRefs(state),
         closeDrawer,
+        setTheme,
       };
     },
   });

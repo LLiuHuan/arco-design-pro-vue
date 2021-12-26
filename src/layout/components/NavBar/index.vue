@@ -175,4 +175,8 @@
 
 <style lang="less" scoped>
   @import 'styles/index.module.less';
+
+  button {
+    padding: 0 !important;
+  }
 </style>

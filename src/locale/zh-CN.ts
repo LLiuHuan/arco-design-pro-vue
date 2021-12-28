@@ -28,6 +28,7 @@ const localeBase = {
       index: '系统管理',
       menu: '菜单管理',
       user: '用户管理',
+      auth: '角色管理',
     },
   },
   messageBox: {

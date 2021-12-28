@@ -6,8 +6,8 @@ import http from '@/utils/http/axios';
 // @Router /menu/getMenu [post]
 export const asyncMenu = () => {
   return http.request({
-    url: '/v1/menu/getMenu',
-    method: 'post',
+    url: '/v1/menus/user',
+    method: 'get',
   });
 };
 
@@ -20,9 +20,9 @@ export const asyncMenu = () => {
 // @Router /v1/menu/getMenuList [post]
 export const getMenuList = (data) => {
   return http.request({
-    url: '/v1/menu/getMenuList',
-    method: 'post',
-    data: data,
+    url: '/v1/menus',
+    method: 'get',
+    params: data,
   });
 };
 
@@ -35,16 +35,15 @@ export const getMenuList = (data) => {
 // @Router /v1/menu/getBaseMenuById [post]
 export const getBaseMenuById = (data) => {
   return http.request({
-    url: '/v1/menu/getBaseMenuById',
-    method: 'post',
-    data: data,
+    url: '/v1/menus/' + data.id,
+    method: 'get',
   });
 };
 
 export const updateBaseMenu = (data) => {
   return http.request({
-    url: '/v1/menu/updateBaseMenu',
-    method: 'post',
+    url: '/v1/menus',
+    method: 'put',
     data: data,
   });
 };
@@ -55,7 +54,7 @@ export const updateBaseMenu = (data) => {
 // @Router /menu/getMenuList [post]
 export const addBaseMenu = (data) => {
   return http.request({
-    url: '/v1/menu/addBaseMenu',
+    url: '/v1/menus',
     method: 'post',
     data,
   });
@@ -67,8 +66,8 @@ export const addBaseMenu = (data) => {
 // @Router /menu/deleteBaseMenu [post]
 export const deleteBaseMenu = (data) => {
   return http.request({
-    url: '/v1/menu/deleteBaseMenu',
-    method: 'post',
+    url: '/v1/menus',
+    method: 'delete',
     data,
   });
 };
@@ -79,7 +78,37 @@ export const deleteBaseMenu = (data) => {
 // @Router /menu/deleteBaseMenu [post]
 export const deleteBaseMenus = (data) => {
   return http.request({
-    url: '/v1/menu/deleteBaseMenus',
+    url: '/v1/menus/' + data.id,
+    method: 'delete',
+  });
+};
+
+export const getMenuAuth = (data) => {
+  return http.request({
+    url: '/v1/menus/auth',
+    method: 'get',
+    params: data,
+  });
+};
+
+// @Summary 获取基础路由列表
+// @Produce  application/json
+// @Param 可以什么都不填 调一下即可
+// @Router /menu/base [get]
+export const getBaseMenuTree = () => {
+  return http.request({
+    url: '/v1/menus/base',
+    method: 'get',
+  });
+};
+
+// @Summary 添加用户menu关联关系
+// @Produce  application/json
+// @Param menus Object authorityId string
+// @Router /menu/getMenuList [post]
+export const addMenuAuthority = (data) => {
+  return http.request({
+    url: '/v1/menus/auth',
     method: 'post',
     data,
   });

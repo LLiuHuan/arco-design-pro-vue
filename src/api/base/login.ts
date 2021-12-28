@@ -37,7 +37,7 @@ export const Captcha = () => {
 // @Router /jwt/jsonInBlacklist [post]
 export const jsonInBlacklist = () => {
   return http.request({
-    url: '/v1/jwt/jsonInBlacklist',
+    url: '/v1/jwt/black',
     method: 'post',
   });
 };

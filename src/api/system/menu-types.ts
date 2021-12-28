@@ -6,7 +6,7 @@ export interface MenuTypes {
   children?: Array<MenuTypes>;
   component: string;
   hidden: boolean;
-  menuId: string;
+  menuId?: string;
   meta: MetaType;
   name: string;
   parameters?: Array<any>;

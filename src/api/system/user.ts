@@ -6,12 +6,12 @@ import { PageInfo } from '@/api/types/common/types';
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body compoments.SysUser true "设置用户信息"
+// @Param data body components.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
 // @Router /user/getUserList [get]
 export const getUserList = (data: PageInfo) => {
   return http.request({
-    url: '/v1/user/getUserList',
+    url: '/v1/users',
     method: 'get',
     params: data,
   });
@@ -20,7 +20,7 @@ export const getUserList = (data: PageInfo) => {
 // 删除用户
 export const delUser = (data) => {
   return http.request({
-    url: '/v1/user/deleteUser',
+    url: '/v1/users',
     method: 'delete',
     data: data,
   });
@@ -31,12 +31,12 @@ export const delUser = (data) => {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body compoments.SysUser true "设置用户信息"
+// @Param data body components.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
 // @Router /user/setUserInfo [put]
 export const setUserInfo = (data) => {
   return http.request({
-    url: '/v1/user/setUserInfo',
+    url: '/v1/user',
     method: 'put',
     data: data,
   });
@@ -44,7 +44,7 @@ export const setUserInfo = (data) => {
 
 export const setUserAuthorities = (data) => {
   return http.request({
-    url: '/v1/user/setUserAuthorities',
+    url: '/v1/user/authorities',
     method: 'post',
     data: data,
   });

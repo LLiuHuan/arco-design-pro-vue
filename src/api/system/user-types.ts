@@ -1,4 +1,4 @@
-import { authorityInfo } from '@/api/authority/authority-types';
+import { authorityInfo } from '@/api/system/auth-types';
 
 export interface UserInfo {
   ID: number;

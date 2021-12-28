@@ -84,11 +84,11 @@
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { delUser, getUserList, setUserAuthorities } from '@/api/system/user';
-  import { getAuthorityList } from '@/api/authority';
+  import { getAuthorityList } from '@/api/system/auth';
   import { UserInfo } from '@/api/system/user-types';
   import { Message } from '@arco-design/web-vue';
   import { CustomPic } from '@/components/CustomPic';
-  import { CreateUser } from './compoments';
+  import { CreateUser } from './components';
   import { usePermission } from '@/hooks/web/usePermission';
   export default defineComponent({
     name: 'SystemUser',

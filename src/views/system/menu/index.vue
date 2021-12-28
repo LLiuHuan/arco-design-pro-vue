@@ -15,7 +15,9 @@
                   <a-doption @click="addBaseMenu(treeItemTitle)" :disabled="parentId === 0"
                     >添加子菜单 {{ treeItemTitle ? ': ' + treeItemTitle : '' }}</a-doption
                   >
-                  <a-doption @click="removeBaseMenus">删除选中菜单</a-doption>
+                  <a-doption @click="removeBaseMenus" :disabled="parentId === 0"
+                    >删除选中菜单</a-doption
+                  >
                 </template>
               </a-dropdown>
               <a-button type="outline" @click="toggleExpanded">
@@ -33,9 +35,7 @@
             :data="treeData"
             :show-line="true"
             :blockNode="true"
-            :checkable="true"
             v-model:expanded-keys="expandedKeys"
-            v-model:checked-keys="checkedKeys"
             @select="getEditMenu"
           >
             <template #title="nodeData">
@@ -122,7 +122,7 @@
   import { MenuTypes } from '@/api/system/menu-types';
   import { ArcoIcon } from '@/components/ArcoIcons';
   import { Message } from '@arco-design/web-vue';
-  import CreateMenu from '@/views/system/menu/compoments/CreateMenu.vue';
+  import CreateMenu from '@/views/system/menu/components/CreateMenu.vue';
   export default defineComponent({
     name: 'SystemMenu',
     components: {
@@ -153,7 +153,6 @@
         ],
         allExpandedKeys: ref<Array<string>>([]),
         expandedKeys: ref<Array<string>>([]),
-        checkedKeys: ref<Array<string>>([]),
 
         parentId: ref<number>(0),
         treeItemTitle: ref(''),
@@ -300,7 +299,7 @@
       };
 
       const removeBaseMenus = () => {
-        deleteBaseMenus({ ids: state.checkedKeys }).then(() => {
+        deleteBaseMenus({ id: state.parentId }).then(() => {
           Message.success('删除成功！');
           getTableData();
         });

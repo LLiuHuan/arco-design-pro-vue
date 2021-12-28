@@ -28,6 +28,7 @@ const localeBase = {
       index: 'System',
       menu: 'Menu',
       user: 'User',
+      auth: 'Authority',
     },
   },
   messageBox: {

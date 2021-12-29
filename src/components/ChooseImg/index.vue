@@ -18,7 +18,7 @@
 
   const path = import.meta.env.VITE_BASE_API;
   import { defineComponent, reactive, ref, toRefs } from 'vue';
-  import { getFileList } from '@/api/file';
+  import { getFileList } from '@/api/file/file';
   export default defineComponent({
     name: 'ChooseImg',
     props: {

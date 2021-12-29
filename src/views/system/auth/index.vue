@@ -28,7 +28,7 @@
             <template #cell="{ record }">
               <a-button type="text" @click="openDrawer(record)">设置权限</a-button>
               <a-button type="text" @click="addAuthority(record.authorityId)">新增子角色</a-button>
-              <a-button type="text">拷贝</a-button>
+              <a-button type="text" @click="copyAuthority(record)">拷贝</a-button>
               <a-button type="text" @click="editAuthority(record)">编辑</a-button>
               <a-popconfirm
                 content="此操作将永久删除该角色, 是否继续?"
@@ -136,8 +136,11 @@
 
       const initialize = async () => {
         state.table.loading = true;
-        await getAllAuthList();
-        state.table.loading = false;
+        setTimeout(() => {
+          getAllAuthList().then(() => {
+            state.table.loading = false;
+          });
+        }, 500);
       };
 
       const openDrawer = (row) => {
@@ -163,11 +166,22 @@
       };
 
       const editAuthority = (data) => {
-        [state.model.modelTitle, state.model.modelType] = ['编辑角色', 'edit'];
-        for (const key in state.model.form) {
-          state.model.form[key] = data[key];
-        }
-        console.log(state.model.modelType);
+        [state.model.modelTitle, state.model.modelType, state.model.form] = [
+          '编辑角色',
+          'edit',
+          data,
+        ];
+
+        operationModel.value.openModel();
+      };
+
+      const copyAuthority = (data) => {
+        [state.model.modelTitle, state.model.modelType, state.model.form] = [
+          '拷贝角色',
+          'copy',
+          data,
+        ];
+
         operationModel.value.openModel();
       };
 
@@ -198,6 +212,7 @@
         closeModel,
         addAuthority,
         editAuthority,
+        copyAuthority,
         deleteAuth,
       };
     },

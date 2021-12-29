@@ -100,7 +100,7 @@
       const setDefault = async (data) => {
         updateAuthority({
           authorityId: props.row.authorityId,
-          AuthorityName: props.row.authorityName,
+          authorityName: props.row.authorityName,
           parentId: props.row.parentId,
           defaultRouter: data.title,
         }).then(() => {

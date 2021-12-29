@@ -32,6 +32,7 @@
     "element-resize-detector": "^1.2.3",
     "esno": "^0.12.1",
     "lodash-es": "^4.17.21",
+    "mitt": "^3.0.0",
     "path-browserify": "^1.0.1",
     "path-value": "^0.9.4",
     "qs": "^6.10.1",

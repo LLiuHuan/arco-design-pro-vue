@@ -97,6 +97,7 @@
     computed,
     defineComponent,
     nextTick,
+    onBeforeMount,
     onMounted,
     reactive,
     ref,
@@ -114,6 +115,9 @@
   import Draggable from 'vuedraggable';
   import { storage } from '@/utils/storage';
   import elementResizeDetectorMaker from 'element-resize-detector';
+  import { emitter } from '@/utils/bus';
+  import { GettersType } from '@/store/modules/user/getters';
+  import { ActionsType } from '@/store/modules/user/actions';
 
   export default defineComponent({
     name: 'TagsView',
@@ -133,7 +137,7 @@
         activeKey: route.fullPath,
         scrollable: false,
         isMultiHeaderFixed: false,
-        baseHome: PageEnum.BASE_HOME,
+        baseHome: store.getters[GettersType.GET_USER].authority.defaultRouter || PageEnum.BASE_HOME,
         showDropdown: false,
         dropdownX: 0,
         dropdownY: 0,
@@ -153,7 +157,7 @@
 
       function handleContextMenu(e, item) {
         e.preventDefault();
-        isCurrent.value = PageEnum.BASE_HOME_REDIRECT === item.path;
+        isCurrent.value = state.baseHome === item.path;
         state.showDropdown = false;
         nextTick().then(() => {
           state.showDropdown = true;
@@ -197,8 +201,13 @@
       const closeAll = () => {
         localStorage.removeItem('routes');
         store.commit(MutationType.SET_CLOSE_ALL_TABS, route);
-        router.replace(PageEnum.BASE_HOME);
-        updateNavScroll();
+
+        store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
+          state.baseHome = data.authority.defaultRouter || PageEnum.BASE_HOME;
+
+          router.replace(state.baseHome);
+          updateNavScroll();
+        });
       };
 
       //删除tab
@@ -317,6 +326,10 @@
 
       onMounted(() => {
         onElementResize();
+
+        emitter.on('closeAllPage', () => {
+          closeAll();
+        });
       });
 
       function onElementResize() {

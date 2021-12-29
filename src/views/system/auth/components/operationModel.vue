@@ -36,10 +36,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
+  import { defineComponent, reactive, toRefs } from 'vue';
   import { Message } from '@arco-design/web-vue';
   import { copyAuthority, createAuthority, updateAuthority } from '@/api/system/auth';
-  import { formType } from './types';
+  import { authorityInfo, UpdAuthority } from '@/api/system/auth-types';
 
   export default defineComponent({
     name: 'OperationModel',
@@ -66,23 +66,28 @@
     },
     emits: ['close'],
     setup(props, { emit }) {
-      const state = reactive({
+      const state: {
+        visible: boolean;
+        form: UpdAuthority;
+        AuthorityOption: Array<Object>;
+        copyForm: authorityInfo;
+      } = reactive({
         visible: false,
         form: {
           authorityId: '',
           authorityName: '',
           parentId: '0',
         },
-        AuthorityOption: ref([
+        AuthorityOption: [
           {
             value: '0',
             label: '根角色',
           },
-        ]),
+        ],
         copyForm: {
           authorityId: '',
           authorityName: '',
-          parentId: '0',
+          parentId: '',
         },
       });
 
@@ -150,7 +155,17 @@
               break;
             case 'edit':
               {
-                state.form = props.row as formType;
+                for (const key in state.form) {
+                  state.form[key] = props.row[key];
+                }
+              }
+              break;
+            case 'copy':
+              {
+                for (const key in state.form) {
+                  state.form[key] = props.row[key];
+                }
+                state.copyForm = props.row as authorityInfo;
               }
               break;
           }
@@ -186,20 +201,24 @@
             }
             break;
           case 'copy': {
-            const data = {
+            const data: {
+              authority: authorityInfo;
+              oldAuthorityId: string;
+            } = {
               authority: {
-                authorityId: 'string',
-                authorityName: 'string',
-                datauthorityId: [],
-                parentId: 'string',
-                dataAuthorityId: '',
+                authorityId: '',
+                authorityName: '',
+                parentId: '',
               },
               oldAuthorityId: '0',
             };
             data.authority.authorityId = state.form.authorityId;
             data.authority.authorityName = state.form.authorityName;
             data.authority.parentId = state.form.parentId;
-            // data.authority.dataAuthorityId = state.copyForm.dataAuthorityId;
+            if (!state.copyForm) {
+              Message.error('参数异常，请刷新后重试');
+            }
+            data.authority.dataAuthorityId = state.copyForm.dataAuthorityId;
             data.oldAuthorityId = state.copyForm.authorityId;
             copyAuthority(data).then(() => {
               Message.success('复制成功！');

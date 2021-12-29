@@ -4,7 +4,7 @@ import { Mutations, MutationType } from '@/store/modules/user/mutations';
 import { jsonInBlacklist, Login } from '@/api/base/login';
 import { LoginTypes } from '@/api/base/login-types';
 import { State } from '@/store/modules/user/state';
-import { setUserInfo } from '@/api/system/user';
+import { getUserInfo, setUserInfo } from '@/api/system/user';
 import { Message } from '@arco-design/web-vue';
 
 export enum ActionsType {
@@ -13,6 +13,7 @@ export enum ActionsType {
   SET_MODE = 'SET_MODE',
   SET_BASE_COLOR = 'SET_BASE_COLOR',
   SET_LANGUAGE = 'SET_LANGUAGE',
+  GET_USER_INFO = 'GET_USER_INFO',
 }
 
 type ActionAugments = Omit<ActionContext<State, RootState>, 'commit'> & {
@@ -28,6 +29,7 @@ export type Actions = {
   [ActionsType.SET_MODE](context: ActionAugments, payload: string): void;
   [ActionsType.SET_BASE_COLOR](context: ActionAugments, payload: string): void;
   [ActionsType.SET_LANGUAGE](context: ActionAugments, payload: string): void;
+  [ActionsType.GET_USER_INFO](context: ActionAugments): any;
 };
 
 export const actions: ActionTree<State, RootState> & Actions = {
@@ -72,5 +74,10 @@ export const actions: ActionTree<State, RootState> & Actions = {
       commit(MutationType.SET_LANGUAGE, payload);
       Message.success('设置成功');
     }
+  },
+  async [ActionsType.GET_USER_INFO]({ commit }) {
+    const data = await getUserInfo();
+    commit(MutationType.SET_USER_INFO, data.userInfo);
+    return data.userInfo;
   },
 };

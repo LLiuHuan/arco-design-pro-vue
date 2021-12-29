@@ -61,7 +61,7 @@
     emits: ['update:iconValue'],
     setup(props, { emit }) {
       const state = reactive({
-        inputValue: ref<string | undefined>(props.iconValue),
+        inputValue: ref<string>(props.iconValue),
       });
 
       const setValue = (value: string) => {

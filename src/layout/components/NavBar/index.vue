@@ -56,12 +56,28 @@
         </a-tooltip>
       </li>
       <li>
-        <a-avatar class="mr-2" :size="24" :style="{ backgroundColor: '#14a9f8', marginRight: 8 }"
-          >Arco</a-avatar
-        >
+        <a-avatar class="mr-2" :size="24" :style="{ backgroundColor: '#14a9f8', marginRight: 8 }">{{
+          userInfo.nickName
+        }}</a-avatar>
         <a-dropdown>
-          <a-typography-text> 王立群 </a-typography-text>
+          <a-typography-text> {{ userInfo.nickName }} </a-typography-text>
           <template #content>
+            <a-doption>
+              <span style="font-weight: 600">
+                当前角色：{{ userInfo?.authority?.authorityName }}
+              </span>
+            </a-doption>
+            <template v-if="userInfo.authorities">
+              <a-doption
+                v-for="item in userInfo.authorities.filter(
+                  (i) => i.authorityId !== userInfo.authorityId
+                )"
+                :key="item.authorityId"
+                @click="changeUserAuth(item.authorityId)"
+              >
+                <span> 切换为：{{ item.authorityName }} </span>
+              </a-doption>
+            </template>
             <a-doption @click="logout">登出</a-doption>
           </template>
         </a-dropdown>
@@ -86,7 +102,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
+  import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import Logo from '@/layout/components/Logo/index.vue';
   import MessageBox from '@/layout/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
@@ -94,6 +110,8 @@
   import { ActionsType } from '@/store/modules/user/actions';
   import { GettersType } from '@/store/modules/user/getters';
   import { storage } from '@/utils/storage';
+  import { setUserAuthority } from '@/api/system/user';
+  import { emitter } from '@/utils/bus';
   export default defineComponent({
     name: 'NavBar',
     components: {
@@ -111,6 +129,7 @@
         theme: store.getters[GettersType.GET_MODE], // light
         docs: 'https://arco.design/vue/docs/start',
         fullscreen: false,
+        userInfo: {},
       });
       // 使用i18n
       const { locale } = useI18n({ useScope: 'global' });
@@ -162,12 +181,32 @@
         await store.dispatch(ActionsType.LOGOUT);
       };
 
+      // 切换角色
+      const changeUserAuth = async (id) => {
+        await setUserAuthority({
+          authorityId: id,
+        }).then(() => {
+          emitter.emit('closeAllPage');
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
+        });
+      };
+
+      onBeforeMount(() => {
+        store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
+          state.userInfo = data;
+        });
+      });
+
       return {
         ...toRefs(state),
         changeTheme,
         setLang,
         toggleFullScreen,
         logout,
+        changeUserAuth,
       };
     },
   });

@@ -1,4 +1,5 @@
 import http from '@/utils/http/axios';
+import { PageInfo } from '@/api/types/common/types';
 
 // @Summary 用户登录 获取动态路由
 // @Produce  application/json
@@ -18,7 +19,7 @@ export const asyncMenu = () => {
 //	pageSize int
 // }
 // @Router /v1/menu/getMenuList [post]
-export const getMenuList = (data) => {
+export const getMenuList = (data: PageInfo) => {
   return http.request({
     url: '/v1/menus',
     method: 'get',

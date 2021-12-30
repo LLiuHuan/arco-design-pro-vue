@@ -16,7 +16,7 @@
       >
         <a-button>
           <template #icon>
-            <component :is="inputValue" />
+            <component v-if="inputValue" :is="inputValue" />
           </template>
         </a-button>
         <template #content>

@@ -117,7 +117,6 @@
   import elementResizeDetectorMaker from 'element-resize-detector';
   import { emitter } from '@/utils/bus';
   import { GettersType } from '@/store/modules/user/getters';
-  import { ActionsType } from '@/store/modules/user/actions';
 
   export default defineComponent({
     name: 'TagsView',
@@ -133,11 +132,12 @@
       const navWrap: any = ref(null);
       const flex = ref(null);
       const theme = storage.get('theme') || 'dark';
+      const baseHome = ref<string>();
+
       const state = reactive({
         activeKey: route.fullPath,
         scrollable: false,
         isMultiHeaderFixed: false,
-        baseHome: store.getters[GettersType.GET_USER].authority.defaultRouter || PageEnum.BASE_HOME,
         showDropdown: false,
         dropdownX: 0,
         dropdownY: 0,
@@ -157,7 +157,7 @@
 
       function handleContextMenu(e, item) {
         e.preventDefault();
-        isCurrent.value = state.baseHome === item.path;
+        isCurrent.value = baseHome.value === item.path;
         state.showDropdown = false;
         nextTick().then(() => {
           state.showDropdown = true;
@@ -201,13 +201,6 @@
       const closeAll = () => {
         localStorage.removeItem('routes');
         store.commit(MutationType.SET_CLOSE_ALL_TABS, route);
-
-        store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
-          state.baseHome = data.authority.defaultRouter || PageEnum.BASE_HOME;
-
-          router.replace(state.baseHome);
-          updateNavScroll();
-        });
       };
 
       //删除tab
@@ -325,11 +318,19 @@
       );
 
       onMounted(() => {
+        console.log('onMounted');
         onElementResize();
 
         emitter.on('closeAllPage', () => {
           closeAll();
         });
+      });
+
+      onBeforeMount(() => {
+        setTimeout(() => {
+          baseHome.value = store.getters[GettersType.GET_USER].authority.defaultRouter;
+          // store.commit(MutationType.SET_INIT_TABS, [baseHome.value]);
+        }, 10);
       });
 
       function onElementResize() {
@@ -340,6 +341,7 @@
 
       return {
         ...toRefs(state),
+        baseHome,
         tabsList,
         isDisabled,
         flex,

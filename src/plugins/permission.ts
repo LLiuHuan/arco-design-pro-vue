@@ -32,7 +32,6 @@ export const permission: ObjectDirective = {
       }
     } else if (value && value instanceof Object) {
       const { action, effect } = value;
-      console.log(!hasPermission(action), action, effect);
       if (!hasPermission(action)) {
         if (effect == 'disabled') {
           el.disabled = true;

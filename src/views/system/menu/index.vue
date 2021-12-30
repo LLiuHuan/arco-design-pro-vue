@@ -163,6 +163,10 @@
         return t('menu.' + title).indexOf('menu.') != -1 ? title : t('menu.' + title);
       };
 
+      const isHttp = (path: string): boolean => {
+        return path.indexOf('http://') != -1 || path.indexOf('https://') != -1;
+      };
+
       // region 处理tree 菜单树
 
       // 处理搜索菜单时的数据
@@ -208,14 +212,14 @@
           if (!item.children) {
             result.push({
               key: item.ID,
-              title: treeTitle(item.name),
+              title: isHttp(item.path) ? item.meta.title : treeTitle(item.meta.title),
             });
           } else {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const filterData = tableToTree(item.children);
             result.push({
               key: item.ID,
-              title: treeTitle(item.name),
+              title: isHttp(item.path) ? item.meta.title : treeTitle(item.meta.title),
               children: filterData,
             });
             state.allExpandedKeys.push(item.ID);
@@ -241,7 +245,9 @@
         const res = await getBaseMenuById({ id: node.key });
         state.form = res.menu;
         state.parentId = node.key;
-        state.treeItemTitle = treeTitle(state.form.name);
+        state.treeItemTitle = isHttp(state.form.path)
+          ? state.form.meta.title
+          : treeTitle(state.form.meta.title);
         setOptions();
       };
 

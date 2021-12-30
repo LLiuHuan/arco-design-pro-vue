@@ -147,14 +147,12 @@
             } else {
               // 设置登陆后默认的样式
               const theme = store.getters[UserGetters.GET_MODE] || 'dark';
-              console.log(theme);
               // 设置为暗黑主题
               document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
               document.body.style.setProperty(
                 `--arcoblue-6`,
                 store.getters[UserGetters.GET_BASE_COLOR] ?? '5, 160, 69'
               );
-              console.log(store.getters[UserGetters.GET_BASE_COLOR]);
             }
           });
         }

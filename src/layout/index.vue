@@ -1,7 +1,9 @@
 <template>
   <a-layout class="layout">
+    <!--  切换菜单顶部加载进度条  -->
     <LoadingBar ref="loading" />
     <div class="layoutNavbar">
+      <!--   顶部菜单栏   -->
       <nav-bar />
     </div>
     <a-layout>
@@ -99,15 +101,6 @@
           }
         }
       );
-
-      // const watchWidth = () => {
-      //   const Width = document.body.clientWidth;
-      //   collapsed.value = Width <= 950;
-      // };
-
-      // onMounted(() => {
-      //   window.addEventListener('resize', watchWidth);
-      // });
 
       return {
         styles,

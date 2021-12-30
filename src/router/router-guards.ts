@@ -14,8 +14,9 @@ let asyncRouterFlag = 0;
 
 export function createRouterGuards(router: Router) {
   // to, from, next
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach((to, from, next) => {
     const store = useStore();
+
     if (from.path === LOGIN_PATH && to.name === 'errorPage') {
       next(PageEnum.BASE_HOME);
       return;
@@ -52,30 +53,32 @@ export function createRouterGuards(router: Router) {
 
     if (!asyncRouterFlag) {
       asyncRouterFlag++;
-      const routes = await generatorDynamicRouter();
-      console.log(routes);
-      if (routes) {
-        // 动态添加可访问路由表
-        routes.forEach((item) => {
-          router.addRoute(item as unknown as RouteRecordRaw);
-        });
+      generatorDynamicRouter().then((routes) => {
+        if (routes) {
+          // 动态添加可访问路由表
+          routes.forEach((item) => {
+            if (item.path.indexOf('http://') == -1 && item.path.indexOf('https://') == -1) {
+              router.addRoute(item as unknown as RouteRecordRaw);
+            }
+          });
 
-        //添加404
-        const isErrorPage = router
-          .getRoutes()
-          .findIndex((item) => item.name === ErrorPageRoute.name);
-        if (isErrorPage === -1) {
-          router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
+          //添加404
+          const isErrorPage = router
+            .getRoutes()
+            .findIndex((item) => item.name === ErrorPageRoute.name);
+          if (isErrorPage === -1) {
+            router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
+          }
+
+          const redirectPath = (from.query.redirect || to.path) as string;
+          const redirect = decodeURIComponent(redirectPath);
+          const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
+          // asyncRouteStore.setDynamicAddedRoute(true);
+          // storage.set('DynamicAddedRoute', true);
+          next(nextData);
+          // Loading && Loading.finish();
         }
-
-        const redirectPath = (from.query.redirect || to.path) as string;
-        const redirect = decodeURIComponent(redirectPath);
-        const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
-        // asyncRouteStore.setDynamicAddedRoute(true);
-        // storage.set('DynamicAddedRoute', true);
-        next(nextData);
-        // Loading && Loading.finish();
-      }
+      });
     } else {
       next();
     }
@@ -86,6 +89,7 @@ export function createRouterGuards(router: Router) {
     // TODO: 有些大问题，暂时先这样吧
     const { t } = useI18n('menu');
     document.title = t(to?.meta?.title as string) || document.title;
+    console.log('1234', to);
   });
 
   router.onError((error) => {

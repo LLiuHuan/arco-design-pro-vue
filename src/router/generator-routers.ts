@@ -46,6 +46,8 @@ export const routerGenerator = (routerMap, parent?): any[] => {
       name: item.name || '',
       // 该路由对应页面的 组件
       component: item.component,
+      // 隐藏菜单
+      hidden: item.hidden,
       // meta: 页面标题, 菜单图标, 页面权限(供指令权限用，可去掉)
       meta: {
         ...item.meta,
@@ -55,8 +57,13 @@ export const routerGenerator = (routerMap, parent?): any[] => {
       },
     };
 
-    // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
-    currentRouter.path = currentRouter.path.replace('//', '/');
+    if (item.path.indexOf('http://') > -1 || item.path.indexOf('https://') > -1) {
+      currentRouter.path = item.path;
+    } else {
+      // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
+      currentRouter.path = currentRouter.path.replace('//', '/');
+    }
+
     // 重定向
     item.redirect && (currentRouter.redirect = item.redirect);
     // 是否有子菜单，并递归处理
@@ -112,7 +119,6 @@ export const dynamicImport = (
       const lastIndex = k.lastIndexOf('.');
       k = k.substring(0, lastIndex);
     }
-    console.log('k === component', k, component, k === component);
     return k === component;
   });
   if (matchKeys?.length === 1) {

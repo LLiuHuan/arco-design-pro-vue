@@ -112,6 +112,7 @@
   import { storage } from '@/utils/storage';
   import { setUserAuthority } from '@/api/system/user';
   import { emitter } from '@/utils/bus';
+  import { useRouter } from 'vue-router';
   export default defineComponent({
     name: 'NavBar',
     components: {
@@ -120,6 +121,7 @@
     },
     setup() {
       const store = useStore();
+      const router = useRouter();
       const state = reactive({
         options: [
           { label: '中文', value: 'zh-CN' },
@@ -188,15 +190,26 @@
         }).then(() => {
           emitter.emit('closeAllPage');
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 100);
+          store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
+            state.userInfo = data;
+            // alert(data.authority.defaultRouter);
+            console.log('跳转：', data.authority.defaultRouter);
+            router.replace(data.authority.defaultRouter);
+            setTimeout(() => {
+              window.location.reload();
+            }, 100);
+          });
+
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 10);
         });
       };
 
       onBeforeMount(() => {
         store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
           state.userInfo = data;
+          // router.replace(data.authority.defaultRouter);
         });
       });
 

@@ -1,10 +1,18 @@
 <template>
   <div v-if="!item.hidden">
     <template v-if="!item.children && !isArray(item.children)">
-      <router-link :to="item.path">
+      <a-menu-item
+        v-if="item.path.indexOf('http://') > -1 || item.path.indexOf('https://') > -1"
+        :key="'menu-item' + item.name"
+        @click="openPath(item.path)"
+      >
+        <component v-if="item.meta.icon" :is="item.meta.icon" />
+        {{ item.meta.title }}
+      </a-menu-item>
+      <router-link v-else :to="item.path">
         <a-menu-item :key="'menu-item' + item.name">
           <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ $t('menu.' + item.name) }}
+          {{ $t('menu.' + item.meta.title) }}
         </a-menu-item>
       </router-link>
     </template>
@@ -12,14 +20,14 @@
       <router-link :to="item.path">
         <a-menu-item :key="'menu-item' + item.name">
           <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ $t('menu.' + item.name) }}
+          {{ $t('menu.' + item.meta.title) }}
         </a-menu-item>
       </router-link>
     </template>
     <a-sub-menu v-else :key="'sub-menu-item' + item.name">
       <template #title>
         <component v-if="item.meta.icon" :is="item.meta.icon" />
-        {{ $t('menu.' + item.name) }}
+        {{ $t('menu.' + item.meta.title) }}
       </template>
       <menu-item v-for="child in item.children" :item="child" :base-path="item.path" :key="child" />
     </a-sub-menu>
@@ -79,10 +87,15 @@
         }
         return resolve(props.basePath, routePath);
       };
+
+      const openPath = (path) => {
+        window.open(path);
+      };
       return {
         isArray,
         resolvePath,
         resolve,
+        openPath,
       };
     },
   });

@@ -192,24 +192,17 @@
 
           store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
             state.userInfo = data;
-            // alert(data.authority.defaultRouter);
-            console.log('跳转：', data.authority.defaultRouter);
             router.replace(data.authority.defaultRouter);
             setTimeout(() => {
               window.location.reload();
             }, 100);
           });
-
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 10);
         });
       };
 
       onBeforeMount(() => {
         store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
           state.userInfo = data;
-          // router.replace(data.authority.defaultRouter);
         });
       });
 

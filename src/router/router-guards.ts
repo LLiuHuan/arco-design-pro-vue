@@ -89,7 +89,6 @@ export function createRouterGuards(router: Router) {
     // TODO: 有些大问题，暂时先这样吧
     const { t } = useI18n('menu');
     document.title = t(to?.meta?.title as string) || document.title;
-    console.log('1234', to);
   });
 
   router.onError((error) => {

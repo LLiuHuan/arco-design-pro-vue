@@ -145,7 +145,6 @@
 
       // 标签页列表
       const tabsList: any = computed(() => store.getters.getTabsList);
-      console.log(tabsList);
       const isDisabled = unref(tabsList).length <= 1;
 
       // 获取简易的路由对象
@@ -312,7 +311,6 @@
         (to) => {
           if (whiteList.includes(route.name as string)) return;
           state.activeKey = to;
-          console.log('route: ', route);
           store.commit(MutationType.SET_ADD_TABS, getSimpleRoute(route));
           updateNavScroll(true);
         },

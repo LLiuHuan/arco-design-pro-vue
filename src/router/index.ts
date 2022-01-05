@@ -2,7 +2,7 @@ import { App } from 'vue';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { createRouterGuards } from '@/router/router-guards';
-import { Error, RedirectRoute } from '@/router/base';
+import { RedirectRoute } from '@/router/base';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 
@@ -42,7 +42,7 @@ export const LoginRoute: RouteRecordRaw = {
 export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
-export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute, Error];
+export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute];
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,

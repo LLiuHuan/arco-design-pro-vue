@@ -30,6 +30,9 @@ const localeBase = {
       user: '用户管理',
       auth: '角色管理',
     },
+    state: {
+      index: '服务器状态',
+    },
   },
   messageBox: {
     tab: {

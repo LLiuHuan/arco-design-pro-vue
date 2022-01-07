@@ -3,33 +3,39 @@
     <template v-if="!item.children && !isArray(item.children)">
       <a-menu-item
         v-if="item.path.indexOf('http://') > -1 || item.path.indexOf('https://') > -1"
-        :key="'menu-item' + item.name"
+        :key="parent !== '' ? parent + '.' + item.name : item.name"
         @click="openPath(item.path)"
       >
         <component v-if="item.meta.icon" :is="item.meta.icon" />
-        {{ item.meta.title }}
+        {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
       </a-menu-item>
       <router-link v-else :to="item.path">
-        <a-menu-item :key="'menu-item' + item.name">
+        <a-menu-item :key="parent !== '' ? parent + '.' + item.name : item.name">
           <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ $t('menu.' + item.meta.title) }}
+          {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
         </a-menu-item>
       </router-link>
     </template>
     <template v-else-if="item.children && item.children.length === 1">
       <router-link :to="item.path">
-        <a-menu-item :key="'menu-item' + item.name">
+        <a-menu-item :key="parent !== '' ? parent + '.' + item.name : item.name">
           <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ $t('menu.' + item.meta.title) }}
+          {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
         </a-menu-item>
       </router-link>
     </template>
-    <a-sub-menu v-else :key="'sub-menu-item' + item.name">
+    <a-sub-menu v-else :key="parent !== '' ? parent + '.' + item.name : item.name">
       <template #title>
         <component v-if="item.meta.icon" :is="item.meta.icon" />
-        {{ $t('menu.' + item.meta.title) }}
+        {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
       </template>
-      <menu-item v-for="child in item.children" :item="child" :base-path="item.path" :key="child" />
+      <menu-item
+        v-for="child in item.children"
+        :item="child"
+        :base-path="item.path"
+        :parent="item.name"
+        :key="child"
+      />
     </a-sub-menu>
   </div>
 </template>
@@ -47,6 +53,10 @@
         required: true,
       },
       basePath: {
+        type: String,
+        default: '',
+      },
+      parent: {
         type: String,
         default: '',
       },

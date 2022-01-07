@@ -119,6 +119,7 @@
           authorityId: props.row.authorityId,
         }).then(() => {
           Message.success('菜单设置成功');
+          initialize();
         });
       };
       // endregion

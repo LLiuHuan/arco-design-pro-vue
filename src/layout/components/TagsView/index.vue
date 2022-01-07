@@ -39,12 +39,21 @@
                     @click.stop="goPage(element)"
                     @contextmenu="handleContextMenu($event, element)"
                   >
-                    <span v-if="activeKey !== element.path">{{ $t('menu.' + element.name) }}</span>
-                    <span v-else
-                      ><a-badge class="pr-1.5" dot status="success" />{{
-                        $t('menu.' + element.name)
-                      }}</span
-                    >
+                    <span v-if="activeKey !== element.path">
+                      {{
+                        element.meta.title.indexOf('menu.') !== -1
+                          ? $t(element.meta.title)
+                          : element.meta.title
+                      }}
+                    </span>
+                    <span v-else>
+                      <a-badge class="pr-1.5" dot status="success" />
+                      {{
+                        element.meta.title.indexOf('menu.') !== -1
+                          ? $t(element.meta.title)
+                          : element.meta.title
+                      }}
+                    </span>
                     <icon-close
                       size="14"
                       @click.stop="closeTabItem(element)"

@@ -87,8 +87,12 @@ export function createRouterGuards(router: Router) {
   // , failure
   router.afterEach((to, _) => {
     // TODO: 有些大问题，暂时先这样吧
-    const { t } = useI18n('menu');
-    document.title = t(to?.meta?.title as string) || document.title;
+    const { t } = useI18n('');
+    if ((to.meta?.title as string).indexOf('menu.') !== -1) {
+      document.title = t(to?.meta?.title as string) || document.title;
+    } else {
+      document.title = to.meta?.title as string;
+    }
   });
 
   router.onError((error) => {

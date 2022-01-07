@@ -30,6 +30,9 @@ const localeBase = {
       user: 'User',
       auth: 'Authority',
     },
+    state: {
+      index: 'SystemState',
+    },
   },
   messageBox: {
     tab: {

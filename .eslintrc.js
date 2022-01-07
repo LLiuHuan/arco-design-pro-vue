@@ -83,6 +83,7 @@ module.exports = {
           'About',
           'Settings',
           'Login',
+          'State',
         ],
       },
     ],

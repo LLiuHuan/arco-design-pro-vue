@@ -2,11 +2,11 @@
 import { defineConfig } from 'vite-plugin-windicss';
 import colors from 'windicss/colors';
 import plugin from 'windicss/plugin';
-const { preset } = require('twin.arco');
+// const { preset } = require('twin.arco');
 
 export default defineConfig({
   darkMode: 'class', // or 'media'
-  presets: [preset()],
+  // presets: [preset()],
   theme: {
     extend: {
       screens: {

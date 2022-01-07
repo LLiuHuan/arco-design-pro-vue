@@ -61,19 +61,22 @@
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
             <a-form v-if="isForm" :model="form">
               <a-form-item field="name" label="路由Name">
-                <a-input
-                  v-model="form.name"
-                  placeholder="目前使用1i8n的数据，需要为xx.xx 和展示名称一致"
-                />
+                <a-input v-model="form.name" placeholder="路由名称，推荐英文" />
               </a-form-item>
               <a-form-item field="path" label="路由Path">
-                <a-input v-model="form.path" placeholder="请输入路由地址，不需要输入上级路由" />
+                <a-input v-model="form.path" placeholder="不需要输入上级路由，例：menu" />
               </a-form-item>
               <a-form-item field="meta.title" label="展示名称">
-                <a-input v-model="form.meta.title" placeholder="目前使用1i8n的数据，需要为xx.xx" />
+                <a-input
+                  v-model="form.meta.title"
+                  placeholder="如需国际化请按照locale配置，menu.system.menu"
+                />
               </a-form-item>
               <a-form-item field="component" label="文件路径">
-                <a-input v-model="form.component" placeholder="views下的文件路径" />
+                <a-input
+                  v-model="form.component"
+                  placeholder="views下的文件路径, /system/menu/index.vue"
+                />
               </a-form-item>
               <a-form-item field="redirect" label="重定向">
                 <a-input v-model="form.redirect" placeholder="顶级菜单需要重定向到一个子级菜单" />
@@ -160,7 +163,7 @@
       });
 
       const treeTitle = (title: string): string => {
-        return t('menu.' + title).indexOf('menu.') != -1 ? title : t('menu.' + title);
+        return title.indexOf('menu.') === -1 ? title : t(title);
       };
 
       const isHttp = (path: string): boolean => {

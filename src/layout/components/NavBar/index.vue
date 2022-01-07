@@ -5,18 +5,9 @@
     </div>
     <ul class="right">
       <li>
-        <MessageBox />
+        <a target="_blank" :href="docs"><IconGithub /></a>
       </li>
       <li>
-        <!--        <a target="_blank" :href="docs">{{ $t('navbar.docs') }}</a>-->
-        <a target="_blank" :href="docs"><icon-github /></a>
-      </li>
-      <li>
-        <!--        <a-select v-components="language" @change="setLang(language)">-->
-        <!--          <a-option v-for="opt in options" :key="opt.value" :value="opt.value">{{-->
-        <!--            opt.label-->
-        <!--          }}</a-option>-->
-        <!--        </a-select>-->
         <a-tooltip :content="language === 'en-US' ? '点击切换为中文' : '点击切换为英文'">
           <a-button
             @click="setLang(language === 'en-US' ? 'zh-CN' : 'en-US')"
@@ -82,21 +73,6 @@
           </template>
         </a-dropdown>
       </li>
-      <!--      <li>-->
-      <!--        <Avatar size={24} style={{ marginRight: 8 }}>-->
-      <!--          <img alt="avatar" src={userInfo.avatar} />-->
-      <!--        </Avatar>-->
-      <!--        <Dropdown-->
-      <!--          trigger="click"-->
-      <!--          droplist={-->
-      <!--        <MenuBox onClickMenuItem={onMenuItemClick}>-->
-      <!--          <MenuBox.Item key="logout">登出</MenuBox.Item>-->
-      <!--        </MenuBox>-->
-      <!--        }-->
-      <!--        >-->
-      <!--        <Typography.Text class={styles.username}>{userInfo.name}</Typography.Text>-->
-      <!--        </Dropdown>-->
-      <!--      </li>-->
     </ul>
   </div>
 </template>
@@ -104,7 +80,6 @@
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import Logo from '@/layout/components/Logo/index.vue';
-  import MessageBox from '@/layout/components/MessageBox/index.vue';
   import { useI18n } from 'vue-i18n';
   import { useStore } from 'vuex';
   import { ActionsType } from '@/store/modules/user/actions';
@@ -113,11 +88,14 @@
   import { setUserAuthority } from '@/api/system/user';
   import { emitter } from '@/utils/bus';
   import { useRouter } from 'vue-router';
+  import { IconGithub } from '@arco-design/web-vue/es/icon';
+
   export default defineComponent({
     name: 'NavBar',
     components: {
       Logo,
-      MessageBox,
+
+      IconGithub,
     },
     setup() {
       const store = useStore();
@@ -129,7 +107,7 @@
         ],
         language: ref<string | null>(store.getters[GettersType.GET_LANGUAGE]),
         theme: store.getters[GettersType.GET_MODE], // light
-        docs: 'https://arco.design/vue/docs/start',
+        docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
         userInfo: {},
       });

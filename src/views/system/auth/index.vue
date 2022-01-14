@@ -12,14 +12,14 @@
         :pagination="{
           current: table.page,
           onPageSize: table.pageSize,
-          change: setPage,
           size: 'medium',
           total: table.total,
-          onPageSizeChange: setPageSize,
           showTotal: true,
           showPageSize: true,
         }"
         :loading="table.loading"
+        @page-change="setPage"
+        @page-size-change="setPageSize"
       >
         <template #columns>
           <a-table-column title="角色ID" data-index="authorityId" />

@@ -16,14 +16,14 @@
         :pagination="{
           current: page,
           onPageSize: pageSize,
-          change: setPage,
           size: 'medium',
           total: total,
-          onPageSizeChange: setPageSize,
           showTotal: true,
           showPageSize: true,
         }"
         :loading="tableLoading"
+        @page-change="setPage"
+        @page-size-change="setPageSize"
       >
         <template #columns>
           <a-table-column ellipsis title="头像" data-index="headerImg" width="100">

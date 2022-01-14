@@ -29,6 +29,7 @@ const localeBase = {
       menu: 'Menu',
       user: 'User',
       auth: 'Authority',
+      api: 'Api',
     },
     state: {
       index: 'SystemState',

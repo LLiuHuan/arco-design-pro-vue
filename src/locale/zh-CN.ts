@@ -29,6 +29,7 @@ const localeBase = {
       menu: '菜单管理',
       user: '用户管理',
       auth: '角色管理',
+      api: 'Api管理',
     },
     state: {
       index: '服务器状态',

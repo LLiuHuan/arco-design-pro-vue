@@ -1,9 +1,11 @@
 <template>
   <div class="search-box"> 选择区 </div>
   <div class="table-box">
-    <a-space class="btn-list pb-2">
-      <a-button type="outline">新增</a-button>
-      <a-button type="outline">删除</a-button>
+    <a-space class="btn-list pb-3">
+      <a-button type="outline" @click="openModel('addApi')">新增</a-button>
+      <a-popconfirm @ok="onDelete" content="确定要删除吗？">
+        <a-button type="outline">删除</a-button>
+      </a-popconfirm>
     </a-space>
     <a-table
       :data="table.data"
@@ -24,6 +26,7 @@
         showCheckedAll: true,
       }"
       :bordered="false"
+      @selection-change="(keys) => (table.selectKeys = keys)"
     >
       <template #columns>
         <a-table-column title="ID" data-index="ID" />
@@ -93,7 +96,14 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-  import { createApi, deleteApi, getApiById, getApiList, updateApi } from '@/api/system/api';
+  import {
+    createApi,
+    deleteApi,
+    deleteApisByIds,
+    getApiById,
+    getApiList,
+    updateApi,
+  } from '@/api/system/api';
   import { Message } from '@arco-design/web-vue';
   export default defineComponent({
     name: 'SystemApi',
@@ -129,6 +139,7 @@
           pageSize: 0,
           total: 0,
           loading: false,
+          selectKeys: [],
         },
         pageInfo: {
           page: 1,
@@ -186,7 +197,7 @@
       };
 
       // region 添加和修改
-      const openDialog = (type: string) => {
+      const openModel = (type: string) => {
         switch (type) {
           case 'addApi':
             state.model.title = '新增Api';
@@ -205,7 +216,7 @@
       const editApi = async (row) => {
         const data = await getApiById(row.ID);
         state.model.form = data.api;
-        openDialog('edit');
+        openModel('edit');
       };
 
       const removeApi = async (row) => {
@@ -268,6 +279,18 @@
       };
       // endregion
 
+      const onDelete = async () => {
+        const res = await deleteApisByIds({ ids: state.table.selectKeys });
+        if (res) {
+          Message.success('删除成功！');
+          const { data, selectKeys } = state.table;
+          if (data.length === selectKeys.length && state.pageInfo.page > 1) {
+            state.pageInfo.page--;
+          }
+          await listApi();
+        }
+      };
+
       onBeforeMount(() => {
         listApi();
       });
@@ -284,8 +307,10 @@
         editApi,
         removeApi,
 
+        openModel,
         closeModel,
         enterModel,
+        onDelete,
       };
     },
   });

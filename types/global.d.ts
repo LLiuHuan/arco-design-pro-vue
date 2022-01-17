@@ -15,6 +15,8 @@ declare global {
 
   declare function parseInt(s: string | number, radix?: number): number;
 
+  declare type Nullable<T> = T | null;
+
   declare interface ViteEnv {
     VITE_PORT: number;
     VITE_USE_MOCK: boolean;

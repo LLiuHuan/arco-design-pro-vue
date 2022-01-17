@@ -7,6 +7,7 @@ import plugin from 'windicss/plugin';
 export default defineConfig({
   darkMode: 'class', // or 'media'
   // presets: [preset()],
+  preflight: false,
   theme: {
     extend: {
       screens: {

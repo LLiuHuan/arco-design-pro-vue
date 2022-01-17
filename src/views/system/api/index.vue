@@ -1,5 +1,7 @@
 <template>
-  <div class="search-box"> 选择区 </div>
+  <div class="search-box">
+    <BasicForm @register="register" @submit="submit" @reset="reset" />
+  </div>
   <div class="table-box">
     <a-space class="btn-list pb-3">
       <a-button type="outline" @click="openModel('addApi')">新增</a-button>
@@ -35,7 +37,7 @@
         <a-table-column title="API简介" data-index="description" />
         <a-table-column title="请求" data-index="method">
           <template #cell="{ record }">
-            <div> {{ record.method }} / {{ methodFiletr(record.method) }} </div>
+            <div> {{ methodFiletr(record.method) }} </div>
           </template>
         </a-table-column>
         <a-table-column title="操作">
@@ -105,29 +107,33 @@
     updateApi,
   } from '@/api/system/api';
   import { Message } from '@arco-design/web-vue';
+  import { BasicForm, FormSchema, useForm } from '@/components/BasicForm';
   export default defineComponent({
     name: 'SystemApi',
+    components: {
+      BasicForm,
+    },
     setup() {
       const modelForm = ref();
       const methodOptions = [
         {
           value: 'POST',
-          label: '创建',
+          label: '创建(POST)',
           type: 'success',
         },
         {
           value: 'GET',
-          label: '查看',
+          label: '查看(GET)',
           type: '',
         },
         {
           value: 'PUT',
-          label: '更新',
+          label: '更新(PUT)',
           type: 'warning',
         },
         {
           value: 'DELETE',
-          label: '删除',
+          label: '删除(DELETE)',
           type: 'danger',
         },
       ];
@@ -162,12 +168,59 @@
             description: [{ required: true, message: '请输入api介绍', trigger: 'blur' }],
           },
         },
+        search: {},
+      });
+
+      const schemas: FormSchema[] = [
+        {
+          field: 'path',
+          labelMessage: '这是一个提示',
+          component: 'AInput',
+          label: '路径',
+          componentProps: {
+            placeholder: '请输入路径',
+          },
+          colProps: { span: 8 },
+        },
+        {
+          field: 'description',
+          component: 'AInput',
+          label: '描述',
+          componentProps: {
+            placeholder: '请输入描述',
+          },
+          colProps: { span: 8 },
+        },
+        {
+          field: 'apiGroup',
+          component: 'AInput',
+          label: 'API组',
+          componentProps: {
+            placeholder: '请输入API组',
+          },
+          colProps: { span: 8 },
+        },
+        {
+          field: 'method',
+          component: 'ASelect',
+          label: '请求',
+          componentProps: {
+            placeholder: '请选择请求',
+            options: methodOptions,
+          },
+          colProps: { span: 8 },
+        },
+      ];
+
+      const [register, {}] = useForm({
+        rowProps: { gutter: 8 },
+        schemas,
       });
 
       const listApi = async () => {
         state.table.loading = true;
 
-        const res = await getApiList(state.pageInfo);
+        const res = await getApiList({ ...state.pageInfo, ...state.search });
         [state.table.data, state.table.page, state.table.pageSize, state.table.total] = [
           res.list,
           res.page,
@@ -291,6 +344,18 @@
         }
       };
 
+      const submit = (value) => {
+        console.log('submit', value);
+        state.pageInfo.page = 1;
+        state.pageInfo.pageSize = 10;
+        state.search = value;
+        listApi();
+      };
+
+      const reset = () => {
+        // state.search = {};
+      };
+
       onBeforeMount(() => {
         listApi();
       });
@@ -311,6 +376,10 @@
         closeModel,
         enterModel,
         onDelete,
+
+        register,
+        submit,
+        reset,
       };
     },
   });

@@ -2,6 +2,8 @@
  * 判断根路由 Router
  * */
 import { PageEnum } from '@/enums/pageEnum';
+import { isObject } from '@/utils/is';
+import { unref } from 'vue';
 
 export function isRootRouter(item: any) {
   return item.meta?.alwaysShow != true && item.children?.length === 1;
@@ -52,4 +54,23 @@ export function generatorMenu(routerMap: Array<any>) {
  */
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path);
+}
+
+export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
+  let key: string;
+  for (key in target) {
+    src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
+  }
+  return src;
+}
+
+// dynamic use hook props
+export function getDynamicProps<T, U>(props: T): Partial<U> {
+  const ret: Recordable = {};
+
+  Object.keys(props).map((key) => {
+    ret[key] = unref((props as Recordable)[key]);
+  });
+
+  return ret as Partial<U>;
 }

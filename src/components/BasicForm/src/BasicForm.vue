@@ -2,7 +2,7 @@
   <a-form v-bind="getBindValue" :model="formModel" ref="formElRef">
     <a-grid v-bind="getGrid">
       <a-grid-item v-bind="schema.gridItemProps" v-for="schema in getSchema" :key="schema.field">
-        <a-form-item :label="schema.label" :field="schema.field">
+        <a-form-item :label="schema.label" :field="schema.field" v-bind="schema">
           <!--标签名右侧温馨提示-->
           <template #label v-if="schema.labelMessage">
             {{ schema.label }}
@@ -164,7 +164,6 @@
 
       // 获取确定按钮样式
       const getSubmitBtnOptions = computed(() => {
-        console.log(unref(getProps).formProps?.size);
         return Object.assign(
           {
             size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',

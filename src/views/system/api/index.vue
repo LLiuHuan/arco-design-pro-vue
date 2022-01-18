@@ -346,7 +346,6 @@
       };
 
       const submit = (value) => {
-        console.log('submit', value);
         state.pageInfo.page = 1;
         state.pageInfo.pageSize = 10;
         state.search = value;
@@ -354,7 +353,7 @@
       };
 
       const reset = () => {
-        // state.search = {};
+        state.search = {};
       };
 
       onBeforeMount(() => {

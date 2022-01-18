@@ -327,7 +327,6 @@
       );
 
       onMounted(() => {
-        console.log('onMounted');
         onElementResize();
 
         emitter.on('closeAllPage', () => {

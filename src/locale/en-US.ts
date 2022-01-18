@@ -30,6 +30,7 @@ const localeBase = {
       user: 'User',
       auth: 'Authority',
       api: 'Api',
+      operationRecord: 'OperationRecord',
     },
     state: {
       index: 'SystemState',

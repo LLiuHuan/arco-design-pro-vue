@@ -12,7 +12,6 @@ import { getDynamicProps } from '@/utils';
 type Props = Partial<DynamicProps<BaseFormProps>>;
 
 export function useForm(props?: Props): UseFormReturnType {
-  console.log(props);
   // @ts-ignore
   const formRef = ref<Nullable<FormActionType>>(null);
   // @ts-ignore
@@ -30,7 +29,6 @@ export function useForm(props?: Props): UseFormReturnType {
   }
 
   function register(instance: FormActionType) {
-    console.log(instance);
     isProdMode() &&
       onUnmounted(() => {
         formRef.value = null;
@@ -44,7 +42,6 @@ export function useForm(props?: Props): UseFormReturnType {
     watch(
       () => props,
       () => {
-        console.log(getDynamicProps(props));
         props && instance.setProps(getDynamicProps(props));
       },
       {

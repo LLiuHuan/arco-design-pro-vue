@@ -1,13 +1,14 @@
 import type { ComputedRef, Ref } from 'vue';
-import type { FormProps, FormSchema } from '../types/form';
+import type { FormSchema } from '../types/form';
 import { unref, toRaw } from 'vue';
 import { isFunction } from '@/utils/is';
+import { BaseFormProps } from '../types/form';
 
 declare type EmitType = (event: string, ...args: any[]) => void;
 
 interface UseFormActionContext {
   emit: EmitType;
-  getProps: ComputedRef<FormProps>;
+  getProps: ComputedRef<BaseFormProps>;
   getSchema: ComputedRef<FormSchema[]>;
   formModel: Ref<Recordable>;
   formElRef: Ref;

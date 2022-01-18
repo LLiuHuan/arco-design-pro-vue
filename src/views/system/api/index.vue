@@ -180,7 +180,7 @@
           componentProps: {
             placeholder: '请输入路径',
           },
-          colProps: { span: 8 },
+          gridItemProps: { span: 8 },
         },
         {
           field: 'description',
@@ -189,7 +189,7 @@
           componentProps: {
             placeholder: '请输入描述',
           },
-          colProps: { span: 8 },
+          gridItemProps: { span: 8 },
         },
         {
           field: 'apiGroup',
@@ -198,7 +198,7 @@
           componentProps: {
             placeholder: '请输入API组',
           },
-          colProps: { span: 8 },
+          gridItemProps: { span: 8 },
         },
         {
           field: 'method',
@@ -208,12 +208,13 @@
             placeholder: '请选择请求',
             options: methodOptions,
           },
-          colProps: { span: 8 },
+          gridItemProps: { span: 8 },
         },
       ];
 
       const [register, {}] = useForm({
-        rowProps: { gutter: 8 },
+        formProps: { layout: 'inline' },
+        gridProps: { cols: 24 },
         schemas,
       });
 

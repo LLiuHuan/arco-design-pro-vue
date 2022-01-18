@@ -1,17 +1,4 @@
-import { GridRowGutter } from '@arco-design/web-vue/es/grid/interface';
-
-// TODO: 临时使用，因为现在还没有提供Grid的Props
-export type RowProps = {
-  gutter?:
-    | number
-    | Partial<Record<'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs', number>>
-    | GridRowGutter[];
-  justify?: 'start' | 'center' | 'end' | 'space-around' | 'space-between';
-  align?: 'start' | 'center' | 'end' | 'stretch';
-  div?: boolean;
-  wrap?: boolean;
-};
-
+// TODO: 临时使用，因为现在还没有提供Col的Props
 export type ColProps = {
   span?: number;
   offset?: number;

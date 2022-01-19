@@ -61,7 +61,7 @@
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
             <a-form v-if="isForm" :model="form">
               <a-form-item field="name" label="路由Name">
-                <a-input v-model="form.name" placeholder="路由名称，推荐英文" />
+                <a-input v-model="form.name" placeholder="路由名称，目前仅在权限管理使用" />
               </a-form-item>
               <a-form-item field="path" label="路由Path">
                 <a-input v-model="form.path" placeholder="不需要输入上级路由，例：menu" />
@@ -69,7 +69,7 @@
               <a-form-item field="meta.title" label="展示名称">
                 <a-input
                   v-model="form.meta.title"
-                  placeholder="如需国际化请按照locale配置，menu.system.menu"
+                  placeholder="menu.system.menu 如需国际化请按照locale配置"
                 />
               </a-form-item>
               <a-form-item field="component" label="文件路径">

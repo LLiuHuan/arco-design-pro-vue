@@ -75,7 +75,7 @@
           <a-option
             v-for="item in methodOptions"
             :key="item.value"
-            :label="`${item.label}(${item.value})`"
+            :label="`${item.label}`"
             :value="item.value"
           />
         </a-select>

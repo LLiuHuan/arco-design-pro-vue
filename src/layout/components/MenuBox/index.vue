@@ -14,8 +14,7 @@
   import { isArray } from 'lodash-es';
   import MenuItem from '@/layout/components/MenuBox/MenuItem.vue';
   import { storage } from '@/utils/storage';
-  import { useStore } from '@/store';
-  import { GettersType } from '@/store/modules/route/getters';
+  import { useRoutersStore } from '@/store/modules/routers';
 
   export default defineComponent({
     name: 'Menu',
@@ -24,7 +23,7 @@
     },
     setup() {
       // const menus = generatorMenu(asyncRoutes);
-      const store = useStore();
+      const routerStore = useRoutersStore();
       const state = reactive({
         menus: ref<any[]>([]),
         defaultOpenKeys: ref<Array<String>>([storage.get('open-key')]),
@@ -36,7 +35,7 @@
         storage.set('select-key', key);
       };
 
-      state.menus = store.getters[GettersType.GET_ASYNC_ROUTER];
+      state.menus = routerStore.getRouters;
 
       return {
         ...toRefs(state),

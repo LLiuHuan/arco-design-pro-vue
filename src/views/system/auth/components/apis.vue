@@ -49,9 +49,10 @@
         state.activeUserId = props.row.authorityId;
         const res = await getPolicyPathByAuthorityId(props.row.authorityId);
         const paths = res.paths;
-        paths.forEach((item) => {
-          state.apiTreeIds.push('p:' + item.path + 'm:' + item.method);
-        });
+        paths &&
+          paths.forEach((item) => {
+            state.apiTreeIds.push('p:' + item.path + 'm:' + item.method);
+          });
       };
 
       // 创建api树方法

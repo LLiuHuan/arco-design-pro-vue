@@ -17,7 +17,6 @@
  unbind -> unmounted
 
  */
-// import store from "@/store";
 import { usePermission } from '@/hooks/web/usePermission';
 import type { App, ObjectDirective } from 'vue';
 

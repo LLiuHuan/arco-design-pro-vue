@@ -13,8 +13,8 @@ import { Message, Modal } from '@arco-design/web-vue';
 import { PageEnum } from '@/enums/pageEnum';
 import router from '@/router';
 import { storage } from '@/utils/storage';
-import { useStore } from '@/store';
-import { MutationType } from '@/store/modules/user/mutations';
+import { useUserStore } from '@/store/modules/users';
+import { ACCESS_TOKEN } from '@/store/mutation-types';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix || '';
@@ -34,8 +34,9 @@ const transform: AxiosTransform = {
     // @ts-ignore
     // const { $message: Message, $dialog: Modal } = window;
     if (res.headers['new-token']) {
-      const store = useStore();
-      store.commit(MutationType.SET_TOKEN, res.headers['new-token']);
+      const usersStore = useUserStore();
+      console.log(res.headers);
+      usersStore.setToken(res.headers['new-token']);
     }
 
     const {
@@ -190,8 +191,7 @@ const transform: AxiosTransform = {
   requestInterceptors: (config) => {
     // 请求之前处理config
     // const userStore = useUserStoreWidthOut();
-    const store = useStore();
-    const token = store.state.user.token;
+    const token = storage.get(ACCESS_TOKEN);
     if (token) {
       // jwt token
       if (config.headers) {

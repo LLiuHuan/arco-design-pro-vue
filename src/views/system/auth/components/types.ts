@@ -3,3 +3,8 @@ export interface formType {
   authorityName: string;
   parentId: string;
 }
+
+export interface casbinType {
+  path: string;
+  method: string;
+}

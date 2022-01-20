@@ -53,9 +53,11 @@
     :footer="false"
     unmountOnClose
   >
-    <a-tabs type="text">
+    <a-tabs type="text" lazy-load>
       <a-tab-pane key="menus" title="角色菜单"> <menus :row="activeRow" /> </a-tab-pane>
-      <a-tab-pane key="api" title="角色Api"> Content of Tab Panel 2 </a-tab-pane>
+      <a-tab-pane key="api" title="角色Api">
+        <Apis :row="activeRow" />
+      </a-tab-pane>
     </a-tabs>
   </a-drawer>
 
@@ -74,12 +76,14 @@
   import { deleteAuthority, getAuthorityList } from '@/api/system/auth';
   import { authorityInfo } from '@/api/system/auth-types';
   import Menus from './components/menus.vue';
+  import Apis from './components/apis.vue';
   import OperationModel from './components/operationModel.vue';
   import { Message } from '@arco-design/web-vue';
   export default defineComponent({
     name: 'SystemAuth',
     components: {
       Menus,
+      Apis,
       OperationModel,
     },
     setup() {

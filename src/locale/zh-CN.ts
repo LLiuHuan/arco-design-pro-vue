@@ -30,6 +30,7 @@ const localeBase = {
       user: '用户管理',
       auth: '角色管理',
       api: 'Api管理',
+      operationRecord: '操作历史',
     },
     state: {
       index: '服务器状态',

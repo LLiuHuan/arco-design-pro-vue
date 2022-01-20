@@ -1,45 +1,23 @@
-import { FormSchema } from '@/components/BasicForm/src/types/form';
-import { CSSProperties, PropType } from 'vue';
+import { FormProps, FormSchema } from '@/components/BasicForm/src/types/form';
+import { PropType } from 'vue';
 import { ButtonProps } from '@arco-design/web-vue/es/button';
 import { propTypes } from '@/utils/propTypes';
-import { ColProps, RowProps } from '@/components/BasicForm/src/types/gridProps';
+import { GridProps } from '@arco-design/web-vue/es/grid/interface';
 
 export const basicProps = {
-  // // 标签宽度  固定宽度
-  // labelWidth: {
-  //   type: [Number, String] as PropType<number | string>,
-  //   default: 80,
-  // },
   // 表单配置规则
   schemas: {
     type: [Array] as PropType<FormSchema[]>,
     default: () => [],
   },
-  //布局方式
-  layout: {
-    type: String,
-    default: 'inline',
+  // 表单设置规则
+  formProps: {
+    type: Object as PropType<FormProps>,
+    default: () => {},
   },
-  // //是否展示为行内表单
-  // inline: {
-  //   type: Boolean,
-  //   default: false,
-  // },
-  //大小
-  size: {
-    type: String,
-    default: 'medium',
-  },
-  //标签位置
-  labelAlign: {
-    type: String,
-    default: 'left',
-  },
-  // //组件是否width 100%
-  // isFull: {
-  //   type: Boolean,
-  //   default: true,
-  // },
+  //grid 配置
+  gridProps: Object as PropType<GridProps>,
+
   //是否显示操作按钮（查询/重置）
   showActionButtonGroup: propTypes.bool.def(true),
   // 显示重置按钮
@@ -61,25 +39,5 @@ export const basicProps = {
   resetButtonText: {
     type: String,
     default: '重置',
-  },
-  //row 配置
-  // TODO: 临时使用，因为他现在还没有guid的prop type文件
-  rowProps: Object as PropType<RowProps>,
-  //col配置
-  // TODO: 临时使用，因为他现在还没有guid的prop type文件
-  colProps: Object as PropType<ColProps>,
-  //grid 样式
-  baseRowStyle: {
-    type: Object as PropType<CSSProperties>,
-  },
-  //是否折叠
-  collapsed: {
-    type: Boolean,
-    default: false,
-  },
-  //默认展示的行数
-  collapsedRows: {
-    type: Number,
-    default: 1,
   },
 };

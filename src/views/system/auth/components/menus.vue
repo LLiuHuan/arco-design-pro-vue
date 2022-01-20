@@ -19,11 +19,11 @@
             <a-button
               type="text"
               size="mini"
-              :style="{ color: row.defaultRouter === nodeData.title ? '#E6A23C' : '#85ce61' }"
-              :disabled="row.defaultRouter === nodeData.title"
+              :style="{ color: row.defaultRouter === nodeData.path ? '#E6A23C' : '#85ce61' }"
+              :disabled="row.defaultRouter === nodeData.path"
               @click="() => setDefault(nodeData)"
             >
-              {{ row.defaultRouter === nodeData.title ? '首页' : '设为首页' }}
+              {{ row.defaultRouter === nodeData.path ? '首页' : '设为首页' }}
             </a-button>
           </span>
         </template>
@@ -102,9 +102,10 @@
           authorityId: props.row.authorityId,
           authorityName: props.row.authorityName,
           parentId: props.row.parentId,
-          defaultRouter: data.title,
+          defaultRouter: data.path,
         }).then(() => {
           Message.success('设置成功');
+          initialize();
           // this.$emit('changeRow', 'defaultRouter', res.data.authority.defaultRouter)
         });
       };

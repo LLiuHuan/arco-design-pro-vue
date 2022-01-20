@@ -1,8 +1,8 @@
 <template>
   <a-form v-bind="getBindValue" :model="formModel" ref="formElRef">
-    <a-row v-bind="getGrid">
-      <a-col v-bind="schema.colProps" v-for="schema in getSchema" :key="schema.field">
-        <a-form-item :label="schema.label" :field="schema.field">
+    <a-grid v-bind="getGrid">
+      <a-grid-item v-bind="schema.gridItemProps" v-for="schema in getSchema" :key="schema.field">
+        <a-form-item :label="schema.label" :field="schema.field" v-bind="schema">
           <!--标签名右侧温馨提示-->
           <template #label v-if="schema.labelMessage">
             {{ schema.label }}
@@ -61,7 +61,7 @@
             v-bind="getComponentProps(schema)"
             :is="schema.component"
             v-model="formModel[schema.field]"
-            :class="{ isFull: schema.isFull !== false && getProps.isFull }"
+            :class="{ isFull: schema.isFull !== false }"
           />
 
           <!--组件后面的内容-->
@@ -74,48 +74,50 @@
             ></slot>
           </template>
         </a-form-item>
-      </a-col>
+      </a-grid-item>
       <!--提交 重置 展开 收起 按钮-->
-      <a-col
-        :span="isInline ? 0 : 24"
-        :suffix="!!isInline"
+      <a-grid-item
+        :span="isInline ? getSchema[0].gridItemProps.span : 24"
         #="{ overflow }"
-        v-if="getProps.showActionButtonGroup"
+        :suffix="!!isInline"
+        v-if="showActionButtonGroup"
       >
-        <a-space align="center" wrap>
+        <a-space class="pl-7" align="center" wrap>
           <a-button
-            v-if="getProps.showSubmitButton"
+            v-if="showSubmitButton"
             v-bind="getSubmitBtnOptions"
             @click="handleSubmit"
             :loading="loadingSub"
-            >{{ getProps.submitButtonText }}</a-button
+            >{{ submitButtonText }}</a-button
           >
+          <a-button v-if="showResetButton" v-bind="getResetBtnOptions" @click="resetFields">{{
+            resetButtonText
+          }}</a-button>
           <a-button
-            v-if="getProps.showResetButton"
-            v-bind="getResetBtnOptions"
-            @click="resetFields"
-            >{{ getProps.resetButtonText }}</a-button
+            type="text"
+            v-if="isInline && getProps.showAdvancedButton"
+            @click="unfoldToggle"
           >
-          <!--          <a-button-->
-          <!--            type="text"-->
-          <!--            v-if="isInline && getProps.showAdvancedButton"-->
-          <!--            @click="unfoldToggle"-->
-          <!--          >-->
-          <!--            <template #icon>-->
-          <!--              <IconDown v-if="overflow" :size="14" />-->
-          <!--              <IconUp v-else :size="14" />-->
-          <!--            </template>-->
-          <!--            {{ overflow ? '展开' : '收起' }}-->
-          <!--          </a-button>-->
+            <template #icon>
+              <IconDown v-if="overflow" :size="14" />
+              <IconUp v-else :size="14" />
+            </template>
+            {{ overflow ? '展开' : '收起' }}
+          </a-button>
         </a-space>
-      </a-col>
-    </a-row>
+      </a-grid-item>
+    </a-grid>
   </a-form>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, onMounted, reactive, ref, unref, watch } from 'vue';
-  import { FormActionType, FormProps, FormSchema } from '@/components/BasicForm/src/types/form';
+  import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue';
+  import {
+    BaseFormProps,
+    FormActionType,
+    FormProps,
+    FormSchema,
+  } from '@/components/BasicForm/src/types/form';
   import { IconQuestionCircle, IconDown, IconUp } from '@arco-design/web-vue/es/icon';
   import { basicProps } from '@/components/BasicForm/src/props';
   import { useFormValues } from '@/components/BasicForm/src/hooks/useFormValues';
@@ -123,7 +125,7 @@
   import { useFormEvents } from '@/components/BasicForm/src/hooks/useFormEvents';
   import { deepMerge } from '@/utils';
   import { createPlaceholderMessage } from '@/components/BasicForm/src/helper';
-  import { RowProps } from '@/components/BasicForm/src/types/gridProps';
+  import { GridProps } from '@arco-design/web-vue/es/grid/interface';
   export default defineComponent({
     name: 'BasicForm',
     components: {
@@ -145,41 +147,60 @@
       const loadingSub = ref(false);
       const isUpdateDefaultRef = ref(false);
 
+      // 获取并拼接props内容
+      const getProps = computed((): BaseFormProps => {
+        const baseFormProps = { ...props, ...unref(propsRef) } as BaseFormProps;
+        const rulesObj: any = {
+          rules: {},
+        };
+        const schemas: any = baseFormProps.schemas || [];
+        schemas.forEach((item) => {
+          if (item.rules && isArray(item.rules)) {
+            rulesObj.rules[item.field] = item.rules;
+          }
+        });
+        return { ...baseFormProps, ...unref(rulesObj) };
+      });
+
+      // 获取确定按钮样式
       const getSubmitBtnOptions = computed(() => {
         return Object.assign(
           {
-            size: props.size,
+            size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
             type: 'primary',
           },
-          props.submitButtonOptions
+          unref(getProps).submitButtonOptions
         );
       });
 
+      // 获取重置按钮样式
       const getResetBtnOptions = computed(() => {
         return Object.assign(
           {
-            size: props.size,
+            size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
           },
-          props.resetButtonOptions
+          unref(getProps).resetButtonOptions
         );
       });
 
       const isInline = computed(() => {
-        const { layout } = unref(getProps);
-        return layout === 'inline';
+        const { formProps } = unref(getProps);
+        return formProps?.layout === 'inline';
       });
 
-      const getGrid = computed((): RowProps | undefined => {
-        const { rowProps } = unref(getProps);
-        if (rowProps) {
+      // 获取grid的row的样式
+      const getGrid = computed((): Partial<GridProps> | undefined => {
+        const { gridProps } = unref(getProps);
+        if (gridProps) {
           return {
-            ...rowProps,
-            // collapsed: isInline.value ? gridCollapsed.value : false,
+            ...gridProps,
+            collapsed: isInline.value ? gridCollapsed.value : false,
           };
         }
         return undefined;
       });
 
+      // 获取动态渲染表单的props
       function getComponentProps(schema) {
         const compProps = schema.componentProps ?? {};
         const component = schema.component;
@@ -190,24 +211,12 @@
         };
       }
 
-      const getProps = computed((): FormProps => {
-        const formProps = { ...props, ...unref(propsRef) } as FormProps;
-        const rulesObj: any = {
-          rules: {},
-        };
-        const schemas: any = formProps.schemas || [];
-        schemas.forEach((item) => {
-          if (item.rules && isArray(item.rules)) {
-            rulesObj.rules[item.field] = item.rules;
-          }
-        });
-        return { ...formProps, ...unref(rulesObj) };
-      });
-
+      // 获取form表单的props
       const getBindValue = computed(
-        () => ({ ...attrs, ...props, ...unref(getProps) } as Recordable)
+        () => ({ ...attrs, ...props.formProps, ...unref(getProps) } as Recordable)
       );
 
+      // 获取动态表单
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
         for (const schema of schemas) {
@@ -221,6 +230,7 @@
         return schemas as FormSchema[];
       });
 
+      // 使用 formValues Hooks
       const { handleFormValues, initDefault } = useFormValues({
         // getProps,
         defaultFormModel,
@@ -228,6 +238,7 @@
         formModel,
       });
 
+      // 使用 formEvents Hooks
       const { handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } =
         useFormEvents({
           emit,
@@ -240,14 +251,17 @@
           handleFormValues,
         });
 
+      // 展开折叠
       function unfoldToggle() {
         gridCollapsed.value = !gridCollapsed.value;
       }
 
+      // 写入props
       async function setProps(formProps: Partial<FormProps>): Promise<void> {
         propsRef.value = deepMerge(unref(propsRef) || {}, formProps);
       }
 
+      // formActionType
       const formActionType: Partial<FormActionType> = {
         getFieldsValue,
         setFieldsValue,
@@ -261,7 +275,6 @@
       watch(
         () => getSchema.value,
         (schema) => {
-          console.log('1111', isUpdateDefaultRef);
           if (unref(isUpdateDefaultRef)) {
             return;
           }

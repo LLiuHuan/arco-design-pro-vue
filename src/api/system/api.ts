@@ -1,5 +1,20 @@
 import http from '@/utils/http/axios';
 
+// GetAllApis 获取所有的Api 不分页
+// @Tags SysApi
+// @Summary 获取所有的Api 不分页
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /v1/api/all [get]
+export const getApiAllList = () => {
+  return http.request({
+    url: '/v1/api/all',
+    method: 'get',
+  });
+};
+
 // @Tags api
 // @Summary 分页获取角色列表
 // @Security ApiKeyAuth

@@ -104,8 +104,8 @@
           { label: '中文', value: 'zh-CN' },
           { label: 'English', value: 'en-US' },
         ],
-        language: ref<string | null>(usersStore.getLanguage),
-        theme: usersStore.getModel, // light
+        language: ref<string | undefined>(usersStore.getLanguage),
+        theme: ref<string | undefined>(usersStore.getModel), // light
         docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
         userInfo: {} as UserInfoType,
@@ -116,12 +116,13 @@
       locale.value = state.language ? state.language : 'zh-CN';
 
       // 修改语言
-      const setLang = (value: string | null) => {
+      const setLang = (value: string | undefined) => {
         if (value) {
+          if (value == state.language) return;
           locale.value = value;
           state.language = value;
           usersStore.setLanguage(value);
-          storage.set('lang', value ? value : 'zh-CN');
+          storage.set('app-lang', value ? value : 'zh-CN');
           location.replace(location.href);
         }
       };
@@ -130,11 +131,10 @@
       const changeTheme = (newTheme: string) => {
         if (newTheme === 'dark') {
           document.body.setAttribute('arco-theme', 'dark');
-          // state.theme = newTheme;
         } else {
           document.body.removeAttribute('arco-theme');
-          // state.theme = newTheme;
         }
+        if (newTheme == state.theme) return;
         usersStore.setMode(newTheme);
         state.theme = newTheme;
       };
@@ -181,6 +181,9 @@
         usersStore.getUserInfo().then((data) => {
           state.userInfo = data;
         });
+
+        changeTheme(state.theme as string);
+        setLang(state.language);
       });
 
       return {

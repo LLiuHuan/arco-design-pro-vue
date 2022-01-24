@@ -35,4 +35,15 @@ export const useSettingsStore = defineStore({
       this.loading = loading;
     },
   },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'app-settings',
+        storage: localStorage,
+        // paths: ['name', 'age']
+      },
+    ],
+  },
 });

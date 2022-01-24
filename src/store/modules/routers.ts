@@ -20,4 +20,15 @@ export const useRoutersStore = defineStore({
       this.asyncRouters = routers;
     },
   },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'app-routers',
+        storage: localStorage,
+        // paths: ['name', 'age']
+      },
+    ],
+  },
 });

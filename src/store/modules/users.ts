@@ -56,7 +56,7 @@ export const useUserStore = defineStore({
       storage.set(ACCESS_TOKEN, token, ex);
       this.token = token;
     },
-    setUserInfo(info: UserInfoType) {
+    setUserInfo(info: any) {
       this.userInfo = info;
     },
     async setMode(model: string) {
@@ -89,7 +89,7 @@ export const useUserStore = defineStore({
     },
     async getUserInfo() {
       const data = await getUserInfo();
-      this.setUserInfo(data);
+      this.setUserInfo(data.userInfo);
       return data.userInfo;
     },
     async login(userInfo) {
@@ -114,5 +114,16 @@ export const useUserStore = defineStore({
         window.location.reload();
       }
     },
+  },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'app-user',
+        storage: localStorage,
+        // paths: ['name', 'age']
+      },
+    ],
   },
 });

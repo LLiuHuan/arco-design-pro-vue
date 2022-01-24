@@ -78,4 +78,15 @@ export const useTabsStore = defineStore({
       storage.remove(TABS_ROUTES);
     },
   },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'app-tabs',
+        storage: localStorage,
+        // paths: ['name', 'age']
+      },
+    ],
+  },
 });

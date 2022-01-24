@@ -37,7 +37,12 @@
             </a-col>
             <a-col :span="10">
               <a-form-item field="captcha" hide-label>
-                <img @click="resetCaptcha" :src="form.picPath" style="padding-left: 5px" />
+                <img
+                  class="w-full"
+                  @click="resetCaptcha"
+                  :src="form.picPath"
+                  style="padding-left: 5px"
+                />
               </a-form-item>
             </a-col>
           </a-row>

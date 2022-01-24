@@ -1,4 +1,4 @@
-export interface LoginTypes {
+export interface ILoginTypes {
   username: string;
   password: string;
   captcha: string;

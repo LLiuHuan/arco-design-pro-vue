@@ -81,14 +81,13 @@
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import Logo from '@/layout/components/Logo/index.vue';
   import { useI18n } from 'vue-i18n';
-  import { useStore } from 'vuex';
-  import { ActionsType } from '@/store/modules/user/actions';
-  import { GettersType } from '@/store/modules/user/getters';
   import { storage } from '@/utils/storage';
   import { setUserAuthority } from '@/api/system/user';
   import { emitter } from '@/utils/bus';
   import { useRouter } from 'vue-router';
   import { IconGithub } from '@arco-design/web-vue/es/icon';
+  import { useUserStore } from '@/store/modules/users';
+  import { UserInfoType } from '@/store/state-types';
 
   export default defineComponent({
     name: 'NavBar',
@@ -98,18 +97,18 @@
       IconGithub,
     },
     setup() {
-      const store = useStore();
+      const usersStore = useUserStore();
       const router = useRouter();
       const state = reactive({
         options: [
           { label: '中文', value: 'zh-CN' },
           { label: 'English', value: 'en-US' },
         ],
-        language: ref<string | null>(store.getters[GettersType.GET_LANGUAGE]),
-        theme: store.getters[GettersType.GET_MODE], // light
+        language: ref<string | undefined>(usersStore.getLanguage),
+        theme: ref<string | undefined>(usersStore.getModel), // light
         docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
-        userInfo: {},
+        userInfo: {} as UserInfoType,
       });
       // 使用i18n
       const { locale } = useI18n({ useScope: 'global' });
@@ -117,12 +116,13 @@
       locale.value = state.language ? state.language : 'zh-CN';
 
       // 修改语言
-      const setLang = (value: string | null) => {
+      const setLang = (value: string | undefined) => {
         if (value) {
+          if (value == state.language) return;
           locale.value = value;
           state.language = value;
-          store.dispatch(ActionsType.SET_LANGUAGE, value);
-          storage.set('lang', value ? value : 'zh-CN');
+          usersStore.setLanguage(value);
+          storage.set('app-lang', value ? value : 'zh-CN');
           location.replace(location.href);
         }
       };
@@ -131,12 +131,11 @@
       const changeTheme = (newTheme: string) => {
         if (newTheme === 'dark') {
           document.body.setAttribute('arco-theme', 'dark');
-          // state.theme = newTheme;
         } else {
           document.body.removeAttribute('arco-theme');
-          // state.theme = newTheme;
         }
-        store.dispatch(ActionsType.SET_MODE, newTheme);
+        if (newTheme == state.theme) return;
+        usersStore.setMode(newTheme);
         state.theme = newTheme;
       };
 
@@ -158,7 +157,7 @@
       document.addEventListener('fullscreenchange', toggleFullscreenIcon);
 
       const logout = async () => {
-        await store.dispatch(ActionsType.LOGOUT);
+        await usersStore.logout();
       };
 
       // 切换角色
@@ -168,7 +167,7 @@
         }).then(() => {
           emitter.emit('closeAllPage');
 
-          store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
+          usersStore.getUserInfo().then((data) => {
             state.userInfo = data;
             router.replace(data.authority.defaultRouter);
             setTimeout(() => {
@@ -179,9 +178,12 @@
       };
 
       onBeforeMount(() => {
-        store.dispatch(ActionsType.GET_USER_INFO).then((data) => {
+        usersStore.getUserInfo().then((data) => {
           state.userInfo = data;
         });
+
+        changeTheme(state.theme as string);
+        setLang(state.language);
       });
 
       return {

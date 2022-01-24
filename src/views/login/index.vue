@@ -37,7 +37,12 @@
             </a-col>
             <a-col :span="10">
               <a-form-item field="captcha" hide-label>
-                <img @click="resetCaptcha" :src="form.picPath" style="padding-left: 5px" />
+                <img
+                  class="w-full"
+                  @click="resetCaptcha"
+                  :src="form.picPath"
+                  style="padding-left: 5px"
+                />
               </a-form-item>
             </a-col>
           </a-row>
@@ -92,12 +97,12 @@
   import { Captcha } from '@/api/base/login';
   import { Message } from '@arco-design/web-vue';
   import { useRoute, useRouter } from 'vue-router';
-  import { useStore } from 'vuex';
-  import { ActionsType } from '@/store/modules/user/actions';
-  import { GettersType as UserGetters } from '@/store/modules/user/getters';
+  import { useUserStore } from '@/store/modules/users';
   export default defineComponent({
     name: 'Login',
     setup() {
+      const usersStore = useUserStore();
+
       const formInline = reactive({
         form: {
           username: 'admin',
@@ -111,7 +116,6 @@
       });
       const router = useRouter();
       const route = useRoute();
-      const store = useStore();
 
       const signInBtn = ref();
       const signUpBtn = ref();
@@ -133,7 +137,7 @@
       const handleSubmit = async (e) => {
         e.preventDefault();
         Message.loading('登陆中...');
-        const flag = await store.dispatch(ActionsType.LOGIN, formInline.form);
+        const flag = await usersStore.login(formInline.form);
         if (!flag) {
           resetCaptcha();
         } else {
@@ -146,12 +150,12 @@
               router.replace('/');
             } else {
               // 设置登陆后默认的样式
-              const theme = store.getters[UserGetters.GET_MODE] || 'dark';
+              const theme = usersStore.getModel || 'dark';
               // 设置为暗黑主题
               document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
               document.body.style.setProperty(
                 `--arcoblue-6`,
-                store.getters[UserGetters.GET_BASE_COLOR] ?? '5, 160, 69'
+                usersStore.getBaseColor ?? '5, 160, 69'
               );
             }
           });

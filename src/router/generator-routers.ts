@@ -2,8 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { asyncMenu } from '@/api/system/menu';
 import { AppRouteRecordRaw } from '@/router/types';
 import { Layout, ParentLayout } from '@/router/constant';
-import { useStore } from '@/store';
-import { ActionsType } from '@/store/modules/route/actions';
+import { useRoutersStore } from '@/store/modules/routers';
 
 // const Iframe = () => import('@/views/iframe/index.vue');
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
@@ -21,8 +20,8 @@ export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
       .then((result) => {
         const routeList = routerGenerator(result.menus);
         asyncImportRoute(routeList);
-        const store = useStore();
-        store.dispatch(ActionsType.SET_ASYNC_ROUTER, routeList);
+        const routersStore = useRoutersStore();
+        routersStore.setRouters(routeList);
         resolve(routeList);
       })
       .catch((err) => {

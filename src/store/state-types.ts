@@ -2,7 +2,10 @@ export interface UserInfoType {
   uuid: string;
   nickName: string;
   headerImg?: string;
-  authority?: Object;
+  authority?: {
+    defaultRouter?: string;
+    authorityName?: string;
+  };
   sideMode?: string;
   activeColor?: string;
   baseColor?: string;

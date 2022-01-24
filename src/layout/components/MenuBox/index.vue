@@ -1,21 +1,21 @@
 <template>
   <a-menu
     @menu-item-click="openKey"
-    :default-selected-keys="defaultSelectedKeys"
+    v-model:selected-keys="defaultSelectedKeys"
     :default-open-keys="defaultOpenKeys"
   >
-    <menu-item v-for="menu in menus" :key="menu.name" :item="menu" />
+    <MenuItem v-for="menu in menus" :key="menu.name" :item="menu" />
     <!--   不分组   -->
   </a-menu>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
+  import { defineComponent, reactive, ref, toRefs, watch } from 'vue';
   import { isArray } from 'lodash-es';
   import MenuItem from '@/layout/components/MenuBox/MenuItem.vue';
   import { storage } from '@/utils/storage';
-  import { useStore } from '@/store';
-  import { GettersType } from '@/store/modules/route/getters';
+  import { useRoutersStore } from '@/store/modules/routers';
+  import { useRoute } from 'vue-router';
 
   export default defineComponent({
     name: 'Menu',
@@ -24,7 +24,8 @@
     },
     setup() {
       // const menus = generatorMenu(asyncRoutes);
-      const store = useStore();
+      const currentRoute = useRoute();
+      const routerStore = useRoutersStore();
       const state = reactive({
         menus: ref<any[]>([]),
         defaultOpenKeys: ref<Array<String>>([storage.get('open-key')]),
@@ -32,11 +33,19 @@
       });
 
       const openKey = (key: any) => {
-        if (key.split('.').length > 0) storage.set('open-key', key.split('.')[0]);
         storage.set('select-key', key);
+        console.log('key', key);
       };
 
-      state.menus = store.getters[GettersType.GET_ASYNC_ROUTER];
+      state.menus = routerStore.getRouters;
+
+      watch(
+        () => currentRoute.fullPath,
+        () => {
+          console.log(currentRoute);
+          state.defaultSelectedKeys = [currentRoute.name as string];
+        }
+      );
 
       return {
         ...toRefs(state),

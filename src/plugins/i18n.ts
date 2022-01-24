@@ -7,7 +7,7 @@ import { storage } from '@/utils/storage';
 
 const localeData = {
   legacy: false, // composition API
-  locale: storage.get('lang'),
+  locale: storage.get('app-lang'),
   globalInjection: true,
 
   silentTranslationWarn: true,

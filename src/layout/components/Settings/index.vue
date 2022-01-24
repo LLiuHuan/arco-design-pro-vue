@@ -56,10 +56,8 @@
   import { ColorPicker } from 'vue3-colorpicker';
   import 'vue3-colorpicker/style.css';
   import { ColorInputWithoutInstance } from 'tinycolor2';
-  import { useStore } from '@/store';
-  import { ActionsType } from '@/store/modules/user/actions';
-  import { GettersType } from '@/store/modules/user/getters';
   import { storage } from '@/utils/storage';
+  import { useUserStore } from '@/store/modules/users';
 
   export default defineComponent({
     name: 'Settings',
@@ -67,11 +65,11 @@
       ColorPicker,
     },
     setup() {
-      const store = useStore();
+      const usersStore = useUserStore();
       const state = reactive({
         visible: false,
         pureColor: ref<ColorInputWithoutInstance>(
-          `rgb(${store.getters[GettersType.GET_BASE_COLOR]})` ?? 'rgb(5, 160, 69)'
+          `rgb(${usersStore.getBaseColor})` ?? 'rgb(5, 160, 69)'
         ),
         themes: [
           { title: '默认', value: 'default' },
@@ -95,7 +93,7 @@
         (value: any) => {
           let regex1 = /\d+, \d+, \d+/gi;
           let color = value.match(regex1);
-          store.dispatch(ActionsType.SET_BASE_COLOR, color[0]);
+          usersStore.setBaseColor(color[0]);
           document.body.style.setProperty(`--arcoblue-6`, color[0]);
         }
       );

@@ -25,17 +25,17 @@
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { Notification } from '@arco-design/web-vue';
-  import { useStore } from 'vuex';
   import Banner from '@/views/dashboard/workplace/banner.vue';
+  import { useSettingsStore } from '@/store/modules/settings';
   export default defineComponent({
     name: 'WorkPlace',
     components: {
       Banner,
     },
     setup() {
-      const store = useStore();
+      const settingsStore = useSettingsStore();
       const state = reactive({
-        theme: ref(store.getters.getTheme),
+        theme: ref(settingsStore.getTheme),
       });
       const openNotification = () => {
         Notification.info({ content: 'This is an info message!' });

@@ -1,10 +1,10 @@
 import { Router, RouteRecordRaw } from 'vue-router';
-import { GettersType as UserGetters } from '@/store/modules/user/getters';
 import { PageEnum } from '@/enums/pageEnum';
 import { ErrorPageRoute } from '@/router/base';
 import { useI18n } from '@/hooks/web/useI18n';
 import { generatorDynamicRouter } from '@/router/generator-routers';
-import { useStore } from '@/store';
+import { storage } from '@/utils/storage';
+import { ACCESS_TOKEN } from '@/store/mutation-types';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const INIT_DB = PageEnum.INIT_DB;
@@ -15,8 +15,6 @@ let asyncRouterFlag = 0;
 export function createRouterGuards(router: Router) {
   // to, from, next
   router.beforeEach((to, from, next) => {
-    const store = useStore();
-
     if (from.path === LOGIN_PATH && to.name === 'errorPage') {
       next(PageEnum.BASE_HOME);
       return;
@@ -28,7 +26,7 @@ export function createRouterGuards(router: Router) {
       return;
     }
 
-    const token = store.getters[UserGetters.GET_TOKEN];
+    const token = storage.get(ACCESS_TOKEN);
     if (!token) {
       // You can access without permissions. You need to set the routing meta.ignoreAuth to true
       if (to.meta.ignoreAuth) {

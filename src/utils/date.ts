@@ -10,7 +10,7 @@ export class DateUtil {
    */
   public formatDate(strDate: any, strFormat?: any) {
     if (!strDate) {
-      return;
+      strDate = new Date();
     }
     if (!strFormat) {
       strFormat = 'yyyy-MM-dd';
@@ -23,23 +23,39 @@ export class DateUtil {
         strDate = new Date(strDate);
         break;
     }
-    if (strDate instanceof Date) {
-      const dict: any = {
-        yyyy: strDate.getFullYear(),
-        M: strDate.getMonth() + 1,
-        d: strDate.getDate(),
-        H: strDate.getHours(),
-        m: strDate.getMinutes(),
-        s: strDate.getSeconds(),
-        MM: ('' + (strDate.getMonth() + 101)).substr(1),
-        dd: ('' + (strDate.getDate() + 100)).substr(1),
-        HH: ('' + (strDate.getHours() + 101)).substr(1),
-        mm: ('' + (strDate.getMinutes() + 101)).substr(1),
-        ss: ('' + (strDate.getSeconds() + 101)).substr(1),
-      };
-      return strFormat.replace(/(yyyy|MM?|dd?|HH?|mm?|ss?)/g, function () {
-        return dict[arguments[0]];
-      });
+
+    if (!(strDate instanceof Date)) return strDate;
+
+    const year = `${strDate.getFullYear()}`;
+    let month = `${strDate.getMonth() + 1}`;
+    if (month.length === 1) {
+      month = `0${month}`;
     }
+    let day = `${strDate.getDate()}`;
+    if (day.length === 1) {
+      day = `0${day}`;
+    }
+
+    let hours = `${strDate.getHours()}`;
+    if (hours.length === 1) {
+      hours = `0${hours}`;
+    }
+    let minutes = `${strDate.getMinutes()}`;
+    if (minutes.length === 1) {
+      minutes = `0${minutes}`;
+    }
+    let seconds = `${strDate.getSeconds()}`;
+    if (seconds.length === 1) {
+      seconds = `0${seconds}`;
+    }
+
+    return (strFormat || 'yyyy-MM-dd hh:mm:ss')
+      .replace(/yyyy/g, year)
+      .replace(/MM/g, month)
+      .replace(/dd/g, day)
+
+      .replace(/hh/g, hours)
+      .replace(/mm/g, minutes)
+      .replace(/ss/g, seconds);
   }
 }

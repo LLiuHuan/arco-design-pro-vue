@@ -24,7 +24,7 @@
             <ul class="flex flex-wrap px-2">
               <li
                 :class="{ 'border border-blue-700': inputValue === arcoIcon.name }"
-                class="p-2 w-1/8 cursor-pointer mr-1 mt-1 flex justify-center items-center border border-solid hover:border-blue-700"
+                class="p-2 w-1/8 cursor-pointer mr-0.5 mt-0.5 flex justify-center items-center border border-solid hover:border-blue-700"
                 v-for="arcoIcon in ArcoVueIcon"
                 v-show="arcoIcon.name !== 'install'"
                 :key="arcoIcon.name"

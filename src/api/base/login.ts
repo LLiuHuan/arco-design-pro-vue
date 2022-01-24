@@ -1,5 +1,5 @@
 import http from '@/utils/http/axios';
-import { LoginTypes } from '@/api/base/login-types';
+import * as T from '@/api/base/login-types';
 
 // @Tags login
 // @Summary 登陆
@@ -7,7 +7,7 @@ import { LoginTypes } from '@/api/base/login-types';
 // @Produce application/json
 // @Success 200 {string} string ""
 // @Router /jwt/jsonInBlacklist [post]
-export const Login = (params: LoginTypes) => {
+export const Login = (params: T.ILoginTypes) => {
   return http.request({
     url: '/v1/base/login',
     method: 'post',

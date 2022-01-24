@@ -89,9 +89,9 @@
             <a-progress
               animation
               type="circle"
-              :color="color(state.disk.usedPercent)"
+              :color="color(state?.disk.usedPercent)"
               size="large"
-              :percent="state.disk.usedPercent / 100"
+              :percent="state?.disk.usedPercent / 100"
             />
           </a-col>
         </a-row>
@@ -102,7 +102,7 @@
         v-if="state?.cpu"
         class="card_item"
         title="CPU"
-        :body-style="{ height: '160px', 'overflow-y': 'scroll' }"
+        :body-style="{ height: '140px', 'overflow-y': 'scroll' }"
         hoverable
       >
         <a-space class="col-text" direction="vertical" :size="10" style="display: block">
@@ -111,10 +111,10 @@
               <span>physical number of cores</span>
             </a-col>
             <a-col :span="12">
-              <span>{{ state.cpu.cores }}</span>
+              <span>{{ state?.cpu.cores }}</span>
             </a-col>
           </a-row>
-          <a-row v-for="(item, index) in state.cpu.cpus" :key="index" :gutter="10">
+          <a-row v-for="(item, index) in state?.cpu.cpus" :key="index" :gutter="10">
             <a-col :span="12">core {{ index }}</a-col>
             <a-col :span="12">
               <!-- TODO: 这个组件有时候有点问题，暂时先把文字去掉了 -->
@@ -139,7 +139,7 @@
                   <span>total (MB)</span>
                 </a-col>
                 <a-col :span="12">
-                  <span>{{ state.ram.totalMb }}</span>
+                  <span>{{ state?.ram.totalMb }}</span>
                 </a-col>
               </a-row>
               <a-row :gutter="10">
@@ -147,7 +147,7 @@
                   <span>used (MB)</span>
                 </a-col>
                 <a-col :span="12">
-                  <span>{{ state.ram.usedMb }}</span>
+                  <span>{{ state?.ram.usedMb }}</span>
                 </a-col>
               </a-row>
               <a-row :gutter="10">
@@ -155,7 +155,7 @@
                   <span>total (GB)</span>
                 </a-col>
                 <a-col :span="12">
-                  <span>{{ state.ram.totalMb / 1024 }}</span>
+                  <span>{{ state?.ram.totalMb / 1024 }}</span>
                 </a-col>
               </a-row>
               <a-row :gutter="10">
@@ -163,7 +163,7 @@
                   <span>used (GB)</span>
                 </a-col>
                 <a-col :span="12">
-                  <span>{{ (state.ram.usedMb / 1024).toFixed(2) }}</span>
+                  <span>{{ (state?.ram.usedMb / 1024).toFixed(2) }}</span>
                 </a-col>
               </a-row>
             </a-space>
@@ -172,9 +172,9 @@
             <a-progress
               animation
               type="circle"
-              :color="color(state.ram.usedPercent)"
+              :color="color(state?.ram.usedPercent)"
               size="large"
-              :percent="state.ram.usedPercent / 100"
+              :percent="state?.ram.usedPercent / 100"
             />
           </a-col>
         </a-row>
@@ -186,11 +186,12 @@
 <script lang="ts">
   import { defineComponent, onBeforeMount, onBeforeUnmount, reactive, ref, toRefs } from 'vue';
   import { getSystemState } from '@/api/system/system';
+  import { IStateTypes } from '@/api/system/system-types';
   export default defineComponent({
     name: 'State',
     setup() {
       const state = reactive({
-        state: ref(),
+        state: ref<IStateTypes>(),
         time: ref(),
       });
       const getState = async () => {
@@ -239,6 +240,6 @@
     font-size: 16px;
   }
   .card_item {
-    height: 220px;
+    height: 230px;
   }
 </style>

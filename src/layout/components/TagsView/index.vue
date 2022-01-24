@@ -115,17 +115,16 @@
     UnwrapRef,
     watch,
   } from 'vue';
-  import { useStore } from 'vuex';
   import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
   import { PageEnum } from '@/enums/pageEnum';
   import { RouteItem } from '/#/config';
-  import { MutationType } from '@/store/modules/tabs/mutations';
   import { Message } from '@arco-design/web-vue';
   import Draggable from 'vuedraggable';
   import { storage } from '@/utils/storage';
   import elementResizeDetectorMaker from 'element-resize-detector';
   import { emitter } from '@/utils/bus';
-  import { GettersType } from '@/store/modules/user/getters';
+  import { useTabsStore } from '@/store/modules/tabs';
+  import { useUserStore } from '@/store/modules/users';
 
   export default defineComponent({
     name: 'TagsView',
@@ -133,7 +132,8 @@
       Draggable,
     },
     setup() {
-      const store = useStore();
+      const tabsStore = useTabsStore();
+      const usersStore = useUserStore();
       const route = useRoute();
       const router = useRouter();
       const isCurrent = ref(false);
@@ -153,7 +153,7 @@
       });
 
       // 标签页列表
-      const tabsList: any = computed(() => store.getters.getTabsList);
+      const tabsList: any = computed(() => tabsStore.getTabsList);
       const isDisabled = unref(tabsList).length <= 1;
 
       // 获取简易的路由对象
@@ -200,7 +200,7 @@
       const closeOther = (
         route: RouteItem | RouteLocationNormalizedLoaded | UnwrapRef<RouteLocationNormalizedLoaded>
       ) => {
-        store.commit(MutationType.SET_CLOSE_OTHER_TABS, route);
+        tabsStore.setCloseOtherTabs(route);
         state.activeKey = route.fullPath;
         router.replace(route.fullPath);
         updateNavScroll();
@@ -209,7 +209,7 @@
       // 关闭全部
       const closeAll = () => {
         localStorage.removeItem('routes');
-        store.commit(MutationType.SET_CLOSE_ALL_TABS, route);
+        tabsStore.setCloseAllTabs();
       };
 
       //删除tab
@@ -228,7 +228,7 @@
           return;
         }
         delKeepAliveCompName();
-        store.commit(MutationType.SET_CLOSE_CURRENT_TABS, route);
+        tabsStore.setCloseCurrentTabs(route);
         // 如果关闭的是当前页
         if (state.activeKey === route.fullPath) {
           const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)];
@@ -320,7 +320,7 @@
         (to) => {
           if (whiteList.includes(route.name as string)) return;
           state.activeKey = to;
-          store.commit(MutationType.SET_ADD_TABS, getSimpleRoute(route));
+          tabsStore.setAddTabs(getSimpleRoute(route));
           updateNavScroll(true);
         },
         { immediate: true }
@@ -336,8 +336,9 @@
 
       onBeforeMount(() => {
         setTimeout(() => {
-          baseHome.value = store.getters[GettersType.GET_USER].authority.defaultRouter;
-          // store.commit(MutationType.SET_INIT_TABS, [baseHome.value]);
+          const userInfo = usersStore.getUser.authority;
+          baseHome.value = userInfo?.defaultRouter;
+          // store_bak.commit(MutationType.SET_INIT_TABS, [baseHome.value]);
         }, 10);
       });
 

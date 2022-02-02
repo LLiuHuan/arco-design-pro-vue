@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.hidden">
+  <div v-if="!item.meta.hidden">
     <template v-if="!item.children && !isArray(item.children)">
       <a-menu-item
         v-if="item.path.indexOf('http://') > -1 || item.path.indexOf('https://') > -1"
@@ -11,14 +11,6 @@
       </a-menu-item>
       <router-link v-else :to="item.path">
         <a-menu-item :key="item.name">
-          <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
-        </a-menu-item>
-      </router-link>
-    </template>
-    <template v-else-if="item.children && item.children.length === 1">
-      <router-link :to="item.path">
-        <a-menu-item :key="item.children[0].name">
           <component v-if="item.meta.icon" :is="item.meta.icon" />
           {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
         </a-menu-item>
@@ -58,6 +50,7 @@
       },
     },
     setup(props) {
+      console.log(props.item);
       const resolve = (...pathList: string[]) => {
         let newStrPath = '';
         let newPathList = [...new Set(pathList)];

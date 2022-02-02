@@ -14,6 +14,7 @@ export interface MenuTypes {
   path: string;
   redirect: string;
   sort: number;
+  menu_type: number;
 }
 
 export interface MetaType {
@@ -22,4 +23,5 @@ export interface MetaType {
   title: string;
   icon: string;
   closeTab: boolean;
+  permissions: string;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a-row class="grid-demo" :gutter="12">
+    <a-row class="grid" :gutter="12">
       <a-col :span="10">
         <a-card>
           <template #title>
@@ -12,8 +12,18 @@
                 </a-button>
                 <template #content>
                   <a-doption @click="addBaseMenu('添加顶级菜单')">添加顶级菜单</a-doption>
-                  <a-doption @click="addBaseMenu(treeItemTitle)" :disabled="parentId === 0"
-                    >添加子菜单 {{ treeItemTitle ? ': ' + treeItemTitle : '' }}</a-doption
+                  <a-doption
+                    v-if="form.menu_type !== 3"
+                    @click="
+                      addBaseMenu(
+                        '添加子' +
+                          (form?.menu_type ? menuTypeMap[form?.menu_type] + '：' : '菜单：') +
+                          treeItemTitle
+                      )
+                    "
+                    :disabled="parentId === 0"
+                    >添加子{{ form?.menu_type ? menuTypeMap[form?.menu_type] : '菜单' }}
+                    {{ treeItemTitle ? ': ' + treeItemTitle : '' }}</a-doption
                   >
                   <a-doption @click="removeBaseMenus" :disabled="parentId === 0"
                     >删除选中菜单</a-doption
@@ -60,28 +70,35 @@
           <a-space direction="vertical" fill>
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
             <a-form v-if="isForm" :model="form">
-              <a-form-item field="name" label="路由Name">
-                <a-input v-model="form.name" placeholder="路由名称，目前仅在权限管理使用" />
+              <a-form-item field="menu_type" label="菜单类型">
+                <a-radio-group v-model:model-value="form.menu_type" type="button">
+                  <a-radio :value="1" disabled>目录</a-radio>
+                  <a-radio :value="2" disabled>菜单</a-radio>
+                  <a-radio :value="3" disabled>按钮</a-radio>
+                </a-radio-group>
               </a-form-item>
-              <a-form-item field="path" label="路由Path">
+              <a-form-item field="name" label="路由Name">
+                <a-input v-model="form.name" placeholder="路由名称，唯一英文id" />
+              </a-form-item>
+              <a-form-item v-if="form.menu_type !== 3" field="path" label="路由Path">
                 <a-input v-model="form.path" placeholder="不需要输入上级路由，例：menu" />
               </a-form-item>
               <a-form-item field="meta.title" label="展示名称">
                 <a-input
                   v-model="form.meta.title"
-                  placeholder="menu.system.menu 如需国际化请按照locale配置"
+                  placeholder="i18n前端国际化 menu.system.menu，不需要就中文"
                 />
               </a-form-item>
-              <a-form-item field="component" label="文件路径">
+              <a-form-item v-if="form.menu_type !== 3" field="component" label="文件路径">
                 <a-input
                   v-model="form.component"
                   placeholder="views下的文件路径, /system/menu/index.vue"
                 />
               </a-form-item>
-              <a-form-item field="redirect" label="重定向">
+              <a-form-item v-if="form.menu_type === 1" field="redirect" label="重定向">
                 <a-input v-model="form.redirect" placeholder="顶级菜单需要重定向到一个子级菜单" />
               </a-form-item>
-              <a-form-item field="parentId" label="上级菜单">
+              <a-form-item v-if="form.menu_type !== 3" field="parentId" label="上级菜单">
                 <a-tree-select
                   v-model:model-value="form.parentId"
                   :data="menuOption"
@@ -91,8 +108,11 @@
               <a-form-item field="sort" label="排序标记">
                 <a-input-number v-model="form.sort" placeholder="请输入排序" />
               </a-form-item>
-              <a-form-item field="icon" label="图标">
+              <a-form-item v-if="form.menu_type !== 3" field="icon" label="图标">
                 <arco-icon v-model:icon-value="form.meta.icon" placeholder="请选择图标" />
+              </a-form-item>
+              <a-form-item field="permission" label="权限标识">
+                <a-input v-model="form.meta.permissions" placeholder="请输入权限标识" />
               </a-form-item>
               <a-form-item field="hidden" label="是否显示">
                 <a-switch v-model:model-value="form.hidden">
@@ -113,6 +133,8 @@
     ref="addMenu"
     v-model:title="drawerTitle"
     v-model:parent-id="parentId"
+    :menu-option="menuOption"
+    v-model:menu-type="menu_type"
     @close="getTableData"
   />
 </template>
@@ -136,6 +158,10 @@
       const { t } = useI18n();
       const searchKey = ref('');
       const addMenu = ref();
+      const menuTypeMap = {
+        1: '菜单',
+        2: '按钮',
+      };
       const state = reactive({
         originTreeData: [] as Array<TreeType>,
         pageInfo: {
@@ -160,6 +186,7 @@
         parentId: ref<number>(0),
         treeItemTitle: ref(''),
         drawerTitle: '',
+        menu_type: 1,
       });
 
       const treeTitle = (title: string): string => {
@@ -293,6 +320,7 @@
       const editMenu = () => {
         updateBaseMenu(state.form).then(() => {
           Message.success('修改成功！');
+          getTableData();
         });
       };
 
@@ -303,7 +331,9 @@
       // endregion
 
       const addBaseMenu = (title: string) => {
-        state.drawerTitle = title === '添加顶级菜单' ? title : '添加子级菜单：' + title;
+        state.drawerTitle = title;
+        state.menu_type = title === '添加顶级菜单' ? 1 : state.form.menu_type + 1;
+        console.log(state.drawerTitle, state.menu_type);
         addMenu.value.open();
       };
 
@@ -322,6 +352,7 @@
         ...toRefs(state),
         treeData,
         searchKey,
+        menuTypeMap,
         getMatchIndex,
         getEditMenu,
         editMenu,
@@ -335,3 +366,10 @@
     },
   });
 </script>
+
+<style lang="less" scoped>
+  .grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+</style>

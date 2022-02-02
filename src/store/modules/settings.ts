@@ -1,23 +1,25 @@
 import { defineStore } from 'pinia';
 import designSetting from '@/settings/designSetting';
 import projectSetting from '@/settings/projectSetting';
+import type { ImenuSetting } from '/#/config';
 
 const { Theme } = designSetting;
-const { permissionMode } = projectSetting;
+const { permissionMode, menuSetting } = projectSetting;
 
 export interface ISettingsState {
-  //主题
-  theme: string;
+  theme: string; //主题
   loading: boolean; // TODO: 临时测试，无用
   permissionMode: string;
+  menuSetting: ImenuSetting; //多标签
 }
 
-export const useSettingsStore = defineStore({
+export const useSettingStore = defineStore({
   id: 'app-settings',
   state: (): ISettingsState => ({
     theme: Theme,
     loading: false,
     permissionMode: permissionMode,
+    menuSetting: menuSetting,
   }),
   getters: {
     getTheme(): string {

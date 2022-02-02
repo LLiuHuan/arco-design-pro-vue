@@ -6,7 +6,7 @@
           <a-button
             type="primary"
             @click="addUser"
-            v-permission="{ action: ['menu:user:add'], effect: 'disabled' }"
+            v-permission="{ action: ['system.user.add'], effect: 'disabled' }"
             >添加</a-button
           >
         </div>
@@ -45,7 +45,7 @@
                 multiple
                 check-strictly
                 allow-search
-                :disabled="!hasPermission(['menu:user:auth'])"
+                :disabled="!hasPermission(['system.user.auth'])"
               />
             </template>
           </a-table-column>
@@ -58,7 +58,7 @@
                 @ok="delUserInfo(record.ID)"
               >
                 <a-button
-                  v-permission="{ action: ['menu:user:del'], effect: 'disabled' }"
+                  v-permission="{ action: ['system.user.del'], effect: 'disabled' }"
                   type="primary"
                 >
                   <template #icon>

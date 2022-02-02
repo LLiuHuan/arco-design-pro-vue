@@ -11,7 +11,7 @@ export interface ITabsState {
   tabsList: RouteItem[]; // 标签页
 }
 
-export const useTabsStore = defineStore({
+export const useTabStore = defineStore({
   id: 'app-tabs',
   state: (): ITabsState => ({
     tabsList: [],

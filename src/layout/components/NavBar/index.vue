@@ -97,15 +97,15 @@
       IconGithub,
     },
     setup() {
-      const usersStore = useUserStore();
+      const userStore = useUserStore();
       const router = useRouter();
       const state = reactive({
         options: [
           { label: '中文', value: 'zh-CN' },
           { label: 'English', value: 'en-US' },
         ],
-        language: ref<string | undefined>(usersStore.getLanguage),
-        theme: ref<string | undefined>(usersStore.getModel), // light
+        language: ref<string | undefined>(userStore.getLanguage),
+        theme: ref<string | undefined>(userStore.getModel), // light
         docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
         userInfo: {} as UserInfoType,
@@ -121,7 +121,7 @@
           if (value == state.language) return;
           locale.value = value;
           state.language = value;
-          usersStore.setLanguage(value);
+          userStore.setLanguage(value);
           storage.set('app-lang', value ? value : 'zh-CN');
           location.replace(location.href);
         }
@@ -135,7 +135,7 @@
           document.body.removeAttribute('arco-theme');
         }
         if (newTheme == state.theme) return;
-        usersStore.setMode(newTheme);
+        userStore.setMode(newTheme);
         state.theme = newTheme;
       };
 
@@ -157,7 +157,7 @@
       document.addEventListener('fullscreenchange', toggleFullscreenIcon);
 
       const logout = async () => {
-        await usersStore.logout();
+        await userStore.logout();
       };
 
       // 切换角色
@@ -167,7 +167,7 @@
         }).then(() => {
           emitter.emit('closeAllPage');
 
-          usersStore.getUserInfo().then((data) => {
+          userStore.getUserInfo().then((data) => {
             state.userInfo = data;
             router.replace(data.authority.defaultRouter);
             setTimeout(() => {
@@ -178,7 +178,7 @@
       };
 
       onBeforeMount(() => {
-        usersStore.getUserInfo().then((data) => {
+        userStore.getUserInfo().then((data) => {
           state.userInfo = data;
         });
 

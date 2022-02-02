@@ -34,9 +34,9 @@ const transform: AxiosTransform = {
     // @ts-ignore
     // const { $message: Message, $dialog: Modal } = window;
     if (res.headers['new-token']) {
-      const usersStore = useUserStore();
+      const userStore = useUserStore();
       console.log(res.headers);
-      usersStore.setToken(res.headers['new-token']);
+      userStore.setToken(res.headers['new-token']);
     }
 
     const {

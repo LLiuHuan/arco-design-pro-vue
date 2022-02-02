@@ -26,6 +26,7 @@ const RootRouter: RouteRecordRaw = {
   redirect: PageEnum.BASE_HOME,
   meta: {
     title: 'Root',
+    hidden: true,
   },
 };
 
@@ -35,6 +36,7 @@ export const LoginRoute: RouteRecordRaw = {
   component: () => import('@/views/login/index.vue'),
   meta: {
     title: 'login',
+    hidden: true,
   },
 };
 

@@ -123,7 +123,7 @@
   import { storage } from '@/utils/storage';
   import elementResizeDetectorMaker from 'element-resize-detector';
   import { emitter } from '@/utils/bus';
-  import { useTabsStore } from '@/store/modules/tabs';
+  import { useTabStore } from '@/store/modules/tabs';
   import { useUserStore } from '@/store/modules/users';
 
   export default defineComponent({
@@ -132,8 +132,8 @@
       Draggable,
     },
     setup() {
-      const tabsStore = useTabsStore();
-      const usersStore = useUserStore();
+      const tabStore = useTabStore();
+      const userStore = useUserStore();
       const route = useRoute();
       const router = useRouter();
       const isCurrent = ref(false);
@@ -152,8 +152,10 @@
         dropdownY: 0,
       });
 
+      console.log(state.activeKey);
+
       // 标签页列表
-      const tabsList: any = computed(() => tabsStore.getTabsList);
+      const tabsList: any = computed(() => tabStore.getTabsList);
       const isDisabled = unref(tabsList).length <= 1;
 
       // 获取简易的路由对象
@@ -200,7 +202,7 @@
       const closeOther = (
         route: RouteItem | RouteLocationNormalizedLoaded | UnwrapRef<RouteLocationNormalizedLoaded>
       ) => {
-        tabsStore.setCloseOtherTabs(route);
+        tabStore.setCloseOtherTabs(route);
         state.activeKey = route.fullPath;
         router.replace(route.fullPath);
         updateNavScroll();
@@ -209,7 +211,7 @@
       // 关闭全部
       const closeAll = () => {
         localStorage.removeItem('routes');
-        tabsStore.setCloseAllTabs();
+        tabStore.setCloseAllTabs();
       };
 
       //删除tab
@@ -228,7 +230,7 @@
           return;
         }
         delKeepAliveCompName();
-        tabsStore.setCloseCurrentTabs(route);
+        tabStore.setCloseCurrentTabs(route);
         // 如果关闭的是当前页
         if (state.activeKey === route.fullPath) {
           const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)];
@@ -320,7 +322,7 @@
         (to) => {
           if (whiteList.includes(route.name as string)) return;
           state.activeKey = to;
-          tabsStore.setAddTabs(getSimpleRoute(route));
+          tabStore.setAddTabs(getSimpleRoute(route));
           updateNavScroll(true);
         },
         { immediate: true }
@@ -336,7 +338,7 @@
 
       onBeforeMount(() => {
         setTimeout(() => {
-          const userInfo = usersStore.getUser.authority;
+          const userInfo = userStore.getUser.authority;
           baseHome.value = userInfo?.defaultRouter;
           // store_bak.commit(MutationType.SET_INIT_TABS, [baseHome.value]);
         }, 10);

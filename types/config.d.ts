@@ -33,3 +33,11 @@ export type RouteItem = Partial<RouteLocationNormalized> & {
   fullPath: string;
   name: string;
 };
+
+export interface ImenuSetting {
+  minMenuWidth: number;
+  menuWidth: number;
+  fixed: boolean;
+  mixMenu: boolean;
+  collapsed: boolean;
+}

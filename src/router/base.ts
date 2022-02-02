@@ -8,6 +8,7 @@ export const RedirectRoute: AppRouteRecordRaw = {
   meta: {
     title: RedirectName,
     hideBreadcrumb: true,
+    hidden: true,
   },
   children: [
     {

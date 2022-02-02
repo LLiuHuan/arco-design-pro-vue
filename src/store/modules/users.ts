@@ -11,6 +11,8 @@ const Storage = createStorage({ storage: localStorage });
 export interface IUserState {
   userInfo: UserInfoType;
   token: string;
+  avatar: string;
+  permissions: any[];
 }
 
 export const useUserStore = defineStore({
@@ -29,6 +31,8 @@ export const useUserStore = defineStore({
       language: 'zh-CN',
     },
     token: Storage.get(ACCESS_TOKEN, ''),
+    avatar: '',
+    permissions: [],
   }),
   getters: {
     getToken(): string {
@@ -49,12 +53,21 @@ export const useUserStore = defineStore({
     getLanguage(): string {
       return this.userInfo.language ?? 'zh-CN';
     },
+    getPermissions(): string[] {
+      return this.permissions;
+    },
   },
   actions: {
     setToken(token: string) {
       const ex = 24 * 60 * 60 * 1000;
       storage.set(ACCESS_TOKEN, token, ex);
       this.token = token;
+    },
+    setAvatar(avatar: string) {
+      this.avatar = avatar;
+    },
+    setPermissions(permissions) {
+      this.permissions = permissions;
     },
     setUserInfo(info: any) {
       this.userInfo = info;
@@ -91,6 +104,27 @@ export const useUserStore = defineStore({
       const data = await getUserInfo();
       this.setUserInfo(data.userInfo);
       return data.userInfo;
+    },
+    // 获取用户信息
+    GetInfo() {
+      return new Promise((resolve, reject) => {
+        getUserInfo()
+          .then((res) => {
+            const result = res.userInfo;
+            if (result.permissions && result.permissions.length) {
+              const permissionsList = result.permissions;
+              this.setPermissions(permissionsList);
+              this.setUserInfo(result);
+            } else {
+              reject(new Error('getInfo: permissionsList must be a non-null array !'));
+            }
+            this.setAvatar(result.avatar);
+            resolve(result);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     },
     async login(userInfo) {
       try {

@@ -2,7 +2,7 @@
   <a-layout class="layout">
     <!--  切换菜单顶部加载进度条  -->
     <LoadingBar ref="loading" />
-    <div class="layoutNavbar">
+    <div class="layout-navbar">
       <!--   顶部菜单栏   -->
       <nav-bar />
     </div>
@@ -10,9 +10,9 @@
       <a-layout-sider
         collapsible
         :collapsed="collapsed"
-        class="layoutSider"
+        class="layout-sider"
         hide-trigger
-        style="padding-top: 60px"
+        style="padding-top: 64px"
         :style="{ width: collapsed ? minMenuWidth + 'px' : menuWidth + 'px' }"
       >
         <menu-box />
@@ -22,28 +22,33 @@
         </div>
       </a-layout-sider>
       <a-layout
-        class="layoutContent"
-        style="padding-top: 60px"
         :style="{
           paddingLeft: collapsed ? minMenuWidth + 'px' : menuWidth + 'px',
           height: '100vh',
         }"
       >
-        <a-layout-content class="layoutContent1">
-          <!--          <a-affix :offsetTop="60">-->
-          <tags-view />
-          <!--          </a-affix>-->
+        <a-layout-content id="layout-content" class="layout-content" style="overflow-y: auto">
           <div
-            id="base-content"
+            class="layout-content-main"
             :class="{
-              'main-view-fix': true,
-              noMultiTabs: false,
+              'layout-content-main-fix': fixedMulti,
             }"
+            style="overflow-y: auto"
           >
-            <router-view />
+            <tags-view v-if="isMultiTabs" v-model:collapsed="collapsed" />
+            <div
+              id="main-view"
+              :class="{
+                'main-view-fix': fixedMulti,
+                noMultiTabs: !isMultiTabs,
+                'mt-3': !isMultiTabs,
+              }"
+            >
+              <MainView />
+            </div>
           </div>
-          <a-back-top target-container="#base-content" :style="{ position: 'absolute' }" />
         </a-layout-content>
+        <a-back-top target-container="#layout-content" :style="{ position: 'absolute' }" />
         <footer-bar />
       </a-layout>
     </a-layout>
@@ -52,7 +57,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, watch } from 'vue';
+  import { computed, defineComponent, ref, unref, watch } from 'vue';
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
   import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
@@ -63,7 +68,9 @@
   import { FooterBar } from '@/layout/components/FooterBar';
   import { TagsView } from '@/layout/components/TagsView';
   import { Settings } from '@/layout/components/Settings';
+  import { MainView } from '@/layout/components/MainView';
   import { useSettingStore } from '@/store/modules/settings';
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
 
   export default defineComponent({
     name: 'Layout',
@@ -74,34 +81,51 @@
       FooterBar,
       TagsView,
       Settings,
+      MainView,
     },
     setup: function () {
       const loading = ref<null | LoadingBarType>(null);
       const { headerSetting } = projectSetting;
+      const { getMultiTabsSetting } = useProjectSetting();
       const route = useRoute();
 
       const settingStore = useSettingStore();
 
       const { collapsed: menuCollapsed, menuWidth, minMenuWidth } = settingStore.menuSetting;
 
+      // 折叠菜单
       const collapsed = ref<boolean>(menuCollapsed);
 
+      // 是否显示tabs
+      const isMultiTabs = computed(() => {
+        return unref(getMultiTabsSetting).show;
+      });
+
+      // 是否固定tabs
+      const fixedMulti = computed(() => {
+        return unref(getMultiTabsSetting).fixed;
+      });
+
+      // 折叠菜单
       const fold = () => {
         collapsed.value = !collapsed.value;
       };
 
+      // 路由加载完毕进度条加载完毕
       onBeforeRouteLeave(() => {
         if (loading.value) {
           loading.value.success();
         }
       });
 
+      // 路由加载完毕进度条加载完毕
       onBeforeRouteUpdate(() => {
         if (loading.value) {
           loading.value.success();
         }
       });
 
+      // 路由加载完毕进度条加载完毕
       watch(
         () => route.path,
         () => {
@@ -120,6 +144,9 @@
 
         menuWidth,
         minMenuWidth,
+
+        isMultiTabs,
+        fixedMulti,
       };
     },
   });
@@ -128,10 +155,11 @@
 <style lang="less" scoped>
   @import './style/layout.module.less';
 
+  // TODO: 改为动态的
   .main-view-fix {
     //padding-top: 24px;
-    overflow-y: auto;
-    height: calc(100vh - 44px - 60px - 40px);
+    //overflow-y: auto;
+    //height: calc(100vh - 44px - 60px - 40px);
   }
 
   .noMultiTabs {

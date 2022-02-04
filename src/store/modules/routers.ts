@@ -9,6 +9,7 @@ export interface IRoutersState {
   menus: RouteRecordRaw[];
   routers: any[];
   addRouters: any[];
+  keepAliveComponents: string[];
 }
 
 interface TreeHelperConfig {
@@ -51,6 +52,7 @@ export const useRouterStore = defineStore({
     menus: [],
     routers: constantRouter,
     addRouters: [],
+    keepAliveComponents: [],
   }),
   getters: {
     getRouters(): any[] {
@@ -67,6 +69,10 @@ export const useRouterStore = defineStore({
     },
     setMenus(menus) {
       this.menus = menus;
+    },
+    setKeepAliveComponents(compNames) {
+      // 设置需要缓存的组件
+      this.keepAliveComponents = compNames;
     },
     async generateRoutes(data) {
       let accessedRouters;

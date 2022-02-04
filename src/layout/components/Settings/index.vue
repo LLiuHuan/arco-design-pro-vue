@@ -11,9 +11,9 @@
     unmountOnClose
   >
     <template #title> 页面配置 </template>
-    <a-typography>
-      <a-typography-title :heading="6"> 主题色 </a-typography-title>
-      <a-typography-paragraph>
+    <div class="drawer">
+      <a-divider orientation="center">主题色</a-divider>
+      <div class="justify-center drawer-setting-item dark-switch">
         <a-trigger class="demo-basic" trigger="click">
           <div class="input">
             <div class="current-color" :style="{ backgroundColor: `${pureColor}` }"> </div>
@@ -23,31 +23,95 @@
             <color-picker v-model:pureColor="pureColor" :isWidget="true" />
           </template>
         </a-trigger>
-      </a-typography-paragraph>
-      <a-typography-title :heading="6"> 主题 </a-typography-title>
-      <a-typography-paragraph>
-        <a-trigger class="demo-basic" trigger="click">
-          <a-space>
-            <a-card
-              v-for="theme in themes"
-              class="card-theme"
-              hoverable
-              :style="{
-                width: '100px',
-                marginBottom: '20px',
-                textAlign: 'center',
-                borderColor: theme.value === baseTheme ? pureColor : '',
-              }"
-              :key="theme.value"
-            >
-              <div class="cursor-pointer select-none" @click="setTheme(theme.value)">
-                {{ theme.title }}
-              </div>
-            </a-card>
-          </a-space>
-        </a-trigger>
-      </a-typography-paragraph>
-    </a-typography>
+      </div>
+
+      <a-divider orientation="center">主题</a-divider>
+      <div class="drawer-setting-item align-items-top">
+        <div class="drawer-setting-item-style align-items-top">
+          <a-trigger class="demo-basic" trigger="click">
+            <a-space>
+              <a-card
+                v-for="theme in themes"
+                class="card-theme"
+                hoverable
+                :style="{
+                  width: '100px',
+                  marginBottom: '20px',
+                  textAlign: 'center',
+                  borderColor: theme.value === baseTheme ? pureColor : '',
+                }"
+                :key="theme.value"
+              >
+                <div class="cursor-pointer select-none" @click="setTheme(theme.value)">
+                  {{ theme.title }}
+                </div>
+              </a-card>
+            </a-space>
+          </a-trigger>
+        </div>
+      </div>
+
+      <a-divider orientation="center">界面功能</a-divider>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 固定多页签 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.multiTabsSetting.fixed" />
+        </div>
+      </div>
+
+      <a-divider orientation="center">界面</a-divider>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 显示重载页面按钮 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.headerSetting.isReload" />
+        </div>
+      </div>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 显示面包屑导航 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.crumbsSetting.show" />
+        </div>
+      </div>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 显示面包屑显示图标 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.crumbsSetting.showIcon" />
+        </div>
+      </div>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 显示多页签 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.multiTabsSetting.show" />
+        </div>
+      </div>
+
+      <a-divider orientation="center">动画</a-divider>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 启用动画 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.isPageAnimate" />
+        </div>
+      </div>
+
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 动画类型 </div>
+        <div class="drawer-setting-item-select">
+          <a-select v-model:model-value="settingStore.pageAnimateType" :options="animateOptions" />
+        </div>
+      </div>
+
+      <div class="drawer-setting-item">
+        <a-alert type="warning" :show-icon="false">
+          <p>{{ alertText }}</p>
+        </a-alert>
+      </div>
+    </div>
   </a-drawer>
 </template>
 
@@ -58,6 +122,8 @@
   import { ColorInputWithoutInstance } from 'tinycolor2';
   import { storage } from '@/utils/storage';
   import { useUserStore } from '@/store/modules/users';
+  import { useSettingStore } from '@/store/modules/settings';
+  import { animates as animateOptions } from '@/settings/animateSetting';
 
   export default defineComponent({
     name: 'Settings',
@@ -66,6 +132,7 @@
     },
     setup() {
       const userStore = useUserStore();
+      const settingStore = useSettingStore();
       const state = reactive({
         visible: false,
         pureColor: ref<ColorInputWithoutInstance>(
@@ -76,6 +143,8 @@
           { title: '圣诞主题', value: 'theme-christmas' },
         ],
         baseTheme: storage.get('_theme') ?? 'default',
+        alertText:
+          '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。',
       });
 
       const closeDrawer = () => {
@@ -101,6 +170,8 @@
         ...toRefs(state),
         closeDrawer,
         setTheme,
+        settingStore,
+        animateOptions,
       };
     },
   });

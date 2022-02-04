@@ -150,12 +150,24 @@
               >
                 <a-input v-model="form.meta.permissions" placeholder="请输入权限标识" />
               </a-form-item>
-              <a-form-item field="hidden" label="是否显示">
-                <a-switch v-model:model-value="form.hidden">
-                  <template #checked> 显示 </template>
-                  <template #unchecked> 隐藏 </template>
-                </a-switch>
-              </a-form-item>
+              <a-row :gutter="16">
+                <a-col :span="12">
+                  <a-form-item field="meta.keepAlive" label="缓存路由" label-col-flex="120px">
+                    <a-switch v-model:model-value="form.meta.keepAlive" type="round">
+                      <template #checked> 打开 </template>
+                      <template #unchecked> 关闭 </template>
+                    </a-switch>
+                  </a-form-item>
+                </a-col>
+                <a-col :span="12">
+                  <a-form-item field="hidden" label="是否显示" label-col-flex="80px">
+                    <a-switch v-model:model-value="form.hidden">
+                      <template #checked> 显示 </template>
+                      <template #unchecked> 隐藏 </template>
+                    </a-switch>
+                  </a-form-item>
+                </a-col>
+              </a-row>
               <a-form-item>
                 <a-button type="primary" @click="editMenu">保存修改</a-button>
               </a-form-item>

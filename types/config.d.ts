@@ -34,10 +34,27 @@ export type RouteItem = Partial<RouteLocationNormalized> & {
   name: string;
 };
 
+export interface IheaderSetting {
+  fixed: boolean;
+  isReload: boolean;
+  headerHeight: string;
+}
+
 export interface ImenuSetting {
   minMenuWidth: number;
   menuWidth: number;
   fixed: boolean;
   mixMenu: boolean;
   collapsed: boolean;
+}
+
+// tabs
+export interface ImultiTabsSetting {
+  fixed: boolean;
+  show: boolean;
+}
+
+export interface IcrumbsSetting {
+  show: boolean;
+  showIcon: boolean;
 }

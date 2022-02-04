@@ -9,7 +9,7 @@ const setting = {
   //菜单
   menuSetting: {
     //最小宽度
-    minMenuWidth: 64,
+    minMenuWidth: 48,
     //菜单宽度
     menuWidth: 200,
     //固定菜单

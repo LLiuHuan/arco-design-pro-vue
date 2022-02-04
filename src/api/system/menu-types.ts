@@ -15,6 +15,8 @@ export interface MenuTypes {
   redirect: string;
   sort: number;
   menu_type: number;
+
+  title: string; // 临时使用
 }
 
 export interface MetaType {

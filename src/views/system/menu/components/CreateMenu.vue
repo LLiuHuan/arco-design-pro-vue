@@ -10,7 +10,7 @@
   >
     <template #title> {{ title }} </template>
     <div>
-      <a-form ref="addMenuForm" :model="form">
+      <a-form ref="addMenuForm" :model="form" :rules="rules">
         <a-form-item field="menu_type" label="菜单类型">
           <a-radio-group v-model:model-value="form.menu_type" type="button">
             <a-radio :value="1">目录</a-radio>
@@ -85,7 +85,7 @@
       },
       width: {
         type: Number,
-        default: 450,
+        default: 650,
       },
       parentId: {
         type: Number,
@@ -102,7 +102,7 @@
     },
     emits: ['close'],
     setup(props, { emit }) {
-      const addMenuForm = ref<HTMLFormElement>();
+      const addMenuForm = ref();
       const state = reactive({
         visible: false,
         form: ref<MenuTypes>({
@@ -114,6 +114,15 @@
             closeTab: false,
           },
         } as MenuTypes),
+        rules: {
+          name: { required: true, message: '请输入路由Name', trigger: 'blur' },
+          path: { required: true, message: '请输入路由Path', trigger: 'blur' },
+          'meta.title': { required: true, message: '请输入展示名称', trigger: 'blur' },
+          redirect: { required: true, message: '请输入重定向', trigger: 'blur' },
+          parentId: { required: true, message: '请选择上级菜单', trigger: 'blur' },
+          sort: { required: true, message: '请输入排序标记', trigger: 'blur', type: 'number' },
+          'meta.permissions': { required: true, message: '请输入权限标识', trigger: 'blur' },
+        },
       });
 
       const open = async () => {
@@ -139,10 +148,16 @@
 
       const enterMenu = () => {
         state.form.parentId = String(props.parentId);
-        addBaseMenu(state.form).then(() => {
-          Message.success('添加成功');
-          close();
-          emit('close');
+        addMenuForm.value.validate().then((res) => {
+          if (res) {
+            return;
+          }
+
+          addBaseMenu(state.form).then(() => {
+            Message.success('添加成功');
+            close();
+            emit('close');
+          });
         });
       };
 

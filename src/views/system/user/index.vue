@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div class="container-main">
       <div class="toolbar">
         <div>

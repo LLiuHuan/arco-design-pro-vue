@@ -7,7 +7,6 @@
       <nav-bar />
     </div>
     <a-layout>
-      <!--   TODO: 改为动态 48 220  -->
       <a-layout-sider
         collapsible
         :collapsed="collapsed"

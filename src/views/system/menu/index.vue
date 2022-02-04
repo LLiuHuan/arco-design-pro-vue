@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <a-row class="grid" :gutter="12">
       <a-col :span="10">
         <a-card>
@@ -65,11 +65,11 @@
       <a-col :span="14">
         <a-card>
           <template #title>
-            <icon-edit />编辑菜单<span v-if="isForm">: {{ treeItemTitle }}</span>
+            <IconEdit />编辑菜单<span v-if="isForm">: {{ treeItemTitle }}</span>
           </template>
           <a-space direction="vertical" fill>
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
-            <a-form v-if="isForm" :model="form">
+            <a-form ref="menuFormRef" v-if="isForm" :model="form">
               <a-form-item field="menu_type" label="菜单类型">
                 <a-radio-group v-model:model-value="form.menu_type" type="button">
                   <a-radio :value="1" disabled>目录</a-radio>
@@ -77,13 +77,26 @@
                   <a-radio :value="3" disabled>按钮</a-radio>
                 </a-radio-group>
               </a-form-item>
-              <a-form-item field="name" label="路由Name">
+              <a-form-item
+                field="name"
+                label="路由Name"
+                :rules="{ required: true, message: '请输入路由Name', trigger: 'blur' }"
+              >
                 <a-input v-model="form.name" placeholder="路由名称，唯一英文id" />
               </a-form-item>
-              <a-form-item v-if="form.menu_type !== 3" field="path" label="路由Path">
+              <a-form-item
+                v-if="form.menu_type !== 3"
+                field="path"
+                label="路由Path"
+                :rules="{ required: true, message: '请输入路由Path', trigger: 'blur' }"
+              >
                 <a-input v-model="form.path" placeholder="不需要输入上级路由，例：menu" />
               </a-form-item>
-              <a-form-item field="meta.title" label="展示名称">
+              <a-form-item
+                field="meta.title"
+                label="展示名称"
+                :rules="{ required: true, message: '请输入展示名称', trigger: 'blur' }"
+              >
                 <a-input
                   v-model="form.meta.title"
                   placeholder="i18n前端国际化 menu.system.menu，不需要就中文"
@@ -95,23 +108,46 @@
                   placeholder="views下的文件路径, /system/menu/index.vue"
                 />
               </a-form-item>
-              <a-form-item v-if="form.menu_type === 1" field="redirect" label="重定向">
+              <a-form-item
+                v-if="form.menu_type === 1"
+                field="redirect"
+                label="重定向"
+                :rules="{ required: true, message: '请输入重定向', trigger: 'blur' }"
+              >
                 <a-input v-model="form.redirect" placeholder="顶级菜单需要重定向到一个子级菜单" />
               </a-form-item>
-              <a-form-item v-if="form.menu_type !== 3" field="parentId" label="上级菜单">
+              <a-form-item
+                v-if="form.menu_type !== 3"
+                field="parentId"
+                label="上级菜单"
+                :rules="{ required: true, message: '请选择上级菜单', trigger: 'blur' }"
+              >
                 <a-tree-select
                   v-model:model-value="form.parentId"
                   :data="menuOption"
                   placeholder="请选择上级菜单"
                 />
               </a-form-item>
-              <a-form-item field="sort" label="排序标记">
+              <a-form-item
+                field="sort"
+                label="排序标记"
+                :rules="{
+                  required: true,
+                  message: '请输入排序标记',
+                  trigger: 'blur',
+                  type: 'number',
+                }"
+              >
                 <a-input-number v-model="form.sort" placeholder="请输入排序" />
               </a-form-item>
               <a-form-item v-if="form.menu_type !== 3" field="icon" label="图标">
                 <arco-icon v-model:icon-value="form.meta.icon" placeholder="请选择图标" />
               </a-form-item>
-              <a-form-item field="permission" label="权限标识">
+              <a-form-item
+                field="meta.permissions"
+                label="权限标识"
+                :rules="{ required: true, message: '请输入权限标识', trigger: 'blur' }"
+              >
                 <a-input v-model="form.meta.permissions" placeholder="请输入权限标识" />
               </a-form-item>
               <a-form-item field="hidden" label="是否显示">
@@ -155,6 +191,7 @@
       ArcoIcon,
     },
     setup() {
+      const menuFormRef = ref();
       const { t } = useI18n();
       const searchKey = ref('');
       const addMenu = ref();
@@ -318,9 +355,15 @@
       };
 
       const editMenu = () => {
-        updateBaseMenu(state.form).then(() => {
-          Message.success('修改成功！');
-          getTableData();
+        menuFormRef.value.validate().then((res) => {
+          if (res) {
+            return;
+          }
+
+          updateBaseMenu(state.form).then(() => {
+            Message.success('修改成功！');
+            getTableData();
+          });
         });
       };
 
@@ -350,6 +393,7 @@
 
       return {
         ...toRefs(state),
+        menuFormRef,
         treeData,
         searchKey,
         menuTypeMap,

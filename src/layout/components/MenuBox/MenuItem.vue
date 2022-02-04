@@ -50,7 +50,6 @@
       },
     },
     setup(props) {
-      console.log(props.item);
       const resolve = (...pathList: string[]) => {
         let newStrPath = '';
         let newPathList = [...new Set(pathList)];

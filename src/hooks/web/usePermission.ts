@@ -1,6 +1,8 @@
+import { useUserStore } from '@/store/modules/users';
+
 export function usePermission() {
-  // const userStore = useUserStore();
-  const roles = ['job:add', 'job:edit', 'menu:user:add'];
+  const userStore = useUserStore();
+  const roles = userStore.getPermissions;
 
   /**
    * 检查权限

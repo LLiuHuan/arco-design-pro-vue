@@ -101,7 +101,7 @@
   export default defineComponent({
     name: 'Login',
     setup() {
-      const usersStore = useUserStore();
+      const userStore = useUserStore();
 
       const formInline = reactive({
         form: {
@@ -137,7 +137,7 @@
       const handleSubmit = async (e) => {
         e.preventDefault();
         Message.loading('登陆中...');
-        const flag = await usersStore.login(formInline.form);
+        const flag = await userStore.login(formInline.form);
         if (!flag) {
           resetCaptcha();
         } else {
@@ -150,12 +150,12 @@
               router.replace('/');
             } else {
               // 设置登陆后默认的样式
-              const theme = usersStore.getModel || 'dark';
+              const theme = userStore.getModel || 'dark';
               // 设置为暗黑主题
               document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
               document.body.style.setProperty(
                 `--arcoblue-6`,
-                usersStore.getBaseColor ?? '5, 160, 69'
+                userStore.getBaseColor ?? '5, 160, 69'
               );
             }
           });

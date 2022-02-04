@@ -2,9 +2,10 @@ import { Router, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { ErrorPageRoute } from '@/router/base';
 import { useI18n } from '@/hooks/web/useI18n';
-import { generatorDynamicRouter } from '@/router/generator-routers';
 import { storage } from '@/utils/storage';
 import { ACCESS_TOKEN } from '@/store/mutation-types';
+import { useRouterStore } from '@/store/modules/routers';
+import { useUserStore } from '@/store/modules/users';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const INIT_DB = PageEnum.INIT_DB;
@@ -14,7 +15,10 @@ let asyncRouterFlag = 0;
 
 export function createRouterGuards(router: Router) {
   // to, from, next
-  router.beforeEach((to, from, next) => {
+  router.beforeEach(async (to, from, next) => {
+    const routerStore = useRouterStore();
+    const userStore = useUserStore();
+
     if (from.path === LOGIN_PATH && to.name === 'errorPage') {
       next(PageEnum.BASE_HOME);
       return;
@@ -51,32 +55,35 @@ export function createRouterGuards(router: Router) {
 
     if (!asyncRouterFlag) {
       asyncRouterFlag++;
-      generatorDynamicRouter().then((routes) => {
-        if (routes) {
-          // 动态添加可访问路由表
-          routes.forEach((item) => {
-            if (item.path.indexOf('http://') == -1 && item.path.indexOf('https://') == -1) {
-              router.addRoute(item as unknown as RouteRecordRaw);
-            }
-          });
 
-          //添加404
-          const isErrorPage = router
-            .getRoutes()
-            .findIndex((item) => item.name === ErrorPageRoute.name);
-          if (isErrorPage === -1) {
-            router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
+      const userInfo = await userStore.GetInfo();
+      // generatorDynamicRouter().then((routes) => {
+      const routes = await routerStore.generateRoutes(userInfo);
+
+      if (routes) {
+        // 动态添加可访问路由表
+        routes.forEach((item) => {
+          if (item.path.indexOf('http://') == -1 && item.path.indexOf('https://') == -1) {
+            router.addRoute(item as unknown as RouteRecordRaw);
           }
+        });
 
-          const redirectPath = (from.query.redirect || to.path) as string;
-          const redirect = decodeURIComponent(redirectPath);
-          const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
-          // asyncRouteStore.setDynamicAddedRoute(true);
-          // storage.set('DynamicAddedRoute', true);
-          next(nextData);
-          // Loading && Loading.finish();
+        //添加404
+        const isErrorPage = router
+          .getRoutes()
+          .findIndex((item) => item.name === ErrorPageRoute.name);
+        if (isErrorPage === -1) {
+          router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw);
         }
-      });
+
+        const redirectPath = (from.query.redirect || to.path) as string;
+        const redirect = decodeURIComponent(redirectPath);
+        const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
+        // asyncRouteStore.setDynamicAddedRoute(true);
+        // storage.set('DynamicAddedRoute', true);
+        next(nextData);
+        // Loading && Loading.finish();
+      }
     } else {
       next();
     }

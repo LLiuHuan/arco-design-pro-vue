@@ -52,6 +52,7 @@
       iconValue: {
         type: String,
         required: true,
+        default: '',
       },
       placeholder: {
         type: String,

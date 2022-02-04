@@ -8,14 +8,14 @@
         v-model:checked-keys="menuTreeIds"
         :fieldNames="{
           key: 'ID',
-          title: 'name',
+          title: 'title',
         }"
         :data="menuTreeData"
         :show-line="true"
         :blockNode="true"
       >
         <template #extra="nodeData">
-          <span>
+          <span v-if="nodeData.menu_type !== 3">
             <a-button
               type="text"
               size="mini"
@@ -38,6 +38,7 @@
   import { MenuTypes } from '@/api/system/menu-types';
   import { Message } from '@arco-design/web-vue';
   import { updateAuthority } from '@/api/system/auth';
+  import { useI18n } from 'vue-i18n';
 
   export default defineComponent({
     name: 'AuthMenus',
@@ -49,6 +50,7 @@
     },
     setup(props) {
       const menuTree = ref();
+      const { t } = useI18n();
       const state = reactive({
         menuTreeData: ref<Array<MenuTypes>>([]),
         menuTreeIds: ref<Array<Number>>([]),
@@ -56,10 +58,30 @@
 
       // region 处理菜单树
 
+      const treeTitle = (title: string): string => {
+        return title.indexOf('menu.') === -1 ? title : t(title);
+      };
+
+      const isHttp = (path: string): boolean => {
+        return path.indexOf('http://') != -1 || path.indexOf('https://') != -1;
+      };
+
+      const nameToTitle = (data: Array<any>) => {
+        return data.map((item) => {
+          item.title = isHttp(item.path) ? item.meta.title : treeTitle(item.meta.title);
+
+          if (item.children) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            item.children = nameToTitle(item.children);
+          }
+          return item;
+        });
+      };
+
       // 将data数据转为tree所需数据
       const initialize = async () => {
         const res = await getBaseMenuTree();
-        state.menuTreeData = res.menus;
+        state.menuTreeData = nameToTitle(res.menus);
 
         const res1 = await getMenuAuth({ authorityId: props.row.authorityId });
         const menus = res1.menus;
@@ -73,22 +95,23 @@
       };
 
       function tableToTree(table: any) {
-        const result = [] as Array<MenuTypes>;
+        let result: Array<any> = [];
 
-        table.forEach((item: any) => {
-          if (!item.children) {
-            if (state.menuTreeIds.includes(item.ID)) {
-              result.push(item);
+        table &&
+          table.forEach((item: any) => {
+            if (!item.children) {
+              if (state.menuTreeIds.includes(item.ID)) {
+                result.push(item);
+              }
+            } else {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const children = tableToTree(item.children);
+              if (children.length > 0) {
+                result.push(item);
+                result.push(...children);
+              }
             }
-          } else {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            item.children = tableToTree(item.children);
-            if (item.children.length > 0) {
-              result.push(item);
-              result.push(...item.children);
-            }
-          }
-        });
+          });
         return result;
       }
 
@@ -115,6 +138,7 @@
       // region 修改树
       // 关联树 确认方法
       const relation = async () => {
+        console.log(tableToTree(state.menuTreeData));
         await addMenuAuthority({
           menus: tableToTree(state.menuTreeData),
           authorityId: props.row.authorityId,

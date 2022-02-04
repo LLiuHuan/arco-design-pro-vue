@@ -7,11 +7,11 @@ Object.keys(allModules).forEach((path) => {
 });
 
 import { useUserStore } from './users';
-import { useTabsStore } from './tabs';
-import { useSettingsStore } from './settings';
+import { useTabStore } from './tabs';
+import { useSettingStore } from './settings';
 
 export default {
   useUserStore,
-  useTabsStore,
-  useSettingsStore,
+  useTabStore,
+  useSettingStore,
 };

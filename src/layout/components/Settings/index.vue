@@ -65,11 +65,11 @@
       ColorPicker,
     },
     setup() {
-      const usersStore = useUserStore();
+      const userStore = useUserStore();
       const state = reactive({
         visible: false,
         pureColor: ref<ColorInputWithoutInstance>(
-          `rgb(${usersStore.getBaseColor})` ?? 'rgb(5, 160, 69)'
+          `rgb(${userStore.getBaseColor})` ?? 'rgb(5, 160, 69)'
         ),
         themes: [
           { title: '默认', value: 'default' },
@@ -93,7 +93,7 @@
         (value: any) => {
           let regex1 = /\d+, \d+, \d+/gi;
           let color = value.match(regex1);
-          usersStore.setBaseColor(color[0]);
+          userStore.setBaseColor(color[0]);
           document.body.style.setProperty(`--arcoblue-6`, color[0]);
         }
       );

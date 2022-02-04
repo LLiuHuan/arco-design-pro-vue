@@ -84,6 +84,7 @@ module.exports = {
           'Settings',
           'Login',
           'State',
+          'Application',
         ],
       },
     ],

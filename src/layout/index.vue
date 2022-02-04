@@ -7,14 +7,13 @@
       <nav-bar />
     </div>
     <a-layout>
-      <!--   TODO: 改为动态 48 220  -->
       <a-layout-sider
         collapsible
         :collapsed="collapsed"
         class="layoutSider"
         hide-trigger
         style="padding-top: 60px"
-        :style="{ width: collapsed ? '48px' : '220px' }"
+        :style="{ width: collapsed ? minMenuWidth + 'px' : menuWidth + 'px' }"
       >
         <menu-box />
         <div class="collapseBtn" @click="fold">
@@ -25,13 +24,17 @@
       <a-layout
         class="layoutContent"
         style="padding-top: 60px"
-        :style="{ paddingLeft: collapsed ? '48px' : '220px' }"
+        :style="{
+          paddingLeft: collapsed ? minMenuWidth + 'px' : menuWidth + 'px',
+          height: '100vh',
+        }"
       >
-        <a-layout-content>
+        <a-layout-content class="layoutContent1">
           <!--          <a-affix :offsetTop="60">-->
           <tags-view />
           <!--          </a-affix>-->
           <div
+            id="base-content"
             :class="{
               'main-view-fix': true,
               noMultiTabs: false,
@@ -39,6 +42,7 @@
           >
             <router-view />
           </div>
+          <a-back-top target-container="#base-content" :style="{ position: 'absolute' }" />
         </a-layout-content>
         <footer-bar />
       </a-layout>
@@ -59,6 +63,7 @@
   import { FooterBar } from '@/layout/components/FooterBar';
   import { TagsView } from '@/layout/components/TagsView';
   import { Settings } from '@/layout/components/Settings';
+  import { useSettingStore } from '@/store/modules/settings';
 
   export default defineComponent({
     name: 'Layout',
@@ -75,7 +80,11 @@
       const { headerSetting } = projectSetting;
       const route = useRoute();
 
-      const collapsed = ref<boolean>(false);
+      const settingStore = useSettingStore();
+
+      const { collapsed: menuCollapsed, menuWidth, minMenuWidth } = settingStore.menuSetting;
+
+      const collapsed = ref<boolean>(menuCollapsed);
 
       const fold = () => {
         collapsed.value = !collapsed.value;
@@ -108,6 +117,9 @@
         loading,
         collapsed,
         fold,
+
+        menuWidth,
+        minMenuWidth,
       };
     },
   });
@@ -118,11 +130,13 @@
 
   .main-view-fix {
     //padding-top: 24px;
-    height: calc(100% - 44px);
+    overflow-y: auto;
+    height: calc(100vh - 44px - 60px - 40px);
   }
 
   .noMultiTabs {
     //padding-top: 0;
-    height: 100%;
+    //height: 100%;
+    height: calc(100vh - 60px - 40px);
   }
 </style>

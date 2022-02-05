@@ -1,72 +1,74 @@
 <template>
-  <div class="container-main">
-    <div class="toolbar">
-      <div>
-        <!--          v-permission="{ action: ['menu:auth:add'], effect: 'disabled' }"-->
-        <a-button type="primary" @click="addAuthority('0')">添加</a-button>
+  <div>
+    <div class="container-main">
+      <div class="toolbar">
+        <div>
+          <!--          v-permission="{ action: ['menu:auth:add'], effect: 'disabled' }"-->
+          <a-button type="primary" @click="addAuthority('0')">添加</a-button>
+        </div>
       </div>
+      <a-table
+        :data="table.data"
+        :pagination="{
+          current: table.page,
+          onPageSize: table.pageSize,
+          size: 'medium',
+          total: table.total,
+          showTotal: true,
+          showPageSize: true,
+        }"
+        :loading="table.loading"
+        @page-change="setPage"
+        @page-size-change="setPageSize"
+      >
+        <template #columns>
+          <a-table-column title="角色ID" data-index="authorityId" />
+          <a-table-column title="角色名称" data-index="authorityName" />
+          <a-table-column title="操作">
+            <template #cell="{ record }">
+              <a-button type="text" @click="openDrawer(record)">设置权限</a-button>
+              <a-button type="text" @click="addAuthority(record.authorityId)">新增子角色</a-button>
+              <a-button type="text" @click="copyAuthority(record)">拷贝</a-button>
+              <a-button type="text" @click="editAuthority(record)">编辑</a-button>
+              <a-popconfirm
+                content="此操作将永久删除该角色, 是否继续?"
+                position="bottom"
+                @ok="deleteAuth(record)"
+              >
+                <a-button type="text">删除</a-button>
+              </a-popconfirm>
+            </template>
+          </a-table-column>
+        </template>
+      </a-table>
     </div>
-    <a-table
-      :data="table.data"
-      :pagination="{
-        current: table.page,
-        onPageSize: table.pageSize,
-        size: 'medium',
-        total: table.total,
-        showTotal: true,
-        showPageSize: true,
-      }"
-      :loading="table.loading"
-      @page-change="setPage"
-      @page-size-change="setPageSize"
+
+    <a-drawer
+      v-if="drawer"
+      :visible="drawer"
+      @cancel="closeDrawer"
+      title="设置角色权限"
+      :width="600"
+      :footer="false"
+      unmountOnClose
     >
-      <template #columns>
-        <a-table-column title="角色ID" data-index="authorityId" />
-        <a-table-column title="角色名称" data-index="authorityName" />
-        <a-table-column title="操作">
-          <template #cell="{ record }">
-            <a-button type="text" @click="openDrawer(record)">设置权限</a-button>
-            <a-button type="text" @click="addAuthority(record.authorityId)">新增子角色</a-button>
-            <a-button type="text" @click="copyAuthority(record)">拷贝</a-button>
-            <a-button type="text" @click="editAuthority(record)">编辑</a-button>
-            <a-popconfirm
-              content="此操作将永久删除该角色, 是否继续?"
-              position="bottom"
-              @ok="deleteAuth(record)"
-            >
-              <a-button type="text">删除</a-button>
-            </a-popconfirm>
-          </template>
-        </a-table-column>
-      </template>
-    </a-table>
+      <a-tabs type="text" lazy-load>
+        <a-tab-pane key="menus" title="角色菜单"> <menus :row="activeRow" /> </a-tab-pane>
+        <a-tab-pane key="api" title="角色Api">
+          <Apis :row="activeRow" />
+        </a-tab-pane>
+      </a-tabs>
+    </a-drawer>
+
+    <OperationModel
+      ref="operationModel"
+      v-model:model-title="model.modelTitle"
+      v-model:model-type="model.modelType"
+      :row="model.form"
+      :table-data="table.data"
+      @close="closeModel"
+    />
   </div>
-
-  <a-drawer
-    v-if="drawer"
-    :visible="drawer"
-    @cancel="closeDrawer"
-    title="设置角色权限"
-    :width="600"
-    :footer="false"
-    unmountOnClose
-  >
-    <a-tabs type="text" lazy-load>
-      <a-tab-pane key="menus" title="角色菜单"> <menus :row="activeRow" /> </a-tab-pane>
-      <a-tab-pane key="api" title="角色Api">
-        <Apis :row="activeRow" />
-      </a-tab-pane>
-    </a-tabs>
-  </a-drawer>
-
-  <OperationModel
-    ref="operationModel"
-    v-model:model-title="model.modelTitle"
-    v-model:model-type="model.modelType"
-    :row="model.form"
-    :table-data="table.data"
-    @close="closeModel"
-  />
 </template>
 
 <script lang="ts">

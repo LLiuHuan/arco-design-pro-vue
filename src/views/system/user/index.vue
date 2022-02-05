@@ -72,13 +72,13 @@
         </template>
       </a-table>
     </div>
-  </div>
 
-  <create-user
-    v-model:user-model="addUserModel"
-    :authority-data="authorityData"
-    @get-all-user-list="getAllUserList"
-  />
+    <create-user
+      v-model:user-model="addUserModel"
+      :authority-data="authorityData"
+      @get-all-user-list="getAllUserList"
+    />
+  </div>
 </template>
 
 <script lang="ts">

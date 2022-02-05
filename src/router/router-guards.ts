@@ -1,4 +1,4 @@
-import { Router, RouteRecordRaw } from 'vue-router';
+import { isNavigationFailure, Router, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { ErrorPageRoute } from '@/router/base';
 import { useI18n } from '@/hooks/web/useI18n';
@@ -90,7 +90,7 @@ export function createRouterGuards(router: Router) {
   });
 
   // , failure
-  router.afterEach((to, _) => {
+  router.afterEach((to, _, failure) => {
     // TODO: 有些大问题，暂时先这样吧
     const { t } = useI18n('');
     if ((to.meta?.title as string).indexOf('menu.') !== -1) {
@@ -98,6 +98,28 @@ export function createRouterGuards(router: Router) {
     } else {
       document.title = to.meta?.title as string;
     }
+    if (isNavigationFailure(failure)) {
+      //console.log('failed navigation', failure)
+    }
+    const asyncRouteStore = useRouterStore();
+    // 在这里设置需要缓存的组件名称
+    const keepAliveComponents = asyncRouteStore.keepAliveComponents;
+    const currentComName: any = to.matched.find((item) => item.name == to.name)?.name;
+    console.log(currentComName);
+    console.log(to.meta?.keepAlive);
+    if (currentComName && !keepAliveComponents.includes(currentComName) && to.meta?.keepAlive) {
+      // 需要缓存的组件
+      keepAliveComponents.push(currentComName);
+    } else if (!to.meta?.keepAlive || to.name == 'Redirect') {
+      // 不需要缓存的组件
+      const index = asyncRouteStore.keepAliveComponents.findIndex((name) => name == currentComName);
+      if (index != -1) {
+        keepAliveComponents.splice(index, 1);
+      }
+    }
+    asyncRouteStore.setKeepAliveComponents(keepAliveComponents);
+    // const Loading = window['$loading'] || null;
+    // Loading && Loading.finish();
   });
 
   router.onError((error) => {

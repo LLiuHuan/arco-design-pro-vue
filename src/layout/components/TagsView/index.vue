@@ -2,12 +2,14 @@
   <div
     class="tabs-view"
     :class="{
+      'tabs-view-fix': multiTabsSetting.fixed,
       'tabs-view-fixed-header': isMultiHeaderFixed,
       'tabs-view-default-background': theme === 'light',
       'tabs-view-dark-background': theme === 'dark',
     }"
+    :style="getChangeStyle"
   >
-    <div class="tabs-view-main">
+    <div class="tabs-view-main" :style="{ minWidth: multiTabsSetting.fixed ? '98.5%' : '100%' }">
       <div ref="navWrap" class="tabs-card" :class="{ 'tabs-card-scrollable': scrollable }">
         <span
           class="tabs-card-prev"
@@ -125,15 +127,24 @@
   import { emitter } from '@/utils/bus';
   import { useTabStore } from '@/store/modules/tabs';
   import { useUserStore } from '@/store/modules/users';
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
+  import { useSettingStore } from '@/store/modules/settings';
 
   export default defineComponent({
     name: 'TagsView',
     components: {
       Draggable,
     },
-    setup() {
+    props: {
+      collapsed: {
+        type: Boolean,
+      },
+    },
+    setup(props) {
       const tabStore = useTabStore();
       const userStore = useUserStore();
+      const settingStore = useSettingStore();
+      const { getNavMode, getMenuSetting, getMultiTabsSetting } = useProjectSetting();
       const route = useRoute();
       const router = useRouter();
       const isCurrent = ref(false);
@@ -150,9 +161,26 @@
         showDropdown: false,
         dropdownX: 0,
         dropdownY: 0,
+        multiTabsSetting: getMultiTabsSetting,
       });
 
-      console.log(state.activeKey);
+      //动态组装样式 菜单缩进
+      const getChangeStyle = computed(() => {
+        const { collapsed } = props;
+        const navMode = unref(getNavMode);
+        const { minMenuWidth, menuWidth }: any = unref(getMenuSetting);
+        const { fixed }: any = unref(getMultiTabsSetting);
+        let lenNum =
+          navMode === 'horizontal' || !isMixMenuNoneSub.value
+            ? '0px'
+            : collapsed
+            ? `${minMenuWidth}px`
+            : `${menuWidth}px`;
+        return {
+          left: lenNum,
+          width: `calc(100% - ${!fixed ? '0px' : lenNum})`,
+        };
+      });
 
       // 标签页列表
       const tabsList: any = computed(() => tabStore.getTabsList);
@@ -163,6 +191,14 @@
         const { fullPath, hash, meta, name, params, path, query } = route;
         return { fullPath, hash, meta, name, params, path, query };
       };
+
+      const isMixMenuNoneSub = computed(() => {
+        const mixMenu = settingStore.menuSetting.mixMenu;
+        const currentRoute = useRoute();
+        const navMode = unref(getNavMode);
+        if (unref(navMode) != 'horizontal-mix') return true;
+        return !(unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot);
+      });
 
       const whiteList: string[] = [PageEnum.BASE_LOGIN_NAME, PageEnum.REDIRECT_NAME];
 
@@ -373,6 +409,7 @@
         scrollNext,
         theme,
         updateNavScroll,
+        getChangeStyle,
       };
     },
   });

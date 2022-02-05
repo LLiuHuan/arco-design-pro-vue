@@ -1,8 +1,62 @@
 <template>
   <div class="navbar">
-    <div class="left">
-      <Logo />
-    </div>
+    <ul class="left">
+      <li>
+        <Logo />
+      </li>
+      <li>
+        <!-- 刷新 -->
+        <div v-if="headerSetting.isReload">
+          <a-tooltip content="刷新">
+            <a-button @click="reloadPage" class="p-0 w-8 h-8" type="text" style="font-size: 20px">
+              <icon-refresh />
+            </a-button>
+          </a-tooltip>
+        </div>
+      </li>
+      <li>
+        <!-- 面包屑 -->
+        <a-breadcrumb v-if="crumbsSetting.show">
+          <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
+            <a-breadcrumb-item>
+              <a-dropdown v-if="routeItem.children.length" @select="dropdownSelect">
+                <template #content>
+                  <a-doption v-for="item in routeItem.children" :value="item" :key="item.path">
+                    {{
+                      item.meta.title.indexOf('menu.') !== -1
+                        ? $t(item.meta.title)
+                        : item.meta.title
+                    }}
+                  </a-doption>
+                </template>
+                <span class="link-text">
+                  <component
+                    v-if="crumbsSetting.showIcon && routeItem.meta.icon"
+                    :is="routeItem.meta.icon"
+                  />
+                  {{
+                    routeItem.meta.title.indexOf('menu.') !== -1
+                      ? $t(routeItem.meta.title)
+                      : routeItem.meta.title
+                  }}
+                </span>
+              </a-dropdown>
+              <span class="link-text" v-else>
+                <component
+                  v-if="crumbsSetting.showIcon && routeItem.meta.icon"
+                  :is="routeItem.meta.icon"
+                />
+                {{
+                  routeItem.meta.title.indexOf('menu.') !== -1
+                    ? $t(routeItem.meta.title)
+                    : routeItem.meta.title
+                }}
+              </span>
+            </a-breadcrumb-item>
+          </template>
+        </a-breadcrumb>
+      </li>
+    </ul>
     <ul class="right">
       <li>
         <a target="_blank" :href="docs"><IconGithub /></a>
@@ -78,16 +132,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs, unref } from 'vue';
   import Logo from '@/layout/components/Logo/index.vue';
   import { useI18n } from 'vue-i18n';
   import { storage } from '@/utils/storage';
   import { setUserAuthority } from '@/api/system/user';
   import { emitter } from '@/utils/bus';
-  import { useRouter } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { IconGithub } from '@arco-design/web-vue/es/icon';
   import { useUserStore } from '@/store/modules/users';
   import { UserInfoType } from '@/store/state-types';
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
 
   export default defineComponent({
     name: 'NavBar',
@@ -99,6 +154,8 @@
     setup() {
       const userStore = useUserStore();
       const router = useRouter();
+      const route = useRoute();
+      const { getHeaderSetting, getCrumbsSetting } = useProjectSetting();
       const state = reactive({
         options: [
           { label: '中文', value: 'zh-CN' },
@@ -109,7 +166,35 @@
         docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
         userInfo: {} as UserInfoType,
+        headerSetting: getHeaderSetting,
+        crumbsSetting: getCrumbsSetting,
       });
+
+      const generator: any = (routerMap) => {
+        return routerMap.map((item) => {
+          const currentMenu = {
+            ...item,
+            label: item.meta.title,
+            key: item.name,
+            disabled: item.path === '/',
+          };
+          // 是否有子菜单，并递归处理
+          if (item.children && item.children.length > 0) {
+            // Recursion
+            currentMenu.children = generator(item.children, currentMenu);
+          }
+          return currentMenu;
+        });
+      };
+
+      const breadcrumbList = computed(() => {
+        return generator(route.matched);
+      });
+
+      const dropdownSelect = (routeMap) => {
+        router.push({ path: routeMap.path });
+      };
+
       // 使用i18n
       const { locale } = useI18n({ useScope: 'global' });
 
@@ -177,6 +262,13 @@
         });
       };
 
+      // 刷新页面
+      const reloadPage = () => {
+        router.push({
+          path: '/redirect' + unref(route).fullPath,
+        });
+      };
+
       onBeforeMount(() => {
         userStore.getUserInfo().then((data) => {
           state.userInfo = data;
@@ -193,6 +285,9 @@
         toggleFullScreen,
         logout,
         changeUserAuth,
+        reloadPage,
+        breadcrumbList,
+        dropdownSelect,
       };
     },
   });

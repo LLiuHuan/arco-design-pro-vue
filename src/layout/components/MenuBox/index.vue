@@ -51,7 +51,6 @@
       const matched = currentRoute.matched;
 
       const getOpenKeys = matched && matched.length ? matched.map((item) => item.name) : [];
-      console.log(getOpenKeys);
 
       const state = reactive({
         defaultSelectedKeys: ref<Array<String>>([storage.get('select-key')]),
@@ -60,33 +59,27 @@
 
       const openKey = (key: any) => {
         storage.set('select-key', key);
-        console.log('key', key);
       };
 
       menus.value = routerStore.getRouters;
-      console.log(menus.value);
 
       watch(
         () => currentRoute.fullPath,
-        (v) => {
-          console.log(v);
+        () => {
           updateMenu();
           const matched = currentRoute.matched;
           state.openKeys = matched.map((item) => item.name);
           const activeMenu: string = (currentRoute.meta?.activeMenu as string) || '';
           selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string);
-          console.log(selectedKeys);
           state.defaultSelectedKeys = [selectedKeys.value];
         }
       );
 
       function updateMenu() {
         if (!settingStore.menuSetting.mixMenu) {
-          console.log(1);
           menus.value = generatorMenu(routerStore.getRouters);
         } else {
           //混合菜单
-          console.log(2);
           const firstRouteName: string = (currentRoute.matched[0].name as string) || '';
           menus.value = generatorMenuMix(routerStore.getRouters, firstRouteName, props.location);
           const activeMenu: string = currentRoute?.matched[0].meta?.activeMenu as string;

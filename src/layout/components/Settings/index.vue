@@ -20,7 +20,7 @@
             <span>{{ pureColor }}</span>
           </div>
           <template #content>
-            <color-picker v-model:pureColor="pureColor" :isWidget="true" />
+            <color-picker v-model:pureColor="pureColor" :isWidget="true" format="hex" />
           </template>
         </a-trigger>
       </div>
@@ -116,14 +116,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs, watch } from 'vue';
+  import { defineComponent, onBeforeMount, reactive, toRefs, watch } from 'vue';
   import { ColorPicker } from 'vue3-colorpicker';
   import 'vue3-colorpicker/style.css';
-  import { ColorInputWithoutInstance } from 'tinycolor2';
   import { storage } from '@/utils/storage';
   import { useUserStore } from '@/store/modules/users';
   import { useSettingStore } from '@/store/modules/settings';
   import { animates as animateOptions } from '@/settings/animateSetting';
+  import { setBaseColor } from '@/utils/color';
 
   export default defineComponent({
     name: 'Settings',
@@ -135,9 +135,7 @@
       const settingStore = useSettingStore();
       const state = reactive({
         visible: false,
-        pureColor: ref<ColorInputWithoutInstance>(
-          `rgb(${userStore.getBaseColor})` ?? 'rgb(5, 160, 69)'
-        ),
+        pureColor: userStore.getBaseColor,
         themes: [
           { title: '默认', value: 'default' },
           { title: '圣诞主题', value: 'theme-christmas' },
@@ -160,12 +158,20 @@
       watch(
         () => state.pureColor,
         (value: any) => {
-          let regex1 = /\d+, \d+, \d+/gi;
-          let color = value.match(regex1);
-          userStore.setBaseColor(color[0]);
-          document.body.style.setProperty(`--arcoblue-6`, color[0]);
+          // let regex1 = /\d+, \d+, \d+/gi;
+          // let color = value.match(regex1);
+          userStore.setBaseColor(value);
+
+          setBaseColor(value);
+          // document.body.style.setProperty(`--arcoblue-5`, color[0]);
         }
       );
+
+      onBeforeMount(() => {
+        if (userStore.getBaseColor != '') {
+          setBaseColor(userStore.getBaseColor);
+        }
+      });
       return {
         ...toRefs(state),
         closeDrawer,

@@ -98,6 +98,8 @@
   import { Message } from '@arco-design/web-vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useUserStore } from '@/store/modules/users';
+  import { generate, getRgbStr } from '@arco-design/color';
+
   export default defineComponent({
     name: 'Login',
     setup() {
@@ -153,10 +155,19 @@
               const theme = userStore.getModel || 'dark';
               // 设置为暗黑主题
               document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
-              document.body.style.setProperty(
-                `--arcoblue-6`,
-                userStore.getBaseColor ?? '5, 160, 69'
-              );
+
+              // 设置主题色
+              for (let i = 1; i < 10; i++) {
+                document.body.style.setProperty(
+                  `--arcoblue-${i}`,
+                  getRgbStr(
+                    generate(userStore.getBaseColor, {
+                      index: i,
+                      dark: userStore.getModel === 'dark',
+                    })
+                  )
+                );
+              }
             }
           });
         }

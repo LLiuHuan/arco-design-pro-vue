@@ -6,6 +6,9 @@ import { storage } from '@/utils/storage';
 import { ACCESS_TOKEN } from '@/store/mutation-types';
 import { useRouterStore } from '@/store/modules/routers';
 import { useUserStore } from '@/store/modules/users';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const INIT_DB = PageEnum.INIT_DB;
@@ -18,7 +21,7 @@ export function createRouterGuards(router: Router) {
   router.beforeEach(async (to, from, next) => {
     const routerStore = useRouterStore();
     const userStore = useUserStore();
-
+    NProgress.start();
     if (from.path === LOGIN_PATH && to.name === 'errorPage') {
       next(PageEnum.BASE_HOME);
       return;
@@ -118,8 +121,7 @@ export function createRouterGuards(router: Router) {
       }
     }
     asyncRouteStore.setKeepAliveComponents(keepAliveComponents);
-    // const Loading = window['$loading'] || null;
-    // Loading && Loading.finish();
+    NProgress.done();
   });
 
   router.onError((error) => {

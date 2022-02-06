@@ -68,7 +68,7 @@
 
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs } from 'vue';
-  import { MenuTypes, MetaType } from '@/api/system/menu-types';
+  import { MenuTypes } from '@/api/system/menu-types';
   import { ArcoIcon } from '@/components/ArcoIcons';
   import { addBaseMenu } from '@/api/system/menu';
   import { Message } from '@arco-design/web-vue';

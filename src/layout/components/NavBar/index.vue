@@ -4,9 +4,9 @@
       <li>
         <Logo />
       </li>
-      <li>
+      <li v-if="headerSetting.isReload">
         <!-- 刷新 -->
-        <div v-if="headerSetting.isReload">
+        <div>
           <a-tooltip content="刷新">
             <a-button @click="reloadPage" class="p-0 w-8 h-8" type="text" style="font-size: 20px">
               <icon-refresh />
@@ -14,9 +14,9 @@
           </a-tooltip>
         </div>
       </li>
-      <li>
+      <li v-if="crumbsSetting.show">
         <!-- 面包屑 -->
-        <a-breadcrumb v-if="crumbsSetting.show">
+        <a-breadcrumb>
           <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
             <a-breadcrumb-item>
               <a-dropdown v-if="routeItem.children.length" @select="dropdownSelect">
@@ -143,6 +143,7 @@
   import { useUserStore } from '@/store/modules/users';
   import { UserInfoType } from '@/store/state-types';
   import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
+  import { setBaseColor } from '@/utils/color';
 
   export default defineComponent({
     name: 'NavBar',
@@ -222,6 +223,7 @@
         if (newTheme == state.theme) return;
         userStore.setMode(newTheme);
         state.theme = newTheme;
+        setBaseColor(userStore.getBaseColor, newTheme);
       };
 
       // 全屏切换

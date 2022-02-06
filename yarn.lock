@@ -16,8 +16,8 @@
 
 "@arco-design/color@^0.4.0":
   version "0.4.0"
-  resolved "https://registry.npmmirror.com/@arco-design/color/download/@arco-design/color-0.4.0.tgz#52ddb40d318ee6df1057ca8c653cc1675023928f"
-  integrity sha1-Ut20DTGO5t8QV8qMZTzBZ1Ajko8=
+  resolved "https://registry.npmmirror.com/@arco-design/color/-/color-0.4.0.tgz#52ddb40d318ee6df1057ca8c653cc1675023928f"
+  integrity sha512-s7p9MSwJgHeL8DwcATaXvWT3m2SigKpxx4JA1BGPHL4gfvaQsmQfrLBDpjOJFJuJ2jG2dMt3R3P8Pm9E65q18g==
   dependencies:
     color "^3.1.3"
 

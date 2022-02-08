@@ -5,11 +5,11 @@
       <!-- Sign Up -->
       <div class="container__form container--signup">
         <form ref="fistForm" action="#" class="form" id="form1">
-          <h2 class="form__title">Sign Up</h2>
-          <input type="text" placeholder="User" class="input" />
-          <input type="email" placeholder="Email" class="input" />
-          <input type="password" placeholder="Password" class="input" />
-          <button class="btn">Sign Up</button>
+          <h2 class="form__title">注册</h2>
+          <!--          <input type="text" placeholder="User" class="input" />-->
+          <!--          <input type="email" placeholder="Email" class="input" />-->
+          <!--          <input type="password" placeholder="Password" class="input" />-->
+          <!--          <button class="btn">Sign Up</button>-->
         </form>
       </div>
 
@@ -23,6 +23,7 @@
           size="large"
           :wrapper-col-style="{ flex: 'auto' }"
         >
+          <h2 class="form__title">登陆</h2>
           <a-form-item field="username" hide-label>
             <a-input v-model="form.username" placeholder="请输入用户名" />
           </a-form-item>
@@ -47,7 +48,7 @@
             </a-col>
           </a-row>
           <a-form-item>
-            <a-button @click="handleSubmit">Submit</a-button>
+            <button @click="handleSubmit" class="btn">登陆</button>
           </a-form-item>
         </a-form>
       </div>

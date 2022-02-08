@@ -1,7 +1,7 @@
 <template>
   <a-space :size="8" class="logo">
     <img class="flex justify-center items-center" src="~@/assets/logo.png" alt="" />
-    <a-typography-title class="title" :heading="5">Arco Design Pro</a-typography-title>
+    <a-typography-title class="title" :heading="5">Arco Desɪgn Pro</a-typography-title>
   </a-space>
 </template>
 

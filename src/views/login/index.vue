@@ -5,7 +5,7 @@
       <!-- Sign Up -->
       <div class="container__form container--signup">
         <form ref="fistForm" action="#" class="form" id="form1">
-          <h2 class="form__title">注册</h2>
+          <h2 class="form__title">注册功能未开放</h2>
           <!--          <input type="text" placeholder="User" class="input" />-->
           <!--          <input type="email" placeholder="Email" class="input" />-->
           <!--          <input type="password" placeholder="Password" class="input" />-->
@@ -43,12 +43,16 @@
                   @click="resetCaptcha"
                   :src="form.picPath"
                   style="padding-left: 5px"
+                  alt="验证码生成失败"
                 />
               </a-form-item>
             </a-col>
           </a-row>
-          <a-form-item>
-            <button @click="handleSubmit" class="btn">登陆</button>
+          <a-form-item hide-label>
+            <a-space size="mini">
+              <button @click="handleSubmit" class="btn">登 陆</button>
+              <button @click="initDB" class="btn">初始化</button>
+            </a-space>
           </a-form-item>
         </a-form>
       </div>
@@ -100,6 +104,7 @@
   import { useRoute, useRouter } from 'vue-router';
   import { useUserStore } from '@/store/modules/users';
   import { generate, getRgbStr } from '@arco-design/color';
+  import { checkDB } from '@/api/initdb';
 
   export default defineComponent({
     name: 'Login',
@@ -139,38 +144,45 @@
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        Message.loading('登陆中...');
-        const flag = await userStore.login(formInline.form);
-        if (!flag) {
+        if (formInline.form.captcha == '') {
+          Message.error('请输入验证码');
           resetCaptcha();
+          return;
         } else {
-          Message.clear();
+          let l = Message.loading('登陆中...');
+          const flag = await userStore.login(formInline.form);
+          if (!flag) {
+            resetCaptcha();
+            l.close();
+          } else {
+            // Message.clear();
+            l.close();
+            const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
+            Message.success('登录成功！');
+            router.replace(toPath).then((_) => {
+              if (route.name == 'login') {
+                router.replace('/');
+              } else {
+                // 设置登陆后默认的样式
+                const theme = userStore.getModel || 'dark';
+                // 设置为暗黑主题
+                document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
 
-          const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
-          Message.success('登录成功！');
-          router.replace(toPath).then((_) => {
-            if (route.name == 'login') {
-              router.replace('/');
-            } else {
-              // 设置登陆后默认的样式
-              const theme = userStore.getModel || 'dark';
-              // 设置为暗黑主题
-              document.body.setAttribute('arco-theme', theme === 'dark' ? 'dark' : 'light');
-
-              // 设置主题色
-              for (let i = 1; i < 10; i++) {
-                document.body.style.setProperty(
-                  `--arcoblue-${i}`,
-                  getRgbStr(
-                    generate(userStore.getBaseColor, {
-                      index: i,
-                      dark: userStore.getModel === 'dark',
-                    })
-                  )
-                );
+                // 设置主题色
+                for (let i = 1; i < 10; i++) {
+                  document.body.style.setProperty(
+                    `--arcoblue-${i}`,
+                    getRgbStr(
+                      generate(userStore.getBaseColor, {
+                        index: i,
+                        dark: userStore.getModel === 'dark',
+                      })
+                    )
+                  );
+                }
               }
-            }
-          });
+            });
+          }
         }
       };
 
@@ -178,6 +190,16 @@
         type == 'remove'
           ? container.value.classList.remove('right-panel-active')
           : container.value.classList.add('right-panel-active');
+      };
+
+      const initDB = async () => {
+        const res = await checkDB();
+        if (res?.needInit) {
+          await userStore.NeedInit();
+          await router.push({ path: '/initdb' });
+        } else {
+          Message.info('已配置数据库信息，无法初始化');
+        }
       };
 
       onBeforeMount(() => {
@@ -195,6 +217,7 @@
         container,
 
         active,
+        initDB,
       };
     },
   });
@@ -340,7 +363,7 @@
     font-size: 0.8rem;
     font-weight: bold;
     letter-spacing: 0.1rem;
-    padding: 0.9rem 4rem;
+    padding: 0.9rem 3rem;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
   }

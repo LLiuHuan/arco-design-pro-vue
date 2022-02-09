@@ -40,11 +40,21 @@ export const LoginRoute: RouteRecordRaw = {
   },
 };
 
+export const InitDBRoute: RouteRecordRaw = {
+  path: '/initdb',
+  name: 'InitDB',
+  component: () => import('@/views/initdb/index.vue'),
+  meta: {
+    title: 'initdb',
+    hidden: true,
+  },
+};
+
 //
 export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
-export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute];
+export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute, InitDBRoute];
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,

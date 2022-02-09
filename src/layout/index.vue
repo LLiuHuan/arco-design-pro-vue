@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout">
     <!--  切换菜单顶部加载进度条  -->
-    <LoadingBar ref="loading" />
+    <!--    <LoadingBar ref="loading" />-->
     <div class="layout-navbar">
       <!--   顶部菜单栏   -->
       <nav-bar />
@@ -61,10 +61,8 @@
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
   import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import LoadingBarType from '@/layout/components/LoadingBar/LoadingBar';
   import { NavBar } from '@/layout/components/NavBar';
   import { MenuBox } from '@/layout/components/MenuBox';
-  import { LoadingBar } from '@/layout/components/LoadingBar';
   import { FooterBar } from '@/layout/components/FooterBar';
   import { TagsView } from '@/layout/components/TagsView';
   import { Settings } from '@/layout/components/Settings';
@@ -77,14 +75,12 @@
     components: {
       NavBar,
       MenuBox,
-      LoadingBar,
       FooterBar,
       TagsView,
       Settings,
       MainView,
     },
     setup: function () {
-      const loading = ref<null | LoadingBarType>(null);
       const { headerSetting } = projectSetting;
       const { getMultiTabsSetting } = useProjectSetting();
       const route = useRoute();
@@ -111,34 +107,9 @@
         collapsed.value = !collapsed.value;
       };
 
-      // 路由加载完毕进度条加载完毕
-      onBeforeRouteLeave(() => {
-        if (loading.value) {
-          loading.value.success();
-        }
-      });
-
-      // 路由加载完毕进度条加载完毕
-      onBeforeRouteUpdate(() => {
-        if (loading.value) {
-          loading.value.success();
-        }
-      });
-
-      // 路由加载完毕进度条加载完毕
-      watch(
-        () => route.path,
-        () => {
-          if (loading.value) {
-            loading.value.loading();
-          }
-        }
-      );
-
       return {
         styles,
         headerSetting,
-        loading,
         collapsed,
         fold,
 

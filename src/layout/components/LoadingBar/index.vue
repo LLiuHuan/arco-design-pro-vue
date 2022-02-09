@@ -1,11 +1,11 @@
 <template>
+  {{ percent }}
   <a-progress
     v-if="!hide"
     :percent="percent"
     animation
-    :show-text="false"
     style="position: absolute; height: 2px; top: -1px; z-index: 9999"
-    :status="percent >= 98 ? 'success' : 'normal'"
+    :status="percent >= 0.98 ? 'success' : 'normal'"
   />
 </template>
 
@@ -16,27 +16,29 @@
     setup() {
       const loadingTimer = ref();
       const state = reactive({
-        percent: ref<number>(30),
+        percent: ref<number>(0.3),
         hide: ref<boolean>(true),
       });
 
       const loading = () => {
         state.hide = false;
-        state.percent = 30;
+        state.percent = 0.3;
+
         loadingTimer.value = setInterval(() => {
-          if (state.percent <= 98) {
-            state.percent = state.percent > 80 ? state.percent + 1 : state.percent + 10;
+          if (state.percent <= 0.98) {
+            state.percent = state.percent > 0.8 ? state.percent + 0.01 : state.percent + 0.1;
           }
         }, 1000);
       };
 
       const success = () => {
-        clearInterval(loadingTimer.value);
-        state.percent = 100;
+        state.percent = 1;
 
+        clearInterval(loadingTimer.value);
+        console.log(state.percent);
         setTimeout(() => {
           state.hide = true;
-        }, 300);
+        }, 3000);
       };
 
       return {

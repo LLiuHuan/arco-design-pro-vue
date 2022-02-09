@@ -5,6 +5,7 @@ import { UserInfoType } from '@/store/state-types';
 import { jsonInBlacklist, Login } from '@/api/base/login';
 import { getUserInfo, setUserInfo } from '@/api/system/user';
 import { Message } from '@arco-design/web-vue';
+import { useRouter } from 'vue-router';
 
 const Storage = createStorage({ storage: localStorage });
 
@@ -104,6 +105,12 @@ export const useUserStore = defineStore({
       const data = await getUserInfo();
       this.setUserInfo(data.userInfo);
       return data.userInfo;
+    },
+    async NeedInit() {
+      this.setToken('');
+      localStorage.clear();
+      const router = useRouter();
+      await router.push({ name: 'Init', replace: true });
     },
     // 获取用户信息
     GetInfo() {

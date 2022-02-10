@@ -138,7 +138,6 @@
       // region 修改树
       // 关联树 确认方法
       const relation = async () => {
-        console.log(tableToTree(state.menuTreeData));
         await addMenuAuthority({
           menus: tableToTree(state.menuTreeData),
           authorityId: props.row.authorityId,

@@ -26,7 +26,6 @@ export function filterRouter(routerMap: Array<any>) {
  * 递归组装菜单格式
  */
 export function generatorMenu(routerMap: Array<any>) {
-  console.log('routerMap', routerMap);
   return filterRouter(routerMap).map((item) => {
     const isRoot = isRootRouter(item);
     const info = isRoot ? item.children[0] : item;

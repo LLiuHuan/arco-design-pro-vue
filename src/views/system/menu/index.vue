@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row class="grid" :gutter="12">
+    <a-row class="grid-row" :gutter="12">
       <a-col :span="10">
         <a-card>
           <template #title>
@@ -388,7 +388,6 @@
       const addBaseMenu = (title: string) => {
         state.drawerTitle = title;
         state.menu_type = title === '添加顶级菜单' ? 1 : state.form.menu_type + 1;
-        console.log(state.drawerTitle, state.menu_type);
         addMenu.value.open();
       };
 
@@ -424,7 +423,7 @@
 </script>
 
 <style lang="less" scoped>
-  .grid {
+  .grid-row {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }

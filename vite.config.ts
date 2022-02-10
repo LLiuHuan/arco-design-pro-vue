@@ -29,7 +29,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PORT, VITE_GLOB_PROD_MOCK, VITE_DROP_CONSOLE } = viteEnv;
+  const { VITE_PORT, VITE_GLOB_PROD_MOCK, VITE_DROP_CONSOLE, VITE_BASE_URL } = viteEnv;
   const isBuild = command === 'build';
   // const alias: Record<string, string> = {
   //   // '@': `${resolve(__dirname, 'src')}/`,
@@ -79,7 +79,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       }),
     ],
     esbuild: {},
-    base: '/arco-design-pro-vue/',
+    base: VITE_BASE_URL,
     resolve: {
       alias: [
         {

@@ -35,7 +35,6 @@
         state.percent = 1;
 
         clearInterval(loadingTimer.value);
-        console.log(state.percent);
         setTimeout(() => {
           state.hide = true;
         }, 3000);

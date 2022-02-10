@@ -89,7 +89,6 @@
 
       onBeforeMount(() => {
         updateMenu();
-        console.log(currentRoute.fullPath);
       });
 
       return {

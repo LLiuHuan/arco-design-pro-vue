@@ -6,7 +6,8 @@
 ### 1.1 项目介绍
 > 原本是打算实现 arco-design-pro 的vue版本，但是看官方说21年12月份就会推出vue版本的，所以这个项目就不会完全照搬 arco-design-pro 了
 
-~~在线预览~~：[https://lliuhuan.github.io/arco-design-pro-vue](https://lliuhuan.github.io/arco-design-pro-vue)
+~~在线预览~~：[https://lliuhuan.github.io/arco-design-pro-vue](https://lliuhuan.github.io/arco-design-pro-vue)  
+在线预览：[http://arco-vue.54cc.cc](http://arco-vue.54cc.cc)
 
 ## 2. 使用说明
 ### 2.1 开发

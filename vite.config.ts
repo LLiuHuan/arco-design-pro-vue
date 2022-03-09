@@ -6,12 +6,13 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
 import { wrapperEnv } from './build/utils';
 import { format } from 'date-fns';
-import styleImport from 'vite-plugin-style-import';
 import WindiCSS from 'vite-plugin-windicss';
 import { viteMockServe } from 'vite-plugin-mock';
 import alias from '@rollup/plugin-alias';
 import pkg from './package.json';
 import { OUTPUT_DIR } from './build/constant';
+// import Components from 'unplugin-vue-components/vite';
+// import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 
 const { dependencies, devDependencies, name, version } = pkg;
 
@@ -45,24 +46,9 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       vue(),
       vueJsx(),
       alias(),
-      // 没弄懂有没有用
-      styleImport({
-        libs: [
-          // Dynamic import @arco-design styles
-          {
-            libraryName: '@arco-design/web-vue',
-            esModule: true,
-            resolveStyle: (name) => `@arco-design/web-vue/es/${name}/style/index`,
-          },
-          // Dynamic import @arco-design icons
-          {
-            libraryName: '@arco-design/web-vue/icon',
-            libraryNameChangeCase: 'pascalCase',
-            resolveStyle: (name) => `@arco-design/web-vue/icon/react-icon/${name}`,
-            resolveComponent: (name) => `@arco-design/web-vue/icon/react-icon/${name}`,
-          },
-        ],
-      }),
+      // Components({
+      //   resolvers: [ArcoResolver()],
+      // }),
       WindiCSS(),
       viteMockServe({
         ignore: /^\_/, // 忽略指定格式的文件
@@ -119,7 +105,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       port: VITE_PORT,
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:8080',
+          target: 'http://127.0.0.1:8085',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

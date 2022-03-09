@@ -108,8 +108,6 @@ export function createRouterGuards(router: Router) {
     // 在这里设置需要缓存的组件名称
     const keepAliveComponents = asyncRouteStore.keepAliveComponents;
     const currentComName: any = to.matched.find((item) => item.name == to.name)?.name;
-    console.log(currentComName);
-    console.log(to.meta?.keepAlive);
     if (currentComName && !keepAliveComponents.includes(currentComName) && to.meta?.keepAlive) {
       // 需要缓存的组件
       keepAliveComponents.push(currentComName);

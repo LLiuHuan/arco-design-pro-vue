@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { setupArco } from './plugins/arco-design';
-// import '@arco-design/web-vue/dist/arco.css';
+import '@arco-design/web-vue/dist/arco.css';
 import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
 import { setupMarkDown } from '@/plugins/v-md-editor';

@@ -130,7 +130,7 @@
         loading.value = true;
         try {
           const res = await initDB(form);
-          if (res.code === 0) {
+          if (res) {
             out.value = true;
             Message.success('初始化成功！');
             await router.push({ name: 'Login' });
@@ -167,7 +167,7 @@
   .init_page {
     margin: 0;
     padding: 0;
-    background-image: url('./src/assets/login_bg.jpg');
+    background-image: url('../../assets/login_bg.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;

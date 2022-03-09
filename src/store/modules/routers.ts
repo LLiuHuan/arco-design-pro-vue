@@ -80,7 +80,7 @@ export const useRouterStore = defineStore({
       const routeFilter = (route) => {
         const { meta } = route;
         const { permissions } = meta || {};
-        if (!permissions) return true;
+        if (!permissions || permissionsList.length != 0) return true;
         return permissionsList.some((item) => permissions.includes(item.value));
       };
       const { getPermissionMode } = useProjectSetting();
@@ -101,7 +101,6 @@ export const useRouterStore = defineStore({
         }
       }
       accessedRouters = accessedRouters.filter(routeFilter);
-
       this.setRouters(accessedRouters);
       this.setMenus(accessedRouters);
       return toRaw(accessedRouters);

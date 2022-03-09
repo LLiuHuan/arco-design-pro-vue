@@ -31,9 +31,7 @@
         text: ref(''),
         previewText: ref(''),
       });
-      const saveText = (text, html) => {
-        console.log(text);
-        console.log(html);
+      const saveText = (text, _) => {
         state.previewText = text;
       };
       return {

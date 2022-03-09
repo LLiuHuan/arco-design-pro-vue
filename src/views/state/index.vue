@@ -1,7 +1,7 @@
 <template>
   <div>
-    <a-row v-if="state" class="grid" :gutter="24">
-      <a-col class="col" :span="12">
+    <a-row v-if="state" class="grid-row" :gutter="24">
+      <a-col class="col-row" :span="12">
         <a-card v-if="state?.os" class="card_item" title="Runtime" hoverable>
           <a-space class="col-text" direction="vertical" :size="10" style="display: block">
             <a-row :gutter="10">
@@ -232,12 +232,12 @@
 </script>
 
 <style lang="less" scoped>
-  .grid {
+  .grid-row {
     padding: 20px 30px;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  .col {
+  .col-row {
     padding-bottom: 20px;
   }
   .col-text {

@@ -196,7 +196,7 @@
         const res = await checkDB();
         if (res?.needInit) {
           await userStore.NeedInit();
-          await router.push({ path: '/initdb' });
+          await router.push({ path: '/initdb', replace: true });
         } else {
           Message.info('已配置数据库信息，无法初始化');
         }
@@ -226,7 +226,7 @@
 <style lang="less" scoped>
   .body {
     align-items: center;
-    background: var(--color-bg-2) url('src/assets/login_bg.jpg') no-repeat fixed center;
+    background: var(--color-bg-2) url('../../assets/login_bg.jpg') no-repeat fixed center;
     background-size: cover;
     display: grid;
     height: 100vh;

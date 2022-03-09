@@ -5,7 +5,6 @@ import { UserInfoType } from '@/store/state-types';
 import { jsonInBlacklist, Login } from '@/api/base/login';
 import { getUserInfo, setUserInfo } from '@/api/system/user';
 import { Message } from '@arco-design/web-vue';
-import { useRouter } from 'vue-router';
 
 const Storage = createStorage({ storage: localStorage });
 
@@ -109,8 +108,6 @@ export const useUserStore = defineStore({
     async NeedInit() {
       this.setToken('');
       localStorage.clear();
-      const router = useRouter();
-      await router.push({ name: 'Init', replace: true });
     },
     // 获取用户信息
     GetInfo() {
@@ -123,6 +120,7 @@ export const useUserStore = defineStore({
               this.setPermissions(permissionsList);
               this.setUserInfo(result);
             } else {
+              this.setPermissions([]);
               reject(new Error('getInfo: permissionsList must be a non-null array !'));
             }
             this.setAvatar(result.avatar);

@@ -11,8 +11,8 @@ import { viteMockServe } from 'vite-plugin-mock';
 import alias from '@rollup/plugin-alias';
 import pkg from './package.json';
 import { OUTPUT_DIR } from './build/constant';
-// import Components from 'unplugin-vue-components/vite';
-// import { ArcoResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 
 const { dependencies, devDependencies, name, version } = pkg;
 
@@ -46,9 +46,9 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       vue(),
       vueJsx(),
       alias(),
-      // Components({
-      //   resolvers: [ArcoResolver()],
-      // }),
+      Components({
+        resolvers: [ArcoResolver()],
+      }),
       WindiCSS(),
       viteMockServe({
         ignore: /^\_/, // 忽略指定格式的文件

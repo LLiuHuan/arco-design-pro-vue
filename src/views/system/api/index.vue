@@ -73,8 +73,8 @@
           placeholder="请选择api请求"
         >
           <a-option
-            v-for="item in methodOptions"
-            :key="item.value"
+            v-for="(item, index) in methodOptions"
+            :key="index"
             :label="`${item.label}`"
             :value="item.value"
           />
@@ -175,7 +175,7 @@
         {
           field: 'path',
           labelMessage: '这是一个提示',
-          component: 'AInput',
+          component: 'Input',
           label: '路径',
           componentProps: {
             placeholder: '请输入路径',
@@ -184,7 +184,7 @@
         },
         {
           field: 'description',
-          component: 'AInput',
+          component: 'Input',
           label: '描述',
           componentProps: {
             placeholder: '请输入描述',
@@ -193,7 +193,7 @@
         },
         {
           field: 'apiGroup',
-          component: 'AInput',
+          component: 'Input',
           label: 'API组',
           componentProps: {
             placeholder: '请输入API组',
@@ -202,7 +202,7 @@
         },
         {
           field: 'method',
-          component: 'ASelect',
+          component: 'Select',
           label: '请求',
           componentProps: {
             placeholder: '请选择请求',

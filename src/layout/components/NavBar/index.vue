@@ -17,11 +17,15 @@
       <li v-if="crumbsSetting.show">
         <!-- 面包屑 -->
         <a-breadcrumb>
-          <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
+          <template v-for="(routeItem, index) in breadcrumbList" :key="index">
             <a-breadcrumb-item>
               <a-dropdown v-if="routeItem.children.length" @select="dropdownSelect">
                 <template #content>
-                  <a-doption v-for="item in routeItem.children" :value="item" :key="item.path">
+                  <a-doption
+                    v-for="(item, itemIndex) in routeItem.children"
+                    :value="item"
+                    :key="itemIndex"
+                  >
                     {{
                       item.meta.title.indexOf('menu.') !== -1
                         ? $t(item.meta.title)
@@ -112,12 +116,12 @@
                 当前角色：{{ userInfo?.authority?.authorityName }}
               </span>
             </a-doption>
-            <template v-if="userInfo.authorities">
+            <template v-if="userInfo.authorities.length > 0">
               <a-doption
-                v-for="item in userInfo.authorities.filter(
+                v-for="(item, index) in userInfo.authorities.filter(
                   (i) => i.authorityId !== userInfo.authorityId
                 )"
-                :key="item.authorityId"
+                :key="index"
                 @click="changeUserAuth(item.authorityId)"
               >
                 <span> 切换为：{{ item.authorityName }} </span>
@@ -141,9 +145,10 @@
   import { useRoute, useRouter } from 'vue-router';
   import { IconGithub } from '@arco-design/web-vue/es/icon';
   import { useUserStore } from '@/store/modules/users';
-  import { UserInfoType } from '@/store/state-types';
+  // import { UserInfoType } from '@/store/state-types';
   import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
   import { setBaseColor } from '@/utils/color';
+  import { UserInfo } from '@/api/system/user-types';
 
   export default defineComponent({
     name: 'NavBar',
@@ -166,7 +171,7 @@
         theme: ref<string | undefined>(userStore.getModel), // light
         docs: 'https://github.com/LLiuHuan',
         fullscreen: false,
-        userInfo: {} as UserInfoType,
+        userInfo: {} as UserInfo,
         headerSetting: getHeaderSetting,
         crumbsSetting: getCrumbsSetting,
       });

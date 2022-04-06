@@ -35,12 +35,24 @@ export interface FormSchema {
   labelMessageStyle?: object | string; // label提示信息样式
   defaultValue?: any; // 默认值
   component?: ComponentType; // 动态生成的标签
-  componentProps?: object; // 标签的props
+  componentProps?: ComponentProps; // 标签的props
   slot?: string; // 插槽
   // colProps?: ColProps; // 栅格布局props
   gridItemProps?: Partial<GridItemProps>; //  栅格布局props
   isFull?: boolean; // 暂时无用
   suffix?: string; // 暂时无用
+}
+
+interface ComponentProps {
+  placeholder: string;
+  options?: MethodOptions[];
+}
+
+interface MethodOptions {
+  value: string;
+  label: string;
+  type: string;
+  disabled?: boolean;
 }
 
 // form所需参数

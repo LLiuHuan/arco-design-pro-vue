@@ -25,9 +25,9 @@
               <li
                 :class="{ 'border border-blue-700': inputValue === arcoIcon.name }"
                 class="p-2 w-1/8 cursor-pointer mr-0.5 mt-0.5 flex justify-center items-center border border-solid hover:border-blue-700"
-                v-for="arcoIcon in ArcoVueIcon"
+                v-for="(arcoIcon, index) in ArcoVueIcon"
                 v-show="arcoIcon.name !== 'install'"
-                :key="arcoIcon.name"
+                :key="index"
                 @click="setValue(arcoIcon.name)"
               >
                 <span class="app-iconify anticon" style="font-size: 16px; display: inline-flex">

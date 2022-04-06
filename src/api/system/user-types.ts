@@ -13,7 +13,7 @@ export interface UserInfo {
   activeColor: string;
   language: string;
   authorityId: string;
-  authorityIds: Array<string>;
+  authorityIds: string[];
   authority: authorityInfo;
-  authorities: Array<authorityInfo>;
+  authorities: authorityInfo[];
 }

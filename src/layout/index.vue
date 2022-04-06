@@ -57,10 +57,10 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, unref, watch } from 'vue';
+  import { computed, defineComponent, ref, unref } from 'vue';
   import styles from './style/layout.module.less';
   import projectSetting from '@/settings/projectSetting';
-  import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
+  // import { useRoute } from 'vue-router';
   import { NavBar } from '@/layout/components/NavBar';
   import { MenuBox } from '@/layout/components/MenuBox';
   import { FooterBar } from '@/layout/components/FooterBar';
@@ -83,7 +83,7 @@
     setup: function () {
       const { headerSetting } = projectSetting;
       const { getMultiTabsSetting } = useProjectSetting();
-      const route = useRoute();
+      // const route = useRoute();
 
       const settingStore = useSettingStore();
 

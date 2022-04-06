@@ -48,9 +48,9 @@
             </div>
           </template>
         </a-table-column>
-        <a-table-column title="请求IP" data-index="ip" width="120" />
-        <a-table-column title="请求方法" data-index="method" width="120" />
-        <a-table-column title="请求路径" data-index="path" width="240" />
+        <a-table-column title="请求IP" data-index="ip" :width="120" />
+        <a-table-column title="请求方法" data-index="method" :width="120" />
+        <a-table-column title="请求路径" data-index="path" :width="240" />
         <a-table-column title="请求" data-index="body">
           <template #cell="{ record }">
             <div>
@@ -158,7 +158,7 @@
       const schemas: FormSchema[] = [
         {
           field: 'method',
-          component: 'AInput',
+          component: 'Input',
           label: '请求方法',
           componentProps: {
             placeholder: '请输入请求方法',
@@ -167,7 +167,7 @@
         },
         {
           field: 'path',
-          component: 'AInput',
+          component: 'Input',
           label: '请求路径',
           componentProps: {
             placeholder: '请输入请求路径',
@@ -176,7 +176,7 @@
         },
         {
           field: 'status',
-          component: 'AInput',
+          component: 'Input',
           label: '结果状态码',
           componentProps: {
             placeholder: '请输入结果状态码',

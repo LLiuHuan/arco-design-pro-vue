@@ -1,6 +1,6 @@
 <template>
   <a-menu @menu-item-click="openKey" v-model:selected-keys="defaultSelectedKeys" auto-open-selected>
-    <MenuItem v-for="menu in menus" :key="menu.name" :item="menu" />
+    <MenuItem v-for="(menu, index) in menus" :key="index" :item="menu" />
     <!--   不分组   -->
   </a-menu>
 </template>

@@ -26,7 +26,7 @@
         @page-size-change="setPageSize"
       >
         <template #columns>
-          <a-table-column ellipsis title="头像" data-index="headerImg" width="100">
+          <a-table-column ellipsis title="头像" data-index="headerImg" :width="100">
             <template #cell="{ record }">
               <custom-pic style="margin-top: 8px" :pic-src="record.headerImg" />
             </template>
@@ -34,7 +34,7 @@
           <a-table-column title="UUID" data-index="uuid" />
           <a-table-column title="用户名" data-index="userName" />
           <a-table-column title="昵称" data-index="nickName" />
-          <a-table-column title="用户角色" data-index="nickName" width="250">
+          <a-table-column title="用户角色" data-index="nickName" :width="250">
             <template #cell="{ record }">
               <a-cascader
                 v-model:model-value="record.authorityIds"

@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { setupArco } from './plugins/arco-design';
+// import { setupArco } from './plugins/arco-design';
 import '@arco-design/web-vue/dist/arco.css';
 import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
@@ -9,11 +9,13 @@ import { setupPermission } from '@/plugins/permission';
 import 'virtual:windi.css';
 import { setupTheme } from '@/plugins/theme';
 import { setupI18n } from '@/plugins/i18n';
+import { setupArcoIcon } from '@/plugins/arco-design-icon';
 
 const app = createApp(App);
 
 // 初始化arco
-setupArco(app);
+// setupArco(app);
+setupArcoIcon(app);
 setupStore(app);
 setupMarkDown(app);
 setupPermission(app);

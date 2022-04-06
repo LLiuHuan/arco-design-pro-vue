@@ -1,8 +1,8 @@
 <template>
   <a-list v-if="list" :bordered="false">
     <a-list-item
-      v-for="item in list"
-      :key="item.id"
+      v-for="(item, index) in list"
+      :key="index"
       action-layout="vertical"
       :style="{ opacity: item.status ? 0.5 : 1 }"
       style="border-bottom: 1px solid var(--color-fill-3)"

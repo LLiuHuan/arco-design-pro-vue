@@ -49,14 +49,14 @@
             @select="getEditMenu"
           >
             <template #title="nodeData">
-              <template v-if="((index = getMatchIndex(nodeData?.title)), index < 0)">{{
-                nodeData?.title
-              }}</template>
+              <template v-if="getMatchIndex(nodeData?.title) < 0">{{ nodeData?.title }}</template>
               <span v-else>
-                {{ nodeData?.title?.substr(0, index) }}
+                {{ nodeData?.title?.substr(0, getMatchIndex(nodeData?.title)) }}
                 <span style="color: var(--color-primary-light-4)">
-                  {{ nodeData?.title?.substr(index, searchKey.length) }} </span
-                >{{ nodeData?.title?.substr(index + searchKey.length) }}
+                  {{
+                    nodeData?.title?.substr(getMatchIndex(nodeData?.title), searchKey.length)
+                  }} </span
+                >{{ nodeData?.title?.substr(getMatchIndex(nodeData?.title) + searchKey.length) }}
               </span>
             </template>
           </a-tree>

@@ -31,7 +31,7 @@
           <a-trigger class="demo-basic" trigger="click">
             <a-space>
               <a-card
-                v-for="theme in themes"
+                v-for="(theme, index) in themes"
                 class="card-theme"
                 hoverable
                 :style="{
@@ -40,7 +40,7 @@
                   textAlign: 'center',
                   borderColor: theme.value === baseTheme ? pureColor : '',
                 }"
-                :key="theme.value"
+                :key="index"
               >
                 <div class="cursor-pointer select-none" @click="setTheme(theme.value)">
                   {{ theme.title }}

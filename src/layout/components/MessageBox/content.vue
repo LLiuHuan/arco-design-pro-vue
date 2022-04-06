@@ -1,7 +1,7 @@
 <template>
   <a-spin :loading="messageLoading" style="width: 100%">
     <a-tabs type="rounded" default-active-key="message" destroyOnHide>
-      <a-tab-pane v-for="tab in tabList" :key="tab.key">
+      <a-tab-pane v-for="(tab, index) in tabList" :key="index">
         <template #title>
           <component :is="tab.titleIcon" />
           {{ tab.title }} {{ tabListCont(tab.key) ? '(' + tabListCont(tab.key) + ')' : `` }}

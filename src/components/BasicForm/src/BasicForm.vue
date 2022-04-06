@@ -1,8 +1,8 @@
 <template>
   <a-form v-bind="getBindValue" :model="formModel" ref="formElRef">
     <a-grid v-bind="getGrid">
-      <a-grid-item v-bind="schema.gridItemProps" v-for="schema in getSchema" :key="schema.field">
-        <a-form-item :label="schema.label" :field="schema.field" v-bind="schema">
+      <a-grid-item v-bind="schema.gridItemProps" v-for="(schema, index) in getSchema" :key="index">
+        <a-form-item v-bind="schema">
           <!--标签名右侧温馨提示-->
           <template #label v-if="schema.labelMessage">
             {{ schema.label }}
@@ -31,8 +31,8 @@
             <a-checkbox-group v-model:value="formModel[schema.field]">
               <a-space>
                 <a-checkbox
-                  v-for="item in schema.componentProps.options"
-                  :key="item.value"
+                  v-for="(item, index) in schema.componentProps?.options"
+                  :key="index"
                   :value="item.value"
                   :label="item.label"
                 />
@@ -45,8 +45,8 @@
             <a-radio-group v-model:value="formModel[schema.field]">
               <a-space>
                 <a-radio
-                  v-for="item in schema.componentProps.options"
-                  :key="item.value"
+                  v-for="(item, index) in schema.componentProps?.options"
+                  :key="index"
                   :value="item.value"
                 >
                   {{ item.label }}
@@ -77,7 +77,7 @@
       </a-grid-item>
       <!--提交 重置 展开 收起 按钮-->
       <a-grid-item
-        :span="isInline ? getSchema[0].gridItemProps.span : 24"
+        :span="isInline ? getSchema[0].gridItemProps?.span : 24"
         #="{ overflow }"
         :suffix="!!isInline"
         v-if="showActionButtonGroup"
@@ -125,13 +125,62 @@
   import { useFormEvents } from '@/components/BasicForm/src/hooks/useFormEvents';
   import { deepMerge } from '@/utils';
   import { createPlaceholderMessage } from '@/components/BasicForm/src/helper';
-  import { GridProps } from '@arco-design/web-vue/es/grid/interface';
+  import { GridProps } from './types/grid';
+  import {
+    Input,
+    InputGroup,
+    InputPassword,
+    InputSearch,
+    InputNumber,
+    InputTag,
+    Select,
+    TreeSelect,
+    Radio,
+    RadioGroup,
+    Checkbox,
+    CheckboxGroup,
+    AutoComplete,
+    Cascader,
+    DatePicker,
+    MonthPicker,
+    RangePicker,
+    WeekPicker,
+    TimePicker,
+    Switch,
+    Upload,
+    Slider,
+    Rate,
+  } from '@arco-design/web-vue';
+
   export default defineComponent({
     name: 'BasicForm',
     components: {
       IconQuestionCircle,
       IconDown,
       IconUp,
+      Input,
+      InputGroup,
+      InputPassword,
+      InputSearch,
+      InputNumber,
+      InputTag,
+      Select,
+      TreeSelect,
+      Radio,
+      RadioGroup,
+      Checkbox,
+      CheckboxGroup,
+      AutoComplete,
+      Cascader,
+      DatePicker,
+      MonthPicker,
+      RangePicker,
+      WeekPicker,
+      TimePicker,
+      Switch,
+      Upload,
+      Slider,
+      Rate,
     },
     props: {
       ...basicProps,

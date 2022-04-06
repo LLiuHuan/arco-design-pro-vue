@@ -123,7 +123,7 @@
                   animation
                   :show-text="false"
                   type="line"
-                  :percent="item.toFixed(0) / 100"
+                  :percent="(item / 100).toFixed(0)"
                   :color="color(item)"
               /></a-col>
             </a-row>

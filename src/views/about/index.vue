@@ -11,9 +11,9 @@
             mode="alternate"
           >
             <a-timeline-item
-              v-for="dateTime in dataTimeline"
+              v-for="(dateTime, index) in dataTimeline"
               :label="dateTime.date"
-              :key="dateTime"
+              :key="index"
               >{{ dateTime.message }}</a-timeline-item
             >
             <a-button type="text" @click="getGithubCommit">Load more</a-button>

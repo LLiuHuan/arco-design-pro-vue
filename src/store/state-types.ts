@@ -10,4 +10,5 @@ export interface UserInfoType {
   activeColor?: string;
   baseColor?: string;
   language?: string;
+  authorityId?: string;
 }

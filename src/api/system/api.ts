@@ -1,4 +1,5 @@
 import http from '@/utils/http/axios';
+import { RequestEnum } from '@/enums/httpEnum';
 
 // GetAllApis 获取所有的Api 不分页
 // @Tags SysApi
@@ -30,7 +31,7 @@ export const getApiAllList = () => {
 export const getApiList = (data) => {
   return http.request({
     url: '/v1/api/page',
-    method: 'post',
+    method: RequestEnum.GET,
     data,
   });
 };

@@ -22,11 +22,11 @@
         {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
       </template>
       <menu-item
-        v-for="child in item.children"
+        v-for="(child, index) in item.children"
         :item="child"
         :base-path="item.path"
         :parent="item.name"
-        :key="child"
+        :key="index"
       />
     </a-sub-menu>
   </div>

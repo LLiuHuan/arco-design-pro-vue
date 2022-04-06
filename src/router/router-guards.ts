@@ -96,11 +96,16 @@ export function createRouterGuards(router: Router) {
   router.afterEach((to, _, failure) => {
     // TODO: 有些大问题，暂时先这样吧
     const { t } = useI18n('');
-    if ((to.meta?.title as string).indexOf('menu.') !== -1) {
-      document.title = t(to?.meta?.title as string) || document.title;
+    if (to.meta?.title) {
+      if ((to.meta?.title as string).indexOf('menu.') !== -1) {
+        document.title = t(to?.meta?.title as string) || document.title;
+      } else {
+        document.title = to.meta?.title as string;
+      }
     } else {
-      document.title = to.meta?.title as string;
+      document.title = 'ArcoD';
     }
+
     if (isNavigationFailure(failure)) {
       //console.log('failed navigation', failure)
     }

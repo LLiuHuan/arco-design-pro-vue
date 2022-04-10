@@ -90,6 +90,13 @@
         </div>
       </div>
 
+      <div class="drawer-setting-item">
+        <div class="drawer-setting-item-title"> 显示水印 </div>
+        <div class="drawer-setting-item-action">
+          <a-switch v-model:model-value="settingStore.watermark" />
+        </div>
+      </div>
+
       <a-divider orientation="center">动画</a-divider>
 
       <div class="drawer-setting-item">

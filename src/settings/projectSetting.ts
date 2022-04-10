@@ -45,6 +45,8 @@ const setting = {
     //显示图标
     showIcon: false,
   },
+  // 关闭水印
+  watermark: false,
 };
 
 export default setting;

@@ -26,6 +26,7 @@
           paddingLeft: collapsed ? minMenuWidth + 'px' : menuWidth + 'px',
           height: '100vh',
         }"
+        style="transition: padding-left 0.2s ease 0s"
       >
         <a-layout-content id="layout-content" class="layout-content" style="overflow-y: auto">
           <div
@@ -56,11 +57,9 @@
   <Settings />
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, ref, unref } from 'vue';
-  import styles from './style/layout.module.less';
+<script lang="ts" setup>
+  import { computed, ref, unref, watch } from 'vue';
   import projectSetting from '@/settings/projectSetting';
-  // import { useRoute } from 'vue-router';
   import { NavBar } from '@/layout/components/NavBar';
   import { MenuBox } from '@/layout/components/MenuBox';
   import { FooterBar } from '@/layout/components/FooterBar';
@@ -69,58 +68,50 @@
   import { MainView } from '@/layout/components/MainView';
   import { useSettingStore } from '@/store/modules/settings';
   import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
+  import watermark from '@/utils/watermark';
 
-  export default defineComponent({
-    name: 'Layout',
-    components: {
-      NavBar,
-      MenuBox,
-      FooterBar,
-      TagsView,
-      Settings,
-      MainView,
-    },
-    setup: function () {
-      const { headerSetting } = projectSetting;
-      const { getMultiTabsSetting } = useProjectSetting();
-      // const route = useRoute();
+  const { headerSetting } = projectSetting;
+  const { getMultiTabsSetting } = useProjectSetting();
 
-      const settingStore = useSettingStore();
+  const settingStore = useSettingStore();
 
-      const { collapsed: menuCollapsed, menuWidth, minMenuWidth } = settingStore.menuSetting;
+  const { collapsed: menuCollapsed, menuWidth, minMenuWidth } = settingStore.menuSetting;
 
-      // 折叠菜单
-      const collapsed = ref<boolean>(menuCollapsed);
+  if (settingStore.getWatermark) {
+    //添加水印
+    watermark.set('水印', {});
+  }
 
-      // 是否显示tabs
-      const isMultiTabs = computed(() => {
-        return unref(getMultiTabsSetting).show;
-      });
+  watch(
+    () => settingStore.getWatermark,
+    () => {
+      if (settingStore.getWatermark) {
+        //添加水印
+        watermark.set('水印', {});
+      } else {
+        //移除水印
+        watermark.close();
+      }
+    }
+  );
 
-      // 是否固定tabs
-      const fixedMulti = computed(() => {
-        return unref(getMultiTabsSetting).fixed;
-      });
+  // 折叠菜单
+  const collapsed = ref<boolean>(menuCollapsed);
 
-      // 折叠菜单
-      const fold = () => {
-        collapsed.value = !collapsed.value;
-      };
-
-      return {
-        styles,
-        headerSetting,
-        collapsed,
-        fold,
-
-        menuWidth,
-        minMenuWidth,
-
-        isMultiTabs,
-        fixedMulti,
-      };
-    },
+  // 是否显示tabs
+  const isMultiTabs = computed(() => {
+    return unref(getMultiTabsSetting).show;
   });
+
+  // 是否固定tabs
+  const fixedMulti = computed(() => {
+    return unref(getMultiTabsSetting).fixed;
+  });
+
+  // 折叠菜单
+  const fold = () => {
+    collapsed.value = !collapsed.value;
+  };
 </script>
 
 <style lang="less" scoped>

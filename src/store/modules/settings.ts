@@ -14,6 +14,7 @@ const {
   multiTabsSetting,
   headerSetting,
   crumbsSetting,
+  watermark,
 } = projectSetting;
 
 export interface ISettingsState {
@@ -28,6 +29,7 @@ export interface ISettingsState {
   isPageAnimate: boolean; //是否开启路由动画
   pageAnimateType: string; //路由动画类型
   crumbsSetting: IcrumbsSetting; //面包屑
+  watermark: boolean; //是否开启水印
 }
 
 export const useSettingStore = defineStore({
@@ -44,6 +46,7 @@ export const useSettingStore = defineStore({
     pageAnimateType: pageAnimateType,
     multiTabsSetting: multiTabsSetting,
     crumbsSetting: crumbsSetting,
+    watermark: watermark,
   }),
   getters: {
     // 获取导航模式
@@ -70,6 +73,10 @@ export const useSettingStore = defineStore({
     getPageAnimateType(): string {
       return this.pageAnimateType;
     },
+    // 是否开启水印
+    getWatermark(): boolean {
+      return this.watermark;
+    },
   },
   actions: {
     setTheme(theme: string) {
@@ -77,6 +84,10 @@ export const useSettingStore = defineStore({
     },
     setLoading(loading: boolean) {
       this.loading = loading;
+    },
+    // 开启水印
+    setWatermark(watermark: boolean) {
+      this.watermark = watermark;
     },
   },
   // 开启数据缓存

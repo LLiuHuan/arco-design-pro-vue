@@ -10,6 +10,7 @@ import 'virtual:windi.css';
 import { setupTheme } from '@/plugins/theme';
 import { setupI18n } from '@/plugins/i18n';
 import { setupArcoIcon } from '@/plugins/arco-design-icon';
+import globalComponents from '@/components';
 
 const app = createApp(App);
 
@@ -22,5 +23,7 @@ setupPermission(app);
 setupRouter(app);
 setupTheme();
 setupI18n(app);
+
+app.use(globalComponents);
 
 app.mount('#app');

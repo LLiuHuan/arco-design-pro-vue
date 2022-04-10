@@ -55,6 +55,7 @@ export const asyncRoutes = [...routeModuleList];
 
 // 普通路由 无需权限验证
 export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute, InitDBRoute];
+console.log(constantRouter);
 const router = createRouter({
   history: createWebHashHistory(''),
   routes: constantRouter,

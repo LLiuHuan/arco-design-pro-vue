@@ -1,4 +1,12 @@
 # arco-design-pro-vue
+<p align="center">
+  <img width="55" src="http://qiniu.54cc.cc/uPic/Arco Logo.png">
+</p>
+
+<p align="center">
+  <a href="https://github.com/LLiuHuan/arco-design-pro-vue"><img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg?sanitize=true" alt="Build Status"></a>
+  <a href="https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"></a>
+</p>
 
 > 技术不好，也没啥时间，随便写写，对付看吧，喜欢的话可以点个 Start
 
@@ -51,14 +59,14 @@ yarn dev:mock
 - [ ] Clipboard
 - [ ] 小组件
 - [ ] 引导页
-- [ ] 权限控制（目前想做到按钮级权限控制，这个就看到时候用go写后端的时候好不好设计吧，如果不好弄可能只会做到角色级别）
+- [x] 权限控制（目前想做到按钮级权限控制，这个就看到时候用go写后端的时候好不好设计吧，如果不好弄可能只会做到角色级别）
 - [ ] 断点续传（这个看后端）
-- [ ] 操作历史
+- [x] 操作历史
 - [x] api管理（主要是为了配合go后端）
 - [ ] websocket
 - [ ] 打印
 - [ ] 文件下载
-- [ ] 水印（看情况吧）
+- [x] 水印（看情况吧）
 - [ ] 图片裁剪
 - [ ] 二维码
 - [ ] 密码强度

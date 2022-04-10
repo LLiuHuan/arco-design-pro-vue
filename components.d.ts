@@ -72,6 +72,7 @@ declare module 'vue' {
     BasicForm: typeof import('./src/components/BasicForm/src/BasicForm.vue')['default']
     ChooseImg: typeof import('./src/components/ChooseImg/index.vue')['default']
     CustomPic: typeof import('./src/components/CustomPic/index.vue')['default']
+    Echarts: typeof import('./src/components/Echarts/index.vue')['default']
   }
 }
 

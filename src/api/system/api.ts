@@ -28,11 +28,11 @@ export const getApiAllList = () => {
 //  page     int
 //	pageSize int
 // }
-export const getApiList = (data) => {
+export const getApiList = (params) => {
   return http.request({
     url: '/v1/api/page',
-    method: RequestEnum.GET,
-    data,
+    method: RequestEnum.POST,
+    params,
   });
 };
 
@@ -59,11 +59,11 @@ export const getApiById = (id) => {
 // @Param data body api.CreateApiParams true "更新api"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"更新成功"}"
 // @Router /api/updateApi [post]
-export const updateApi = (data) => {
+export const updateApi = (params) => {
   return http.request({
     url: '/v1/api',
     method: 'put',
-    data,
+    params,
   });
 };
 
@@ -75,11 +75,11 @@ export const updateApi = (data) => {
 // @Param data body api.CreateApiParams true "创建api"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /api/createApi [post]
-export const createApi = (data) => {
+export const createApi = (params) => {
   return http.request({
     url: '/v1/api',
     method: 'post',
-    data,
+    params,
   });
 };
 
@@ -91,11 +91,11 @@ export const createApi = (data) => {
 // @Param data body dbModel.Api true "删除api"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /api/deleteApi [post]
-export const deleteApi = (data) => {
+export const deleteApi = (params) => {
   return http.request({
     url: '/v1/api',
     method: 'delete',
-    data,
+    params,
   });
 };
 
@@ -107,10 +107,10 @@ export const deleteApi = (data) => {
 // @Param data body request.IdsReq true "ID"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
 // @Router /api/deleteApisByIds [delete]
-export const deleteApisByIds = (data) => {
+export const deleteApisByIds = (params) => {
   return http.request({
     url: '/v1/api/byIds',
     method: 'delete',
-    data,
+    params,
   });
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <banner />
-
+    <Chart v-if="!loading" :options="chartOption" :width="'400px'" :height="'400px'" />
     <h1>1234</h1>
     <div class="dark">
       <span class="cursor-pointer p-1 text-white dark:text-white container1">2345</span>
@@ -125,33 +125,44 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
   import { Notification } from '@arco-design/web-vue';
   import Banner from '@/views/dashboard/workplace/banner.vue';
   import { useSettingStore } from '@/store/modules/settings';
-  export default defineComponent({
-    name: 'WorkPlace',
-    components: {
-      Banner,
-    },
-    setup() {
-      const settingsStore = useSettingStore();
-      const state = reactive({
-        theme: ref(settingsStore.getTheme),
-      });
-      const openNotification = () => {
-        Notification.info({ content: 'This is an info message!' });
-      };
+  import useChartOption from '@/hooks/echart-option';
 
-      onBeforeMount(() => {});
-
-      return {
-        openNotification,
-        ...toRefs(state),
-      };
-    },
+  const settingsStore = useSettingStore();
+  const state = reactive({
+    theme: ref(settingsStore.getTheme),
   });
+  const openNotification = () => {
+    Notification.info({ content: 'This is an info message!' });
+  };
+  const loading = ref(true);
+
+  const { chartOption } = useChartOption(() => {
+    const data = ref<number[][]>([[], []]);
+    return {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line',
+        },
+      ],
+    };
+  });
+
+  loading.value = false;
+
+  onBeforeMount(() => {});
 </script>
 
 <!--<style>-->

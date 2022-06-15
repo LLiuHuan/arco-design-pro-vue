@@ -1,4 +1,4 @@
-import { isObject, isString } from '@/utils/is';
+import { isObject, isString } from '@/utils';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
 
@@ -26,22 +26,24 @@ export function formatRequestDate(params: Recordable) {
     return;
   }
 
-  for (const key in params) {
+  Object.keys(params).forEach((key) => {
+    // eslint-disable-next-line no-underscore-dangle
     if (params[key] && params[key]._isAMomentObject) {
       params[key] = params[key].format(DATE_TIME_FORMAT);
     }
+
     if (isString(key)) {
       const value = params[key];
       if (value) {
         try {
           params[key] = isString(value) ? value.trim() : value;
         } catch (error) {
-          throw new Error(error as string);
+          throw new Error(error as any);
         }
       }
     }
     if (isObject(params[key])) {
       formatRequestDate(params[key]);
     }
-  }
+  });
 }

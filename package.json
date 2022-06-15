@@ -1,6 +1,6 @@
 {
   "name": "arco-design-pro-vue",
-  "version": "0.0.3-beta",
+  "version": "0.0.4",
   "author": {
     "name": "LLiuHuan",
     "email": "184555556@qq.com",
@@ -11,7 +11,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "build:esno": "vite build && esno ./build/script/postBuild.ts",
     "serve": "vite preview",
-    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0 -n ./changelog-option.js",
+    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
     "deploy": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build && gh-pages -d dist"
   },
   "private": true,

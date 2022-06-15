@@ -22,23 +22,23 @@
   // echarts
   import * as echarts from 'echarts/core';
   import {
+    GridComponent,
+    GridComponentOption,
+    LegendComponent,
+    LegendComponentOption,
     TitleComponent,
     TitleComponentOption,
     ToolboxComponent,
     ToolboxComponentOption,
     TooltipComponent,
     TooltipComponentOption,
-    GridComponent,
-    GridComponentOption,
-    LegendComponent,
-    LegendComponentOption,
   } from 'echarts/components';
   import { LineChart, LineSeriesOption } from 'echarts/charts';
   import { UniversalTransition } from 'echarts/features';
   import { CanvasRenderer } from 'echarts/renderers';
   // import light from '@/styles/echarts/light';
   import dark from '@/styles/echarts/dark.json';
-  import { storage } from '@/utils/storage';
+  import { storage } from '@/utils/storage/storage';
 
   export default defineComponent({
     name: 'Monitor',

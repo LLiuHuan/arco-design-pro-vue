@@ -19,11 +19,11 @@
             <a-button
               type="text"
               size="mini"
-              :style="{ color: row.defaultRouter === nodeData.path ? '#E6A23C' : '#85ce61' }"
-              :disabled="row.defaultRouter === nodeData.path"
+              :style="{ color: defaultRouter === nodeData.path ? '#E6A23C' : '#85ce61' }"
+              :disabled="defaultRouter === nodeData.path"
               @click="() => setDefault(nodeData)"
             >
-              {{ row.defaultRouter === nodeData.path ? '首页' : '设为首页' }}
+              {{ defaultRouter === nodeData.path ? '首页' : '设为首页' }}
             </a-button>
           </span>
         </template>
@@ -34,11 +34,11 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
+  import { useI18n } from 'vue-i18n';
   import { addMenuAuthority, getBaseMenuTree, getMenuAuth } from '@/api/system/menu';
   import { MenuTypes } from '@/api/system/menu-types';
-  import { Message } from '@arco-design/web-vue';
   import { updateAuthority } from '@/api/system/auth';
-  import { useI18n } from 'vue-i18n';
 
   export default defineComponent({
     name: 'AuthMenus',
@@ -54,6 +54,7 @@
       const state = reactive({
         menuTreeData: ref<Array<MenuTypes>>([]),
         menuTreeIds: ref<Array<Number>>([]),
+        defaultRouter: ref<string>(props.row.defaultRouter),
       });
 
       // region 处理菜单树
@@ -66,13 +67,16 @@
         return path.indexOf('http://') != -1 || path.indexOf('https://') != -1;
       };
 
-      const nameToTitle = (data: Array<any>) => {
+      const nameToTitle = (data: Array<any>, path = '') => {
         return data.map((item) => {
           item.title = isHttp(item.path) ? item.meta.title : treeTitle(item.meta.title);
-
+          item.path = `/${item.path}`;
+          if (path != '') {
+            item.path = path + item.path;
+          }
           if (item.children) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            item.children = nameToTitle(item.children);
+            item.children = nameToTitle(item.children, item.path);
           }
           return item;
         });
@@ -84,7 +88,7 @@
         state.menuTreeData = nameToTitle(res.menus);
 
         const res1 = await getMenuAuth({ authorityId: props.row.authorityId });
-        const menus = res1.menus;
+        const { menus } = res1;
 
         menus.forEach((item: MenuTypes) => {
           // 防止直接选中父级造成全选
@@ -95,7 +99,7 @@
       };
 
       function tableToTree(table: any) {
-        let result: Array<any> = [];
+        const result: Array<any> = [];
 
         table &&
           table.forEach((item: any) => {
@@ -129,7 +133,9 @@
         }).then(() => {
           Message.success('设置成功');
           initialize();
-          // this.$emit('changeRow', 'defaultRouter', res.data.authority.defaultRouter)
+
+          state.defaultRouter = data.path;
+          // emit('changeRow', 'defaultRouter', res.data.authority.defaultRouter);
         });
       };
 

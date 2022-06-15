@@ -1,5 +1,5 @@
-import { useSettingStore } from '@/store/modules/settings';
 import { computed } from 'vue';
+import { useSettingStore } from '@/store/modules/settings';
 
 export function useProjectSetting() {
   const projectStore = useSettingStore();

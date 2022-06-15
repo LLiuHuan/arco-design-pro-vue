@@ -1,9 +1,9 @@
-import { ComponentType } from '@/components/BasicForm';
-import { ColProps } from '@/components/BasicForm/src/types/gridProps';
+import { CSSProperties } from 'vue';
 import { FieldRule } from '@arco-design/web-vue/es/form/interface';
 import { ButtonProps } from '@arco-design/web-vue/es/button';
-import { CSSProperties } from 'vue';
 import { GridItemProps, GridProps } from '@arco-design/web-vue/es/grid/interface';
+import { ComponentType } from '@/components/BasicForm';
+import { ColProps } from '@/components/BasicForm/src/types/gridProps';
 
 // schema 所需参数
 export interface FormSchema {

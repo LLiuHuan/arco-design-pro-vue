@@ -53,7 +53,9 @@
       unmountOnClose
     >
       <a-tabs type="text" lazy-load>
-        <a-tab-pane key="menus" title="角色菜单"> <menus :row="activeRow" /> </a-tab-pane>
+        <a-tab-pane key="menus" title="角色菜单">
+          <menus :row="activeRow" />
+        </a-tab-pane>
         <a-tab-pane key="api" title="角色Api">
           <Apis :row="activeRow" />
         </a-tab-pane>
@@ -73,12 +75,13 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { deleteAuthority, getAuthorityList } from '@/api/system/auth';
   import { authorityInfo } from '@/api/system/auth-types';
   import Menus from './components/menus.vue';
   import Apis from './components/apis.vue';
   import OperationModel from './components/operationModel.vue';
-  import { Message } from '@arco-design/web-vue';
+
   export default defineComponent({
     name: 'SystemAuth',
     components: {
@@ -228,6 +231,7 @@
     padding: 20px;
     background-color: var(--color-bg-2);
   }
+
   .toolbar {
     display: flex;
     justify-content: space-between;

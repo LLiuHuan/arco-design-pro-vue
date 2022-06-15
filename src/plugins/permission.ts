@@ -17,8 +17,8 @@
  unbind -> unmounted
 
  */
-import { usePermission } from '@/hooks/web/usePermission';
 import type { App, ObjectDirective } from 'vue';
+import { usePermission } from '@/hooks/web/usePermission';
 
 export const permission: ObjectDirective = {
   mounted(el: any, binding: any) {
@@ -32,9 +32,11 @@ export const permission: ObjectDirective = {
     } else if (value && value instanceof Object) {
       const { action, effect } = value;
       if (!hasPermission(action)) {
-        if (effect == 'disabled') {
+        if (effect === 'disabled') {
+          // eslint-disable-next-line no-param-reassign
           el.disabled = true;
-          el.style['disabled'] = 'disabled';
+          // eslint-disable-next-line no-param-reassign
+          el.style.disabled = 'disabled';
           el.classList.add('arco-btn-disabled');
         } else {
           // el.remove();

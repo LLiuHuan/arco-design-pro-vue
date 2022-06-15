@@ -38,7 +38,7 @@
           </template>
         </a-table-column>
         <a-table-column title="日期" data-index="CreatedAt">
-          <template #cell="{ record }"> {{ formatDateStr(record.CreatedAt) }} </template>
+          <template #cell="{ record }"> {{ formatDateStr(record.CreatedAt) }}</template>
         </a-table-column>
         <a-table-column title="状态码" data-index="status">
           <template #cell="{ record }">
@@ -88,13 +88,13 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
+  import { IconExclamationCircle } from '@arco-design/web-vue/es/icon';
   import {
     deleteSysOperationRecordByIds,
     getSysOperationRecordList,
   } from '@/api/system/operation-record';
-  import { IconExclamationCircle } from '@arco-design/web-vue/es/icon';
   import { BasicForm, FormSchema, useForm } from '@/components/BasicForm';
-  import { Message } from '@arco-design/web-vue';
   import { DateUtil } from '@/utils/date';
 
   export default defineComponent({
@@ -219,11 +219,10 @@
       const formatDateStr = (time) => {
         const d: DateUtil = new DateUtil();
         if (time !== null && time !== '') {
-          var date = new Date(time);
+          const date = new Date(time);
           return d.formatDate(date, 'yyyy-MM-dd hh:mm:ss');
-        } else {
-          return '';
         }
+        return '';
       };
 
       onBeforeMount(() => {
@@ -256,6 +255,7 @@
     width: 420px;
     overflow: auto;
   }
+
   .popover-box::-webkit-scrollbar {
     display: none; /* Chrome Safari */
   }

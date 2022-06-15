@@ -1,5 +1,5 @@
 // import { getConfigFileName } from '../../build/getConfigFileName';
-import { GlobEnvConfig } from '@/../../types/config';
+import { GlobEnvConfig } from '@/typings/config';
 import { warn } from '@/utils/log';
 import pkg from '../../package.json';
 
@@ -31,7 +31,6 @@ export function getAppEnvConfig() {
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_API_URL_PREFIX,
     VITE_GLOB_UPLOAD_URL,
-    VITE_GLOB_PROD_MOCK,
     VITE_GLOB_IMG_URL,
   } = ENV;
 
@@ -47,7 +46,6 @@ export function getAppEnvConfig() {
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_API_URL_PREFIX,
     VITE_GLOB_UPLOAD_URL,
-    VITE_GLOB_PROD_MOCK,
     VITE_GLOB_IMG_URL,
   };
 }

@@ -17,7 +17,7 @@
             <!--            <p class="init_p">注：开发组不为文档中书写过的内容提供无偿服务</p>-->
             <p class="init_btn">
               <!--              <a-button type="primary" @click="goDoc"> 阅读文档 </a-button>-->
-              <a-button type="primary" @click="showNext"> 我已确认 </a-button>
+              <a-button type="primary" @click="showNext"> 我已确认</a-button>
             </p>
           </div>
         </div>
@@ -61,11 +61,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { initDB } from '@/api/initdb';
-  import { reactive, ref } from 'vue';
+  import { defineComponent, reactive, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { Message } from '@arco-design/web-vue';
+  import { initDB } from '@/api/initdb';
 
   export default defineComponent({
     name: 'InitDB',
@@ -76,7 +75,7 @@
       const loading = ref(false);
       const hello = ref(0);
       const showNext = () => {
-        hello.value = hello.value + 1;
+        hello.value += 1;
       };
 
       const goDoc = () => {
@@ -164,6 +163,7 @@
     height: 100%;
     display: block;
   }
+
   .init_page {
     margin: 0;
     padding: 0;
@@ -172,6 +172,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+
     .init_page_panle {
       position: absolute;
       top: 20vh;
@@ -184,6 +185,7 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
+
       .hello {
         position: absolute;
         z-index: 2;
@@ -194,21 +196,26 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+
         .hello_title {
           font-size: 32px;
           line-height: 98px;
         }
+
         .in-two {
           font-size: 22px;
         }
+
         .init_p {
           margin-top: 20px;
           color: #777777;
         }
+
         .init_btn {
           margin-top: 20px;
         }
       }
+
       .form {
         position: absolute;
         z-index: 3;
@@ -225,14 +232,17 @@
     -webkit-animation: slide-in-fwd-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: slide-in-fwd-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
+
   .slide-out-right {
     -webkit-animation: slide-out-right 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
     animation: slide-out-right 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
   }
+
   .slide-in-left {
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
+
   @-webkit-keyframes slide-in-fwd-top {
     0% {
       -webkit-transform: translateZ(-1400px) translateY(-800px);
@@ -245,6 +255,7 @@
       opacity: 1;
     }
   }
+
   @keyframes slide-in-fwd-top {
     0% {
       -webkit-transform: translateZ(-1400px) translateY(-800px);
@@ -257,6 +268,7 @@
       opacity: 1;
     }
   }
+
   @-webkit-keyframes slide-out-right {
     0% {
       -webkit-transform: translateX(0);
@@ -269,6 +281,7 @@
       opacity: 0;
     }
   }
+
   @keyframes slide-out-right {
     0% {
       -webkit-transform: translateX(0);
@@ -281,6 +294,7 @@
       opacity: 0;
     }
   }
+
   @-webkit-keyframes slide-in-left {
     0% {
       -webkit-transform: translateX(-2000px);
@@ -293,6 +307,7 @@
       opacity: 1;
     }
   }
+
   @keyframes slide-in-left {
     0% {
       -webkit-transform: translateX(-2000px);
@@ -305,6 +320,7 @@
       opacity: 1;
     }
   }
+
   @media (max-width: 750px) {
     .form {
       width: 94vw !important;

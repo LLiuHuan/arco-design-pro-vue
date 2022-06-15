@@ -125,7 +125,8 @@
                   type="line"
                   :percent="(item / 100).toFixed(0)"
                   :color="color(item)"
-              /></a-col>
+                />
+              </a-col>
             </a-row>
           </a-space>
         </a-card>
@@ -189,6 +190,7 @@
   import { defineComponent, onBeforeMount, onBeforeUnmount, reactive, ref, toRefs } from 'vue';
   import { getSystemState } from '@/api/system/system';
   import { IStateTypes } from '@/api/system/system-types';
+
   export default defineComponent({
     name: 'State',
     setup() {
@@ -204,11 +206,11 @@
       const color = (value: number) => {
         if (value < 40) {
           return '#5cb87a';
-        } else if (value > 40 && value < 80) {
-          return '#e6a23c';
-        } else {
-          return '#f56c6c';
         }
+        if (value > 40 && value < 80) {
+          return '#e6a23c';
+        }
+        return '#f56c6c';
       };
 
       onBeforeMount(() => {
@@ -237,12 +239,15 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+
   .col-row {
     padding-bottom: 20px;
   }
+
   .col-text {
     font-size: 16px;
   }
+
   .card_item {
     height: 230px;
   }

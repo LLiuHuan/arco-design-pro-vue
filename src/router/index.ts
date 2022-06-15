@@ -1,71 +1,33 @@
-import { App } from 'vue';
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import { PageEnum } from '@/enums/pageEnum';
-import { createRouterGuards } from '@/router/router-guards';
-import { RedirectRoute } from '@/router/base';
+import type { App } from 'vue';
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import { transformAuthRoutesToVueRoutes, transformRouteNameToRoutePath } from '@/utils';
+import { constantRoutes } from './routes';
+import { scrollBehavior } from './helpers';
+import { createRouterGuard } from './guard';
 
-const modules = import.meta.globEager('./modules/**/*.ts');
+const { VITE_HASH_ROUTE = 'false', VITE_BASE_URL } = import.meta.env;
 
-const routeModuleList: RouteRecordRaw[] = [];
-
-Object.keys(modules).forEach((key) => {
-  const mod = modules[key].default || {};
-  const modList = Array.isArray(mod) ? [...mod] : mod;
-  routeModuleList.push(...modList);
+export const router = createRouter({
+  history:
+    VITE_HASH_ROUTE === 'true'
+      ? createWebHashHistory(VITE_BASE_URL)
+      : createWebHistory(VITE_BASE_URL),
+  routes: transformAuthRoutesToVueRoutes(constantRoutes),
+  scrollBehavior,
 });
 
-function sortRoute(a, b) {
-  return (a.meta?.sort || 0) - (b.meta?.sort || 0);
-}
-
-routeModuleList.sort(sortRoute);
-
-const RootRouter: RouteRecordRaw = {
-  path: '/',
-  name: 'Root',
-  redirect: PageEnum.BASE_HOME,
-  meta: {
-    title: 'Root',
-    hidden: true,
-  },
-};
-
-export const LoginRoute: RouteRecordRaw = {
-  path: '/login',
-  name: 'Login',
-  component: () => import('@/views/login/index.vue'),
-  meta: {
-    title: 'login',
-    hidden: true,
-  },
-};
-
-export const InitDBRoute: RouteRecordRaw = {
-  path: '/initdb',
-  name: 'InitDB',
-  component: () => import('@/views/initdb/index.vue'),
-  meta: {
-    title: 'initdb',
-    hidden: true,
-  },
-};
-
-//
-export const asyncRoutes = [...routeModuleList];
-
-// 普通路由 无需权限验证
-export const constantRouter: any[] = [RootRouter, RedirectRoute, LoginRoute, InitDBRoute];
-const router = createRouter({
-  history: createWebHashHistory(''),
-  routes: constantRouter,
-  // strict: true,
-  scrollBehavior: () => ({ left: 0, top: 0 }),
-});
-
-export function setupRouter(app: App) {
+/** 安装vue路由 */
+export async function setupRouter(app: App) {
   app.use(router);
-  // 路由守卫
-  createRouterGuards(router);
+  createRouterGuard(router);
+  await router.isReady();
 }
 
-export default router;
+/** 路由名称 */
+export const routeName = (key: AuthRoute.RouteKey) => key;
+/** 路由路径 */
+export const routePath = (key: Exclude<AuthRoute.RouteKey, 'not-found-page'>) =>
+  transformRouteNameToRoutePath(key);
+
+export * from './routes';
+export * from './modules';

@@ -1,70 +1,66 @@
-const localeBase = {
-  navbar: {
-    docs: '文档中心',
-  },
-  menu: {
-    lang: '中文',
-    login: '登陆',
-    dashboard: {
-      index: '仪表台',
-      workplace: '工作台',
-      monitor: '实时监控',
-    },
-    errors: {
-      index: '异常页',
-      403: '403',
-      404: '404',
-      500: '500',
-    },
-    about: {
-      index: '关于',
-    },
-    components: {
-      index: '组件',
-      markdown: 'Markdown',
-      split: '分割面板',
-    },
-    system: {
-      index: '系统管理',
-      menu: '菜单管理',
-      user: '用户管理',
-      auth: '角色管理',
-      api: 'Api管理',
-      operationRecord: '操作历史',
-    },
-    state: {
-      index: '服务器状态',
-    },
-  },
-  messageBox: {
-    tab: {
-      title: {
-        message: '消息',
-        notice: '通知',
-        approve: '审批',
-      },
-    },
-    allRead: '全部已读',
-  },
-  exception: {
-    result: {
-      403: {
-        description: '对不起，您没有访问该资源的权限',
-        back: '返回',
-      },
-      404: {
-        description: '抱歉，页面不见了～',
-        retry: '重试',
-        back: '返回',
-      },
-      500: {
-        description: '抱歉，服务器出了点问题～',
-        back: '返回',
-      },
-    },
-  },
-};
+// import localeMessageBox from '@/components/message-box/locale/zh-CN';
+import localeLogin from '@/views/base-view/login/components/PwdLogin/locale/zh-CN';
+
+// import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
+/** simple */
+// import localeMonitor from '@/views/dashboard/monitor/locale/zh-CN';
+//
+// import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
+// import localeCardList from '@/views/list/card/locale/zh-CN';
+//
+// import localeStepForm from '@/views/form/step/locale/zh-CN';
+// import localeGroupForm from '@/views/form/group/locale/zh-CN';
+//
+// import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
+//
+// import localeDataAnalysis from '@/views/visualization/data-analysis/locale/zh-CN';
+// import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/zh-CN';
+//
+// import localeSuccess from '@/views/result/success/locale/zh-CN';
+// import localeError from '@/views/result/error/locale/zh-CN';
+
+import locale403 from '@/views/exception/403/locale/zh-CN';
+import locale404 from '@/views/exception/404/locale/zh-CN';
+import locale500 from '@/views/exception/500/locale/zh-CN';
+
+// import localeUserInfo from '@/views/user/info/locale/zh-CN';
+// import localeUserSetting from '@/views/user/setting/locale/zh-CN';
+/** simple end */
+import localeSettings from './zh-CN/settings';
 
 export default {
-  ...localeBase,
+  'menu.dashboard': '仪表盘',
+  'menu.server.dashboard': '仪表盘-服务端',
+  'menu.server.workplace': '工作台-服务端',
+  'menu.server.monitor': '实时监控-服务端',
+  'menu.list': '列表页',
+  'menu.result': '结果页',
+  'menu.exception': '异常页',
+  'menu.form': '表单页',
+  'menu.profile': '详情页',
+  'menu.visualization': '数据可视化',
+  'menu.user': '个人中心',
+  'navbar.docs': '文档中心',
+  'navbar.action.locale': '切换为中文',
+  ...localeSettings,
+  // ...localeMessageBox,
+  ...localeLogin,
+  // ...localeWorkplace,
+  /** simple */
+  // ...localeMonitor,
+  // ...localeSearchTable,
+  // ...localeCardList,
+  // ...localeStepForm,
+  // ...localeGroupForm,
+  // ...localeBasicProfile,
+  // ...localeDataAnalysis,
+  // ...localeMultiDAnalysis,
+  // ...localeSuccess,
+  // ...localeError,
+  ...locale403,
+  ...locale404,
+  ...locale500,
+  // ...localeUserInfo,
+  // ...localeUserSetting,
+  /** simple end */
 };

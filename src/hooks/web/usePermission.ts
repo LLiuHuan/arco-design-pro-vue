@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/modules/users';
+import { useUserStore } from '@/store/modules/user/users';
 
 export function usePermission() {
   const userStore = useUserStore();

@@ -8,7 +8,7 @@
     :width="width"
     unmountOnClose
   >
-    <template #title> {{ title }} </template>
+    <template #title> {{ title }}</template>
     <div>
       <a-form ref="addMenuForm" :model="form" :rules="rules">
         <a-form-item field="menu_type" label="菜单类型">
@@ -57,8 +57,8 @@
         </a-form-item>
         <a-form-item field="hidden" label="是否显示">
           <a-switch v-model:model-value="form.hidden">
-            <template #checked> 显示 </template>
-            <template #unchecked> 隐藏 </template>
+            <template #checked> 显示</template>
+            <template #unchecked> 隐藏</template>
           </a-switch>
         </a-form-item>
       </a-form>
@@ -68,10 +68,10 @@
 
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { MenuTypes } from '@/api/system/menu-types';
   import { ArcoIcon } from '@/components/ArcoIcons';
   import { addBaseMenu } from '@/api/system/menu';
-  import { Message } from '@arco-design/web-vue';
 
   export default defineComponent({
     name: 'CreateMenu',

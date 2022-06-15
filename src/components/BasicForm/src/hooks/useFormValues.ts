@@ -1,13 +1,14 @@
-import { FormSchema } from '@/components/BasicForm/src/types/form';
-import { isArray, isFunction, isNullOrUnDef, isObject, isString } from '@/utils/is';
 import { ComputedRef, Ref, unref } from 'vue';
 import { set } from 'lodash-es';
+import { FormSchema } from '@/components/BasicForm/src/types/form';
+import { isArray, isFunction, isNullOrUnDef, isObject, isString } from '@/utils/is';
 
 interface UseFormValuesContext {
   defaultFormModel: Ref<any>;
   getSchema: ComputedRef<FormSchema[]>;
   formModel: Recordable;
 }
+
 export function useFormValues({ defaultFormModel, getSchema, formModel }: UseFormValuesContext) {
   // 加工 form values
   function handleFormValues(values: Recordable) {
@@ -35,7 +36,7 @@ export function useFormValues({ defaultFormModel, getSchema, formModel }: UseFor
     return res;
   }
 
-  //初始化默认值
+  // 初始化默认值
   function initDefault() {
     const schemas = unref(getSchema);
     const obj: Recordable = {};

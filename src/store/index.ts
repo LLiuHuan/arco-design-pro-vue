@@ -1,12 +1,10 @@
+import type { App } from 'vue';
 import { createPinia } from 'pinia';
-import piniaPluginPersist from 'pinia-plugin-persist';
-import { App } from 'vue';
-
-const store = createPinia();
-store.use(piniaPluginPersist);
 
 export function setupStore(app: App<Element>) {
+  const store = createPinia();
   app.use(store);
 }
 
-export { store };
+export * from './modules';
+// export * from './subscribe';

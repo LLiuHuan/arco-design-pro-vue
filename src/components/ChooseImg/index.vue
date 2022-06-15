@@ -14,11 +14,12 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent, reactive, ref, toRefs } from 'vue';
   import { FileTypes } from '@/api/file/file-types';
+  import { getFileList } from '@/api/file/file';
 
   const path = import.meta.env.VITE_BASE_API;
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
-  import { getFileList } from '@/api/file/file';
+
   export default defineComponent({
     name: 'ChooseImg',
     props: {
@@ -36,7 +37,7 @@
       const state = reactive({
         drawer: ref(false),
         picList: ref<Array<FileTypes>>([]),
-        path: path,
+        path,
       });
 
       const chooseImg = (url, target, targetKey) => {

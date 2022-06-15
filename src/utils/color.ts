@@ -1,5 +1,5 @@
-import { useUserStore } from '@/store/modules/users';
 import { generate, getRgbStr } from '@arco-design/color';
+import { useUserStore } from '@/store/modules/user/users';
 
 export const setBaseColor = (val: string, model?: string) => {
   const userStore = useUserStore();

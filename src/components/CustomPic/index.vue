@@ -20,6 +20,7 @@
 <script lang="ts">
   import { computed, defineComponent, reactive, toRefs } from 'vue';
   import noAvatar from '@/assets/noBody.png';
+
   const path = import.meta.env.VITE_BASE_API;
   export default defineComponent({
     name: 'CustomPic',
@@ -37,19 +38,18 @@
     },
     setup(props) {
       const state = reactive({
-        noAvatar: noAvatar,
-        path: path + '/',
+        noAvatar,
+        path: `${path}/`,
       });
 
       const avatar = computed(() => {
         if (props.picSrc === '') {
           return noAvatar;
-        } else {
-          if (props.picSrc !== '' && props.picSrc.slice(0, 4) === 'http') {
-            return props.picSrc;
-          }
-          return state.path + props.picSrc;
         }
+        if (props.picSrc !== '' && props.picSrc.slice(0, 4) === 'http') {
+          return props.picSrc;
+        }
+        return state.path + props.picSrc;
       });
 
       return {

@@ -1,35 +1,38 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "strictFunctionTypes": false,
+    "target": "esnext", // 目标语言版本
+    "module": "esnext", // 生成代码的模块标准
+    "moduleResolution": "node", // 模块解析策略
+    "strict": true, // 严格的类型检查
+    "forceConsistentCasingInFileNames": true, // 是否禁止对同一个文件不一致的引用
+    "allowSyntheticDefaultImports": true, // 允许有没有默认导出的模块导入
+    "strictFunctionTypes": false, // 不允许函数参数双向协变
     "jsx": "preserve",
-    "baseUrl": ".",
-    "allowJs": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "experimentalDecorators": true,
+    "baseUrl": ".", // 解析非相对模块的基地址
+    "allowJs": true, // 允许编辑JS文件
+    "sourceMap": false, // 生成目标文件的sourecMap
+    "esModuleInterop": true, // 允许export = 导出, 由import from导入
+    "resolveJsonModule": true, // 防止 ts文件中引入json文件防止 ts文件中引入json文件
+    "noUnusedLocals": true, // 检查只声明，未使用的局部变量
+    "noUnusedParameters": true, // 检查未使用的函数参数
+    "experimentalDecorators": true, // 消除实验性语法错误提示
+    "strictNullChecks": true, // 不允许把null,undefined赋值给其他类型变量
     "lib": [
       "dom",
       "esnext",
       "es2015.promise"
-    ],
+    ], // TS需要引用的库，即声明文件
     "types": [
-      "vite/client"
-    ],
+      "vite/client",
+      "node",
+      "unplugin-icons/types/vue",
+    ], // 声明文件包
     "typeRoots": [
-      "./node_modules/@types/",
-      "./types"
-    ],
-    "noImplicitAny": false,
-    "skipLibCheck": true,
+      "node_modules/@types/",
+      "src/typings"
+    ], // 声明文件目录 默认node_modules/@types
+    "noImplicitAny": true, // 提示可能是any类型的变量
+    "skipLibCheck": true,  // 是否打印ts解析文件的日志
     "paths": {
       "@/*": [
         "src/*"
@@ -37,24 +40,21 @@
       "/#/*": [
         "types/*"
       ]
-    }
+    } // 路径映射，相对于baseUrl
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "types/**/*.d.ts",
-    "types/*.d.ts",
-    "types/**/*.ts",
     "build/**/*.ts",
     "build/**/*.d.ts",
     "mock/**/*.ts",
-    "vite.config.ts"
-  ],
+    "vite.config.ts",
+  ], // 用于指定要编译的路径列表，但是和files的区别在于，这里的路径可以是文件夹，也可以是文件，可以使用相对和绝对路径，而且可以使用通配符。
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.js"
-  ]
+    "**/*.js",
+  ] // 用于指定当解析include选项时，需要忽略的文件列表
 }

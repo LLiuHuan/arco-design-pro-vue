@@ -21,11 +21,12 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { getPolicyPathByAuthorityId, UpdateCasbin } from '@/api/system/casbin';
   import { getApiAllList } from '@/api/system/api';
-  import { Message } from '@arco-design/web-vue';
   import { ApiTypes } from '@/api/system/api-types';
   import { casbinType } from '@/views/system/auth/components/types';
+
   export default defineComponent({
     name: 'AuthApis',
     props: {
@@ -48,10 +49,10 @@
 
         state.activeUserId = props.row.authorityId;
         const res = await getPolicyPathByAuthorityId(props.row.authorityId);
-        const paths = res.paths;
+        const { paths } = res;
         paths &&
           paths.forEach((item) => {
-            state.apiTreeIds.push('p:' + item.path + 'm:' + item.method);
+            state.apiTreeIds.push(`p:${item.path}m:${item.method}`);
           });
       };
 
@@ -70,8 +71,8 @@
         for (const key in apiObj) {
           const treeNode = {
             ID: key,
-            key: key,
-            description: key + '组',
+            key,
+            description: `${key}组`,
             children: apiObj[key],
           };
           apiTree.push(treeNode);
@@ -104,10 +105,10 @@
       const authApiEnter = async () => {
         const checkArr = tableToTree(state.apiTreeData);
 
-        let casbinInfos = [] as casbinType[];
+        const casbinInfos = [] as casbinType[];
         checkArr &&
           checkArr.forEach((item) => {
-            let casbinInfo: casbinType = {
+            const casbinInfo: casbinType = {
               path: item.path,
               method: item.method,
             };

@@ -23,11 +23,11 @@
                     "
                     :disabled="parentId === 0"
                     >添加子{{ form?.menu_type ? menuTypeMap[form?.menu_type] : '菜单' }}
-                    {{ treeItemTitle ? ': ' + treeItemTitle : '' }}</a-doption
-                  >
+                    {{ treeItemTitle ? ': ' + treeItemTitle : '' }}
+                  </a-doption>
                   <a-doption @click="removeBaseMenus" :disabled="parentId === 0"
-                    >删除选中菜单</a-doption
-                  >
+                    >删除选中菜单
+                  </a-doption>
                 </template>
               </a-dropdown>
               <a-button type="outline" @click="toggleExpanded">
@@ -65,7 +65,8 @@
       <a-col :span="14">
         <a-card>
           <template #title>
-            <IconEdit />编辑菜单<span v-if="isForm">: {{ treeItemTitle }}</span>
+            <IconEdit />
+            编辑菜单<span v-if="isForm">: {{ treeItemTitle }}</span>
           </template>
           <a-space direction="vertical" fill>
             <a-alert closable>从菜单列表选择一项后，进行编辑</a-alert>
@@ -154,16 +155,16 @@
                 <a-col :span="12">
                   <a-form-item field="meta.keepAlive" label="缓存路由" label-col-flex="120px">
                     <a-switch v-model:model-value="form.meta.keepAlive" type="round">
-                      <template #checked> 打开 </template>
-                      <template #unchecked> 关闭 </template>
+                      <template #checked> 打开</template>
+                      <template #unchecked> 关闭</template>
                     </a-switch>
                   </a-form-item>
                 </a-col>
                 <a-col :span="12">
                   <a-form-item field="hidden" label="是否显示" label-col-flex="80px">
                     <a-switch v-model:model-value="form.hidden">
-                      <template #checked> 显示 </template>
-                      <template #unchecked> 隐藏 </template>
+                      <template #checked> 显示</template>
+                      <template #unchecked> 隐藏</template>
                     </a-switch>
                   </a-form-item>
                 </a-col>
@@ -189,13 +190,14 @@
 
 <script lang="ts">
   import { computed, defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
+  import { useI18n } from 'vue-i18n';
   import { TreeType } from '@/views/system/menu/menu-types';
   import { deleteBaseMenus, getBaseMenuById, getMenuList, updateBaseMenu } from '@/api/system/menu';
-  import { useI18n } from 'vue-i18n';
   import { MenuTypes } from '@/api/system/menu-types';
   import { ArcoIcon } from '@/components/ArcoIcons';
-  import { Message } from '@arco-design/web-vue';
   import CreateMenu from '@/views/system/menu/components/CreateMenu.vue';
+
   export default defineComponent({
     name: 'SystemMenu',
     components: {

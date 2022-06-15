@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-view">
     <a-result class="result" status="500" :title="$t('exception.result.500.description')">
       <template #subtitle>
         <a-button key="back" type="primary">
@@ -10,19 +10,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: '500',
-    setup() {
-      return {};
-    },
-  });
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less" scoped>
-  .container {
+  .container-view {
     position: relative;
     padding: 0;
     height: 100%;

@@ -4,20 +4,20 @@
   </a-config-provider>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+  import { watch } from 'vue';
   import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
-  import { defineComponent } from 'vue';
+  import { useThemeStore } from '@/store';
 
-  export default defineComponent({
-    name: 'App',
-    setup() {
-      return {
-        zhCN,
-      };
-    },
-  });
+  const theme = useThemeStore();
+  watch(
+    () => theme.naiveTheme,
+    (newTheme) => {
+      document.body.setAttribute('arco-theme', newTheme ?? '');
+    }
+  );
 </script>
 
 <style lang="less">
-  @import 'styles/index.less';
+  //@import 'styles/index.less';
 </style>

@@ -1,13 +1,10 @@
 <template>
-$END$
+  <div class="h-full">
+    <iframe class="wh-full" :src="src"></iframe>
+  </div>
 </template>
 
-<script>
-export default {
-name: "index"
-}
+<script setup lang="ts">
+  const src = 'https://vitejs.cn/';
 </script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

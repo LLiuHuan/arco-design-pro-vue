@@ -7,6 +7,7 @@ declare namespace AuthRoute {
   type RouteKey =
     // 固定的路由
     | 'root' // 根路由
+    | 'redirect'
     | 'login'
     | 'not-found'
     | 'no-permission'
@@ -21,7 +22,7 @@ declare namespace AuthRoute {
     | 'document_vue-new'
     | 'document_vite'
     | 'document_naive'
-    | 'document_project'
+    | 'document_baidu'
     | 'component'
     | 'component_button'
     | 'component_card'
@@ -55,7 +56,8 @@ declare namespace AuthRoute {
     | '/'
     | Exclude<KeyToPath<RouteKey>, '/root' | 'not-found-page'>
     | SingleRouteParentPath
-    | '/:pathMatch(.*)*';
+    | '/:pathMatch(.*)*'
+    | '/redirect/:path(.*)';
 
   /**
    * 路由的组件
@@ -93,6 +95,8 @@ declare namespace AuthRoute {
     order?: number;
     /** 表示是否是多级路由的中间级路由(用于转换路由数据时筛选多级路由的标识，定义路由时不用填写) */
     multi?: boolean;
+    /** 是否固定到tab上 */
+    affix?: boolean;
   };
 
   /** 单个路由的类型结构(动态路由模式：后端返回此类型结构的路由) */

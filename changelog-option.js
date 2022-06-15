@@ -1,4 +1,5 @@
 const compareFunc = require('compare-func');
+
 module.exports = {
   writerOpts: {
     transform: (commit, context) => {

@@ -1,13 +1,7 @@
 <template>
-$END$
+  <h1>VerticalMixSider</h1>
 </template>
 
-<script>
-export default {
-name: "index"
-}
-</script>
+<script lang="ts" setup></script>
 
-<style scoped>
-
-</style>
+<style lang="less" scoped></style>

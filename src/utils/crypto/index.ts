@@ -1,14 +1,32 @@
+/* 加密方法 */
+
 import CryptoJS from 'crypto-js';
 
-const CryptoSecret = '__CryptoJS_Secret__';
+// 十六位十六进制数作为密钥
+const SECRET_KEY = CryptoJS.enc.Utf8.parse('1101201190000001');
+// 十六位十六进制数作为密钥偏移量
+const SECRET_IV = CryptoJS.enc.Utf8.parse('1000000911021011');
 
 /**
  * 加密数据
  * @param data - 数据
  */
 export function encrypto(data: any) {
-  const newData = JSON.stringify(data);
-  return CryptoJS.AES.encrypt(newData, CryptoSecret).toString();
+  if (typeof data === 'object') {
+    try {
+      // eslint-disable-next-line no-param-reassign
+      data = JSON.stringify(data);
+    } catch (error) {
+      console.log('encrypt error:', error);
+    }
+  }
+  const dataHex = CryptoJS.enc.Utf8.parse(data);
+  const encrypted = CryptoJS.AES.encrypt(dataHex, SECRET_KEY, {
+    iv: SECRET_IV,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  return encrypted.ciphertext.toString();
 }
 
 /**
@@ -16,10 +34,16 @@ export function encrypto(data: any) {
  * @param cipherText - 密文
  */
 export function decrypto(cipherText: string) {
-  const bytes = CryptoJS.AES.decrypt(cipherText, CryptoSecret);
-  const originalText = bytes.toString(CryptoJS.enc.Utf8);
-  if (originalText) {
-    return JSON.parse(originalText);
+  const encryptedHexStr = CryptoJS.enc.Hex.parse(cipherText);
+  const str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+  const decrypt = CryptoJS.AES.decrypt(str, SECRET_KEY, {
+    iv: SECRET_IV,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+  if (decryptedStr) {
+    return JSON.parse(decryptedStr.toString());
   }
   return null;
 }

@@ -1,9 +1,9 @@
-//注册i8n实例并引入语言文件
-import { createI18n } from 'vue-i18n';
+// 注册i8n实例并引入语言文件
 import { App } from 'vue';
+import { createI18n } from 'vue-i18n';
 import zh_CN from '@/locale/zh-CN';
 import en_US from '@/locale/en-US';
-import { storage } from '@/utils/storage';
+import { storage } from '@/utils/storage/storage';
 
 const localeData = {
   legacy: false, // composition API

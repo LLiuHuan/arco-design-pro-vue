@@ -88,11 +88,11 @@
             v-bind="getSubmitBtnOptions"
             @click="handleSubmit"
             :loading="loadingSub"
-            >{{ submitButtonText }}</a-button
-          >
-          <a-button v-if="showResetButton" v-bind="getResetBtnOptions" @click="resetFields">{{
-            resetButtonText
-          }}</a-button>
+            >{{ submitButtonText }}
+          </a-button>
+          <a-button v-if="showResetButton" v-bind="getResetBtnOptions" @click="resetFields"
+            >{{ resetButtonText }}
+          </a-button>
           <a-button
             type="text"
             v-if="isInline && getProps.showAdvancedButton"
@@ -113,44 +113,44 @@
 <script lang="ts">
   import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue';
   import {
+    AutoComplete,
+    Cascader,
+    Checkbox,
+    CheckboxGroup,
+    DatePicker,
+    Input,
+    InputGroup,
+    InputNumber,
+    InputPassword,
+    InputSearch,
+    InputTag,
+    MonthPicker,
+    Radio,
+    RadioGroup,
+    RangePicker,
+    Rate,
+    Select,
+    Slider,
+    Switch,
+    TimePicker,
+    TreeSelect,
+    Upload,
+    WeekPicker,
+  } from '@arco-design/web-vue';
+  import { IconDown, IconQuestionCircle, IconUp } from '@arco-design/web-vue/es/icon';
+  import { deepMerge } from '@/utils';
+  import {
     BaseFormProps,
     FormActionType,
     FormProps,
     FormSchema,
   } from '@/components/BasicForm/src/types/form';
-  import { IconQuestionCircle, IconDown, IconUp } from '@arco-design/web-vue/es/icon';
   import { basicProps } from '@/components/BasicForm/src/props';
   import { useFormValues } from '@/components/BasicForm/src/hooks/useFormValues';
   import { isArray } from '@/utils/is';
   import { useFormEvents } from '@/components/BasicForm/src/hooks/useFormEvents';
-  import { deepMerge } from '@/utils';
   import { createPlaceholderMessage } from '@/components/BasicForm/src/helper';
   import { GridProps } from './types/grid';
-  import {
-    Input,
-    InputGroup,
-    InputPassword,
-    InputSearch,
-    InputNumber,
-    InputTag,
-    Select,
-    TreeSelect,
-    Radio,
-    RadioGroup,
-    Checkbox,
-    CheckboxGroup,
-    AutoComplete,
-    Cascader,
-    DatePicker,
-    MonthPicker,
-    RangePicker,
-    WeekPicker,
-    TimePicker,
-    Switch,
-    Upload,
-    Slider,
-    Rate,
-  } from '@arco-design/web-vue';
 
   export default defineComponent({
     name: 'BasicForm',
@@ -213,23 +213,19 @@
 
       // 获取确定按钮样式
       const getSubmitBtnOptions = computed(() => {
-        return Object.assign(
-          {
-            size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
-            type: 'primary',
-          },
-          unref(getProps).submitButtonOptions
-        );
+        return {
+          size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
+          type: 'primary',
+          ...unref(getProps).submitButtonOptions,
+        };
       });
 
       // 获取重置按钮样式
       const getResetBtnOptions = computed(() => {
-        return Object.assign(
-          {
-            size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
-          },
-          unref(getProps).resetButtonOptions
-        );
+        return {
+          size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
+          ...unref(getProps).resetButtonOptions,
+        };
       });
 
       const isInline = computed(() => {
@@ -252,7 +248,7 @@
       // 获取动态渲染表单的props
       function getComponentProps(schema) {
         const compProps = schema.componentProps ?? {};
-        const component = schema.component;
+        const { component } = schema;
         return {
           allowClear: true,
           placeholder: createPlaceholderMessage(unref(component)),
@@ -294,7 +290,7 @@
           getProps,
           formModel,
           getSchema,
-          formElRef: formElRef,
+          formElRef,
           defaultFormModel,
           loadingSub,
           handleFormValues,

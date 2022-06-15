@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref } from 'vue';
+import { toRaw, unref } from 'vue';
+import { isFunction } from '@/utils';
 import type { FormSchema } from '../types/form';
-import { unref, toRaw } from 'vue';
-import { isFunction } from '@/utils/is';
 import { BaseFormProps } from '../types/form';
 
 declare type EmitType = (event: string, ...args: any[]) => void;
@@ -54,20 +54,18 @@ export function useFormEvents({
         }
         loadingSub.value = false;
         emit('submit', formModel);
-        return;
       });
     } catch (error) {
       loadingSub.value = false;
-      return;
     }
   }
 
-  //清空校验
+  // 清空校验
   async function clearValidate() {
     unref(formElRef)?.clearValidate();
   }
 
-  //重置
+  // 重置
   async function resetFields(): Promise<void> {
     const { resetFunc, submitOnReset } = unref(getProps);
     resetFunc && isFunction(resetFunc) && (await resetFunc());
@@ -83,14 +81,14 @@ export function useFormEvents({
     submitOnReset && (await handleSubmit());
   }
 
-  //获取表单值
+  // 获取表单值
   function getFieldsValue(): Recordable {
     const formEl = unref(formElRef);
     if (!formEl) return {};
     return handleFormValues(toRaw(unref(formModel)));
   }
 
-  //设置表单字段值
+  // 设置表单字段值
   async function setFieldsValue(values: Recordable): Promise<void> {
     const fields = unref(getSchema)
       .map((item) => item.field)

@@ -1,9 +1,17 @@
 import { unref } from 'vue';
 import { defineStore } from 'pinia';
+import { Message } from '@arco-design/web-vue';
 import { router } from '@/router';
 import { useRouterPush } from '@/composables';
-import { fetchLogin, fetchUserInfo } from '@/service';
-import { getUserInfo, getToken, setUserInfo, setToken, setRefreshToken, clearAuthStorage } from '@/utils';
+import {
+  clearAuthStorage,
+  getToken,
+  getUserInfo,
+  setRefreshToken,
+  setToken,
+  setUserInfo,
+} from '@/utils';
+import { fetchLogin, fetchUserInfo } from '@/api';
 import { useTabStore } from '../tab';
 import { useRouteStore } from '../route';
 
@@ -20,13 +28,13 @@ export const useAuthStore = defineStore('auth-store', {
   state: (): AuthState => ({
     userInfo: getUserInfo(),
     token: getToken(),
-    loginLoading: false
+    loginLoading: false,
   }),
   getters: {
     /** 是否登录 */
     isLogin(state) {
       return Boolean(state.token);
-    }
+    },
   },
   actions: {
     /** 重置auth状态 */
@@ -52,18 +60,16 @@ export const useAuthStore = defineStore('auth-store', {
      */
     async handleActionAfterLogin(backendToken: ApiAuth.Token) {
       const { toLoginRedirect } = useRouterPush(false);
-
       const loginSuccess = await this.loginByToken(backendToken);
-
       if (loginSuccess) {
         // 跳转登录后的地址
         toLoginRedirect();
 
         // 登录成功弹出欢迎提示
-        window.$notification?.success({
-          title: '登录成功!',
+        Message.success({
+          // title: '登录成功!',
           content: `欢迎回来，${this.userInfo.userName}!`,
-          duration: 3000
+          duration: 3000,
         });
 
         return;
@@ -85,7 +91,7 @@ export const useAuthStore = defineStore('auth-store', {
       setRefreshToken(refreshToken);
 
       // 获取用户信息
-      const { data } = await fetchUserInfo();
+      const data = await fetchUserInfo();
       if (data) {
         // 成功后把用户信息存储到缓存中
         setUserInfo(data);
@@ -106,7 +112,7 @@ export const useAuthStore = defineStore('auth-store', {
      */
     async login(userName: string, password: string) {
       this.loginLoading = true;
-      const { data } = await fetchLogin(userName, password);
+      const data = await fetchLogin(userName, password);
       if (data) {
         await this.handleActionAfterLogin(data);
       }
@@ -122,24 +128,24 @@ export const useAuthStore = defineStore('auth-store', {
       const accounts: Record<Auth.RoleType, { userName: string; password: string }> = {
         super: {
           userName: 'Super',
-          password: 'super123'
+          password: 'super123',
         },
         admin: {
           userName: 'Admin',
-          password: 'admin123'
+          password: 'admin123',
         },
         user: {
           userName: 'User01',
-          password: 'user01123'
-        }
+          password: 'user01123',
+        },
       };
       const { userName, password } = accounts[userRole];
-      const { data } = await fetchLogin(userName, password);
+      const data = await fetchLogin(userName, password);
       if (data) {
         await this.loginByToken(data);
         resetRouteStore();
         initAuthRoute();
       }
-    }
-  }
+    },
+  },
 });

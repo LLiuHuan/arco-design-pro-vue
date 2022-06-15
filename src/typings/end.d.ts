@@ -15,6 +15,8 @@ interface EnvConfig {
 }
 
 interface ImportMetaEnv {
+  /** 项目端口 */
+  readonly VITE_PORT: number;
   /** 项目基本地址 */
   readonly VITE_BASE_URL: string;
   /** 项目名称 */
@@ -46,6 +48,14 @@ interface ImportMetaEnv {
   readonly VITE_COMPRESS_TYPE?: 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw';
   /** hash路由模式 */
   readonly VITE_HASH_ROUTE?: 'true' | 'false';
+
+  /** 是否禁用console */
+  readonly VITE_DROP_CONSOLE: boolean;
+  /** 项目打包路径 */
+  readonly BUILD_OUT_DIR: string;
+  /** Api接口前缀 */
+  readonly VITE_API_URL_PREFIX: string;
+  ß;
 }
 
 interface ImportMeta {

@@ -1,13 +1,9 @@
 <template>
-$END$
+  <div>
+    <h1>22222222222</h1>
+  </div>
 </template>
 
-<script>
-export default {
-name: "index"
-}
-</script>
+<script lang="ts" setup></script>
 
-<style scoped>
-
-</style>
+<style lang="less" scoped></style>

@@ -9,7 +9,7 @@ function hideInMenu(route: AuthRoute.Route) {
 function addPartialProps(menuItem: GlobalMenuOption, icon?: string, children?: GlobalMenuOption[]) {
   const item = { ...menuItem };
   if (icon) {
-    Object.assign(item, { icon: icon });
+    Object.assign(item, { icon });
   }
   if (children) {
     Object.assign(item, { children });
@@ -50,13 +50,12 @@ export function transformAuthRouteToMenu(routes: AuthRoute.Route[]): GlobalMenuO
 }
 
 /**
- * 获取当前路由所在菜单数据的paths
+ * 获取当前路由所在菜单数据的paths // 无用
  * @param activeKey - 当前路由的key
  * @param menus - 菜单数据
  */
 export function getActiveKeyPathsOfMenus(activeKey: string, menus: GlobalMenuOption[]) {
-  const keys = menus.map((menu) => getActiveKeyPathsOfMenu(activeKey, menu)).flat(1);
-  return keys;
+  return menus.map((menu) => getActiveKeyPathsOfMenu(activeKey, menu)).flat(1);
 }
 
 function getActiveKeyPathsOfMenu(activeKey: string, menu: GlobalMenuOption) {

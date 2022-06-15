@@ -60,12 +60,12 @@
 <script lang="ts" setup>
   import { computed, ref, unref, watch } from 'vue';
   import projectSetting from '@/settings/projectSetting';
-  import { NavBar } from '@/layout/components/NavBar';
-  import { MenuBox } from '@/layout/components/MenuBox';
-  import { FooterBar } from '@/layout/components/FooterBar';
-  import { TagsView } from '@/layout/components/TagsView';
-  import { Settings } from '@/layout/components/Settings';
-  import { MainView } from '@/layout/components/MainView';
+  import { NavBar } from '@/layout/BasicLayout/components/NavBar';
+  import { MenuBox } from '@/layout/BasicLayout/components/MenuBox';
+  import { FooterBar } from '@/layout/BasicLayout/components/FooterBar';
+  import { TagsView } from '@/layout/BasicLayout/components/TagsView';
+  import { Settings } from '@/layout/BasicLayout/components/Settings';
+  import { MainView } from '@/layout/BasicLayout/components/MainView';
   import { useSettingStore } from '@/store/modules/settings';
   import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
   import watermark from '@/utils/watermark';
@@ -78,7 +78,7 @@
   const { collapsed: menuCollapsed, menuWidth, minMenuWidth } = settingStore.menuSetting;
 
   if (settingStore.getWatermark) {
-    //添加水印
+    // 添加水印
     watermark.set('水印', {});
   }
 
@@ -86,10 +86,10 @@
     () => settingStore.getWatermark,
     () => {
       if (settingStore.getWatermark) {
-        //添加水印
+        // 添加水印
         watermark.set('水印', {});
       } else {
-        //移除水印
+        // 移除水印
         watermark.close();
       }
     }

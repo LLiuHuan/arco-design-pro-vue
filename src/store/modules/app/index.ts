@@ -1,5 +1,5 @@
-import { nextTick } from 'vue';
 import { defineStore } from 'pinia';
+import { useRouterPush } from '@/composables';
 
 interface AppState {
   /** 重载页面(控制页面的显示) */
@@ -17,26 +17,27 @@ export const useAppStore = defineStore('app-store', {
     reloadFlag: true,
     settingDrawerVisible: false,
     siderCollapse: false,
-    mixSiderFixed: false
+    mixSiderFixed: false,
   }),
   actions: {
     /**
      * 重载页面
-     * @param duration - 重载的延迟时间(ms)
      */
-    async reloadPage(duration = 0) {
-      this.reloadFlag = false;
-      await nextTick();
-      if (duration) {
-        setTimeout(() => {
-          this.reloadFlag = true;
-        }, duration);
-      } else {
-        this.reloadFlag = true;
-      }
-      setTimeout(() => {
-        document.documentElement.scrollTo({ left: 0, top: 0 });
-      }, 100);
+    async reloadPage(path: string) {
+      const { routerPush } = useRouterPush(false);
+      routerPush(`/redirect${path}`);
+      // this.reloadFlag = false;
+      // await nextTick();
+      // if (duration) {
+      //   setTimeout(() => {
+      //     this.reloadFlag = true;
+      //   }, duration);
+      // } else {
+      //   this.reloadFlag = true;
+      // }
+      // setTimeout(() => {
+      //   document.documentElement.scrollTo({ left: 0, top: 0 });
+      // }, 100);
     },
     /** 打开设置抽屉 */
     openSettingDrawer() {
@@ -65,6 +66,6 @@ export const useAppStore = defineStore('app-store', {
     /** 设置 vertical-mix模式下 侧边栏的固定状态 */
     toggleMixSiderFixed() {
       this.mixSiderFixed = !this.mixSiderFixed;
-    }
-  }
+    },
+  },
 });

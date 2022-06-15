@@ -2,12 +2,12 @@
   <div class="container">
     <a-card :bordered="false" title="v-md-editor" class="proCard" size="small">
       <div>
-        <a-alert :show-icon="false"
-          ><a-link href="https://ckang1229.gitee.io/vue-markdown-editor/zh/#%E4%BB%8B%E7%BB%8D"
-            >v-md-editor</a-link
-          >
-          推荐亮色模式下使用</a-alert
-        >
+        <a-alert :show-icon="false">
+          <a-link href="https://ckang1229.gitee.io/vue-markdown-editor/zh/#%E4%BB%8B%E7%BB%8D"
+            >v-md-editor
+          </a-link>
+          推荐亮色模式下使用
+        </a-alert>
       </div>
       <v-md-editor
         v-model="text"
@@ -24,6 +24,7 @@
 
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs } from 'vue';
+
   export default defineComponent({
     name: 'MarkDown',
     setup() {

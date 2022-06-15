@@ -1,5 +1,5 @@
 export default {
-  'menu.exception.403': '403',
-  'exception.result.403.description': 'Access to this resource on the server is denied.',
-  'exception.result.403.back': 'Back',
+  'menu.exception.500': '500',
+  'exception.result.500.description': 'Internal server error',
+  'exception.result.500.back': 'Back',
 };

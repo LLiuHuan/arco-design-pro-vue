@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-view">
     <a-result class="result" status="404" :title="$t('exception.result.404.description')">
       <template #subtitle>
         <a-button key="again" style="margin-right: 16px">
@@ -11,19 +11,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: '404',
-    setup() {
-      return {};
-    },
-  });
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less" scoped>
-  .container {
+  .container-view {
     position: relative;
     height: 100%;
     max-width: 100%;

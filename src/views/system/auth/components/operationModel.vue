@@ -7,7 +7,7 @@
     cancelText="取消"
     unmountOnClose
   >
-    <template #title> {{ modelTitle }} </template>
+    <template #title> {{ modelTitle }}</template>
     <a-form ref="authForm" :model="form">
       <a-form-item field="parentId" label="父级角色">
         <a-cascader

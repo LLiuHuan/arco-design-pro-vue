@@ -37,7 +37,7 @@
         <a-table-column title="API简介" data-index="description" />
         <a-table-column title="请求" data-index="method">
           <template #cell="{ record }">
-            <div> {{ methodFiletr(record.method) }} </div>
+            <div> {{ methodFiletr(record.method) }}</div>
           </template>
         </a-table-column>
         <a-table-column title="操作">
@@ -58,7 +58,7 @@
   </div>
 
   <a-modal width="auto" v-model:visible="model.visible" :mask-closable="false">
-    <template #title> {{ model.title }} </template>
+    <template #title> {{ model.title }}</template>
     <div class="pb-4">
       <a-alert type="warning">新增API，需要在角色管理内配置权限才可使用</a-alert>
     </div>
@@ -98,6 +98,7 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import {
     createApi,
     deleteApi,
@@ -106,8 +107,8 @@
     getApiList,
     updateApi,
   } from '@/api/system/api';
-  import { Message } from '@arco-design/web-vue';
   import { BasicForm, FormSchema, useForm } from '@/components/BasicForm';
+
   export default defineComponent({
     name: 'SystemApi',
     components: {

@@ -1,9 +1,10 @@
-import type { Router, RouteLocationNormalizedLoaded } from 'vue-router';
+import type { RouteLocationNormalizedLoaded, Router } from 'vue-router';
 import { defineStore } from 'pinia';
+import { useThemeStore } from '@/store';
 import { useRouterPush } from '@/composables';
-import { getTabRoutes, clearTabRoutes } from '@/utils';
-import { useThemeStore } from '../theme';
-import { getTabRouteByVueRoute, isInTabRoutes, getIndexInTabRoutes } from './helpers';
+import { clearTabRoutes, getTabRoutes } from '@/utils';
+// import { useThemeStore } from '../theme';
+import { getIndexInTabRoutes, getTabRouteByVueRoute, isInTabRoutes } from './helpers';
 
 interface TabState {
   /** 多页签数据 */
@@ -21,21 +22,21 @@ export const useTabStore = defineStore('tab-store', {
       name: 'root',
       path: '/',
       meta: {
-        title: 'Root'
+        title: 'Root',
       },
       scrollPosition: {
         left: 0,
-        top: 0
-      }
+        top: 0,
+      },
     },
-    activeTab: ''
+    activeTab: '',
   }),
   getters: {
     /** 当前激活状态的页签索引 */
     activeTabIndex(state) {
       const { tabs, activeTab } = state;
-      return tabs.findIndex(tab => tab.path === activeTab);
-    }
+      return tabs.findIndex((tab) => tab.path === activeTab);
+    },
   },
   actions: {
     /** 重置Tab状态 */
@@ -57,7 +58,7 @@ export const useTabStore = defineStore('tab-store', {
      */
     initHomeTab(routeHomeName: string, router: Router) {
       const routes = router.getRoutes();
-      const findHome = routes.find(item => item.name === routeHomeName);
+      const findHome = routes.find((item) => item.name === routeHomeName);
       if (findHome && !findHome.children.length) {
         // 有子路由的不能作为Tab
         this.homeTab = getTabRouteByVueRoute(findHome);
@@ -69,6 +70,7 @@ export const useTabStore = defineStore('tab-store', {
      */
     addTab(route: RouteLocationNormalizedLoaded) {
       if (!isInTabRoutes(this.tabs, route.path)) {
+        console.log(this.tabs, route.path);
         const tab = getTabRouteByVueRoute(route);
         this.tabs.push(tab);
       }
@@ -79,9 +81,8 @@ export const useTabStore = defineStore('tab-store', {
      */
     removeTab(path: string) {
       const { routerPush } = useRouterPush(false);
-
       const isActive = this.activeTab === path;
-      const updateTabs = this.tabs.filter(tab => tab.path !== path);
+      const updateTabs = this.tabs.filter((tab) => tab.path !== path);
       this.tabs = updateTabs;
       if (isActive && updateTabs.length) {
         const activePath = updateTabs[updateTabs.length - 1].path;
@@ -99,7 +100,7 @@ export const useTabStore = defineStore('tab-store', {
       const homePath = this.homeTab.path;
       const remain = [homePath, ...excludes];
       const hasActive = remain.includes(this.activeTab);
-      const updateTabs = this.tabs.filter(tab => remain.includes(tab.path));
+      const updateTabs = this.tabs.filter((tab) => remain.includes(tab.path));
       this.tabs = updateTabs;
       if (!hasActive && updateTabs.length) {
         const activePath = updateTabs[updateTabs.length - 1].path;
@@ -114,7 +115,7 @@ export const useTabStore = defineStore('tab-store', {
     clearLeftTab(path: string) {
       const index = getIndexInTabRoutes(this.tabs, path);
       if (index > -1) {
-        const excludes = this.tabs.slice(index).map(item => item.path);
+        const excludes = this.tabs.slice(index).map((item) => item.path);
         this.clearTab(excludes);
       }
     },
@@ -125,7 +126,7 @@ export const useTabStore = defineStore('tab-store', {
     clearRightTab(path: string) {
       const index = getIndexInTabRoutes(this.tabs, path);
       if (index > -1) {
-        const excludes = this.tabs.slice(0, index + 1).map(item => item.path);
+        const excludes = this.tabs.slice(0, index + 1).map((item) => item.path);
         this.clearTab(excludes);
       }
     },
@@ -143,7 +144,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 记录tab滚动位置
+     * 记录tab滚动位置 // 无用
      * @param path - 路由path
      * @param position - tab当前页的滚动位置
      */
@@ -154,13 +155,13 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 获取tab滚动位置
+     * 获取tab滚动位置 // 无用
      * @param path - 路由path
      */
     getTabScrollPosition(path: string) {
       const position = {
         left: 0,
-        top: 0
+        top: 0,
       };
       const index = getIndexInTabRoutes(this.tabs, path);
       if (index > -1) {
@@ -168,10 +169,11 @@ export const useTabStore = defineStore('tab-store', {
       }
       return position;
     },
+
     /** 初始化Tab状态 */
     iniTabStore(currentRoute: RouteLocationNormalizedLoaded) {
       const theme = useThemeStore();
-
+      console.log(currentRoute, theme, getTabRoutes());
       const tabs: GlobalTabRoute[] = theme.tab.isCache ? getTabRoutes() : [];
 
       const hasHome = isInTabRoutes(tabs, this.homeTab.path);
@@ -185,9 +187,8 @@ export const useTabStore = defineStore('tab-store', {
         const currentTab = getTabRouteByVueRoute(currentRoute);
         tabs.push(currentTab);
       }
-
       this.tabs = tabs;
       this.setActiveTab(currentRoute.path);
-    }
-  }
+    },
+  },
 });

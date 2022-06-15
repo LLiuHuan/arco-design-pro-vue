@@ -1,6 +1,6 @@
 // import '@/styles/theme/theme-christmas.less';
 
-import { storage } from '@/utils/storage';
+import { storage } from '@/utils/storage/storage';
 
 export function setupTheme() {
   const theme = storage.get('_theme') ?? 'default';

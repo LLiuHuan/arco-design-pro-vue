@@ -1,4 +1,5 @@
 import { nextTick, onUnmounted, ref, unref, watch } from 'vue';
+import { getDynamicProps } from '@/utils';
 import {
   BaseFormProps,
   FormActionType,
@@ -6,15 +7,12 @@ import {
   UseFormReturnType,
 } from '@/components/BasicForm';
 import { isProdMode } from '@/utils/env';
-import { DynamicProps } from '/#/utils';
-import { getDynamicProps } from '@/utils';
+import type { DynamicProps } from '@/typings/util';
 
 type Props = Partial<DynamicProps<BaseFormProps>>;
 
 export function useForm(props?: Props): UseFormReturnType {
-  // @ts-ignore
   const formRef = ref<Nullable<FormActionType>>(null);
-  // @ts-ignore
   const loadedRef = ref<Nullable<boolean>>(false);
 
   async function getForm() {

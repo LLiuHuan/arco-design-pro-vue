@@ -7,8 +7,8 @@
             type="primary"
             @click="addUser"
             v-permission="{ action: ['system.user.add'], effect: 'disabled' }"
-            >添加</a-button
-          >
+            >添加
+          </a-button>
         </div>
       </div>
       <a-table
@@ -83,13 +83,14 @@
 
 <script lang="ts">
   import { defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { delUser, getUserList, setUserAuthorities } from '@/api/system/user';
   import { getAuthorityList } from '@/api/system/auth';
   import { UserInfo } from '@/api/system/user-types';
-  import { Message } from '@arco-design/web-vue';
   import { CustomPic } from '@/components/CustomPic';
-  import { CreateUser } from './components';
   import { usePermission } from '@/hooks/web/usePermission';
+  import { CreateUser } from './components';
+
   export default defineComponent({
     name: 'SystemUser',
     components: {
@@ -240,6 +241,7 @@
     padding: 20px;
     background-color: var(--color-bg-2);
   }
+
   .toolbar {
     display: flex;
     justify-content: space-between;

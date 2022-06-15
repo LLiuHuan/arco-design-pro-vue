@@ -10,8 +10,8 @@ import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum';
 // import { useUserStoreWidthOut } from '@/store/modules/user';
 // import { storage } from '@/utils/storage/storage';
 import { storage } from '@/utils/storage/storage';
-import { formatRequestDate, joinTimestamp } from '@/utils/http/axios1/helper';
-import { checkStatus } from '@/utils/http/axios1/checkStatus';
+import { formatRequestDate, joinTimestamp } from '@/utils/http/axios/helper';
+import { checkStatus } from '@/utils/http/axios/checkStatus';
 import { RequestOptions, Result, CreateAxiosOptions } from './types';
 // import { joinTimestamp, formatRequestDate } from './helper';
 // import { checkStatus } from './checkStatus';
@@ -221,9 +221,10 @@ const transform: AxiosTransform = {
   },
 };
 
-const { VITE_API_URL_PREFIX = '' } = import.meta.env;
-
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
+  const { VITE_API_URL_PREFIX } = import.meta.env;
+  console.log(VITE_API_URL_PREFIX);
+
   return new AAxios(
     deepMerge(
       {
@@ -254,7 +255,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 接口地址
           apiUrl: '',
           // 接口拼接地址
-          VITE_API_URL_PREFIX,
+          urlPrefix: VITE_API_URL_PREFIX,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

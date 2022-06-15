@@ -17,6 +17,9 @@ declare namespace EnumType {
 
   /** 登录模块 */
   type LoginModuleKey = keyof typeof import('@/enums').EnumLoginModule;
+
+  /** 语言 */
+  type Language = keyof typeof import('@/enums').EnumLanguage;
 }
 
 /** 请求的相关类型 */
@@ -128,6 +131,8 @@ declare namespace Theme {
     footer: Footer;
     /** 页面样式 */
     page: Page;
+    /** 中英文 */
+    language: EnumType.Language;
   }
 
   /** 布局样式 */
@@ -266,14 +271,15 @@ type GlobalMenuOption = {
   label: string;
   routeName: string;
   routePath: string;
-  icon?: () => import('vue').VNodeChild;
+  icon?: string;
   children?: GlobalMenuOption[];
 };
 
 /** 面包屑 */
-type GlobalBreadcrumb = import('naive-ui').DropdownOption & {
+type GlobalBreadcrumb = {
   key: string;
   label: string;
+  icon?: string;
   disabled: boolean;
   routeName: string;
   hasChildren: boolean;

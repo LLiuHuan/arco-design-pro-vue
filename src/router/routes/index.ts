@@ -63,4 +63,24 @@ export const constantRoutes: AuthRoute.Route[] = [
       singleLayout: 'blank',
     },
   },
+  {
+    name: 'redirect',
+    path: '/redirect',
+    component: 'self',
+    children: [
+      {
+        name: 'redirect',
+        path: '/redirect/:path(.*)',
+        component: 'self',
+        meta: {
+          title: '重定向',
+          // requiresAuth: true,
+          // icon: 'icon-park-outline:analysis',
+        },
+      },
+    ],
+    meta: {
+      title: '重定向',
+    },
+  },
 ];

@@ -52,9 +52,10 @@
 
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { ChooseImg } from '@/components/ChooseImg';
   import { register } from '@/api/system/user';
-  import { Message } from '@arco-design/web-vue';
+
   const path = import.meta.env.VITE_BASE_API;
 
   export default defineComponent({
@@ -85,7 +86,7 @@
           headerImg: '',
         }),
         visible: ref(false),
-        path: path,
+        path,
       });
       const enterAddUser = () => {
         register(state.userForm).then(() => {

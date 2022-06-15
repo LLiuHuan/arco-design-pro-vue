@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-view">
     <a-result class="result" status="403" :title="$t('exception.result.403.description')">
       <template #subtitle>
         <a-button key="back" type="primary"> {{ $t('exception.result.403.back') }}</a-button>
@@ -8,19 +8,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: '403',
-    setup() {
-      return {};
-    },
-  });
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less" scoped>
-  .container {
+  .container-view {
     position: relative;
     //background-color: var(--color-bg-1);
     height: 100%;

@@ -1,4 +1,5 @@
 <template>
+  <!--密码登陆-->
   <div class="login-form-wrapper">
     <div class="login-form-title">{{ $t('login.form.title') }}</div>
     <div class="login-form-sub-title">{{ $t('login.form.title') }}</div>
@@ -61,26 +62,23 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { Message } from '@arco-design/web-vue';
+  import { reactive, ref } from 'vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
   import { useI18n } from 'vue-i18n';
   import { useStorage } from '@vueuse/core';
-  // import { useUserStore } from '@/store';
+  import { useAuthStore } from '@/store';
   import useLoading from '@/hooks/loading';
-  import { fetchLogin } from '@/api/user';
+  import { LoginFormProps } from '@/views/base-view/login/components/PwdLogin/types';
 
-  const router = useRouter();
   const { t } = useI18n();
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
-  // const userStore = useUserStore();
+  const { login } = useAuthStore();
 
   const loginConfig = useStorage('login-config', {
     rememberPassword: true,
-    username: 'admin', // 演示默认值
-    password: 'admin', // demo default value
+    username: 'Arco', // 演示默认值
+    password: 'arco123', // demo default value
   });
   const userInfo = reactive({
     username: loginConfig.value.username,
@@ -92,20 +90,13 @@
     values,
   }: {
     errors: Record<string, ValidatedError> | undefined;
-    values: LoginData;
+    values: LoginFormProps;
   }) => {
     if (!errors) {
       setLoading(true);
       try {
-        await userStore.login(values);
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        router.push({
-          name: (redirect as string) || 'Workplace',
-          query: {
-            ...othersQuery,
-          },
-        });
-        Message.success(t('login.form.login.success'));
+        await login(values.username, values.password);
+        // 如果选中记住密码，就默认保存下来
         const { rememberPassword } = loginConfig.value;
         const { username, password } = values;
         // 实际生产环境需要进行加密存储。
@@ -113,6 +104,7 @@
         loginConfig.value.username = rememberPassword ? username : '';
         loginConfig.value.password = rememberPassword ? password : '';
       } catch (err) {
+        // 异常提示
         errorMessage.value = (err as Error).message;
       } finally {
         setLoading(false);
@@ -120,6 +112,7 @@
     }
   };
   const setRememberPassword = (value: boolean) => {
+    // 是否记住密码
     loginConfig.value.rememberPassword = value;
   };
 </script>

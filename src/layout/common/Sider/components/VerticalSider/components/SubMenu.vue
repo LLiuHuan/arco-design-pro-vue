@@ -1,37 +1,45 @@
 <template>
-  <div v-if="!item.meta.hidden">
-    <template v-if="!item.children && !isArray(item.children)">
-      <a-menu-item
-        v-if="item.path.indexOf('http://') > -1 || item.path.indexOf('https://') > -1"
-        :key="item.name"
-        @click="openPath(item.path)"
-      >
-        <component v-if="item.meta.icon" :is="item.meta.icon" />
-        {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
-      </a-menu-item>
-      <router-link v-else :to="item.path">
-        <a-menu-item :key="item.name">
-          <component v-if="item.meta.icon" :is="item.meta.icon" />
-          {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
-        </a-menu-item>
-      </router-link>
+  <a-sub-menu :key="menuInfo.key">
+    <template #title>
+      <span class="sub-menu-lable">{{ menuInfo.label }}</span>
     </template>
-    <a-sub-menu v-else :key="item.name">
-      <template #title>
-        <component v-if="item.meta.icon" :is="item.meta.icon" />
-        {{ item.meta.title.indexOf('menu.') !== -1 ? $t(item.meta.title) : item.meta.title }}
-      </template>
-      <menu-item
-        v-for="(child, index) in item.children"
-        :item="child"
-        :base-path="item.path"
-        :parent="item.name"
-        :key="index"
+    <template #icon>
+      <component
+        :is="menuInfo.icon || 'icon-menu'"
+        style="font-size: 16px; vertical-align: middle"
       />
-    </a-sub-menu>
-  </div>
+    </template>
+    <template v-for="item in menuInfo.children" :key="item.key">
+      <template v-if="!item.children">
+        <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
+          <template #icon>
+            <component :is="item.icon || 'icon-menu'" />
+          </template>
+          {{ item.label }}
+        </a-menu-item>
+      </template>
+      <template v-else>
+        <SubMenu :menu-info="item" :key="item.key" />
+      </template>
+    </template>
+  </a-sub-menu>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { useRouterPush } from '@/composables';
+
+  const { routerPush } = useRouterPush();
+  defineProps({
+    menuInfo: {
+      type: Object,
+      default: () => ({}),
+    },
+  });
+
+  function handleUpdateMenu(_key: string, item: any) {
+    const menuItem = item as GlobalMenuOption;
+    routerPush(menuItem.routePath);
+  }
+</script>
 
 <style lang="less" scoped></style>

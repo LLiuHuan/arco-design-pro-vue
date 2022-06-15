@@ -1,24 +1,28 @@
 import { defineStore } from 'pinia';
-import { darkTheme } from 'naive-ui';
-import { getThemeSettings, getNaiveThemeOverrides } from './helpers';
+import { getNaiveThemeOverrides, getThemeSettings } from './helpers';
 
 type ThemeState = Theme.Setting;
 
 export const useThemeStore = defineStore('theme-store', {
   state: (): ThemeState => getThemeSettings(),
   getters: {
-    /** naiveUI的主题配置 */
+    /** 主题配置 无用 */
     naiveThemeOverrides(state) {
       const overrides = getNaiveThemeOverrides({ primary: state.themeColor, ...state.otherColor });
       return overrides;
     },
-    /** naive-ui暗黑主题 */
+    /** 暗黑主题 */
     naiveTheme(state) {
-      return state.darkMode ? darkTheme : undefined;
+      // const darkTheme = document.body.getAttribute('arco-theme');
+      return state.darkMode ? 'dark' : '';
     },
     pageAnimateMode(state) {
       return state.page.animate ? state.page.animateMode : undefined;
-    }
+    },
+    /** 语言 */
+    getLanguage(state) {
+      return state.language ? state.language : 'zh-CN';
+    },
   },
   actions: {
     /** 重置theme状态 */
@@ -146,6 +150,12 @@ export const useThemeStore = defineStore('theme-store', {
     /** 设置页面过渡动画类型 */
     setPageAnimateMode(mode: EnumType.ThemeAnimateMode) {
       this.page.animateMode = mode;
-    }
-  }
+    },
+    /** 设置中英文 */
+    setLanguage(language: EnumType.Language) {
+      this.language = language;
+      // localStorage.setItem('arco-locale', value);
+      // Message.success(i18.t('navbar.action.locale'));
+    },
+  },
 });

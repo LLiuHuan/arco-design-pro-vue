@@ -1,3 +1,5 @@
+// 水印功能
+
 export interface watermarkType {
   zIndex?: number;
   rotate?: number;
@@ -12,7 +14,7 @@ export interface watermarkType {
 }
 
 const watermark = {
-  set: function (contents: string[] | string, type: watermarkType) {
+  set(contents: string[] | string, type: watermarkType) {
     const canvas = document.createElement('canvas');
     canvas.width = type.width || 150;
     canvas.height = type.height || 120;
@@ -22,12 +24,12 @@ const watermark = {
       // 控制文字的旋转角度和上下位置
       shuiyin.rotate((-(type.rotate || 20) * Math.PI) / 180);
       shuiyin.translate(type.offsets?.x || -50, type.offsets?.y || 20);
-      //文字颜色
+      // 文字颜色
       shuiyin.fillStyle = type.fillStyle || '#868686';
-      //文字样式
+      // 文字样式
       shuiyin.font = type.font || '100 16px Microsoft JhengHei ';
 
-      if (typeof contents == 'string') {
+      if (typeof contents === 'string') {
         shuiyin.fillText(contents, canvas.width / 3, canvas.height / 2);
       } else {
         contents.forEach((item, index) => {
@@ -56,12 +58,12 @@ const watermark = {
     watermark.classList.add('watermark');
     document.body.appendChild(watermark);
 
-    //此方法是防止用户通过控制台修改样式去除水印效果
+    // 此方法是防止用户通过控制台修改样式去除水印效果
     /* MutationObserver 是一个可以监听DOM结构变化的接口。 */
     const observer = new MutationObserver(() => {
       const wmInstance = document.querySelector('.watermark');
       if ((wmInstance && wmInstance.getAttribute('style') !== styleStr) || !wmInstance) {
-        //如果标签在，只修改了属性，重新赋值属性
+        // 如果标签在，只修改了属性，重新赋值属性
         if (wmInstance) {
           // 避免一直触发
           // observer.disconnect();
@@ -85,7 +87,7 @@ const watermark = {
       childList: true,
     });
   },
-  close: function () {
+  close() {
     /* 关闭页面的水印，即要移除水印标签 */
     const watermark = document.querySelector('.watermark');
     if (watermark) {

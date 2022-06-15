@@ -1,5 +1,5 @@
 const setting = {
-  //主题
+  // 主题
   Theme: 'dark',
 };
 

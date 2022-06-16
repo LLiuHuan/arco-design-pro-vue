@@ -1,1 +1,0 @@
-import{d as s,q as t,G as a,n}from"./index.afad4720.js";const c={class:"h-full"},i=s({__name:"index",setup(o){const e="https://staging-cn.vuejs.org/";return(r,l)=>(n(),t("div",c,[a("iframe",{class:"wh-full",src:e})]))}});export{i as default};

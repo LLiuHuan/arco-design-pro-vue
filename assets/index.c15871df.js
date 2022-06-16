@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{d as n,q as a,n as t}from"./index.f1b51aa1.js";const r=n({name:"DataAnalysis",setup(){return{}}});function s(o,c,p,i,_,f){return t(),a("h1",null,"DataAnalysis")}var d=e(r,[["render",s]]);export{d as default};

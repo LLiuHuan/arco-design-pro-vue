@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vue_export-helper.21dcd24c.js";import{d as e,f as a,e as d}from"./index.dd72c641.js";var s=r(e({name:"ListCard",setup:()=>({})}),[["render",function(r,e,s,t,n,i){return d(),a("h1",null,"ListCard")}]]);export{s as default};

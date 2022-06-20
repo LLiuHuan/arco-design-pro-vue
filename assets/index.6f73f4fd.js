@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vue_export-helper.21dcd24c.js";import{d as e,f as o,e as p}from"./index.dd72c641.js";var u=r(e({name:"FormGroup",setup:()=>({})}),[["render",function(r,e,u,a,d,n){return p(),o("h1",null,"FormGroup")}]]);export{u as default};

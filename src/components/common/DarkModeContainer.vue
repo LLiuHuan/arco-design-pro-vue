@@ -9,7 +9,7 @@
   interface Props {
     inverted?: boolean; // 反转色调
   }
-  const props = withDefaults(defineProps<Props>(), {
+  withDefaults(defineProps<Props>(), {
     inverted: false,
   });
 </script>

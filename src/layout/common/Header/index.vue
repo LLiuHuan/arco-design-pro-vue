@@ -29,6 +29,8 @@
         <ThemeModel />
         <Locale />
         <Fullscreen />
+        <Setting />
+        <User />
       </div>
     </dark-mode-container>
   </a-layout-header>
@@ -39,7 +41,16 @@
   import { useAppStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
   import { Logo } from '@/layout/common';
-  import { Breadcrumb, MenuCollapse, Github, ThemeModel, Locale, Fullscreen } from './components';
+  import {
+    Breadcrumb,
+    MenuCollapse,
+    Github,
+    ThemeModel,
+    Locale,
+    Fullscreen,
+    User,
+    Setting,
+  } from './components';
 
   interface Props {
     /** 显示logo */

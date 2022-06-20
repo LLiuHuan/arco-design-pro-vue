@@ -64,13 +64,13 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-  import { useI18n } from 'vue-i18n';
+  // import { useI18n } from 'vue-i18n';
   import { useStorage } from '@vueuse/core';
   import { useAuthStore } from '@/store';
   import useLoading from '@/hooks/loading';
   import { LoginFormProps } from '@/views/base-view/login/components/PwdLogin/types';
 
-  const { t } = useI18n();
+  // const { t } = useI18n();
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
   const { login } = useAuthStore();

@@ -107,6 +107,7 @@ const defaultThemeSetting: Theme.Setting = {
       { value: 'zoom-out', label: EnumThemeAnimateMode['zoom-out'] },
     ],
   },
+  language: 'zh-CN',
 };
 
 export const themeSetting = (jsonSetting as Theme.Setting) || defaultThemeSetting;

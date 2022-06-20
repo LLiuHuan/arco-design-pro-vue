@@ -2,6 +2,7 @@ import { unref } from 'vue';
 import { defineStore } from 'pinia';
 import { Message } from '@arco-design/web-vue';
 import { router } from '@/router';
+import { useRouteStore } from '@/store';
 import { useRouterPush } from '@/composables';
 import {
   clearAuthStorage,
@@ -13,7 +14,6 @@ import {
 } from '@/utils';
 import { fetchLogin, fetchUserInfo } from '@/api';
 import { useTabStore } from '../tab';
-import { useRouteStore } from '../route';
 
 interface AuthState {
   /** 用户信息 */

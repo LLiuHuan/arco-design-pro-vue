@@ -11,6 +11,7 @@
         <a-layout-footer>Footer</a-layout-footer>
       </a-layout>
     </a-layout>
+    <Setting />
   </a-layout>
 </template>
 
@@ -18,7 +19,7 @@
   import { computed } from 'vue';
   import { useAppStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
-  import { Sider, Header, Tab, Content } from '@/layout/common';
+  import { Sider, Header, Tab, Content, Setting } from '@/layout/common';
 
   const { headerProps } = useBasicLayout();
 
@@ -34,6 +35,9 @@
     let { height } = theme.header;
     if (theme.tab.visible) {
       height += theme.tab.height;
+    }
+    if (!theme.fixedHeaderAndTab) {
+      height = 0;
     }
     return height;
   });

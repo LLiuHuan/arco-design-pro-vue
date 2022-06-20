@@ -27,11 +27,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import { useAppStore, useRouteStore, useThemeStore } from '@/store';
   import { useRouterPush } from '@/composables';
-  import { getActiveKeyPathsOfMenus } from '@/utils';
   import SubMenu from './SubMenu.vue';
 
   const route = useRoute();

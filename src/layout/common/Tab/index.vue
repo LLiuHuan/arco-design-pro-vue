@@ -2,8 +2,15 @@
   <dark-mode-container
     class="arco-layout-tab"
     :class="theme.fixedHeaderAndTab ? 'layout-tab-fixed' : 'layout-tab'"
+    :style="{
+      height: theme.tab.height + 'px',
+      top: theme.header.height + 'px',
+      paddingLeft: tabLeft + 'px',
+    }"
     v-if="theme.tab.visible"
   >
+    <!--        padding-left: calc(v-bind(tabLeft) * 1px);
+-->
     <div class="layout-tab">
       <span
         class="tabs-card-prev"
@@ -25,6 +32,7 @@
                   :id="`tag${element.path}`"
                   class="layout-tab-scroll-item"
                   :class="{ 'active-item': tab.activeTab === element.path }"
+                  :style="{ height: theme.tab.height - 12 + 'px' }"
                   @click.stop="goPath(element.path)"
                 >
                   <span :class="{ activeTab: tab.activeTab === element.path }">
@@ -96,9 +104,6 @@
     }
     return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
   });
-
-  const { height: headerHeight } = theme.header;
-  const { height: tabHeight } = theme.tab;
 
   function init() {
     tab.iniTabStore(route);
@@ -191,8 +196,6 @@
 <style lang="less" scoped>
   .arco-layout-tab {
     position: fixed;
-    height: calc(v-bind(tabHeight) * 1px);
-    top: calc(v-bind(headerHeight) * 1px);
     min-width: 900px;
     left: 0;
     flex-shrink: 0;
@@ -255,7 +258,6 @@
           background: var(--color-fill-2);
           color: var(--color-text-2);
           text-decoration: none;
-          height: calc(v-bind(tabHeight) * 1px - 12px);
           padding: 6px 16px 4px;
           border-radius: 3px;
           margin-right: 6px;
@@ -323,7 +325,6 @@
   .layout-tab-fixed {
     position: fixed;
     z-index: 999;
-    padding-left: calc(v-bind(tabLeft) * 1px);
     transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     transform: translateX(0px);
   }
@@ -340,6 +341,6 @@
   }
 
   .activeTab {
-    color: red;
+    color: rgb(var(--arcoblue-6));
   }
 </style>

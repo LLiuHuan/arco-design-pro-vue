@@ -19,8 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
-  import { Message } from '@arco-design/web-vue';
+  import { computed } from 'vue';
   import { useAppStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
   import { Logo } from '@/layout/common';

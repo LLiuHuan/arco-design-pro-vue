@@ -1,5 +1,5 @@
 <template>
-  <div class="main-body container">
+  <div class="container-view">
     <h1>1111111111</h1>
 
     <a-button @click="theme.setTabVisible(!theme.tab.visible)">a</a-button>

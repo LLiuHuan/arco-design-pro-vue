@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { useAppStore, useRouteStore, useThemeStore } from '@/store';
+  import { useThemeStore } from '@/store';
 
   interface Props {
     /** 显示padding */
@@ -26,7 +26,6 @@
   });
 
   const theme = useThemeStore();
-  const routeStore = useRouteStore();
 
   const getTransitionName = computed(() => {
     return theme.pageAnimateMode;

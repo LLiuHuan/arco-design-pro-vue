@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { useI18n } from 'vue-i18n';
   import { useThemeStore } from '@/store';
   import useLocale from '@/hooks/locale';
 
@@ -26,7 +25,6 @@
   const setLanguage = () => {
     const language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
     theme.setLanguage(language);
-    // locale.value = language;
     changeLocale(language);
   };
 

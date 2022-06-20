@@ -1,0 +1,1 @@
+import{_ as e}from"./ExceptionBase.b606d0f9.js";import{d as s,G as d,J as a,e as t}from"./index.1d92e195.js";/* empty css              *//* empty css              */const i=s({__name:"index",setup:s=>(s,i)=>(t(),d(a(e),{type:"404"}))});export{i as default};

@@ -1,1 +1,0 @@
-import{_ as a}from"./plugin-vue_export-helper.21dcd24c.js";import{d as e,f as r,e as s}from"./index.bcb9938a.js";var n=a(e({name:"DataAnalysis",setup:()=>({})}),[["render",function(a,e,n,t,i,l){return s(),r("h1",null,"DataAnalysis")}]]);export{n as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{d as r,f as a,e as d}from"./index.a00d870d.js";var n=e(r({name:"SearchTable",setup:()=>({})}),[["render",function(e,r,n,s,t,l){return d(),a("h1",null,"SearchTable")}]]);export{n as default};

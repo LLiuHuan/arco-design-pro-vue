@@ -9,9 +9,7 @@
     }"
     v-if="theme.tab.visible"
   >
-    <!--        padding-left: calc(v-bind(tabLeft) * 1px);
--->
-    <div class="layout-tab">
+    <div class="layout-tab" :style="{ height: theme.tab.height + 'px' }">
       <span
         class="tabs-card-prev"
         @click="scrollPrev"
@@ -160,19 +158,19 @@
     scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
   }
 
-  // 滚动 右
-  function scrollNext() {
-    const containerWidth = navScroll.value.offsetWidth;
-    const navWidth = navScroll.value.scrollWidth;
-    const currentScroll = navScroll.value.scrollLeft;
-
-    if (navWidth - currentScroll <= containerWidth) return;
-    const scrollLeft =
-      navWidth - currentScroll > containerWidth * 2
-        ? currentScroll + containerWidth
-        : navWidth - containerWidth;
-    scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
-  }
+  // // 滚动 右
+  // function scrollNext() {
+  //   const containerWidth = navScroll.value.offsetWidth;
+  //   const navWidth = navScroll.value.scrollWidth;
+  //   const currentScroll = navScroll.value.scrollLeft;
+  //
+  //   if (navWidth - currentScroll <= containerWidth) return;
+  //   const scrollLeft =
+  //     navWidth - currentScroll > containerWidth * 2
+  //       ? currentScroll + containerWidth
+  //       : navWidth - containerWidth;
+  //   scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
+  // }
 
   watch(
     () => route.fullPath,
@@ -206,7 +204,6 @@
     border-bottom: 1px solid var(--color-border);
 
     .layout-tab {
-      height: calc(v-bind(tabHeight) * 1px);
       padding-top: 6px;
       padding-bottom: 6px;
       padding-left: 6px;

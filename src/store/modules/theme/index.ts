@@ -76,7 +76,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.showReload = visible;
     },
     /** 设置头部高度 */
-    setHeaderHeight(height: number | null) {
+    setHeaderHeight(height: number | undefined) {
       if (height) {
         this.header.height = height;
       }
@@ -94,7 +94,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.tab.visible = visible;
     },
     /** 设置多页签高度 */
-    setTabHeight(height: number | null) {
+    setTabHeight(height: number | undefined) {
       if (height) {
         this.tab.height = height;
       }
@@ -108,7 +108,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.tab.isCache = isCache;
     },
     /** 侧边栏宽度 */
-    setSiderWidth(width: number | null) {
+    setSiderWidth(width: number | undefined) {
       if (width) {
         this.sider.width = width;
       }
@@ -118,7 +118,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.sider.collapsedWidth = width;
     },
     /** vertical-mix模式下侧边栏宽度 */
-    setMixSiderWidth(width: number | null) {
+    setMixSiderWidth(width: number | undefined) {
       if (width) {
         this.sider.mixWidth = width;
       }

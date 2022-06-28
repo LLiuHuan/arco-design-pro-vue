@@ -6,20 +6,19 @@
       :png-logo="LogoPng"
       :style="{ height: theme.header.height + 'px' }"
     />
-    <VerticalMenu />
+    <Menu :menus="routeStore.menus" :mode="'vertical'" />
   </dark-mode-container>
 </template>
 
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { useAppStore, useThemeStore } from '@/store';
-  import { useBasicLayout } from '@/composables';
-  import { Logo } from '@/layout/common';
+  import { useAppStore, useRouteStore, useThemeStore } from '@/store';
+  import { Logo, Menu } from '@/layout/common';
   import LogoPng from '@/assets/logo.png';
-  import { VerticalMenu } from './components';
 
   const app = useAppStore();
   const theme = useThemeStore();
+  const routeStore = useRouteStore();
 
   const isHorizontalMix = computed(() => theme.layout.mode === 'horizontal-mix');
   const showTitle = computed(() => !app.siderCollapse && theme.layout.mode !== 'vertical-mix');

@@ -5,6 +5,7 @@
       height: theme.header.height + 'px',
       paddingLeft: siderVisible ? headerLeft + 'px' : 0,
     }"
+    style="z-index: 1002"
   >
     <dark-mode-container class="header flex-y-center h-full" :inverted="theme.header.inverted">
       <Logo
@@ -23,7 +24,8 @@
         class="flex-y-center h-full flex-1"
         :style="{ justifyContent: theme.menu.horizontalPosition }"
       >
-        <HeaderMenu />
+        <!--        <HeaderMenu />-->
+        <Menu :menus="routeStore.menus" :mode="'horizontal'" />
       </div>
       <div class="flex justify-end h-full pr-30px">
         <Github />
@@ -39,9 +41,9 @@
 
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { useAppStore, useThemeStore } from '@/store';
+  import { useAppStore, useRouteStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
-  import { Logo } from '@/layout/common';
+  import { Logo, Menu } from '@/layout/common';
   import LogoPng from '@/assets/logo.png';
   import {
     Breadcrumb,
@@ -52,7 +54,6 @@
     Fullscreen,
     User,
     Setting,
-    HeaderMenu,
   } from './components';
 
   interface Props {
@@ -68,13 +69,13 @@
 
   const theme = useThemeStore();
   const app = useAppStore();
+  const routeStore = useRouteStore();
 
   const { siderVisible } = useBasicLayout();
 
   const headerLeft = computed((): number => {
-    if (!theme.fixedHeaderAndTab) {
-      return 0;
-    }
+    if (!theme.fixedHeaderAndTab) return 0;
+    if (theme.layout.mode.includes('horizontal-mix')) return 0;
     const { siderWidth, siderCollapsedWidth } = useBasicLayout();
     return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
   });

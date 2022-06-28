@@ -78,4 +78,14 @@
     width: 0 !important;
     height: 0;
   }
+
+  :deep(.arco-menu-horizontal .arco-menu-inner) {
+    overflow: hidden;
+    padding: 9px 10px 8px 10px;
+  }
+
+  :deep(.arco-menu-selected-label) {
+    bottom: -8px;
+    height: 2px;
+  }
 </style>

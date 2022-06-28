@@ -53,6 +53,9 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 设置布局模式 */
     setLayoutMode(mode: EnumType.ThemeLayoutMode) {
+      if (mode === 'horizontal-mix') {
+        this.fixedHeaderAndTab = true;
+      }
       this.layout.mode = mode;
     },
     /** 设置侧边栏反转色 */

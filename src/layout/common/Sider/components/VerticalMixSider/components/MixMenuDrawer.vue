@@ -18,14 +18,6 @@
         </div>
       </header>
       <div class="flex-1-hidden">
-        <!--        <a-menu-->
-        <!--          :value="activeKey"-->
-        <!--          :options="menus"-->
-        <!--          :expanded-keys="expandedKeys"-->
-        <!--          :indent="18"-->
-        <!--          @update:value="handleUpdateMenu"-->
-        <!--          @update:expanded-keys="handleUpdateExpandedKeys"-->
-        <!--        />-->
         <Menu :menus="menus" />
       </div>
     </dark-mode-container>

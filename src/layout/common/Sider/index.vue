@@ -4,7 +4,10 @@
     hide-trigger
     collapsible
     :collapsed="!isVerticalMix ? app.siderCollapse : false"
-    :style="{ width: headerLeft + 'px' }"
+    :style="{
+      width: headerLeft + 'px',
+      paddingTop: !isHorizontalMix ? 0 : theme.header.height + 'px',
+    }"
     v-if="siderVisible"
   >
     <VerticalMixSider v-if="isVerticalMix" />
@@ -23,6 +26,7 @@
   const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
 
   const isVerticalMix = computed(() => theme.layout.mode === 'vertical-mix');
+  const isHorizontalMix = computed(() => theme.layout.mode === 'horizontal-mix');
 
   const headerLeft = computed((): number => {
     return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;

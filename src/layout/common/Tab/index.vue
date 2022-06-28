@@ -5,13 +5,11 @@
     :style="{
       height: theme.tab.height + 'px',
       top: theme.header.height + 'px',
-      paddingLeft: tabLeft + 'px',
+      paddingLeft: !siderVisible ? 0 : tabLeft + 'px',
     }"
     v-if="theme.tab.visible"
   >
-    <!--        padding-left: calc(v-bind(tabLeft) * 1px);
--->
-    <div class="layout-tab">
+    <div class="layout-tab" :style="{ height: theme.tab.height + 'px' }">
       <span
         class="tabs-card-prev"
         @click="scrollPrev"
@@ -83,6 +81,7 @@
   const app = useAppStore();
   const tab = useTabStore();
   const route = useRoute();
+  const { siderWidth, siderCollapsedWidth, siderVisible } = useBasicLayout();
 
   // refs
   const navScroll = ref();
@@ -98,7 +97,7 @@
   };
 
   const tabLeft = computed((): number => {
-    const { siderWidth, siderCollapsedWidth } = useBasicLayout();
+    // 固定多页签
     if (!theme.fixedHeaderAndTab) {
       return 0;
     }
@@ -206,7 +205,6 @@
     border-bottom: 1px solid var(--color-border);
 
     .layout-tab {
-      height: calc(v-bind(tabHeight) * 1px);
       padding-top: 6px;
       padding-bottom: 6px;
       padding-left: 6px;

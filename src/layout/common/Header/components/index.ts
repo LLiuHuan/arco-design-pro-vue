@@ -6,5 +6,16 @@ import Locale from './Locale.vue';
 import Fullscreen from './Fullscreen.vue';
 import User from './User.vue';
 import Setting from './Setting.vue';
+import HeaderMenu from './HeaderMenu.vue';
 
-export { MenuCollapse, Breadcrumb, Github, ThemeModel, Locale, Fullscreen, User, Setting };
+export {
+  MenuCollapse,
+  Breadcrumb,
+  Github,
+  ThemeModel,
+  Locale,
+  Fullscreen,
+  User,
+  Setting,
+  HeaderMenu,
+};

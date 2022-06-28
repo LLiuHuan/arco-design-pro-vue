@@ -1,5 +1,5 @@
 <template>
-  <a-divider orientation="center">界面功能</a-divider>
+  <a-divider orientation="center">{{ $t('settings.interface.functions') }}</a-divider>
   <a-space direction="vertical" fill>
     <!--    <setting-menu label="侧边栏反转色">-->
     <!--      <a-switch :model-value="theme.sider.inverted" @change="theme.setSiderInverted" />-->
@@ -7,8 +7,12 @@
     <!--    <setting-menu label="头部反转色">-->
     <!--      <a-switch :model-value="theme.header.inverted" @change="theme.setHeaderInverted" />-->
     <!--    </setting-menu>-->
-    <setting-menu label="固定头部和多页签">
-      <a-switch :model-value="theme.fixedHeaderAndTab" @change="theme.setIsFixedHeaderAndTab" />
+    <setting-menu :label="$t('settings.interface.functions.fixed.header')">
+      <a-switch
+        :model-value="theme.fixedHeaderAndTab"
+        @change="theme.setIsFixedHeaderAndTab"
+        :disabled="theme.layout.mode === 'horizontal-mix'"
+      />
     </setting-menu>
     <!--    <setting-menu label="顶部菜单位置">-->
     <!--      <n-select-->
@@ -19,7 +23,7 @@
     <!--        @update:value="theme.setHorizontalMenuPosition"-->
     <!--      />-->
     <!--    </setting-menu>-->
-    <setting-menu label="头部高度">
+    <setting-menu :label="$t('settings.interface.functions.header.height')">
       <a-input-number
         class="max-w-120px"
         size="small"
@@ -28,7 +32,7 @@
         :step="1"
       />
     </setting-menu>
-    <setting-menu label="多页签高度">
+    <setting-menu :label="$t('settings.interface.functions.tab.height')">
       <a-input-number
         class="max-w-120px"
         size="small"

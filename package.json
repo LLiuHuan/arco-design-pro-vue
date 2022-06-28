@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "cross-env VITE_ENV_TYPE=dev vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:esno": "vite build && esno ./build/script/postBuild.ts",
     "serve": "vite preview",
     "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0 -n ./changelog-option.js",
     "deploy": "cross-env NODE_ENV=development vue-tsc --noEmit && vite build && gh-pages -d dist"

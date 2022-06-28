@@ -5,7 +5,7 @@
     :style="{
       height: theme.tab.height + 'px',
       top: theme.header.height + 'px',
-      paddingLeft: tabLeft + 'px',
+      paddingLeft: !siderVisible ? 0 : tabLeft + 'px',
     }"
     v-if="theme.tab.visible"
   >
@@ -81,6 +81,7 @@
   const app = useAppStore();
   const tab = useTabStore();
   const route = useRoute();
+  const { siderWidth, siderCollapsedWidth, siderVisible } = useBasicLayout();
 
   // refs
   const navScroll = ref();
@@ -96,7 +97,7 @@
   };
 
   const tabLeft = computed((): number => {
-    const { siderWidth, siderCollapsedWidth } = useBasicLayout();
+    // 固定多页签
     if (!theme.fixedHeaderAndTab) {
       return 0;
     }
@@ -158,19 +159,19 @@
     scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
   }
 
-  // // 滚动 右
-  // function scrollNext() {
-  //   const containerWidth = navScroll.value.offsetWidth;
-  //   const navWidth = navScroll.value.scrollWidth;
-  //   const currentScroll = navScroll.value.scrollLeft;
-  //
-  //   if (navWidth - currentScroll <= containerWidth) return;
-  //   const scrollLeft =
-  //     navWidth - currentScroll > containerWidth * 2
-  //       ? currentScroll + containerWidth
-  //       : navWidth - containerWidth;
-  //   scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
-  // }
+  // 滚动 右
+  function scrollNext() {
+    const containerWidth = navScroll.value.offsetWidth;
+    const navWidth = navScroll.value.scrollWidth;
+    const currentScroll = navScroll.value.scrollLeft;
+
+    if (navWidth - currentScroll <= containerWidth) return;
+    const scrollLeft =
+      navWidth - currentScroll > containerWidth * 2
+        ? currentScroll + containerWidth
+        : navWidth - containerWidth;
+    scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
+  }
 
   watch(
     () => route.fullPath,

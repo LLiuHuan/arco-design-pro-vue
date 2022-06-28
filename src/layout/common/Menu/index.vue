@@ -1,16 +1,14 @@
 <template>
   <div class="flex-1-hidden">
     <a-menu
-      class="flex-1-hidden"
+      class="flex-1-hidden aaabbb"
       :mode="mode"
       :style="{ width: '100%', height: '100%' }"
-      :collapsed="app.siderCollapse"
-      :collapsed-width="theme.sider.collapsedWidth"
       v-model:selectedKeys="defaultPath"
       v-model:openKeys="defaultExpandKeys"
       auto-scroll-into-view
     >
-      <template v-for="item of routeStore.menus" :key="item.key">
+      <template v-for="item of menus" :key="item.key">
         <template v-if="!item.children">
           <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
             <template #icon>
@@ -30,14 +28,12 @@
 <script lang="ts" setup>
   import { ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import { useAppStore, useRouteStore, useThemeStore } from '@/store';
-  import { useBasicLayout, useRouterPush } from '@/composables';
+  import { useAppStore, useThemeStore } from '@/store';
+  import { useRouterPush } from '@/composables';
   import SubMenu from './SubMenu.vue';
 
   const route = useRoute();
-  const app = useAppStore();
   const theme = useThemeStore();
-  const routeStore = useRouteStore();
   const { routerPush } = useRouterPush();
   const defaultPath = ref([] as Array<string>);
   const defaultExpandKeys = ref([] as Array<string>);
@@ -47,7 +43,20 @@
     routerPush(menuItem.routePath);
   }
 
-  const { mode } = useBasicLayout();
+  type LayoutMode = 'vertical' | 'horizontal';
+
+  interface Props {
+    /** mode */
+    mode?: LayoutMode;
+    /** 菜单数据 */
+    menus?: GlobalMenuOption[];
+    /** 是否折叠 */
+    siderCollapse?: boolean;
+  }
+  withDefaults(defineProps<Props>(), {
+    mode: 'vertical',
+    siderCollapse: false,
+  });
 
   watch(
     () => route.name,

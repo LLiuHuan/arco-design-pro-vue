@@ -16,6 +16,7 @@ declare namespace AuthRoute {
     // 自定义路由
     | 'dashboard'
     | 'dashboard_analysis'
+    | 'dashboard_analysis_table'
     | 'dashboard_workbench'
     | 'document'
     | 'document_vue'

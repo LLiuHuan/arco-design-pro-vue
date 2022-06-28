@@ -1,21 +1,13 @@
 <template>
-  <a-layout-sider
-    class="layout-sider"
-    hide-trigger
-    collapsible
-    :collapsed="app.siderCollapse"
-    :style="{ width: headerLeft + 'px' }"
-  >
-    <dark-mode-container class="flex-col-stretch h-full" :inverted="theme.sider.inverted">
-      <Logo
-        v-if="!isHorizontalMix"
-        :show-title="showTitle"
-        :png-logo="LogoPng"
-        :style="{ height: theme.header.height + 'px' }"
-      />
-      <VerticalMenu />
-    </dark-mode-container>
-  </a-layout-sider>
+  <dark-mode-container class="flex-col-stretch h-full" :inverted="theme.sider.inverted">
+    <Logo
+      v-if="!isHorizontalMix"
+      :show-title="showTitle"
+      :png-logo="LogoPng"
+      :style="{ height: theme.header.height + 'px' }"
+    />
+    <VerticalMenu />
+  </dark-mode-container>
 </template>
 
 <script lang="ts" setup>
@@ -31,11 +23,6 @@
 
   const isHorizontalMix = computed(() => theme.layout.mode === 'horizontal-mix');
   const showTitle = computed(() => !app.siderCollapse && theme.layout.mode !== 'vertical-mix');
-
-  const headerLeft = computed((): number => {
-    const { siderWidth, siderCollapsedWidth } = useBasicLayout();
-    return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
-  });
 </script>
 
 <style lang="less" scoped>

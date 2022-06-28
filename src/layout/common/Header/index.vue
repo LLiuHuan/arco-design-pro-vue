@@ -3,12 +3,14 @@
     :class="theme.fixedHeaderAndTab ? 'layout-header-fixed' : 'layout-header'"
     :style="{
       height: theme.header.height + 'px',
+      paddingLeft: siderVisible ? headerLeft + 'px' : 0,
     }"
   >
     <dark-mode-container class="header flex-y-center h-full" :inverted="theme.header.inverted">
       <Logo
         v-if="props.showLogo"
         :show-title="true"
+        :png-logo="LogoPng"
         class="h-full"
         :style="{ width: theme.sider.width + 'px' }"
       />
@@ -18,11 +20,10 @@
       </div>
       <div
         v-else
-        class="flex-y-center h-full"
+        class="flex-y-center h-full flex-1"
         :style="{ justifyContent: theme.menu.horizontalPosition }"
       >
-        <!--        <header-menu />-->
-        HeaderMenu
+        <HeaderMenu />
       </div>
       <div class="flex justify-end h-full pr-30px">
         <Github />
@@ -41,6 +42,7 @@
   import { useAppStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
   import { Logo } from '@/layout/common';
+  import LogoPng from '@/assets/logo.png';
   import {
     Breadcrumb,
     MenuCollapse,
@@ -50,6 +52,7 @@
     Fullscreen,
     User,
     Setting,
+    HeaderMenu,
   } from './components';
 
   interface Props {
@@ -66,10 +69,12 @@
   const theme = useThemeStore();
   const app = useAppStore();
 
+  const { siderVisible } = useBasicLayout();
+
   const headerLeft = computed((): number => {
-    // if (!theme.fixedHeaderAndTab) {
-    //   return 0;
-    // }
+    if (!theme.fixedHeaderAndTab) {
+      return 0;
+    }
     const { siderWidth, siderCollapsedWidth } = useBasicLayout();
     return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
   });
@@ -92,7 +97,6 @@
     right: 0;
     transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     transform: translateX(0px);
-    padding-left: calc(v-bind(headerLeft) * 1px);
   }
 
   .layout-header {

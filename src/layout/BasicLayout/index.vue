@@ -1,7 +1,8 @@
 <template>
   <a-layout class="admin-layout">
     <Sider />
-    <a-layout class="layout-body" :style="{ marginLeft: headerLeft + 'px' }">
+    <a-layout class="layout-body">
+      <!--    <a-layout class="layout-body" :style="{ marginLeft: !siderVisible ? 0 : headerLeft + 'px' }">-->
       <Header v-bind="headerProps" />
       <Tab />
       <a-layout>
@@ -21,15 +22,14 @@
   import { useBasicLayout } from '@/composables';
   import { Sider, Header, Tab, Content, Setting } from '@/layout/common';
 
-  const { headerProps } = useBasicLayout();
+  const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
 
   const theme = useThemeStore();
   const app = useAppStore();
 
-  const headerLeft = computed((): number => {
-    const { siderWidth, siderCollapsedWidth } = useBasicLayout();
-    return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
-  });
+  // const headerLeft = computed((): number => {
+  //   return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
+  // });
 
   const headerHeight = computed((): number => {
     let { height } = theme.header;

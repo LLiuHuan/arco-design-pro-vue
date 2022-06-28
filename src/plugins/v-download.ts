@@ -1,7 +1,6 @@
 import type { App, ObjectDirective } from 'vue';
 import { loadEnv } from 'vite';
 import { isExternal } from '@/utils';
-// import { wrapperEnv } from '../../build/utils';
 
 export const downLoadUrl: ObjectDirective = {
   mounted(el: any, binding: any) {
@@ -15,8 +14,6 @@ export const downLoadUrl: ObjectDirective = {
           const root = process.cwd();
           const mode = import.meta.env.MODE;
           const env = loadEnv(mode, root);
-          // const viteEnv = wrapperEnv(env);
-          // const { VITE_PORT } = viteEnv;
           url = `${env.VITE_PORT}/${binding.value}`; // 若是不完整的url则需要拼接baseURL
         }
         // 这里是将url转成blob地址，

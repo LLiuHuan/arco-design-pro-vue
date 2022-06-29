@@ -41,10 +41,10 @@
         :step="1"
       />
     </setting-menu>
-    <setting-menu label="多页签缓存">
+    <setting-menu :label="$t('settings.interface.functions.tab.cache')">
       <a-switch :model-value="theme.tab.isCache" @change="theme.setTabIsCache" />
     </setting-menu>
-    <setting-menu label="侧边栏展开宽度">
+    <setting-menu :label="$t('settings.interface.functions.sidebar.width')">
       <a-input-number
         class="max-w-120px"
         size="small"
@@ -53,7 +53,7 @@
         :step="10"
       />
     </setting-menu>
-    <setting-menu label="左侧混合侧边栏展开宽度">
+    <setting-menu :label="$t('settings.interface.functions.sidebar.blend.width')">
       <a-input-number
         class="max-w-120px"
         size="small"
@@ -62,7 +62,7 @@
         :step="10"
       />
     </setting-menu>
-    <setting-menu label="固定底部">
+    <setting-menu :label="$t('settings.interface.functions.fixed.bottom')">
       <a-switch :model-value="theme.footer.fixed" @change="theme.setFooterIsFixed" />
     </setting-menu>
   </a-space>

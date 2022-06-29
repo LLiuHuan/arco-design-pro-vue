@@ -5,5 +5,6 @@ import Tab from './Tab/index.vue';
 import Content from './Content/index.vue';
 import Setting from './Setting/index.vue';
 import Menu from './Menu/index.vue';
+import Footer from './Footer/index.vue';
 
-export { Logo, Sider, Header, Tab, Content, Setting, Menu };
+export { Logo, Sider, Header, Tab, Content, Setting, Menu, Footer };

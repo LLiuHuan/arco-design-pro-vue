@@ -22,14 +22,16 @@
 
   const theme = useThemeStore();
 
-  const setLanguage = () => {
-    const language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
+  const setLanguage = (language: EnumType.Language | undefined = 'zh-CN') => {
+    if (!language) {
+      language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
+    }
     theme.setLanguage(language);
     changeLocale(language);
   };
 
   const init = () => {
-    setLanguage();
+    setLanguage('zh-CN');
   };
 
   init();

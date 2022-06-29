@@ -28,12 +28,12 @@
 <script lang="ts" setup>
   import { ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import { useAppStore, useThemeStore } from '@/store';
+  // import { useAppStore, useThemeStore } from '@/store';
   import { useRouterPush } from '@/composables';
   import SubMenu from './SubMenu.vue';
 
   const route = useRoute();
-  const theme = useThemeStore();
+  // const theme = useThemeStore();
   const { routerPush } = useRouterPush();
   const defaultPath = ref([] as Array<string>);
   const defaultExpandKeys = ref([] as Array<string>);

@@ -23,7 +23,7 @@
 
   const theme = useThemeStore();
   const app = useAppStore();
-  const { mode, headerProps, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
+  const { siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
 
   const isVerticalMix = computed(() => theme.layout.mode === 'vertical-mix');
   const isHorizontalMix = computed(() => theme.layout.mode === 'horizontal-mix');

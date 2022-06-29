@@ -28,7 +28,7 @@
   import { ref, computed, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import { useAppStore, useThemeStore } from '@/store';
-  import { useAppInfo, useRouterPush } from '@/composables';
+  import { useAppInfo } from '@/composables';
   import { getActiveKeyPathsOfMenus } from '@/utils';
   import { Menu } from '@/layout/common';
 
@@ -44,7 +44,7 @@
   const route = useRoute();
   const app = useAppStore();
   const theme = useThemeStore();
-  const { routerPush } = useRouterPush();
+  // const { routerPush } = useRouterPush();
   const { title } = useAppInfo();
 
   const showDrawer = computed(() => (props.visible && props.menus.length) || app.mixSiderFixed);
@@ -53,14 +53,14 @@
   const expandedKeys = ref<string[]>([]);
 
   // TODO: 1111111111111  any
-  function handleUpdateMenu(_key: string, item: any) {
-    const menuItem = item as GlobalMenuOption;
-    routerPush(menuItem.routePath);
-  }
-
-  function handleUpdateExpandedKeys(keys: string[]) {
-    expandedKeys.value = keys;
-  }
+  // function handleUpdateMenu(_key: string, item: any) {
+  //   const menuItem = item as GlobalMenuOption;
+  //   routerPush(menuItem.routePath);
+  // }
+  //
+  // function handleUpdateExpandedKeys(keys: string[]) {
+  //   expandedKeys.value = keys;
+  // }
 
   watch(
     () => route.name,

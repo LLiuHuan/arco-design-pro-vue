@@ -120,6 +120,16 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             // icon: 'mdi:table-large',
           },
         },
+        {
+          name: 'component_form',
+          path: '/component/form',
+          component: 'self',
+          meta: {
+            title: '表单',
+            requiresAuth: true,
+            // icon: 'mdi:table-large',
+          },
+        },
       ],
       meta: {
         title: '组件示例',
@@ -260,6 +270,53 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
         title: '权限示例',
         // icon: 'ic:baseline-security',
         order: 5,
+      },
+    },
+    {
+      name: 'function',
+      path: '/function',
+      component: 'basic',
+      children: [
+        {
+          name: 'function_tab',
+          path: '/function/tab',
+          component: 'self',
+          meta: {
+            title: 'Tab',
+            requiresAuth: true,
+            // icon: 'ic:round-tab',
+          },
+        },
+        {
+          name: 'function_tab-detail',
+          path: '/function/tab-detail',
+          component: 'self',
+          meta: {
+            title: 'Tab Detail',
+            requiresAuth: true,
+            hide: true,
+            activeMenu: 'function_tab',
+            // icon: 'ic:round-tab',
+          },
+        },
+        {
+          name: 'function_tab-multi-detail',
+          path: '/function/tab-multi-detail',
+          component: 'self',
+          meta: {
+            title: 'Tab Multi Detail',
+            requiresAuth: true,
+            hide: true,
+            multiTab: true,
+            activeMenu: 'function_tab',
+            // icon: 'ic:round-tab',
+          },
+        },
+      ],
+      meta: {
+        title: '功能',
+        // icon: 'ri:function-line',
+        order: 6,
       },
     },
     {

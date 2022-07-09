@@ -12,12 +12,9 @@ NProgress.configure({ showSpinner: false }); // NProgress Configuration
  */
 export function createRouterGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
-    console.log(222222222);
-
     // 开始 loadingBar
     NProgress.start();
     // 页面跳转权限处理
-    console.log(to);
     await createPermissionGuard(to, from, next);
   });
   router.afterEach((to) => {

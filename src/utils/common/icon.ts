@@ -1,5 +1,4 @@
 import { h } from 'vue';
-// @ts-ignore
 import { Icon as AIcon } from '@arco-design/web-vue';
 import { Icon } from '@iconify/vue';
 import SvgIcon from '@/components/custom/SvgIcon.vue';
@@ -18,7 +17,11 @@ export function iconifyRender(icon: string, color?: string, size?: number) {
   if (size) {
     style.size = `${size}px`;
   }
-  return () => h(Icon, { icon, style });
+  // 开头是icon-的图标 就是默认图标，不需要处理
+  if (icon.startsWith('icon-')) {
+    return icon;
+  }
+  return () => h(Icon, { icon, style, class: 'arco-icon arco-icon-file' });
 }
 
 /**
@@ -28,6 +31,7 @@ export function iconifyRender(icon: string, color?: string, size?: number) {
  * @param size - 图标大小
  */
 export function customIconRender(icon: string, color?: string, size?: number) {
+  const IconFont = AIcon.addFromIconFontCn({});
   const style: { color?: string; size?: string } = {};
   if (color) {
     style.color = color;
@@ -36,5 +40,5 @@ export function customIconRender(icon: string, color?: string, size?: number) {
     style.size = `${size}px`;
   }
 
-  return () => h(AIcon, null, { default: () => h(SvgIcon, { icon, style }) });
+  return () => h(IconFont, null, { default: () => h(SvgIcon, { icon, style }) });
 }

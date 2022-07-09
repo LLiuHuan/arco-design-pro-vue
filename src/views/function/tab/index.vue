@@ -8,12 +8,17 @@
         <a-input v-model:value="title" />
         <a-button type="primary" @click="handleSetTitle">设置当前Tab页标题</a-button>
       </a-input-group>
+      <!--      <div>-->
+      <!--        <canvas ref="canvas" v-show="0"></canvas>-->
+      <!--        <img :src="imageUrl" v-if="imageUrl" />-->
+      <!--      </div>-->
     </a-space>
   </a-card>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { routeName } from '@/router';
   import { useTabStore } from '@/store';
   import { useRouterPush } from '@/composables';
@@ -40,7 +45,7 @@
 
   function handleSetTitle() {
     if (!title.value) {
-      window.$message?.warning('请输入要设置的标题名称');
+      Message.warning('请输入要设置的标题名称');
     } else {
       tabStore.setActiveTabTitle(title.value);
     }

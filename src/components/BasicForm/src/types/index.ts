@@ -1,9 +1,5 @@
-import { VNode } from 'vue';
-
 export type ComponentType =
-  | VNode
   | 'AInput'
-  | 'AAInput'
   | 'AInputGroup'
   | 'AInputPassword'
   | 'AInputSearch'

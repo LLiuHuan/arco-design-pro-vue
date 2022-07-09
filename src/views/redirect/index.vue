@@ -1,22 +1,15 @@
-<script lang="tsx">
-  import { defineComponent, h, onBeforeMount } from 'vue';
+<script lang="tsx" setup>
+  import { onBeforeMount } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import { Empty } from '@arco-design/web-vue';
 
-  export default defineComponent({
-    name: 'Redirect',
-    setup() {
-      const route = useRoute();
-      const router = useRouter();
-      onBeforeMount(() => {
-        const { params, query } = route;
-        const { path } = params;
-        router.replace({
-          path: `/${Array.isArray(path) ? path.join('/') : path}`,
-          query,
-        });
-      });
-      return () => h(Empty);
-    },
+  const route = useRoute();
+  const router = useRouter();
+  onBeforeMount(() => {
+    const { params, query } = route;
+    const { path } = params;
+    router.replace({
+      path: `/${Array.isArray(path) ? path.join('/') : path}`,
+      query,
+    });
   });
 </script>

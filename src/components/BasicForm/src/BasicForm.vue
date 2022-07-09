@@ -218,7 +218,8 @@
   const getSubmitBtnOptions = computed(() => {
     return {
       size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
-      type: 'primary',
+      // TODO: 暂时先强制转一下类型 要不会报错，type 不是string类型
+      type: 'primary' as 'text' | 'dashed' | 'outline' | 'primary' | 'secondary' | undefined,
       ...unref(getProps).submitButtonOptions,
     };
   });
@@ -325,7 +326,7 @@
   };
 
   // TODO: vue3 的 setup方式 使用component :is 字符串形式的无法专成组件，临时使用一个函数来返回组件，后期再想办法优化吧
-  const switchComponent = (component: ComponentType) => {
+  const switchComponent = (component: ComponentType | undefined) => {
     switch (component) {
       case 'AAutoComplete':
         return AutoComplete;

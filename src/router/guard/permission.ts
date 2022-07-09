@@ -10,11 +10,8 @@ export async function createPermissionGuard(
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
-  console.log(1111111111);
-  console.log(to);
   // 动态路由
   const permission = await createDynamicRouteGuard(to, from, next);
-  console.log(permission);
   if (!permission) return;
   // 外链路由, 从新标签打开，返回上一个路由
   if (to.meta.href) {

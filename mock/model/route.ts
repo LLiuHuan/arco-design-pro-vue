@@ -29,7 +29,7 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
       ],
       meta: {
         title: '仪表盘',
-        icon: 'icon-dashboard',
+        icon: 'ant-design:dashboard-outlined',
         order: 1,
       },
     },
@@ -130,146 +130,21 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             // icon: 'mdi:table-large',
           },
         },
-      ],
-      meta: {
-        title: '组件示例',
-        // icon: 'fluent:app-store-24-regular',
-        order: 3,
-      },
-    },
-    {
-      name: 'plugin',
-      path: '/plugin',
-      component: 'basic',
-      children: [
         {
-          name: 'plugin_map',
-          path: '/plugin/map',
-          component: 'self',
-          meta: {
-            title: '地图',
-            requiresAuth: true,
-            // icon: 'mdi:map',
-          },
-        },
-        {
-          name: 'plugin_video',
-          path: '/plugin/video',
-          component: 'self',
-          meta: {
-            title: '视频',
-            requiresAuth: true,
-            // icon: 'mdi:video',
-          },
-        },
-        {
-          name: 'plugin_editor',
-          path: '/plugin/editor',
-          component: 'multi',
-          children: [
-            {
-              name: 'plugin_editor_quill',
-              path: '/plugin/editor/quill',
-              component: 'self',
-              meta: {
-                title: '富文本编辑器',
-                requiresAuth: true,
-                // icon: 'mdi:file-document-edit-outline',
-              },
-            },
-            {
-              name: 'plugin_editor_markdown',
-              path: '/plugin/editor/markdown',
-              component: 'self',
-              meta: {
-                title: 'markdown编辑器',
-                requiresAuth: true,
-                // icon: 'ri:markdown-line',
-              },
-            },
-          ],
-          meta: {
-            title: '编辑器',
-            // icon: 'icon-park-outline:editor',
-          },
-        },
-        {
-          name: 'plugin_swiper',
-          path: '/plugin/swiper',
-          component: 'self',
-          meta: {
-            title: 'Swiper插件',
-            requiresAuth: true,
-            // icon: 'simple-icons:swiper',
-          },
-        },
-        {
-          name: 'plugin_copy',
-          path: '/plugin/copy',
-          component: 'self',
-          meta: {
-            title: '剪贴板',
-            requiresAuth: true,
-            // icon: 'mdi:clipboard-outline',
-          },
-        },
-        {
-          name: 'plugin_icon',
-          path: '/plugin/icon',
+          name: 'component_icon',
+          path: '/component/icon',
           component: 'self',
           meta: {
             title: '图标',
             requiresAuth: true,
-            // icon: 'ic:baseline-insert-emoticon',
-          },
-        },
-        {
-          name: 'plugin_print',
-          path: '/plugin/print',
-          component: 'self',
-          meta: {
-            title: '打印',
-            requiresAuth: true,
-            // icon: 'ic:baseline-local-printshop',
+            // icon: 'mdi:table-large',
           },
         },
       ],
       meta: {
-        title: '插件示例',
-        // icon: 'clarity:plugin-line',
-        order: 4,
-      },
-    },
-    {
-      name: 'auth-demo',
-      path: '/auth-demo',
-      component: 'basic',
-      children: [
-        {
-          name: 'auth-demo_permission',
-          path: '/auth-demo/permission',
-          component: 'self',
-          meta: {
-            title: '权限切换',
-            requiresAuth: true,
-            // icon: 'ic:round-construction',
-          },
-        },
-        {
-          name: 'auth-demo_super',
-          path: '/auth-demo/super',
-          component: 'self',
-          meta: {
-            title: '超级管理员可见',
-            requiresAuth: true,
-            // icon: 'ic:round-supervisor-account',
-          },
-        },
-      ],
-      meta: {
-        title: '权限示例',
-        // icon: 'ic:baseline-security',
-        order: 5,
+        title: '组件示例',
+        icon: 'icon-experiment',
+        order: 3,
       },
     },
     {
@@ -315,7 +190,7 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
       ],
       meta: {
         title: '功能',
-        // icon: 'ri:function-line',
+        icon: 'icon-apps',
         order: 6,
       },
     },
@@ -357,62 +232,8 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
       ],
       meta: {
         title: '异常页',
-        // icon: 'ant-design:exception-outlined',
+        icon: 'icon-bug',
         order: 6,
-      },
-    },
-    {
-      name: 'multi-menu',
-      path: '/multi-menu',
-      component: 'basic',
-      children: [
-        {
-          name: 'multi-menu_first',
-          path: '/multi-menu/first',
-          component: 'multi',
-          children: [
-            {
-              name: 'multi-menu_first_second',
-              path: '/multi-menu/first/second',
-              component: 'self',
-              meta: {
-                title: '二级菜单',
-                requiresAuth: true,
-                // icon: 'ic:outline-menu',
-              },
-            },
-            {
-              name: 'multi-menu_first_second-new',
-              path: '/multi-menu/first/second-new',
-              component: 'multi',
-              children: [
-                {
-                  name: 'multi-menu_first_second-new_third',
-                  path: '/multi-menu/first/second-new/third',
-                  component: 'self',
-                  meta: {
-                    title: '三级菜单',
-                    requiresAuth: true,
-                    // icon: 'ic:outline-menu',
-                  },
-                },
-              ],
-              meta: {
-                title: '二级菜单(有子菜单)',
-                // icon: 'ic:outline-menu',
-              },
-            },
-          ],
-          meta: {
-            title: '一级菜单',
-            // icon: 'ic:outline-menu',
-          },
-        },
-      ],
-      meta: {
-        title: '多级菜单',
-        // icon: 'carbon:menu',
-        order: 7,
       },
     },
     {
@@ -423,7 +244,7 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
         title: '关于',
         requiresAuth: true,
         singleLayout: 'basic',
-        // icon: 'fluent:book-information-24-regular',
+        icon: 'icon-command',
         order: 8,
       },
     },
@@ -556,131 +377,6 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
       },
     },
     {
-      name: 'plugin',
-      path: '/plugin',
-      component: 'basic',
-      children: [
-        {
-          name: 'plugin_map',
-          path: '/plugin/map',
-          component: 'self',
-          meta: {
-            title: '地图',
-            requiresAuth: true,
-            // icon: 'mdi:map',
-          },
-        },
-        {
-          name: 'plugin_video',
-          path: '/plugin/video',
-          component: 'self',
-          meta: {
-            title: '视频',
-            requiresAuth: true,
-            // icon: 'mdi:video',
-          },
-        },
-        {
-          name: 'plugin_editor',
-          path: '/plugin/editor',
-          component: 'multi',
-          children: [
-            {
-              name: 'plugin_editor_quill',
-              path: '/plugin/editor/quill',
-              component: 'self',
-              meta: {
-                title: '富文本编辑器',
-                requiresAuth: true,
-                // icon: 'mdi:file-document-edit-outline',
-              },
-            },
-            {
-              name: 'plugin_editor_markdown',
-              path: '/plugin/editor/markdown',
-              component: 'self',
-              meta: {
-                title: 'markdown编辑器',
-                requiresAuth: true,
-                // icon: 'ri:markdown-line',
-              },
-            },
-          ],
-          meta: {
-            title: '编辑器',
-            // icon: 'icon-park-outline:editor',
-          },
-        },
-        {
-          name: 'plugin_swiper',
-          path: '/plugin/swiper',
-          component: 'self',
-          meta: {
-            title: 'Swiper插件',
-            requiresAuth: true,
-            // icon: 'simple-icons:swiper',
-          },
-        },
-        {
-          name: 'plugin_copy',
-          path: '/plugin/copy',
-          component: 'self',
-          meta: {
-            title: '剪贴板',
-            requiresAuth: true,
-            // icon: 'mdi:clipboard-outline',
-          },
-        },
-        {
-          name: 'plugin_icon',
-          path: '/plugin/icon',
-          component: 'self',
-          meta: {
-            title: '图标',
-            requiresAuth: true,
-            // icon: 'ic:baseline-insert-emoticon',
-          },
-        },
-        {
-          name: 'plugin_print',
-          path: '/plugin/print',
-          component: 'self',
-          meta: {
-            title: '打印',
-            requiresAuth: true,
-            // icon: 'ic:baseline-local-printshop',
-          },
-        },
-      ],
-      meta: {
-        title: '插件示例',
-        // icon: 'clarity:plugin-line',
-        order: 4,
-      },
-    },
-    {
-      name: 'auth-demo',
-      path: '/auth-demo',
-      component: 'basic',
-      children: [
-        {
-          name: 'auth-demo_permission',
-          path: '/auth-demo/permission',
-          component: 'self',
-          meta: {
-            title: '权限切换',
-            requiresAuth: true,
-            // icon: 'ic:round-construction',
-          },
-        },
-      ],
-      meta: {
-        title: '权限示例',
-        // icon: 'ic:baseline-security',
-        order: 5,
-      },
-    },
-    {
       name: 'exception',
       path: '/exception',
       component: 'basic',
@@ -720,60 +416,6 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
         title: '异常页',
         // icon: 'ant-design:exception-outlined',
         order: 6,
-      },
-    },
-    {
-      name: 'multi-menu',
-      path: '/multi-menu',
-      component: 'basic',
-      children: [
-        {
-          name: 'multi-menu_first',
-          path: '/multi-menu/first',
-          component: 'multi',
-          children: [
-            {
-              name: 'multi-menu_first_second',
-              path: '/multi-menu/first/second',
-              component: 'self',
-              meta: {
-                title: '二级菜单',
-                requiresAuth: true,
-                // icon: 'ic:outline-menu',
-              },
-            },
-            {
-              name: 'multi-menu_first_second-new',
-              path: '/multi-menu/first/second-new',
-              component: 'multi',
-              children: [
-                {
-                  name: 'multi-menu_first_second-new_third',
-                  path: '/multi-menu/first/second-new/third',
-                  component: 'self',
-                  meta: {
-                    title: '三级菜单',
-                    requiresAuth: true,
-                    // icon: 'ic:outline-menu',
-                  },
-                },
-              ],
-              meta: {
-                title: '二级菜单(有子菜单)',
-                // icon: 'ic:outline-menu',
-              },
-            },
-          ],
-          meta: {
-            title: '一级菜单',
-            // icon: 'ic:outline-menu',
-          },
-        },
-      ],
-      meta: {
-        title: '多级菜单',
-        // icon: 'carbon:menu',
-        order: 7,
       },
     },
     {

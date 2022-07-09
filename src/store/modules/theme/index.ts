@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import watermark from '@/utils/watermark';
 import { getNaiveThemeOverrides, getThemeSettings } from './helpers';
 
 type ThemeState = Theme.Setting;
@@ -8,8 +9,7 @@ export const useThemeStore = defineStore('theme-store', {
   getters: {
     /** 主题配置 无用 */
     naiveThemeOverrides(state) {
-      const overrides = getNaiveThemeOverrides({ primary: state.themeColor, ...state.otherColor });
-      return overrides;
+      return getNaiveThemeOverrides({ primary: state.themeColor, ...state.otherColor });
     },
     /** 暗黑主题 */
     naiveTheme(state) {
@@ -146,7 +146,7 @@ export const useThemeStore = defineStore('theme-store', {
     setFooterHeight(height: number) {
       this.footer.height = height;
     },
-    /** 设置切换页面时是否过渡动画 */
+    /** 设置切换页面时是否过度动画 */
     setPageIsAnimate(animate: boolean) {
       this.page.animate = animate;
     },
@@ -159,6 +159,15 @@ export const useThemeStore = defineStore('theme-store', {
       this.language = language;
       // localStorage.setItem('arco-locale', value);
       // Message.success(i18.t('navbar.action.locale'));
+    },
+    /** 设置水印 */
+    setWatermark(val: boolean) {
+      this.watermark.watermark = val;
+      val ? watermark.set(this.watermark.watermarkText || '水印', {}) : watermark.close();
+    },
+    /** 设置水印文字 */
+    setWatermarkText(text: string) {
+      this.watermark.watermarkText = text;
     },
   },
 });

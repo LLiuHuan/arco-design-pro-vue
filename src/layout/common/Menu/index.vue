@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1-hidden">
     <a-menu
-      class="flex-1-hidden aaabbb"
+      class="flex-1-hidden"
       :mode="mode"
       :style="{ width: '100%', height: '100%' }"
       v-model:selectedKeys="defaultPath"
@@ -12,7 +12,7 @@
         <template v-if="!item.children">
           <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
             <template #icon>
-              <component :is="item.icon || 'icon-menu'" />
+              <component :is="item.icon" />
             </template>
             {{ item.label }}
           </a-menu-item>

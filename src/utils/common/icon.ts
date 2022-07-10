@@ -1,5 +1,4 @@
 import { h } from 'vue';
-import { Icon as AIcon } from '@arco-design/web-vue';
 import { Icon } from '@iconify/vue';
 import SvgIcon from '@/components/custom/SvgIcon.vue';
 
@@ -31,7 +30,6 @@ export function iconifyRender(icon: string, color?: string, size?: number) {
  * @param size - 图标大小
  */
 export function customIconRender(icon: string, color?: string, size?: number) {
-  const IconFont = AIcon.addFromIconFontCn({});
   const style: { color?: string; size?: string } = {};
   if (color) {
     style.color = color;
@@ -40,5 +38,5 @@ export function customIconRender(icon: string, color?: string, size?: number) {
     style.size = `${size}px`;
   }
 
-  return () => h(IconFont, null, { default: () => h(SvgIcon, { icon, style }) });
+  return () => h(SvgIcon, { icon, style });
 }

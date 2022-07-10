@@ -155,11 +155,7 @@ module.exports = {
         ],
       },
     ],
-    // 'import/no-unresolved': 'off',
-    'import/no-unresolved': [
-      'error',
-      { ignore: ['uno.css', '~icons/*', 'virtual:svg-icons-register'] },
-    ],
+    'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'max-classes-per-file': 'off',
     'class-methods-use-this': 'off',

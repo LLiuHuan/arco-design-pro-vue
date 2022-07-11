@@ -58,7 +58,6 @@
   import { ref } from 'vue';
   import { Icon as AIcon } from '@arco-design/web-vue';
   import { Icon } from '@iconify/vue';
-  import { customIconRender } from '@/utils/common/icon';
   import { icons } from './icons';
 
   const IconFont = AIcon.addFromIconFontCn({
@@ -68,8 +67,6 @@
   const selectValue = ref('');
 
   const customIcons = ['logo', 'chrome', 'copy'];
-
-  const t = customIconRender('copy');
 </script>
 
 <style lang="less" scoped></style>

@@ -38,7 +38,6 @@
     "ua-parser-js": "^1.0.2",
     "vite-plugin-importer": "^0.2.5",
     "vue": "^3.2.37",
-    "vue-echarts": "^6.0.3",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.16",
     "vue-types": "^4.1.1",

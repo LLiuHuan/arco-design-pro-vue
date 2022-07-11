@@ -4,6 +4,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
 import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 export default (srcPath: string) => {
   return [
@@ -23,6 +24,12 @@ export default (srcPath: string) => {
         ArcoResolver(),
         IconsResolver({ customCollections: ['custom'], componentPrefix: 'icon' }),
       ],
+    }),
+    createSvgIconsPlugin({
+      iconDirs: [`${srcPath}/assets/svg`],
+      symbolId: 'icon-custom-[dir]-[name]',
+      inject: 'body-last',
+      customDomId: '__CUSTOM_SVG_ICON__',
     }),
   ];
 };

@@ -4,10 +4,7 @@
       <span class="sub-menu-lable">{{ menuInfo.label }}</span>
     </template>
     <template #icon>
-      <component
-        :is="menuInfo.icon || 'icon-menu'"
-        style="font-size: 16px; vertical-align: middle"
-      />
+      <component :is="menuInfo.icon" style="font-size: 16px; vertical-align: middle" />
     </template>
     <template v-for="item in menuInfo.children" :key="item.key">
       <template v-if="item.children && item.children.length > 0">
@@ -16,7 +13,7 @@
       <template v-else>
         <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
           <template #icon>
-            <component :is="item.icon || 'icon-menu'" />
+            <component :is="item.icon" />
           </template>
           {{ item.label }}
         </a-menu-item>

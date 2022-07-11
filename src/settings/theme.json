@@ -142,5 +142,9 @@
       }
     ]
   },
-  "language": "zh-CN"
+  "language": "zh-CN",
+  "watermark": {
+    "watermark": false,
+    "watermarkText": "水印文字"
+  }
 }

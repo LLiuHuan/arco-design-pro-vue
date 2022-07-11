@@ -108,6 +108,10 @@ const defaultThemeSetting: Theme.Setting = {
     ],
   },
   language: 'zh-CN',
+  watermark: {
+    watermark: false,
+    watermarkText: '水印',
+  },
 };
 
 export const themeSetting = (jsonSetting as Theme.Setting) || defaultThemeSetting;

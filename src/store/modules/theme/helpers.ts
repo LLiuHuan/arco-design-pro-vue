@@ -10,8 +10,7 @@ export function getThemeSettings() {
     ? themeSetting.otherColor.info
     : getColorPalette(themeColor, 7);
   const otherColor = { ...themeSetting.otherColor, info };
-  const setting = cloneDeep({ ...themeSetting, themeColor, otherColor });
-  return setting;
+  return cloneDeep({ ...themeSetting, themeColor, otherColor });
 }
 
 type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'error';

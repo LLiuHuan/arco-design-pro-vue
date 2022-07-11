@@ -133,6 +133,15 @@ declare namespace Theme {
     page: Page;
     /** 中英文 */
     language: EnumType.Language;
+    /** 水印 */
+    watermark: Watermark;
+  }
+
+  interface Watermark {
+    /** 水印 */
+    watermark: boolean;
+    /** 水印文字 */
+    watermarkText: string;
   }
 
   /** 布局样式 */
@@ -219,7 +228,7 @@ declare namespace Theme {
   /** 菜单样式 */
   interface Menu {
     /** 水平模式的菜单的位置 */
-    horizontalPosition: HorizontalMenuPosition;
+    horizontalPosition: EnumType.ThemeHorizontalMenuPosition;
     /** 水平模式的菜单的位置列表 */
     horizontalPositionList: HorizontalMenuPositionList[];
   }
@@ -288,7 +297,7 @@ type GlobalBreadcrumb = {
 
 /** 多页签Tab的路由 */
 interface GlobalTabRoute
-  extends Pick<import('vue-router').RouteLocationNormalizedLoaded, 'name' | 'path' | 'meta'> {
+  extends Pick<import('vue-router').RouteLocationNormalizedLoaded, 'name' | 'meta' | 'fullPath'> {
   /** 滚动的位置 */
   scrollPosition: {
     left: number;

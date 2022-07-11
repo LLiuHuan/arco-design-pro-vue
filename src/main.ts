@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
-import App from './App.vue';
-import '@arco-design/web-vue/dist/arco.css';
+import { setupDirectives, setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
-import { setupDirectives, setupPlugin } from '@/plugins';
+import App from './App.vue';
+import '@arco-design/web-vue/dist/arco.css';
 
 const setupApp = async () => {
   const app = createApp(App);

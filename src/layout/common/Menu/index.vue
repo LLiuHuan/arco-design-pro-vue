@@ -1,18 +1,18 @@
 <template>
   <div class="flex-1-hidden">
     <a-menu
-      class="flex-1-hidden aaabbb"
+      class="flex-1-hidden"
       :mode="mode"
       :style="{ width: '100%', height: '100%' }"
       v-model:selectedKeys="defaultPath"
-      v-model:openKeys="defaultExpandKeys"
+      v-model:openKeys="defaultPath"
       auto-scroll-into-view
     >
       <template v-for="item of menus" :key="item.key">
         <template v-if="!item.children">
           <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
             <template #icon>
-              <component :is="item.icon || 'icon-menu'" />
+              <component :is="item.icon" />
             </template>
             {{ item.label }}
           </a-menu-item>
@@ -26,17 +26,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  // import { useAppStore, useThemeStore } from '@/store';
+  import { useRouteStore } from '@/store';
   import { useRouterPush } from '@/composables';
+  import { getActiveKeyPathsOfMenus } from '@/utils';
   import SubMenu from './SubMenu.vue';
 
   const route = useRoute();
-  // const theme = useThemeStore();
+  const routeStore = useRouteStore();
   const { routerPush } = useRouterPush();
   const defaultPath = ref([] as Array<string>);
-  const defaultExpandKeys = ref([] as Array<string>);
+  const activeKey = computed(
+    () => (route.meta?.activeMenu ? route.meta.activeMenu : route.name) as string
+  );
 
   function handleUpdateMenu(_key: string, item: any) {
     const menuItem = item as GlobalMenuOption;
@@ -61,13 +64,12 @@
   watch(
     () => route.name,
     () => {
-      const { matched } = route;
-      defaultPath.value = matched.map((item) =>
-        item.name !== undefined ? item.name.toString() : ''
-      );
+      // const { matched } = route;
+      // defaultPath.value = matched.map((item) =>
+      //   item.name !== undefined ? item.name.toString() : ''
+      // );
       // TODO: 需要处理一下
-
-      defaultExpandKeys.value = defaultPath.value;
+      defaultPath.value = getActiveKeyPathsOfMenus(activeKey.value, routeStore.menus);
     },
     { immediate: true }
   );

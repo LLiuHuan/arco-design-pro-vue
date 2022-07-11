@@ -15,3 +15,9 @@ export interface GridProps {
   collapsed: boolean;
   collapsedRows: number;
 }
+
+export interface GridItemProps {
+  span?: number | ResponsiveValue;
+  offset?: number | ResponsiveValue;
+  suffix?: boolean;
+}

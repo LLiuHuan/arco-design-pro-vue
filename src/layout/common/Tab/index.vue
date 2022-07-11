@@ -27,18 +27,18 @@
             <Draggable :list="tab.tabs" animation="300" item-key="fullPath" class="flex" ref="flex">
               <template #item="{ element }">
                 <div
-                  :id="`tag${element.path}`"
+                  :id="`tag${element.fullPath}`"
                   class="layout-tab-scroll-item"
-                  :class="{ 'active-item': tab.activeTab === element.path }"
+                  :class="{ 'active-item': tab.activeTab === element.fullPath }"
                   :style="{ height: theme.tab.height - 12 + 'px' }"
-                  @click.stop="goPath(element.path)"
+                  @click.stop="goPath(element.fullPath)"
                 >
-                  <span :class="{ activeTab: tab.activeTab === element.path }">
+                  <span :class="{ activeTab: tab.activeTab === element.fullPath }">
                     {{ element.meta.title }}
                   </span>
                   <icon-close
                     v-if="!element.meta.affix"
-                    @click.stop="tab.removeTab(element.path)"
+                    @click.stop="tab.removeTab(element.fullPath)"
                     size="14"
                   />
                 </div>
@@ -73,8 +73,7 @@
   import { useEventListener } from '@vueuse/core';
   import { useAppStore, useTabStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
-  import { setTabRoutes } from '@/utils';
-  import { getTabRouteByVueRoute } from '@/store/modules/tab/helpers';
+  import { setTabRoutes } from '@/store/modules/tab/helpers';
   import ContextMenu from './components/ContextMenu.vue';
 
   const theme = useThemeStore();
@@ -176,9 +175,8 @@
   watch(
     () => route.fullPath,
     () => {
-      if (tab.tabs.includes(getTabRouteByVueRoute(route))) return;
       tab.addTab(route);
-      tab.setActiveTab(route.path);
+      tab.setActiveTab(route.fullPath);
       updateNavScroll(true);
     }
   );

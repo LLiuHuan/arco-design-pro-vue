@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-full transition-width duration-300 ease-in-out bg-red"
+    class="relative h-full transition-width duration-300 ease-in-out"
     :style="{ width: app.mixSiderFixed ? theme.sider.mixChildMenuWidth + 'px' : '0px' }"
   >
     <dark-mode-container

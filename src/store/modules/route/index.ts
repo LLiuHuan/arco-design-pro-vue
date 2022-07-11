@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { constantRoutes, router, routes as staticRoutes } from '@/router';
+import { constantRoutes, ROOT_ROUTE, router, routes as staticRoutes } from '@/router';
 import {
   filterAuthRoutesByUserPermission,
   getCacheRoutes,
@@ -8,6 +8,8 @@ import {
   transformAuthRoutesToSearchMenus,
   transformAuthRoutesToVueRoutes,
   transformAuthRouteToMenu,
+  transformAuthRouteToVueRoute,
+  transformRouteNameToRoutePath,
   transformRoutePathToRouteName,
 } from '@/utils';
 import { fetchUserRoutes } from '@/api';
@@ -43,6 +45,7 @@ export const useRouteStore = defineStore('route-store', {
     cacheRoutes: [],
   }),
   actions: {
+    /** 重置路由的store */
     resetRouteStore() {
       this.resetRoutes();
       this.$reset();
@@ -64,24 +67,37 @@ export const useRouteStore = defineStore('route-store', {
      */
     handleAuthRoutes(routes: AuthRoute.Route[]) {
       this.menus = transformAuthRouteToMenu(routes);
-      console.log(this.menus);
       this.searchMenus = transformAuthRoutesToSearchMenus(routes);
 
       const vueRoutes = transformAuthRoutesToVueRoutes(routes);
-      console.log(vueRoutes);
+
       vueRoutes.forEach((route) => {
         router.addRoute(route);
       });
-      console.log(router);
+
       this.cacheRoutes = getCacheRoutes(vueRoutes);
+    },
+    /** 动态路由模式下：更新根路由的重定向 */
+    handleUpdateRootRedirect(routeKey: AuthRoute.RouteKey) {
+      if (routeKey === 'root' || routeKey === 'not-found-page') {
+        throw Error('routeKey的值不能为root或者not-found-page');
+      }
+      const rootRoute: AuthRoute.Route = {
+        ...ROOT_ROUTE,
+        redirect: transformRouteNameToRoutePath(routeKey),
+      };
+      const rootRouteName: AuthRoute.RouteKey = 'root';
+      router.removeRoute(rootRouteName);
+      const rootVueRoute = transformAuthRouteToVueRoute(rootRoute)[0];
+      router.addRoute(rootVueRoute);
     },
     /** 初始化动态路由 */
     async initDynamicRoute() {
       const { userId } = getUserInfo();
       const data = await fetchUserRoutes(userId);
-      console.log('data: ', data);
       if (data) {
         this.routeHomeName = data.home;
+        this.handleUpdateRootRedirect(data.home);
         this.handleAuthRoutes(data.routes);
       }
     },
@@ -99,7 +115,6 @@ export const useRouteStore = defineStore('route-store', {
       if (!userId) return;
 
       const isDynamicRoute = this.authRouteMode === 'dynamic';
-      console.log(isDynamicRoute);
       if (isDynamicRoute) {
         await this.initDynamicRoute();
       } else {

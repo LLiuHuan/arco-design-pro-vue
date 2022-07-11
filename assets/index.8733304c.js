@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vue_export-helper.21dcd24c.js";import{y as e,x as n,z as o}from"./index.0d5f6591.js";const s={},t=[o("h1",null,"重置密码",-1)];var a=r(s,[["render",function(r,o){return n(),e("div",null,t)}]]);export{a as default};

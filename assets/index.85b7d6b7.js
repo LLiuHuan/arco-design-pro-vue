@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{d as r,y as a,x as s}from"./index.0d5f6591.js";var i=e(r({name:"ProfileBasic",setup:()=>({})}),[["render",function(e,r,i,o,n,t){return s(),a("h1",null,"ProfileBasic")}]]);export{i as default};

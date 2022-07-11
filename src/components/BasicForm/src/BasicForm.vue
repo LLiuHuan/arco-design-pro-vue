@@ -28,7 +28,7 @@
 
           <!--ACheckbox-->
           <template v-else-if="schema.component === 'ACheckbox'">
-            <a-checkbox-group v-model:value="formModel[schema.field]">
+            <a-checkbox-group v-model:model-value="formModel[schema.field]">
               <a-space>
                 <a-checkbox
                   v-for="(item, indexCheckbox) in schema.componentProps?.options"
@@ -42,7 +42,7 @@
 
           <!--ARadioGroup-->
           <template v-else-if="schema.component === 'ARadioGroup'">
-            <a-radio-group v-model:value="formModel[schema.field]">
+            <a-radio-group v-model:model-value="formModel[schema.field]">
               <a-space>
                 <a-radio
                   v-for="(item, indexRadio) in schema.componentProps?.options"

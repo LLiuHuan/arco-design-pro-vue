@@ -105,6 +105,7 @@
 
   function init() {
     tab.iniTabStore(route);
+    updateNavScroll(true);
   }
 
   /**

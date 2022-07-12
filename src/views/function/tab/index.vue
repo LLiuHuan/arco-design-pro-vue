@@ -5,7 +5,7 @@
       <a-button @click="handleToTabMultiDetail(1)">跳转Tab Multi Detail 1</a-button>
       <a-button @click="handleToTabMultiDetail(2)">跳转Tab Multi Detail 2</a-button>
       <a-input-group>
-        <a-input v-model:value="title" />
+        <a-input v-model:model-value="title" />
         <a-button type="primary" @click="handleSetTitle">设置当前Tab页标题</a-button>
       </a-input-group>
       <!--      <div>-->

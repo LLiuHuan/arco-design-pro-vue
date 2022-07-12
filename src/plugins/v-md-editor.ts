@@ -2,8 +2,8 @@
 // import { App } from 'vue';
 // import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor';
 // import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
-// import VMdPreview from '@kangc/v-md-editor/lib/preview';
-// import '@kangc/v-md-editor/lib/style/preview.css';
+// // import VMdPreview from '@kangc/v-md-editor/lib/preview';
+// // import '@kangc/v-md-editor/lib/style/preview.css';
 // import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
 // import '@kangc/v-md-editor/lib/theme/style/github.css';
 //
@@ -37,23 +37,23 @@
 // import '@kangc/v-md-editor/lib/plugins/emoji/emoji.css';
 //
 // // todo组件
-// import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index';
-// import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css';
+// // import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index';
+// // import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css';
 //
 // VMdEditor.Codemirror = Codemirror;
 // VMdEditor.use(githubTheme, {
 //   Hljs: hljs,
 // });
 // VMdEditor.use(createEmojiPlugin());
-// VMdEditor.use(createTodoListPlugin());
+// // VMdEditor.use(createTodoListPlugin());
 //
-// VMdPreview.use(githubTheme, {
-//   Hljs: hljs,
-// });
-// VMdPreview.use(createEmojiPlugin());
-// VMdPreview.use(createTodoListPlugin());
+// // VMdPreview.use(githubTheme, {
+// //   Hljs: hljs,
+// // });
+// // VMdPreview.use(createEmojiPlugin());
+// // VMdPreview.use(createTodoListPlugin());
 //
 // export function setupMarkDown(app: App) {
 //   app.use(VMdEditor);
-//   app.use(VMdPreview);
+//   // app.use(VMdPreview);
 // }

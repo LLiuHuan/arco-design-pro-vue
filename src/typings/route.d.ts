@@ -39,6 +39,7 @@ declare namespace AuthRoute {
     | 'plugin_charts_d3'
     | 'plugin_editor_quill'
     | 'plugin_editor_markdown'
+    | 'plugin_editor_yaml'
     | 'plugin_copy'
     | 'plugin_icon'
     | 'plugin_print'

@@ -1,6 +1,6 @@
 import { App } from 'vue';
 import { Modal } from '@arco-design/web-vue';
-import { setupMarkDown } from '@/plugins/v-md-editor';
+// import { setupMarkDown } from '@/plugins/v-md-editor';
 import { setupArcoIcon } from '@/plugins/arco-design-icon';
 // import { setupPermission } from '@/plugins/permission';
 import { setupI18n } from '@/plugins/i18n';
@@ -20,7 +20,7 @@ export const setupPlugin = (app: App) => {
   setupArcoIcon(app);
 
   // 初始化Markdown编辑器
-  setupMarkDown(app);
+  // setupMarkDown(app);
   // setupTheme();
 
   // 挂载ArcoModal

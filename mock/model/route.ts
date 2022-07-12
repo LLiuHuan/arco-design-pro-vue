@@ -218,6 +218,16 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
                 // icon: 'ri:markdown-line',
               },
             },
+            {
+              name: 'plugin_editor_yaml',
+              path: '/plugin/editor/yaml',
+              component: 'self',
+              meta: {
+                title: 'yaml编辑器',
+                requiresAuth: true,
+                // icon: 'ri:markdown-line',
+              },
+            },
           ],
           meta: {
             title: '编辑器',

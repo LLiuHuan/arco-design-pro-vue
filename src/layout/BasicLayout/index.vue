@@ -28,6 +28,7 @@
   import { useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
   import { Sider, Header, Tab, Content, Setting, Footer } from '@/layout/common';
+  import { setBaseColor } from '@/utils/color';
 
   const { headerProps } = useBasicLayout();
 
@@ -72,6 +73,12 @@
       height: `${theme.footer.height}px`,
     };
   });
+
+  const init = () => {
+    setBaseColor(theme.themeColor);
+  };
+
+  init();
 </script>
 
 <style lang="less" scoped>

@@ -39,6 +39,7 @@
     "path-value": "^0.9.4",
     "pinia": "^2.0.15",
     "pinia-plugin-persist": "^1.0.0",
+    "pinia-plugin-persistedstate": "^1.6.1",
     "qs": "^6.11.0",
     "swiper": "^8.3.0",
     "tinycolor2": "^1.4.2",

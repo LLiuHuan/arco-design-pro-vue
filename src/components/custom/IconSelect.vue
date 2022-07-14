@@ -14,7 +14,7 @@
           <Icon
             :icon="iconItem"
             class="border-1px border-[#d9d9d9] !text-30px m-2px p-5px"
-            :style="{ 'border-color': modelValue === iconItem ? 'red' : '' }"
+            :style="{ 'border-color': modelValue === iconItem ? theme.themeColor : '' }"
             @click="handleChange(iconItem)"
           />
         </template>
@@ -26,6 +26,7 @@
 <script lang="ts" setup>
   import { ref, computed } from 'vue';
   import { Icon } from '@iconify/vue';
+  import { useThemeStore } from '@/store';
 
   interface Props {
     /** 选中的图标 */
@@ -45,6 +46,7 @@
   });
 
   const emit = defineEmits<Emits>();
+  const theme = useThemeStore();
 
   const searchValue = ref('');
   const iconsList = computed(() => props.icons.filter((v) => v.includes(searchValue.value)));

@@ -25,6 +25,6 @@
 
   const { log } = console;
 
-  const code = ref(`console.log('Hello, world!')`);
+  const code = ref(`# console.log('Hello, world!')`);
   const extensions = [StreamLanguage.define(yaml), oneDark];
 </script>

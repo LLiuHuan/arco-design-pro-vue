@@ -4,9 +4,10 @@
       class="flex-1-hidden"
       :mode="mode"
       :style="{ width: '100%', height: '100%' }"
-      v-model:selectedKeys="defaultPath"
-      v-model:openKeys="defaultPath"
+      v-model:selectedKeys="selectedKeys"
+      v-model:openKeys="openKeys"
       auto-scroll-into-view
+      accordion
     >
       <template v-for="item of menus" :key="item.key">
         <template v-if="!item.children">
@@ -26,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, watch } from 'vue';
+  import { computed, nextTick, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import { useRouteStore } from '@/store';
   import { useRouterPush } from '@/composables';
@@ -36,7 +37,8 @@
   const route = useRoute();
   const routeStore = useRouteStore();
   const { routerPush } = useRouterPush();
-  const defaultPath = ref([] as Array<string>);
+  const selectedKeys = ref([] as Array<string>);
+  const openKeys = ref([] as Array<string>);
   const activeKey = computed(
     () => (route.meta?.activeMenu ? route.meta.activeMenu : route.name) as string
   );
@@ -69,7 +71,8 @@
       //   item.name !== undefined ? item.name.toString() : ''
       // );
       // TODO: 需要处理一下
-      defaultPath.value = getActiveKeyPathsOfMenus(activeKey.value, routeStore.menus);
+      selectedKeys.value = getActiveKeyPathsOfMenus(activeKey.value, routeStore.menus);
+      openKeys.value = selectedKeys.value.slice(0, selectedKeys.value.length - 1);
     },
     { immediate: true }
   );

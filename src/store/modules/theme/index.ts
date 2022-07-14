@@ -6,6 +6,7 @@ type ThemeState = Theme.Setting;
 
 export const useThemeStore = defineStore('theme-store', {
   state: (): ThemeState => getThemeSettings(),
+  persist: true,
   getters: {
     /** 主题配置 无用 */
     naiveThemeOverrides(state) {

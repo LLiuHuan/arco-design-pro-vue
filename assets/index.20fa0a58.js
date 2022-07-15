@@ -1,0 +1,1 @@
+import{_ as a}from"./plugin-vue_export-helper.21dcd24c.js";import{y as e,x as n}from"./index.eabfbd96.js";var i=a({name:"MultiDimensionDataAnalysis"},[["render",function(a,i,r,s,t,l){return n(),e("h1",null,"MultiDimensionDataAnalysis")}]]);export{i as default};

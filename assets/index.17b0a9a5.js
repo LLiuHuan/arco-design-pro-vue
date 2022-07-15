@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vue_export-helper.21dcd24c.js";import{y as e,x as n,S as a}from"./index.eabfbd96.js";const o={},s=[a("h1",null," 背景 ",-1)];var t=r(o,[["render",function(r,a){return n(),e("div",null,s)}]]);export{t as default};

@@ -3,7 +3,7 @@
     <a-card :bordered="false" class="rounded-16px shadow-sm">
       <div ref="pieRef" class="h-400px"></div>
     </a-card>
-    <a-card class="mt-10px shadow-sm rounded-16px">
+    <a-card :bordered="false" class="mt-10px shadow-sm rounded-16px">
       <div ref="gaugeRef" class="h-640px"></div>
     </a-card>
   </div>

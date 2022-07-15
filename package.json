@@ -52,6 +52,7 @@
     "vue-types": "^4.1.1",
     "vue3-colorpicker": "^2.0.4",
     "vuedraggable": "^4.1.0",
+    "xgplayer": "^2.31.6",
     "yaml": "^2.1.1"
   },
   "devDependencies": {

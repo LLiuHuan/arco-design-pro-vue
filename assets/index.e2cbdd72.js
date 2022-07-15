@@ -1,0 +1,1 @@
+import{d as a,X as r,Y as e,Z as s}from"./index.1a1592a4.js";var t=a({__name:"index",setup(a){const t=s(),n=e();return r((()=>{const{params:a,query:r}=t,{path:e}=a;n.replace({path:`/${Array.isArray(e)?e.join("/"):e}`,query:r})})),()=>{}}});export{t as default};

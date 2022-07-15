@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vue_export-helper.21dcd24c.js";import{y as e,x as a,z as n}from"./index.1a1592a4.js";const o={},s=[n("h1",null,"注册",-1)];var t=r(o,[["render",function(r,n){return a(),e("div",null,s)}]]);export{t as default};

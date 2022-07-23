@@ -88,3 +88,17 @@ yarn dev
 - [ ] 错误日志收集（参考 vue-element-admin，这个不一定会做，毕竟不怎么会前端 ）
 - [ ] 更新记录
 - [ ] 服务器信息
+
+
+##  致谢
+
+<a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
+  <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">
+</a>
+
+
+
+## License
+
+Ths project is [MIT licensed](https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE).
+

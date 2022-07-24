@@ -40,6 +40,20 @@
             </a-card>
           </a-card-grid>
         </a-card>
+
+        <a-card title="动态" :bordered="false" class="rounded-16px shadow-sm mt-15px">
+          <a-list :bordered="false">
+            <a-list-item v-for="(item, index) in dynamic" :key="index">
+              <a-list-item-meta :title="item.title" :description="item.description">
+                <template #avatar>
+                  <a-avatar shape="square">
+                    <img alt="avatar" :src="item.logo" />
+                  </a-avatar>
+                </template>
+              </a-list-item-meta>
+            </a-list-item>
+          </a-list>
+        </a-card>
       </a-col>
       <a-col :span="6">
         <a-card class="rounded-16px shadow-sm mt-15px" title="进度">
@@ -81,6 +95,12 @@
     date: string;
     message: string;
     messageUrl: string;
+  }
+
+  interface Dynamic {
+    title: string;
+    description: string;
+    logo: string;
   }
 
   const auth = useAuthStore();
@@ -158,6 +178,34 @@
   ];
 
   const dataTimeline = ref<dataTimeItem[]>([]);
+
+  const dynamic = ref<Dynamic[]>([
+    {
+      title: '刚才把工作台页面随便写了以下，勉强能看了。',
+      description: '2022-07:24 11:11:11',
+      logo: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    },
+    {
+      title: '刚才把工作台页面随便写了以下，勉强能看了。',
+      description: '2022-07:24 11:11:11',
+      logo: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    },
+    {
+      title: '刚才把工作台页面随便写了以下，勉强能看了。',
+      description: '2022-07:24 11:11:11',
+      logo: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    },
+    {
+      title: '刚才把工作台页面随便写了以下，勉强能看了。',
+      description: '2022-07:24 11:11:11',
+      logo: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    },
+    {
+      title: '刚才把工作台页面随便写了以下，勉强能看了。',
+      description: '2022-07:24 11:11:11',
+      logo: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    },
+  ]);
 
   const getGithubCommit = () => {
     getCommit(0).then(({ data }) => {

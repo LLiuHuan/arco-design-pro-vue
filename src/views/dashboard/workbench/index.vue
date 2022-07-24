@@ -44,7 +44,7 @@
       <a-col :span="6">
         <a-card class="rounded-16px shadow-sm mt-15px" title="进度">
           <a-timeline-item v-for="item in dataTimeline" :key="item.messageUrl" :label="item.date">
-            <span class="message">{{ item.message }}</span>
+            <span class="message w-full">{{ item.message }}</span>
           </a-timeline-item>
 
           <a-empty v-if="dataTimeline.length === 0" />
@@ -190,5 +190,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  :deep(.arco-timeline-item-content) {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>

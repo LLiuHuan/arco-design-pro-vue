@@ -5,6 +5,10 @@
 //   $notification?: import('naive-ui').NotificationProviderInst;
 // }
 
+interface Window extends Window {
+  MonacoEnvironment: import('monaco-editor').Environment;
+}
+
 /** 通用类型 */
 declare namespace Common {
   /**

@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { Message } from '@arco-design/web-vue';
+// import { Message } from '@arco-design/web-vue';
 import { useI18n } from 'vue-i18n';
 import { useThemeStore } from '@/store';
 
@@ -12,7 +12,7 @@ export default function useLocale() {
     i18.locale.value = value;
     const theme = useThemeStore();
     theme.setLanguage(value);
-    Message.success(i18.t('navbar.action.locale'));
+    // Message.success(i18.t('navbar.action.locale'));
   };
   return {
     currentLocale,

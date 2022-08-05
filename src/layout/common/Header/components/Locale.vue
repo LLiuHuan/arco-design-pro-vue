@@ -3,7 +3,7 @@
     tooltip-content="切换语言"
     class="w-40px h-full"
     :inverted="theme.header.inverted"
-    @click="setLanguage"
+    @click="setLanguage(theme.language === 'zh-CN' ? 'en-US' : 'zh-CN')"
   >
     <icon-english-fill
       v-if="theme.language === 'zh-CN'"
@@ -23,10 +23,12 @@
   const theme = useThemeStore();
 
   const setLanguage = (language: EnumType.Language | undefined = 'zh-CN') => {
-    if (!language) {
-      language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
-    }
-    theme.setLanguage(language);
+    console.log(language);
+
+    // if (!language) {
+    //   language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
+    // }
+    // theme.setLanguage(language);
     changeLocale(language);
   };
 

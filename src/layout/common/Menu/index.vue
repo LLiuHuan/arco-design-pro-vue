@@ -66,11 +66,6 @@
   watch(
     () => route.name,
     () => {
-      // const { matched } = route;
-      // defaultPath.value = matched.map((item) =>
-      //   item.name !== undefined ? item.name.toString() : ''
-      // );
-      // TODO: 需要处理一下
       selectedKeys.value = getActiveKeyPathsOfMenus(activeKey.value, routeStore.menus);
       openKeys.value = selectedKeys.value.slice(0, selectedKeys.value.length - 1);
     },

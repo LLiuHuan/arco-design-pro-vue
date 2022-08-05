@@ -1,25 +1,10 @@
 <template>
-  <h1>Form</h1>
-
-  <component :is="icon" />
-  <component :is="icon1" />
-
-  <SvgIcon :icon="'logo'" />
-
-  <svg aria-hidden="true" width="1em" height="1em" class="text-30px text-primary">
-    <use xlink:href="#icon-custom-logo" fill="currentColor" />
-  </svg>
-
-  <!--  <icon-custom-logo class="w-28px" />-->
+  <div>
+    <h1>Form</h1>
+  </div>
 </template>
 
-<script lang="ts" setup>
-  import { customIconRender, iconifyRender } from '@/utils/common/icon';
-  import SvgIcon from '@/components/custom/SvgIcon.vue';
-
-  const icon = iconifyRender('material-symbols:123');
-  const icon1 = customIconRender('logo');
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less" scoped></style>
 

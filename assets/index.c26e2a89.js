@@ -1,0 +1,1 @@
+import{d as a,bk as r,b7 as s,bl as e}from"./index.6fd1736c.js";const t=a({__name:"index",setup(a){const t=s(),n=e();return r((()=>{const{params:a,query:r}=t,{path:s}=a;n.replace({path:`/${Array.isArray(s)?s.join("/"):s}`,query:r})})),()=>{}}});export{t as default};

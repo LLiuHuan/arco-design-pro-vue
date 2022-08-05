@@ -1,0 +1,1 @@
+import{d as e,w as n,A as s}from"./index.6fd1736c.js";const t=e({__name:"index",setup(e){const t=new WebSocket("ws://127.0.0.1:8081/v2/base/test");return t.onopen=()=>{},t.onerror=e=>{},(e,t)=>(n(),s("h1",null,"Print"))}});export{t as default};

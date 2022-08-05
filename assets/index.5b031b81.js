@@ -1,0 +1,1 @@
+import{d as s,w as a,A as e,C as t}from"./index.6fd1736c.js";const l={class:"h-full"},c=s({__name:"index",setup:s=>(s,c)=>(a(),e("div",l,[t("iframe",{class:"wh-full",src:"https://vitejs.cn/"})]))});export{c as default};

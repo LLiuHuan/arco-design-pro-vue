@@ -20,6 +20,21 @@ a {
   max-width: 100%;
 }
 
+.general-card {
+  border-radius: 4px;
+  border: none
+}
+
+.general-card>.arco-card-header {
+  height: auto;
+  padding: 20px;
+  border: none;
+}
+
+.general-card>.arco-card-body {
+  padding: 0 20px 20px
+}
+
 /* 临时 */
 
 /** {*/

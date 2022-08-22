@@ -53,11 +53,11 @@
 
 <script lang="ts" setup>
   import { useThemeStore } from '@/store';
-  import useLoading from '@/hooks/loading';
+  // import useLoading from '@/hooks/loading';
   import { DataItem } from './component';
 
   const { darkMode } = useThemeStore();
-  const { loading, setLoading } = useLoading(true);
+  // const { loading, setLoading } = useLoading(true);
 </script>
 
 <style lang="less" scoped>

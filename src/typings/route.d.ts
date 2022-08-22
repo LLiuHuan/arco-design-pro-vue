@@ -44,6 +44,7 @@ declare namespace AuthRoute {
     | 'plugin_icon'
     | 'plugin_print'
     | 'plugin_swiper'
+    | 'plugin_terminal'
     | 'auth-demo'
     | 'auth-demo_permission'
     | 'auth-demo_super'

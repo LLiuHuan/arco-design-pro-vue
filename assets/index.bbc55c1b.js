@@ -1,0 +1,1 @@
+import{d as e,w as r,A as a}from"./index.a5de0260.js";import{_ as n}from"./_plugin-vue_export-helper.cdc0426e.js";const s=n(e({name:"SearchTable",setup:()=>({})}),[["render",function(e,n,s,t,o,l){return r(),a("h1",null,"SearchTable")}]]);export{s as default};

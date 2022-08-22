@@ -1,1 +1,0 @@
-import{d as e,w as r,A as s}from"./index.6fd1736c.js";import{_ as o}from"./_plugin-vue_export-helper.cdc0426e.js";const a=o(e({name:"ProfileBasic",setup:()=>({})}),[["render",function(e,o,a,i,n,t){return r(),s("h1",null,"ProfileBasic")}]]);export{a as default};

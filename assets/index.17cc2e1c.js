@@ -1,1 +1,0 @@
-import{d as e,w as r,A as s}from"./index.6fd1736c.js";import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";const a=t(e({name:"ListCard",setup:()=>({})}),[["render",function(e,t,a,n,d,o){return r(),s("h1",null,"ListCard")}]]);export{a as default};

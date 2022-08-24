@@ -274,6 +274,16 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             // icon: 'ic:baseline-local-printshop',
           },
         },
+        {
+          name: 'plugin_terminal',
+          path: '/plugin/terminal',
+          component: 'self',
+          meta: {
+            title: '终端',
+            requiresAuth: true,
+            // icon: 'simple-icons:swiper',
+          },
+        },
       ],
       meta: {
         title: '插件示例',

@@ -10,8 +10,7 @@ import unplugin from './unplugin';
 import unocss from './unocss';
 import visualizer from './visualizer';
 import compress from './compress';
-import prismjs from './prismjs';
-import monacoEditor from './monacoEditor';
+// import prismjs from './prismjs';
 
 /**
  * vite插件
@@ -28,8 +27,7 @@ export function setupVitePlugins(
     ...unplugin(srcPath),
     unocss,
     mock,
-    prismjs,
-    monacoEditor,
+    // prismjs,
   ];
 
   if (viteEnv.VITE_VISUALIZER === 'true') {

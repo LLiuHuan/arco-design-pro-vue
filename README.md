@@ -105,3 +105,12 @@ yarn dev
 
 Ths project is [MIT licensed](https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE).
 
+
+```
+"esno": "^0.16.3",
+"js-yaml": "^4.1.0",
+"path-browserify": "^1.0.1",
+"path-value": "^0.9.4",
+"tinycolor2": "^1.4.2",
+@types/path-browserify
+```

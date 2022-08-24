@@ -5,6 +5,7 @@ import { setupArcoIcon } from '@/plugins/arco-design-icon';
 // import { setupPermission } from '@/plugins/permission';
 import { setupI18n } from '@/plugins/i18n';
 import setupAssets from '@/plugins/assets';
+import { setupGoogleMap } from '@/plugins/google-map';
 // import { setupTheme } from '@/plugins/theme';
 // import { setupArco } from './plugins/arco-design';
 
@@ -22,6 +23,8 @@ export const setupPlugin = (app: App) => {
   // 初始化Markdown编辑器
   // setupMarkDown(app);
   // setupTheme();
+
+  setupGoogleMap(app);
 
   // 挂载ArcoModal
   // eslint-disable-next-line no-underscore-dangle

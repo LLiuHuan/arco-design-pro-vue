@@ -1,1 +1,0 @@
-import{d as a,bi as r,b7 as e,bj as s}from"./index.a5de0260.js";const t=a({__name:"index",setup(a){const t=e(),n=s();return r((()=>{const{params:a,query:r}=t,{path:e}=a;n.replace({path:`/${Array.isArray(e)?e.join("/"):e}`,query:r})})),()=>{}}});export{t as default};

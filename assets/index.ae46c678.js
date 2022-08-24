@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.cdc0426e.js";import{w as n,A as a}from"./index.a5de0260.js";const i=e({name:"MultiDimensionDataAnalysis"},[["render",function(e,i,s,t,r,o){return n(),a("h1",null,"MultiDimensionDataAnalysis")}]]);export{i as default};

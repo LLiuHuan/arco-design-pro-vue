@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.cdc0426e.js";import{w as r,A as n}from"./index.a5de0260.js";const o=e({},[["render",function(e,o){return r(),n("h1",null,"Swiper")}]]);export{o as default};

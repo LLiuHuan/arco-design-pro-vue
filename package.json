@@ -1,6 +1,6 @@
 {
   "name": "arco-design-pro-vue",
-  "version": "0.0.4-bate",
+  "version": "0.0.4",
   "author": {
     "name": "LLiuHuan",
     "email": "184555556@qq.com",
@@ -92,6 +92,7 @@
     "prettier": "^2.4.1",
     "rollup-plugin-visualizer": "^5.8.0",
     "scss": "^0.2.4",
+    "standard-version": "^9.5.0",
     "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recess-order": "^3.0.0",

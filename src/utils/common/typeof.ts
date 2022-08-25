@@ -142,6 +142,14 @@ export function isUrl(url: string) {
   return /^(http|https):\/\//g.test(url);
 }
 
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export function isExternal(path: string) {
+  return /^(https?:|mailto:|tel:|http?:)/.test(path);
+}
+
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
   let key: string;
   for (key in target) {

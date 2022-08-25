@@ -63,9 +63,7 @@ export function transformRoutePathToRouteName(
   const pathSplitMark = '/';
   const routeSplitMark: AuthRoute.RouteSplitMark = '_';
 
-  const name = path.split(pathSplitMark).slice(1).join(routeSplitMark) as AuthRoute.RouteKey;
-
-  return name;
+  return path.split(pathSplitMark).slice(1).join(routeSplitMark) as AuthRoute.RouteKey;
 }
 
 /**
@@ -86,8 +84,7 @@ type ComponentAction = Record<AuthRoute.RouteComponent, () => void>;
  * 将单个权限路由转换成vue路由
  * @param item - 单个权限路由
  */
-function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
-  console.log(item);
+export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];
 
   const itemRoute = { ...item } as RouteRecordRaw;
@@ -174,10 +171,9 @@ function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
     const children = (item.children as AuthRoute.Route[])
       .map((child) => transformAuthRouteToVueRoute(child))
       .flat();
-
-    // 找出第一个不为多级路由中间级的子路由路径作为重定向路径
-    const redirectPath: AuthRoute.RoutePath = (children.find((v) => !v.meta?.multi)?.path ||
-      '/') as AuthRoute.RoutePath;
+    // 找出第一个不为多级路由中间级的子路由或非隐藏路由路径作为重定向路径
+    const redirectPath: AuthRoute.RoutePath = (children.find((v) => !v.meta?.multi && !v.meta?.hide)
+      ?.path || '/') as AuthRoute.RoutePath;
     if (redirectPath === '/') {
       consoleError('该多级路由没有有效的子路径', item);
     }
@@ -189,8 +185,9 @@ function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
     } else {
       itemRoute.children = children;
     }
-    console.log(redirectPath);
-    itemRoute.redirect = redirectPath;
+    if (redirectPath !== '/') {
+      itemRoute.redirect = redirectPath;
+    }
   }
 
   resultRoute.push(itemRoute);

@@ -86,7 +86,7 @@
   "sider": {
     "inverted": false,
     "width": 220,
-    "collapsedWidth": 64,
+    "collapsedWidth": 48,
     "mixWidth": 80,
     "mixCollapsedWidth": 48,
     "mixChildMenuWidth": 200
@@ -141,5 +141,10 @@
         "label": "闪现"
       }
     ]
+  },
+  "language": "zh-CN",
+  "watermark": {
+    "watermark": false,
+    "watermarkText": "水印文字"
   }
 }

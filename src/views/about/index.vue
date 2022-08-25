@@ -2,8 +2,15 @@
   <div class="container-view">
     <a-card :bordered="false" title="项目信息" class="proCard" size="small">
       <a-row style="height: 500px">
-        <a-col :span="12"> 介绍呀</a-col>
-        <a-col :span="12" style="height: 500px; overflow-y: auto">
+        <a-col :span="6">
+          <div class="flex justify-center items-center flex-col h-400px">
+            <img class="w-100px mb-15px" src="@/assets/images/logo.png" alt="Logo" />
+            <div class="mb-15px text-center leading-24px">
+              基于 Arco Design Vue 组件库的开箱即用的中后台前端解决方案。
+            </div>
+          </div>
+        </a-col>
+        <a-col :span="18" style="height: 500px; overflow-y: auto">
           <a-timeline
             v-if="state.dataTimeline.length !== 0"
             :reverse="false"

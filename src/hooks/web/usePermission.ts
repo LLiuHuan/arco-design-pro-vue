@@ -1,8 +1,9 @@
-import { useUserStore } from '@/store/modules/user/users';
+// import { useUserStore } from '@/store/modules/user/users';
 
 export function usePermission() {
-  const userStore = useUserStore();
-  const roles = userStore.getPermissions;
+  // const userStore = useUserStore();
+  // const roles = userStore.getPermissions;
+  const roles = ['dashboard'];
 
   /**
    * 检查权限

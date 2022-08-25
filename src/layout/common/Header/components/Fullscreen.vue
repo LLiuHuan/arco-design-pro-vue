@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useDark, useToggle, useFullscreen } from '@vueuse/core';
+  import { useFullscreen } from '@vueuse/core';
   import { useThemeStore } from '@/store';
 
   const theme = useThemeStore();

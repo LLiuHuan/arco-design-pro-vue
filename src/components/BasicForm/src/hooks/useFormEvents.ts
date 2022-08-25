@@ -94,10 +94,10 @@ export function useFormEvents({
       .map((item) => item.field)
       .filter(Boolean);
 
-    Object.keys(values).forEach((key) => {
+    Object.keys(values).forEach((key: string) => {
       const value = values[key];
       if (fields.includes(key)) {
-        formModel[key] = value;
+        formModel.value[key] = value;
       }
     });
   }

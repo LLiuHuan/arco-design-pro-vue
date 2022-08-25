@@ -19,21 +19,21 @@ const watermark = {
     canvas.width = type.width || 150;
     canvas.height = type.height || 120;
     canvas.style.display = 'none';
-    const shuiyin = canvas.getContext('2d');
-    if (shuiyin) {
+    const watermarkCanvas = canvas.getContext('2d');
+    if (watermarkCanvas) {
       // 控制文字的旋转角度和上下位置
-      shuiyin.rotate((-(type.rotate || 20) * Math.PI) / 180);
-      shuiyin.translate(type.offsets?.x || -50, type.offsets?.y || 20);
+      watermarkCanvas.rotate((-(type.rotate || 20) * Math.PI) / 180);
+      watermarkCanvas.translate(type.offsets?.x || -50, type.offsets?.y || 20);
       // 文字颜色
-      shuiyin.fillStyle = type.fillStyle || '#868686';
+      watermarkCanvas.fillStyle = type.fillStyle || '#868686';
       // 文字样式
-      shuiyin.font = type.font || '100 16px Microsoft JhengHei ';
+      watermarkCanvas.font = type.font || '100 16px Microsoft JhengHei ';
 
       if (typeof contents === 'string') {
-        shuiyin.fillText(contents, canvas.width / 3, canvas.height / 2);
+        watermarkCanvas.fillText(contents, canvas.width / 3, canvas.height / 2);
       } else {
         contents.forEach((item, index) => {
-          shuiyin.fillText(item, canvas.width / 3, canvas.height / 2 + index * 20 + 20);
+          watermarkCanvas.fillText(item, canvas.width / 3, canvas.height / 2 + index * 20 + 20);
         });
       }
 
@@ -42,7 +42,7 @@ const watermark = {
 
     /* 新建一个用于填充canvas水印的标签，之所以没有直接在body上添加，
        是因为z-index对个别内容影响，才考虑的不用body */
-    const watermark = document.createElement('div');
+    const watermarkDom = document.createElement('div');
     const styleStr = `
             position:fixed;
             top:0;
@@ -54,9 +54,9 @@ const watermark = {
             background-repeat:repeat;
             mix-blend-mode: multiply;
             background-image:url('${canvas.toDataURL('image/png')}')`;
-    watermark.setAttribute('style', styleStr);
-    watermark.classList.add('watermark');
-    document.body.appendChild(watermark);
+    watermarkDom.setAttribute('style', styleStr);
+    watermarkDom.classList.add('watermark');
+    document.body.appendChild(watermarkDom);
 
     // 此方法是防止用户通过控制台修改样式去除水印效果
     /* MutationObserver 是一个可以监听DOM结构变化的接口。 */
@@ -89,10 +89,10 @@ const watermark = {
   },
   close() {
     /* 关闭页面的水印，即要移除水印标签 */
-    const watermark = document.querySelector('.watermark');
-    if (watermark) {
+    const watermarkDom = document.querySelector('.watermark');
+    if (watermarkDom) {
       // watermark.remove();
-      document.body.removeChild(watermark);
+      document.body.removeChild(watermarkDom);
     }
   },
 };

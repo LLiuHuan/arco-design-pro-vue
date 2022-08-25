@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia';
+import watermark from '@/utils/watermark';
 import { getNaiveThemeOverrides, getThemeSettings } from './helpers';
 
 type ThemeState = Theme.Setting;
 
 export const useThemeStore = defineStore('theme-store', {
   state: (): ThemeState => getThemeSettings(),
+  persist: true,
   getters: {
     /** 主题配置 无用 */
     naiveThemeOverrides(state) {
-      const overrides = getNaiveThemeOverrides({ primary: state.themeColor, ...state.otherColor });
-      return overrides;
+      return getNaiveThemeOverrides({ primary: state.themeColor, ...state.otherColor });
     },
     /** 暗黑主题 */
     naiveTheme(state) {
@@ -53,6 +54,9 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 设置布局模式 */
     setLayoutMode(mode: EnumType.ThemeLayoutMode) {
+      if (mode === 'horizontal-mix') {
+        this.fixedHeaderAndTab = true;
+      }
       this.layout.mode = mode;
     },
     /** 设置侧边栏反转色 */
@@ -76,7 +80,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.showReload = visible;
     },
     /** 设置头部高度 */
-    setHeaderHeight(height: number | null) {
+    setHeaderHeight(height: number | undefined) {
       if (height) {
         this.header.height = height;
       }
@@ -94,7 +98,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.tab.visible = visible;
     },
     /** 设置多页签高度 */
-    setTabHeight(height: number | null) {
+    setTabHeight(height: number | undefined) {
       if (height) {
         this.tab.height = height;
       }
@@ -108,7 +112,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.tab.isCache = isCache;
     },
     /** 侧边栏宽度 */
-    setSiderWidth(width: number | null) {
+    setSiderWidth(width: number | undefined) {
       if (width) {
         this.sider.width = width;
       }
@@ -118,7 +122,7 @@ export const useThemeStore = defineStore('theme-store', {
       this.sider.collapsedWidth = width;
     },
     /** vertical-mix模式下侧边栏宽度 */
-    setMixSiderWidth(width: number | null) {
+    setMixSiderWidth(width: number | undefined) {
       if (width) {
         this.sider.mixWidth = width;
       }
@@ -143,7 +147,7 @@ export const useThemeStore = defineStore('theme-store', {
     setFooterHeight(height: number) {
       this.footer.height = height;
     },
-    /** 设置切换页面时是否过渡动画 */
+    /** 设置切换页面时是否过度动画 */
     setPageIsAnimate(animate: boolean) {
       this.page.animate = animate;
     },
@@ -156,6 +160,15 @@ export const useThemeStore = defineStore('theme-store', {
       this.language = language;
       // localStorage.setItem('arco-locale', value);
       // Message.success(i18.t('navbar.action.locale'));
+    },
+    /** 设置水印 */
+    setWatermark(val: boolean) {
+      this.watermark.watermark = val;
+      val ? watermark.set(this.watermark.watermarkText || '水印', {}) : watermark.close();
+    },
+    /** 设置水印文字 */
+    setWatermarkText(text: string) {
+      this.watermark.watermarkText = text;
     },
   },
 });

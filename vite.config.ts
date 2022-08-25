@@ -21,6 +21,9 @@ export default defineConfig((configEnv) => {
       },
     },
     define: viteDefine,
+    // optimizeDeps: {
+    //   include: ['js-yaml'],
+    // },
     plugins: setupVitePlugins(viteEnv, srcPath),
     css: {
       preprocessorOptions: {

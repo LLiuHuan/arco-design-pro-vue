@@ -1,7 +1,7 @@
 import { ComputedRef, Ref, unref } from 'vue';
 import { set } from 'lodash-es';
+import { isArray, isFunction, isNullOrUnDef, isObject, isString } from '@/utils';
 import { FormSchema } from '@/components/BasicForm/src/types/form';
-import { isArray, isFunction, isNullOrUnDef, isObject, isString } from '@/utils/is';
 
 interface UseFormValuesContext {
   defaultFormModel: Ref<any>;

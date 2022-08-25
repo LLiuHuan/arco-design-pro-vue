@@ -1,8 +1,8 @@
 // 注册i8n实例并引入语言文件
 import { App } from 'vue';
 import { createI18n } from 'vue-i18n';
-import zh_CN from '@/locale/zh-CN';
-import en_US from '@/locale/en-US';
+import zhCN from '@/locale/zh-CN';
+import enUS from '@/locale/en-US';
 import { storage } from '@/utils/storage/storage';
 
 const localeData = {
@@ -15,8 +15,8 @@ const localeData = {
   silentFallbackWarn: true,
 
   messages: {
-    'zh-CN': zh_CN,
-    'en-US': en_US,
+    'zh-CN': zhCN,
+    'en-US': enUS,
   },
 };
 

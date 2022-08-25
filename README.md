@@ -1,13 +1,14 @@
-# arco-design-pro-vue
 
 <p align="center">
-  <img width="55" src="http://qiniu.54cc.cc/uPic/Arco Logo.png">
+  <img width="55" src="./src/assets/images/logo.png" alt="LOGO" />
 </p>
 
 <p align="center">
+<a href="https://www.oscs1024.com/project/oscs/LLiuHuan/arco-design-pro-vue?ref=badge_small" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/LLiuHuan/arco-design-pro-vue.svg?size=small"/></a>
   <a href="https://github.com/LLiuHuan/arco-design-pro-vue"><img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg?sanitize=true" alt="Build Status"></a>
   <a href="https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"></a>
 </p>
+
 
 > 技术不好，也没啥时间，随便写写，对付看吧，喜欢的话可以点个 Start
 
@@ -19,6 +20,10 @@
 
 在线预览
 ：[https://lliuhuan.github.io/arco-design-pro-vue](https://lliuhuan.github.io/arco-design-pro-vue)  
+
+### 1.2 目录结构
+```
+```
 
 ## 2. 使用说明
 
@@ -86,3 +91,26 @@ yarn dev
 - [ ] 错误日志收集（参考 vue-element-admin，这个不一定会做，毕竟不怎么会前端 ）
 - [ ] 更新记录
 - [ ] 服务器信息
+
+
+##  致谢
+
+<a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
+  <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">
+</a>
+
+
+
+## License
+
+Ths project is [MIT licensed](https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE).
+
+
+```
+"esno": "^0.16.3",
+"js-yaml": "^4.1.0",
+"path-browserify": "^1.0.1",
+"path-value": "^0.9.4",
+"tinycolor2": "^1.4.2",
+@types/path-browserify
+```

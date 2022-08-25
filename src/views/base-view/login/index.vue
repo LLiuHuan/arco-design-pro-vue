@@ -5,7 +5,7 @@
         alt="logo"
         src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
       />
-      <div class="logo-text">Arco Design Pro</div>
+      <div class="logo-text">{{ title }}</div>
     </div>
     <LoginBanner />
     <div class="content">
@@ -34,7 +34,7 @@
   import { EnumLoginModule } from '@/enums';
   import { useThemeStore } from '@/store';
   import { useAppInfo } from '@/composables';
-  import { getColorPalette, mixColor } from '@/utils';
+  // import { getColorPalette, mixColor } from '@/utils';
   // import Footer from '@/components/footer/index.vue';
   import { PwdLogin } from './components';
   import LoginBanner from './components/banner.vue';
@@ -71,15 +71,15 @@
     return active;
   });
 
-  const bgThemeColor = computed(() =>
-    theme.darkMode ? getColorPalette(theme.themeColor, 7) : theme.themeColor
-  );
-
-  const bgColor = computed(() => {
-    const COLOR_WHITE = '#ffffff';
-    const ratio = theme.darkMode ? 0.5 : 0.2;
-    return mixColor(COLOR_WHITE, theme.themeColor, ratio);
-  });
+  // const bgThemeColor = computed(() =>
+  //   theme.darkMode ? getColorPalette(theme.themeColor, 7) : theme.themeColor
+  // );
+  //
+  // const bgColor = computed(() => {
+  //   const COLOR_WHITE = '#ffffff';
+  //   const ratio = theme.darkMode ? 0.5 : 0.2;
+  //   return mixColor(COLOR_WHITE, theme.themeColor, ratio);
+  // });
 </script>
 
 <style lang="less" scoped>

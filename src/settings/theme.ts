@@ -107,6 +107,11 @@ const defaultThemeSetting: Theme.Setting = {
       { value: 'zoom-out', label: EnumThemeAnimateMode['zoom-out'] },
     ],
   },
+  language: 'zh-CN',
+  watermark: {
+    watermark: false,
+    watermarkText: '水印',
+  },
 };
 
 export const themeSetting = (jsonSetting as Theme.Setting) || defaultThemeSetting;

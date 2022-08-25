@@ -3,7 +3,7 @@
     tooltip-content="切换语言"
     class="w-40px h-full"
     :inverted="theme.header.inverted"
-    @click="setLanguage"
+    @click="setLanguage(theme.language === 'zh-CN' ? 'en-US' : 'zh-CN')"
   >
     <icon-english-fill
       v-if="theme.language === 'zh-CN'"
@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { useI18n } from 'vue-i18n';
   import { useThemeStore } from '@/store';
   import useLocale from '@/hooks/locale';
 
@@ -23,15 +22,18 @@
 
   const theme = useThemeStore();
 
-  const setLanguage = () => {
-    const language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
-    theme.setLanguage(language);
-    // locale.value = language;
+  const setLanguage = (language: EnumType.Language | undefined = 'zh-CN') => {
+    console.log(language);
+
+    // if (!language) {
+    //   language = theme.language === 'zh-CN' ? 'en-US' : 'zh-CN';
+    // }
+    // theme.setLanguage(language);
     changeLocale(language);
   };
 
   const init = () => {
-    setLanguage();
+    setLanguage('zh-CN');
   };
 
   init();

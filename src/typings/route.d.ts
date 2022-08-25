@@ -16,6 +16,7 @@ declare namespace AuthRoute {
     // 自定义路由
     | 'dashboard'
     | 'dashboard_analysis'
+    | 'dashboard_analysis_table'
     | 'dashboard_workbench'
     | 'document'
     | 'document_vue'
@@ -27,19 +28,30 @@ declare namespace AuthRoute {
     | 'component_button'
     | 'component_card'
     | 'component_table'
+    | 'component_form'
+    | 'component_icon'
     | 'plugin'
     | 'plugin_map'
     | 'plugin_video'
     | 'plugin_editor'
+    | 'plugin_charts'
+    | 'plugin_charts_echarts'
+    | 'plugin_charts_d3'
     | 'plugin_editor_quill'
     | 'plugin_editor_markdown'
+    | 'plugin_editor_yaml'
     | 'plugin_copy'
     | 'plugin_icon'
     | 'plugin_print'
     | 'plugin_swiper'
+    | 'plugin_terminal'
     | 'auth-demo'
     | 'auth-demo_permission'
     | 'auth-demo_super'
+    | 'function'
+    | 'function_tab'
+    | 'function_tab-detail'
+    | 'function_tab-multi-detail'
     | 'exception'
     | 'exception_403'
     | 'exception_404'
@@ -87,12 +99,18 @@ declare namespace AuthRoute {
     keepAlive?: boolean;
     /** 菜单和面包屑对应的图标 */
     icon?: string;
+    /** 自定义的菜单和面包屑对应的图标 */
+    customIcon?: string;
     /** 是否在菜单中隐藏(一些列表、表格的详情页面需要通过参数跳转，所以不能显示在菜单中) */
     hide?: boolean;
     /** 外链链接 */
     href?: string;
+    /** 是否支持多个tab页签(默认一个，即相同name的路由会被替换) */
+    multiTab?: boolean;
     /** 路由顺序，可用于菜单的排序 */
     order?: number;
+    /** 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况) */
+    activeMenu?: RouteKey;
     /** 表示是否是多级路由的中间级路由(用于转换路由数据时筛选多级路由的标识，定义路由时不用填写) */
     multi?: boolean;
     /** 是否固定到tab上 */

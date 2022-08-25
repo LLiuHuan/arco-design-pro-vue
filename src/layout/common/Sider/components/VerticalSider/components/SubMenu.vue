@@ -10,16 +10,16 @@
       />
     </template>
     <template v-for="item in menuInfo.children" :key="item.key">
-      <template v-if="!item.children">
+      <template v-if="item.children && item.children.length > 0">
+        <SubMenu :menu-info="item" :key="item.key" />
+      </template>
+      <template v-else>
         <a-menu-item :key="item.key" @click="handleUpdateMenu(item.key, item)">
           <template #icon>
             <component :is="item.icon || 'icon-menu'" />
           </template>
           {{ item.label }}
         </a-menu-item>
-      </template>
-      <template v-else>
-        <SubMenu :menu-info="item" :key="item.key" />
       </template>
     </template>
   </a-sub-menu>

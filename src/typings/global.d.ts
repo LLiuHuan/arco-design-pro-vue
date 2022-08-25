@@ -5,6 +5,10 @@
 //   $notification?: import('naive-ui').NotificationProviderInst;
 // }
 
+// interface Window extends Window {
+//   MonacoEnvironment: import('monaco-editor').Environment;
+// }
+
 /** 通用类型 */
 declare namespace Common {
   /**
@@ -17,8 +21,23 @@ declare namespace Common {
 /** 构建时间 */
 declare const PROJECT_BUILD_TIME: string;
 
-declare global {
-  declare type Nullable<T> = T | null;
-}
+declare type Nullable<T> = T | null;
 
 declare type Recordable<T = any> = Record<string, T>;
+
+declare type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
+
+declare interface Fn<T = any, R = T> {
+  (...arg: T[]): R;
+}
+
+declare type LabelValueOptions = {
+  label: string;
+  value: any;
+  disabled: boolean;
+  [key: string]: string | number | boolean;
+}[];
+
+declare interface ChangeEvent extends Event {
+  target: HTMLInputElement;
+}

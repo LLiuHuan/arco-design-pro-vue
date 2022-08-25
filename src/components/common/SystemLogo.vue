@@ -1,7 +1,7 @@
 <template>
   <!-- LOGO VIEW -->
-  <icon-custom-logo-fill v-if="props.fill" />
-  <icon-custom-logo v-else />
+  <icon-custom-logo-fill class="w-28px" v-if="props.fill" />
+  <icon-custom-logo class="w-28px" v-else />
 </template>
 
 <script lang="ts" setup>

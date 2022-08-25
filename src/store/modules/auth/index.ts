@@ -2,6 +2,7 @@ import { unref } from 'vue';
 import { defineStore } from 'pinia';
 import { Message } from '@arco-design/web-vue';
 import { router } from '@/router';
+import { useRouteStore } from '@/store';
 import { useRouterPush } from '@/composables';
 import {
   clearAuthStorage,
@@ -13,7 +14,6 @@ import {
 } from '@/utils';
 import { fetchLogin, fetchUserInfo } from '@/api';
 import { useTabStore } from '../tab';
-import { useRouteStore } from '../route';
 
 interface AuthState {
   /** 用户信息 */
@@ -83,10 +83,12 @@ export const useAuthStore = defineStore('auth-store', {
      * @param backendToken - 返回的token
      */
     async loginByToken(backendToken: ApiAuth.Token) {
+      console.log(backendToken);
       let successFlag = false;
 
       // 先把token存储到缓存中(后面接口的请求头需要token)
       const { token, refreshToken } = backendToken;
+      console.log(token, refreshToken);
       setToken(token);
       setRefreshToken(refreshToken);
 
@@ -99,6 +101,7 @@ export const useAuthStore = defineStore('auth-store', {
         // 更新状态
         this.userInfo = data;
         this.token = token;
+        console.log(data, token);
 
         successFlag = true;
       }

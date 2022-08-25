@@ -83,7 +83,7 @@
     {
       label: '关闭选中',
       key: 'close-current',
-      disabled: state.currentPath === tab.homeTab.path,
+      disabled: state.currentPath === tab.homeTab.fullPath,
       icon: 'icon-close',
     },
     {

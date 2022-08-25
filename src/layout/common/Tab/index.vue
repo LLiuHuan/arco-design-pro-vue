@@ -2,9 +2,14 @@
   <dark-mode-container
     class="arco-layout-tab"
     :class="theme.fixedHeaderAndTab ? 'layout-tab-fixed' : 'layout-tab'"
+    :style="{
+      height: theme.tab.height + 'px',
+      top: theme.header.height + 'px',
+      paddingLeft: !siderVisible ? 0 : tabLeft + 'px',
+    }"
     v-if="theme.tab.visible"
   >
-    <div class="layout-tab">
+    <div class="layout-tab" :style="{ height: theme.tab.height + 'px' }">
       <span
         class="tabs-card-prev"
         @click="scrollPrev"
@@ -22,17 +27,18 @@
             <Draggable :list="tab.tabs" animation="300" item-key="fullPath" class="flex" ref="flex">
               <template #item="{ element }">
                 <div
-                  :id="`tag${element.path}`"
+                  :id="`tag${element.fullPath}`"
                   class="layout-tab-scroll-item"
-                  :class="{ 'active-item': tab.activeTab === element.path }"
-                  @click.stop="goPath(element.path)"
+                  :class="{ 'active-item': tab.activeTab === element.fullPath }"
+                  :style="{ height: theme.tab.height - 12 + 'px' }"
+                  @click.stop="goPath(element.fullPath)"
                 >
-                  <span :class="{ activeTab: tab.activeTab === element.path }">
+                  <span :class="{ activeTab: tab.activeTab === element.fullPath }">
                     {{ element.meta.title }}
                   </span>
                   <icon-close
                     v-if="!element.meta.affix"
-                    @click.stop="tab.removeTab(element.path)"
+                    @click.stop="tab.removeTab(element.fullPath)"
                     size="14"
                   />
                 </div>
@@ -67,14 +73,14 @@
   import { useEventListener } from '@vueuse/core';
   import { useAppStore, useTabStore, useThemeStore } from '@/store';
   import { useBasicLayout } from '@/composables';
-  import { setTabRoutes } from '@/utils';
-  import { getTabRouteByVueRoute } from '@/store/modules/tab/helpers';
+  import { setTabRoutes } from '@/store/modules/tab/helpers';
   import ContextMenu from './components/ContextMenu.vue';
 
   const theme = useThemeStore();
   const app = useAppStore();
   const tab = useTabStore();
   const route = useRoute();
+  const { siderWidth, siderCollapsedWidth, siderVisible } = useBasicLayout();
 
   // refs
   const navScroll = ref();
@@ -90,18 +96,16 @@
   };
 
   const tabLeft = computed((): number => {
-    const { siderWidth, siderCollapsedWidth } = useBasicLayout();
+    // 固定多页签
     if (!theme.fixedHeaderAndTab) {
       return 0;
     }
     return app.siderCollapse ? siderCollapsedWidth.value : siderWidth.value;
   });
 
-  const { height: headerHeight } = theme.header;
-  const { height: tabHeight } = theme.tab;
-
   function init() {
     tab.iniTabStore(route);
+    updateNavScroll(true);
   }
 
   /**
@@ -172,9 +176,8 @@
   watch(
     () => route.fullPath,
     () => {
-      if (tab.tabs.includes(getTabRouteByVueRoute(route))) return;
       tab.addTab(route);
-      tab.setActiveTab(route.path);
+      tab.setActiveTab(route.fullPath);
       updateNavScroll(true);
     }
   );
@@ -191,8 +194,6 @@
 <style lang="less" scoped>
   .arco-layout-tab {
     position: fixed;
-    height: calc(v-bind(tabHeight) * 1px);
-    top: calc(v-bind(headerHeight) * 1px);
     min-width: 900px;
     left: 0;
     flex-shrink: 0;
@@ -203,7 +204,6 @@
     border-bottom: 1px solid var(--color-border);
 
     .layout-tab {
-      height: calc(v-bind(tabHeight) * 1px);
       padding-top: 6px;
       padding-bottom: 6px;
       padding-left: 6px;
@@ -255,7 +255,6 @@
           background: var(--color-fill-2);
           color: var(--color-text-2);
           text-decoration: none;
-          height: calc(v-bind(tabHeight) * 1px - 12px);
           padding: 6px 16px 4px;
           border-radius: 3px;
           margin-right: 6px;
@@ -323,7 +322,6 @@
   .layout-tab-fixed {
     position: fixed;
     z-index: 999;
-    padding-left: calc(v-bind(tabLeft) * 1px);
     transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     transform: translateX(0px);
   }
@@ -340,6 +338,6 @@
   }
 
   .activeTab {
-    color: red;
+    color: rgb(var(--arcoblue-6));
   }
 </style>

@@ -2,6 +2,7 @@
   <div class="flex-1-hidden">
     <a-menu
       class="flex-1-hidden"
+      :mode="mode"
       :style="{ width: '100%', height: '100%' }"
       :collapsed="app.siderCollapse"
       :collapsed-width="theme.sider.collapsedWidth"
@@ -27,11 +28,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import { useAppStore, useRouteStore, useThemeStore } from '@/store';
-  import { useRouterPush } from '@/composables';
-  import { getActiveKeyPathsOfMenus } from '@/utils';
+  import { useBasicLayout, useRouterPush } from '@/composables';
   import SubMenu from './SubMenu.vue';
 
   const route = useRoute();
@@ -46,6 +46,8 @@
     const menuItem = item as GlobalMenuOption;
     routerPush(menuItem.routePath);
   }
+
+  const { mode } = useBasicLayout();
 
   watch(
     () => route.name,

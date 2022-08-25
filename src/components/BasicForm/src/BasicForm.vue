@@ -28,11 +28,11 @@
 
           <!--ACheckbox-->
           <template v-else-if="schema.component === 'ACheckbox'">
-            <a-checkbox-group v-model:value="formModel[schema.field]">
+            <a-checkbox-group v-model:model-value="formModel[schema.field]">
               <a-space>
                 <a-checkbox
-                  v-for="(item, index) in schema.componentProps?.options"
-                  :key="index"
+                  v-for="(item, indexCheckbox) in schema.componentProps?.options"
+                  :key="indexCheckbox"
                   :value="item.value"
                   :label="item.label"
                 />
@@ -42,11 +42,11 @@
 
           <!--ARadioGroup-->
           <template v-else-if="schema.component === 'ARadioGroup'">
-            <a-radio-group v-model:value="formModel[schema.field]">
+            <a-radio-group v-model:model-value="formModel[schema.field]">
               <a-space>
                 <a-radio
-                  v-for="(item, index) in schema.componentProps?.options"
-                  :key="index"
+                  v-for="(item, indexRadio) in schema.componentProps?.options"
+                  :key="indexRadio"
                   :value="item.value"
                 >
                   {{ item.label }}
@@ -59,7 +59,7 @@
           <component
             v-else
             v-bind="getComponentProps(schema)"
-            :is="schema.component"
+            :is="switchComponent(schema.component)"
             v-model="formModel[schema.field]"
             :class="{ isFull: schema.isFull !== false }"
           />
@@ -110,8 +110,8 @@
   </a-form>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue';
+<script lang="ts" setup>
+  import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue';
   import {
     AutoComplete,
     Cascader,
@@ -138,220 +138,263 @@
     WeekPicker,
   } from '@arco-design/web-vue';
   import { IconDown, IconQuestionCircle, IconUp } from '@arco-design/web-vue/es/icon';
-  import { deepMerge } from '@/utils';
+  import { ButtonProps } from '@arco-design/web-vue/es/button';
+  import { deepMerge, isArray } from '@/utils';
   import {
     BaseFormProps,
     FormActionType,
     FormProps,
     FormSchema,
   } from '@/components/BasicForm/src/types/form';
-  import { basicProps } from '@/components/BasicForm/src/props';
   import { useFormValues } from '@/components/BasicForm/src/hooks/useFormValues';
-  import { isArray } from '@/utils/is';
   import { useFormEvents } from '@/components/BasicForm/src/hooks/useFormEvents';
   import { createPlaceholderMessage } from '@/components/BasicForm/src/helper';
+  import { ComponentType } from '@/components/BasicForm';
   import { GridProps } from './types/grid';
 
-  export default defineComponent({
-    name: 'BasicForm',
-    components: {
-      IconQuestionCircle,
-      IconDown,
-      IconUp,
-      Input,
-      InputGroup,
-      InputPassword,
-      InputSearch,
-      InputNumber,
-      InputTag,
-      Select,
-      TreeSelect,
-      Radio,
-      RadioGroup,
-      Checkbox,
-      CheckboxGroup,
-      AutoComplete,
-      Cascader,
-      DatePicker,
-      MonthPicker,
-      RangePicker,
-      WeekPicker,
-      TimePicker,
-      Switch,
-      Upload,
-      Slider,
-      Rate,
-    },
-    props: {
-      ...basicProps,
-    },
-    emits: ['reset', 'submit', 'register'],
-    setup(props, { emit, attrs }) {
-      const defaultFormModel = ref<Recordable>({});
-      const formModel = ref<Recordable>({});
-      const propsRef = ref<Partial<FormProps>>({});
-      const schemaRef = ref(null);
-      const formElRef = ref(null);
-      const gridCollapsed = ref(true);
-      const loadingSub = ref(false);
-      const isUpdateDefaultRef = ref(false);
+  const defaultFormModel = ref<Recordable>({});
+  const formModel = ref<Recordable>({});
+  const propsRef = ref<Partial<FormProps>>({});
+  const schemaRef = ref(null);
+  const formElRef = ref(null);
+  const gridCollapsed = ref(true);
+  const loadingSub = ref(false);
+  const isUpdateDefaultRef = ref(false);
+  const attrs = useAttrs();
 
-      // 获取并拼接props内容
-      const getProps = computed((): BaseFormProps => {
-        const baseFormProps = { ...props, ...unref(propsRef) } as BaseFormProps;
-        const rulesObj: any = {
-          rules: {},
-        };
-        const schemas: any = baseFormProps.schemas || [];
-        schemas.forEach((item) => {
-          if (item.rules && isArray(item.rules)) {
-            rulesObj.rules[item.field] = item.rules;
-          }
-        });
-        return { ...baseFormProps, ...unref(rulesObj) };
-      });
+  interface Props {
+    // 表单配置规则
+    schemas?: FormSchema[];
+    // 表单设置规则
+    formProps?: FormProps;
+    // grid 配置
+    gridProps?: GridProps;
 
-      // 获取确定按钮样式
-      const getSubmitBtnOptions = computed(() => {
-        return {
-          size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
-          type: 'primary',
-          ...unref(getProps).submitButtonOptions,
-        };
-      });
+    // 是否显示操作按钮（查询/重置）
+    showActionButtonGroup?: boolean;
+    // 显示重置按钮
+    showResetButton?: boolean;
+    // 重置按钮配置
+    resetButtonOptions?: Partial<ButtonProps>;
+    // 显示确认按钮
+    showSubmitButton?: boolean;
+    // 确认按钮配置
+    submitButtonOptions?: Partial<ButtonProps>;
+    // 展开收起按钮
+    showAdvancedButton?: boolean;
+    // 确认按钮文字
+    submitButtonText?: string;
+    // 重置按钮文字
+    resetButtonText?: string;
+  }
 
-      // 获取重置按钮样式
-      const getResetBtnOptions = computed(() => {
-        return {
-          size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
-          ...unref(getProps).resetButtonOptions,
-        };
-      });
+  const props = withDefaults(defineProps<Props>(), {
+    showActionButtonGroup: true,
+    showResetButton: true,
+    showSubmitButton: true,
+    showAdvancedButton: true,
+    submitButtonText: '查询',
+    resetButtonText: '重置',
+  });
 
-      const isInline = computed(() => {
-        const { formProps } = unref(getProps);
-        return formProps?.layout === 'inline';
-      });
+  const emit = defineEmits(['reset', 'submit', 'register']);
 
-      // 获取grid的row的样式
-      const getGrid = computed((): Partial<GridProps> | undefined => {
-        const { gridProps } = unref(getProps);
-        if (gridProps) {
-          return {
-            ...gridProps,
-            collapsed: isInline.value ? gridCollapsed.value : false,
-          };
-        }
-        return undefined;
-      });
-
-      // 获取动态渲染表单的props
-      function getComponentProps(schema) {
-        const compProps = schema.componentProps ?? {};
-        const { component } = schema;
-        return {
-          allowClear: true,
-          placeholder: createPlaceholderMessage(unref(component)),
-          ...compProps,
-        };
+  // 获取并拼接props内容
+  const getProps = computed((): BaseFormProps => {
+    const baseFormProps = { ...props, ...unref(propsRef) } as BaseFormProps;
+    const rulesObj: any = {
+      rules: {},
+    };
+    const schemas: any = baseFormProps.schemas || [];
+    schemas.forEach((item: FormSchema) => {
+      if (item.rules && isArray(item.rules)) {
+        rulesObj.rules[item.field] = item.rules;
       }
+    });
+    return { ...baseFormProps, ...unref(rulesObj) };
+  });
 
-      // 获取form表单的props
-      const getBindValue = computed(
-        () => ({ ...attrs, ...props.formProps, ...unref(getProps) } as Recordable)
-      );
+  // 获取确定按钮样式
+  const getSubmitBtnOptions = computed(() => {
+    return {
+      size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
+      // TODO: 暂时先强制转一下类型 要不会报错，type 不是string类型
+      type: 'primary' as 'text' | 'dashed' | 'outline' | 'primary' | 'secondary' | undefined,
+      ...unref(getProps).submitButtonOptions,
+    };
+  });
 
-      // 获取动态表单
-      const getSchema = computed((): FormSchema[] => {
-        const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
-        for (const schema of schemas) {
-          const { defaultValue } = schema;
-          // handle date type
-          // dateItemType.includes(component as string)
-          if (defaultValue) {
-            schema.defaultValue = defaultValue;
-          }
-        }
-        return schemas as FormSchema[];
-      });
+  // 获取重置按钮样式
+  const getResetBtnOptions = computed(() => {
+    return {
+      size: unref(getProps).formProps?.size ? unref(getProps).formProps?.size : 'medium',
+      ...unref(getProps).resetButtonOptions,
+    };
+  });
 
-      // 使用 formValues Hooks
-      const { handleFormValues, initDefault } = useFormValues({
-        // getProps,
-        defaultFormModel,
-        getSchema,
-        formModel,
-      });
+  const isInline = computed(() => {
+    const { formProps } = unref(getProps);
+    return formProps?.layout === 'inline';
+  });
 
-      // 使用 formEvents Hooks
-      const { handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } =
-        useFormEvents({
-          emit,
-          getProps,
-          formModel,
-          getSchema,
-          formElRef,
-          defaultFormModel,
-          loadingSub,
-          handleFormValues,
-        });
-
-      // 展开折叠
-      function unfoldToggle() {
-        gridCollapsed.value = !gridCollapsed.value;
-      }
-
-      // 写入props
-      async function setProps(formProps: Partial<FormProps>): Promise<void> {
-        propsRef.value = deepMerge(unref(propsRef) || {}, formProps);
-      }
-
-      // formActionType
-      const formActionType: Partial<FormActionType> = {
-        getFieldsValue,
-        setFieldsValue,
-        resetFields,
-        validate,
-        clearValidate,
-        setProps,
-        submit: handleSubmit,
-      };
-
-      watch(
-        () => getSchema.value,
-        (schema) => {
-          if (unref(isUpdateDefaultRef)) {
-            return;
-          }
-          if (schema?.length) {
-            initDefault();
-            isUpdateDefaultRef.value = true;
-          }
-        }
-      );
-
-      onMounted(() => {
-        initDefault();
-        emit('register', formActionType);
-      });
-
+  // 获取grid的row的样式
+  const getGrid = computed((): Partial<GridProps> | undefined => {
+    const { gridProps } = unref(getProps);
+    if (gridProps) {
       return {
-        formElRef,
-        getBindValue,
-        getGrid,
-        formModel,
-        getSchema,
-        getProps,
-        isInline,
-        unfoldToggle,
-        loadingSub,
-        handleSubmit,
-        resetFields,
-        getComponentProps,
-        getSubmitBtnOptions,
-        getResetBtnOptions,
+        ...gridProps,
+        collapsed: isInline.value ? gridCollapsed.value : false,
       };
-    },
+    }
+    return undefined;
+  });
+
+  // 获取动态渲染表单的props
+  function getComponentProps(schema: FormSchema) {
+    const compProps = schema.componentProps ?? {};
+    const { component } = schema;
+    return {
+      allowClear: true,
+      placeholder: createPlaceholderMessage(unref(component as ComponentType)),
+      ...compProps,
+    };
+  }
+
+  // 获取form表单的props
+  const getBindValue = computed(
+    () => ({ ...attrs, ...props.formProps, ...unref(getProps) } as Recordable)
+  );
+
+  // 获取动态表单
+  const getSchema = computed((): FormSchema[] => {
+    const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
+    if (schemas) {
+      Object.keys(schemas).forEach((key: any) => {
+        const schema = schemas[key];
+        const { defaultValue } = schema;
+        // handle date type
+        // dateItemType.includes(component as string)
+        if (defaultValue) {
+          schema.defaultValue = defaultValue;
+        }
+      });
+      return schemas as FormSchema[];
+    }
+    return [];
+  });
+
+  // 使用 formValues Hooks
+  const { handleFormValues, initDefault } = useFormValues({
+    // getProps,
+    defaultFormModel,
+    getSchema,
+    formModel,
+  });
+
+  // 使用 formEvents Hooks
+  const { handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } =
+    useFormEvents({
+      emit,
+      getProps,
+      formModel,
+      getSchema,
+      formElRef,
+      defaultFormModel,
+      loadingSub,
+      handleFormValues,
+    });
+
+  // 展开折叠
+  function unfoldToggle() {
+    gridCollapsed.value = !gridCollapsed.value;
+  }
+
+  // 写入props
+  async function setProps(formProps: Partial<FormProps>): Promise<void> {
+    propsRef.value = deepMerge(unref(propsRef) || {}, formProps);
+  }
+
+  // formActionType
+  const formActionType: Partial<FormActionType> = {
+    getFieldsValue,
+    setFieldsValue,
+    resetFields,
+    validate,
+    clearValidate,
+    setProps,
+    submit: handleSubmit,
+  };
+
+  // TODO: vue3 的 setup方式 使用component :is 字符串形式的无法专成组件，临时使用一个函数来返回组件，后期再想办法优化吧
+  const switchComponent = (component: ComponentType | undefined) => {
+    switch (component) {
+      case 'AAutoComplete':
+        return AutoComplete;
+      case 'ACascader':
+        return Cascader;
+      case 'ACheckbox':
+        return Checkbox;
+      case 'ACheckboxGroup':
+        return CheckboxGroup;
+      case 'ADatePicker':
+        return DatePicker;
+      case 'AInput':
+        return Input;
+      case 'AInputGroup':
+        return InputGroup;
+      case 'AInputNumber':
+        return InputNumber;
+      case 'AInputPassword':
+        return InputPassword;
+      case 'AInputSearch':
+        return InputSearch;
+      case 'AInputTag':
+        return InputTag;
+      case 'AMonthPicker':
+        return MonthPicker;
+      case 'ARadio':
+        return Radio;
+      case 'ARadioGroup':
+        return RadioGroup;
+      case 'ARangePicker':
+        return RangePicker;
+      case 'ARate':
+        return Rate;
+      case 'ASelect':
+        return Select;
+      case 'ASlider':
+        return Slider;
+      case 'ASwitch':
+        return Switch;
+      case 'ATimePicker':
+        return TimePicker;
+      case 'ATreeSelect':
+        return TreeSelect;
+      case 'AUpload':
+        return Upload;
+      case 'AWeekPicker':
+        return WeekPicker;
+      default:
+        return Input;
+    }
+  };
+
+  watch(
+    () => getSchema.value,
+    (schema) => {
+      if (unref(isUpdateDefaultRef)) {
+        return;
+      }
+      if (schema?.length) {
+        initDefault();
+        isUpdateDefaultRef.value = true;
+      }
+    }
+  );
+
+  onMounted(() => {
+    initDefault();
+    emit('register', formActionType);
   });
 </script>
 

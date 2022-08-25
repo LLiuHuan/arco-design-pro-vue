@@ -19,6 +19,8 @@
     "@arco-design/theme-christmas": "^0.0.18",
     "@arco-design/web-vue": "2.35.1",
     "@fawmi/vue-google-maps": "^0.9.72",
+    "@wangeditor/editor": "^5.1.14",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
     "conventional-changelog-cmyr-config": "^2.0.4",
     "crypto-js": "^4.1.1",

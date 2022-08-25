@@ -1,20 +1,9 @@
 <template>
-  <GoogleMap
-    ref="domRef"
-    class="w-full h-400px"
-    :api-key="GOOGLE_KEY"
-    style="width: 100%; height: 500px"
-    :center="center"
-    :zoom="15"
-  >
-    <Marker :options="{ position: center }" />
-  </GoogleMap>
+  <a-alert class="mb-20px" :show-icon="false">文档地址：https://vue-map.netlify.app/</a-alert>
+  <GMapMap class="w-full !h-400px" :center="center" :zoom="7" map-type-id="terrain" />
 </template>
 
 <script setup lang="ts">
-  import { GoogleMap, Marker } from 'vue3-google-map';
-  import { GOOGLE_KEY } from '@/config';
-
   const center = { lat: 40.689247, lng: -74.044502 };
 </script>
 

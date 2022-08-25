@@ -1,10 +1,14 @@
 <template>
+  <a-alert class="mb-20px" :show-icon="false"
+    >文档地址：https://lbs.amap.com/api/jsapi-v2/summary</a-alert
+  >
   <div ref="domRef" class="w-full h-400px"></div>
 </template>
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useScriptTag } from '@vueuse/core';
+  // import AMapLoader from '@amap/amap-jsapi-loader';
   import { GAODE_MAP_SDK_URL } from '@/config';
 
   const { load } = useScriptTag(GAODE_MAP_SDK_URL);

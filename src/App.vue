@@ -10,6 +10,10 @@
   import { useThemeStore } from '@/store';
 
   const theme = useThemeStore();
+
+  // created
+  document.body.setAttribute('arco-theme', theme.naiveTheme);
+
   watch(
     () => theme.naiveTheme,
     (newTheme) => {

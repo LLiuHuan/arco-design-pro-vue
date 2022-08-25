@@ -1,4 +1,7 @@
 <template>
+  <a-alert class="mb-20px" :show-icon="false"
+    >文档地址：https://lbs.qq.com/webApi/javascriptV2/jsDoc/jsDocIndex</a-alert
+  >
   <div ref="domRef" class="w-full h-400px"></div>
 </template>
 

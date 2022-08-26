@@ -1,6 +1,7 @@
 // import localeMessageBox from '@/components/message-box/locale/en-US';
 import localeLogin from '@/views/base-view/login/components/PwdLogin/locale/en-US';
-// import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
+import localeAnalysis from '@/views/dashboard/analysis/locale/en-US';
+import localeWorkbench from '@/views/dashboard/workbench/locale/en-US';
 /** simple */
 // import localeMonitor from '@/views/dashboard/monitor/locale/en-US';
 //
@@ -17,7 +18,7 @@ import localeLogin from '@/views/base-view/login/components/PwdLogin/locale/en-U
 //
 // import localeSuccess from '@/views/result/success/locale/en-US';
 // import localeError from '@/views/result/error/locale/en-US';
-//
+import localeRoute from '@/router/locale/en-US';
 import locale403 from '@/views/exception/403/locale/en-US';
 import locale404 from '@/views/exception/404/locale/en-US';
 import locale500 from '@/views/exception/500/locale/en-US';
@@ -44,7 +45,8 @@ export default {
   ...localeSettings,
   // ...localeMessageBox,
   ...localeLogin,
-  // ...localeWorkplace,
+  ...localeAnalysis,
+  ...localeWorkbench,
   /** simple */
   // ...localeMonitor,
   // ...localeSearchTable,
@@ -61,5 +63,6 @@ export default {
   ...locale500,
   // ...localeUserInfo,
   // ...localeUserSetting,
+  ...localeRoute,
   /** simple end */
 };

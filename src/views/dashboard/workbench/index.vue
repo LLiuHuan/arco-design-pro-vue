@@ -9,9 +9,10 @@
           </a-avatar>
           <div class="pl-12px">
             <h3 class="text-18px font-semibold"
-              >早安，{{ auth.userInfo.userName }}, 请开始一天的工作吧 !</h3
+              >{{ $t('dashboard.workbench.good-morning') }}，{{ auth.userInfo.userName }},
+              {{ $t('dashboard.workbench.start-day') }}</h3
             >
-            <p class="leading-30px text-[#999]">今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
+            <p class="leading-30px text-[#999]">{{ $t('dashboard.workbench.weather') }}</p>
           </div>
         </div>
         <a-space :size="24" :wrap="false">
@@ -19,7 +20,7 @@
             v-for="item in statisticData"
             :key="item.id"
             class="whitespace-nowrap"
-            :title="item.title"
+            :title="$t(item.title)"
             :value="item.value"
           />
         </a-space>
@@ -28,7 +29,11 @@
 
     <a-row :gutter="10">
       <a-col :span="18">
-        <a-card title="项目" :bordered="false" class="rounded-16px shadow-sm mt-15px">
+        <a-card
+          :title="$t('dashboard.workbench.project')"
+          :bordered="false"
+          class="rounded-16px shadow-sm mt-15px"
+        >
           <a-card-grid
             v-for="(item, index) in technology"
             :key="index"
@@ -41,7 +46,11 @@
           </a-card-grid>
         </a-card>
 
-        <a-card title="动态" :bordered="false" class="rounded-16px shadow-sm mt-15px">
+        <a-card
+          :title="$t('dashboard.workbench.dynamic')"
+          :bordered="false"
+          class="rounded-16px shadow-sm mt-15px"
+        >
           <a-list :bordered="false">
             <a-list-item v-for="(item, index) in dynamic" :key="index">
               <a-list-item-meta :title="item.title" :description="item.description">
@@ -56,7 +65,7 @@
         </a-card>
       </a-col>
       <a-col :span="6">
-        <a-card class="rounded-16px shadow-sm mt-15px" title="进度">
+        <a-card class="rounded-16px shadow-sm mt-15px" :title="$t('dashboard.workbench.progress')">
           <a-timeline-item v-for="item in dataTimeline" :key="item.messageUrl" :label="item.date">
             <span class="message w-full">{{ item.message }}</span>
           </a-timeline-item>
@@ -73,6 +82,7 @@
   import { format } from 'date-fns';
   import { useAuthStore } from '@/store';
   import { getCommit } from '@/api/system/github';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { TechnologyCard } from './component';
 
   interface StatisticData {
@@ -108,17 +118,17 @@
   const statisticData: StatisticData[] = [
     {
       id: 0,
-      title: '项目数',
+      title: 'dashboard.workbench.items',
       value: 25,
     },
     {
       id: 1,
-      title: '待办',
+      title: 'dashboard.workbench.abeyance',
       value: 4,
     },
     {
       id: 2,
-      title: '消息',
+      title: 'dashboard.workbench.news',
       value: 12,
     },
   ];

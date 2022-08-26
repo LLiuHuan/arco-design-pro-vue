@@ -1,6 +1,7 @@
 // import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/base-view/login/components/PwdLogin/locale/zh-CN';
-// import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
+import localeWorkbench from '@/views/dashboard/workbench/locale/zh-CN';
+import localeAnalysis from '@/views/dashboard/analysis/locale/zh-CN';
 /** simple */
 // import localeMonitor from '@/views/dashboard/monitor/locale/zh-CN';
 //
@@ -22,6 +23,7 @@ import locale404 from '@/views/exception/404/locale/zh-CN';
 import locale500 from '@/views/exception/500/locale/zh-CN';
 // import localeUserInfo from '@/views/user/info/locale/zh-CN';
 // import localeUserSetting from '@/views/user/setting/locale/zh-CN';
+import localeRoute from '@/router/locale/zh-CN';
 /** simple end */
 import localeSettings from './zh-CN/settings';
 
@@ -42,7 +44,8 @@ export default {
   ...localeSettings,
   // ...localeMessageBox,
   ...localeLogin,
-  // ...localeWorkplace,
+  ...localeAnalysis,
+  ...localeWorkbench,
   /** simple */
   // ...localeMonitor,
   // ...localeSearchTable,
@@ -59,5 +62,6 @@ export default {
   ...locale500,
   // ...localeUserInfo,
   // ...localeUserSetting,
+  ...localeRoute,
   /** simple end */
 };

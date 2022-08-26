@@ -15,7 +15,7 @@
             <template #icon>
               <component :is="item.icon" />
             </template>
-            {{ item.label }}
+            {{ $t(item.label) }}
           </a-menu-item>
         </template>
         <template v-else>

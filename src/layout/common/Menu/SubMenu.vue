@@ -1,7 +1,7 @@
 <template>
   <a-sub-menu :key="menuInfo.key">
     <template #title>
-      <span class="sub-menu-lable">{{ menuInfo.label }}</span>
+      <span class="sub-menu-lable">{{ $t(menuInfo.label) }}</span>
     </template>
     <template #icon>
       <component :is="menuInfo.icon" style="font-size: 16px; vertical-align: middle" />
@@ -15,7 +15,7 @@
           <template #icon>
             <component :is="item.icon" />
           </template>
-          {{ item.label }}
+          {{ $t(item.label) }}
         </a-menu-item>
       </template>
     </template>

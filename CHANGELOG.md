@@ -1,44 +1,23 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.0.5-alpha.0](https://github.com/LLiuHuan/arco-design-pro-vue/compare/v0.0.4-bate...v0.0.5-alpha.0) (2022-08-25)
+## [0.0.5-alpha.0](https://github.com/LLiuHuan/arco-design-pro-vue/compare/v0.0.4-bate...v0.0.5-alpha.0) (2022-08-25)
 
 
-### Features
+### ✨ Features | 新功能
 
-* **dashboard:** 工作台增加动态 ([fa07335](https://github.com/LLiuHuan/arco-design-pro-vue/commit/fa0733583f1dfd258e4f7e03ca46e01cd58c6bf8))
-* **dashboard:** 工作台增加动态 ([#27](https://github.com/LLiuHuan/arco-design-pro-vue/issues/27)) ([82fe995](https://github.com/LLiuHuan/arco-design-pro-vue/commit/82fe995fe3932b64d7e50c8b86cf80cea8521c10))
-* **icon:** 添加icon ([380ecd8](https://github.com/LLiuHuan/arco-design-pro-vue/commit/380ecd8fe2c8de28087b46fcf2e72c35401885b7))
-* **layout、icon:** 更新layout、icon ([8b7fd01](https://github.com/LLiuHuan/arco-design-pro-vue/commit/8b7fd0164ce0a9d029bfadae3798a77981f10ea1))
-* **plugin:** 添加echarts ([1d35bb0](https://github.com/LLiuHuan/arco-design-pro-vue/commit/1d35bb092365fb217a7dad2e036eee5b5e7d9804))
-
-
-### Bug Fixes
-
-* **charts:** update echarts bordered ([ecd4fcb](https://github.com/LLiuHuan/arco-design-pro-vue/commit/ecd4fcb48bd3daa4a0825be4ced4b448e8af4302))
-* **dashboard:** 修复进度超出问题 ([9693def](https://github.com/LLiuHuan/arco-design-pro-vue/commit/9693def334ee75f6c85ada898b51d8a4aeed3853))
-* **sider:** 修复左侧菜单闪屏问题 ([f0a066d](https://github.com/LLiuHuan/arco-design-pro-vue/commit/f0a066d63113fdaba93f55e0cf02d1d7dccfb124))
-* **tab:** update tab setTitle ([2fbff7a](https://github.com/LLiuHuan/arco-design-pro-vue/commit/2fbff7a65e1bd8d9d6dfe4baffce5894c2d4b14a))
-
-### [0.0.4](https://github.com/LLiuHuan/arco-design-pro-vue/compare/v0.0.4-bate...v0.0.4) (2022-08-25)
+* **dashboard:** 工作台增加动态 ([fa07335](https://github.com/LLiuHuan/arco-design-pro-vue/commit/fa07335)) by: **LLiuHuan** (184555556@qq.com)
+* **dashboard:** 工作台增加动态 ([#27](https://github.com/LLiuHuan/arco-design-pro-vue/issues/27)) ([82fe995](https://github.com/LLiuHuan/arco-design-pro-vue/commit/82fe995)) by: **刘欢** (184555556@qq.com)
+* **icon:** 添加icon ([380ecd8](https://github.com/LLiuHuan/arco-design-pro-vue/commit/380ecd8)) by: **刘欢** (184555556@qq.com)
+* **layout、icon:** 更新layout、icon ([8b7fd01](https://github.com/LLiuHuan/arco-design-pro-vue/commit/8b7fd01)) by: **刘欢** (184555556@qq.com)
+* **plugin:** 添加echarts ([1d35bb0](https://github.com/LLiuHuan/arco-design-pro-vue/commit/1d35bb0)) by: **刘欢** (184555556@qq.com)
 
 
-### Features
+### 🐛 Bug Fixes | Bug 修复
 
-* **dashboard:** 工作台增加动态 ([fa07335](https://github.com/LLiuHuan/arco-design-pro-vue/commit/fa0733583f1dfd258e4f7e03ca46e01cd58c6bf8))
-* **dashboard:** 工作台增加动态 ([#27](https://github.com/LLiuHuan/arco-design-pro-vue/issues/27)) ([82fe995](https://github.com/LLiuHuan/arco-design-pro-vue/commit/82fe995fe3932b64d7e50c8b86cf80cea8521c10))
-* **icon:** 添加icon ([380ecd8](https://github.com/LLiuHuan/arco-design-pro-vue/commit/380ecd8fe2c8de28087b46fcf2e72c35401885b7))
-* **layout、icon:** 更新layout、icon ([8b7fd01](https://github.com/LLiuHuan/arco-design-pro-vue/commit/8b7fd0164ce0a9d029bfadae3798a77981f10ea1))
-* **plugin:** 添加echarts ([1d35bb0](https://github.com/LLiuHuan/arco-design-pro-vue/commit/1d35bb092365fb217a7dad2e036eee5b5e7d9804))
+* **charts:** update echarts bordered ([ecd4fcb](https://github.com/LLiuHuan/arco-design-pro-vue/commit/ecd4fcb)) by: **刘欢** (184555556@qq.com)
+* **dashboard:** 修复进度超出问题 ([9693def](https://github.com/LLiuHuan/arco-design-pro-vue/commit/9693def)) by: **LLiuHuan** (184555556@qq.com)
+* **sider:** 修复左侧菜单闪屏问题 ([f0a066d](https://github.com/LLiuHuan/arco-design-pro-vue/commit/f0a066d)) by: **刘欢** (184555556@qq.com)
+* **tab:** update tab setTitle ([2fbff7a](https://github.com/LLiuHuan/arco-design-pro-vue/commit/2fbff7a)) by: **刘欢** (184555556@qq.com)
 
 
-### Bug Fixes
-
-* **charts:** update echarts bordered ([ecd4fcb](https://github.com/LLiuHuan/arco-design-pro-vue/commit/ecd4fcb48bd3daa4a0825be4ced4b448e8af4302))
-* **dashboard:** 修复进度超出问题 ([9693def](https://github.com/LLiuHuan/arco-design-pro-vue/commit/9693def334ee75f6c85ada898b51d8a4aeed3853))
-* **sider:** 修复左侧菜单闪屏问题 ([f0a066d](https://github.com/LLiuHuan/arco-design-pro-vue/commit/f0a066d63113fdaba93f55e0cf02d1d7dccfb124))
-* **tab:** update tab setTitle ([2fbff7a](https://github.com/LLiuHuan/arco-design-pro-vue/commit/2fbff7a65e1bd8d9d6dfe4baffce5894c2d4b14a))
 
 ## [0.0.4-bate](https://github.com/LLiuHuan/arco-design-pro-vue/compare/d9ebeca...v0.0.4-bate) (2022-06-20)
 

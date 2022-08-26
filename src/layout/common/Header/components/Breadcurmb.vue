@@ -15,7 +15,7 @@
                 v-if="theme.header.crumb.showIcon"
                 class="inline-block align-text-bottom mr-4px text-16px"
               />
-              <span>{{ item.label }}</span>
+              <span>{{ $t(item.label) }}</span>
             </a-doption>
           </template>
           <span class="link-text">
@@ -25,7 +25,9 @@
               :is="breadcrumb.icon"
               :class="{ 'text-#BBBBBB': theme.header.inverted }"
             />
-            <span :class="{ 'text-#BBBBBB': theme.header.inverted }">{{ breadcrumb.label }}</span>
+            <span :class="{ 'text-#BBBBBB': theme.header.inverted }">{{
+              $t(breadcrumb.label)
+            }}</span>
           </span>
         </a-dropdown>
         <span class="link-text" v-else>
@@ -35,7 +37,7 @@
             :is="breadcrumb.icon"
             :class="{ 'text-#BBBBBB': theme.header.inverted }"
           />
-          <span :class="{ 'text-#BBBBBB': theme.header.inverted }">{{ breadcrumb.label }}</span>
+          <span :class="{ 'text-#BBBBBB': theme.header.inverted }">{{ $t(breadcrumb.label) }}</span>
         </span>
       </a-breadcrumb-item>
     </template>

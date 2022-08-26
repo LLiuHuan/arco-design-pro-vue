@@ -34,7 +34,7 @@
                   @click.stop="goPath(element.fullPath)"
                 >
                   <span :class="{ activeTab: tab.activeTab === element.fullPath }">
-                    {{ element.meta.title }}
+                    {{ $t(element.meta.title) }}
                   </span>
                   <icon-close
                     v-if="!element.meta.affix"

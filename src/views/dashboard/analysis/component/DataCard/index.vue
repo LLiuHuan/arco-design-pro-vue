@@ -3,7 +3,7 @@
     <a-grid :cols="24" :col-gap="12" :row-gap="12">
       <a-grid-item :span="{ xs: 12, sm: 12, md: 12, lg: 12, xl: 6, xxl: 6 }">
         <DataItem
-          title="访问次数"
+          :title="$t('dashboard.analysis.data-card.visits')"
           chart-type="line"
           :card-style="{
             background: darkMode
@@ -14,7 +14,7 @@
       </a-grid-item>
       <a-grid-item :span="{ xs: 12, sm: 12, md: 12, lg: 12, xl: 6, xxl: 6 }">
         <DataItem
-          title="下载次数"
+          :title="$t('dashboard.analysis.data-card.downloads')"
           chart-type="bar"
           :card-style="{
             background: darkMode
@@ -25,7 +25,7 @@
       </a-grid-item>
       <a-grid-item :span="{ xs: 12, sm: 12, md: 12, lg: 12, xl: 6, xxl: 6 }">
         <DataItem
-          title="评论次数"
+          :title="$t('dashboard.analysis.data-card.comments')"
           quota="comment"
           chart-type="line"
           :card-style="{
@@ -38,7 +38,7 @@
       </a-grid-item>
       <a-grid-item :span="{ xs: 12, sm: 12, md: 12, lg: 12, xl: 6, xxl: 6 }">
         <DataItem
-          title="分享次数"
+          :title="$t('dashboard.analysis.data-card.sharing')"
           chart-type="pie"
           :card-style="{
             background: darkMode

@@ -33,7 +33,7 @@
   };
 
   const init = () => {
-    setLanguage('zh-CN');
+    setLanguage(theme.getLanguage);
   };
 
   init();

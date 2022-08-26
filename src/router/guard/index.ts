@@ -1,8 +1,10 @@
 import type { Router } from 'vue-router';
 import { useTitle } from '@vueuse/core';
 import NProgress from 'nprogress';
+import { useI18n } from '@/hooks/web/useI18n';
 import { createPermissionGuard } from './permission';
 import 'nprogress/nprogress.css';
+import { nextTick } from 'vue';
 
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
@@ -18,8 +20,12 @@ export function createRouterGuard(router: Router) {
     await createPermissionGuard(to, from, next);
   });
   router.afterEach((to) => {
-    // 设置document title
-    useTitle(to.meta.title ? (to.meta.title as string) : '');
+    // 为了解决第一次刷新没办法自动获取到中英文问题
+    setTimeout(() => {
+      const { t } = useI18n();
+      // 设置document title
+      useTitle(to.meta.title ? t(to.meta.title as string) : '');
+    }, 100);
     // 结束 loadingBar
     NProgress.done();
   });

@@ -1,0 +1,1 @@
+import{X as n,A as a,w as s}from"./index.2f949fd3.js";const i=n({name:"MultiDimensionDataAnalysis"},[["render",function(n,i,t,e,l,o){return s(),a("h1",null,"MultiDimensionDataAnalysis")}]]);export{i as default};

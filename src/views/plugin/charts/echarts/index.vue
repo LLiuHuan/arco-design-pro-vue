@@ -1,11 +1,42 @@
 <template>
   <div>
-    <a-card :bordered="false" class="rounded-16px shadow-sm">
-      <div ref="pieRef" class="h-400px"></div>
-    </a-card>
-    <a-card :bordered="false" class="mt-10px shadow-sm rounded-16px">
-      <div ref="gaugeRef" class="h-640px"></div>
-    </a-card>
+    <a-grid
+      :cols="{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3, xxl: 3 }"
+      :colGap="12"
+      :rowGap="16"
+      class="grid"
+    >
+      <a-grid-item class="grid-item">
+        <a-card title="折线图" class="shadow-sm rounded-16px">
+          <div ref="lineRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+      <a-grid-item class="grid-item">
+        <a-card title="柱状图" class="shadow-sm rounded-16px">
+          <div ref="barRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+      <a-grid-item class="grid-item">
+        <a-card title="饼图" class="rounded-16px shadow-sm">
+          <div ref="pieRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+      <a-grid-item class="grid-item">
+        <a-card title="散点图" class="shadow-sm rounded-16px">
+          <div ref="scatterRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+      <a-grid-item class="grid-item">
+        <a-card title="矩形树图" class="shadow-sm rounded-16px">
+          <div ref="treeRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+      <a-grid-item class="grid-item">
+        <a-card title="时钟" class="shadow-sm rounded-16px">
+          <div ref="gaugeRef" class="h-300px"></div>
+        </a-card>
+      </a-grid-item>
+    </a-grid>
   </div>
 </template>
 
@@ -13,8 +44,42 @@
   import { onUnmounted, ref } from 'vue';
   import { ECOption, useEcharts } from '@/composables/echarts';
 
+  const lineOptions = ref<ECOption>({
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+        smooth: true,
+      },
+    ],
+  });
+  const { domRef: lineRef } = useEcharts(lineOptions);
+
+  const barOptions = ref<ECOption>({
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
+      },
+    ],
+  });
+  const { domRef: barRef } = useEcharts(barOptions);
+
   const pieOptions = ref<ECOption>({
-    legend: {},
     toolbox: {
       show: true,
       feature: {
@@ -28,7 +93,7 @@
       {
         name: 'Nightingale Chart',
         type: 'pie',
-        radius: [50, 150],
+        radius: [20, 90],
         center: ['50%', '50%'],
         roseType: 'area',
         itemStyle: {
@@ -40,14 +105,91 @@
           { value: 32, name: 'rose 3' },
           { value: 30, name: 'rose 4' },
           { value: 28, name: 'rose 5' },
-          { value: 26, name: 'rose 6' },
-          { value: 22, name: 'rose 7' },
+          { value: 48, name: 'rose 6' },
+          { value: 78, name: 'rose 7' },
           { value: 18, name: 'rose 8' },
         ],
       },
     ],
   });
   const { domRef: pieRef } = useEcharts(pieOptions);
+
+  const scatterOptions = ref<ECOption>({
+    xAxis: {},
+    yAxis: {},
+    series: [
+      {
+        symbolSize: 20,
+        data: [
+          [10.0, 8.04],
+          [8.07, 6.95],
+          [13.0, 7.58],
+          [9.05, 8.81],
+          [11.0, 8.33],
+          [14.0, 7.66],
+          [13.4, 6.81],
+          [10.0, 6.33],
+          [14.0, 8.96],
+          [12.5, 6.82],
+          [9.15, 7.2],
+          [11.5, 7.2],
+          [3.03, 4.23],
+          [12.2, 7.83],
+          [2.02, 4.47],
+          [1.05, 3.33],
+          [4.05, 4.96],
+          [6.03, 7.24],
+          [12.0, 6.26],
+          [12.0, 8.84],
+          [7.08, 5.82],
+          [5.02, 5.68],
+        ],
+        type: 'scatter',
+      },
+    ],
+  });
+  const { domRef: scatterRef } = useEcharts(scatterOptions);
+
+  const treeOptions = ref<ECOption>({
+    series: [
+      {
+        type: 'treemap',
+        data: [
+          {
+            name: 'nodeA', // First tree
+            value: 10,
+            children: [
+              {
+                name: 'nodeAa', // First leaf of first tree
+                value: 4,
+              },
+              {
+                name: 'nodeAb', // Second leaf of first tree
+                value: 6,
+              },
+            ],
+          },
+          {
+            name: 'nodeB', // Second tree
+            value: 20,
+            children: [
+              {
+                name: 'nodeBa', // Son of first tree
+                value: 20,
+                children: [
+                  {
+                    name: 'nodeBa1', // Granson of first tree
+                    value: 20,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+  const { domRef: treeRef } = useEcharts(treeOptions);
 
   const gaugeOptions = ref<ECOption>({
     series: [
@@ -77,8 +219,8 @@
           },
         },
         axisLabel: {
-          fontSize: 50,
-          distance: 25,
+          fontSize: 15,
+          distance: 15,
           formatter(value) {
             if (value === 0) {
               return '';
@@ -91,7 +233,7 @@
           icon: 'path://M532.8,70.8C532.8,70.8,532.8,70.8,532.8,70.8L532.8,70.8C532.7,70.8,532.8,70.8,532.8,70.8z M456.1,49.6c-2.2-6.2-8.1-10.6-15-10.6h-37.5v10.6h37.5l0,0c2.9,0,5.3,2.4,5.3,5.3c0,2.9-2.4,5.3-5.3,5.3v0h-22.5c-1.5,0.1-3,0.4-4.3,0.9c-4.5,1.6-8.1,5.2-9.7,9.8c-0.6,1.7-0.9,3.4-0.9,5.3v16h10.6v-16l0,0l0,0c0-2.7,2.1-5,4.7-5.3h10.3l10.4,21.2h11.8l-10.4-21.2h0c6.9,0,12.8-4.4,15-10.6c0.6-1.7,0.9-3.5,0.9-5.3C457,53,456.7,51.2,456.1,49.6z M388.9,92.1h11.3L381,39h-3.6h-11.3L346.8,92v0h11.3l3.9-10.7h7.3h7.7l3.9-10.6h-7.7h-7.3l7.7-21.2v0L388.9,92.1z M301,38.9h-10.6v53.1H301V70.8h28.4l3.7-10.6H301V38.9zM333.2,38.9v10.6v10.7v31.9h10.6V38.9H333.2z M249.5,81.4L249.5,81.4L249.5,81.4c-2.9,0-5.3-2.4-5.3-5.3h0V54.9h0l0,0c0-2.9,2.4-5.3,5.3-5.3l0,0l0,0h33.6l3.9-10.6h-37.5c-1.9,0-3.6,0.3-5.3,0.9c-4.5,1.6-8.1,5.2-9.7,9.7c-0.6,1.7-0.9,3.5-0.9,5.3l0,0v21.3c0,1.9,0.3,3.6,0.9,5.3c1.6,4.5,5.2,8.1,9.7,9.7c1.7,0.6,3.5,0.9,5.3,0.9h33.6l3.9-10.6H249.5z M176.8,38.9v10.6h49.6l3.9-10.6H176.8z M192.7,81.4L192.7,81.4L192.7,81.4c-2.9,0-5.3-2.4-5.3-5.3l0,0v-5.3h38.9l3.9-10.6h-53.4v10.6v5.3l0,0c0,1.9,0.3,3.6,0.9,5.3c1.6,4.5,5.2,8.1,9.7,9.7c1.7,0.6,3.4,0.9,5.3,0.9h23.4h10.2l3.9-10.6l0,0H192.7z M460.1,38.9v10.6h21.4v42.5h10.6V49.6h17.5l3.8-10.6H460.1z M541.6,68.2c-0.2,0.1-0.4,0.3-0.7,0.4C541.1,68.4,541.4,68.3,541.6,68.2L541.6,68.2z M554.3,60.2h-21.6v0l0,0c-2.9,0-5.3-2.4-5.3-5.3c0-2.9,2.4-5.3,5.3-5.3l0,0l0,0h33.6l3.8-10.6h-37.5l0,0c-6.9,0-12.8,4.4-15,10.6c-0.6,1.7-0.9,3.5-0.9,5.3c0,1.9,0.3,3.7,0.9,5.3c2.2,6.2,8.1,10.6,15,10.6h21.6l0,0c2.9,0,5.3,2.4,5.3,5.3c0,2.9-2.4,5.3-5.3,5.3l0,0h-37.5v10.6h37.5c6.9,0,12.8-4.4,15-10.6c0.6-1.7,0.9-3.5,0.9-5.3c0-1.9-0.3-3.7-0.9-5.3C567.2,64.6,561.3,60.2,554.3,60.2z',
           showAbove: false,
           offsetCenter: [0, '-35%'],
-          size: 120,
+          size: 50,
           keepAspect: true,
           itemStyle: {
             color: '#707177',

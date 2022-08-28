@@ -4,7 +4,6 @@ import NProgress from 'nprogress';
 import { useI18n } from '@/hooks/web/useI18n';
 import { createPermissionGuard } from './permission';
 import 'nprogress/nprogress.css';
-import { nextTick } from 'vue';
 
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 

@@ -9,6 +9,7 @@ import {
   PictorialBarChart,
   RadarChart,
   GaugeChart,
+  TreemapChart,
 } from 'echarts/charts';
 import type {
   BarSeriesOption,
@@ -18,6 +19,7 @@ import type {
   PictorialBarSeriesOption,
   RadarSeriesOption,
   GaugeSeriesOption,
+  TreemapSeriesOption,
 } from 'echarts/charts';
 import {
   TitleComponent,
@@ -55,6 +57,7 @@ export type ECOption = echarts.ComposeOption<
   | GridComponentOption
   | ToolboxComponentOption
   | DatasetComponentOption
+  | TreemapSeriesOption
 >;
 
 echarts.use([
@@ -75,6 +78,7 @@ echarts.use([
   LabelLayout,
   UniversalTransition,
   CanvasRenderer,
+  TreemapChart,
 ]);
 
 /**

@@ -82,7 +82,6 @@
   import { format } from 'date-fns';
   import { useAuthStore } from '@/store';
   import { getCommit } from '@/api/system/github';
-  import { useI18n } from '@/hooks/web/useI18n';
   import { TechnologyCard } from './component';
 
   interface StatisticData {

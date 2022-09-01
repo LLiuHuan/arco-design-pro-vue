@@ -1,1 +1,0 @@
-import{k as t,o as e,l as n,U as o}from"./index.2f949fd3.js";const a=a=>{const s={},l=t([]),r=()=>{if(s.value){const t=o(s.value,a);t.length===l.value.length&&t.toString()===l.value.toString()||(l.value=t)}};return e((()=>r())),n((()=>r())),{children:s,components:l}};export{a as u};

@@ -1,0 +1,1 @@
+import{d as a,X as s,A as r,w as t}from"./index.fa2f74c2.js";const e=s(a({name:"ListCard",setup:()=>({})}),[["render",function(a,s,e,n,d,f){return t(),r("h1",null,"ListCard")}]]);export{e as default};

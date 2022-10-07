@@ -56,6 +56,8 @@ export interface RequestOptions {
   ignoreCancelToken?: boolean;
   // 是否携带token
   withToken?: boolean;
+  // 接口前缀
+  prefixUrl?: string;
 }
 
 export interface Result<T = any> {

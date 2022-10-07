@@ -54,7 +54,7 @@
     if (theme.footer.fixed) {
       return {
         position: 'fixed',
-        zIndex: 999,
+        zIndex: 4,
         height: `${theme.footer.height}px`,
         paddingLeft: `${theme.sider.width}px`,
         transitionDuration: '300ms',

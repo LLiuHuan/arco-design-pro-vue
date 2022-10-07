@@ -27,6 +27,7 @@ export default {
   'route.plugin.icon': '图标',
   'route.plugin.print': '打印',
   'route.plugin.terminal': '终端',
+  'route.plugin.other': '第三方登录',
   'route.function': '功能',
   'route.function.tab': 'Tab',
   'route.function.tab-detail': 'Tab Detail',

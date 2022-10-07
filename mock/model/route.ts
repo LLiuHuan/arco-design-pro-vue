@@ -284,6 +284,16 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             // icon: 'simple-icons:swiper',
           },
         },
+        {
+          name: 'plugin_other',
+          path: '/plugin/other',
+          component: 'self',
+          meta: {
+            title: 'route.plugin.other',
+            requiresAuth: true,
+            // icon: 'simple-icons:swiper',
+          },
+        },
       ],
       meta: {
         title: 'route.plugin',

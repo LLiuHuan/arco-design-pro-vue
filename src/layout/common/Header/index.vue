@@ -4,7 +4,7 @@
     :style="{
       height: theme.header.height + 'px',
       paddingLeft: siderVisible ? headerLeft + 'px' : 0,
-      zIndex: theme.layout.mode === 'horizontal-mix' ? '1002' : '999',
+      zIndex: theme.layout.mode === 'horizontal-mix' ? '6' : '4',
     }"
   >
     <dark-mode-container class="header flex-y-center h-full" :inverted="theme.header.inverted">

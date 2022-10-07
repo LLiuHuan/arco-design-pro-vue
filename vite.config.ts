@@ -12,6 +12,8 @@ export default defineConfig((configEnv) => {
 
   const isOpenProxy = viteEnv.VITE_HTTP_PROXY === 'true';
   const envConfig = getEnvConfig(viteEnv);
+  console.log(envConfig);
+  console.log(isOpenProxy);
   return {
     base: viteEnv.VITE_BASE_URL,
     resolve: {

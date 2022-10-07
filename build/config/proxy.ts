@@ -14,7 +14,12 @@ export function createViteProxy(isOpenProxy: boolean, envConfig: EnvConfig) {
       changeOrigin: true,
       rewrite: (path) => path.replace(new RegExp(`^${envConfig.proxy}`), ''),
     },
+    '/g': {
+      target: 'https://github.com',
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/g/, ''),
+    },
   };
-
+  console.log(proxy);
   return proxy;
 }

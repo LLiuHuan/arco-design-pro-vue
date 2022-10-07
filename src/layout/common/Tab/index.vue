@@ -225,7 +225,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 9999;
+        z-index: 6;
         background-color: var(--color-bg-2);
 
         svg {
@@ -300,7 +300,7 @@
       width: 32px;
       height: 100%;
       cursor: pointer;
-      z-index: 9999;
+      z-index: 6;
       background-color: var(--color-bg-2);
 
       .layout-close-btn {
@@ -321,7 +321,7 @@
 
   .layout-tab-fixed {
     position: fixed;
-    z-index: 999;
+    z-index: 4;
     transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     transform: translateX(0px);
   }

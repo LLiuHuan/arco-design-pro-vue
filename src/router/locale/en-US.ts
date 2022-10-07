@@ -27,6 +27,7 @@ export default {
   'route.plugin.icon': 'Icon',
   'route.plugin.print': 'Print',
   'route.plugin.terminal': 'Terminal',
+  'route.plugin.other': 'Other',
   'route.function': 'Function',
   'route.function.tab': 'Tab',
   'route.function.tab-detail': 'Tab Detail',

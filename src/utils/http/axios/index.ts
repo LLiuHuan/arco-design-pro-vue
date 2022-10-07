@@ -224,7 +224,6 @@ const transform: AxiosTransform = {
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   const { VITE_API_URL_PREFIX } = import.meta.env;
-  console.log(VITE_API_URL_PREFIX);
 
   return new AAxios(
     deepMerge(
@@ -234,7 +233,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // token 前缀
         authenticationScheme: '',
         // 接口前缀
-        prefixUrl: VITE_API_URL_PREFIX,
+        prefixUrl: opt?.requestOptions?.prefixUrl || VITE_API_URL_PREFIX,
         // 请求头
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 数据处理方式
@@ -256,7 +255,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 接口地址
           apiUrl: '',
           // 接口拼接地址
-          urlPrefix: VITE_API_URL_PREFIX,
+          urlPrefix: opt?.requestOptions?.prefixUrl || VITE_API_URL_PREFIX,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
@@ -272,6 +271,15 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 }
 
 export const http = createAxios();
+
+export const httpOne = createAxios({
+  requestOptions: {
+    apiUrl: '',
+    urlPrefix: '',
+    isTransformResponse: true,
+    isReturnNativeResponse: true,
+  },
+});
 
 // 项目，多个不同 api 地址，直接在这里导出多个
 // src/api ts 里面接口，就可以单独使用这个请求，

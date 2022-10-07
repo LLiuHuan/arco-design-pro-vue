@@ -35,7 +35,7 @@
 
 <style lang="less" scoped>
   .arco-layout-sider {
-    z-index: 1002;
+    z-index: 5;
     //background-color: var(--color-bg-2);
   }
 

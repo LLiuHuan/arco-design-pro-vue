@@ -33,6 +33,7 @@
     "pinia": "^2.0.20",
     "pinia-plugin-persist": "^1.0.0",
     "pinia-plugin-persistedstate": "^2.1.1",
+    "postcss-pxtorem": "^6.0.0",
     "qs": "^6.11.0",
     "ua-parser-js": "^1.0.2",
     "vite-plugin-importer": "^0.2.5",

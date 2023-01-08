@@ -2,7 +2,7 @@
   <a-alert class="mb-20px" :show-icon="false"
     >文档地址：https://lbs.amap.com/api/jsapi-v2/summary</a-alert
   >
-  <div ref="domRef" class="w-full h-400px"></div>
+  <div ref="domRef" class="w-full h-800px"></div>
 </template>
 
 <script lang="ts" setup>

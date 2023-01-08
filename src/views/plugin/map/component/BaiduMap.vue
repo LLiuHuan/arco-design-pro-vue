@@ -2,7 +2,7 @@
   <a-alert class="mb-20px" :show-icon="false"
     >文档地址：https://lbsyun.baidu.com/index.php?title=jspopular3.0</a-alert
   >
-  <div ref="domRef" class="w-full h-400px"></div>
+  <div ref="domRef" class="w-full h-800px"></div>
 </template>
 
 <script lang="ts" setup>

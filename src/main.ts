@@ -4,6 +4,7 @@ import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
 import App from './App.vue';
 import '@arco-design/web-vue/dist/arco.css';
+import './utils/rem.ts';
 
 const setupApp = async () => {
   const app = createApp(App);

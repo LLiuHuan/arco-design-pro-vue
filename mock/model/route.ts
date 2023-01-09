@@ -391,6 +391,61 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
       },
     },
     {
+      name: 'multi-menu',
+      path: '/multi-menu',
+      component: 'basic',
+      children: [
+        {
+          name: 'multi-menu_first',
+          path: '/multi-menu/first',
+          component: 'multi',
+          children: [
+            {
+              name: 'multi-menu_first_second',
+              path: '/multi-menu/first/second',
+              component: 'self',
+              meta: {
+                title: 'route.multi-menu.menu.two',
+                requiresAuth: true,
+                icon: 'icon-list',
+              },
+            },
+            {
+              name: 'multi-menu_first_second-new',
+              path: '/multi-menu/first/second-new',
+              component: 'multi',
+              children: [
+                {
+                  name: 'multi-menu_first_second-new_third',
+                  path: '/multi-menu/first/second-new/third',
+                  component: 'self',
+                  meta: {
+                    title: 'route.multi-menu.menu.three',
+                    requiresAuth: true,
+                    icon: 'icon-list',
+                  },
+                },
+              ],
+              meta: {
+                title: 'route.multi-menu.menu.two.submenu',
+                icon: 'icon-list',
+              },
+            },
+          ],
+          meta: {
+            title: 'route.multi-menu.menu.one',
+            icon: 'icon-list',
+          },
+        },
+      ],
+      meta: {
+        title: 'route.multi-menu',
+        icon: 'carbon:menu',
+        order: 8,
+      },
+    },
+
+    {
       name: 'about',
       path: '/about',
       component: 'self',

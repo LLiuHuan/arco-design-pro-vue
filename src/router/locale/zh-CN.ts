@@ -36,5 +36,10 @@ export default {
   'route.exception.403': '异常页403',
   'route.exception.404': '异常页404',
   'route.exception.500': '异常页500',
+  'route.multi-menu': '多级菜单',
+  'route.multi-menu.menu.one': '一级菜单',
+  'route.multi-menu.menu.two': '二级菜单',
+  'route.multi-menu.menu.two.submenu': '二级菜单(有子菜单)',
+  'route.multi-menu.menu.three': '三级菜单',
   'route.about': '关于',
 };

@@ -36,5 +36,10 @@ export default {
   'route.exception.403': '403',
   'route.exception.404': '404',
   'route.exception.500': '500',
+  'route.multi-menu': 'Multi level menu',
+  'route.multi-menu.menu.one': 'Primary menu',
+  'route.multi-menu.menu.two': 'Secondary menu',
+  'route.multi-menu.menu.two.submenu': 'Secondary menu (with submenu)',
+  'route.multi-menu.menu.three': 'Three level menu',
   'route.about': 'About',
 };

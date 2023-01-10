@@ -4,10 +4,15 @@ import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
 import App from './App.vue';
 import '@arco-design/web-vue/dist/arco.css';
-import './utils/rem.ts';
+import AppLoading from './components/common/AppLoading.vue';
 
 const setupApp = async () => {
   const app = createApp(App);
+
+  // app loading
+  const appLoading = createApp(AppLoading);
+
+  appLoading.mount('#appLoading');
 
   // 初始化插件
   setupPlugin(app);
@@ -21,7 +26,10 @@ const setupApp = async () => {
   // 初始化路由
   await setupRouter(app);
 
-  app.mount('#app');
+  // 延迟挂载app 为了可以多看会加载动画
+  setTimeout(() => {
+    app.mount('#app');
+  }, 2000);
 };
 
 setupApp()

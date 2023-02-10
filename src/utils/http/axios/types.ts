@@ -1,8 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
+import { InternalAxiosRequestConfig } from 'axios';
 import { AxiosTransform } from './transform';
 
 // axios 配置
-export interface CreateAxiosOptions extends AxiosRequestConfig {
+export interface CreateAxiosOptions extends InternalAxiosRequestConfig {
   transform?: AxiosTransform;
   requestOptions?: RequestOptions;
   authenticationScheme?: string;
@@ -21,6 +21,7 @@ export interface UploadFileParams {
   [key: string]: any;
 }
 
+// 请求参数
 export interface RequestOptions {
   // 请求参数拼接到url
   joinParamsToUrl?: boolean;
@@ -60,6 +61,7 @@ export interface RequestOptions {
   prefixUrl?: string;
 }
 
+// 返回
 export interface Result<T = any> {
   code: number;
   type?: 'success' | 'error' | 'warning';

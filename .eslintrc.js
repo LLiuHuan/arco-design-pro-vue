@@ -1,8 +1,28 @@
 module.exports = {
   root: true,
+  parserOptions: {
+    ecmaVersion: 2020,
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
+  },
+  parser: 'vue-eslint-parser',
+  overrides: [
+    {
+      files: ['*.vue'],
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['*.html'],
+      rules: {
+        'vue/comment-directive': 'off',
+      },
+    },
+  ],
   env: {
     browser: true,
-    es2021: true,
+    es2020: true,
     node: true,
     'vue/setup-compiler-macros': true,
   },
@@ -11,11 +31,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended',
-    'airbnb-base',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript/recommended',
-    '@vue/eslint-config-prettier',
-    '@vue/typescript/recommended',
   ],
   globals: {
     PROJECT_BUILD_TIME: 'readonly',
@@ -23,155 +38,20 @@ module.exports = {
     BMap: 'readonly',
     TMap: 'readonly',
   },
-  parser: 'vue-eslint-parser',
-  parserOptions: {
-    ecmaVersion: 12,
-    parser: '@typescript-eslint/parser',
-    sourceType: 'module',
-  },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'import/extensions': 'off',
+    'import/extensions': 'off', // import x from './m' 关闭m没有后缀的告警
     'import/no-extraneous-dependencies': 'off',
     'import/no-useless-path-segments': 'off',
-    'import/order': [
-      'error',
-      {
-        'newlines-between': 'never',
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        pathGroups: [
-          {
-            pattern: 'vue',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: 'vue-router',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: 'vuex',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: 'pinia',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: '@arco-design/web-vue',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: '@/config',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/settings',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/enums',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/plugins',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/layouts',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/views',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/components',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/router',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/store',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/composables',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/hooks',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/service',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/utils',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/assets',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@/interface',
-            group: 'internal',
-            position: 'before',
-          },
-        ],
-        pathGroupsExcludedImportTypes: [
-          'vue',
-          'vue-router',
-          'vuex',
-          'pinia',
-          '@arco-design/web-vue',
-        ],
-      },
-    ],
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'max-classes-per-file': 'off',
     'class-methods-use-this': 'off',
-    // 'no-param-reassign': [
-    //   'error',
-    //   {
-    //     props: true,
-    //     ignorePropertyModificationsFor: ['state', 'acc', 'e'],
-    //   },
-    // ],
     'no-param-reassign': 'off',
     'no-shadow': 'off',
     'no-unused-vars': 'off',
     'no-use-before-define': 'off',
     'no-unused-expressions': 'off',
-    // 'no-plusplus': 'off',
     'vue/multi-word-component-names': [
       'error',
       {
@@ -184,26 +64,10 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-function': 'off',
-    // '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    // '@typescript-eslint/no-unused-vars': 'off',
-    // '@typescript-eslint/no-unused-vars': [
-    //   'error',
-    //   {
-    //     argsIgnorePattern: '^_',
-    //     varsIgnorePattern: '^_',
-    //   },
-    // ],
-    // 'no-unused-vars': [
-    //   'error',
-    //   {
-    //     argsIgnorePattern: '^_',
-    //     varsIgnorePattern: '^_',
-    //   },
-    // ],
     'space-before-function-paren': 'off',
 
     'vue/attributes-order': 'off',
@@ -244,6 +108,17 @@ module.exports = {
       { classes: true, functions: false, typedefs: false },
     ],
     'valid-typeof': 'off', // ts(2367)
+    // 定义对象的set存取器属性时，强制定义get
+    'accessor-pairs': 2,
+    // 指定数组的元素之间要以空格隔开(,后面)， never参数：[ 之前和 ] 之后不能带空格，always参数：[ 之前和 ] 之后必须带空格
+    'array-bracket-spacing': [2, 'never'],
+    // 在块级作用域外访问块内定义的变量是否报错提示
+    'block-scoped-var': 0,
+    // 文件末尾强制换行
+    // 使用 === 替代 ==
+    eqeqeq: [2, 'allow-null'],
+    'no-console': 2, //禁止使用console
+    'eol-last': 2,
     // 'vue/multi-word-component-names': [
     //   'error',
     //   {
@@ -267,18 +142,4 @@ module.exports = {
     //   },
     // ],
   },
-  overrides: [
-    {
-      files: ['*.vue'],
-      rules: {
-        'no-undef': 'off',
-      },
-    },
-    {
-      files: ['*.html'],
-      rules: {
-        'vue/comment-directive': 'off',
-      },
-    },
-  ],
 };

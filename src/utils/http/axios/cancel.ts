@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig, Canceler } from 'axios';
+import axios, { InternalAxiosRequestConfig, Canceler } from 'axios';
 import qs from 'qs';
 import { isFunction } from '@/utils';
 
 // 声明一个 Map 用于存储每个请求的标识 和 取消函数
 let pendingMap = new Map<string, Canceler>();
 
-export const getPendingUrl = (config: AxiosRequestConfig) =>
+export const getPendingUrl = (config: InternalAxiosRequestConfig) =>
   [config.method, config.url, qs.stringify(config.data), qs.stringify(config.params)].join('&');
 
 export class AxiosCanceler {
@@ -13,7 +13,7 @@ export class AxiosCanceler {
    * 添加请求
    * @param {Object} config
    */
-  addPending(config: AxiosRequestConfig) {
+  addPending(config: InternalAxiosRequestConfig) {
     this.removePending(config);
     const url = getPendingUrl(config);
     config.cancelToken =
@@ -40,7 +40,7 @@ export class AxiosCanceler {
    * 移除请求
    * @param {Object} config
    */
-  removePending(config: AxiosRequestConfig) {
+  removePending(config: InternalAxiosRequestConfig) {
     const url = getPendingUrl(config);
 
     if (pendingMap.has(url)) {

@@ -1,4 +1,9 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
+import type {
+  InternalAxiosRequestConfig,
+  AxiosInstance,
+  AxiosResponse,
+  AxiosRequestConfig,
+} from 'axios';
 import axios from 'axios';
 import { cloneDeep } from 'lodash-es';
 import { isFunction } from '@/utils';
@@ -16,7 +21,7 @@ export class AAxios {
   private axiosInstance: AxiosInstance;
 
   // axios 的options
-  private options: CreateAxiosOptions;
+  private readonly options: CreateAxiosOptions;
 
   // 创建构造函数 参数为 options axios实例 并且调用拦截器
   constructor(options: CreateAxiosOptions) {
@@ -52,8 +57,8 @@ export class AAxios {
   /**
    * @description:   请求方法
    */
-  request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    let conf: AxiosRequestConfig = cloneDeep(config);
+  request<T = any>(config: InternalAxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    let conf: InternalAxiosRequestConfig = cloneDeep(config);
     const transform = this.getTransform();
 
     const { requestOptions } = this.options;
@@ -168,9 +173,11 @@ export class AAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求拦截器配置处理
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+      const {
+        headers: { ignoreCancelToken },
+      } = config;
       // 忽略重复请求
-      const ignoreCancelToken = config.headers && config.headers.ignoreCancelToken;
       const ignoreCancel =
         ignoreCancelToken !== undefined
           ? ignoreCancelToken

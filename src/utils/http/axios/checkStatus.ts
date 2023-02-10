@@ -14,7 +14,7 @@ export function checkStatus(status: number, msg: string): void {
     case 403:
       Message.error('用户得到授权，但是访问是被禁止的。!');
       break;
-    // 404请求不存在
+    // 404: 请求不存在
     case 404:
       Message.error('网络请求错误，未找到该资源!');
       break;

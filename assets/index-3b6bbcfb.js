@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-1b428a4d.js";import{a as r,o as n,e as o}from"./runtime-core.esm-bundler-808dc7a8.js";const t={},s=[o("h1",null," terminal ",-1)];const l=e(t,[["render",function(e,o){return n(),r("div",null,s)}]]);export{l as default};

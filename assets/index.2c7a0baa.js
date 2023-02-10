@@ -1,1 +1,0 @@
-import{d as r,X as o,A as a,w as e}from"./index.fa2f74c2.js";const n=o(r({name:"FormGroup",setup:()=>({})}),[["render",function(r,o,n,s,t,u){return e(),a("h1",null,"FormGroup")}]]);export{n as default};

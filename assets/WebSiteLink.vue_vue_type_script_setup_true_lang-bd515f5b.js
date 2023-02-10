@@ -1,0 +1,1 @@
+import{d as l,o as e,a,e as s,s as n}from"./runtime-core.esm-bundler-808dc7a8.js";const r=["href"],t=l({__name:"WebSiteLink",props:{label:null,link:null},setup:l=>(t,u)=>(e(),a("p",null,[s("span",null,n(l.label),1),s("a",{class:"text-blue-500",href:l.link,target:"_blank"},n(l.link),9,r)]))});export{t as _};

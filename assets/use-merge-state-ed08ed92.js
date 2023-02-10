@@ -1,0 +1,1 @@
+import{j as e}from"./plugin-vue_export-helper-806773bb.js";import{a4 as u,t as a,w as r,c as o}from"./runtime-core.esm-bundler-808dc7a8.js";function t(t,n){const{value:s}=a(n),[l,v]=function(e){const a=u(e);return[a,e=>{a.value=e}]}(e(s.value)?t:s.value);r(s,(u=>{e(u)&&v(void 0)}));return[o((()=>e(s.value)?l.value:s.value)),v,l]}export{t as u};

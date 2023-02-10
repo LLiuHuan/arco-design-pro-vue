@@ -1,0 +1,1 @@
+import{c as e}from"./vue-utils-fe41050b.js";import{a4 as t,K as n,T as o}from"./runtime-core.esm-bundler-808dc7a8.js";const r=r=>{const s={},a=t([]),u=()=>{if(s.value){const t=e(s.value,r);t.length===a.value.length&&t.toString()===a.value.toString()||(a.value=t)}};return n((()=>u())),o((()=>u())),{children:s,components:a}};export{r as u};

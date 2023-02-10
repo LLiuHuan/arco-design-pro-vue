@@ -1,0 +1,1 @@
+import{d as r,a as e,o}from"./runtime-core.esm-bundler-808dc7a8.js";import{_ as u}from"./_plugin-vue_export-helper-1b428a4d.js";const m=u(r({name:"FormGroup",setup:()=>({})}),[["render",function(r,u,m,n,s,t){return o(),e("h1",null,"FormGroup")}]]);export{m as default};

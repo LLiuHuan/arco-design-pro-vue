@@ -1,0 +1,1 @@
+import{_ as r}from"./_plugin-vue_export-helper-1b428a4d.js";import{a as e,o,e as n}from"./runtime-core.esm-bundler-808dc7a8.js";const s={},t=[n("h1",null,"Form",-1)];const u=r(s,[["render",function(r,n){return o(),e("div",null,t)}]]);export{u as default};

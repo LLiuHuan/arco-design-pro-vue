@@ -1,0 +1,1 @@
+import{d as e,a,o as r}from"./runtime-core.esm-bundler-808dc7a8.js";import{_ as s}from"./_plugin-vue_export-helper-1b428a4d.js";const n=s(e({name:"DataAnalysis",setup:()=>({})}),[["render",function(e,s,n,t,o,u){return r(),a("h1",null,"DataAnalysis")}]]);export{n as default};

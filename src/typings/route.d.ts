@@ -62,6 +62,7 @@ declare namespace AuthRoute {
     | 'multi-menu_first_second'
     | 'multi-menu_first_second-new'
     | 'multi-menu_first_second-new_third'
+    | 'setup'
     | 'about';
 
   /** 路由的path */

@@ -1,3 +1,4 @@
+// @ts-ignore
 import DefineOptions from 'unplugin-vue-define-options/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';

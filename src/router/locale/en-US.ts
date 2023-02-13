@@ -41,5 +41,6 @@ export default {
   'route.multi-menu.menu.two': 'Secondary menu',
   'route.multi-menu.menu.two.submenu': 'Secondary menu (with submenu)',
   'route.multi-menu.menu.three': 'Three level menu',
+  'route.setup': 'Setup',
   'route.about': 'About',
 };

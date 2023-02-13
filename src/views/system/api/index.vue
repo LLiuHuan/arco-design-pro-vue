@@ -387,3 +387,11 @@
 <!--</script>-->
 
 <!--<style scoped></style>-->
+
+<template>
+  <div> Api </div>
+</template>
+
+<script lang="ts" setup></script>
+
+<style lang="less" scoped></style>

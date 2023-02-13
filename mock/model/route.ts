@@ -446,6 +446,19 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
     },
 
     {
+      name: 'setup',
+      path: '/setup',
+      component: 'self',
+      meta: {
+        title: 'route.setup',
+        requiresAuth: true,
+        singleLayout: 'basic',
+        icon: 'icon-brush',
+        // customIcon: 'copy',
+        order: 8,
+      },
+    },
+    {
       name: 'about',
       path: '/about',
       component: 'self',
@@ -455,7 +468,7 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
         singleLayout: 'basic',
         icon: 'fluent:book-information-24-regular',
         // customIcon: 'copy',
-        order: 8,
+        order: 9,
       },
     },
   ],

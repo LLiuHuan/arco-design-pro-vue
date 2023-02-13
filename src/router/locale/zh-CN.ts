@@ -41,5 +41,6 @@ export default {
   'route.multi-menu.menu.two': '二级菜单',
   'route.multi-menu.menu.two.submenu': '二级菜单(有子菜单)',
   'route.multi-menu.menu.three': '三级菜单',
+  'route.setup': '引导页',
   'route.about': '关于',
 };

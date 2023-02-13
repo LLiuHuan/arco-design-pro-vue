@@ -328,3 +328,11 @@
 <!--    }-->
 <!--  }-->
 <!--</style>-->
+
+<template>
+  <div> Initdb </div>
+</template>
+
+<script lang="ts" setup></script>
+
+<style lang="less" scoped></style>

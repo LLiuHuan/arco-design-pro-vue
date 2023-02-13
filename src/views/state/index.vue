@@ -252,3 +252,11 @@
 <!--    height: 230px;-->
 <!--  }-->
 <!--</style>-->
+
+<template>
+  <div> State </div>
+</template>
+
+<script lang="ts" setup></script>
+
+<style lang="less" scoped></style>

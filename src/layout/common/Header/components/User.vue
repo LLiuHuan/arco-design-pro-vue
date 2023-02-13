@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown trigger="hover" @select="handleDropdown">
+  <a-dropdown trigger="hover" @select="handleDropdown" class="user">
     <template #content>
       <a-doption v-for="item in options" :value="item.key" :key="item.key">
         {{ item.label }}

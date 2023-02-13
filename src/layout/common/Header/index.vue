@@ -27,13 +27,13 @@
         <!--        <HeaderMenu />-->
         <Menu :menus="routeStore.menus" :mode="'horizontal'" />
       </div>
-      <div class="flex justify-end h-full pr-30px">
+      <div class="flex justify-end h-full pr-30px ribbon">
         <Github />
         <ThemeModel />
         <Locale />
         <Fullscreen />
         <Setting />
-        <User />
+        <User class="user" />
       </div>
     </dark-mode-container>
   </a-layout-header>

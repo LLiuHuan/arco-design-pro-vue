@@ -3,6 +3,7 @@
  */
 import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import type { RequestOptions, Result } from './types';
+import { AxiosRequestConfig } from 'axios/index';
 
 export interface CreateAxiosOptions extends InternalAxiosRequestConfig {
   authenticationScheme?: string;
@@ -15,10 +16,7 @@ export abstract class AxiosTransform {
    * @description: 请求之前处理配置
    * @description: Process configuration before request
    */
-  beforeRequestHook?: (
-    config: InternalAxiosRequestConfig,
-    options: RequestOptions
-  ) => InternalAxiosRequestConfig;
+  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
   /**
    * @description: 请求成功处理

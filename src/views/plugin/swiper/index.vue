@@ -25,13 +25,12 @@
 <script setup lang="ts">
   import SwiperCore, { Navigation, Pagination } from 'swiper';
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  import type { SwiperOptions } from 'swiper';
   import 'swiper/css';
 
   interface SwiperExample {
     id: number;
     label: string;
-    options: Partial<SwiperOptions>;
+    options: any;
   }
 
   SwiperCore.use([Navigation, Pagination]);

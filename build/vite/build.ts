@@ -1,5 +1,9 @@
 type minify = boolean | 'terser' | 'esbuild';
 
+/**
+ * Vite Build Config
+ * @param env
+ */
 export function createViteBuild(env: ImportMetaEnv) {
   const minify = env.VITE_DROP_CONSOLE && ('terser' as minify);
   return {
@@ -10,7 +14,7 @@ export function createViteBuild(env: ImportMetaEnv) {
     // 应只在针对非主流浏览器时使用。
     cssTarget: 'chrome80',
     // 指定输出路径（相对于 项目根目录).
-    outDir: env.BUILD_OUT_DIR || 'dist',
+    outDir: env.VITE_GLOB_BUILD_OUT_DIR || 'dist',
     // 指定生成静态资源的存放路径（相对于 build.outDir）。
     assetsDir: 'assets',
     // 小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。

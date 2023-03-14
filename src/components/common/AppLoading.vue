@@ -1,6 +1,6 @@
 <template>
   <div class="fixed-center flex-col grid-cols-1 grid-rows-3 gap-y-30px">
-    <system-logo class="text-128px text-primary !h-100px !w-100px" />
+    <!--    <system-logo class="text-128px text-primary !h-100px !w-100px" />-->
     <div class="flex">
       <div class="one"></div>
       <div class="two"></div>

@@ -1,2 +1,4 @@
-export * from './plugin';
-export * from './config';
+export { createVitePlugins } from './vite/plugin';
+export { createViteBuild } from './vite/build';
+export { createViteProxy } from './vite/proxy';
+export * from './utils';

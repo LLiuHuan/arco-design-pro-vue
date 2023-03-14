@@ -19,12 +19,12 @@ interface ImportMetaEnv {
   readonly VITE_PORT: number;
   /** 项目基本地址 */
   readonly VITE_BASE_URL: string;
-  /** 项目名称 */
-  readonly VITE_APP_NAME: string;
-  /** 项目标题 */
-  readonly VITE_APP_TITLE: string;
+  /** glob 项目名称 */
+  readonly VITE_GLOB_APP_TITLE: string;
+  /** glob 项目简称 */
+  readonly VITE_GLOB_APP_SHORT_NAME: string;
   /** 项目描述 */
-  readonly VITE_APP_DESC: string;
+  readonly VITE_GLOB_APP_DESC: string;
   /**
    * 权限路由模式:
    * - static - 前端声明的静态
@@ -39,23 +39,27 @@ interface ImportMetaEnv {
   /** vite环境类型 */
   readonly VITE_ENV_TYPE?: EnvType;
   /** 开启请求代理 */
-  readonly VITE_HTTP_PROXY?: 'true' | 'false';
+  readonly VITE_HTTP_PROXY?: boolean;
   /** 是否开启打包文件大小结果分析 */
-  readonly VITE_VISUALIZER?: 'true' | 'false';
-  /** 是否开启打包压缩 */
-  readonly VITE_COMPRESS?: 'true' | 'false';
-  /** 压缩算法类型 */
-  readonly VITE_COMPRESS_TYPE?: 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw';
+  readonly VITE_VISUALIZER: boolean;
   /** hash路由模式 */
-  readonly VITE_HASH_ROUTE?: 'true' | 'false';
+  readonly VITE_HASH_ROUTE?: boolean;
 
   /** 是否禁用console */
   readonly VITE_DROP_CONSOLE: boolean;
   /** 项目打包路径 */
-  readonly BUILD_OUT_DIR: string;
+  readonly VITE_GLOB_BUILD_OUT_DIR: string;
   /** Api接口前缀 */
-  readonly VITE_API_URL_PREFIX: string;
-  ß;
+  readonly VITE_GLOB_API_URL_PREFIX: string;
+
+  /** Mock开关 */
+  readonly VITE_USE_MOCK: boolean;
+  /** 是否开启打包压缩 */
+  readonly VITE_BUILD_COMPRESS: 'gzip' | 'brotli' | 'none';
+  /** 是否删除原始文件 */
+  readonly VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
+  /** 是否开启图片压缩 */
+  readonly VITE_USE_IMAGEMIN: boolean;
 }
 
 interface ImportMeta {

@@ -1,2 +1,2 @@
 export * from './define';
-export * from './proxy';
+export * from './utils';

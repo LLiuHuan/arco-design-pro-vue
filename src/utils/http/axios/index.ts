@@ -223,7 +223,7 @@ const transform: AxiosTransform = {
 };
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
-  const { VITE_API_URL_PREFIX } = import.meta.env;
+  const { VITE_GLOB_API_URL_PREFIX } = import.meta.env;
 
   return new AAxios(
     deepMerge(
@@ -233,7 +233,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // token 前缀
         authenticationScheme: '',
         // 接口前缀
-        prefixUrl: opt?.requestOptions?.prefixUrl || VITE_API_URL_PREFIX,
+        prefixUrl: opt?.requestOptions?.prefixUrl || VITE_GLOB_API_URL_PREFIX,
         // 请求头
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 数据处理方式
@@ -255,7 +255,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 接口地址
           apiUrl: '',
           // 接口拼接地址
-          urlPrefix: opt?.requestOptions?.prefixUrl || VITE_API_URL_PREFIX,
+          urlPrefix: opt?.requestOptions?.prefixUrl || VITE_GLOB_API_URL_PREFIX,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

@@ -1,20 +1,26 @@
 /** 请求环境配置 */
-type ServiceEnv = Record<EnvType, EnvConfig>;
+type ServiceEnv = Record<EnvType, EnvConfig[]>;
 
 /** 环境配置 */
 const serviceEnvConfig: ServiceEnv = {
-  dev: {
-    url: 'http://localhost:8080',
-    proxy: '/api',
-  },
-  test: {
-    url: 'http://localhost:8080',
-    proxy: '/api',
-  },
-  prod: {
-    url: 'http://localhost:8080',
-    proxy: '/api',
-  },
+  dev: [
+    {
+      url: 'http://localhost:8080',
+      proxy: '/api',
+    },
+  ],
+  test: [
+    {
+      url: 'http://localhost:8080',
+      proxy: '/api',
+    },
+  ],
+  prod: [
+    {
+      url: 'http://localhost:8080',
+      proxy: '/api',
+    },
+  ],
 };
 
 /**

@@ -1,21 +1,20 @@
 import { fileURLToPath } from 'url';
 import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
-import { createViteProxy, setupVitePlugins, viteDefine } from './build';
-import { createViteBuild } from './build/config/build';
+import { createViteProxy, createViteBuild, createVitePlugins, viteDefine } from './build';
 import { getEnvConfig } from '.env-config';
 
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd()) as ImportMetaEnv;
   const rootPath = fileURLToPath(new URL('./', import.meta.url));
   const srcPath = `${rootPath}src`;
+  const isBuild = configEnv.command === 'build';
 
-  const isOpenProxy = viteEnv.VITE_HTTP_PROXY === 'true';
+  const { VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT } = viteEnv;
+
   const envConfig = getEnvConfig(viteEnv);
-  console.log(envConfig);
-  console.log(isOpenProxy);
   return {
-    base: viteEnv.VITE_BASE_URL,
+    base: VITE_BASE_URL,
     resolve: {
       alias: {
         '~': rootPath,
@@ -23,15 +22,9 @@ export default defineConfig((configEnv) => {
       },
     },
     define: viteDefine,
-    // optimizeDeps: {
-    //   include: ['js-yaml'],
-    // },
-    plugins: setupVitePlugins(viteEnv, srcPath),
+    plugins: createVitePlugins(viteEnv, srcPath, isBuild),
     css: {
       preprocessorOptions: {
-        // scss: {
-        //   additionalData: `@use "./src/assets/styles/scss/global.scss" as *;`,
-        // },
         less: {
           modifyVars: {
             hack: `true; @import (reference) "${resolve('src/assets/styles/breakpoint.less')}";`,
@@ -42,9 +35,9 @@ export default defineConfig((configEnv) => {
     },
     server: {
       host: '0.0.0.0',
-      port: viteEnv.VITE_PORT || 3200,
+      port: VITE_PORT || 3200,
       open: true,
-      proxy: createViteProxy(isOpenProxy, envConfig),
+      proxy: createViteProxy(VITE_HTTP_PROXY, envConfig),
     },
     build: createViteBuild(viteEnv),
   };

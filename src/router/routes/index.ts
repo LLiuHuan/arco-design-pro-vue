@@ -86,4 +86,12 @@ export const constantRoutes: AuthRoute.Route[] = [
       title: '重定向',
     },
   },
+  {
+    name: 'link',
+    path: '/link',
+    component: 'self',
+    meta: {
+      title: '跳转提示',
+    },
+  },
 ];

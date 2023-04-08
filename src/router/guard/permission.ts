@@ -15,7 +15,7 @@ export async function createPermissionGuard(
   if (!permission) return;
   // 外链路由, 从新标签打开，返回上一个路由
   if (to.meta.href) {
-    window.open(to.meta.href);
+    window.open('/link?target=' + to.meta.href, '_blank');
     next({ path: from.fullPath, replace: true, query: from.query });
     return;
   }

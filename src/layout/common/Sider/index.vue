@@ -37,6 +37,8 @@
   .arco-layout-sider {
     z-index: 5;
     //background-color: var(--color-bg-2);
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
   }
 
   :deep(.arco-layout-sider-children) {

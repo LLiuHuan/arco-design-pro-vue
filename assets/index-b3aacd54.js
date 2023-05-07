@@ -1,1 +1,0 @@
-import{d as s,A as a,E as e,w as l}from"./index-5b47fae5.js";const t={class:"h-full"},f=s({__name:"index",setup:s=>(s,f)=>(l(),a("div",t,[e("iframe",{class:"wh-full",src:"https://v3.cn.vuejs.org/"})]))});export{f as default};

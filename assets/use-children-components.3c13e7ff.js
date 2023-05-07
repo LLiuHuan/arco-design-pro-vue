@@ -1,0 +1,1 @@
+import{k as t,o as e,l as n,U as o}from"./index.4ccc7453.js";const a=a=>{const s={},l=t([]),c=()=>{if(s.value){const t=o(s.value,a);t.length===l.value.length&&t.toString()===l.value.toString()||(l.value=t)}};return e((()=>c())),n((()=>c())),{children:s,components:l}};export{a as u};

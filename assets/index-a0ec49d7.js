@@ -1,1 +1,0 @@
-import{_ as e}from"./ExceptionBase.vue_vue_type_script_setup_true_lang-ab05aa96.js";import{d as a,x as s,z as t,w as p}from"./index-5b47fae5.js";import"./index-3fdaf4f5.js";import"./index-3fdaf4f52.js";const f=a({__name:"index",setup:a=>(a,f)=>(p(),s(t(e),{type:"500"}))});export{f as default};

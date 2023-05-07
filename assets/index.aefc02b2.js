@@ -1,0 +1,1 @@
+/* empty css              */import{C as t}from"./index.10292540.js";import{Y as a,x as n,y as o,w as r,E as s}from"./index.f08481ff.js";import"./index.c8b1455a.js";const e={},i=s("h1",null,"Markdown",-1);const d=a(e,[["render",function(a,s){const e=t;return r(),n(e,{title:"vue-markdown-editor"},{default:o((()=>[i])),_:1})}]]);export{d as default};

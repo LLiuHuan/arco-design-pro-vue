@@ -1,1 +1,0 @@
-import{d as s,Y as a,A as r,w as t}from"./index.4ccc7453.js";const e=a(s({name:"ListCard",setup:()=>({})}),[["render",function(s,a,e,n,d,c){return t(),r("h1",null,"ListCard")}]]);export{e as default};

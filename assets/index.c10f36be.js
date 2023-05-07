@@ -1,1 +1,0 @@
-import{d as a,bu as r,bv as s,bd as e}from"./index.4ccc7453.js";const t=a({__name:"index",setup(a){const t=e(),n=s();return r((()=>{const{params:a,query:r}=t,{path:s}=a;n.replace({path:`/${Array.isArray(s)?s.join("/"):s}`,query:r})})),()=>{}}});export{t as default};

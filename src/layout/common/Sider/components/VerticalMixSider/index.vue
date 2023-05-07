@@ -5,7 +5,7 @@
     @mouseleave="resetFirstDegreeMenus"
     style="color: var(--color-text-2)"
   >
-    <div class="flex-1 flex-col-stretch h-full">
+    <div class="flex-1 flex-col-stretch h-full w-full">
       <logo :show-title="false" :style="{ height: theme.header.height + 'px' }" />
       <div class="flex-1-hidden">
         <mix-menu-detail

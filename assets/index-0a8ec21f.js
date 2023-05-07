@@ -1,0 +1,1 @@
+import{d as e,Y as a,A as r,w as n}from"./index-5b47fae5.js";const s=a(e({name:"SearchTable",setup:()=>({})}),[["render",function(e,a,s,t,l,o){return n(),r("h1",null,"SearchTable")}]]);export{s as default};

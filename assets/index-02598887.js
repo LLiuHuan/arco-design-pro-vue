@@ -1,1 +1,0 @@
-import{_ as r}from"./_plugin-vue_export-helper-1b428a4d.js";import{a as e,o as n}from"./runtime-core.esm-bundler-808dc7a8.js";const o=r({},[["render",function(r,o){return n(),e("div",null," Initdb ")}]]);export{o as default};

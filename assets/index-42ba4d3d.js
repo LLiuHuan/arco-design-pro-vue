@@ -1,1 +1,0 @@
-import{d as e,a as r,o as a}from"./runtime-core.esm-bundler-808dc7a8.js";import{_ as n}from"./_plugin-vue_export-helper-1b428a4d.js";const o=n(e({name:"SearchTable",setup:()=>({})}),[["render",function(e,n,o,s,t,u){return a(),r("h1",null,"SearchTable")}]]);export{o as default};

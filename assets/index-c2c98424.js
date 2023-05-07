@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper-1b428a4d.js";import{a as n,o as r}from"./runtime-core.esm-bundler-808dc7a8.js";const s=e({name:"MultiDimensionDataAnalysis"},[["render",function(e,s,a,i,t,o){return r(),n("h1",null,"MultiDimensionDataAnalysis")}]]);export{s as default};

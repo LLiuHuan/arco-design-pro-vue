@@ -1,1 +1,0 @@
-import{d as s,a as e,e as a,o as t}from"./runtime-core.esm-bundler-808dc7a8.js";const l={class:"h-full"},r=s({__name:"index",setup:s=>(s,r)=>(t(),e("div",l,[a("iframe",{class:"wh-full",src:"https://vitejs.cn/"})]))});export{r as default};

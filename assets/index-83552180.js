@@ -1,1 +1,0 @@
-import{_ as r}from"./_plugin-vue_export-helper-1b428a4d.js";import{q as e,o,j as t}from"./runtime-core.esm-bundler-808dc7a8.js";const s=r({},[["render",function(r,s){const n=e("router-view");return o(),t(n)}]]);export{s as default};

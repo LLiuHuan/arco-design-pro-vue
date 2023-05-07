@@ -1,1 +1,0 @@
-import{d as r,a as e,o as s}from"./runtime-core.esm-bundler-808dc7a8.js";import{_ as t}from"./_plugin-vue_export-helper-1b428a4d.js";const a=t(r({name:"ListCard",setup:()=>({})}),[["render",function(r,t,a,n,o,u){return s(),e("h1",null,"ListCard")}]]);export{a as default};

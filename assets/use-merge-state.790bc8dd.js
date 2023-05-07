@@ -1,1 +1,0 @@
-import{k as a,t as u,W as e,V as n,c as s}from"./index.f08481ff.js";function t(t,o){const{value:v}=u(o),[l,r]=function(u){const e=a(u);return[e,a=>{e.value=a}]}(e(v.value)?t:v.value);n(v,(a=>{e(a)&&r(void 0)}));return[s((()=>e(v.value)?l.value:v.value)),r,l]}export{t as u};

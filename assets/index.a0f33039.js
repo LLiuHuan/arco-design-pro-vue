@@ -1,1 +1,0 @@
-import{d as a,Y as s,A as n,w as t}from"./index.f08481ff.js";const e=s(a({name:"DataAnalysis",setup:()=>({})}),[["render",function(a,s,e,r,f,i){return t(),n("h1",null,"DataAnalysis")}]]);export{e as default};

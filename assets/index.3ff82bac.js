@@ -1,1 +1,0 @@
-import{_ as e}from"./ExceptionBase.vue_vue_type_script_setup_true_lang.72339d72.js";import{d as s,x as a,z as t,w as p}from"./index.f08481ff.js";/* empty css              *//* empty css               */const i=s({__name:"index",setup:s=>(s,i)=>(p(),a(t(e),{type:"403"}))});export{i as default};

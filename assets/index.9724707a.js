@@ -1,0 +1,1 @@
+import{Y as t,A as a,w as e,E as n}from"./index.e00e4771.js";const r={},s=[n("a",{href:"https://www.baidu.com",target:"_blank"},"百度",-1)];const o=t(r,[["render",function(t,n){return e(),a("div",null,s)}]]);export{o as default};

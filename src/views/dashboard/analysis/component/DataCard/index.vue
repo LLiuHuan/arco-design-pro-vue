@@ -6,7 +6,7 @@
           :title="$t('dashboard.analysis.data-card.visits')"
           chart-type="line"
           :card-style="{
-            background: darkMode
+            background: theme.darkMode
               ? 'linear-gradient(180deg, #284991 0%, #122B62 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)',
           }"
@@ -17,7 +17,7 @@
           :title="$t('dashboard.analysis.data-card.downloads')"
           chart-type="bar"
           :card-style="{
-            background: darkMode
+            background: theme.darkMode
               ? ' linear-gradient(180deg, #3D492E 0%, #263827 100%)'
               : 'linear-gradient(180deg, #F5FEF2 0%, #E6FEEE 100%)',
           }"
@@ -29,7 +29,7 @@
           quota="comment"
           chart-type="line"
           :card-style="{
-            background: darkMode
+            background: theme.darkMode
               ? 'linear-gradient(180deg, #294B94 0%, #0F275C 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)',
           }"
@@ -41,7 +41,7 @@
           :title="$t('dashboard.analysis.data-card.sharing')"
           chart-type="pie"
           :card-style="{
-            background: darkMode
+            background: theme.darkMode
               ? 'linear-gradient(180deg, #312565 0%, #201936 100%)'
               : 'linear-gradient(180deg, #F7F7FF 0%, #ECECFF 100%)',
           }"
@@ -56,7 +56,7 @@
   // import useLoading from '@/hooks/loading';
   import { DataItem } from './component';
 
-  const { darkMode } = useThemeStore();
+  const theme = useThemeStore();
   // const { loading, setLoading } = useLoading(true);
 </script>
 

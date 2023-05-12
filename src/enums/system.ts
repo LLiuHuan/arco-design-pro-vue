@@ -14,8 +14,8 @@ export enum EnumThemeLayoutMode {
 
 /** 多页签风格 */
 export enum EnumThemeTabMode {
-  'chrome' = '谷歌风格',
-  'button' = '按钮风格',
+  'chrome' = 'settings.theme.tab.mode.chrome',
+  'button' = 'settings.theme.tab.mode.button',
 }
 
 /** 水平模式的菜单位置 */

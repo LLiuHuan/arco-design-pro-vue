@@ -56,4 +56,6 @@ export default {
   'settings.theme.horizontal.menu.flex-start': 'Flex Start',
   'settings.theme.horizontal.menu.center': 'center',
   'settings.theme.horizontal.menu.flex-end': 'Flex End',
+  'settings.theme.tab.mode.chrome': 'Chrome',
+  'settings.theme.tab.mode.button': 'Button',
 };

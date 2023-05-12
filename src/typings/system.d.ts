@@ -195,8 +195,6 @@ declare namespace Theme {
     height: number;
     /** 多页签风格 */
     mode: EnumType.ThemeTabMode;
-    /** 多页签风格列表 */
-    modeList: ThemeTabModeList[];
     /** 开启多页签缓存 */
     isCache: boolean;
   }

@@ -8,6 +8,7 @@ import jsonSetting from './theme.json';
 import LayoutModeList = Theme.LayoutModeList;
 import AnimateModeList = Theme.AnimateModeList;
 import HorizontalMenuPositionList = Theme.HorizontalMenuPositionList;
+import ThemeTabModeList = Theme.ThemeTabModeList;
 
 const themeColorList = [
   '#1890ff',
@@ -60,6 +61,12 @@ export const menuHorizontalPositionList: HorizontalMenuPositionList[] = [
   { value: 'flex-end', label: EnumThemeHorizontalMenuPosition['flex-end'] },
 ];
 
+/** 多页签风格列表 */
+export const tabModeList: ThemeTabModeList[] = [
+  { value: 'chrome', label: EnumThemeTabMode.chrome },
+  { value: 'button', label: EnumThemeTabMode.button },
+];
+
 const defaultThemeSetting: Theme.Setting = {
   darkMode: false,
   followSystemTheme: true,
@@ -90,10 +97,6 @@ const defaultThemeSetting: Theme.Setting = {
     visible: true,
     height: 44,
     mode: 'chrome',
-    modeList: [
-      { value: 'chrome', label: EnumThemeTabMode.chrome },
-      { value: 'button', label: EnumThemeTabMode.button },
-    ],
     isCache: true,
   },
   sider: {

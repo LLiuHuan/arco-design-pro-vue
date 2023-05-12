@@ -58,4 +58,6 @@ export default {
   'settings.theme.horizontal.menu.flex-start': '居左',
   'settings.theme.horizontal.menu.center': '居中',
   'settings.theme.horizontal.menu.flex-end': '居右',
+  'settings.theme.tab.mode.chrome': '谷歌风格',
+  'settings.theme.tab.mode.button': '按钮风格',
 };

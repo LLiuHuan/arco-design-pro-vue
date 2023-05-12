@@ -109,8 +109,6 @@ declare namespace Theme {
     layout: Layout;
     /** 主题颜色 */
     themeColor: string;
-    /** 主题颜色列表 */
-    themeColorList: string[];
     /** 其他颜色 */
     otherColor: OtherColor;
     /** 是否自定义info的颜色(默认取比主题色深一级的颜色) */

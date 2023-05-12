@@ -10,7 +10,8 @@ import AnimateModeList = Theme.AnimateModeList;
 import HorizontalMenuPositionList = Theme.HorizontalMenuPositionList;
 import ThemeTabModeList = Theme.ThemeTabModeList;
 
-const themeColorList = [
+/** 主题颜色列表 */
+export const themeColorList = [
   '#1890ff',
   '#409EFF',
   '#2d8cf0',
@@ -75,7 +76,6 @@ const defaultThemeSetting: Theme.Setting = {
     mode: 'vertical',
   },
   themeColor: themeColorList[0],
-  themeColorList,
   otherColor: {
     info: '#2080f0',
     success: '#52c41a',

@@ -2,7 +2,7 @@
   <a-divider orientation="center">{{ $t('settings.navbar.layout') }}</a-divider>
   <a-space fill>
     <layout-checkbox
-      v-for="item in theme.layout.modeList"
+      v-for="item in layoutModeList"
       :key="item.value"
       :mode="item.value"
       :label="item.label"
@@ -15,6 +15,7 @@
 <script setup lang="ts">
   import { useThemeStore } from '@/store';
   import { LayoutCheckbox } from './components';
+  import { layoutModeList } from '@/settings';
 
   const theme = useThemeStore();
 </script>

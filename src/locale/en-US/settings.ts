@@ -43,4 +43,8 @@ export default {
   'settings.close': 'Close',
   'settings.color.tooltip': '10 gradient colors generated according to the theme color',
   'settings.menuFromServer': 'Menu From Server',
+  'settings.layout.mode.vertical': 'Vertical',
+  'settings.layout.mode.vertical-mix': 'Vertical Mix',
+  'settings.layout.mode.horizontal': 'Horizontal',
+  'settings.layout.mode.horizontal-mix': 'Horizontal Mix',
 };

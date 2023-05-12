@@ -3,25 +3,7 @@
   "followSystemTheme": true,
   "layout": {
     "minWidth": 900,
-    "mode": "vertical",
-    "modeList": [
-      {
-        "value": "vertical",
-        "label": "左侧菜单模式"
-      },
-      {
-        "value": "vertical-mix",
-        "label": "左侧菜单混合模式"
-      },
-      {
-        "value": "horizontal",
-        "label": "顶部菜单模式"
-      },
-      {
-        "value": "horizontal-mix",
-        "label": "顶部菜单混合模式"
-      }
-    ]
+    "mode": "vertical"
   },
   "themeColor": "#1890ff",
   "themeColorList": [

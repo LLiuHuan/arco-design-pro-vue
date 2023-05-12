@@ -45,4 +45,8 @@ export default {
   'settings.color.tooltip':
     '根据主题颜色生成的 10 个梯度色（将配置复制到项目中，主题色才能对亮色 / 暗黑模式同时生效）',
   'settings.menuFromServer': '菜单来源于后台',
+  'settings.layout.mode.vertical': '左侧菜单模式',
+  'settings.layout.mode.vertical-mix': '左侧菜单混合模式',
+  'settings.layout.mode.horizontal': '顶部菜单模式',
+  'settings.layout.mode.horizontal-mix': '顶部菜单混合模式',
 };

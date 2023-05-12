@@ -5,6 +5,7 @@ import {
   EnumThemeTabMode,
 } from '@/enums';
 import jsonSetting from './theme.json';
+import LayoutModeList = Theme.LayoutModeList;
 
 const themeColorList = [
   '#1890ff',
@@ -32,6 +33,13 @@ const themeColorList = [
   '#6d4c41',
   '#546e7a',
 ];
+/** 布局模式列表 */
+export const layoutModeList: LayoutModeList[] = [
+  { value: 'vertical', label: EnumThemeLayoutMode.vertical },
+  { value: 'vertical-mix', label: EnumThemeLayoutMode['vertical-mix'] },
+  { value: 'horizontal', label: EnumThemeLayoutMode.horizontal },
+  { value: 'horizontal-mix', label: EnumThemeLayoutMode['horizontal-mix'] },
+];
 
 const defaultThemeSetting: Theme.Setting = {
   darkMode: false,
@@ -39,12 +47,6 @@ const defaultThemeSetting: Theme.Setting = {
   layout: {
     minWidth: 900,
     mode: 'vertical',
-    modeList: [
-      { value: 'vertical', label: EnumThemeLayoutMode.vertical },
-      { value: 'vertical-mix', label: EnumThemeLayoutMode['vertical-mix'] },
-      { value: 'horizontal', label: EnumThemeLayoutMode.horizontal },
-      { value: 'horizontal-mix', label: EnumThemeLayoutMode['horizontal-mix'] },
-    ],
   },
   themeColor: themeColorList[0],
   themeColorList,

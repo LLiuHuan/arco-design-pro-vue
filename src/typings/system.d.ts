@@ -150,8 +150,6 @@ declare namespace Theme {
     minWidth: number;
     /** 布局模式 */
     mode: EnumType.ThemeLayoutMode;
-    /** 布局模式列表 */
-    modeList: LayoutModeList[];
   }
 
   interface LayoutModeList {

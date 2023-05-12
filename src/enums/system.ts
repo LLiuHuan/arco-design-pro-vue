@@ -6,10 +6,10 @@ export enum EnumLayoutComponentName {
 
 /** 布局模式 */
 export enum EnumThemeLayoutMode {
-  'vertical' = '左侧菜单模式',
-  'horizontal' = '顶部菜单模式',
-  'vertical-mix' = '左侧菜单混合模式',
-  'horizontal-mix' = '顶部菜单混合模式',
+  'vertical' = 'settings.layout.mode.vertical',
+  'horizontal' = 'settings.layout.mode.horizontal',
+  'vertical-mix' = 'settings.layout.mode.vertical-mix',
+  'horizontal-mix' = 'settings.layout.mode.horizontal-mix',
 }
 
 /** 多页签风格 */

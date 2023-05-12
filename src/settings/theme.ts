@@ -6,6 +6,7 @@ import {
 } from '@/enums';
 import jsonSetting from './theme.json';
 import LayoutModeList = Theme.LayoutModeList;
+import AnimateModeList = Theme.AnimateModeList;
 
 const themeColorList = [
   '#1890ff',
@@ -39,6 +40,16 @@ export const layoutModeList: LayoutModeList[] = [
   { value: 'vertical-mix', label: EnumThemeLayoutMode['vertical-mix'] },
   { value: 'horizontal', label: EnumThemeLayoutMode.horizontal },
   { value: 'horizontal-mix', label: EnumThemeLayoutMode['horizontal-mix'] },
+];
+
+/** 动画类型列表 */
+export const pageAnimateModeList: AnimateModeList[] = [
+  { value: 'fade-slide', label: EnumThemeAnimateMode['fade-slide'] },
+  { value: 'fade', label: EnumThemeAnimateMode.fade },
+  { value: 'fade-bottom', label: EnumThemeAnimateMode['fade-bottom'] },
+  { value: 'fade-scale', label: EnumThemeAnimateMode['fade-scale'] },
+  { value: 'zoom-fade', label: EnumThemeAnimateMode['zoom-fade'] },
+  { value: 'zoom-out', label: EnumThemeAnimateMode['zoom-out'] },
 ];
 
 const defaultThemeSetting: Theme.Setting = {
@@ -100,14 +111,6 @@ const defaultThemeSetting: Theme.Setting = {
   page: {
     animate: true,
     animateMode: 'fade-slide',
-    animateModeList: [
-      { value: 'fade-slide', label: EnumThemeAnimateMode['fade-slide'] },
-      { value: 'fade', label: EnumThemeAnimateMode.fade },
-      { value: 'fade-bottom', label: EnumThemeAnimateMode['fade-bottom'] },
-      { value: 'fade-scale', label: EnumThemeAnimateMode['fade-scale'] },
-      { value: 'zoom-fade', label: EnumThemeAnimateMode['zoom-fade'] },
-      { value: 'zoom-out', label: EnumThemeAnimateMode['zoom-out'] },
-    ],
   },
   language: 'zh-CN',
   watermark: {

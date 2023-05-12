@@ -47,4 +47,10 @@ export default {
   'settings.layout.mode.vertical-mix': 'Vertical Mix',
   'settings.layout.mode.horizontal': 'Horizontal',
   'settings.layout.mode.horizontal-mix': 'Horizontal Mix',
+  'settings.theme.animate.mode.zoom-fade': 'Zoom Fade',
+  'settings.theme.animate.mode.zoom-out': 'Zoom Out',
+  'settings.theme.animate.mode.fade-slide': 'Fade Slide',
+  'settings.theme.animate.mode.fade': 'Fade',
+  'settings.theme.animate.mode.fade-bottom': 'Fade Bottom',
+  'settings.theme.animate.mode.fade-scale': 'Fade Scale',
 };

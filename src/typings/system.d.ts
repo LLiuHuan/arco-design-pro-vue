@@ -251,8 +251,6 @@ declare namespace Theme {
     animate: boolean;
     /** 动画类型 */
     animateMode: EnumType.ThemeAnimateMode;
-    /** 动画类型列表 */
-    animateModeList: AnimateModeList[];
   }
 
   /** 动画类型列表 */

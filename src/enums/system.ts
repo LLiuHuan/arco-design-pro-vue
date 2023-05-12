@@ -27,12 +27,12 @@ export enum EnumThemeHorizontalMenuPosition {
 
 /** 过渡动画类型 */
 export enum EnumThemeAnimateMode {
-  'zoom-fade' = '渐变',
-  'zoom-out' = '闪现',
-  'fade-slide' = '滑动',
-  'fade' = '消退',
-  'fade-bottom' = '底部消退',
-  'fade-scale' = '缩放消退',
+  'zoom-fade' = 'settings.theme.animate.mode.zoom-fade',
+  'zoom-out' = 'settings.theme.animate.mode.zoom-out',
+  'fade-slide' = 'settings.theme.animate.mode.fade-slide',
+  'fade' = 'settings.theme.animate.mode.fade',
+  'fade-bottom' = 'settings.theme.animate.mode.fade-bottom',
+  'fade-scale' = 'settings.theme.animate.mode.fade-scale',
 }
 
 export enum EnumLanguage {

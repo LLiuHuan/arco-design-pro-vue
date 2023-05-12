@@ -49,4 +49,10 @@ export default {
   'settings.layout.mode.vertical-mix': '左侧菜单混合模式',
   'settings.layout.mode.horizontal': '顶部菜单模式',
   'settings.layout.mode.horizontal-mix': '顶部菜单混合模式',
+  'settings.theme.animate.mode.zoom-fade': '渐变',
+  'settings.theme.animate.mode.zoom-out': '闪现',
+  'settings.theme.animate.mode.fade-slide': '滑动',
+  'settings.theme.animate.mode.fade': '消退',
+  'settings.theme.animate.mode.fade-bottom': '底部消退',
+  'settings.theme.animate.mode.fade-scale': '缩放消退',
 };

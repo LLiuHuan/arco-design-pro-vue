@@ -65,13 +65,13 @@
     <setting-menu :label="$t('settings.interface.functions.fixed.bottom')">
       <a-switch :model-value="theme.footer.fixed" @change="theme.setFooterIsFixed" />
     </setting-menu>
-    <setting-menu :label="'开启水印'">
+    <setting-menu :label="$t('settings.interface.functions.watermark.watermark')">
       <a-switch
         :model-value="theme.watermark.watermark"
         @change="theme.setWatermark(!theme.watermark.watermark)"
       />
     </setting-menu>
-    <setting-menu :label="'水印文字'">
+    <setting-menu :label="$t('settings.interface.functions.watermark.text')">
       <a-input
         class="max-w-120px"
         size="small"

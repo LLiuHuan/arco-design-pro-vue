@@ -1,6 +1,6 @@
 <template>
   <hover-container
-    tooltip-content="设置"
+    :tooltip-content="$t('settings.navbar.settings')"
     class="w-40px h-full"
     :inverted="theme.header.inverted"
     @click="openSetting"

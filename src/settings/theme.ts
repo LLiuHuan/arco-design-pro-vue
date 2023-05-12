@@ -7,6 +7,7 @@ import {
 import jsonSetting from './theme.json';
 import LayoutModeList = Theme.LayoutModeList;
 import AnimateModeList = Theme.AnimateModeList;
+import HorizontalMenuPositionList = Theme.HorizontalMenuPositionList;
 
 const themeColorList = [
   '#1890ff',
@@ -50,6 +51,13 @@ export const pageAnimateModeList: AnimateModeList[] = [
   { value: 'fade-scale', label: EnumThemeAnimateMode['fade-scale'] },
   { value: 'zoom-fade', label: EnumThemeAnimateMode['zoom-fade'] },
   { value: 'zoom-out', label: EnumThemeAnimateMode['zoom-out'] },
+];
+
+/** 水平模式的菜单的位置列表 */
+export const menuHorizontalPositionList: HorizontalMenuPositionList[] = [
+  { value: 'flex-start', label: EnumThemeHorizontalMenuPosition['flex-start'] },
+  { value: 'center', label: EnumThemeHorizontalMenuPosition.center },
+  { value: 'flex-end', label: EnumThemeHorizontalMenuPosition['flex-end'] },
 ];
 
 const defaultThemeSetting: Theme.Setting = {
@@ -98,11 +106,6 @@ const defaultThemeSetting: Theme.Setting = {
   },
   menu: {
     horizontalPosition: 'flex-start',
-    horizontalPositionList: [
-      { value: 'flex-start', label: EnumThemeHorizontalMenuPosition['flex-start'] },
-      { value: 'center', label: EnumThemeHorizontalMenuPosition.center },
-      { value: 'flex-end', label: EnumThemeHorizontalMenuPosition['flex-end'] },
-    ],
   },
   footer: {
     fixed: false,

@@ -74,21 +74,7 @@
     "mixChildMenuWidth": 200
   },
   "menu": {
-    "horizontalPosition": "flex-start",
-    "horizontalPositionList": [
-      {
-        "value": "flex-start",
-        "label": "居左"
-      },
-      {
-        "value": "center",
-        "label": "居中"
-      },
-      {
-        "value": "flex-end",
-        "label": "居右"
-      }
-    ]
+    "horizontalPosition": "flex-start"
   },
   "footer": {
     "fixed": false,

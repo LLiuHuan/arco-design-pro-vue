@@ -20,9 +20,9 @@ export enum EnumThemeTabMode {
 
 /** 水平模式的菜单位置 */
 export enum EnumThemeHorizontalMenuPosition {
-  'flex-start' = '居左',
-  'center' = '居中',
-  'flex-end' = '居右',
+  'flex-start' = 'settings.theme.horizontal.menu.flex-start',
+  'center' = 'settings.theme.horizontal.menu.center',
+  'flex-end' = 'settings.theme.horizontal.menu.flex-end',
 }
 
 /** 过渡动画类型 */

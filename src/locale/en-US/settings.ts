@@ -53,4 +53,7 @@ export default {
   'settings.theme.animate.mode.fade': 'Fade',
   'settings.theme.animate.mode.fade-bottom': 'Fade Bottom',
   'settings.theme.animate.mode.fade-scale': 'Fade Scale',
+  'settings.theme.horizontal.menu.flex-start': 'Flex Start',
+  'settings.theme.horizontal.menu.center': 'center',
+  'settings.theme.horizontal.menu.flex-end': 'Flex End',
 };

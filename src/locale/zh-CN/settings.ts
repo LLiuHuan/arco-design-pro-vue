@@ -55,4 +55,7 @@ export default {
   'settings.theme.animate.mode.fade': '消退',
   'settings.theme.animate.mode.fade-bottom': '底部消退',
   'settings.theme.animate.mode.fade-scale': '缩放消退',
+  'settings.theme.horizontal.menu.flex-start': '居左',
+  'settings.theme.horizontal.menu.center': '居中',
+  'settings.theme.horizontal.menu.flex-end': '居右',
 };

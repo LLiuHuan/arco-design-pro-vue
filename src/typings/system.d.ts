@@ -227,8 +227,6 @@ declare namespace Theme {
   interface Menu {
     /** 水平模式的菜单的位置 */
     horizontalPosition: EnumType.ThemeHorizontalMenuPosition;
-    /** 水平模式的菜单的位置列表 */
-    horizontalPositionList: HorizontalMenuPositionList[];
   }
 
   /** 水平模式的菜单的位置列表 */

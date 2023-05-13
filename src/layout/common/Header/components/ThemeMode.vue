@@ -1,5 +1,9 @@
 <template>
-  <hover-container class="w-40px" :inverted="theme.header.inverted" tooltip-content="主题模式">
+  <hover-container
+    class="w-40px"
+    :inverted="theme.header.inverted"
+    :tooltip-content="$t('settings.navbar.theme')"
+  >
     <dark-mode-switch
       class="wh-full"
       @update:dark="theme.setDarkMode"

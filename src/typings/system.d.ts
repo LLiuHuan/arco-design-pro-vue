@@ -109,8 +109,6 @@ declare namespace Theme {
     layout: Layout;
     /** 主题颜色 */
     themeColor: string;
-    /** 主题颜色列表 */
-    themeColorList: string[];
     /** 其他颜色 */
     otherColor: OtherColor;
     /** 是否自定义info的颜色(默认取比主题色深一级的颜色) */
@@ -150,8 +148,6 @@ declare namespace Theme {
     minWidth: number;
     /** 布局模式 */
     mode: EnumType.ThemeLayoutMode;
-    /** 布局模式列表 */
-    modeList: LayoutModeList[];
   }
 
   interface LayoutModeList {
@@ -197,8 +193,6 @@ declare namespace Theme {
     height: number;
     /** 多页签风格 */
     mode: EnumType.ThemeTabMode;
-    /** 多页签风格列表 */
-    modeList: ThemeTabModeList[];
     /** 开启多页签缓存 */
     isCache: boolean;
   }
@@ -229,8 +223,6 @@ declare namespace Theme {
   interface Menu {
     /** 水平模式的菜单的位置 */
     horizontalPosition: EnumType.ThemeHorizontalMenuPosition;
-    /** 水平模式的菜单的位置列表 */
-    horizontalPositionList: HorizontalMenuPositionList[];
   }
 
   /** 水平模式的菜单的位置列表 */
@@ -253,8 +245,6 @@ declare namespace Theme {
     animate: boolean;
     /** 动画类型 */
     animateMode: EnumType.ThemeAnimateMode;
-    /** 动画类型列表 */
-    animateModeList: AnimateModeList[];
   }
 
   /** 动画类型列表 */

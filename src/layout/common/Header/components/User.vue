@@ -2,7 +2,7 @@
   <a-dropdown trigger="hover" @select="handleDropdown" class="user">
     <template #content>
       <a-doption v-for="item in options" :value="item.key" :key="item.key">
-        {{ item.label }}
+        {{ $t(item.label) }}
         <template #icon>
           <component :is="item.icon" />
         </template>
@@ -24,6 +24,9 @@
   import { Modal } from '@arco-design/web-vue';
   import { useAuthStore, useThemeStore } from '@/store';
   import { iconifyRender } from '@/utils/common/icon';
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
 
   interface UserOptions {
     label: string;
@@ -35,12 +38,12 @@
 
   const options: Array<UserOptions> = [
     {
-      label: '用户中心',
+      label: 'menu.user',
       key: 'user-center',
       icon: iconifyRender('carbon:user-avatar'),
     },
     {
-      label: '退出登录',
+      label: 'menu.user.logout',
       key: 'logout',
       icon: iconifyRender('carbon:logout'),
     },
@@ -49,10 +52,10 @@
   function handleDropdown(optionKey: string) {
     if (optionKey === 'logout') {
       Modal.info({
-        title: '提示',
-        content: '您确定要退出登录吗？',
-        okText: '确定',
-        cancelText: '取消',
+        title: t('confirm.hint'), // Modal.xxx() 方法不受<a-config-provider/>控制，只能使用t方法
+        content: t('menu.user.logout.confirm'),
+        okText: t('confirm.okText'),
+        cancelText: t('confirm.cancelText'),
         closable: true, // 显示关闭按钮
         draggable: true, // 可拖动
         hideCancel: false, // 取消隐藏取消按钮

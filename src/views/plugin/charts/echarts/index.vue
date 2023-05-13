@@ -60,7 +60,7 @@
       },
     ],
   });
-  const { domRef: lineRef } = useEcharts(lineOptions);
+  const { domRef: lineRef } = useEcharts(lineOptions as any);
 
   const barOptions = ref<ECOption>({
     xAxis: {
@@ -77,7 +77,7 @@
       },
     ],
   });
-  const { domRef: barRef } = useEcharts(barOptions);
+  const { domRef: barRef } = useEcharts(barOptions as any);
 
   const pieOptions = ref<ECOption>({
     toolbox: {
@@ -112,7 +112,7 @@
       },
     ],
   });
-  const { domRef: pieRef } = useEcharts(pieOptions);
+  const { domRef: pieRef } = useEcharts(pieOptions as any);
 
   const scatterOptions = ref<ECOption>({
     xAxis: {},
@@ -148,7 +148,7 @@
       },
     ],
   });
-  const { domRef: scatterRef } = useEcharts(scatterOptions);
+  const { domRef: scatterRef } = useEcharts(scatterOptions as any);
 
   const treeOptions = ref<ECOption>({
     series: [
@@ -189,7 +189,7 @@
       },
     ],
   });
-  const { domRef: treeRef } = useEcharts(treeOptions);
+  const { domRef: treeRef } = useEcharts(treeOptions as any);
 
   const gaugeOptions = ref<ECOption>({
     series: [
@@ -383,7 +383,7 @@
     ],
   });
   let intervalId: NodeJS.Timer;
-  const { domRef: gaugeRef } = useEcharts(gaugeOptions, (chart) => {
+  const { domRef: gaugeRef } = useEcharts(gaugeOptions as any, (chart) => {
     intervalId = setInterval(() => {
       const date = new Date();
       const second = date.getSeconds();

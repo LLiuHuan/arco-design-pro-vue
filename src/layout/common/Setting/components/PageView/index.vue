@@ -20,7 +20,7 @@
       <a-select
         class="max-w-120px"
         size="small"
-        :options="theme.page.animateModeList"
+        :options="animateModeList"
         @change="theme.setPageAnimateMode"
         :model-value="theme.page.animateMode"
       />
@@ -30,7 +30,17 @@
 
 <script lang="ts" setup>
   import { useThemeStore } from '@/store';
+  import { computed } from 'vue';
+  import { useI18n } from 'vue-i18n';
+  import { pageAnimateModeList } from '@/settings';
   import SettingMenu from '../SettingMenu/index.vue';
+
+  const { t } = useI18n();
+  const animateModeList = computed(() => {
+    return [...pageAnimateModeList].map(({ label, value }) => {
+      return { label: t(label), value: value };
+    });
+  });
 
   const theme = useThemeStore();
 </script>

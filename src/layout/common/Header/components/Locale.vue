@@ -1,6 +1,6 @@
 <template>
   <hover-container
-    tooltip-content="切换语言"
+    :tooltip-content="$t('settings.language')"
     class="w-40px h-full"
     :inverted="theme.header.inverted"
     @click="setLanguage(theme.language === 'zh-CN' ? 'en-US' : 'zh-CN')"

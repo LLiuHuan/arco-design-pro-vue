@@ -5,7 +5,7 @@
       <a-switch :model-value="theme.darkMode" @change="theme.setDarkMode" />
     </setting-menu>
 
-    <setting-menu :label="'主题色'">
+    <setting-menu :label="$t('settings.themeColor')">
       <div class="justify-center drawer-setting-item dark-switch">
         <a-trigger class="demo-basic" trigger="click">
           <div class="input">

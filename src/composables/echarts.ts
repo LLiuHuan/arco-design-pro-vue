@@ -96,7 +96,7 @@ export function useEcharts(
   const domRef = ref<HTMLElement | null>(null);
 
   const initialSize = { width: 0, height: 0 };
-  const { width, height } = useElementSize(domRef, initialSize);
+  const { width, height } = useElementSize(domRef as any, initialSize);
 
   let chart: echarts.ECharts | null = null;
 
@@ -118,7 +118,7 @@ export function useEcharts(
     if (domRef.value) {
       const chartTheme = theme.darkMode ? 'dark' : 'light';
       await nextTick();
-      chart = echarts.init(domRef.value, chartTheme);
+      chart = echarts.init(domRef.value as any, chartTheme);
       if (renderFun) {
         renderFun(chart);
       }

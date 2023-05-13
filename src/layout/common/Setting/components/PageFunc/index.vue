@@ -19,7 +19,7 @@
     <!--        class="w-120px"-->
     <!--        size="small"-->
     <!--        :value="theme.menu.horizontalPosition"-->
-    <!--        :options="theme.menu.horizontalPositionList"-->
+    <!--        :options="horizontalPositionList"-->
     <!--        @update:value="theme.setHorizontalMenuPosition"-->
     <!--      />-->
     <!--    </setting-menu>-->
@@ -65,13 +65,13 @@
     <setting-menu :label="$t('settings.interface.functions.fixed.bottom')">
       <a-switch :model-value="theme.footer.fixed" @change="theme.setFooterIsFixed" />
     </setting-menu>
-    <setting-menu :label="'开启水印'">
+    <setting-menu :label="$t('settings.interface.functions.watermark.watermark')">
       <a-switch
         :model-value="theme.watermark.watermark"
         @change="theme.setWatermark(!theme.watermark.watermark)"
       />
     </setting-menu>
-    <setting-menu :label="'水印文字'">
+    <setting-menu :label="$t('settings.interface.functions.watermark.text')">
       <a-input
         class="max-w-120px"
         size="small"
@@ -84,9 +84,19 @@
 
 <script lang="ts" setup>
   import { useThemeStore } from '@/store';
+  //import { computed } from 'vue';
+  //import { useI18n } from 'vue-i18n';
   import SettingMenu from '../SettingMenu/index.vue';
+  //import { menuHorizontalPositionList } from '@/settings';
 
+  //const { t } = useI18n();
   const theme = useThemeStore();
+
+  /*const horizontalPositionList = computed(() => {
+    return [...menuHorizontalPositionList].map(({ label, value }) => {
+      return { label: t(label), value: value };
+    });
+  });*/
 </script>
 
 <style lang="less" scoped></style>

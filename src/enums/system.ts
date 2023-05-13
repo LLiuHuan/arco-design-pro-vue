@@ -6,33 +6,33 @@ export enum EnumLayoutComponentName {
 
 /** 布局模式 */
 export enum EnumThemeLayoutMode {
-  'vertical' = '左侧菜单模式',
-  'horizontal' = '顶部菜单模式',
-  'vertical-mix' = '左侧菜单混合模式',
-  'horizontal-mix' = '顶部菜单混合模式',
+  'vertical' = 'settings.layout.mode.vertical',
+  'horizontal' = 'settings.layout.mode.horizontal',
+  'vertical-mix' = 'settings.layout.mode.vertical-mix',
+  'horizontal-mix' = 'settings.layout.mode.horizontal-mix',
 }
 
 /** 多页签风格 */
 export enum EnumThemeTabMode {
-  'chrome' = '谷歌风格',
-  'button' = '按钮风格',
+  'chrome' = 'settings.theme.tab.mode.chrome',
+  'button' = 'settings.theme.tab.mode.button',
 }
 
 /** 水平模式的菜单位置 */
 export enum EnumThemeHorizontalMenuPosition {
-  'flex-start' = '居左',
-  'center' = '居中',
-  'flex-end' = '居右',
+  'flex-start' = 'settings.theme.horizontal.menu.flex-start',
+  'center' = 'settings.theme.horizontal.menu.center',
+  'flex-end' = 'settings.theme.horizontal.menu.flex-end',
 }
 
 /** 过渡动画类型 */
 export enum EnumThemeAnimateMode {
-  'zoom-fade' = '渐变',
-  'zoom-out' = '闪现',
-  'fade-slide' = '滑动',
-  'fade' = '消退',
-  'fade-bottom' = '底部消退',
-  'fade-scale' = '缩放消退',
+  'zoom-fade' = 'settings.theme.animate.mode.zoom-fade',
+  'zoom-out' = 'settings.theme.animate.mode.zoom-out',
+  'fade-slide' = 'settings.theme.animate.mode.fade-slide',
+  'fade' = 'settings.theme.animate.mode.fade',
+  'fade-bottom' = 'settings.theme.animate.mode.fade-bottom',
+  'fade-scale' = 'settings.theme.animate.mode.fade-scale',
 }
 
 export enum EnumLanguage {

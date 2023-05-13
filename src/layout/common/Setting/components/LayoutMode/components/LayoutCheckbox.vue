@@ -5,7 +5,7 @@
   >
     <a-tooltip :content="activeConfig.placement" position="bottom">
       <template #content>
-        <span>{{ label }}</span>
+        <span>{{ $t(label) }}</span>
       </template>
       <div
         class="layout-checkbox__shadow relative w-56px h-48px bg-white rounded-4px overflow-hidden"

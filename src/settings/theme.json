@@ -3,25 +3,7 @@
   "followSystemTheme": true,
   "layout": {
     "minWidth": 900,
-    "mode": "vertical",
-    "modeList": [
-      {
-        "value": "vertical",
-        "label": "左侧菜单模式"
-      },
-      {
-        "value": "vertical-mix",
-        "label": "左侧菜单混合模式"
-      },
-      {
-        "value": "horizontal",
-        "label": "顶部菜单模式"
-      },
-      {
-        "value": "horizontal-mix",
-        "label": "顶部菜单混合模式"
-      }
-    ]
+    "mode": "vertical"
   },
   "themeColor": "#1890ff",
   "themeColorList": [
@@ -71,16 +53,6 @@
     "visible": true,
     "height": 44,
     "mode": "chrome",
-    "modeList": [
-      {
-        "value": "chrome",
-        "label": "谷歌风格"
-      },
-      {
-        "value": "button",
-        "label": "按钮风格"
-      }
-    ],
     "isCache": true
   },
   "sider": {
@@ -92,21 +64,7 @@
     "mixChildMenuWidth": 200
   },
   "menu": {
-    "horizontalPosition": "flex-start",
-    "horizontalPositionList": [
-      {
-        "value": "flex-start",
-        "label": "居左"
-      },
-      {
-        "value": "center",
-        "label": "居中"
-      },
-      {
-        "value": "flex-end",
-        "label": "居右"
-      }
-    ]
+    "horizontalPosition": "flex-start"
   },
   "footer": {
     "fixed": false,
@@ -114,33 +72,7 @@
   },
   "page": {
     "animate": true,
-    "animateMode": "fade-slide",
-    "animateModeList": [
-      {
-        "value": "fade-slide",
-        "label": "滑动"
-      },
-      {
-        "value": "fade",
-        "label": "消退"
-      },
-      {
-        "value": "fade-bottom",
-        "label": "底部消退"
-      },
-      {
-        "value": "fade-scale",
-        "label": "缩放消退"
-      },
-      {
-        "value": "zoom-fade",
-        "label": "渐变"
-      },
-      {
-        "value": "zoom-out",
-        "label": "闪现"
-      }
-    ]
+    "animateMode": "fade-slide"
   },
   "language": "zh-CN",
   "watermark": {

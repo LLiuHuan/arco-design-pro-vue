@@ -225,7 +225,7 @@
 
   fetch();
   console.log(chartOption.value);
-  const { domRef: chartRef } = useEcharts(chartOption);
+  const { domRef: chartRef } = useEcharts(chartOption as any);
 </script>
 
 <style scoped lang="less">

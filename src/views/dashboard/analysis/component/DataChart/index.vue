@@ -122,7 +122,7 @@
       },
     ],
   });
-  const { domRef: lineRef } = useEcharts(lineOptions);
+  const { domRef: lineRef } = useEcharts(lineOptions as any);
 
   const pieOptions = ref<ECOption>({
     tooltip: {
@@ -169,7 +169,7 @@
       },
     ],
   });
-  const { domRef: pieRef } = useEcharts(pieOptions);
+  const { domRef: pieRef } = useEcharts(pieOptions as any);
 </script>
 
 <style lang="less" scoped></style>

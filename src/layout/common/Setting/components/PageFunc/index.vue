@@ -84,19 +84,19 @@
 
 <script lang="ts" setup>
   import { useThemeStore } from '@/store';
-  import { computed } from 'vue';
-  import { useI18n } from 'vue-i18n';
+  //import { computed } from 'vue';
+  //import { useI18n } from 'vue-i18n';
   import SettingMenu from '../SettingMenu/index.vue';
-  import { menuHorizontalPositionList } from '@/settings';
+  //import { menuHorizontalPositionList } from '@/settings';
 
-  const { t } = useI18n();
+  //const { t } = useI18n();
   const theme = useThemeStore();
 
-  const horizontalPositionList = computed(() => {
+  /*const horizontalPositionList = computed(() => {
     return [...menuHorizontalPositionList].map(({ label, value }) => {
       return { label: t(label), value: value };
     });
-  });
+  });*/
 </script>
 
 <style lang="less" scoped></style>

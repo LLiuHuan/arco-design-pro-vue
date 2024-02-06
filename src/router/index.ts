@@ -1,30 +1,42 @@
-import type { App } from 'vue';
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
-import { transformAuthRoutesToVueRoutes, transformRouteNameToRoutePath } from '@/utils';
-import { constantRoutes } from './routes';
-import { scrollBehavior } from './helpers';
-import { createRouterGuard } from './guard';
-
-const { VITE_HASH_ROUTE = false, VITE_BASE_URL } = import.meta.env;
-
-export const router = createRouter({
-  history: VITE_HASH_ROUTE ? createWebHashHistory(VITE_BASE_URL) : createWebHistory(VITE_BASE_URL),
-  routes: transformAuthRoutesToVueRoutes(constantRoutes),
-  scrollBehavior,
-});
-
-/** 安装vue路由 */
-export async function setupRouter(app: App) {
-  app.use(router);
-  createRouterGuard(router);
-  await router.isReady();
-}
-
-/** 路由名称 */
-export const routeName = (key: AuthRoute.RouteKey) => key;
-/** 路由路径 */
-export const routePath = (key: Exclude<AuthRoute.RouteKey, 'not-found-page'>) =>
-  transformRouteNameToRoutePath(key);
-
-export * from './routes';
-export * from './modules';
+// import type { RouteRecordRaw } from 'vue-router';
+// import type { App } from 'vue';
+//
+// import { createRouter, createWebHashHistory } from 'vue-router';
+// import { basicRoutes } from './routes';
+//
+// // 白名单应该包含基本静态路由
+// const WHITE_NAME_LIST: string[] = [];
+// const getRouteNames = (array: any[]) =>
+//   array.forEach((item) => {
+//     WHITE_NAME_LIST.push(item.name);
+//     getRouteNames(item.children || []);
+//   });
+// getRouteNames(basicRoutes);
+//
+// // app router
+// // 创建一个可以被 Vue 应用程序使用的路由实例
+// export const router = createRouter({
+//   // 创建一个 hash 历史记录。
+//   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
+//   // 应该添加到路由的初始路由列表。
+//   routes: basicRoutes as unknown as RouteRecordRaw[],
+//   // 是否应该禁止尾部斜杠。默认为假
+//   strict: true,
+//   scrollBehavior: () => ({ left: 0, top: 0 }),
+// });
+//
+// // reset router
+// export function resetRouter() {
+//   router.getRoutes().forEach((route) => {
+//     const { name } = route;
+//     if (name && !WHITE_NAME_LIST.includes(name as string)) {
+//       router.hasRoute(name) && router.removeRoute(name);
+//     }
+//   });
+// }
+//
+// // config router
+// // 配置路由器
+// export function setupRouter(app: App<Element>) {
+//   app.use(router);
+// }

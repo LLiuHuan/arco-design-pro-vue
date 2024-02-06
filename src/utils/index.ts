@@ -1,4 +1,2 @@
-export * from './router';
+export * from './envs';
 export * from './common';
-export * from './auth';
-export { http } from './http/axios';

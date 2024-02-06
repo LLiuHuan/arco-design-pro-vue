@@ -1,159 +1,98 @@
-/* 定义判断类型方法 */
-
-// import { EnumDataType } from '@/enums';
-
-/**
- * @description: 判断值是否未某个类型
- */
-export function is(val: unknown, type: string) {
-  return toString.call(val) === `[object ${type}]`;
-}
-
-/**
- * @description:  是否为函数
- */
-export function isFunction<T = Function>(val: unknown): val is T {
-  return is(val, 'Function');
-}
-
-/**
- * @description: 是否已定义
- */
-export const isDef = <T = unknown>(val?: T): val is T => {
-  return typeof val !== 'undefined';
+export const dataTypeLabels: {
+  [K in TypeUtil.DataTypeStringKey]: TypeUtil.DataTypeString<K>;
+} = {
+  string: '[object String]',
+  number: '[object Number]',
+  boolean: '[object Boolean]',
+  null: '[object Null]',
+  undefined: '[object Undefined]',
+  symbol: '[object Symbol]',
+  bigInt: '[object BigInt]',
+  object: '[object Object]',
+  function: '[object Function]',
+  array: '[object Array]',
+  date: '[object Date]',
+  regExp: '[object RegExp]',
+  promise: '[object Promise]',
+  set: '[object Set]',
+  map: '[object Map]',
+  file: '[object File]',
 };
 
-export const isUnDef = <T = unknown>(val?: T): val is T => {
-  return !isDef(val);
-};
-/**
- * @description: 是否为对象
- */
-export const isObject = (val: any): val is Record<any, any> => {
-  return val !== null && is(val, 'Object');
-};
-
-/**
- * @description:  是否为时间
- */
-export function isDate(val: unknown): val is Date {
-  return is(val, 'Date');
+function getDataTypeString<K extends TypeUtil.DataTypeStringKey>(
+  value: unknown,
+) {
+  return Object.prototype.toString.call(value) as TypeUtil.DataTypeString<K>;
 }
 
-/**
- * @description:  是否为数值
- */
-export function isNumber(val: unknown): val is number {
-  return is(val, 'Number');
+export function isNumber<T extends number>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.number;
 }
 
-/**
- * @description:  是否为AsyncFunction
- */
-export function isAsyncFunction<T = any>(val: unknown): val is Promise<T> {
-  return is(val, 'AsyncFunction');
+export function isString<T extends string>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.string;
 }
 
-/**
- * @description:  是否为promise
- */
-export function isPromise<T = any>(val: unknown): val is Promise<T> {
-  return is(val, 'Promise') && isObject(val) && isFunction(val.then) && isFunction(val.catch);
+export function isBoolean<T extends boolean>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.boolean;
 }
 
-/**
- * @description:  是否为字符串
- */
-export function isString(val: unknown): val is string {
-  return is(val, 'String');
+export function isNull<T extends null>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.null;
 }
 
-/**
- * @description:  是否为boolean类型
- */
-export function isBoolean(val: unknown): val is boolean {
-  return is(val, 'Boolean');
+export function isUndefined<T extends undefined>(
+  value: T | unknown,
+): value is T {
+  return getDataTypeString(value) === dataTypeLabels.undefined;
 }
 
-/**
- * @description:  是否为数组
- */
-export function isArray(val: any): val is Array<any> {
-  return val && Array.isArray(val);
+export function isSymbol<T extends symbol>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.symbol;
 }
 
-/**
- * @description: 是否客户端
- */
-export const isClient = () => {
-  return typeof window !== 'undefined';
-};
-
-/**
- * @description: 是否为浏览器
- */
-export const isWindow = (val: any): val is Window => {
-  return typeof window !== 'undefined' && is(val, 'Window');
-};
-
-export const isElement = (val: unknown): val is Element => {
-  return isObject(val) && !!val.tagName;
-};
-
-export const isServer = typeof window === 'undefined';
-
-// 是否为图片节点
-export function isImageDom(o: Element) {
-  return o && ['IMAGE', 'IMG'].includes(o.tagName);
+export function isBigInt<T extends bigint>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.bigInt;
 }
 
-export function isNull(val: unknown): val is null {
-  return val === null;
+export function isObject<T extends Record<string, any>>(
+  value: T | unknown,
+): value is T {
+  return getDataTypeString(value) === dataTypeLabels.object;
 }
 
-export function isNullAndUnDef(val: unknown): val is null | undefined {
-  return isUnDef(val) && isNull(val);
+export function isArray<T extends any[]>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.array;
 }
 
-export function isNullOrUnDef(val: unknown): val is null | undefined {
-  return isUnDef(val) || isNull(val);
+export function isFunction<T extends (...args: any[]) => any | void>(
+  value: T | unknown,
+): value is T {
+  return getDataTypeString(value) === dataTypeLabels.function;
 }
 
-export function isUndefined(val: unknown): val is undefined {
-  return is(val, 'Undefined');
+export function isDate<T extends Date>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.date;
 }
 
-export function isRegExp(val: unknown): val is RegExp {
-  return is(val, 'RegExp');
+export function isRegExp<T extends RegExp>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.regExp;
 }
 
-export function isSet(val: unknown): val is Set<any> {
-  return is(val, 'Set');
+export function isPromise<T extends Promise<any>>(
+  value: T | unknown,
+): value is T {
+  return getDataTypeString(value) === dataTypeLabels.promise;
 }
 
-export function isMap(val: unknown): val is Map<any, any> {
-  return is(val, 'Map');
+export function isSet<T extends Set<any>>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.set;
 }
 
-/**
- * 判断是否 url
- * */
-export function isUrl(url: string) {
-  return /^(http|https):\/\//g.test(url);
+export function isMap<T extends Map<any, any>>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.map;
 }
 
-/**
- * @param {string} path
- * @returns {Boolean}
- */
-export function isExternal(path: string) {
-  return /^(https?:|mailto:|tel:|http?:)/.test(path);
-}
-
-export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
-  let key: string;
-  for (key in target) {
-    src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
-  }
-  return src;
+export function isFile<T extends File>(value: T | unknown): value is T {
+  return getDataTypeString(value) === dataTypeLabels.file;
 }

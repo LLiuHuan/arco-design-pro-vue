@@ -1,9 +1,9 @@
-import { fileURLToPath } from 'url';
-import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
-import { createViteProxy, createViteBuild, createVitePlugins, viteDefine } from './build';
-import { getEnvConfig } from '.env-config';
+import { fileURLToPath } from 'url';
+import { getEnvConfig } from './.env.config';
+import { createVitePlugins, createViteProxy } from './build';
 
+// https://vitejs.dev/config/
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd()) as ImportMetaEnv;
   const rootPath = fileURLToPath(new URL('./', import.meta.url));
@@ -13,6 +13,8 @@ export default defineConfig((configEnv) => {
   const { VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT } = viteEnv;
 
   const envConfig = getEnvConfig(viteEnv);
+
+  console.log(viteEnv.DEV, viteEnv.PROD, viteEnv.MODE, 'APP_ENV');
   return {
     base: VITE_BASE_URL,
     resolve: {
@@ -21,24 +23,12 @@ export default defineConfig((configEnv) => {
         '@': srcPath,
       },
     },
-    define: viteDefine,
     plugins: createVitePlugins(viteEnv, srcPath, isBuild),
-    css: {
-      preprocessorOptions: {
-        less: {
-          modifyVars: {
-            hack: `true; @import (reference) "${resolve('src/assets/styles/breakpoint.less')}";`,
-          },
-          javascriptEnabled: true,
-        },
-      },
-    },
     server: {
       host: '0.0.0.0',
       port: VITE_PORT || 3200,
       open: true,
       proxy: createViteProxy(VITE_HTTP_PROXY, envConfig),
     },
-    build: createViteBuild(viteEnv),
   };
 });

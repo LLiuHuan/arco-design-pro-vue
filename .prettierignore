@@ -6,4 +6,4 @@
 **/*.svg
 **/*.sh
 
-/public/*
+#/public/*

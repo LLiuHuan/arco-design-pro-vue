@@ -1,11 +1,11 @@
-type minify = boolean | 'terser' | 'esbuild';
+type minifyType = boolean | 'terser' | 'esbuild';
 
 /**
  * Vite Build Config
  * @param env
  */
 export function createViteBuild(env: ImportMetaEnv) {
-  const minify = env.VITE_DROP_CONSOLE && ('terser' as minify);
+  const minify = env.VITE_DROP_CONSOLE && ('terser' as minifyType);
   return {
     // 设置最终构建的浏览器兼容目标。默认值是一个 Vite 特有的值——'modules'，这是指 支持原生 ES 模块的浏览器。
     target: 'es2015',
@@ -26,7 +26,7 @@ export function createViteBuild(env: ImportMetaEnv) {
       },
     },
     // 启用/禁用 brotli 压缩大小报告。压缩大型输出文件可能会很慢，因此禁用该功能可能会提高大型项目的构建性能。
-    brotliSize: false,
+    brotliSize: true,
     // chunk 大小警告的限制（以 kbs 为单位）。
     chunkSizeWarningLimit: 2000,
     rollupOptions: {

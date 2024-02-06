@@ -7,12 +7,15 @@ const httpsRE = /^https:\/\//;
  * @param isOpenProxy - 是否开启代理
  * @param envConfigs - env环境配置
  */
-export function createViteProxy(isOpenProxy: boolean, envConfigs: EnvConfig[] = []) {
+export function createViteProxy(
+  isOpenProxy: boolean,
+  envConfigs: EnvConfig[] = [],
+) {
   if (!isOpenProxy) return undefined;
 
   const ret: Record<string, string | ProxyOptions> = {};
 
-  for (const env of envConfigs) {
+  envConfigs.forEach((env) => {
     const isHttps = httpsRE.test(env.url);
     ret[env.proxy] = {
       target: env.url,
@@ -21,12 +24,7 @@ export function createViteProxy(isOpenProxy: boolean, envConfigs: EnvConfig[] = 
       rewrite: (path) => path.replace(new RegExp(`^${env.proxy}`), ''),
       ...(isHttps ? { secure: false } : {}),
     };
-  }
-  // 代理github
-  ret['/g'] = {
-    target: 'https://github.com',
-    changeOrigin: true,
-    rewrite: (path) => path.replace(/g/, ''),
-  };
+  });
+
   return ret;
 }

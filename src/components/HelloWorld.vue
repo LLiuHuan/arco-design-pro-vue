@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useThemeStore } from '@/store';
+  import { DarkMode } from '@/components/DarkMode';
 
   defineProps<{ msg: string }>();
 
@@ -12,29 +13,49 @@
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <a-layout style="height: 400px">
+    <a-layout-header>Header</a-layout-header>
+    <a-layout-content>
+      <div class="bg-red">
+        <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <a-button @click="count++">count is {{ count }}</a-button>
-    <a-button @click="theme.toggleDarkMode()">c123</a-button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
+        <DarkMode
+          style="color: var(--color-text-1)"
+          @update:dark="theme.toggleDarkMode()"
+        ></DarkMode>
+        <div class="card">
+          <a-button @click="count++">count is {{ count }}</a-button>
+          <a-button type="primary" @click="theme.toggleDarkMode()"
+            >c123</a-button
+          >
+          <p>
+            Edit
+            <code>components/HelloWorld.vue</code> to test HMR
+          </p>
+        </div>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+        <p>
+          Check out
+          <a
+            href="https://vuejs.org/guide/quick-start.html#local"
+            target="_blank"
+            >create-vue</a
+          >, the official Vue + Vite starter
+        </p>
+        <p>
+          Install
+          <a href="https://github.com/vuejs/language-tools" target="_blank"
+            >Volar</a
+          >
+          in your IDE for a better DX
+        </p>
+        <p class="read-the-docs"
+          >Click on the Vite and Vue logos to learn more</p
+        >
+      </div>
+    </a-layout-content>
+    <a-layout-footer>Footer</a-layout-footer>
+  </a-layout>
 </template>
 
 <style scoped>

@@ -15,7 +15,7 @@ export const useThemeStore = defineStore('theme-store', {
   },
   actions: {
     /** 设置暗黑模式 */
-    setDarkMode(darkMode: string) {
+    setDarkMode(darkMode: 'dark' | 'light') {
       this.darkMode = darkMode;
     },
     /** 切换暗黑模式 */

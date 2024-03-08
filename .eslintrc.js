@@ -70,5 +70,10 @@ module.exports = {
     'import/prefer-default-export': 0,
     'array-callback-return': 0,
     'no-bitwise': 0,
+    // note you must disable the base rule as it can report incorrect errors
+    "no-shadow": 0,
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-restricted-syntax": 0,
+    "no-underscore-dangle": 0,
   },
 };

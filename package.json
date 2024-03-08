@@ -52,7 +52,9 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.10.5",
+    "@types/qs": "^6.9.11",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-vue": "^4.6.0",
@@ -64,6 +66,8 @@
     "eslint-plugin-prettier": "^5.1.2",
     "eslint-plugin-vue": "^9.19.2",
     "less": "^4.2.0",
+    "lodash-es": "^4.17.21",
+    "qs": "^6.11.2",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
     "vue-tsc": "^1.8.27"

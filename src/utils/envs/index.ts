@@ -101,5 +101,5 @@
 //   return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
 // }
 
-export { getEnvConfig } from '../../../.env.config';
+// export { getEnvConfig } from '../../../.env.config';
 export * from './env.store';

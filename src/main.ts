@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import './style.css';
-import { registerGlobComp } from '@/components';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import App from './App.vue';
@@ -15,9 +14,6 @@ const setupApp = async () => {
 
   // 初始化vue状态管理：pinia
   setupStore(app);
-
-  // 注册全局组件
-  registerGlobComp(app);
 
   app.mount('#app');
 };

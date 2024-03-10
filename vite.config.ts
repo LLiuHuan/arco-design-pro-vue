@@ -1,11 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import { getEnvConfig } from './.env.config';
-import {
-  createVitePlugins,
-  createViteProxy,
-  getRootPath,
-  getSrcPath,
-} from './build';
+import { createVitePlugins, createViteProxy } from './build/vite';
+import { getRootPath, getSrcPath } from './build/utils';
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => {

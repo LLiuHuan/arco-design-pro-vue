@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useThemeStore } from '@/store';
-  import { DarkMode } from '@/components/DarkMode';
 
   defineProps<{ msg: string }>();
 
@@ -16,13 +15,13 @@
   <a-layout style="height: 400px">
     <a-layout-header>Header</a-layout-header>
     <a-layout-content>
-      <div class="bg-red">
+      <div>
         <h1>{{ msg }}</h1>
 
-        <DarkMode
-          style="color: var(--color-text-1)"
-          @update:dark="theme.toggleDarkMode()"
-        ></DarkMode>
+        <!--        <DarkMode-->
+        <!--          style="color: var(&#45;&#45;color-text-1)"-->
+        <!--          @update:dark="theme.toggleDarkMode()"-->
+        <!--        ></DarkMode>-->
         <div class="card">
           <a-button @click="count++">count is {{ count }}</a-button>
           <a-button type="primary" @click="theme.toggleDarkMode()"

@@ -1,3 +1,4 @@
+import 'uno.css';
 import '@/styles/index.less';
 
 /**

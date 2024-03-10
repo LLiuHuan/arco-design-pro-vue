@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useThemeStore } from '@/store';
+  import SvgIcon from './SvgIcon.vue';
 
   defineProps<{ msg: string }>();
 
@@ -22,6 +23,9 @@
         <!--          style="color: var(&#45;&#45;color-text-1)"-->
         <!--          @update:dark="theme.toggleDarkMode()"-->
         <!--        ></DarkMode>-->
+
+        <SvgIcon name="icon1"></SvgIcon>
+
         <div class="card">
           <a-button @click="count++">count is {{ count }}</a-button>
           <a-button type="primary" @click="theme.toggleDarkMode()"

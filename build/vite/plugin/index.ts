@@ -10,6 +10,7 @@ import { configPWAPlugin } from './pwa';
 import { configImageminPlugin } from './imagemin';
 import { configUnocssPlugin } from './unocss';
 import { configDevtoolsPlugin } from './devtools';
+import { configSvgIconsPlugin } from './svgIcons';
 
 /**
  * vite插件
@@ -23,6 +24,7 @@ export function createVitePlugins(
     configUnocssPlugin(), // unocss
     configDevtoolsPlugin(), // 在开发环境下使用vue-devtools
     configProgressPlugin(), // 打包进度条
+    configSvgIconsPlugin(false), // svg图标
   ];
 
   // 添加ArcoDesign插件
@@ -45,8 +47,9 @@ export function createVitePlugins(
     plugins.push(configCompressPlugin(viteEnv));
   }
 
-  // vite-plugin-imagemin
+  // 开启图片压缩
   if (viteEnv.VITE_IMAGEMIN === 'Y') {
+    // vite-plugin-imagemin
     plugins.push(configImageminPlugin());
   }
 

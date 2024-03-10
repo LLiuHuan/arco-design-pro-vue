@@ -24,7 +24,8 @@
     ], // TS需要引用的库，即声明文件
     "types": [
       "vite/client",
-      "node"
+      "node",
+      "vite-plugin-svg-icons/client"
 //      "unplugin-icons/types/vue",
     ],
     // 声明文件包

@@ -24,7 +24,7 @@ interface ImportMetaEnv {
   readonly VITE_GLOB_APP_SHORT_NAME: string;
   // endregion
 
-  /** iconify图标作为组件的前缀 */
+  /** iconify icon as prefix for component - [iconify图标作为组件的前缀] */
   readonly VITE_ICON_PREFIX: string;
   /**
    * 本地SVG图标作为组件的前缀, 请注意一定要包含 VITE_ICON_PREFIX
@@ -51,6 +51,8 @@ interface ImportMetaEnv {
   readonly VITE_PWA?: 'Y' | 'N';
   /** Whether it is deployed vercel - [是否是部署的vercel] */
   readonly VITE_VERCEL?: 'Y' | 'N';
+  /** Whether to enable image compression - [是否开启图片压缩] */
+  readonly VITE_IMAGEMIN?: 'Y' | 'N';
 }
 
 interface ImportMeta {

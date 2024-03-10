@@ -12,7 +12,7 @@
     props: {
       prefix: {
         type: String,
-        default: 'icon',
+        default: 'icon-local',
       },
       name: {
         type: String,

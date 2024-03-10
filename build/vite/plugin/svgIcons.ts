@@ -1,11 +1,17 @@
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import path from 'path';
+import { getSrcPath } from '../../utils';
 
-export const configSvgIconsPlugin = (isBuild: boolean) => {
+export const configSvgIconsPlugin = (viteEnv: ImportMetaEnv) => {
+  const { VITE_ICON_LOCAL_PREFIX, command } = viteEnv;
+
+  const srcPath = getSrcPath();
+  const localIconPath = `${srcPath}/assets/icons`;
+
   return createSvgIconsPlugin({
-    iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
-    svgoOptions: isBuild,
+    iconDirs: [localIconPath],
+    svgoOptions: command === 'build',
     // default
-    symbolId: 'icon-[dir]-[name]',
+    inject: 'body-last',
+    symbolId: `${VITE_ICON_LOCAL_PREFIX ?? 'icon'}-[dir]-[name]`,
   });
 };

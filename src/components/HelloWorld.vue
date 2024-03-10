@@ -24,7 +24,7 @@
         <!--          @update:dark="theme.toggleDarkMode()"-->
         <!--        ></DarkMode>-->
 
-        <SvgIcon name="icon1"></SvgIcon>
+        <SvgIcon name="no-permission"></SvgIcon>
 
         <div class="card">
           <a-button @click="count++">count is {{ count }}</a-button>

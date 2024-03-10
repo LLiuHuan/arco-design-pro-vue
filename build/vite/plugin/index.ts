@@ -24,7 +24,7 @@ export function createVitePlugins(
     configUnocssPlugin(), // unocss
     configDevtoolsPlugin(), // 在开发环境下使用vue-devtools
     configProgressPlugin(), // 打包进度条
-    configSvgIconsPlugin(false), // svg图标
+    configSvgIconsPlugin(viteEnv), // svg图标
   ];
 
   // 添加ArcoDesign插件

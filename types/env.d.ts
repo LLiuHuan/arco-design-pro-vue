@@ -18,8 +18,10 @@ interface ImportMetaEnv {
   // region GLOB打包后会生成到_app.config.js文件中，用于项目打包后需要可以支持动态配置的场景
   /** 项目基本地址 */
   readonly VITE_GLOB_BASE_URL: string;
-  /** 项目名称 */
+  /** Project name - [项目名称] */
   readonly VITE_GLOB_APP_TITLE: string;
+  /** Project abbreviation - [项目简称] */
+  readonly VITE_GLOB_APP_SHORT_NAME: string;
   // endregion
 
   /** iconify图标作为组件的前缀 */
@@ -33,6 +35,22 @@ interface ImportMetaEnv {
 
   /** Whether to enable analysis of packaged file size results - [是否开启打包文件大小结果分析] */
   readonly VITE_VISUALIZER?: 'Y' | 'N';
+  /** Whether to enable packaging and compression - [是否开启打包压缩] */
+  readonly VITE_COMPRESS?: 'Y' | 'N';
+  /** Compression algorithm type - [压缩算法类型] */
+  readonly VITE_COMPRESS_TYPE?:
+    | 'gzip'
+    | 'brotliCompress'
+    | 'deflate'
+    | 'deflateRaw';
+  /** Whether to delete the original file after compression - [压缩后是否删除原文件] */
+  readonly VITE_COMPRESS_DELETE_ORIGIN_FILE?: 'Y' | 'N';
+  /** Whether to enable preview - [是否开启预览] */
+  readonly VITE_OPEN_PREVIEW?: 'Y' | 'N';
+  /** Whether to apply pwa - [是否应用pwa] */
+  readonly VITE_PWA?: 'Y' | 'N';
+  /** Whether it is deployed vercel - [是否是部署的vercel] */
+  readonly VITE_VERCEL?: 'Y' | 'N';
 }
 
 interface ImportMeta {

@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useThemeStore } from '@/store';
+  import { defHttp } from '@/utils/http';
+  import { Message } from '@arco-design/web-vue';
   import SvgIcon from './SvgIcon.vue';
 
   defineProps<{ msg: string }>();
@@ -10,6 +12,27 @@
   const theme = useThemeStore();
 
   console.log(import.meta.env.DEV);
+
+  const a1 = () => {
+    defHttp.get({ url: '/api/user' });
+  };
+  const b1 = () => {
+    defHttp
+      .get({
+        url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1/getUserInfo',
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
+  const c1 = () => {
+    Message.success({
+      content: '操作成功！',
+      duration: 80000,
+      // resetOnHover: true,
+    });
+  };
 </script>
 
 <template>
@@ -27,6 +50,9 @@
         <SvgIcon name="no-permission"></SvgIcon>
 
         <div class="card">
+          <a-button @click="a1">a1</a-button>
+          <a-button @click="b1">b1</a-button>
+          <a-button @click="c1">c1</a-button>
           <a-button @click="count++">count is {{ count }}</a-button>
           <a-button type="primary" @click="theme.toggleDarkMode()"
             >c123</a-button

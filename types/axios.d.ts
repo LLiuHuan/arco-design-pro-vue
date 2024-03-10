@@ -41,6 +41,15 @@ export interface RequestOptions {
   withToken?: boolean;
   // Request retry mechanism - [请求重试机制]
   retryRequest?: RetryRequest;
+
+  // Whether to display the message - [是否显示提示信息]
+  isShowMessage?: boolean;
+  // Custom processing return content deconstruction format - [自定义处理返回内容解构格式]
+  respDeconstruct?: (resp: any) => ResponseData;
+  // Success status - [成功状态]
+  successCode?: number;
+  // Timeout state - [超时状态]
+  timeoutCode?: number;
 }
 
 /**

@@ -53,6 +53,8 @@ interface ImportMetaEnv {
   readonly VITE_VERCEL?: 'Y' | 'N';
   /** Whether to enable image compression - [是否开启图片压缩] */
   readonly VITE_IMAGEMIN?: 'Y' | 'N';
+  /** Whether to delete CONSOLE printing - [是否删除CONSOLE打印] */
+  readonly VITE_DROP_CONSOLE?: 'Y' | 'N';
 }
 
 interface ImportMeta {

@@ -1,3 +1,7 @@
+/**
+ * @description: 本地svg图标插件
+ */
+
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { getSrcPath } from '../../utils';
 

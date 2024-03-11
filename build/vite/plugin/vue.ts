@@ -1,5 +1,5 @@
 /**
- * Vue基础插件
+ * @description Vue基础插件
  */
 
 import vue from '@vitejs/plugin-vue';

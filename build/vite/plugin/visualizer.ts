@@ -1,5 +1,5 @@
 /**
- * @description Analysis of packaged file size results - [打包文件大小结果分析]
+ * @description 打包文件大小结果分析
  */
 
 import { visualizer } from 'rollup-plugin-visualizer';

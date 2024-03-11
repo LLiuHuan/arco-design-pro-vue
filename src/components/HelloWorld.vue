@@ -3,7 +3,8 @@
   import { useThemeStore } from '@/store';
   import { defHttp } from '@/utils/http';
   import { Message } from '@arco-design/web-vue';
-  import SvgIcon from './SvgIcon.vue';
+  import ExceptionBase from '@/components/Exception/src/index.vue';
+  import { SvgIcon } from '@/components/Icon';
 
   defineProps<{ msg: string }>();
 
@@ -11,10 +12,18 @@
 
   const theme = useThemeStore();
 
-  console.log(import.meta.env.DEV);
-
   const a1 = () => {
-    defHttp.get({ url: '/api/user' });
+    defHttp
+      .post({
+        url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1/login',
+        params: {
+          username: 'admin',
+          password: 'admin',
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
   const b1 = () => {
     defHttp
@@ -47,7 +56,9 @@
         <!--          @update:dark="theme.toggleDarkMode()"-->
         <!--        ></DarkMode>-->
 
-        <SvgIcon name="no-permission"></SvgIcon>
+        <ExceptionBase type="404"></ExceptionBase>
+        <!--        <SvgIcon name="no-permission"></SvgIcon>-->
+        <SvgIcon size="100" icon="material-symbols:1k"></SvgIcon>
 
         <div class="card">
           <a-button @click="a1">a1</a-button>

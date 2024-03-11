@@ -1,3 +1,5 @@
+import { OUTPUT_DIR } from '../constant';
+
 type minifyType = boolean | 'terser' | 'esbuild';
 
 /**
@@ -5,7 +7,7 @@ type minifyType = boolean | 'terser' | 'esbuild';
  * @param env
  */
 export function createViteBuild(env: ImportMetaEnv) {
-  const minify = env.VITE_DROP_CONSOLE && ('terser' as minifyType);
+  const minify = env.VITE_DROP_CONSOLE === 'Y' && ('terser' as minifyType);
   return {
     // 设置最终构建的浏览器兼容目标。默认值是一个 Vite 特有的值——'modules'，这是指 支持原生 ES 模块的浏览器。
     target: 'es2015',
@@ -14,7 +16,7 @@ export function createViteBuild(env: ImportMetaEnv) {
     // 应只在针对非主流浏览器时使用。
     cssTarget: 'chrome80',
     // 指定输出路径（相对于 项目根目录).
-    outDir: env.VITE_GLOB_BUILD_OUT_DIR || 'dist',
+    outDir: OUTPUT_DIR || 'dist',
     // 指定生成静态资源的存放路径（相对于 build.outDir）。
     assetsDir: 'assets',
     // 小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。
@@ -22,7 +24,7 @@ export function createViteBuild(env: ImportMetaEnv) {
     terserOptions: {
       compress: {
         keep_infinity: true,
-        drop_console: env.VITE_DROP_CONSOLE,
+        drop_console: env.VITE_DROP_CONSOLE === 'Y',
       },
     },
     // 启用/禁用 brotli 压缩大小报告。压缩大型输出文件可能会很慢，因此禁用该功能可能会提高大型项目的构建性能。

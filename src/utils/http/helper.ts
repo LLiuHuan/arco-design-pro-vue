@@ -33,7 +33,7 @@ export function joinTimestamp(join: boolean, restful = false): string | object {
  * @param params
  */
 export function formatRequestDate(params: Recordable) {
-  if (Object.prototype.toString.call(params) !== '[object Object]') {
+  if (!isObject(params)) {
     return;
   }
 

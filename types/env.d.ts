@@ -16,8 +16,23 @@ interface EnvConfig {
 
 interface ImportMetaEnv {
   // region GLOB打包后会生成到_app.config.js文件中，用于项目打包后需要可以支持动态配置的场景
+  // // Site title
+  // VITE_GLOB_APP_TITLE: string;
+  // // Service interface url
+  // VITE_GLOB_API_URL: string;
+  // // Service interface url prefix
+  // VITE_GLOB_API_URL_PREFIX?: string;
+  // // Upload url
+  // VITE_GLOB_UPLOAD_URL?: string;
+  // // Site title
+  // VITE_GLOB_APP_TITLE_SHORT?: string;
+
   /** 项目基本地址 */
   readonly VITE_GLOB_BASE_URL: string;
+  /** 项目接口地址 apiUrl */
+  readonly VITE_GLOB_API_URL: string;
+  /** 项目接口前缀 */
+  readonly VITE_GLOB_API_URL_PREFIX: string;
   /** Project name - [项目名称] */
   readonly VITE_GLOB_APP_TITLE: string;
   /** Project abbreviation - [项目简称] */
@@ -55,6 +70,9 @@ interface ImportMetaEnv {
   readonly VITE_IMAGEMIN?: 'Y' | 'N';
   /** Whether to delete CONSOLE printing - [是否删除CONSOLE打印] */
   readonly VITE_DROP_CONSOLE?: 'Y' | 'N';
+
+  /** Whether to enable HASH mode routing plugin - [是否开启HASH模式路由插件] */
+  readonly VITE_HASH_ROUTE?: 'Y' | 'N';
 }
 
 interface ImportMeta {

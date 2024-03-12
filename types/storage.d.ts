@@ -1,6 +1,14 @@
-import { LOCALE_KEY, TOKEN_KEY } from '@/enums';
-import type { LocaleSetting } from '~/types/config';
+import {
+  LOCALE_KEY,
+  MenuModeEnum,
+  MenuTypeEnum,
+  MULTIPLE_TABS_KEY,
+  PROJ_CFG_KEY,
+  TOKEN_KEY,
+} from '@/enums';
+import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
+import { RouteLocationNormalized } from 'vue-router';
 
 declare namespace StorageInterface {
   /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */
@@ -15,6 +23,10 @@ declare namespace StorageInterface {
     [LOCALE_KEY]: LocaleSetting;
     /** 用户token */
     [TOKEN_KEY]: string;
+    /** 项目配置 */
+    [PROJ_CFG_KEY]: ProjectConfig | null;
+    /** 多标签页列表 */
+    [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
   }
 }
 
@@ -38,4 +50,13 @@ export interface ErrorLogInfo {
   url: string;
   // Error time - [错误时间]
   time?: string;
+}
+
+// When the window shrinks, remember some states, and restore these states when the window is restored
+// [当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态]
+export interface BeforeMiniState {
+  menuCollapsed?: boolean;
+  menuSplit?: boolean;
+  menuMode?: MenuModeEnum;
+  menuType?: MenuTypeEnum;
 }

@@ -1,10 +1,10 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
 import { ThemeEnum } from '@/enums';
-import { useThemeStore } from '../modules';
+import { useAppStore } from '../modules';
 
 /** 订阅theme store */
 export default function subscribeThemeStore() {
-  const theme = useThemeStore();
+  const theme = useAppStore();
 
   const scope = effectScope();
   scope.run(() => {

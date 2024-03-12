@@ -1,3 +1,7 @@
+/**
+ * copy to https://github.com/developit/mitt
+ * Expand clear method
+ */
 export type EventType = string | symbol;
 
 // An event handler can take an optional event argument
@@ -44,7 +48,7 @@ export interface Emitter<Events extends Record<EventType, unknown>> {
  * @name mitt
  * @returns {Mitt}
  */
-export default function mitt<Events extends Record<EventType, unknown>>(
+export function mitt<Events extends Record<EventType, unknown>>(
   all?: EventHandlerMap<Events>,
 ): Emitter<Events> {
   type GenericEventHandler =
@@ -106,8 +110,8 @@ export default function mitt<Events extends Record<EventType, unknown>>(
       if (handlers) {
         (handlers as EventHandlerList<Events[keyof Events]>)
           .slice()
-          .map((handler) => {
-            handler(evt!);
+          .forEach((handler) => {
+            handler(evt as Events[Key]);
           });
       }
 
@@ -115,8 +119,8 @@ export default function mitt<Events extends Record<EventType, unknown>>(
       if (handlers) {
         (handlers as WildCardEventHandlerList<Events>)
           .slice()
-          .map((handler) => {
-            handler(type, evt!);
+          .forEach((handler) => {
+            handler(type, evt as Events[Key]);
           });
       }
     },

@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { ErrorLogInfo } from '~/types/storage';
 import { formatToDateTime } from '@/utils';
 import { ErrorTypeEnum } from '@/enums';
-import projectSetting from '@/settings/projectSetting';
+import { appSetting } from '@/settings';
 
 export interface ErrorLogState {
   errorLogInfoList: Nullable<ErrorLogInfo[]>;
@@ -47,7 +47,7 @@ export const useErrorLogStore = defineStore({
      * @returns
      */
     addAjaxErrorInfo(error: any) {
-      const { useErrorHandle } = projectSetting;
+      const { useErrorHandle } = appSetting;
       if (!useErrorHandle) {
         return;
       }

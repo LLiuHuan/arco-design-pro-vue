@@ -1,5 +1,5 @@
 import { Message, Modal } from '@arco-design/web-vue';
-import { useI18n } from '@/hooks';
+import { useI18n } from '@/hooks/web';
 import type { ErrorMessageMode } from '~/types/axios';
 
 const error = Message.error!;

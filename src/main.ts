@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import './style.css';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
+import { setupRouter } from '@/router';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -12,6 +13,8 @@ const setupApp = async () => {
   setupStore(app);
   // 初始化插件
   await setupPlugin(app);
+
+  await setupRouter(app);
 
   app.mount('#app');
 };

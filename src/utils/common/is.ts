@@ -154,6 +154,11 @@ export function deepMerge<
   });
 }
 
+export function isHttpUrl(path: string): boolean {
+  const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
+  return reg.test(path);
+}
+
 // export function isNumber<T extends number>(value: T | unknown): value is T {
 //   return getDataTypeString(value) === dataTypeLabels.number;
 // }

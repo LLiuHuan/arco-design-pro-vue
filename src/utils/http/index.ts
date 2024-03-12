@@ -13,12 +13,12 @@ import {
   setObjToUrlParams,
   getToken,
 } from '@/utils';
-import { useI18n } from '@/hooks/web/useI18n';
+import { useI18n } from '@/hooks/web';
 import axios from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
 import { useErrorLogStoreWithOut } from '@/store';
-import { useGlobSetting } from '@/hooks/setting/useGlobSetting';
+import { useGlobSetting } from '@/hooks/setting';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';

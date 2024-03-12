@@ -1,11 +1,48 @@
-import { ProjectConfig } from '~/types/config';
-import { CacheTypeEnum } from '@/enums';
+import type { ProjectConfig } from '~/types/config';
+import { CacheTypeEnum, RouterTransitionEnum } from '@/enums';
+import jsonSetting from './projectSetting.json';
 
-const setting: ProjectConfig = {
+const defaultSetting: ProjectConfig = {
   // Permission-related cache is stored in sessionStorage or localStorage - [权限相关缓存存储在sessionStorage还是localStorage中]
   permissionCacheType: CacheTypeEnum.LOCAL,
   // Use error-handler-plugin - [显示错误处理插件]
   useErrorHandle: false,
+  // Animation configuration - [动画配置]
+  transitionSetting: {
+    // Whether to open the page switching animation - [是否开启页面切换动画]
+    // The disabled state will also disable pageLoading - [禁用状态也会禁用pageLoading]
+    enable: true,
+
+    // Route basic switching animation - [路由基本切换动画]
+    basicTransition: RouterTransitionEnum.FADE_SIDE,
+
+    // Whether to open page switching loading - [是否开启页面切换loading]
+    // Only open when enable=true - [只有在enable=true时才会打开]
+    openPageLoading: true,
+
+    // Whether to open the top progress bar - [是否开启顶部进度条]
+    openNProgress: false,
+  },
+  // pageLayout whether to enable keep-alive - [页面布局是否开启keep-alive]
+  openKeepAlive: true,
+  // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
+  canEmbedIFramePage: true,
+  // Multi-tab settings - [多标签页设置]
+  multiTabsSetting: {
+    cache: false,
+    // Turn on - [是否开启]
+    show: true,
+    // Is it possible to drag and drop sorting tabs - [是否可以拖拽排序tab]
+    canDrag: true,
+    // Turn on quick actions - [是否开启快速操作]
+    showQuick: true,
+    // Whether to show the refresh button - [是否显示刷新按钮]
+    showRedo: true,
+    // Whether to show the collapse button - [是否显示折叠按钮]
+    showFold: true,
+    // Auto collapsed - [自动折叠]
+    autoCollapse: false,
+  },
 };
 
-export default setting;
+export const appSetting = { ...defaultSetting, ...jsonSetting };

@@ -13,3 +13,8 @@ declare global {}
 // nullable type - [可以为空的类型]
 declare type Nullable<T> = T | null;
 declare type Recordable<T = any> = Record<string, T>;
+declare type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
+
+declare type TargetContext = '_self' | '_blank';

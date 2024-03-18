@@ -1,18 +1,16 @@
 /**
- * Multi-language related operations
+ * Multi-language related operations - [多语言相关操作]
  */
 import { useLocaleStoreWithOut } from '@/store/modules/locale';
 import { unref, computed } from 'vue';
-// import arcoLocal from '@arco-design/web-vue/es/locale';
-
 import type { LocaleType } from '~/types/config';
+import { consoleError } from '@/utils';
 import { i18n } from './index';
 import { loadLocalePool, setHtmlPageLang } from './helper';
 
 interface LangModule {
   message: Recordable;
-  dateLocale: Recordable;
-  dateLocaleName: string;
+  arcoLocale: Recordable;
 }
 
 function setI18nLanguage(locale: LocaleType) {
@@ -34,10 +32,6 @@ export function useLocale() {
   // Get whether to display the language switch - [获取是否显示语言切换]
   const getShowLocalePicker = computed(() => localeStore.getShowPicker);
 
-  // const getArcoLocale = computed((): any => {
-  //   return arcoLocal?.getLocale() ?? {};
-  // });
-
   /**
    * @description Switching the language will change the locale of useI18n - [切换语言会改变useI18n的locale]
    * @description And submit to configuration modification - [并提交到配置修改]
@@ -54,9 +48,13 @@ export function useLocale() {
       setI18nLanguage(locale);
       return locale;
     }
+
     const langModule = ((await import(`./lang/${locale}.ts`)) as any)
       .default as LangModule;
-    if (!langModule) return;
+    if (!langModule) {
+      consoleError('langModule is not found');
+      return locale;
+    }
 
     const { message } = langModule;
 
@@ -71,6 +69,5 @@ export function useLocale() {
     getLocale,
     getShowLocalePicker,
     changeLocale,
-    // getArcoLocale,
   };
 }

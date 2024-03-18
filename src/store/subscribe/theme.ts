@@ -1,6 +1,6 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
 import { ThemeEnum } from '@/enums';
-import { useAppStore } from '../modules';
+import { useAppStore } from '../modules/app';
 
 /** 订阅theme store */
 export default function subscribeThemeStore() {

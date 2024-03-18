@@ -1,4 +1,4 @@
-import { useAppStore } from '@/store';
+import { useAppStore } from '@/store/modules/app';
 import { computed } from 'vue';
 
 export const useRootSetting = () => {

@@ -1,3 +1,85 @@
+declare namespace PageRoute {
+  /**
+   * the root route key
+   * @translate 根路由
+   */
+  type RootRouteKey = 'root';
+
+  /**
+   * the not found route, which catch the invalid route path
+   * @translate 未找到路由(捕获无效路径的路由)
+   */
+  type NotFoundRouteKey = 'not-found';
+
+  /**
+   * the route key
+   * @translate 页面路由
+   */
+  type RouteKey =
+    | '403'
+    | '404'
+    | '500'
+    | 'redirect'
+    | 'constant-page'
+    | 'login'
+    | 'not-found'
+    | 'about'
+    | 'dashboard'
+    | 'dashboard_analysis'
+    | 'dashboard_workbench';
+
+  /**
+   * last degree route key, which has the page file
+   * @translate 最后一级路由(该级路有对应的页面文件)
+   */
+  type LastDegreeRouteKey = Extract<
+    RouteKey,
+    | '403'
+    | '404'
+    | '500'
+    | 'redirect'
+    | 'constant-page'
+    | 'login'
+    | 'not-found'
+    | 'about'
+    | 'auth-demo_permission'
+    | 'auth-demo_super'
+    | 'component_button'
+    | 'component_card'
+    | 'component_table'
+    | 'dashboard_analysis'
+    | 'dashboard_workbench'
+    | 'document_naive'
+    | 'document_project-link'
+    | 'document_project'
+    | 'document_vite'
+    | 'document_vue'
+    | 'exception_403'
+    | 'exception_404'
+    | 'exception_500'
+    | 'function_tab-detail'
+    | 'function_tab-multi-detail'
+    | 'function_tab'
+    | 'function_websocket'
+    | 'management_auth'
+    | 'management_role'
+    | 'management_route'
+    | 'management_user'
+    | 'multi-menu_first_second-new_third'
+    | 'multi-menu_first_second'
+    | 'plugin_charts_antv'
+    | 'plugin_charts_echarts'
+    | 'plugin_copy'
+    | 'plugin_editor_markdown'
+    | 'plugin_editor_quill'
+    | 'plugin_icon'
+    | 'plugin_map'
+    | 'plugin_print'
+    | 'plugin_swiper'
+    | 'plugin_video'
+  >;
+}
+
 declare namespace AuthRoute {
   type RootRouteKey = PageRoute.RootRouteKey;
 
@@ -85,151 +167,4 @@ declare namespace AuthRoute {
         'name' | 'path' | 'redirect' | 'component' | 'children' | 'meta'
       >
     : never;
-}
-
-declare namespace AuthRouteUtils {
-  /** 路由key层级分割符 */
-  type RouteKeySplitMark = '_';
-
-  /** 路由path层级分割符 */
-  type RoutePathSplitMark = '/';
-
-  /** 空白字符串 */
-  type BlankString = '';
-
-  /** key转换成path */
-  type KeyToPath<K extends string> =
-    K extends `${infer _Left}${RouteKeySplitMark}${RouteKeySplitMark}${infer _Right}`
-      ? never
-      : K extends `${infer Left}${RouteKeySplitMark}${infer Right}`
-        ? Left extends BlankString
-          ? never
-          : Right extends BlankString
-            ? never
-            : KeyToPath<`${Left}${RoutePathSplitMark}${Right}`>
-        : `${RoutePathSplitMark}${K}`;
-
-  /** 根据路由key获取路由路径 */
-  type GetRoutePath<K extends AuthRoute.AllRouteKey = AuthRoute.AllRouteKey> =
-    K extends AuthRoute.AllRouteKey
-      ? K extends AuthRoute.RootRouteKey
-        ? AuthRoute.RootRoutePath
-        : K extends AuthRoute.NotFoundRouteKey
-          ? AuthRoute.NotFoundRoutePath
-          : KeyToPath<K>
-      : never;
-
-  /** 获取一级路由(有子路由的一级路由和没有子路由的路由) */
-  type GetFirstDegreeRouteKey<
-    K extends AuthRoute.RouteKey = AuthRoute.RouteKey,
-  > = K extends `${infer _Left}${RouteKeySplitMark}${infer _Right}` ? never : K;
-
-  /** 获取有子路由的一级路由 */
-  type GetFirstDegreeRouteKeyWithChildren<
-    K extends AuthRoute.RouteKey = AuthRoute.RouteKey,
-  > = K extends `${infer Left}${RouteKeySplitMark}${infer _Right}`
-    ? Left
-    : never;
-
-  /** 单级路由的key (单级路由需要添加一个父级路由用于应用布局组件) */
-  type SingleRouteKey = Exclude<
-    GetFirstDegreeRouteKey,
-    | GetFirstDegreeRouteKeyWithChildren
-    | AuthRoute.RootRouteKey
-    | AuthRoute.NotFoundRouteKey
-  >;
-
-  /** 单独路由父级路由key */
-  type SingleRouteParentKey = `${SingleRouteKey}-parent`;
-
-  /** 单独路由父级路由path */
-  type SingleRouteParentPath = KeyToPath<SingleRouteParentKey>;
-
-  /** 获取路由动态路径 */
-  type GetDynamicPath<P extends AuthRoute.RoutePath> =
-    | `${P}/:${string}`
-    | `${P}/:${string}(${string})`
-    | `${P}/:${string}(${string})?`;
-}
-
-declare namespace PageRoute {
-  /**
-   * the root route key
-   * @translate 根路由
-   */
-  type RootRouteKey = 'root';
-
-  /**
-   * the not found route, which catch the invalid route path
-   * @translate 未找到路由(捕获无效路径的路由)
-   */
-  type NotFoundRouteKey = 'not-found';
-
-  /**
-   * the route key
-   * @translate 页面路由
-   */
-  type RouteKey =
-    | '403'
-    | '404'
-    | '500'
-    | 'redirect'
-    | 'constant-page'
-    | 'login'
-    | 'not-found'
-    | 'about'
-    | 'dashboard'
-    | 'dashboard_analysis'
-    | 'dashboard_workbench';
-
-  /**
-   * last degree route key, which has the page file
-   * @translate 最后一级路由(该级路有对应的页面文件)
-   */
-  type LastDegreeRouteKey = Extract<
-    RouteKey,
-    | '403'
-    | '404'
-    | '500'
-    | 'redirect'
-    | 'constant-page'
-    | 'login'
-    | 'not-found'
-    | 'about'
-    | 'auth-demo_permission'
-    | 'auth-demo_super'
-    | 'component_button'
-    | 'component_card'
-    | 'component_table'
-    | 'dashboard_analysis'
-    | 'dashboard_workbench'
-    | 'document_naive'
-    | 'document_project-link'
-    | 'document_project'
-    | 'document_vite'
-    | 'document_vue'
-    | 'exception_403'
-    | 'exception_404'
-    | 'exception_500'
-    | 'function_tab-detail'
-    | 'function_tab-multi-detail'
-    | 'function_tab'
-    | 'function_websocket'
-    | 'management_auth'
-    | 'management_role'
-    | 'management_route'
-    | 'management_user'
-    | 'multi-menu_first_second-new_third'
-    | 'multi-menu_first_second'
-    | 'plugin_charts_antv'
-    | 'plugin_charts_echarts'
-    | 'plugin_copy'
-    | 'plugin_editor_markdown'
-    | 'plugin_editor_quill'
-    | 'plugin_icon'
-    | 'plugin_map'
-    | 'plugin_print'
-    | 'plugin_swiper'
-    | 'plugin_video'
-  >;
 }

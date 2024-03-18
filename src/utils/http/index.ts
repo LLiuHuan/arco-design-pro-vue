@@ -17,7 +17,7 @@ import { useI18n } from '@/hooks/web';
 import axios from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
-import { useErrorLogStoreWithOut } from '@/store';
+import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 import { useGlobSetting } from '@/hooks/setting';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';

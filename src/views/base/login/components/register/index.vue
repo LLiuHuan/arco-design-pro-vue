@@ -1,6 +1,8 @@
 <template>
-  {{ name }}
-  <a-button @click="toLoginModule('pwd-login')">注册</a-button>
+  <div>
+    {{ name }}
+    <a-button @click="toLoginModule('pwd-login')">注册</a-button>
+  </div>
 </template>
 
 <script lang="ts" setup>

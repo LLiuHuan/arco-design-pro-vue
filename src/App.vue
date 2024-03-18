@@ -1,23 +1,17 @@
 <script setup lang="ts">
-  // import { ExceptionBase } from '@/components/Exception';
+  import { subscribeStore } from '@/store/subscribe';
+  import { useLocaleStoreWithOut } from '@/store/modules/locale';
 
-  // import HelloWorld from '@/components/HelloWorld.vue';
-  import { subscribeStore } from '@/store';
-  import { LOCALE } from '@/settings';
-
-  const locale = LOCALE.ZH_CN;
+  const localeStore = useLocaleStoreWithOut();
 
   subscribeStore();
 </script>
 
 <template>
-  <a-config-provider :locale="locale">
-    <!--      <exception-base type="500"></exception-base>-->
-    <!--      <AppProvider>-->
-    <RouterView />
-    <!--      </AppProvider>-->
+  <a-config-provider :locale="localeStore.localInfo?.arcoLang">
+    <!--    <HelloWorld msg="111"></HelloWorld>-->
 
-    <!--    <HelloWorld msg="aaaa"></HelloWorld>-->
+    <RouterView />
   </a-config-provider>
 </template>
 

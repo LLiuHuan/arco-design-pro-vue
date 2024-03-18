@@ -29,7 +29,7 @@ export const useLocaleStore = defineStore('locale-store', {
      * @param state
      */
     getLocale(state): LocaleType {
-      return state.localInfo?.locale ?? 'zh_CN';
+      return state.localInfo?.locale ?? 'zh-CN';
     },
   },
   actions: {
@@ -53,7 +53,7 @@ export const useLocaleStore = defineStore('locale-store', {
   },
 });
 
-// Need to be used outside the setup - [需要在设置之外使用]
+// // Need to be used outside the setup - [需要在设置之外使用]
 export function useLocaleStoreWithOut() {
   return useLocaleStore(store);
 }

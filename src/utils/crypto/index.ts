@@ -1,6 +1,7 @@
 /* 加密方法 */
 
 import CryptoJS from 'crypto-js';
+import { consoleLog } from '@/utils';
 
 // 十六位十六进制数作为密钥
 const SECRET_KEY = CryptoJS.enc.Utf8.parse('1101201190000001');
@@ -17,7 +18,7 @@ export const encrypt = (data: any) => {
       // eslint-disable-next-line no-param-reassign
       data = JSON.stringify(data);
     } catch (error) {
-      console.log('encrypt error:', error);
+      consoleLog('encrypt error:', error);
     }
   }
   const dataHex = CryptoJS.enc.Utf8.parse(data);

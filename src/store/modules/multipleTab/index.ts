@@ -125,7 +125,7 @@ export const useMultipleTabStore = defineStore({
         }
       }
       // Jump to the current page and report an error
-      if (path !== toPath) this.Go(router, toPath as PageEnum, true);
+      if (path !== toPath) this.Go(toPath as PageEnum, true, router);
     },
 
     /**
@@ -141,9 +141,9 @@ export const useMultipleTabStore = defineStore({
     },
 
     async Go(
-      _router: Router,
       opt: RouteLocationRawEx = PageEnum.BASE_HOME,
       goTypeOrIsReplace: boolean | GoType = false,
+      _router?: Router,
     ) {
       if (!opt) {
         return;

@@ -1,48 +1,60 @@
 <template>
-  <div class="relative flex-center wh-full">
-    <a-card
-      :bordered="false"
-      size="large"
-      class="z-4 !w-auto rounded-20px shadow-sm"
-    >
-      <div class="w-300px sm:w-360px">
-        {{ $t('system.title') }}
-        <main class="pt-24px">
-          <h3 class="text-18px text-primary font-medium">{{
-            activeModule.label
-          }}</h3>
-          <div class="pt-24px">
-            <transition name="fade-slide" mode="out-in" appear>
-              <component :is="activeModule.component" />
-            </transition>
-          </div>
-        </main>
+  <div class="flex h-full">
+    <AppLogo
+      class="fixed top-24px left-22px text-[var(--color-fill-1)] text-20px"
+      :title="$t('system.title')"
+    ></AppLogo>
+    <LoginBg
+      class="w-35%"
+      style="background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%)"
+    />
+    <div class="flex flex-1 items-center justify-center pb-40px relative">
+      <div class="content-inner">
+        <div
+          class="text-[var(--color-text-1)] text-24px font-medium leading-8"
+          >{{ $t(activeModule.label) }}</div
+        >
+        <div>
+          <transition name="fade-slide" mode="out-in" appear>
+            <component :is="activeModule.component" />
+          </transition>
+        </div>
       </div>
-    </a-card>
+      <div class="footer absolute right-0 bottom-0 w-full">
+        <div
+          class="flex justify-center items-center text-[var(--color-text-2)] h-40px"
+        >
+          Arco Design Pro © 2024
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed } from 'vue';
   import type { Component } from 'vue';
+  import { AppLogo } from '@/components/AppLogo';
   import {
     BindWechat,
     CodeLogin,
     PwdLogin,
     Register,
     ResetPwd,
+    LoginBg,
+    ForgetPwd,
   } from './components';
   import { loginModuleLabels } from './enum';
 
   interface Props {
     /** 登录模块分类 */
-    module: UnionKey.LoginModule;
+    module: LoginModuleType;
   }
 
   const props = defineProps<Props>();
 
   interface LoginModule {
-    key: UnionKey.LoginModule;
+    key: LoginModuleType;
     label: string;
     component: Component;
   }
@@ -69,6 +81,11 @@
       label: loginModuleLabels['bind-wechat'],
       component: BindWechat,
     },
+    {
+      key: 'forget-pwd',
+      label: loginModuleLabels['forget-pwd'],
+      component: ForgetPwd,
+    },
   ];
 
   const activeModule = computed(() => {
@@ -81,4 +98,4 @@
   });
 </script>
 
-<style scoped></style>
+<style lang="less" scoped></style>

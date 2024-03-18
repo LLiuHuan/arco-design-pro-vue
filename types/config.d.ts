@@ -5,16 +5,16 @@ export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
 
 // TODO: 可能需要修改
 export interface GlobEnvConfig {
-  // Site title
-  VITE_GLOB_APP_TITLE: string;
-  // Service interface url
-  VITE_GLOB_API_URL: string;
-  // Service interface url prefix
-  VITE_GLOB_API_URL_PREFIX?: string;
-  // Upload url
-  VITE_GLOB_UPLOAD_URL?: string;
-  // Site title
-  VITE_GLOB_APP_TITLE_SHORT?: string;
+  // 项目标题，用于显示在浏览器标签和站点标题
+  title: string;
+  // 项目地址
+  apiUrl: string;
+  // 项目地址前缀
+  apiUrlPrefix?: string;
+  // 上传地址
+  uploadUrl?: string;
+  // 项目标题简称
+  shortTitle?: string;
 }
 
 export interface LocaleSetting {

@@ -21,5 +21,55 @@
     "errMsg503": "服务不可用，服务器暂时过载或维护!",
     "errMsg504": "网络超时!",
     "errMsg505": "http版本不支持该请求!"
+  },
+  "login": {
+    "common": {
+      "back": "返回",
+      "confirm": "确定",
+      "cancel": "取消",
+      "login": "登录",
+      "welcomeBack": "欢迎回来, {userName}",
+      "title": "登录 Arco Design Pro",
+      "userNamePlaceholder": "请输入用户名",
+      "phonePlaceholder": "请输入手机号",
+      "codePlaceholder": "请输入验证码",
+      "passwordPlaceholder": "请输入密码",
+      "confirmPasswordPlaceholder": "请再次输入密码",
+      "validateSuccess": "验证成功",
+      "loginSuccess": "登录成功"
+    },
+    "banner": {
+      "slogan1": "开箱即用的高质量模板",
+      "subSlogan1": "丰富的的页面模板，覆盖大多数典型业务场景",
+      "slogan2": "内置了常见问题的解决方案",
+      "subSlogan2": "国际化，路由配置，状态管理应有尽有",
+      "slogan3": "接入可视化增强工具AUX",
+      "subSlogan3": "实现灵活的区块式开发"
+    },
+    "pwdLogin": {
+      "title": "登录",
+      "rememberMe": "记住密码",
+      "forgetPwd": "忘记密码?",
+      "register": "注册",
+      "mobileLogin": "手机登录",
+      "qrLogin": "扫码登录",
+      "otherAccountLogin": "其他账号登录",
+      "otherLoginMode": "其他登录方式"
+    },
+    "codeLogin": {
+      "title": "验证码登录"
+    },
+    "register": {
+      "title": "注册"
+    },
+    "resetPwd": {
+      "title": "重置密码"
+    },
+    "changePwd": {
+      "title": "修改密码"
+    },
+    "forgetPwd": {
+      "title": "忘记密码"
+    }
   }
 }

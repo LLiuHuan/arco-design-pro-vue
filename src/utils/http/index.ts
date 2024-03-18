@@ -267,8 +267,8 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // authenticationScheme: 'Bearer',
         authenticationScheme: '',
         timeout: 10 * 1000,
-        // 基础接口地址
-        // baseURL: globSetting.apiUrl,
+        // TODO: 基础接口地址
+        baseURL: globSetting.apiUrl,
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式
@@ -289,12 +289,11 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           formatDate: true,
           // 消息提示类型
           errorMessageMode: 'message',
-          // 接口地址
-          apiUrl: globSetting.VITE_GLOB_API_URL || '',
-          // 接口拼接地址
+          // TODO: 接口地址
+          apiUrl: globSetting.apiUrl || '',
+          // TODO: 接口拼接地址
           urlPrefix:
-            opt?.requestOptions?.urlPrefix ||
-            globSetting.VITE_GLOB_API_URL_PREFIX,
+            opt?.requestOptions?.urlPrefix || globSetting?.apiUrlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

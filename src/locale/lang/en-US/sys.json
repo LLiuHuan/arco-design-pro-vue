@@ -21,5 +21,55 @@
     "errMsg503": "The service is unavailable, the server is temporarily overloaded or maintained!",
     "errMsg504": "Network timeout!",
     "errMsg505": "The http version does not support the request!"
+  },
+  "login": {
+    "common": {
+      "back": "Back",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "login": "Login",
+      "welcomeBack": "Welcome back, ",
+      "title": "Login Arco Design Pro",
+      "userNamePlaceholder": "Please enter your username",
+      "phonePlaceholder": "Please enter your phone number",
+      "codePlaceholder": "Please enter the verification code",
+      "passwordPlaceholder": "Please enter your password",
+      "confirmPasswordPlaceholder": "Please enter your password again",
+      "validateSuccess": "Verification passed",
+      "loginSuccess": "Login successful"
+    },
+    "banner": {
+      "slogan1": "Out-of-the-box high-quality template",
+      "subSlogan1": "Rich page templates, covering most typical business scenarios",
+      "slogan2": "Built-in solutions to common problems",
+      "subSlogan2": "Internationalization, routing configuration, state management everything",
+      "slogan3": "Access visualization enhancement tool AUX",
+      "subSlogan3": "Realize flexible block development"
+    },
+    "pwdLogin": {
+      "title": "Login",
+      "rememberMe": "Remember the password",
+      "forgetPwd": "Forget password?",
+      "register": "Register",
+      "mobileLogin": "Mobile Login",
+      "qrLogin": "QR Code Login",
+      "otherAccountLogin": "Other account login",
+      "otherLoginMode": "Other login methods"
+    },
+    "codeLogin": {
+      "title": "Code Login"
+    },
+    "register": {
+      "title": "Register"
+    },
+    "resetPwd": {
+      "title": "Reset Password"
+    },
+    "changePwd": {
+      "title": "Change Password"
+    },
+    "forgetPwd": {
+      "title": "Forget Password"
+    }
   }
 }

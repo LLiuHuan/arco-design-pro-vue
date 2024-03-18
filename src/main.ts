@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
-import './style.css';
+// import './style.css';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
+import { consoleLog } from '@/utils';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -21,8 +22,8 @@ const setupApp = async () => {
 
 setupApp()
   .then(() => {
-    console.log('app init success');
+    consoleLog('app init success');
   })
   .catch((err) => {
-    console.log('app init fail', err);
+    consoleLog('app init fail', err);
   });

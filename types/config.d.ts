@@ -1,6 +1,7 @@
-import { CacheTypeEnum } from '@/enums';
+import { CacheTypeEnum, RouterTransitionEnum } from '@/enums';
+import type { ArcoLang } from '@arco-design/web-vue/es/locale/interface';
 
-export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
+export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
 
 // TODO: 可能需要修改
 export interface GlobEnvConfig {
@@ -24,6 +25,8 @@ export interface LocaleSetting {
   fallback: LocaleType;
   // available Locales - [可用语言]
   availableLocales: LocaleType[];
+  // arco language - [arco语言]
+  arcoLang?: ArcoLang;
 }
 
 export interface TransitionSetting {

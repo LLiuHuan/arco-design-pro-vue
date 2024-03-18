@@ -1,0 +1,22 @@
+{
+  "login": {
+    "common": {
+      "back": "Back"
+    },
+    "pwdLogin": {
+      "title": "Password Login"
+    },
+    "codeLogin": {
+      "title": "Code Login"
+    },
+    "register": {
+      "title": "Register"
+    },
+    "resetPwd": {
+      "title": "Reset Password"
+    },
+    "changePwd": {
+      "title": "Change Password"
+    }
+  }
+}

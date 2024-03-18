@@ -16,7 +16,7 @@
       mode="out-in"
       appear
     >
-      <div :key="route.fullPath">
+      <div :key="route.fullPath" class="wh-full">
         <keep-alive v-if="openCache" :include="getCaches">
           <component
             :is="Component"
@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMultipleTabStore } from '@/store';
+  import { useMultipleTabStore } from '@/store/modules/multipleTab';
   import {
     useRootSetting,
     useMultipleTabSetting,

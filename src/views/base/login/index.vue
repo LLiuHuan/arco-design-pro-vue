@@ -12,7 +12,9 @@
             activeModule.label
           }}</h3>
           <div class="pt-24px">
-            <component :is="activeModule.component" />
+            <transition name="fade-slide" mode="out-in" appear>
+              <component :is="activeModule.component" />
+            </transition>
           </div>
         </main>
       </div>

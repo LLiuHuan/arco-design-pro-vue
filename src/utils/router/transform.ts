@@ -1,15 +1,46 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { getLayoutComponent, getViewComponent } from '@/utils';
+import { consoleError, getLayoutComponent, getViewComponent } from '@/utils';
 
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
 
 /**
- * Convert permission routing to vue routing - [将权限路由转换成vue路由]
- * @param routes - Permissions routing - [权限路由]
- * @description All multi-level routes will be converted into secondary routes - [所有多级路由都会被转换成二级路由]
+ * 是否有外链
+ * @param item - 权限路由
  */
-export function transformAuthRouteToVueRoutes(routes: AuthRoute.Route[]) {
-  return routes.map((route) => transformAuthRouteToVueRoute(route)).flat(1);
+function hasHref(item: AuthRoute.Route) {
+  return Boolean(item.meta.href);
+}
+
+/**
+ * 是否有动态路由path
+ * @param item - 权限路由
+ */
+function hasDynamicPath(item: AuthRoute.Route) {
+  return Boolean(item.meta.dynamicPath);
+}
+
+/**
+ * 是否有路由组件
+ * @param item - 权限路由
+ */
+function hasComponent(item: AuthRoute.Route) {
+  return Boolean(item.component);
+}
+
+/**
+ * 是否有子路由
+ * @param item - 权限路由
+ */
+function hasChildren(item: AuthRoute.Route) {
+  return Boolean(item.children && item.children.length);
+}
+
+/**
+ * 是否是单层级路由
+ * @param item - 权限路由
+ */
+function isSingleRoute(item: AuthRoute.Route) {
+  return Boolean(item.meta.singleLayout);
 }
 
 /**
@@ -19,7 +50,7 @@ export function transformAuthRouteToVueRoutes(routes: AuthRoute.Route[]) {
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];
 
-  const itemRoute = { ...item } as RouteRecordRaw;
+  const itemRoute = { ...item } as unknown as RouteRecordRaw;
 
   // 动态path
   if (hasDynamicPath(item)) {
@@ -48,7 +79,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
           });
           delete itemRoute.component;
         } else {
-          window.console.error('多级路由缺少子路由: ', item);
+          consoleError('多级路由缺少子路由: ', item);
         }
       },
       self() {
@@ -59,17 +90,17 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
       if (item.component) {
         action[item.component]();
       } else {
-        window.console.error('路由组件解析失败: ', item);
+        consoleError('路由组件解析失败: ', item);
       }
     } catch {
-      window.console.error('路由组件解析失败: ', item);
+      consoleError('路由组件解析失败: ', item);
     }
   }
 
   // 注意：单独路由没有children
   if (isSingleRoute(item)) {
     if (hasChildren(item)) {
-      window.console.error('单独路由不应该有子路由: ', item);
+      consoleError('单独路由不应该有子路由: ', item);
     }
 
     // 捕获无效路由的需特殊处理
@@ -112,7 +143,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
       '/') as AuthRoute.RoutePath;
 
     if (redirectPath === '/') {
-      window.console.error('该多级路由没有有效的子路径', item);
+      consoleError('该多级路由没有有效的子路径', item);
     }
 
     if (item.component === 'multi') {
@@ -131,41 +162,10 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
 }
 
 /**
- * 是否有外链
- * @param item - 权限路由
+ * Convert permission routing to vue routing - [将权限路由转换成vue路由]
+ * @param routes - Permissions routing - [权限路由]
+ * @description All multi-level routes will be converted into secondary routes - [所有多级路由都会被转换成二级路由]
  */
-function hasHref(item: AuthRoute.Route) {
-  return Boolean(item.meta.href);
-}
-
-/**
- * 是否有动态路由path
- * @param item - 权限路由
- */
-function hasDynamicPath(item: AuthRoute.Route) {
-  return Boolean(item.meta.dynamicPath);
-}
-
-/**
- * 是否有路由组件
- * @param item - 权限路由
- */
-function hasComponent(item: AuthRoute.Route) {
-  return Boolean(item.component);
-}
-
-/**
- * 是否有子路由
- * @param item - 权限路由
- */
-function hasChildren(item: AuthRoute.Route) {
-  return Boolean(item.children && item.children.length);
-}
-
-/**
- * 是否是单层级路由
- * @param item - 权限路由
- */
-function isSingleRoute(item: AuthRoute.Route) {
-  return Boolean(item.meta.singleLayout);
+export function transformAuthRouteToVueRoutes(routes: AuthRoute.Route[]) {
+  return routes.map((route) => transformAuthRouteToVueRoute(route)).flat(1);
 }

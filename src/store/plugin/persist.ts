@@ -68,6 +68,7 @@ export function createPersistedStateOptions(
  * @param pinia Pinia instance Pinia 实例
  */
 export function registerPiniaPersistPlugin(pinia: Pinia) {
+  console.log(PERSIST_KEY_PREFIX, 'PERSIST_KEY_PREFIX');
   pinia.use(
     createPersistedState(createPersistedStateOptions(PERSIST_KEY_PREFIX)),
   );

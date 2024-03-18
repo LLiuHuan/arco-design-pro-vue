@@ -1,5 +1,5 @@
 <template>
-  <LayoutContent></LayoutContent>
+  <LayoutContent :show-padding="false"></LayoutContent>
 </template>
 
 <script lang="ts" setup>

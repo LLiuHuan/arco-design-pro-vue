@@ -1,5 +1,7 @@
 <template>
-  {{ name }}
+  <div>
+    {{ name }}
+  </div>
 </template>
 
 <script lang="ts" setup>

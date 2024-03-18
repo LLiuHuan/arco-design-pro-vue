@@ -1,16 +1,17 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { useThemeStore } from '@/store';
   import { defHttp } from '@/utils/http';
   import { Message } from '@arco-design/web-vue';
   import ExceptionBase from '@/components/Exception/src/index.vue';
   import { SvgIcon } from '@/components/Icon';
+  import { consoleLog } from '@/utils';
+  import { useLocaleStore } from '@/store/modules/locale';
+  import { i18n } from '@/locale';
+  import { useLocale } from '@/locale/useLocale';
 
   defineProps<{ msg: string }>();
 
   const count = ref(0);
-
-  const theme = useThemeStore();
 
   const a1 = () => {
     defHttp
@@ -22,7 +23,7 @@
         },
       })
       .then((res) => {
-        console.log(res);
+        consoleLog(res);
       });
   };
   const b1 = () => {
@@ -31,7 +32,7 @@
         url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1/getUserInfo',
       })
       .then((res) => {
-        console.log(res);
+        consoleLog(res);
       });
   };
 
@@ -42,6 +43,18 @@
       // resetOnHover: true,
     });
   };
+
+  const d1 = () => {
+    const localeStore = useLocaleStore();
+
+    if (localeStore.getLocale === 'zh-CN') {
+      localeStore.setLocaleInfo({ locale: 'en-US' });
+    } else {
+      localeStore.setLocaleInfo({ locale: 'zh-CN' });
+    }
+  };
+
+  const { changeLocale, getLocale } = useLocale();
 </script>
 
 <template>
@@ -60,14 +73,23 @@
         <!--        <SvgIcon name="no-permission"></SvgIcon>-->
         <SvgIcon size="100" icon="material-symbols:1k"></SvgIcon>
 
+        <a-button
+          @click="changeLocale(getLocale === 'zh-CN' ? 'en-US' : 'zh-CN')"
+          >切换中英文</a-button
+        >
+        <a-pagination
+          :total="50"
+          :size="'mini'"
+          show-total
+          show-jumper
+          show-page-size
+        />
+
         <div class="card">
           <a-button @click="a1">a1</a-button>
           <a-button @click="b1">b1</a-button>
           <a-button @click="c1">c1</a-button>
           <a-button @click="count++">count is {{ count }}</a-button>
-          <a-button type="primary" @click="theme.toggleDarkMode()"
-            >c123</a-button
-          >
           <p>
             Edit
             <code>components/HelloWorld.vue</code> to test HMR

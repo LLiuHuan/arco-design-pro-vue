@@ -11,7 +11,7 @@ export interface ErrorLogState {
 }
 
 export const useErrorLogStore = defineStore({
-  id: 'error-log-store',
+  id: 'store-error-log',
   state: (): ErrorLogState => ({
     errorLogInfoList: null,
     errorLogListCount: 0,

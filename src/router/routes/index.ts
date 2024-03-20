@@ -15,7 +15,7 @@ export const LOGIN_ROUTE: AuthRoute.Route = {
   path: '/login',
   component: 'self',
   props: (route) => {
-    const moduleType = (route.params.module as LoginModule) || 'pwd-login';
+    const moduleType = (route.params.module as LoginModuleType) || 'pwd-login';
     return {
       module: moduleType,
     };

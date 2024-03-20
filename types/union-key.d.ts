@@ -5,6 +5,7 @@
  * - register: 注册
  * - reset-pwd: 重置密码
  * - bind-wechat: 微信绑定
+ * - forget-pwd: 忘记密码
  */
 type LoginModuleType =
   | 'pwd-login'

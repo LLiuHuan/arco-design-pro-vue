@@ -73,6 +73,15 @@ interface ImportMetaEnv {
 
   /** Whether to enable HASH mode routing plugin - [是否开启HASH模式路由插件] */
   readonly VITE_HASH_ROUTE?: 'Y' | 'N';
+
+  /**
+   * 权限路由模式:
+   * - static - 前端声明的静态
+   * - dynamic - 后端返回的动态
+   */
+  readonly VITE_AUTH_ROUTE_MODE: 'static' | 'dynamic';
+  /** 路由首页的路径 */
+  readonly VITE_ROUTE_HOME_PATH: AuthRoute.RoutePath;
 }
 
 interface ImportMeta {

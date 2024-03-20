@@ -12,7 +12,8 @@ interface LocaleState {
   localInfo: LocaleSetting;
 }
 
-export const useLocaleStore = defineStore('locale-store', {
+export const useLocaleStore = defineStore({
+  id: 'store-locale',
   state: (): LocaleState => ({
     localInfo: lsLocaleSetting,
   }),

@@ -19,7 +19,7 @@
     /**
      * Whether to show title - [是否显示标题]
      */
-    showTitle: boolean;
+    showTitle?: boolean;
   }
 
   withDefaults(defineProps<Props>(), {

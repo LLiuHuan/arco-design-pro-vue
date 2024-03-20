@@ -32,7 +32,7 @@ interface AppState {
 }
 
 export const useAppStore = defineStore({
-  id: 'app-store',
+  id: 'store-app',
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,

@@ -17,6 +17,7 @@ import {
 } from '@/utils';
 import { store } from '@/store';
 import { REDIRECT_NAME } from '@/router';
+import { clearTabRoutes } from '@/store/modules/multipleTab/helpers';
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -37,7 +38,7 @@ export enum GoType {
 const cacheTab = appSetting.multiTabsSetting.cache;
 
 export const useMultipleTabStore = defineStore({
-  id: 'multiple-tab-store',
+  id: 'store-multiple-tab',
   state: (): MultipleTabState => ({
     // Tabs that need to be cached - [需要缓存的标签]
     cacheTabList: new Set(),
@@ -61,6 +62,14 @@ export const useMultipleTabStore = defineStore({
     },
   },
   actions: {
+    /**
+     * @description Reset the state - [重置状态]
+     */
+    resetTabStore(): void {
+      clearTabRoutes();
+      // this.clearCacheTabs();
+      this.$reset();
+    },
     /**
      * @description Update the cache according to the currently opened tabs - [根据当前打开的标签更新缓存]
      */
@@ -99,13 +108,6 @@ export const useMultipleTabStore = defineStore({
      */
     clearCacheTabs(): void {
       this.cacheTabList = new Set();
-    },
-    /**
-     * @description Reset the state - [重置状态]
-     */
-    resetState(): void {
-      this.tabList = [];
-      this.clearCacheTabs();
     },
     /**
      * @description Add a new tab - [添加新标签]

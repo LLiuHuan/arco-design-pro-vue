@@ -1,11 +1,10 @@
 <template>
-  <!--密码登陆-->
-  <div class="login-form-wrapper">
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
+  <div :class="prefixCls">
+    <div :class="`${prefixCls}-error-msg`">{{ errorMessage }}</div>
     <a-form
       ref="loginForm"
       :model="userInfo"
-      class="login-form"
+      :class="`${prefixCls}-form`"
       layout="vertical"
       @submit="handleSubmit"
     >
@@ -51,7 +50,7 @@
         </a-input-password>
       </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div class="login-form-password-actions">
+        <div :class="`${prefixCls}-password-actions`">
           <a-checkbox
             checked="rememberPassword"
             :model-value="loginConfig.rememberPassword"
@@ -67,13 +66,13 @@
           {{ $t('sys.login.common.login') }}
         </a-button>
         <div class="flex w-full">
-          <a-button type="text" long class="login-form-register-btn">
+          <a-button type="text" long :class="`${prefixCls}-register-btn`">
             {{ $t('sys.login.pwdLogin.mobileLogin') }}
           </a-button>
           <a-button
             type="text"
             long
-            class="login-form-register-btn"
+            :class="`${prefixCls}-register-btn`"
             @click="toLoginModule('register')"
           >
             {{ $t('sys.login.pwdLogin.register') }}
@@ -117,8 +116,7 @@
   import { reactive, ref } from 'vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
   import { useStorage } from '@vueuse/core';
-  // import { useAuthStore } from '@/store';
-  import { useLoading } from '@/hooks';
+  import { useDesign, useLoading } from '@/hooks';
   import {
     IconGithub,
     IconWechat,
@@ -128,6 +126,7 @@
     IconFaceBookCircleFill,
   } from '@arco-design/web-vue/es/icon';
   import { useRouterPush } from '@/hooks/component';
+  import { useAuthStore } from '@/store/modules/auth';
 
   const { toLoginModule } = useRouterPush();
 
@@ -138,10 +137,9 @@
 
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
-  // const { login } = useAuthStore();
-  const login = (username: string, password: string) => {
-    console.log(username, password);
-  };
+  const { prefixCls } = useDesign('pwd-login');
+
+  const { login } = useAuthStore();
 
   const loginConfig = useStorage('login-config', {
     rememberPassword: true,
@@ -186,23 +184,23 @@
 </script>
 
 <style lang="less" scoped>
-  .login-form {
-    &-wrapper {
-      width: 320px;
-    }
+  @prefix-cls: ~'@{name}-pwd-login';
 
-    &-title {
-      color: var(--color-text-1);
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 32px;
-    }
+  .@{prefix-cls} {
+    width: 320px;
 
-    &-sub-title {
-      color: var(--color-text-3);
-      font-size: 16px;
-      line-height: 24px;
-    }
+    //&-title {
+    //  color: var(--color-text-1);
+    //  font-weight: 500;
+    //  font-size: 24px;
+    //  line-height: 32px;
+    //}
+    //
+    //&-sub-title {
+    //  color: var(--color-text-3);
+    //  font-size: 16px;
+    //  line-height: 24px;
+    //}
 
     &-error-msg {
       height: 32px;

@@ -266,9 +266,11 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // authentication schemes，e.g: Bearer
         // authenticationScheme: 'Bearer',
         authenticationScheme: '',
-        timeout: 10 * 1000,
+        timeout: 60 * 1000,
         // TODO: 基础接口地址
-        baseURL: globSetting.apiUrl,
+        // baseURL: globSetting.apiUrl,
+        // 接口前缀
+        prefixUrl: opt?.requestOptions?.urlPrefix || globSetting?.apiUrlPrefix,
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式

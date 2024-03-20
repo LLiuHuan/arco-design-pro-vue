@@ -1,6 +1,10 @@
 //
 export const TOKEN_KEY = 'TOKEN__';
 
+export const REFRESH_TOKEN_KEY = 'REFRESH__TOKEN__';
+
+export const USER_INFO_KEY = 'USER__INFO__';
+
 export const LOCALE_KEY = 'LOCALE__';
 
 // project config key

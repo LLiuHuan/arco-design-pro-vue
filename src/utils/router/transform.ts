@@ -169,3 +169,38 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
 export function transformAuthRouteToVueRoutes(routes: AuthRoute.Route[]) {
   return routes.map((route) => transformAuthRouteToVueRoute(route)).flat(1);
 }
+
+/**
+ * @description Convert the route path to the route name - [将路由路径转换成路由名称]
+ * @param path
+ */
+export function transformRoutePathToRouteName<K extends AuthRoute.RoutePath>(
+  path: K,
+) {
+  if (path === '/') return 'root';
+
+  const pathSplitMark = '/';
+  const routeSplitMark = '_';
+
+  return path
+    .split(pathSplitMark)
+    .slice(1)
+    .join(routeSplitMark) as AuthRoute.AllRouteKey;
+}
+
+/**
+ * @description Convert the route name to the route path - [将路由名字转换成路由路径]
+ * @param name
+ */
+export function transformRouteNameToRoutePath(
+  name: Exclude<AuthRoute.AllRouteKey, 'not-found'>,
+): AuthRoute.RoutePath {
+  const rootPath: AuthRoute.RoutePath = '/';
+  if (name === 'root') return rootPath;
+
+  const splitMark = '_';
+  const pathSplitMark = '/';
+  const path = name.split(splitMark).join(pathSplitMark);
+
+  return (pathSplitMark + path) as AuthRoute.RoutePath;
+}

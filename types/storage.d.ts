@@ -4,7 +4,9 @@ import {
   MenuTypeEnum,
   MULTIPLE_TABS_KEY,
   PROJ_CFG_KEY,
+  REFRESH_TOKEN_KEY,
   TOKEN_KEY,
+  USER_INFO_KEY,
 } from '@/enums';
 import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
@@ -23,10 +25,13 @@ declare namespace StorageInterface {
     [LOCALE_KEY]: LocaleSetting;
     /** 用户token */
     [TOKEN_KEY]: string;
+    [REFRESH_TOKEN_KEY]: string;
     /** 项目配置 */
     [PROJ_CFG_KEY]: ProjectConfig | null;
     /** 多标签页列表 */
     [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
+    /** 用户信息 */
+    [USER_INFO_KEY]: Auth.UserInfo;
   }
 }
 

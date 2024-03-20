@@ -6,19 +6,19 @@ const serviceEnvConfig: ServiceEnv = {
   dev: [
     {
       url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1',
-      proxy: '/api',
+      proxy: '/mock',
     },
   ],
   test: [
     {
       url: 'http://localhost:8080',
-      proxy: '/api',
+      proxy: '/mock',
     },
   ],
   prod: [
     {
       url: 'http://localhost:8080',
-      proxy: '/api',
+      proxy: '/mock',
     },
   ],
 };

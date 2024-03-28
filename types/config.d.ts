@@ -1,4 +1,10 @@
-import { CacheTypeEnum, RouterTransitionEnum } from '@/enums';
+import {
+  CacheTypeEnum,
+  MenuTypeEnum,
+  RouterTransitionEnum,
+  ThemeEnum,
+  TriggerEnum,
+} from '@/enums';
 import type { ArcoLang } from '@arco-design/web-vue/es/locale/interface';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
@@ -57,6 +63,25 @@ export interface MultiTabsSetting {
   autoCollapse: boolean;
 }
 
+export interface MenuSetting {
+  type: MenuTypeEnum;
+  // Background color - [背景颜色]
+  bgColor: string;
+  // Whether to collapse the menu - [是否折叠菜单]
+  collapsed?: boolean;
+  // Menu width - [菜单宽度]
+  menuWidth: number;
+  // Whether the sidebar is hidden - [侧边栏是否隐藏]
+  siderHidden?: boolean;
+  // Menu theme - [菜单主题]
+  theme: ThemeEnum;
+
+  // Menu collapse trigger position - [菜单折叠触发器位置]
+  trigger: TriggerEnum;
+  // Drag the sidebar - [拖动侧边栏]
+  canDrag: boolean;
+}
+
 export interface ProjectConfig {
   // Storage location of permission related information - [权限相关信息的存储位置]
   permissionCacheType: CacheTypeEnum;
@@ -70,4 +95,7 @@ export interface ProjectConfig {
   canEmbedIFramePage: boolean;
   // Multi-tab settings - [多标签页设置]
   multiTabsSetting: MultiTabsSetting;
+
+  // menuSetting - [菜单设置]
+  menuSetting: MenuSetting;
 }

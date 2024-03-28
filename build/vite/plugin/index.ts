@@ -9,7 +9,6 @@ import { configCompressPlugin } from './compress';
 import { configPWAPlugin } from './pwa';
 import { configImageminPlugin } from './imagemin';
 import { configUnocssPlugin } from './unocss';
-import { configDevtoolsPlugin } from './devtools';
 import { configSvgIconsPlugin } from './svgIcons';
 
 /**
@@ -22,7 +21,6 @@ export function createVitePlugins(
   const plugins: (PluginOption | PluginOption[])[] = [
     ...configVuePlugin(), // vue基础插件
     configUnocssPlugin(), // unocss
-    configDevtoolsPlugin(), // 在开发环境下使用vue-devtools
     configProgressPlugin(), // 打包进度条
     configSvgIconsPlugin(viteEnv), // svg图标
   ];

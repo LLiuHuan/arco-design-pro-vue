@@ -35,7 +35,7 @@ export interface AppProviderContextProps {
 /**
  * @description injection key - [注入键]
  */
-const key: InjectionKey<AppProviderContextProps> = Symbol();
+const globKey: InjectionKey<AppProviderContextProps> = Symbol();
 
 /**
  * @description create context - [创建上下文]
@@ -52,7 +52,7 @@ export function createContext<T>(
 
   const state = reactive(context);
   const provideData = readonly ? defineReadonly(state) : state;
-  createProvider && provide(key, native ? context : provideData);
+  if (createProvider) provide(key, native ? context : provideData);
 
   return {
     state,
@@ -72,7 +72,7 @@ export function useContext<T>(key: InjectionKey<T>, native?: boolean): T;
  * @param defaultValue
  */
 export function useContext<T>(
-  key: InjectionKey<T> = Symbol(),
+  key: InjectionKey<T>,
   defaultValue?: any,
 ): ShallowUnwrap<T> {
   return inject(key, defaultValue || {});
@@ -83,14 +83,14 @@ export function useContext<T>(
  * @param context
  */
 export function createAppProviderContext(context: AppProviderContextProps) {
-  return createContext<AppProviderContextProps>(context, key);
+  return createContext<AppProviderContextProps>(context, globKey);
 }
 
 /**
  * @description use app provider context - [使用应用程序提供者上下文]
  */
 export function useAppProviderContext() {
-  return useContext<AppProviderContextProps>(key);
+  return useContext<AppProviderContextProps>(globKey);
 }
 
 /**

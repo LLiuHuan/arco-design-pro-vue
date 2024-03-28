@@ -1,7 +1,13 @@
 import { store } from '@/store';
 import { defineStore } from 'pinia';
-import { APP_DARK_MODE_KEY, PROJ_CFG_KEY, ThemeEnum } from '@/enums';
+import {
+  APP_DARK_MODE_IS_AUTO_KEY,
+  APP_DARK_MODE_KEY,
+  PROJ_CFG_KEY,
+  ThemeEnum,
+} from '@/enums';
 import type {
+  MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
   TransitionSetting,
@@ -34,7 +40,6 @@ interface AppState {
 export const useAppStore = defineStore({
   id: 'store-app',
   state: (): AppState => ({
-    darkMode: undefined,
     pageLoading: false,
     projectConfig: initAppSetting(),
     beforeMiniInfo: {},
@@ -45,9 +50,11 @@ export const useAppStore = defineStore({
       return state.pageLoading;
     },
     // 获取主题
-    getDarkMode(state): 'light' | 'dark' | string {
+    getDarkMode(state): ThemeEnum {
       return (
-        state.darkMode || localStorage.getItem(APP_DARK_MODE_KEY) || darkMode
+        state.darkMode ||
+        (localStorage.getItem(APP_DARK_MODE_KEY) as ThemeEnum) ||
+        darkMode
       );
     },
     // 获取窗口状态
@@ -58,22 +65,15 @@ export const useAppStore = defineStore({
     getProjectConfig(state): ProjectConfig {
       return state.projectConfig || ({} as ProjectConfig);
     },
-
-    // getHeaderSetting(): HeaderSetting {
-    //   return this.getProjectConfig.headerSetting;
-    // },
-    // getMenuSetting(): MenuSetting {
-    //   return this.getProjectConfig.menuSetting;
-    // },
+    getMenuSetting(): MenuSetting {
+      return this.getProjectConfig.menuSetting;
+    },
     getTransitionSetting(): TransitionSetting {
       return this.getProjectConfig.transitionSetting;
     },
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;
     },
-    // getApiAddress() {
-    //   return JSON.parse(localStorage.getItem(API_ADDRESS) || '{}');
-    // },
   },
   actions: {
     // 设置页面加载状态
@@ -81,10 +81,26 @@ export const useAppStore = defineStore({
       this.pageLoading = loading;
     },
 
-    // 设置主题
+    /**
+     * @description Set the theme - [设置主题]
+     * @param mode
+     */
     setDarkMode(mode: ThemeEnum): void {
       this.darkMode = mode;
       localStorage.setItem(APP_DARK_MODE_KEY, mode);
+    },
+    /**
+     * @description Toggle the theme - [切换主题]
+     */
+    toggleDarkMode(): void {
+      const themeSchemes: ThemeEnum[] = [ThemeEnum.LIGHT, ThemeEnum.DARK];
+
+      if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
+        themeSchemes.push(ThemeEnum.AUTO);
+      const index = themeSchemes.findIndex((item) => item === this.darkMode);
+      const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
+      const nextMode = themeSchemes[nextIndex];
+      this.setDarkMode(nextMode);
     },
     // 设置窗口信息
     setBeforeMiniInfo(state: BeforeMiniState): void {
@@ -99,11 +115,14 @@ export const useAppStore = defineStore({
       ) as ProjectConfig;
       localStg.set(PROJ_CFG_KEY, this.projectConfig);
     },
-    // setMenuSetting(setting: Partial<MenuSetting>): void {
-    //   this.projectConfig!.menuSetting = deepMerge(this.projectConfig!.menuSetting, setting);
-    //   Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
-    // },
-    //
+    setMenuSetting(setting: Partial<MenuSetting>): void {
+      this.projectConfig!.menuSetting = deepMerge(
+        this.projectConfig!.menuSetting,
+        setting,
+      );
+      localStg.set(PROJ_CFG_KEY, this.projectConfig);
+    },
+
     // async resetAllState() {
     //   resetRouter();
     //   Persistent.clearAll();

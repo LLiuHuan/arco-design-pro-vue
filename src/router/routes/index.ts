@@ -27,6 +27,28 @@ export const LOGIN_ROUTE: AuthRoute.Route = {
   },
 };
 
+export const TEST_ROUTE: AuthRoute.Route = {
+  name: 'dashboard',
+  path: '/dashboard',
+  component: 'basic',
+  children: [
+    {
+      name: 'dashboard_analysis',
+      path: '/dashboard/analysis',
+      component: 'self',
+      meta: {
+        title: '分析页',
+        // requiresAuth: true,
+        // icon: 'icon-park-outline:analysis',
+        // i18nTitle: 'routes.dashboard.analysis',
+      },
+    },
+  ],
+  meta: {
+    title: '仪表盘',
+  },
+};
+
 export const CONSTANT_PAGE_ROUTE: AuthRoute.Route = {
   name: 'constant-page',
   path: '/constant-page',
@@ -96,4 +118,5 @@ export const CONSTANT_ROUTES: AuthRoute.Route[] = [
   // SERVER_ERROR_ROUTE,
   INVALID_ROUTE,
   // REDIRECT_ROUTE,
+  TEST_ROUTE,
 ];

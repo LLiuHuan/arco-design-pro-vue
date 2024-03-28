@@ -1,5 +1,11 @@
 import type { ProjectConfig } from '~/types/config';
-import { CacheTypeEnum, RouterTransitionEnum } from '@/enums';
+import {
+  CacheTypeEnum,
+  MenuTypeEnum,
+  RouterTransitionEnum,
+  ThemeEnum,
+  TriggerEnum,
+} from '@/enums';
 import jsonSetting from './projectSetting.json';
 
 const defaultSetting: ProjectConfig = {
@@ -42,6 +48,26 @@ const defaultSetting: ProjectConfig = {
     showFold: true,
     // Auto collapsed - [自动折叠]
     autoCollapse: false,
+  },
+  // Menu settings - [菜单设置]
+  menuSetting: {
+    // Whether the menu is collapsed - [菜单是否折叠]
+    collapsed: false,
+    // Background color - [背景颜色]
+    bgColor: '#304156',
+    // Menu width - [菜单宽度]
+    menuWidth: 210,
+    // Whether the sidebar is hidden - [侧边栏是否隐藏]
+    siderHidden: false,
+    // Menu collapse trigger position - [菜单折叠触发器位置]
+    trigger: TriggerEnum.HEADER,
+    // Drag the sidebar - [拖动侧边栏]
+    canDrag: true,
+    // Menu theme - [菜单主题]
+    theme: ThemeEnum.DARK,
+
+    // Menu type - [菜单类型]
+    type: MenuTypeEnum.SIDEBAR,
   },
 };
 

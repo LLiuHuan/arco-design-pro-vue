@@ -142,6 +142,13 @@ export const useMultipleTabStore = defineStore({
       this.lastDragEndIndex += 1;
     },
 
+    /**
+     * @description Go to the specified route - [跳转到指定路由]
+     * @param opt
+     * @param goTypeOrIsReplace
+     * @param _router
+     * @constructor
+     */
     async Go(
       opt: RouteLocationRawEx = PageEnum.BASE_HOME,
       goTypeOrIsReplace: boolean | GoType = false,
@@ -195,6 +202,11 @@ export const useMultipleTabStore = defineStore({
       }
     },
 
+    /**
+     * @description Redo - [重做]
+     * @param _router
+     * @constructor
+     */
     async Redo(_router: Router): Promise<boolean> {
       const { replace, currentRoute } = _router || useRouter();
       const { query, params = {}, name, fullPath } = unref(currentRoute.value);

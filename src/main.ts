@@ -4,6 +4,7 @@ import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
 import { consoleLog } from '@/utils';
+import { initProjectSetting } from '@/settings/initProjectSetting';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -14,6 +15,9 @@ const setupApp = async () => {
   setupStore(app);
   // 初始化插件
   await setupPlugin(app);
+
+  // Initialize internal system configuration - [初始化项目配置]
+  initProjectSetting();
 
   await setupRouter(app);
 

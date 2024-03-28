@@ -15,15 +15,39 @@ export default function subscribeThemeStore() {
           // 设置为暗黑主题
           document.body.setAttribute('arco-theme', ThemeEnum.DARK);
           document.documentElement.classList.add(ThemeEnum.DARK);
+        } else if (newValue === ThemeEnum.AUTO) {
+          // 自动模式
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // 设置为暗黑主题
+            document.body.setAttribute('arco-theme', ThemeEnum.DARK);
+            document.documentElement.classList.add(ThemeEnum.DARK);
+          } else {
+            // 恢复亮色主题
+            document.body.removeAttribute('arco-theme');
+            document.documentElement.classList.remove(ThemeEnum.DARK);
+          }
         } else {
           // 恢复亮色主题
           document.body.removeAttribute('arco-theme');
           document.documentElement.classList.remove(ThemeEnum.DARK);
         }
-        // useToggle(newValue === 'dark');
       },
       { immediate: true },
     );
+
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        if (theme.darkMode === ThemeEnum.AUTO) {
+          if (e.matches) {
+            document.body.setAttribute('arco-theme', ThemeEnum.DARK);
+            document.documentElement.classList.add(ThemeEnum.DARK);
+          } else {
+            document.body.removeAttribute('arco-theme');
+            document.documentElement.classList.remove(ThemeEnum.DARK);
+          }
+        }
+      });
   });
 
   onScopeDispose(() => {

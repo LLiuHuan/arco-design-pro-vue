@@ -1,5 +1,12 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed } from 'vue';
+import { ThemeEnum } from '@/enums';
+import type { ProjectConfig } from '~/types/config';
+
+type RootSetting = Omit<
+  ProjectConfig,
+  'locale' | 'headerSetting' | 'menuSetting' | 'multiTabsSetting'
+>;
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
@@ -14,8 +21,30 @@ export const useRootSetting = () => {
     () => appStore.getProjectConfig.canEmbedIFramePage,
   );
 
+  const getDarkMode = computed(() => appStore.getDarkMode);
+
+  const getIsDarkMode = computed(() => appStore.getDarkMode === ThemeEnum.DARK);
+
+  function setRootSetting(setting: Partial<RootSetting>) {
+    appStore.setProjectConfig(setting);
+  }
+
+  function setDarkMode(mode: ThemeEnum) {
+    appStore.setDarkMode(mode);
+  }
+
+  function toggleDarkMode() {
+    appStore.toggleDarkMode();
+  }
+
   return {
+    getDarkMode,
+    getIsDarkMode,
     getOpenKeepAlive,
     getCanEmbedIFramePage,
+
+    setRootSetting,
+    setDarkMode,
+    toggleDarkMode,
   };
 };

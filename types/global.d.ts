@@ -18,3 +18,14 @@ declare type DeepPartial<T> = {
 };
 
 declare type TargetContext = '_self' | '_blank';
+
+interface Document {
+  startViewTransition?: (
+    callback: () => Promise<void> | void,
+  ) => ViewTransition;
+}
+
+declare type ComponentRef<T extends HTMLElement = HTMLDivElement> =
+  ComponentElRef<T> | null;
+
+declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;

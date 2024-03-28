@@ -34,5 +34,5 @@ export const routeName = (key: AuthRoute.AllRouteKey) => key;
 //   transformRouteNameToRoutePath(key);
 //
 export * from './routes';
-// export * from './modules';
+export * from './modules';
 export * from './common';

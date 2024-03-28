@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { useGlobSetting } from '@/hooks';
   import { useRouterPush } from '@/hooks/component';
+  import { useGlobSetting } from '@/hooks/setting';
 
   const { toHome } = useRouterPush();
 

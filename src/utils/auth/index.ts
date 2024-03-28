@@ -1,5 +1,5 @@
-// import { TOKEN_KEY } from '@/enums';
-// import { localStg, sessionStg } from '@/utils';
+import { TOKEN_KEY } from '@/enums';
+import { localStg } from '@/utils';
 
 // TODO: 获取token有问题
 // const appStore = useAppStore();
@@ -7,5 +7,5 @@
 //   appStore.getProjectConfig.permissionCacheType === CacheTypeEnum.LOCAL;
 
 export function getToken() {
-  return '111';
+  return localStg.get(TOKEN_KEY) || '';
 }

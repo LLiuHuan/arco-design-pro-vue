@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia';
-import { getConstantRouteNames, transformRoutePathToRouteName } from '@/utils';
-import { router, CONSTANT_ROUTES } from '@/router';
+import {
+  filterAuthRoutesByUserPermission,
+  getConstantRouteNames,
+  transformAuthRouteToVueRoutes,
+  transformRoutePathToRouteName,
+} from '@/utils';
+import { router, CONSTANT_ROUTES, routes as staticRoutes } from '@/router';
+import { useAuthStore } from '@/store/modules/auth';
 
 interface RouteState {
   /**
@@ -55,12 +61,57 @@ export const useRouteStore = defineStore({
       });
     },
     /**
-     * 是否是固定路由
+     * @description Whether it is a constant route - [是否是固定路由]
      * @param name 路由名称
      */
     isConstantRoute(name: AuthRoute.AllRouteKey) {
       const constantRouteNames = getConstantRouteNames(CONSTANT_ROUTES);
       return constantRouteNames.includes(name);
+    },
+
+    /**
+     * 处理权限路由
+     * @param routes - 权限路由
+     */
+    handleAuthRoute(routes: AuthRoute.Route[]) {
+      // (this.menus as App.GlobalMenuOption[]) = transformAuthRouteToMenu(routes);
+      // this.searchMenus = transformAuthRouteToSearchMenus(routes);
+
+      const vueRoutes = transformAuthRouteToVueRoutes(routes);
+
+      vueRoutes.forEach((route) => {
+        router.addRoute(route);
+      });
+
+      // this.cacheRoutes = getCacheRoutes(vueRoutes);
+    },
+
+    /**
+     * @description Initialize the static route - [初始化静态路由]
+     */
+    async initStaticRoute() {
+      // const { initHomeTab } = useMultipleTabStore();
+      const auth = useAuthStore();
+
+      const routes = filterAuthRoutesByUserPermission(
+        staticRoutes,
+        auth.userInfo.userRole,
+      );
+      this.handleAuthRoute(routes);
+
+      // initHomeTab(this.routeHomeName, router);
+
+      this.isInitAuthRoute = true;
+    },
+    /**
+     * @description Initialize the authentication route - [初始化权限路由]
+     */
+    async initAuthRoute() {
+      if (this.authRouteMode === 'dynamic') {
+        // await this.initDynamicRoute();
+      } else {
+        await this.initStaticRoute();
+      }
     },
   },
 });

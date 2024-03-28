@@ -60,9 +60,9 @@
     "@types/qs": "^6.9.12",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@unocss/preset-uno": "^0.58.5",
-    "@unocss/transformer-directives": "^0.58.5",
-    "@unocss/vite": "^0.58.5",
+    "@unocss/preset-uno": "^0.58.7",
+    "@unocss/transformer-directives": "^0.58.7",
+    "@unocss/vite": "^0.58.7",
     "@vitejs/plugin-vue": "^4.6.2",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -85,7 +85,6 @@
     "vite-plugin-progress": "^0.0.7",
     "vite-plugin-pwa": "^0.19.2",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-devtools": "^7.0.16",
     "vue-tsc": "^1.8.27"
   },
   "engines": {

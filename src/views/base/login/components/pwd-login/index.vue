@@ -115,8 +115,7 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-  import { useStorage } from '@vueuse/core';
-  import { useDesign, useLoading } from '@/hooks';
+  // import { useStorage } from '@vueuse/core';
   import {
     IconGithub,
     IconWechat,
@@ -127,6 +126,7 @@
   } from '@arco-design/web-vue/es/icon';
   import { useRouterPush } from '@/hooks/component';
   import { useAuthStore } from '@/store/modules/auth';
+  import { useDesign, useLoading } from '@/hooks/common';
 
   const { toLoginModule } = useRouterPush();
 
@@ -141,7 +141,12 @@
 
   const { login } = useAuthStore();
 
-  const loginConfig = useStorage('login-config', {
+  // const loginConfig = useStorage('login-config', {
+  //   rememberPassword: true,
+  //   username: 'Arco', // 演示默认值
+  //   password: 'arco123', // demo default value
+  // });
+  const loginConfig = ref({
     rememberPassword: true,
     username: 'Arco', // 演示默认值
     password: 'arco123', // demo default value

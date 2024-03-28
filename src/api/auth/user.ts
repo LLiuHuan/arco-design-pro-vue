@@ -8,3 +8,10 @@ export const fetchLogin = (username: string, password: string) => {
     data: { username, password },
   });
 };
+
+export const fetchUserInfo = () => {
+  return defHttp.request({
+    url: '/getUserInfo',
+    method: 'GET',
+  });
+};

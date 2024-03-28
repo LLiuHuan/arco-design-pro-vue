@@ -12,6 +12,13 @@ function createLocalStorage<
   /** 默认缓存期限为7天 */
   const DEFAULT_CACHE_TIME = 60 * 60 * 24 * 7;
 
+  function remove(key: keyof T) {
+    window.localStorage.removeItem(key as string);
+  }
+  function clear() {
+    window.localStorage.clear();
+  }
+
   function set<K extends keyof T>(
     key: K,
     value: T[K],
@@ -45,13 +52,6 @@ function createLocalStorage<
       return null;
     }
     return null;
-  }
-
-  function remove(key: keyof T) {
-    window.localStorage.removeItem(key as string);
-  }
-  function clear() {
-    window.localStorage.clear();
   }
 
   return {

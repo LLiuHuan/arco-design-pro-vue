@@ -75,5 +75,6 @@ module.exports = {
     "@typescript-eslint/no-shadow": ["error"],
     "no-restricted-syntax": 0,
     "no-underscore-dangle": 0,
+    "symbol-description": 0,
   },
 };

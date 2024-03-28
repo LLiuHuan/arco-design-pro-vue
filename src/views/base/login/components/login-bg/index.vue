@@ -17,7 +17,7 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import bannerImage from '@/assets/images/login-banner.png';
-  import { useI18n } from '@/hooks';
+  import { useI18n } from '@/hooks/web';
 
   const { t } = useI18n();
   const carouselItem = computed(() => [

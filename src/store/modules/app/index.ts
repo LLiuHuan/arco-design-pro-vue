@@ -57,6 +57,16 @@ export const useAppStore = defineStore({
         darkMode
       );
     },
+    // 获取下一个主题
+    getNextDarkMode(): ThemeEnum {
+      const themeSchemes: ThemeEnum[] = [ThemeEnum.LIGHT, ThemeEnum.DARK];
+
+      if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
+        themeSchemes.push(ThemeEnum.AUTO);
+      const index = themeSchemes.findIndex((item) => item === this.getDarkMode);
+      const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
+      return themeSchemes[nextIndex];
+    },
     // 获取窗口状态
     getBeforeMiniInfo(state): BeforeMiniState {
       return state.beforeMiniInfo;
@@ -93,14 +103,7 @@ export const useAppStore = defineStore({
      * @description Toggle the theme - [切换主题]
      */
     toggleDarkMode(): void {
-      const themeSchemes: ThemeEnum[] = [ThemeEnum.LIGHT, ThemeEnum.DARK];
-
-      if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
-        themeSchemes.push(ThemeEnum.AUTO);
-      const index = themeSchemes.findIndex((item) => item === this.darkMode);
-      const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
-      const nextMode = themeSchemes[nextIndex];
-      this.setDarkMode(nextMode);
+      this.setDarkMode(this.getNextDarkMode);
     },
     // 设置窗口信息
     setBeforeMiniInfo(state: BeforeMiniState): void {

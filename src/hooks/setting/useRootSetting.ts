@@ -21,8 +21,13 @@ export const useRootSetting = () => {
     () => appStore.getProjectConfig.canEmbedIFramePage,
   );
 
+  // 获取主题模式
   const getDarkMode = computed(() => appStore.getDarkMode);
 
+  // 获取下一个主题模式
+  const getNextDarkMode = computed(() => appStore.getNextDarkMode);
+
+  // 获取是否开启暗黑模式
   const getIsDarkMode = computed(() => appStore.getDarkMode === ThemeEnum.DARK);
 
   function setRootSetting(setting: Partial<RootSetting>) {
@@ -40,6 +45,7 @@ export const useRootSetting = () => {
   return {
     getDarkMode,
     getIsDarkMode,
+    getNextDarkMode,
     getOpenKeepAlive,
     getCanEmbedIFramePage,
 

@@ -1,10 +1,29 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
-import { ThemeEnum } from '@/enums';
+import { ThemeColorEnum, ThemeEnum } from '@/enums';
+import { setBaseColor } from '@/utils/common';
 import { useAppStore } from '../modules/app';
 
 /** 订阅theme store */
 export default function subscribeThemeStore() {
   const theme = useAppStore();
+
+  const setDarkMode = () => {
+    // 设置为暗黑主题
+    document.body.setAttribute('arco-theme', ThemeEnum.DARK);
+    document.documentElement.classList.add(ThemeEnum.DARK);
+    Object.keys(theme.getThemeSetting).forEach((key: ThemeColorEnum) => {
+      setBaseColor(theme.getThemeSetting[key], key, true);
+    });
+  };
+
+  const setLightMode = () => {
+    // 恢复亮色主题
+    document.body.removeAttribute('arco-theme');
+    document.documentElement.classList.remove(ThemeEnum.DARK, ThemeEnum.LIGHT);
+    Object.keys(theme.getThemeSetting).forEach((key: ThemeColorEnum) => {
+      setBaseColor(theme.getThemeSetting[key], key);
+    });
+  };
 
   const scope = effectScope();
   scope.run(() => {
@@ -12,24 +31,16 @@ export default function subscribeThemeStore() {
       () => theme.darkMode,
       (newValue) => {
         if (newValue === ThemeEnum.DARK) {
-          // 设置为暗黑主题
-          document.body.setAttribute('arco-theme', ThemeEnum.DARK);
-          document.documentElement.classList.add(ThemeEnum.DARK);
+          setDarkMode();
         } else if (newValue === ThemeEnum.AUTO) {
           // 自动模式
           if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            // 设置为暗黑主题
-            document.body.setAttribute('arco-theme', ThemeEnum.DARK);
-            document.documentElement.classList.add(ThemeEnum.DARK);
+            setDarkMode();
           } else {
-            // 恢复亮色主题
-            document.body.removeAttribute('arco-theme');
-            document.documentElement.classList.remove(ThemeEnum.DARK);
+            setLightMode();
           }
         } else {
-          // 恢复亮色主题
-          document.body.removeAttribute('arco-theme');
-          document.documentElement.classList.remove(ThemeEnum.DARK);
+          setLightMode();
         }
       },
       { immediate: true },
@@ -40,11 +51,9 @@ export default function subscribeThemeStore() {
       .addEventListener('change', (e) => {
         if (theme.darkMode === ThemeEnum.AUTO) {
           if (e.matches) {
-            document.body.setAttribute('arco-theme', ThemeEnum.DARK);
-            document.documentElement.classList.add(ThemeEnum.DARK);
+            setDarkMode();
           } else {
-            document.body.removeAttribute('arco-theme');
-            document.documentElement.classList.remove(ThemeEnum.DARK);
+            setLightMode();
           }
         }
       });

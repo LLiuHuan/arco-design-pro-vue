@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
+import { router, CONSTANT_ROUTES, routes as staticRoutes } from '@/router';
+import { useAuthStore } from '@/store/modules/auth';
 import {
   filterAuthRoutesByUserPermission,
   getConstantRouteNames,
   transformAuthRouteToVueRoutes,
   transformRoutePathToRouteName,
-} from '@/utils';
-import { router, CONSTANT_ROUTES, routes as staticRoutes } from '@/router';
-import { useAuthStore } from '@/store/modules/auth';
+} from '@/utils/router';
 
 interface RouteState {
   /**

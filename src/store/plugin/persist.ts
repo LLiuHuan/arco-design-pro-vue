@@ -7,8 +7,9 @@
 import type { Pinia } from 'pinia';
 import { createPersistedState, Serializer } from 'pinia-plugin-persistedstate';
 import type { PersistedStateFactoryOptions } from 'pinia-plugin-persistedstate';
-import { getCommonStoragePrefix, Encryption, EncryptionFactory } from '@/utils';
 import { cacheCipher, SHOULD_ENABLE_STORAGE_ENCRYPTION } from '@/settings';
+import { getCommonStoragePrefix } from '@/utils/envs';
+import { Encryption, EncryptionFactory } from '@/utils/common';
 
 export const PERSIST_KEY_PREFIX = getCommonStoragePrefix();
 

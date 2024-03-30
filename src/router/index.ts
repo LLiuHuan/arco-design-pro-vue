@@ -4,7 +4,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import type { App } from 'vue';
-import { transformAuthRouteToVueRoutes } from '@/utils';
+import { transformAuthRouteToVueRoutes } from '@/utils/router';
 import { CONSTANT_ROUTES } from './routes';
 import { setupRouterGuard } from './guard';
 

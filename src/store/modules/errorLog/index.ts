@@ -1,9 +1,9 @@
 import { store } from '@/store';
 import { defineStore } from 'pinia';
 import type { ErrorLogInfo } from '~/types/storage';
-import { formatToDateTime } from '@/utils';
 import { ErrorTypeEnum } from '@/enums';
 import { appSetting } from '@/settings';
+import { formatToDateTime } from '@/utils/date';
 
 export interface ErrorLogState {
   errorLogInfoList: Nullable<ErrorLogInfo[]>;

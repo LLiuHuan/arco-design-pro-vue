@@ -1,5 +1,5 @@
 import type { ProjectConfig } from '~/types/config';
-import { localStg } from '@/utils';
+import { localStg } from '@/utils/cache';
 import { PROJ_CFG_KEY } from '@/enums';
 import { appSetting } from '@/settings';
 import { cloneDeep } from 'lodash-es';

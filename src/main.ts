@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
-import { consoleLog } from '@/utils';
+import { consoleLog } from '@/utils/common';
 import { initProjectSetting } from '@/settings/initProjectSetting';
 import App from './App.vue';
 

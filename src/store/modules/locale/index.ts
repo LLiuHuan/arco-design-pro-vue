@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import type { LocaleSetting, LocaleType } from '~/types/config';
 import { LOCALE_KEY } from '@/enums';
 import { localeSetting } from '@/settings';
-import { localStg } from '@/utils';
+import { localStg } from '@/utils/cache';
 import { store } from '@/store';
 
 const lsLocaleSetting = (localStg.get(LOCALE_KEY) ||

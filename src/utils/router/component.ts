@@ -1,6 +1,6 @@
 import { views } from '@/views';
 import { RouteComponent } from 'vue-router';
-import { isFunction } from '@/utils';
+import { isFunction } from '@/utils/common';
 import { BasicLayout, BlankLayout } from '@/layout';
 
 type Lazy<T> = () => Promise<T>;

@@ -1,5 +1,5 @@
 import { TOKEN_KEY } from '@/enums';
-import { localStg } from '@/utils';
+import { localStg } from '@/utils/cache';
 
 // TODO: 获取token有问题
 // const appStore = useAppStore();

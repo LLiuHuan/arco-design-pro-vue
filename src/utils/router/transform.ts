@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { consoleError, getLayoutComponent, getViewComponent } from '@/utils';
+import { getLayoutComponent, getViewComponent } from '@/utils/router';
+import { consoleError } from '@/utils/common';
 
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
 

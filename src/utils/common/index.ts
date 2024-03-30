@@ -5,3 +5,4 @@ export * from './component';
 export * from './url';
 export * from './window';
 export * from './console';
+export * from './color';

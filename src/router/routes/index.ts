@@ -1,4 +1,4 @@
-import { getLoginModuleRegExp } from '@/utils';
+import { getLoginModuleRegExp } from '@/utils/router';
 
 /** 根路由: / */
 export const ROOT_ROUTE: AuthRoute.Route = {

@@ -8,7 +8,7 @@ import type {
 import axios from 'axios';
 import qs from 'qs';
 import { cloneDeep } from 'lodash-es';
-import { isFunction } from '@/utils';
+import { isFunction } from '@/utils/common';
 import type { RequestOptions, Result, UploadFileParams } from '~/types/axios';
 import { ContentTypeEnum, RequestEnum } from '@/enums/httpEnum';
 import type { CreateAxiosOptions } from './httpTransform';

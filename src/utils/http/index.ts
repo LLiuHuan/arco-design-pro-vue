@@ -4,21 +4,21 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { clone } from 'lodash-es';
 import { RequestEnum, ContentTypeEnum } from '@/enums/httpEnum';
-import {
-  isString,
-  isUndefined,
-  isNull,
-  isEmpty,
-  deepMerge,
-  setObjToUrlParams,
-  getToken,
-} from '@/utils';
 import { useI18n } from '@/hooks/web';
 import axios from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
 import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 import { useGlobSetting } from '@/hooks/setting';
+import {
+  deepMerge,
+  isEmpty,
+  isNull,
+  isString,
+  isUndefined,
+  setObjToUrlParams,
+} from '@/utils/common';
+import { getToken } from '@/utils/auth';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';

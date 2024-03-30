@@ -1,4 +1,4 @@
-import { mitt } from '@/utils';
+import { mitt } from '@/utils/common';
 import type {
   RouteLocationNormalized,
   RouteRecordNormalized,

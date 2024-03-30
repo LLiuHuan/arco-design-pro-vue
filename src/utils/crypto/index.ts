@@ -1,7 +1,7 @@
 /* 加密方法 */
 
 import CryptoJS from 'crypto-js';
-import { consoleLog } from '@/utils';
+import { consoleLog } from '@/utils/common';
 
 // 十六位十六进制数作为密钥
 const SECRET_KEY = CryptoJS.enc.Utf8.parse('1101201190000001');

@@ -1,4 +1,4 @@
-import { localStg } from '@/utils';
+import { localStg } from '@/utils/cache';
 import { REFRESH_TOKEN_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums';
 
 /** 获取用户信息 */

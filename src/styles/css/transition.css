@@ -1,0 +1,20 @@
+
+/**
+ ######################################################
+ ###########  InterfaceFunction transition  ###########
+ ######################################################
+ */
+.interface-function-move,
+.interface-function-enter-active,
+.interface-function-leave-active {
+    --uno: transition-all-300;
+}
+
+.interface-function-enter-from,
+.interface-function-leave-to {
+    --uno: opacity-0 -translate-x-30px;
+}
+
+.interface-function-leave-active {
+    --uno: absolute;
+}

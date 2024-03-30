@@ -28,9 +28,10 @@
         </AButton>
       </ASpace>
     </template>
-    <div>
+    <div class="overflow-hidden h-full">
       <ThemeSchema></ThemeSchema>
       <ThemeColor></ThemeColor>
+      <InterfaceFunction></InterfaceFunction>
     </div>
   </ADrawer>
 </template>
@@ -42,7 +43,7 @@
   import { useI18n } from '@/hooks/web';
   import { appSetting } from '@/settings';
   import { unref } from 'vue';
-  import { ThemeSchema, ThemeColor } from './components';
+  import { ThemeSchema, ThemeColor, InterfaceFunction } from './components';
 
   defineOptions({
     name: 'LayoutSettingDrawer',

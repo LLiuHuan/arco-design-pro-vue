@@ -1,7 +1,7 @@
 <template>
   <ADivider>{{ $t('layout.setting.themeColor.title') }}</ADivider>
 
-  <div class="flex-col-stretch gap-16px">
+  <div class="flex-col-stretch gap-12px">
     <SettingItem
       v-for="(_, key) in getThemeColor"
       :key="key"
@@ -25,6 +25,10 @@
   import { ref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
   import SettingItem from '../setting-item/index.vue';
+
+  defineOptions({
+    name: 'ThemeColor',
+  });
 
   const historyColors = ref<string[]>([]);
   const { getThemeColor, setThemeColor } = useRootSetting();

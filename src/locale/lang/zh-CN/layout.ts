@@ -30,5 +30,18 @@ export default {
       orange: '警告色',
       red: '错误色',
     },
+    interfaceFunction: {
+      title: '界面功能',
+      menuCollapse: '折叠菜单',
+      menuCollapseButton: '菜单折叠按钮',
+      menuAccordion: '侧边菜单手风琴模式',
+      expandedMenuWidth: '菜单展开宽度',
+      collapsedMenuWidth: '菜单折叠宽度',
+
+      // menu trigger
+      menuTriggerNone: '不显示',
+      menuTriggerBottom: '底部',
+      menuTriggerTop: '顶部',
+    },
   },
 };

@@ -1,8 +1,10 @@
 import { defineConfig } from '@unocss/vite';
 import presetUno from '@unocss/preset-uno';
+import type { Theme } from '@unocss/preset-uno';
 import transformerDirectives from '@unocss/transformer-directives';
+import transformerVariantGroup from '@unocss/transformer-variant-group';
 
-export default defineConfig({
+export default defineConfig<Theme>({
   content: {
     pipeline: {
       exclude: [
@@ -19,7 +21,7 @@ export default defineConfig({
     },
   },
   presets: [presetUno({ dark: 'class' })],
-  transformers: [transformerDirectives()],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
   shortcuts: {
     'wh-full': 'w-full h-full',
     'flex-center': 'flex justify-center items-center',

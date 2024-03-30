@@ -7,7 +7,7 @@
     collapsible
     :collapsed="getCollapsed"
     :collapsed-width="getCollapsedWidth"
-    :hide-trigger="!getShowTrigger"
+    :hide-trigger="!getShowSiderTrigger"
     breakpoint="lg"
     :style="getSiderDomStyle"
     :theme="getMenuTheme"
@@ -17,7 +17,7 @@
       <LayoutTrigger />
     </template>
     {{ getTrigger }}
-    {{ getShowTrigger }}
+    {{ getShowSiderTrigger }}
     {{ getMenuWidth }}
     {{ getCollapsed }}
     <LayoutDragBar ref="dragBarRef"></LayoutDragBar>
@@ -26,7 +26,6 @@
 
 <script lang="ts" setup>
   import { computed, CSSProperties, ref, unref } from 'vue';
-  import { TriggerEnum } from '@/enums';
   import { LayoutTrigger } from '@/layout/common';
   import { useDesign } from '@/hooks/common';
   import { useMenuSetting } from '@/hooks/setting';
@@ -37,18 +36,18 @@
   const siderRef = ref<ElRef>(null);
 
   const { prefixCls } = useDesign('layout-sider');
-  const { getMenuWidth, getCollapsed, getTrigger, getMenuTheme, getRealWidth } =
-    useMenuSetting();
+  const {
+    getMenuWidth,
+    getCollapsed,
+    getTrigger,
+    getMenuTheme,
+    getRealWidth,
+    getShowSiderTrigger,
+  } = useMenuSetting();
 
   useDragLine(siderRef, dragBarRef);
 
   const { getCollapsedWidth, onBreakpointChange } = useSiderEvent();
-
-  const getShowTrigger = computed(() => {
-    const trigger = unref(getTrigger);
-
-    return trigger !== TriggerEnum.NONE && trigger === TriggerEnum.FOOTER;
-  });
 
   // 隐藏的dom样式
   const getHiddenDomStyle = computed((): CSSProperties => {

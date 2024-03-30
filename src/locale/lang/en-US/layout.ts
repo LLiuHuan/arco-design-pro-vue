@@ -30,5 +30,18 @@ export default {
       orange: 'Warning color',
       red: 'Error color',
     },
+    interfaceFunction: {
+      title: 'Interface function',
+      menuCollapse: 'Collapse menu',
+      menuCollapseButton: 'Menu collapse button',
+      menuAccordion: 'Side menu accordion mode',
+      expandedMenuWidth: 'Menu expand width',
+      collapsedMenuWidth: 'Menu collapse width',
+
+      // menu trigger
+      menuTriggerNone: 'Do not show',
+      menuTriggerBottom: 'Bottom',
+      menuTriggerTop: 'Top',
+    },
   },
 };

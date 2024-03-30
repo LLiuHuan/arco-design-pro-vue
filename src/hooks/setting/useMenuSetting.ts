@@ -1,7 +1,7 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import type { MenuSetting } from '~/types/config';
-import { MenuTypeEnum } from '@/enums';
+import { MenuTypeEnum, TriggerEnum } from '@/enums';
 
 export const useMenuSetting = () => {
   const appStore = useAppStore();
@@ -31,6 +31,20 @@ export const useMenuSetting = () => {
     return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
   });
 
+  const getShowSiderTrigger = computed(() => {
+    const trigger = unref(getTrigger);
+
+    return trigger !== TriggerEnum.NONE && trigger === TriggerEnum.FOOTER;
+  });
+
+  const getShowHeaderTrigger = computed(() => {
+    if (unref(getMenuType) === MenuTypeEnum.TOP_MENU) {
+      return false;
+    }
+
+    return unref(getTrigger) === TriggerEnum.HEADER;
+  });
+
   // const getMenuHidden = computed(() => appStore.getMenuSetting.hidden);
 
   // 获取是否折叠左侧菜单
@@ -54,6 +68,7 @@ export const useMenuSetting = () => {
 
   // 设置菜单配置
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
+    console.log(menuSetting);
     appStore.setProjectConfig({ menuSetting });
   }
 
@@ -71,6 +86,8 @@ export const useMenuSetting = () => {
     getMenuTheme,
     getRealWidth,
     getMiniWidthNumber,
+    getShowSiderTrigger,
+    getShowHeaderTrigger,
 
     setMenuSetting,
     toggleCollapsed,

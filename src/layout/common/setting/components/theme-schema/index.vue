@@ -26,6 +26,10 @@
   import { ThemeEnum } from '@/enums';
   import { useRootSetting } from '@/hooks/setting';
 
+  defineOptions({
+    name: 'ThemeScheme',
+  });
+
   const icons: Record<ThemeEnum, string> = {
     [ThemeEnum.LIGHT]: 'ic:round-wb-sunny',
     [ThemeEnum.DARK]: 'ic:round-nightlight',

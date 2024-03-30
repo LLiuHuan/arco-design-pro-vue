@@ -2,6 +2,7 @@ import {
   CacheTypeEnum,
   MenuTypeEnum,
   RouterTransitionEnum,
+  ThemeColorEnum,
   ThemeEnum,
   TriggerEnum,
 } from '@/enums';
@@ -82,6 +83,25 @@ export interface MenuSetting {
   canDrag: boolean;
 }
 
+export interface ThemeSetting {
+  /**
+   * @description Theme color - [主题色]
+   */
+  [ThemeColorEnum.PRIMARY]: string;
+  /**
+   * @description Success color - [成功色]
+   */
+  [ThemeColorEnum.SUCCESS]: string;
+  /**
+   * @description Warning color - [警告色]
+   */
+  [ThemeColorEnum.WARNING]: string;
+  /**
+   * @description Error color - [错误色]
+   */
+  [ThemeColorEnum.ERROR]: string;
+}
+
 export interface ProjectConfig {
   // Storage location of permission related information - [权限相关信息的存储位置]
   permissionCacheType: CacheTypeEnum;
@@ -98,4 +118,7 @@ export interface ProjectConfig {
 
   // menuSetting - [菜单设置]
   menuSetting: MenuSetting;
+
+  // Theme setting - [主题设置]
+  themeSetting: ThemeSetting;
 }

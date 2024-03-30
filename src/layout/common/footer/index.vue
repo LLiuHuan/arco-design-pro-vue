@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { openWindow } from '@/utils';
   import { GITHUB_URL } from '@/settings';
   import { useDesign } from '@/hooks/common';
+  import { openWindow } from '@/utils/common';
 
   const { prefixCls } = useDesign('layout-footer');
 

@@ -1,4 +1,4 @@
-import { isDevMode } from '@/utils';
+import { isDevMode } from '@/utils/envs';
 
 /**
  * @description System default cache time, in seconds - [系统默认缓存时间，单位秒]

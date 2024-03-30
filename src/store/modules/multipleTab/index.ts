@@ -8,16 +8,12 @@ import { unref } from 'vue';
 import { appSetting } from '@/settings';
 import { defineStore } from 'pinia';
 import { MULTIPLE_TABS_KEY, PageEnum } from '@/enums';
-import {
-  consoleError,
-  getRawRoute,
-  isHttpUrl,
-  localStg,
-  openWindow,
-} from '@/utils';
 import { store } from '@/store';
 import { REDIRECT_NAME } from '@/router';
 import { clearTabRoutes } from '@/store/modules/multipleTab/helpers';
+import { localStg } from '@/utils/cache';
+import { getRawRoute } from '@/utils/router';
+import { consoleError, isHttpUrl, openWindow } from '@/utils/common';
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -150,8 +146,8 @@ export const useMultipleTabStore = defineStore({
      * @constructor
      */
     async Go(
-      opt: RouteLocationRawEx = PageEnum.BASE_HOME,
-      goTypeOrIsReplace: boolean | GoType = false,
+      opt: RouteLocationRawEx,
+      goTypeOrIsReplace: boolean | GoType,
       _router?: Router,
     ) {
       if (!opt) {

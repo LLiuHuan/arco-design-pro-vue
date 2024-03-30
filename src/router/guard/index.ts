@@ -1,7 +1,7 @@
 import type { Router } from 'vue-router';
 import { unref } from 'vue';
 import nProgress from 'nprogress';
-import { setRouteChange } from '@/utils';
+import { setRouteChange } from '@/utils/router';
 import { useTransitionSetting } from '@/hooks/setting';
 
 /**

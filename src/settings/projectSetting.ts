@@ -3,6 +3,7 @@ import {
   CacheTypeEnum,
   MenuTypeEnum,
   RouterTransitionEnum,
+  ThemeColorEnum,
   ThemeEnum,
   TriggerEnum,
 } from '@/enums';
@@ -68,6 +69,17 @@ const defaultSetting: ProjectConfig = {
 
     // Menu type - [菜单类型]
     type: MenuTypeEnum.SIDEBAR,
+  },
+  // Theme settings - [主题设置]
+  themeSetting: {
+    // Theme color - [主题色]
+    [ThemeColorEnum.PRIMARY]: '#165DFF',
+    // Success color - [成功色]
+    [ThemeColorEnum.SUCCESS]: '#00B42A',
+    // Warning color - [警告色]
+    [ThemeColorEnum.WARNING]: '#FF7D00',
+    // Error color - [错误色]
+    [ThemeColorEnum.ERROR]: '#F53F3F',
   },
 };
 

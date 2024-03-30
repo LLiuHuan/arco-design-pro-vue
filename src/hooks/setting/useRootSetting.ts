@@ -1,15 +1,16 @@
 import { useAppStore } from '@/store/modules/app';
-import { computed } from 'vue';
-import { ThemeEnum } from '@/enums';
+import { computed, unref } from 'vue';
+import { ThemeColorEnum, ThemeEnum } from '@/enums';
 import type { ProjectConfig } from '~/types/config';
-
-type RootSetting = Omit<
-  ProjectConfig,
-  'locale' | 'headerSetting' | 'menuSetting' | 'multiTabsSetting'
->;
+import { setBaseColor } from '@/utils/common';
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
+
+  /**
+   * @description: 获取项目配置
+   */
+  const getRootSetting = computed(() => appStore.getProjectConfig);
 
   // 获取页面是否开启keep-alive
   const getOpenKeepAlive = computed(
@@ -30,27 +31,50 @@ export const useRootSetting = () => {
   // 获取是否开启暗黑模式
   const getIsDarkMode = computed(() => appStore.getDarkMode === ThemeEnum.DARK);
 
-  function setRootSetting(setting: Partial<RootSetting>) {
+  const getThemeColor = computed(() => appStore.getProjectConfig.themeSetting);
+
+  const getSettingDrawerState = computed(() => appStore.getSettingDrawerState);
+
+  const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
-  }
+  };
 
-  function setDarkMode(mode: ThemeEnum) {
+  const setDarkMode = (mode: ThemeEnum) => {
     appStore.setDarkMode(mode);
-  }
+  };
 
-  function toggleDarkMode() {
+  const setThemeColor = (key: ThemeColorEnum, value: string) => {
+    appStore.setProjectConfig({
+      themeSetting: {
+        [key]: value,
+      },
+    });
+
+    setBaseColor(value, key, unref(getIsDarkMode));
+  };
+
+  const toggleDarkMode = () => {
     appStore.toggleDarkMode();
-  }
+  };
+
+  const setSettingDrawerState = (state: boolean) => {
+    appStore.setSettingDrawerState(state);
+  };
 
   return {
     getDarkMode,
     getIsDarkMode,
+    getRootSetting,
     getNextDarkMode,
     getOpenKeepAlive,
     getCanEmbedIFramePage,
+    getSettingDrawerState,
+    getThemeColor,
 
     setRootSetting,
     setDarkMode,
     toggleDarkMode,
+    setSettingDrawerState,
+    setThemeColor,
   };
 };

@@ -10,6 +10,7 @@
           class="overflow-y-auto transition-all-300"
         >
           <LayoutContent />
+          <SettingDrawer></SettingDrawer>
         </ALayoutContent>
         <LayoutFooter></LayoutFooter>
       </ALayout>
@@ -22,18 +23,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { DarkModeSwitch } from '@/components/DarkModeSwitch';
-  import { ref } from 'vue';
   import { useDesign } from '@/hooks/common';
   import {
     LayoutContent,
     LayoutFooter,
     LayoutSider,
-    LayoutTrigger,
+    SettingDrawer,
     LayoutHeader,
   } from '../common';
 
-  const a = ref(false);
   const { prefixCls } = useDesign('default-layout');
 </script>
 

@@ -17,3 +17,14 @@ export enum RouterTransitionEnum {
   FADE_BOTTOM = 'fade-bottom',
   FADE_SCALE = 'fade-scale',
 }
+
+export enum ThemeColorEnum {
+  // 主色
+  PRIMARY = 'arcoblue',
+  // 成功
+  SUCCESS = 'green',
+  // 警告
+  WARNING = 'orange',
+  // 错误
+  ERROR = 'red',
+}

@@ -15,7 +15,7 @@
   import { useRootSetting } from '@/hooks/setting';
   import { SvgIcon } from '@/components/Icon';
   import { APP_DARK_MODE_IS_AUTO_KEY, ThemeEnum } from '@/enums';
-  import { localStg } from '@/utils';
+  import { localStg } from '@/utils/cache';
 
   defineOptions({ name: 'DarkModeSwitch' });
 

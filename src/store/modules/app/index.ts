@@ -10,11 +10,13 @@ import type {
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
+  ThemeSetting,
   TransitionSetting,
 } from '~/types/config';
 import type { BeforeMiniState } from '~/types/storage';
-import { deepMerge, localStg } from '@/utils';
 import { darkMode } from '@/settings';
+import { localStg } from '@/utils/cache';
+import { deepMerge } from '@/utils/common';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -22,6 +24,10 @@ interface AppState {
    * @description Theme enum - [主题枚举]
    */
   darkMode?: ThemeEnum;
+  /**
+   * @description Setting Drawer Status - [设置抽屉状态]
+   */
+  settingDrawerState?: boolean;
   /**
    * @description Page loading status - [页面加载状态]
    */
@@ -67,6 +73,13 @@ export const useAppStore = defineStore({
       const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
       return themeSchemes[nextIndex];
     },
+    /**
+     * @description Get the setting drawer status - [获取设置抽屉状态]
+     * @param state
+     */
+    getSettingDrawerState(state): boolean {
+      return state.settingDrawerState || false;
+    },
     // 获取窗口状态
     getBeforeMiniInfo(state): BeforeMiniState {
       return state.beforeMiniInfo;
@@ -83,6 +96,9 @@ export const useAppStore = defineStore({
     },
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;
+    },
+    getThemeSetting(): ThemeSetting {
+      return this.getProjectConfig.themeSetting;
     },
   },
   actions: {
@@ -104,6 +120,13 @@ export const useAppStore = defineStore({
      */
     toggleDarkMode(): void {
       this.setDarkMode(this.getNextDarkMode);
+    },
+    /**
+     * @description Set the setting drawer status - [设置设置抽屉状态]
+     * @param state
+     */
+    setSettingDrawerState(state: boolean): void {
+      this.settingDrawerState = state;
     },
     // 设置窗口信息
     setBeforeMiniInfo(state: BeforeMiniState): void {

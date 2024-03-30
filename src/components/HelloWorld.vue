@@ -4,9 +4,8 @@
   import { Message } from '@arco-design/web-vue';
   import ExceptionBase from '@/components/Exception/src/index.vue';
   import { SvgIcon } from '@/components/Icon';
-  import { consoleLog } from '@/utils';
+  import { consoleLog } from '@/utils/common';
   import { useLocaleStore } from '@/store/modules/locale';
-  import { i18n } from '@/locale';
   import { useLocale } from '@/locale/useLocale';
 
   defineProps<{ msg: string }>();

@@ -1,5 +1,5 @@
 import type { StorageInterface } from '~/types/storage';
-import { decrypt, encrypt } from '@/utils';
+import { decrypt, encrypt } from '@/utils/crypto';
 
 interface StorageData<T> {
   value: T;

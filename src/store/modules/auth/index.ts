@@ -5,7 +5,7 @@ import { router } from '@/router';
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
 import { useRouteStore } from '@/store/modules/route';
 import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
-import { localStg } from '@/utils';
+import { localStg } from '@/utils/cache';
 import { REFRESH_TOKEN_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums';
 import { Notification } from '@arco-design/web-vue';
 import { useI18n } from '@/hooks/web';

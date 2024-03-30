@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { subscribeStore } from '@/store/subscribe';
   import { useLocaleStoreWithOut } from '@/store/modules/locale';
-  import { AppProvider } from '@/components/Application';
 
   const localeStore = useLocaleStoreWithOut();
 
@@ -10,9 +9,7 @@
 
 <template>
   <a-config-provider :locale="localeStore.localInfo?.arcoLang">
-    <app-provider>
-      <RouterView />
-    </app-provider>
+    <RouterView />
   </a-config-provider>
 </template>
 

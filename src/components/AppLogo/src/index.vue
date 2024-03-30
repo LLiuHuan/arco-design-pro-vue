@@ -1,5 +1,5 @@
 <template>
-  <a-space class="system-logo" @click="toHome">
+  <a-space class="system-logo flex-center cursor-pointer" @click="toHome">
     <img class="w-32px" src="/logo.png" alt="logo" />
     <div v-show="showTitle">{{ title ?? globTitle }}</div>
   </a-space>

@@ -1,6 +1,7 @@
 import {
   APP_DARK_MODE_IS_AUTO_KEY,
   LOCALE_KEY,
+  LOGIN_INFO,
   MenuModeEnum,
   MenuTypeEnum,
   MULTIPLE_TABS_KEY,
@@ -35,6 +36,8 @@ declare namespace StorageInterface {
     [USER_INFO_KEY]: Auth.UserInfo;
     /** 是否开启自动切换主题 */
     [APP_DARK_MODE_IS_AUTO_KEY]: boolean;
+    /** 登录信息 */
+    [LOGIN_INFO]: Auth.LoginInfo;
   }
 }
 

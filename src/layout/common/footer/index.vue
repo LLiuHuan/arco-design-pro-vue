@@ -1,9 +1,11 @@
 <template>
-  <a-layout-footer ref="footerRef" :class="prefixCls" class="h-48px">
-    <div :class="`${prefixCls}__links`">
+  <a-layout-footer
+    ref="footerRef"
+    class="h-48px text-[#00000073] flex-col text-center bg-[var(--color-bg-2)]"
+  >
+    <div class="my-8px">
       <IconGithub
-        :class="`${prefixCls}__github`"
-        class="cursor-pointer"
+        class="cursor-pointer !text-[#00000073] hover:!text-[#000000d9]"
         @click="openWindow(GITHUB_URL)"
       />
     </div>
@@ -14,45 +16,10 @@
 
 <script lang="ts" setup>
   import { GITHUB_URL } from '@/settings';
-  import { useDesign } from '@/hooks/common';
   import { openWindow } from '@/utils/common';
-
-  const { prefixCls } = useDesign('layout-footer');
 
   const date = new Date();
   const year = date.getFullYear();
 </script>
 
-<style lang="less" scoped>
-  @prefix-cls: ~'@{name}-layout-footer';
-
-  @normal-color: rgba(0, 0, 0, 0.45);
-
-  @hover-color: rgba(0, 0, 0, 0.85);
-
-  .@{prefix-cls} {
-    color: @normal-color;
-    text-align: center;
-    background: var(--color-bg-2);
-
-    &__links {
-      margin-bottom: 8px;
-
-      a {
-        color: @normal-color;
-
-        &:hover {
-          color: @hover-color;
-        }
-      }
-    }
-
-    &__github {
-      margin: 0 30px;
-
-      &:hover {
-        color: @hover-color;
-      }
-    }
-  }
-</style>
+<style lang="less" scoped></style>

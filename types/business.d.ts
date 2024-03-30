@@ -17,4 +17,13 @@ declare namespace Auth {
     /** 用户角色类型 */
     userRole: RoleType;
   }
+
+  interface LoginInfo {
+    /** 用户名 */
+    username: string;
+    /** 用户密码 */
+    password: string;
+    /** 是否记住密码 */
+    rememberPassword: boolean;
+  }
 }

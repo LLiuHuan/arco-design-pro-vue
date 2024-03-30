@@ -1,3 +1,5 @@
+export const LOGIN_INFO = 'LOGIN_INFO__';
+
 //
 export const TOKEN_KEY = 'TOKEN__';
 

@@ -34,7 +34,7 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import type { Component } from 'vue';
-  import { AppLogo } from '@/components/Application';
+  import { AppLogo } from 'src/components/AppLogo';
   import {
     BindWechat,
     CodeLogin,

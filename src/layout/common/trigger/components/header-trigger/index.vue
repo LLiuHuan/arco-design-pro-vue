@@ -3,7 +3,6 @@
   <a-button
     type="text"
     class="!text-[var(--color-text-1)]"
-    :class="[prefixCls]"
     @click="toggleCollapsed"
   >
     <SvgIcon
@@ -16,13 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useDesign } from '@/hooks/common';
   import { useMenuSetting } from '@/hooks/setting';
   import { SvgIcon } from '@/components/Icon';
 
   defineOptions({ name: 'HeaderTrigger' });
-
-  const { prefixCls } = useDesign('layout-header-trigger');
 
   const { getCollapsed, toggleCollapsed } = useMenuSetting();
 </script>

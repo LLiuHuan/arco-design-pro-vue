@@ -1,10 +1,11 @@
 <template>
-  <div :class="prefixCls">
-    <div :class="`${prefixCls}-error-msg`">{{ errorMessage }}</div>
+  <div class="w-320px">
+    <div class="h-32px leading-32px text-[rgb(var(--red-6))]">{{
+      errorMessage
+    }}</div>
     <a-form
       ref="loginForm"
       :model="userInfo"
-      :class="`${prefixCls}-form`"
       layout="vertical"
       @submit="handleSubmit"
     >
@@ -50,7 +51,7 @@
         </a-input-password>
       </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div :class="`${prefixCls}-password-actions`">
+        <div class="flex justify-between">
           <a-checkbox
             checked="rememberPassword"
             :model-value="loginConfig.rememberPassword"
@@ -66,13 +67,13 @@
           {{ $t('sys.login.common.login') }}
         </a-button>
         <div class="flex w-full">
-          <a-button type="text" long :class="`${prefixCls}-register-btn`">
+          <a-button type="text" long class="!text-[var(--color-text-3)]">
             {{ $t('sys.login.pwdLogin.mobileLogin') }}
           </a-button>
           <a-button
             type="text"
             long
-            :class="`${prefixCls}-register-btn`"
+            class="!text-[var(--color-text-3)]"
             @click="toLoginModule('register')"
           >
             {{ $t('sys.login.pwdLogin.register') }}
@@ -113,9 +114,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref } from 'vue';
+  import { reactive, ref, unref } from 'vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-  // import { useStorage } from '@vueuse/core';
   import {
     IconGithub,
     IconWechat,
@@ -126,7 +126,9 @@
   } from '@arco-design/web-vue/es/icon';
   import { useRouterPush } from '@/hooks/component';
   import { useAuthStore } from '@/store/modules/auth';
-  import { useDesign, useLoading } from '@/hooks/common';
+  import { useLoading } from '@/hooks/common';
+  import { localStg } from '@/utils/cache';
+  import { LOGIN_INFO } from '@/enums';
 
   const { toLoginModule } = useRouterPush();
 
@@ -137,23 +139,26 @@
 
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
-  const { prefixCls } = useDesign('pwd-login');
 
   const { login } = useAuthStore();
 
-  // const loginConfig = useStorage('login-config', {
+  // const loginConfig = {
   //   rememberPassword: true,
   //   username: 'Arco', // 演示默认值
   //   password: 'arco123', // demo default value
-  // });
-  const loginConfig = ref({
-    rememberPassword: true,
-    username: 'Arco', // 演示默认值
-    password: 'arco123', // demo default value
-  });
+  // };
+
+  const loginConfig = ref(
+    localStg.get(LOGIN_INFO) || {
+      rememberPassword: true,
+      username: 'Arco', // 演示默认值
+      password: 'arco123', // demo default value
+    },
+  );
+
   const userInfo = reactive({
-    username: loginConfig.value.username,
-    password: loginConfig.value.password,
+    username: unref(loginConfig).username,
+    password: unref(loginConfig).password,
   });
 
   const handleSubmit = async ({
@@ -168,12 +173,19 @@
       try {
         await login(values.username, values.password);
         // 如果选中记住密码，就默认保存下来
-        const { rememberPassword } = loginConfig.value;
+        const { rememberPassword } = unref(loginConfig);
         const { username, password } = values;
         // 实际生产环境需要进行加密存储。
         // The actual production environment requires encrypted storage.
-        loginConfig.value.username = rememberPassword ? username : '';
-        loginConfig.value.password = rememberPassword ? password : '';
+        if (rememberPassword) {
+          localStg.set(LOGIN_INFO, {
+            rememberPassword,
+            username,
+            password,
+          });
+        } else {
+          localStg.remove(LOGIN_INFO);
+        }
       } catch (err) {
         // 异常提示
         errorMessage.value = (err as Error).message;
@@ -189,40 +201,6 @@
 </script>
 
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name}-pwd-login';
-
-  .@{prefix-cls} {
-    width: 320px;
-
-    //&-title {
-    //  color: var(--color-text-1);
-    //  font-weight: 500;
-    //  font-size: 24px;
-    //  line-height: 32px;
-    //}
-    //
-    //&-sub-title {
-    //  color: var(--color-text-3);
-    //  font-size: 16px;
-    //  line-height: 24px;
-    //}
-
-    &-error-msg {
-      height: 32px;
-      color: rgb(var(--red-6));
-      line-height: 32px;
-    }
-
-    &-password-actions {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &-register-btn {
-      color: var(--color-text-3) !important;
-    }
-  }
-
   :deep(.arco-divider-text) {
     background: transparent;
   }

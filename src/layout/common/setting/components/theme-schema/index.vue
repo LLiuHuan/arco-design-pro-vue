@@ -1,7 +1,7 @@
 <template>
   <ADivider>{{ $t('layout.setting.themeSchema.title') }}</ADivider>
 
-  <div class="flex-col-stretch gap-16px">
+  <div class="flex-col-stretch gap-12px">
     <div class="flex justify-center items-center">
       <a-radio-group
         v-for="(_, key) in themeSchema"
@@ -18,13 +18,36 @@
         </a-radio>
       </a-radio-group>
     </div>
+    <Transition name="dark-menu">
+      <SettingItem
+        v-if="!getIsDarkMode"
+        :label="$t(`layout.setting.themeSchema.darkMenu`)"
+      >
+        <ASwitch
+          :model-value="getMenuTheme === ThemeEnum.DARK"
+          @change="
+            setMenuSetting({
+              theme: $event ? ThemeEnum.DARK : ThemeEnum.LIGHT,
+            })
+          "
+        >
+          <template #checked-icon>
+            <icon-check />
+          </template>
+          <template #unchecked-icon>
+            <icon-close />
+          </template>
+        </ASwitch>
+      </SettingItem>
+    </Transition>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { ThemeEnum } from '@/enums';
-  import { useRootSetting } from '@/hooks/setting';
+  import { useMenuSetting, useRootSetting } from '@/hooks/setting';
+  import SettingItem from '@/layout/common/setting/components/setting-item/index.vue';
 
   defineOptions({
     name: 'ThemeScheme',
@@ -42,7 +65,8 @@
     [ThemeEnum.AUTO]: 'layout.setting.themeSchema.system',
   };
 
-  const { setDarkMode, getDarkMode } = useRootSetting();
+  const { setDarkMode, getDarkMode, getIsDarkMode } = useRootSetting();
+  const { getMenuTheme, setMenuSetting } = useMenuSetting();
 </script>
 
 <style lang="less" scoped></style>

@@ -3,10 +3,12 @@ import { computed, unref } from 'vue';
 import { ThemeColorEnum, ThemeEnum } from '@/enums';
 import type { ProjectConfig } from '~/types/config';
 import { setBaseColor } from '@/utils/common';
+import { usePreferredColorScheme } from '@vueuse/core';
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
 
+  const osTheme = usePreferredColorScheme();
   /**
    * @description: 获取项目配置
    */
@@ -29,11 +31,21 @@ export const useRootSetting = () => {
   const getNextDarkMode = computed(() => appStore.getNextDarkMode);
 
   // 获取是否开启暗黑模式
-  const getIsDarkMode = computed(() => appStore.getDarkMode === ThemeEnum.DARK);
+  const getIsDarkMode = computed(() => {
+    if (unref(getDarkMode) === ThemeEnum.AUTO) {
+      return unref(osTheme) === ThemeEnum.DARK;
+    }
+    return unref(getDarkMode) === ThemeEnum.DARK;
+  });
 
+  // 获取主题颜色
   const getThemeColor = computed(() => appStore.getProjectConfig.themeSetting);
 
+  // 获取是否开启设置抽屉
   const getSettingDrawerState = computed(() => appStore.getSettingDrawerState);
+
+  // 获取是否显示logo
+  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
 
   const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
@@ -70,6 +82,7 @@ export const useRootSetting = () => {
     getCanEmbedIFramePage,
     getSettingDrawerState,
     getThemeColor,
+    getShowLogo,
 
     setRootSetting,
     setDarkMode,

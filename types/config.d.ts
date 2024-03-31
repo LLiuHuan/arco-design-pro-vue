@@ -76,6 +76,8 @@ export interface MenuSetting {
   siderHidden?: boolean;
   // Menu theme - [菜单主题]
   theme: ThemeEnum;
+  // Whether to enable handover - [是否开启手风琴模式]
+  accordion: boolean;
 
   // Menu collapse trigger position - [菜单折叠触发器位置]
   trigger: TriggerEnum;

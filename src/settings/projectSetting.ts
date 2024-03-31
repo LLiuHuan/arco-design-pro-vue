@@ -68,6 +68,8 @@ const defaultSetting: ProjectConfig = {
     canDrag: true,
     // Menu theme - [菜单主题]
     theme: ThemeEnum.LIGHT,
+    // Whether to enable handover - [是否开启手风琴模式]
+    accordion: true,
 
     // Menu type - [菜单类型]
     type: MenuTypeEnum.SIDEBAR,

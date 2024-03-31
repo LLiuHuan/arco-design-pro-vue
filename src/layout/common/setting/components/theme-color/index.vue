@@ -24,7 +24,7 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
-  import SettingItem from '../setting-item/index.vue';
+  import { SettingItem } from '../common';
 
   defineOptions({
     name: 'ThemeColor',

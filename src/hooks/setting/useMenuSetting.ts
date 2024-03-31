@@ -26,6 +26,9 @@ export const useMenuSetting = () => {
   // 获取菜单主题
   const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
 
+  // 获取是否开启手风琴模式
+  const getAccordion = computed(() => appStore.getMenuSetting.accordion);
+
   // 获取是否是混合菜单
   const getIsMixSidebar = computed(() => {
     return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
@@ -94,6 +97,7 @@ export const useMenuSetting = () => {
     getShowSiderTrigger,
     getShowHeaderTrigger,
     getIsSidebarType,
+    getAccordion,
 
     setMenuSetting,
     toggleCollapsed,

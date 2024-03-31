@@ -7,52 +7,73 @@
     class="flex-col-stretch gap-12px"
   >
     <SettingItem
-      key="1"
-      :label="$t(`layout.setting.interfaceFunction.menuCollapse`)"
+      v-for="(item, key) in interfaceFunctions"
+      :key="key"
+      :label="$t(item.label)"
     >
-      <ASwitch :model-value="getCollapsed" @change="toggleCollapsed">
-        <template #checked-icon>
-          <icon-check />
-        </template>
-        <template #unchecked-icon>
-          <icon-close />
-        </template>
-      </ASwitch>
-    </SettingItem>
-    <SettingItem
-      key="2"
-      :label="$t(`layout.setting.interfaceFunction.menuCollapseButton`)"
-    >
-      <ASelect
-        class="!w-126px"
-        :model-value="getTrigger"
-        @change="setMenuSetting({ trigger: $event })"
-      >
-        <AOption
-          v-for="item in triggerOptions"
-          :key="item.value"
-          :value="item.value"
-          >{{ $t(item.label) }}</AOption
-        >
-      </ASelect>
+      <SwitchItem
+        v-if="item.type === 'switch'"
+        :change="item.change"
+        :model-value="item.modelValue"
+      ></SwitchItem>
+
+      <SelectItem
+        v-else-if="item.type === 'select'"
+        :model-value="item.modelValue"
+        :change="item.change"
+        :options="triggerOptions"
+      />
     </SettingItem>
   </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
-  import { unref } from 'vue';
+  import { ref, unref } from 'vue';
   import { useMenuSetting } from '@/hooks/setting';
-  import SettingItem from '../setting-item/index.vue';
   import { getMenuTriggerOptions } from './helpers';
+  import { SettingItem, SwitchItem, SelectItem } from '../common';
 
   defineOptions({
     name: 'InterfaceFunction',
   });
 
-  const { getCollapsed, toggleCollapsed, getTrigger, setMenuSetting } =
-    useMenuSetting();
+  interface InterfaceFunction {
+    type: 'switch' | 'select';
+    label: string;
+    modelValue: any;
+    change: any;
+  }
+
+  const {
+    getCollapsed,
+    toggleCollapsed,
+    getTrigger,
+    setMenuSetting,
+    getAccordion,
+  } = useMenuSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
+
+  const interfaceFunctions = ref<InterfaceFunction[]>([
+    {
+      label: 'layout.setting.interfaceFunction.menuCollapse',
+      type: 'switch',
+      modelValue: getCollapsed,
+      change: toggleCollapsed,
+    },
+    {
+      label: 'layout.setting.interfaceFunction.menuCollapseButton',
+      type: 'select',
+      modelValue: getTrigger,
+      change: setMenuSetting,
+    },
+    {
+      label: 'layout.setting.interfaceFunction.menuAccordion',
+      type: 'switch',
+      modelValue: getAccordion,
+      change: setMenuSetting,
+    },
+  ]);
 </script>
 
 <style lang="less" scoped></style>

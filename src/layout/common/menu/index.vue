@@ -6,6 +6,8 @@
       :show-title="!getCollapsed"
       style="height: 64px"
     ></AppLogo>
+
+    <VerticalMenu></VerticalMenu>
   </div>
 </template>
 
@@ -14,6 +16,7 @@
   import { computed, unref } from 'vue';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
   import { ThemeEnum } from '@/enums';
+  import { VerticalMenu } from './components';
 
   const { getShowLogo } = useRootSetting();
   const { getIsSidebarType, getCollapsed } = useMenuSetting();

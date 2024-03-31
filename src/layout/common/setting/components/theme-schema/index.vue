@@ -47,7 +47,7 @@
   import { SvgIcon } from '@/components/Icon';
   import { ThemeEnum } from '@/enums';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
-  import SettingItem from '@/layout/common/setting/components/setting-item/index.vue';
+  import { SettingItem } from '../common';
 
   defineOptions({
     name: 'ThemeScheme',

@@ -31,6 +31,11 @@ export const useMenuSetting = () => {
     return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
   });
 
+  // 是否是侧边栏模式
+  const getIsSidebarType = computed(
+    () => unref(getMenuType) === MenuTypeEnum.SIDEBAR,
+  );
+
   const getShowSiderTrigger = computed(() => {
     const trigger = unref(getTrigger);
 
@@ -88,6 +93,7 @@ export const useMenuSetting = () => {
     getMiniWidthNumber,
     getShowSiderTrigger,
     getShowHeaderTrigger,
+    getIsSidebarType,
 
     setMenuSetting,
     toggleCollapsed,

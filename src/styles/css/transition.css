@@ -18,3 +18,19 @@
 .interface-function-leave-active {
     --uno: absolute;
 }
+
+
+/**
+ ######################################################
+ ###################  Dark Menu  ######################
+ ######################################################
+ */
+.dark-menu-enter-active,
+.dark-menu-leave-active {
+    --uno: h-22px transition-all-300;
+}
+
+.dark-menu-enter-from,
+.dark-menu-leave-to {
+    --uno: translate-x-20px opacity-0 h-0;
+}

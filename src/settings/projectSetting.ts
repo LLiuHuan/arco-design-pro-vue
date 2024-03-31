@@ -14,6 +14,8 @@ const defaultSetting: ProjectConfig = {
   permissionCacheType: CacheTypeEnum.LOCAL,
   // Use error-handler-plugin - [显示错误处理插件]
   useErrorHandle: false,
+  // Whether to display the logo - [是否显示Logo]
+  showLogo: true,
   // Animation configuration - [动画配置]
   transitionSetting: {
     // Whether to open the page switching animation - [是否开启页面切换动画]
@@ -65,7 +67,7 @@ const defaultSetting: ProjectConfig = {
     // Drag the sidebar - [拖动侧边栏]
     canDrag: true,
     // Menu theme - [菜单主题]
-    theme: ThemeEnum.DARK,
+    theme: ThemeEnum.LIGHT,
 
     // Menu type - [菜单类型]
     type: MenuTypeEnum.SIDEBAR,

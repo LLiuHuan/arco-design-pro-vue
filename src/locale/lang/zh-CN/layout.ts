@@ -22,6 +22,7 @@ export default {
       light: '亮色模式',
       dark: '暗黑模式',
       system: '跟随系统',
+      darkMenu: '深色侧边栏',
     },
     themeColor: {
       title: '主题颜色',

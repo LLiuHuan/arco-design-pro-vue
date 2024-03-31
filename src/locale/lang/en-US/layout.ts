@@ -22,6 +22,7 @@ export default {
       light: 'Light mode',
       dark: 'Dark mode',
       system: 'Follow system',
+      darkMenu: 'Dark side menu',
     },
     themeColor: {
       title: 'Theme color',

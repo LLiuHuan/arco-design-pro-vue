@@ -16,14 +16,14 @@
     <template #trigger>
       <LayoutTrigger />
     </template>
-    <LayoutMenu></LayoutMenu>
+    <LayoutMenu :theme="getMenuTheme"></LayoutMenu>
     <LayoutDragBar ref="dragBarRef"></LayoutDragBar>
   </ALayoutSider>
 </template>
 
 <script lang="ts" setup>
   import { computed, CSSProperties, ref, unref } from 'vue';
-  import { LayoutTrigger, LayoutMenu } from '@/layout/common';
+  import { LayoutMenu, LayoutTrigger } from '@/layout/common';
   import { useMenuSetting } from '@/hooks/setting';
   import { LayoutDragBar } from './components';
   import { useDragLine, useSiderEvent } from './helpers';

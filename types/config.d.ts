@@ -121,4 +121,7 @@ export interface ProjectConfig {
 
   // Theme setting - [主题设置]
   themeSetting: ThemeSetting;
+
+  // Show logo - [显示logo]
+  showLogo: boolean;
 }

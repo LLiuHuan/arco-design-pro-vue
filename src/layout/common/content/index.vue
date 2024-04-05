@@ -16,12 +16,12 @@
       mode="out-in"
       appear
     >
-      <keep-alive v-if="openCache" :include="getCaches">
+      <keep-alive v-if="openCache" :max="10" :include="getCaches">
         <component
           :is="Component"
           :key="route.fullPath"
           :class="{ 'p-16px': showPadding }"
-          class="flex-grow bg-#f6f9f8 dark:bg-#101014 transition duration-300 ease-in-out"
+          class="flex-grow bg-#f6f9f8 dark:bg-#101014 transition-base"
         />
       </keep-alive>
       <component
@@ -29,7 +29,7 @@
         v-else
         :key="route.fullPath"
         :class="{ 'p-16px': showPadding }"
-        class="flex-grow bg-#f6f9f8 dark:bg-#101014 transition duration-300 ease-in-out"
+        class="flex-grow bg-#f6f9f8 dark:bg-#101014 transition-base"
       />
     </transition>
   </router-view>

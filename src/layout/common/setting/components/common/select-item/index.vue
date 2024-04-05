@@ -1,23 +1,66 @@
 <template>
   <ASelect
+    v-bind="getBindValue"
     class="!w-126px"
-    :model-value="modelValue"
-    @change="change({ trigger: $event })"
+    :disabled="disabled"
+    :options="options"
+    @change="handleChange"
   >
-    <AOption v-for="item in options" :key="item.value" :value="item.value">{{
-      $t(item.label)
-    }}</AOption>
   </ASelect>
 </template>
 
 <script lang="ts" setup>
+  import { computed } from 'vue';
+  import { SelectOptionData, SelectOptionGroup } from '@arco-design/web-vue';
+  import { baseHandler, HandlerEnum } from '../helpers';
+
   interface Props {
-    modelValue: any;
-    change: any;
-    options: any;
+    // 调用的修改事件
+    event: HandlerEnum;
+    // 是否禁用
+    disabled?: boolean;
+    // 是否绑定值
+    def?:
+      | string
+      | number
+      | boolean
+      | Record<string, any>
+      | (string | number | boolean | Record<string, any>)[];
+    // 初始值
+    initValue?:
+      | string
+      | number
+      | boolean
+      | Record<string, any>
+      | (string | number | boolean | Record<string, any>)[];
+    // 选项值
+    options: (
+      | string
+      | number
+      | boolean
+      | SelectOptionData
+      | SelectOptionGroup
+    )[];
   }
 
-  defineProps<Props>();
+  const props = defineProps<Props>();
+
+  const getBindValue = computed(() => {
+    return props.def
+      ? { modelValue: props.def, defaultValue: props.initValue || props.def }
+      : {};
+  });
+
+  function handleChange(
+    value:
+      | string
+      | number
+      | boolean
+      | Record<string, any>
+      | (string | number | boolean | Record<string, any>)[],
+  ) {
+    if (props.event) baseHandler(props.event, value);
+  }
 </script>
 
 <style lang="less" scoped></style>

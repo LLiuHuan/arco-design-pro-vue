@@ -1,5 +1,5 @@
 <template>
-  <ASwitch :model-value="modelValue" @change="change">
+  <ASwitch v-bind="getBindValue" :disabled="disabled" @change="handleChange">
     <template #checked-icon>
       <icon-check />
     </template>
@@ -10,12 +10,29 @@
 </template>
 
 <script lang="ts" setup>
+  import { computed } from 'vue';
+  import { baseHandler, HandlerEnum } from '../helpers';
+
   interface Props {
-    modelValue: any;
-    change: any;
+    // 调用的修改事件
+    event: HandlerEnum;
+    // 是否禁用
+    disabled?: boolean;
+    // 是否绑定值
+    def?: boolean;
   }
 
-  defineProps<Props>();
+  const props = defineProps<Props>();
+
+  const getBindValue = computed(() => {
+    return props.def ? { 'model-value': props.def } : {};
+  });
+
+  const handleChange = (value: boolean | string | number) => {
+    if (props.event) {
+      baseHandler(props.event, value);
+    }
+  };
 </script>
 
 <style lang="less" scoped></style>

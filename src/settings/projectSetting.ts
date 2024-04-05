@@ -85,6 +85,11 @@ const defaultSetting: ProjectConfig = {
     // Error color - [错误色]
     [ThemeColorEnum.ERROR]: '#F53F3F',
   },
+  // Header settings - [头部设置]
+  headerSetting: {
+    // Header height - [头部高度]
+    height: 64,
+  },
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

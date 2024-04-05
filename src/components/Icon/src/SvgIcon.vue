@@ -41,6 +41,8 @@
     localIcon?: string;
     /** Icon size - [图标大小] */
     size?: string | number;
+    /** Icon color - [图标颜色] */
+    color?: string;
     /** Whether to rotate - [是否旋转] */
     spin?: boolean;
     /** The rotation angle - [旋转角度] */
@@ -60,13 +62,14 @@
   }));
 
   const getStyle = computed((): CSSProperties => {
-    const { size, rotate } = props;
+    const { size, rotate, color } = props;
     let s = `${size}`;
     s = `${s.replace('px', '')}px`;
     return {
       width: s,
       height: s,
       transform: `rotate(${rotate}deg)`,
+      color,
     };
   });
 

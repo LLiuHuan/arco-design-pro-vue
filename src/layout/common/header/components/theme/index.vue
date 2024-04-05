@@ -2,7 +2,7 @@
   <HoverContainer :tooltip-content="$t(tooltipContent)">
     <AButton
       type="text"
-      class="!text-[var(--color-text-1)]"
+      class="!text-[var(--color-text-1)] !h-40px"
       @click="toggleDarkMode"
     >
       <DarkModeSwitch auto></DarkModeSwitch>

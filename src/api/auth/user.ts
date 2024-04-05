@@ -1,17 +1,19 @@
 import { defHttp } from '@/utils/http';
 
+enum Api {
+  Login = '/login',
+  GetUserInfo = '/getUserInfo',
+}
+
 export const fetchLogin = (username: string, password: string) => {
-  return defHttp.request({
-    url: '/login',
-    // url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1/login',
-    method: 'POST',
+  return defHttp.post<ApiAuth.loginResult>({
+    url: Api.Login,
     data: { username, password },
   });
 };
 
 export const fetchUserInfo = () => {
-  return defHttp.request({
-    url: '/getUserInfo',
-    method: 'GET',
+  return defHttp.get<ApiAuth.loginByTokenResult>({
+    url: Api.GetUserInfo,
   });
 };

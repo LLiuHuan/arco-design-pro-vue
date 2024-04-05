@@ -1,4 +1,5 @@
 import { handleModuleRoutes } from '@/utils/router';
+import type { AuthRoute } from '~/types/route';
 
 const modules = import.meta.glob('./**/*.ts', {
   eager: true,

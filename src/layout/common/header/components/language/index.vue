@@ -4,7 +4,7 @@
     position="left"
   >
     <ADropdown trigger="click" @select="handleSelect">
-      <AButton type="text" class="!text-[var(--color-text-1)]">
+      <AButton type="text" class="!text-[var(--color-text-1)] !h-40px">
         <SvgIcon icon="heroicons:language-16-solid" size="20"> </SvgIcon>
       </AButton>
       <template #content>

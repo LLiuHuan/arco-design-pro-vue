@@ -7,6 +7,7 @@ import {
   ThemeEnum,
 } from '@/enums';
 import type {
+  HeaderSetting,
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
@@ -99,6 +100,9 @@ export const useAppStore = defineStore({
     },
     getThemeSetting(): ThemeSetting {
       return this.getProjectConfig.themeSetting;
+    },
+    getHeaderSetting(): HeaderSetting {
+      return this.getProjectConfig.headerSetting;
     },
   },
   actions: {

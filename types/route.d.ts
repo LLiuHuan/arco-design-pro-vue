@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/authEnum';
+
 declare namespace PageRoute {
   /**
    * the root route key
@@ -125,7 +127,7 @@ declare namespace AuthRoute {
      * 哪些类型的用户有权限才能访问的路由(空的话则表示不需要权限)
      * @description 后端动态路由数据不需要该属性，直接由后端根据用户角色返回对应权限的路由数据
      */
-    permissions?: Auth.RoleType[];
+    permissions?: RoleEnum[];
     /** 缓存页面 */
     keepAlive?: boolean;
     /** 菜单和面包屑对应的图标 */

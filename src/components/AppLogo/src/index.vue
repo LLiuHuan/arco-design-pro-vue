@@ -1,10 +1,10 @@
 <template>
   <div
-    class="system-logo flex-center flex-center cursor-pointer transition-all-200"
+    class="system-logo flex-center flex-center cursor-pointer transition-base"
     :class="[
       theme === ThemeEnum.DARK
         ? 'text-[var(--color-white)]'
-        : 'border-b-[var(--color-border-1)] border-b border-solid border-0 !text-[rgba(var(--primary-6))]',
+        : '!text-[rgba(var(--primary-6))]',
     ]"
     @click="toHome(false)"
   >

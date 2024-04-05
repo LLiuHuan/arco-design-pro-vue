@@ -1,25 +1,36 @@
 <template>
-  <div class="size-full flex-col-stretch shadow-sider text-16px font-bold">
+  <div class="size-full flex-col-stretch shadow-sider">
     <AppLogo
       v-if="getIsShowLogo"
+      class="text-16px font-bold"
+      :class="{
+        'border-b-[var(--color-border-1)] border-b border-solid border-0 ':
+          theme === ThemeEnum.LIGHT,
+      }"
       :theme="theme"
       :show-title="!getCollapsed"
-      style="height: 64px"
+      :style="{ height: `${getHeaderHeight}px` }"
     ></AppLogo>
 
-    <VerticalMenu></VerticalMenu>
+    <VerticalMenu :theme="theme" :menus="getMenus"></VerticalMenu>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { AppLogo } from '@/components/AppLogo';
   import { computed, unref } from 'vue';
-  import { useMenuSetting, useRootSetting } from '@/hooks/setting';
+  import {
+    useHeaderSetting,
+    useMenuSetting,
+    useRootSetting,
+  } from '@/hooks/setting';
   import { ThemeEnum } from '@/enums';
+  import { useRouteStore } from '@/store/modules/route';
   import { VerticalMenu } from './components';
 
   const { getShowLogo } = useRootSetting();
   const { getIsSidebarType, getCollapsed } = useMenuSetting();
+  const { getHeaderHeight } = useHeaderSetting();
 
   interface Props {
     /**
@@ -29,6 +40,8 @@
   }
 
   defineProps<Props>();
+
+  const { getMenus } = useRouteStore();
 
   const getIsShowLogo = computed(
     () => unref(getShowLogo) && unref(getIsSidebarType),

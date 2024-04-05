@@ -7,7 +7,7 @@
     "
     @click="toggle"
   >
-    <AButton type="text" class="!text-[var(--color-text-1)]">
+    <AButton type="text" class="!text-[var(--color-text-1)] !h-40px">
       <SvgIcon v-if="isFullscreen" icon="gridicons:fullscreen-exit" size="20">
       </SvgIcon>
       <SvgIcon v-else icon="gridicons:fullscreen" size="20"> </SvgIcon>

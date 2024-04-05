@@ -2,7 +2,7 @@
   <!-- class="h-full flex justify-center items-center px-10px py-1px hover:bg-#f6f6f6 cursor-pointer transition-all-300" -->
   <a-button
     type="text"
-    class="!text-[var(--color-text-1)]"
+    class="!text-[var(--color-text-1)] !h-40px"
     @click="toggleCollapsed"
   >
     <SvgIcon

@@ -190,7 +190,7 @@ export class HTTP {
 
     return this.axiosInstance.request<T>({
       ...config,
-      method: 'POST',
+      method: RequestEnum.POST,
       data: formData,
       headers: {
         'Content-type': ContentTypeEnum.FORM_DATA,
@@ -229,7 +229,7 @@ export class HTTP {
     config: AxiosRequestConfig,
     options?: RequestOptions,
   ): Promise<T> {
-    return this.request({ ...config, method: 'GET' }, options);
+    return this.request({ ...config, method: RequestEnum.GET }, options);
   }
 
   /**
@@ -241,7 +241,7 @@ export class HTTP {
     config: AxiosRequestConfig,
     options?: RequestOptions,
   ): Promise<T> {
-    return this.request({ ...config, method: 'POST' }, options);
+    return this.request({ ...config, method: RequestEnum.POST }, options);
   }
 
   /**
@@ -253,7 +253,7 @@ export class HTTP {
     config: AxiosRequestConfig,
     options?: RequestOptions,
   ): Promise<T> {
-    return this.request({ ...config, method: 'PUT' }, options);
+    return this.request({ ...config, method: RequestEnum.PUT }, options);
   }
 
   /**
@@ -265,7 +265,7 @@ export class HTTP {
     config: AxiosRequestConfig,
     options?: RequestOptions,
   ): Promise<T> {
-    return this.request({ ...config, method: 'DELETE' }, options);
+    return this.request({ ...config, method: RequestEnum.DELETE }, options);
   }
 
   /**

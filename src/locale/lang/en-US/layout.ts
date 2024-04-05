@@ -2,10 +2,16 @@ export default {
   header: {
     tooltipEntryFull: 'Full screen',
     tooltipExitFull: 'Exit full screen',
+
     switchLanguage: 'Switch language',
+
     themeLight: 'Click to switch light theme',
     themeDark: 'Click to switch dark theme',
     themeSystem: 'Click to switch system theme',
+
+    logOut: 'Log out',
+    logOutMessage: 'Are you sure you want to log out ?',
+    userCenter: 'User center',
   },
   setting: {
     drawerTitle: 'Project configuration',
@@ -43,6 +49,9 @@ export default {
       menuTriggerNone: 'Do not show',
       menuTriggerBottom: 'Bottom',
       menuTriggerTop: 'Top',
+
+      // height
+      headerHeight: 'Header height',
     },
   },
 };

@@ -7,6 +7,7 @@ import {
   MULTIPLE_TABS_KEY,
   PROJ_CFG_KEY,
   REFRESH_TOKEN_KEY,
+  ROLES_KEY,
   TOKEN_KEY,
   USER_INFO_KEY,
 } from '@/enums';
@@ -15,14 +16,7 @@ import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { RouteLocationNormalized } from 'vue-router';
 
 declare namespace StorageInterface {
-  /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */
-  interface Session {
-    /** 用户token */
-    [TOKEN_KEY]: string;
-  }
-
-  /** The type of data stored in local Storage - [localStorage的存储数据的类型] */
-  interface Local {
+  interface BasicStore {
     /** 本地语言缓存 */
     [LOCALE_KEY]: LocaleSetting;
     /** 用户token */
@@ -33,12 +27,23 @@ declare namespace StorageInterface {
     /** 多标签页列表 */
     [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
     /** 用户信息 */
-    [USER_INFO_KEY]: Auth.UserInfo;
+    [USER_INFO_KEY]: ApiAuth.loginByTokenResult;
     /** 是否开启自动切换主题 */
     [APP_DARK_MODE_IS_AUTO_KEY]: boolean;
     /** 登录信息 */
     [LOGIN_INFO]: Auth.LoginInfo;
+    /** 角色列表 */
+    [ROLES_KEY]: Auth.RoleType[];
   }
+
+  /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */
+  type Session = BasicStore;
+
+  /** The type of data stored in local Storage - [localStorage的存储数据的类型] */
+  type Local = BasicStore;
+
+  /** Basic storage key type - [基础存储键类型] */
+  export type BasicKeys = keyof BasicStore;
 }
 
 /**

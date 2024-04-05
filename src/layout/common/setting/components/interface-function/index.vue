@@ -7,73 +7,66 @@
     class="flex-col-stretch gap-12px"
   >
     <SettingItem
-      v-for="(item, key) in interfaceFunctions"
-      :key="key"
-      :label="$t(item.label)"
+      key="1"
+      :label="$t('layout.setting.interfaceFunction.menuCollapse')"
     >
       <SwitchItem
-        v-if="item.type === 'switch'"
-        :change="item.change"
-        :model-value="item.modelValue"
+        :def="getCollapsed"
+        :event="HandlerEnum.MENU_COLLAPSE"
       ></SwitchItem>
-
+    </SettingItem>
+    <SettingItem
+      key="2"
+      :label="$t('layout.setting.interfaceFunction.menuCollapseButton')"
+    >
       <SelectItem
-        v-else-if="item.type === 'select'"
-        :model-value="item.modelValue"
-        :change="item.change"
+        :def="getTrigger"
+        :event="HandlerEnum.MENU_COLLAPSE_BTN"
         :options="triggerOptions"
-      />
+      ></SelectItem>
+    </SettingItem>
+    <SettingItem
+      key="3"
+      :label="$t('layout.setting.interfaceFunction.menuAccordion')"
+    >
+      <SwitchItem
+        :def="getAccordion"
+        :event="HandlerEnum.MENU_ACCORDION"
+      ></SwitchItem>
+    </SettingItem>
+    <SettingItem
+      key="4"
+      :label="$t('layout.setting.interfaceFunction.headerHeight')"
+    >
+      <InputNumberItem
+        :def="getHeaderHeight"
+        :event="HandlerEnum.HEADER_HEIGHT"
+        :min="48"
+      ></InputNumberItem>
     </SettingItem>
   </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
-  import { ref, unref } from 'vue';
-  import { useMenuSetting } from '@/hooks/setting';
+  import { unref } from 'vue';
+  import { useHeaderSetting, useMenuSetting } from '@/hooks/setting';
   import { getMenuTriggerOptions } from './helpers';
-  import { SettingItem, SwitchItem, SelectItem } from '../common';
+  import {
+    HandlerEnum,
+    SelectItem,
+    SettingItem,
+    SwitchItem,
+    InputNumberItem,
+  } from '../common';
 
   defineOptions({
     name: 'InterfaceFunction',
   });
 
-  interface InterfaceFunction {
-    type: 'switch' | 'select';
-    label: string;
-    modelValue: any;
-    change: any;
-  }
-
-  const {
-    getCollapsed,
-    toggleCollapsed,
-    getTrigger,
-    setMenuSetting,
-    getAccordion,
-  } = useMenuSetting();
+  const { getCollapsed, getTrigger, getAccordion } = useMenuSetting();
+  const { getHeaderHeight } = useHeaderSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
-
-  const interfaceFunctions = ref<InterfaceFunction[]>([
-    {
-      label: 'layout.setting.interfaceFunction.menuCollapse',
-      type: 'switch',
-      modelValue: getCollapsed,
-      change: toggleCollapsed,
-    },
-    {
-      label: 'layout.setting.interfaceFunction.menuCollapseButton',
-      type: 'select',
-      modelValue: getTrigger,
-      change: setMenuSetting,
-    },
-    {
-      label: 'layout.setting.interfaceFunction.menuAccordion',
-      type: 'switch',
-      modelValue: getAccordion,
-      change: setMenuSetting,
-    },
-  ]);
 </script>
 
 <style lang="less" scoped></style>

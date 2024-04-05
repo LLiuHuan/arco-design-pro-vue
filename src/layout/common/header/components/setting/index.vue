@@ -2,7 +2,7 @@
   <HoverContainer tooltip-content="主题设置">
     <AButton
       type="text"
-      class="!text-[var(--color-text-1)]"
+      class="!text-[var(--color-text-1)] !h-40px"
       @click="setSettingDrawerState(true)"
     >
       <SvgIcon icon="mingcute:settings-6-fill" size="20"></SvgIcon>

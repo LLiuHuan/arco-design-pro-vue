@@ -23,21 +23,10 @@
         v-if="!getIsDarkMode"
         :label="$t(`layout.setting.themeSchema.darkMenu`)"
       >
-        <ASwitch
-          :model-value="getMenuTheme === ThemeEnum.DARK"
-          @change="
-            setMenuSetting({
-              theme: $event ? ThemeEnum.DARK : ThemeEnum.LIGHT,
-            })
-          "
-        >
-          <template #checked-icon>
-            <icon-check />
-          </template>
-          <template #unchecked-icon>
-            <icon-close />
-          </template>
-        </ASwitch>
+        <SwitchItem
+          :event="HandlerEnum.MENU_THEME"
+          :def="getIsMenuDark"
+        ></SwitchItem>
       </SettingItem>
     </Transition>
   </div>
@@ -47,7 +36,8 @@
   import { SvgIcon } from '@/components/Icon';
   import { ThemeEnum } from '@/enums';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
-  import { SettingItem } from '../common';
+  import { computed } from 'vue';
+  import { SettingItem, SwitchItem, HandlerEnum } from '../common';
 
   defineOptions({
     name: 'ThemeScheme',
@@ -66,7 +56,9 @@
   };
 
   const { setDarkMode, getDarkMode, getIsDarkMode } = useRootSetting();
-  const { getMenuTheme, setMenuSetting } = useMenuSetting();
+  const { getMenuTheme } = useMenuSetting();
+
+  const getIsMenuDark = computed(() => getMenuTheme.value === ThemeEnum.DARK);
 </script>
 
 <style lang="less" scoped></style>

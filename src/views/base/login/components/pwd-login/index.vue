@@ -1,6 +1,6 @@
 <template>
   <div class="w-320px">
-    <div class="h-32px leading-32px text-[rgb(var(--red-6))]">{{
+    <div class="h-32px leading-32px text-[rgba(var(--red-6))]">{{
       errorMessage
     }}</div>
     <a-form
@@ -151,8 +151,8 @@
   const loginConfig = ref(
     localStg.get(LOGIN_INFO) || {
       rememberPassword: true,
-      username: 'Arco', // 演示默认值
-      password: 'arco123', // demo default value
+      username: 'admin', // 演示默认值
+      password: 'admin', // demo default value
     },
   );
 

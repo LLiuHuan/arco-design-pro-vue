@@ -4,6 +4,25 @@
       class="fixed top-24px left-22px text-[var(--color-fill-1)] text-20px"
       :title="$t('system.title')"
     ></AppLogo>
+    <div class="fixed top-24px right-22px z-101">
+      <AButton
+        type="text"
+        class="!text-[var(--color-text-1)]"
+        @click="toggleDarkMode"
+      >
+        <DarkModeSwitch></DarkModeSwitch>
+      </AButton>
+
+      <ADropdown trigger="click" @select="handleSelect">
+        <AButton type="text" class="!text-[var(--color-text-1)]">
+          <SvgIcon icon="heroicons:language-16-solid" size="20"> </SvgIcon>
+        </AButton>
+        <template #content>
+          <ADoption :value="LOCALE.ZH_CN">中文</ADoption>
+          <ADoption :value="LOCALE.EN_US">English</ADoption>
+        </template>
+      </ADropdown>
+    </div>
     <LoginBg
       class="w-35%"
       style="background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%)"
@@ -24,7 +43,7 @@
         <div
           class="flex justify-center items-center text-[var(--color-text-2)] h-40px"
         >
-          Arco Design Pro © 2024
+          Arco Design Pro © {{ year }}
         </div>
       </div>
     </div>
@@ -35,6 +54,13 @@
   import { computed } from 'vue';
   import type { Component } from 'vue';
   import { AppLogo } from '@/components/AppLogo';
+  import { DarkModeSwitch } from '@/components/DarkModeSwitch';
+  import { useRootSetting } from '@/hooks/setting';
+  import { LOCALE } from '@/settings';
+  import { SvgIcon } from '@/components/Icon';
+  import { useLocale } from '@/locale/useLocale';
+  import { LocaleType } from '~/types/config';
+  import { loginModuleLabels } from './enum';
   import {
     BindWechat,
     CodeLogin,
@@ -44,7 +70,15 @@
     LoginBg,
     ForgetPwd,
   } from './components';
-  import { loginModuleLabels } from './enum';
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const { toggleDarkMode } = useRootSetting();
+  const { changeLocale } = useLocale();
+
+  const handleSelect = (value: string) => {
+    changeLocale(value as LocaleType);
+  };
 
   interface Props {
     /** 登录模块分类 */

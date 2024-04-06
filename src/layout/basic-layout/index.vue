@@ -6,7 +6,7 @@
       <ALayout class="w-full h-full relative">
         <LayoutHeader></LayoutHeader>
         <ALayoutContent
-          class="adp-default-layout-content overflow-y-auto transition-base bg-[var(--color-fill-2)]"
+          class="adp-default-layout-content overflow-y-auto transition-base bg-[var(--color-fill-2)] relative"
         >
           <LayoutContent />
           <SettingDrawer></SettingDrawer>

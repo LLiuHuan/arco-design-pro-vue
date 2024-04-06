@@ -1,17 +1,12 @@
 <template>
   <div
-    class="system-logo flex-center flex-center cursor-pointer transition-base"
-    :class="[
-      theme === AppEnum.DARK
-        ? 'text-[var(--color-white)]'
-        : '!text-[rgba(var(--primary-6))]',
-    ]"
+    class="system-logo flex-center flex-center cursor-pointer transition-base !text-[rgba(var(--primary-6))]"
     @click="toHome(false)"
   >
     <img class="w-32px" src="/logo.png" alt="logo" />
     <div
       v-show="showTitle"
-      class="text-16px font-bold transition-all-500 leading-normal ml-2 truncate md:opacity-100"
+      class="text-16px font-bold leading-normal ml-2 truncate md:opacity-100"
       >{{ title ?? globTitle }}</div
     >
   </div>

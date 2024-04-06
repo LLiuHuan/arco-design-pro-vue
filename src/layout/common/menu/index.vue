@@ -2,17 +2,17 @@
   <div class="size-full flex-col-stretch shadow-sider">
     <AppLogo
       v-if="getIsShowLogo"
-      class="text-16px font-bold"
-      :class="{
-        'border-b-[var(--color-border-1)] border-b border-solid border-0 ':
-          theme === AppEnum.LIGHT,
-      }"
+      class="text-16px font-bold border-b border-solid border-0"
+      :class="[
+        theme && theme === AppEnum.LIGHT && !getIsDarkMode
+          ? 'border-b-[rgba(242,243,245,1)]'
+          : 'border-b-[rgba(46,46,48,1)]',
+      ]"
       :theme="theme"
       :show-title="!getCollapsed"
-      :style="{ height: `${getHeaderHeight}px` }"
-    ></AppLogo>
-
-    <VerticalMenu :theme="theme" :menus="getMenus"></VerticalMenu>
+      :style="{ height: `${getHeaderHeight + 1}px` }"
+    />
+    <VerticalMenu :theme="theme" :menus="getMenus" />
   </div>
 </template>
 
@@ -42,6 +42,7 @@
   defineProps<Props>();
 
   const { getMenus } = useRouteStore();
+  const { getIsDarkMode } = useRootSetting();
 
   const getIsShowLogo = computed(
     () => unref(getShowLogo) && unref(getIsSidebarType),

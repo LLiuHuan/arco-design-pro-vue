@@ -2,7 +2,7 @@ import { useAppStore } from '@/store/modules/app';
 import { computed } from 'vue';
 import { TransitionSetting } from '~/types/config';
 
-export function useTransitionSetting() {
+export const useTransitionSetting = () => {
   const appStore = useAppStore();
 
   /**
@@ -48,4 +48,4 @@ export function useTransitionSetting() {
     getOpenPageLoading,
     getBasicTransition,
   };
-}
+};

@@ -17,11 +17,14 @@ export function genMessage(
 ) {
   const obj: Recordable = {};
 
+  console.log('genMessage');
+
   Object.keys(langs).forEach((key) => {
     const langFileModule = langs[key].default;
     let fileName = key.replace(`./${prefix}/`, '').replace(/^\.\//, '');
     const lastIndex = fileName.lastIndexOf('.');
     fileName = fileName.substring(0, lastIndex);
+    console.log(fileName);
     const keyList = fileName.split('/');
     const moduleName = keyList.shift();
     const objKey = keyList.join('.');

@@ -21,6 +21,8 @@ export class AxiosCanceler {
       // 如果当前请求不在等待中，将其添加到等待中
       pendingMap.set(url, controller);
     }
+
+    console.log('pendingMap1: ', pendingMap);
   }
 
   /**
@@ -32,6 +34,7 @@ export class AxiosCanceler {
         abortController.abort();
       }
     });
+    console.log('pendingMap2: ', pendingMap);
     this.reset();
   }
 

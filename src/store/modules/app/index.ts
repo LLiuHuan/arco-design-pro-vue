@@ -4,7 +4,7 @@ import {
   APP_DARK_MODE_IS_AUTO_KEY,
   APP_DARK_MODE_KEY,
   PROJ_CFG_KEY,
-  ThemeEnum,
+  AppEnum,
 } from '@/enums';
 import type {
   HeaderSetting,
@@ -16,15 +16,16 @@ import type {
 } from '~/types/config';
 import type { BeforeMiniState } from '~/types/storage';
 import { darkMode } from '@/settings';
-import { localStg } from '@/utils/cache';
+import { localStg, sessionStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
+import { resetRouter } from '@/router';
 import { initAppSetting } from './helpers';
 
 interface AppState {
   /**
    * @description Theme enum - [主题枚举]
    */
-  darkMode?: ThemeEnum;
+  darkMode?: AppEnum;
   /**
    * @description Setting Drawer Status - [设置抽屉状态]
    */
@@ -44,6 +45,8 @@ interface AppState {
   beforeMiniInfo: BeforeMiniState;
 }
 
+let timeId: TimeoutHandle;
+
 export const useAppStore = defineStore({
   id: 'store-app',
   state: (): AppState => ({
@@ -57,19 +60,19 @@ export const useAppStore = defineStore({
       return state.pageLoading;
     },
     // 获取主题
-    getDarkMode(state): ThemeEnum {
+    getDarkMode(state): AppEnum {
       return (
         state.darkMode ||
-        (localStorage.getItem(APP_DARK_MODE_KEY) as ThemeEnum) ||
+        (localStorage.getItem(APP_DARK_MODE_KEY) as AppEnum) ||
         darkMode
       );
     },
     // 获取下一个主题
-    getNextDarkMode(): ThemeEnum {
-      const themeSchemes: ThemeEnum[] = [ThemeEnum.LIGHT, ThemeEnum.DARK];
-
+    getNextDarkMode(): AppEnum {
+      const themeSchemes: AppEnum[] = [AppEnum.LIGHT, AppEnum.DARK];
+      console.log(localStg.get(APP_DARK_MODE_IS_AUTO_KEY));
       if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
-        themeSchemes.push(ThemeEnum.AUTO);
+        themeSchemes.push(AppEnum.AUTO);
       const index = themeSchemes.findIndex((item) => item === this.getDarkMode);
       const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
       return themeSchemes[nextIndex];
@@ -115,7 +118,7 @@ export const useAppStore = defineStore({
      * @description Set the theme - [设置主题]
      * @param mode
      */
-    setDarkMode(mode: ThemeEnum): void {
+    setDarkMode(mode: AppEnum): void {
       this.darkMode = mode;
       localStorage.setItem(APP_DARK_MODE_KEY, mode);
     },
@@ -152,23 +155,23 @@ export const useAppStore = defineStore({
       );
       localStg.set(PROJ_CFG_KEY, this.projectConfig);
     },
-
-    // async resetAllState() {
-    //   resetRouter();
-    //   Persistent.clearAll();
-    // },
-    // async setPageLoadingAction(loading: boolean): Promise<void> {
-    //   if (loading) {
-    //     clearTimeout(timeId);
-    //     // Prevent flicker
-    //     timeId = setTimeout(() => {
-    //       this.setPageLoading(loading);
-    //     }, 50);
-    //   } else {
-    //     this.setPageLoading(loading);
-    //     clearTimeout(timeId);
-    //   }
-    // },
+    async resetAllState() {
+      resetRouter();
+      localStg.clear();
+      sessionStg.clear();
+    },
+    async setPageLoadingAction(loading: boolean): Promise<void> {
+      if (loading) {
+        clearTimeout(timeId);
+        // Prevent flicker
+        timeId = setTimeout(() => {
+          this.setPageLoading(loading);
+        }, 50);
+      } else {
+        this.setPageLoading(loading);
+        clearTimeout(timeId);
+      }
+    },
     // setApiAddress(config: ApiAddress): void {
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));
     // },

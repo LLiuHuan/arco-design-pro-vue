@@ -29,5 +29,7 @@ export function getTransitionName({
   if (openCache) {
     name = isInCache && route.meta.loaded ? transitionName : undefined;
   }
+
+  console.log('name', name, route.meta.transitionName, def);
   return name || (route.meta.transitionName as string) || def;
 }

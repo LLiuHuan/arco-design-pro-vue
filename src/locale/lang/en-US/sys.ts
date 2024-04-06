@@ -60,7 +60,7 @@ export default {
       mobileLogin: 'Mobile Login',
       qrLogin: 'QR Code Login',
       otherAccountLogin: 'Other account login',
-      otherLoginMode: 'Other login methods',
+      otherLoginMode: 'Other login',
     },
     codeLogin: {
       title: 'Code Login',

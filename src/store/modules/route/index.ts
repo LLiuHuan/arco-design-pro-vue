@@ -3,10 +3,14 @@ import { router, CONSTANT_ROUTES, routes as staticRoutes } from '@/router';
 import { useAuthStore } from '@/store/modules/auth';
 import {
   filterAuthRoutesByUserPermission,
+  getCacheRoutes,
   getConstantRouteNames,
+  transformAuthRouteToSearchMenus,
   transformAuthRouteToVueRoutes,
   transformRoutePathToRouteName,
 } from '@/utils/router';
+import { transformAuthRouteToMenu } from '@/utils/router/menu';
+import { store } from '@/store';
 
 interface RouteState {
   /**
@@ -19,8 +23,8 @@ interface RouteState {
   isInitAuthRoute: boolean;
   /** 路由首页name(前端静态路由时生效，后端动态路由该值会被后端返回的值覆盖) */
   routeHomeName: AuthRoute.AllRouteKey;
-  // /** 菜单 */
-  // menus: App.GlobalMenuOption[];
+  /** 菜单列表 */
+  menus: App.Menu[];
   /** 搜索的菜单 */
   searchMenus: AuthRoute.Route[];
   /** 缓存的路由名称 */
@@ -35,11 +39,26 @@ export const useRouteStore = defineStore({
     routeHomeName: transformRoutePathToRouteName(
       import.meta.env.VITE_ROUTE_HOME_PATH,
     ),
-    // menus: [],
+    menus: [],
     searchMenus: [],
     cacheRoutes: [],
   }),
-  getters: {},
+  getters: {
+    /**
+     * @description Get the menu - [获取菜单]
+     * @param state
+     */
+    getMenus(state) {
+      return state.menus;
+    },
+    /**
+     * @description Get isInitAuthRoute - [获取isInitAuthRoute]
+     * @param state
+     */
+    getIsInitAuthRoute(state) {
+      return state.isInitAuthRoute;
+    },
+  },
   actions: {
     /**
      * @description Reset the store of the route - [重置路由的store]
@@ -74,16 +93,19 @@ export const useRouteStore = defineStore({
      * @param routes - 权限路由
      */
     handleAuthRoute(routes: AuthRoute.Route[]) {
-      // (this.menus as App.GlobalMenuOption[]) = transformAuthRouteToMenu(routes);
-      // this.searchMenus = transformAuthRouteToSearchMenus(routes);
+      this.menus = transformAuthRouteToMenu(routes);
+      console.log('this.menus', this.menus);
+      this.searchMenus = transformAuthRouteToSearchMenus(routes);
 
       const vueRoutes = transformAuthRouteToVueRoutes(routes);
 
+      console.log('vueRoutes: ', vueRoutes);
       vueRoutes.forEach((route) => {
+        console.log('route: ', route);
         router.addRoute(route);
       });
 
-      // this.cacheRoutes = getCacheRoutes(vueRoutes);
+      this.cacheRoutes = getCacheRoutes(vueRoutes);
     },
 
     /**
@@ -91,11 +113,11 @@ export const useRouteStore = defineStore({
      */
     async initStaticRoute() {
       // const { initHomeTab } = useMultipleTabStore();
-      const auth = useAuthStore();
+      const { getRoleList } = useAuthStore();
 
       const routes = filterAuthRoutesByUserPermission(
         staticRoutes,
-        auth.userInfo.userRole,
+        getRoleList,
       );
       this.handleAuthRoute(routes);
 
@@ -114,4 +136,15 @@ export const useRouteStore = defineStore({
       }
     },
   },
+
+  // persist: {
+  //   key: 'pinia-route-store',
+  //   storage: localStorage,
+  //   debug: true,
+  // },
 });
+
+// // Need to be used outside the setup - [需要在设置之外使用]
+export function useRouteStoreWithOut() {
+  return useRouteStore(store);
+}

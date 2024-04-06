@@ -13,16 +13,16 @@
 <script lang="ts" setup>
   import { HoverContainer } from '@/components/HoverContainer';
   import { DarkModeSwitch } from '@/components/DarkModeSwitch';
-  import { ThemeEnum } from '@/enums';
+  import { AppEnum } from '@/enums';
   import { computed, unref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
 
   const { toggleDarkMode, getNextDarkMode } = useRootSetting();
 
   const tooltips = {
-    [ThemeEnum.LIGHT]: 'layout.header.themeLight',
-    [ThemeEnum.DARK]: 'layout.header.themeDark',
-    [ThemeEnum.AUTO]: 'layout.header.themeSystem',
+    [AppEnum.LIGHT]: 'layout.header.themeLight',
+    [AppEnum.DARK]: 'layout.header.themeDark',
+    [AppEnum.AUTO]: 'layout.header.themeSystem',
   };
 
   const tooltipContent = computed(() => tooltips[unref(getNextDarkMode)]);

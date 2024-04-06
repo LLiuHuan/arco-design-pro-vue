@@ -1,6 +1,6 @@
 const dashboard: AuthRoute.Route = {
-  name: 'dashboard1',
-  path: '/dashboard1',
+  name: 'dashboard',
+  path: '/dashboard',
   component: 'basic',
   children: [
     {
@@ -9,7 +9,7 @@ const dashboard: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '分析页',
-        requiresAuth: true,
+        ignoreAuth: true,
         icon: 'icon-park-outline:analysis',
         i18nTitle: 'routes.dashboard.analysis',
       },
@@ -20,7 +20,7 @@ const dashboard: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '工作台',
-        requiresAuth: true,
+        ignoreAuth: true,
         icon: 'icon-park-outline:workbench',
         i18nTitle: 'routes.dashboard.workbench',
       },
@@ -30,7 +30,7 @@ const dashboard: AuthRoute.Route = {
     title: '仪表盘',
     icon: 'mdi:monitor-dashboard',
     order: 1,
-    i18nTitle: 'routes.dashboard._value',
+    i18nTitle: 'routes.dashboard.title',
   },
 };
 

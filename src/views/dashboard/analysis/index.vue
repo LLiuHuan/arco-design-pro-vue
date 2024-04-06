@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AButton @click="logout">退出</AButton>
     <ul>
       <li>1</li>
       <li></li>
@@ -305,6 +306,15 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { useAuthStore } from '@/store/modules/auth';
+  import { useRoute, useRouter } from 'vue-router';
+
+  const { logout } = useAuthStore();
+  const route = useRoute();
+  console.log(route);
+  const router = useRouter();
+  console.log(router);
+</script>
 
 <style lang="less" scoped></style>

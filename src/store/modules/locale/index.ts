@@ -4,7 +4,13 @@ import { LOCALE_KEY } from '@/enums';
 import { localeSetting } from '@/settings';
 import { localStg } from '@/utils/cache';
 import { store } from '@/store';
+import { router } from '@/router';
+import { useTitle } from '@vueuse/core';
+import { useI18n } from '@/hooks/web';
 
+/**
+ * @description Locale store - [多语言 store]
+ */
 const lsLocaleSetting = (localStg.get(LOCALE_KEY) ||
   localeSetting) as LocaleSetting;
 
@@ -41,6 +47,12 @@ export const useLocaleStore = defineStore({
     setLocaleInfo(info: Partial<LocaleSetting>) {
       this.localInfo = { ...this.localInfo, ...info };
       localStg.set(LOCALE_KEY, this.localInfo);
+    },
+    updateTitleByLocale() {
+      const { i18nTitle, title } = router.currentRoute.value.meta;
+      const { t } = useI18n();
+      const documentTitle = i18nTitle ? t(i18nTitle) : title;
+      useTitle(documentTitle);
     },
     /**
      * @description Initialize multilingual information and load the existing configuration from the local cache - [初始化多语言信息并加载本地缓存中的现有配置]

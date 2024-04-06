@@ -1,6 +1,6 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
-import { ThemeColorEnum, ThemeEnum } from '@/enums';
+import { ThemeColorEnum, AppEnum } from '@/enums';
 import type { ProjectConfig } from '~/types/config';
 import { setBaseColor } from '@/utils/common';
 import { usePreferredColorScheme } from '@vueuse/core';
@@ -32,10 +32,10 @@ export const useRootSetting = () => {
 
   // 获取是否开启暗黑模式
   const getIsDarkMode = computed(() => {
-    if (unref(getDarkMode) === ThemeEnum.AUTO) {
-      return unref(osTheme) === ThemeEnum.DARK;
+    if (unref(getDarkMode) === AppEnum.AUTO) {
+      return unref(osTheme) === AppEnum.DARK;
     }
-    return unref(getDarkMode) === ThemeEnum.DARK;
+    return unref(getDarkMode) === AppEnum.DARK;
   });
 
   // 获取主题颜色
@@ -51,7 +51,7 @@ export const useRootSetting = () => {
     appStore.setProjectConfig(setting);
   };
 
-  const setDarkMode = (mode: ThemeEnum) => {
+  const setDarkMode = (mode: AppEnum) => {
     appStore.setDarkMode(mode);
   };
 

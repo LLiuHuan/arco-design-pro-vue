@@ -2,7 +2,7 @@
   <div
     class="system-logo flex-center flex-center cursor-pointer transition-base"
     :class="[
-      theme === ThemeEnum.DARK
+      theme === AppEnum.DARK
         ? 'text-[var(--color-white)]'
         : '!text-[rgba(var(--primary-6))]',
     ]"
@@ -20,7 +20,7 @@
 <script lang="ts" setup>
   import { useRouterPush } from '@/hooks/component';
   import { useGlobSetting } from '@/hooks/setting';
-  import { ThemeEnum } from '@/enums';
+  import { AppEnum } from '@/enums';
 
   const { toHome } = useRouterPush();
 
@@ -36,12 +36,12 @@
     /**
      * The theme of the current parent component - [当前父组件的主题]
      */
-    theme?: ThemeEnum;
+    theme?: AppEnum;
   }
 
   withDefaults(defineProps<Props>(), {
     showTitle: true,
-    theme: ThemeEnum.LIGHT,
+    theme: AppEnum.LIGHT,
   });
 
   const { title: globTitle } = useGlobSetting();

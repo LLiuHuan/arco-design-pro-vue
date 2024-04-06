@@ -2,10 +2,10 @@
   <template v-if="!auto">
     <SvgIcon
       v-if="getIsDarkMode"
-      :icon="icons[ThemeEnum.DARK]"
+      :icon="icons[AppEnum.DARK]"
       size="20"
     ></SvgIcon>
-    <SvgIcon v-else :icon="icons[ThemeEnum.LIGHT]" size="20"></SvgIcon>
+    <SvgIcon v-else :icon="icons[AppEnum.LIGHT]" size="20"></SvgIcon>
   </template>
   <SvgIcon v-else :icon="icon" size="20"></SvgIcon>
 </template>
@@ -14,7 +14,7 @@
   import { computed, unref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
   import { SvgIcon } from '@/components/Icon';
-  import { APP_DARK_MODE_IS_AUTO_KEY, ThemeEnum } from '@/enums';
+  import { APP_DARK_MODE_IS_AUTO_KEY, AppEnum } from '@/enums';
   import { localStg } from '@/utils/cache';
 
   defineOptions({ name: 'DarkModeSwitch' });
@@ -32,16 +32,16 @@
 
   const { getDarkMode, getIsDarkMode } = useRootSetting();
 
-  const icons: Record<ThemeEnum, string> = {
-    [ThemeEnum.LIGHT]: 'line-md:sunny-filled',
-    [ThemeEnum.DARK]: 'line-md:moon-filled',
-    [ThemeEnum.AUTO]: '',
+  const icons: Record<AppEnum, string> = {
+    [AppEnum.LIGHT]: 'line-md:sunny-filled',
+    [AppEnum.DARK]: 'line-md:moon-filled',
+    [AppEnum.AUTO]: '',
   };
 
-  const autoIcons: Record<ThemeEnum, string> = {
-    [ThemeEnum.LIGHT]: 'ic:round-wb-sunny',
-    [ThemeEnum.DARK]: 'ic:round-nightlight',
-    [ThemeEnum.AUTO]: 'ic:round-hdr-auto',
+  const autoIcons: Record<AppEnum, string> = {
+    [AppEnum.LIGHT]: 'ic:round-wb-sunny',
+    [AppEnum.DARK]: 'ic:round-nightlight',
+    [AppEnum.AUTO]: 'ic:round-hdr-auto',
   };
 
   const icon = computed(() => {

@@ -6,7 +6,7 @@ export const ROOT_ROUTE: AuthRoute.Route = {
   path: '/',
   redirect: import.meta.env.VITE_ROUTE_HOME_PATH,
   meta: {
-    title: 'Root',
+    title: 'root',
   },
 };
 
@@ -22,30 +22,9 @@ export const LOGIN_ROUTE: AuthRoute.Route = {
   },
   meta: {
     title: '登录',
+    i18nTitle: 'route.login',
     dynamicPath: `/login/:module(${getLoginModuleRegExp()})?`,
     singleLayout: 'blank',
-  },
-};
-
-export const TEST_ROUTE: AuthRoute.Route = {
-  name: 'dashboard',
-  path: '/dashboard',
-  component: 'basic',
-  children: [
-    {
-      name: 'dashboard_analysis',
-      path: '/dashboard/analysis',
-      component: 'self',
-      meta: {
-        title: '分析页',
-        // requiresAuth: true,
-        // icon: 'icon-park-outline:analysis',
-        // i18nTitle: 'routes.dashboard.analysis',
-      },
-    },
-  ],
-  meta: {
-    title: '仪表盘',
   },
 };
 
@@ -95,6 +74,7 @@ export const INVALID_ROUTE: AuthRoute.Route = {
   component: 'blank',
   meta: {
     title: '无效路径',
+    i18nTitle: 'route.404',
     singleLayout: 'blank',
   },
 };
@@ -118,5 +98,4 @@ export const CONSTANT_ROUTES: AuthRoute.Route[] = [
   // SERVER_ERROR_ROUTE,
   INVALID_ROUTE,
   // REDIRECT_ROUTE,
-  TEST_ROUTE,
 ];

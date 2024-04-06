@@ -1,5 +1,5 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
-import { ThemeColorEnum, ThemeEnum } from '@/enums';
+import { ThemeColorEnum, AppEnum } from '@/enums';
 import { setBaseColor } from '@/utils/common';
 import { useAppStore } from '../modules/app';
 
@@ -9,8 +9,8 @@ export default function subscribeThemeStore() {
 
   const setDarkMode = () => {
     // 设置为暗黑主题
-    document.body.setAttribute('arco-theme', ThemeEnum.DARK);
-    document.documentElement.classList.add(ThemeEnum.DARK);
+    document.body.setAttribute('arco-theme', AppEnum.DARK);
+    document.documentElement.classList.add(AppEnum.DARK);
     Object.keys(theme.getThemeSetting).forEach((key: ThemeColorEnum) => {
       setBaseColor(theme.getThemeSetting[key], key, true);
     });
@@ -19,7 +19,7 @@ export default function subscribeThemeStore() {
   const setLightMode = () => {
     // 恢复亮色主题
     document.body.removeAttribute('arco-theme');
-    document.documentElement.classList.remove(ThemeEnum.DARK, ThemeEnum.LIGHT);
+    document.documentElement.classList.remove(AppEnum.DARK, AppEnum.LIGHT);
     Object.keys(theme.getThemeSetting).forEach((key: ThemeColorEnum) => {
       setBaseColor(theme.getThemeSetting[key], key);
     });
@@ -30,9 +30,9 @@ export default function subscribeThemeStore() {
     watch(
       () => theme.darkMode,
       (newValue) => {
-        if (newValue === ThemeEnum.DARK) {
+        if (newValue === AppEnum.DARK) {
           setDarkMode();
-        } else if (newValue === ThemeEnum.AUTO) {
+        } else if (newValue === AppEnum.AUTO) {
           // 自动模式
           if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             setDarkMode();
@@ -49,7 +49,7 @@ export default function subscribeThemeStore() {
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', (e) => {
-        if (theme.darkMode === ThemeEnum.AUTO) {
+        if (theme.darkMode === AppEnum.AUTO) {
           if (e.matches) {
             setDarkMode();
           } else {

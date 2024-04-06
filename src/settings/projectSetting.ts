@@ -4,8 +4,9 @@ import {
   MenuTypeEnum,
   RouterTransitionEnum,
   ThemeColorEnum,
-  ThemeEnum,
+  AppEnum,
   TriggerEnum,
+  SessionTimeoutProcessingEnum,
 } from '@/enums';
 import jsonSetting from './projectSetting.json';
 
@@ -30,7 +31,7 @@ const defaultSetting: ProjectConfig = {
     openPageLoading: true,
 
     // Whether to open the top progress bar - [是否开启顶部进度条]
-    openNProgress: false,
+    openNProgress: true,
   },
   // pageLayout whether to enable keep-alive - [页面布局是否开启keep-alive]
   openKeepAlive: true,
@@ -67,7 +68,7 @@ const defaultSetting: ProjectConfig = {
     // Drag the sidebar - [拖动侧边栏]
     canDrag: true,
     // Menu theme - [菜单主题]
-    theme: ThemeEnum.LIGHT,
+    theme: AppEnum.LIGHT,
     // Whether to enable handover - [是否开启手风琴模式]
     accordion: true,
 
@@ -90,6 +91,13 @@ const defaultSetting: ProjectConfig = {
     // Header height - [头部高度]
     height: 64,
   },
+
+  // Whether to cancel the http request that has been sent but not responded when switching the interface
+  // 切换界面时取消未响应的http请求
+  removeAllHttpPending: false,
+  // Session timeout processing
+  // 会话超时处理
+  sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

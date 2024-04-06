@@ -41,11 +41,11 @@ export const useTransitionSetting = () => {
     appStore.setProjectConfig({ transitionSetting });
   }
   return {
-    setTransitionSetting,
-
     getEnableTransition,
     getOpenNProgress,
     getOpenPageLoading,
     getBasicTransition,
+
+    setTransitionSetting,
   };
 };

@@ -53,5 +53,17 @@ export default {
       // height
       headerHeight: 'Header height',
     },
+    interfaceDisplay: {
+      title: 'Interface display',
+      routerAnimation: 'Route animation',
+      routerAnimationZoomFade: 'Zoom fade',
+      routerAnimationZoomOut: 'Zoom out',
+      routerAnimationFadeSlide: 'Fade slide',
+      routerAnimationFade: 'Fade',
+      routerAnimationFadeBottom: 'Fade bottom',
+      routerAnimationFadeScale: 'Fade scale',
+
+      transitionEnable: 'Switch animation',
+    },
   },
 };

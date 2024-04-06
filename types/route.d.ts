@@ -27,6 +27,8 @@ declare namespace PageRoute {
     | 'dashboard'
     | 'dashboard_analysis'
     | 'dashboard_workbench'
+    | 'comp'
+    | 'comp_loading'
     | 'user-center';
 
   /**

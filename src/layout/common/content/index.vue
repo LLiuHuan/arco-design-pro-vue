@@ -1,12 +1,16 @@
 <template>
-  <div :class="{ 'p-16px': showPadding }" class="overflow-hidden">
+  <div
+    v-loading="getOpenPageLoading && getPageLoading"
+    :class="{
+      'p-16px': showPadding,
+      'h-full': getOpenPageLoading && getPageLoading,
+    }"
+    class="overflow-hidden"
+  >
     <RouterView
       v-slot="{ Component, route }"
       class="transition duration-300 ease-in-out"
     >
-      <!--  :name="theme.pageAnimateMode"  -->
-      <!--    @before-leave="app.setDisableMainXScroll(true)"-->
-      <!--    @after-enter="app.setDisableMainXScroll(false)"-->
       <transition
         :name="
           getTransitionName({
@@ -53,8 +57,9 @@
   const tabStore = useMultipleTabStore();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
-  const { getOpenKeepAlive } = useRootSetting();
-  const { getBasicTransition, getEnableTransition } = useTransitionSetting();
+  const { getOpenKeepAlive, getPageLoading } = useRootSetting();
+  const { getBasicTransition, getEnableTransition, getOpenPageLoading } =
+    useTransitionSetting();
   // 是否开启缓存
   const openCache = computed(
     () => unref(getOpenKeepAlive) && unref(getShowMultipleTab),

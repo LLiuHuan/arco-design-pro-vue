@@ -9,6 +9,9 @@ export const useRootSetting = () => {
   const appStore = useAppStore();
 
   const osTheme = usePreferredColorScheme();
+
+  const getPageLoading = computed(() => appStore.getPageLoading);
+
   /**
    * @description: 获取项目配置
    */
@@ -83,6 +86,7 @@ export const useRootSetting = () => {
     getSettingDrawerState,
     getThemeColor,
     getShowLogo,
+    getPageLoading,
 
     setRootSetting,
     setDarkMode,

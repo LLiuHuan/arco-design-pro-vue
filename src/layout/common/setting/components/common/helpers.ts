@@ -11,6 +11,10 @@ enum HandlerEnum {
 
   // header
   HEADER_HEIGHT,
+
+  // transition
+  TRANSITION_ENABLE,
+  TRANSITION_ROUTER,
 }
 
 function baseHandler(event: HandlerEnum, value: any) {
@@ -47,6 +51,14 @@ const handler = (
       }
       return {
         headerSetting: { height: value },
+      };
+    case HandlerEnum.TRANSITION_ENABLE:
+      return {
+        transitionSetting: { enable: value },
+      };
+    case HandlerEnum.TRANSITION_ROUTER:
+      return {
+        transitionSetting: { basicTransition: value },
       };
     default:
       return {};

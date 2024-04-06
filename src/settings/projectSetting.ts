@@ -24,7 +24,7 @@ const defaultSetting: ProjectConfig = {
     enable: true,
 
     // Route basic switching animation - [路由基本切换动画]
-    basicTransition: RouterTransitionEnum.FADE_SIDE,
+    basicTransition: RouterTransitionEnum.FADE_SLIDE,
 
     // Whether to open page switching loading - [是否开启页面切换loading]
     // Only open when enable=true - [只有在enable=true时才会打开]

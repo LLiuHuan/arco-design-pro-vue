@@ -53,5 +53,17 @@ export default {
       // height
       headerHeight: '头部高度',
     },
+    interfaceDisplay: {
+      title: '界面显示',
+      routerAnimation: '路由动画',
+      routerAnimationZoomFade: '渐变',
+      routerAnimationZoomOut: '闪现',
+      routerAnimationFadeSlide: '滑动',
+      routerAnimationFade: '消退',
+      routerAnimationFadeBottom: '底部消退',
+      routerAnimationFadeScale: '缩放消退',
+
+      transitionEnable: '切换动画',
+    },
   },
 };

@@ -1,21 +1,24 @@
 import { TriggerEnum } from '@/enums';
+import { useI18n } from '@/hooks/web';
 
 export const getMenuTriggerOptions = (hideTop: boolean) => {
+  const { t } = useI18n();
+
   return [
     {
       value: TriggerEnum.NONE,
-      label: 'layout.setting.interfaceFunction.menuTriggerNone',
+      label: t('layout.setting.interfaceFunction.menuTriggerNone'),
     },
     {
       value: TriggerEnum.FOOTER,
-      label: 'layout.setting.interfaceFunction.menuTriggerBottom',
+      label: t('layout.setting.interfaceFunction.menuTriggerBottom'),
     },
     ...(hideTop
       ? []
       : [
           {
             value: TriggerEnum.HEADER,
-            label: 'layout.setting.interfaceFunction.menuTriggerTop',
+            label: t('layout.setting.interfaceFunction.menuTriggerTop'),
           },
         ]),
   ];

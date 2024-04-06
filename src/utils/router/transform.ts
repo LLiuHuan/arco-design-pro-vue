@@ -175,14 +175,12 @@ export function transformAuthRouteToVueRoutes(routes: AuthRoute.Route[]) {
  * @description Convert the route path to the route name - [将路由路径转换成路由名称]
  * @param path
  */
-export function transformRoutePathToRouteName<K extends AuthRoute.RoutePath>(
-  path: K,
-) {
+export function transformRoutePathToRouteName(path: AuthRoute.RoutePath) {
   if (path === '/') return 'root';
 
   const pathSplitMark = '/';
   const routeSplitMark = '_';
-
+  console.log('transformRoutePathToRouteName', path);
   return path
     .split(pathSplitMark)
     .slice(1)
@@ -204,4 +202,25 @@ export function transformRouteNameToRoutePath(
   const path = name.split(splitMark).join(pathSplitMark);
 
   return (pathSplitMark + path) as AuthRoute.RoutePath;
+}
+
+/**
+ * 将权限路由转换成搜索的菜单数据
+ * @param routes - 权限路由
+ * @param treeMap
+ */
+export function transformAuthRouteToSearchMenus(
+  routes: AuthRoute.Route[],
+  treeMap: AuthRoute.Route[] = [],
+) {
+  if (routes && routes.length === 0) return [];
+  return routes.reduce((acc, cur) => {
+    if (!cur.meta?.hide) {
+      acc.push(cur);
+    }
+    if (cur.children && cur.children.length > 0) {
+      transformAuthRouteToSearchMenus(cur.children, treeMap);
+    }
+    return acc;
+  }, treeMap);
 }

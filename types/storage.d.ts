@@ -14,6 +14,7 @@ import {
 import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { RouteLocationNormalized } from 'vue-router';
+import { LoginParams, UserInfoModel } from '@/api/auth/model/userModel';
 
 declare namespace StorageInterface {
   interface BasicStore {
@@ -27,13 +28,13 @@ declare namespace StorageInterface {
     /** 多标签页列表 */
     [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
     /** 用户信息 */
-    [USER_INFO_KEY]: ApiAuth.loginByTokenResult;
+    [USER_INFO_KEY]: UserInfoModel;
     /** 是否开启自动切换主题 */
     [APP_DARK_MODE_IS_AUTO_KEY]: boolean;
     /** 登录信息 */
-    [LOGIN_INFO]: Auth.LoginInfo;
+    [LOGIN_INFO]: LoginParams;
     /** 角色列表 */
-    [ROLES_KEY]: Auth.RoleType[];
+    [ROLES_KEY]: string[];
   }
 
   /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */

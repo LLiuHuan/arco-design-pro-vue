@@ -52,7 +52,7 @@
       flex: `0 0 ${width}`,
       maxWidth: width,
       minWidth: width,
-      transition: 'all 0.2s',
+      transition: 'all 0.3s',
     };
   });
 
@@ -74,7 +74,7 @@
       flex: `0 0 ${width}`,
       maxWidth: width,
       minWidth: width,
-      transition: 'all 0.2s',
+      transition: 'all 0.3s',
     };
   });
 

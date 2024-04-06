@@ -1,11 +1,20 @@
-import { TOKEN_KEY } from '@/enums';
-import { localStg } from '@/utils/cache';
+import { CacheTypeEnum, TOKEN_KEY } from '@/enums';
+import { localStg, sessionStg } from '@/utils/cache';
+import { appSetting } from '@/settings';
+import { StorageInterface } from '~/types/storage';
 
-// TODO: 获取token有问题
-// const appStore = useAppStore();
-// const isLocal =
-//   appStore.getProjectConfig.permissionCacheType === CacheTypeEnum.LOCAL;
+const { permissionCacheType } = appSetting;
+const isLocal = permissionCacheType === CacheTypeEnum.LOCAL;
 
 export function getToken() {
-  return localStg.get(TOKEN_KEY) || '';
+  return getAuthCache(TOKEN_KEY) || '';
 }
+
+export const getAuthCache = <T>(key: StorageInterface.BasicKeys) => {
+  const fn = isLocal ? localStg.get : sessionStg.get;
+  return fn(key) as T;
+};
+
+export const setAuthCache = (key: StorageInterface.BasicKeys, value: any) => {
+  return isLocal ? localStg.set(key, value) : sessionStg.set(key, value);
+};

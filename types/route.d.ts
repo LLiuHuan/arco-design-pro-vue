@@ -1,5 +1,3 @@
-import { RoleEnum } from '@/enums/authEnum';
-
 declare namespace PageRoute {
   /**
    * the root route key
@@ -28,7 +26,8 @@ declare namespace PageRoute {
     | 'about'
     | 'dashboard'
     | 'dashboard_analysis'
-    | 'dashboard_workbench';
+    | 'dashboard_workbench'
+    | 'user-center';
 
   /**
    * last degree route key, which has the page file
@@ -115,19 +114,18 @@ declare namespace AuthRoute {
     /** 路由标题(可用来作document.title或者菜单的名称) */
     title: string;
     /** 用来支持多国语言 如果i18nTitle和title同时存在优先使用i18nTitle */
-    // i18nTitle?: I18nType.I18nKey;
     i18nTitle?: string;
     /** 路由的动态路径(需要动态路径的页面需要将path添加进范型参数) */
     dynamicPath?: AuthRouteUtils.GetDynamicPath<K>;
     /** 作为单级路由的父级路由布局组件 */
     singleLayout?: Extract<RouteComponentType, 'basic' | 'blank'>;
     /** 需要登录权限 */
-    requiresAuth?: boolean;
+    ignoreAuth?: boolean;
     /**
      * 哪些类型的用户有权限才能访问的路由(空的话则表示不需要权限)
-     * @description 后端动态路由数据不需要该属性，直接由后端根据用户角色返回对应权限的路由数据
+     * 后端动态路由数据不需要该属性，直接由后端根据用户角色返回对应权限的路由数据
      */
-    permissions?: RoleEnum[];
+    roles?: string[];
     /** 缓存页面 */
     keepAlive?: boolean;
     /** 菜单和面包屑对应的图标 */

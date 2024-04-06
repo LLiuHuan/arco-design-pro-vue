@@ -5,7 +5,7 @@
       class="text-16px font-bold"
       :class="{
         'border-b-[var(--color-border-1)] border-b border-solid border-0 ':
-          theme === ThemeEnum.LIGHT,
+          theme === AppEnum.LIGHT,
       }"
       :theme="theme"
       :show-title="!getCollapsed"
@@ -24,7 +24,7 @@
     useMenuSetting,
     useRootSetting,
   } from '@/hooks/setting';
-  import { ThemeEnum } from '@/enums';
+  import { AppEnum } from '@/enums';
   import { useRouteStore } from '@/store/modules/route';
   import { VerticalMenu } from './components';
 
@@ -36,7 +36,7 @@
     /**
      * The theme of the current parent component - [当前父组件的主题]
      */
-    theme?: ThemeEnum;
+    theme?: AppEnum;
   }
 
   defineProps<Props>();

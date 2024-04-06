@@ -76,7 +76,6 @@ export const useMenuSetting = () => {
 
   // 设置菜单配置
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
-    console.log(menuSetting);
     appStore.setProjectConfig({ menuSetting });
   }
 

@@ -1,3 +1,3 @@
-import { ThemeEnum } from '@/enums';
+import { AppEnum } from '@/enums';
 
-export const darkMode = ThemeEnum.LIGHT;
+export const darkMode = AppEnum.LIGHT;

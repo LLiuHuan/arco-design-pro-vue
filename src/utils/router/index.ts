@@ -5,3 +5,4 @@ export * from './change';
 export * from './helpers';
 export * from './module';
 export * from './auth';
+export * from './cache';

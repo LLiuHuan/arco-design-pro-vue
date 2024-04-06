@@ -3,8 +3,9 @@ import {
   MenuTypeEnum,
   RouterTransitionEnum,
   ThemeColorEnum,
-  ThemeEnum,
+  AppEnum,
   TriggerEnum,
+  SessionTimeoutProcessingEnum,
 } from '@/enums';
 import type { ArcoLang } from '@arco-design/web-vue/es/locale/interface';
 
@@ -32,8 +33,6 @@ export interface LocaleSetting {
   fallback: LocaleType;
   // available Locales - [可用语言]
   availableLocales: LocaleType[];
-  // arco language - [arco语言]
-  arcoLang?: ArcoLang;
 }
 
 export interface TransitionSetting {
@@ -75,7 +74,7 @@ export interface MenuSetting {
   // Whether the sidebar is hidden - [侧边栏是否隐藏]
   siderHidden?: boolean;
   // Menu theme - [菜单主题]
-  theme: ThemeEnum;
+  theme: AppEnum;
   // Whether to enable handover - [是否开启手风琴模式]
   accordion: boolean;
 
@@ -104,7 +103,13 @@ export interface ThemeSetting {
   [ThemeColorEnum.ERROR]: string;
 }
 
+export interface HeaderSetting {
+  // Header height - [头部高度]
+  height: number;
+}
+
 export interface ProjectConfig {
+  // TODO: 感觉没有必要，用户信息不大可能会存储在sessionStorage，不过还是暂时保留
   // Storage location of permission related information - [权限相关信息的存储位置]
   permissionCacheType: CacheTypeEnum;
   // Use error-handler-plugin - [显示错误处理插件]
@@ -124,6 +129,17 @@ export interface ProjectConfig {
   // Theme setting - [主题设置]
   themeSetting: ThemeSetting;
 
+  // Header setting - [头部设置]
+  headerSetting: HeaderSetting;
+
   // Show logo - [显示logo]
   showLogo: boolean;
+
+  // Whether to cancel the http request that has been sent but not responded when switching the interface.
+  // 切换接口时是否取消已发送但未响应的http请求
+  removeAllHttpPending: boolean;
+
+  // Session timeout processing
+  // 会话超时处理
+  sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
 }

@@ -35,7 +35,7 @@ export interface RequestOptions {
   successMessageMode?: SuccessMessageMode;
   // Whether to add a timestamp - [是否添加时间戳]
   joinTime?: boolean;
-  // Whether to ignore the cancel token - [是否忽略取消令牌]
+  // Whether to enable cancellation of duplicate requests - [是否开启取消重复请求]
   ignoreCancelToken?: boolean;
   // Whether to send token in header - [是否在 header 中发送 token]
   withToken?: boolean;
@@ -45,7 +45,7 @@ export interface RequestOptions {
   // Whether to display the message - [是否显示提示信息]
   isShowMessage?: boolean;
   // Custom processing return content deconstruction format - [自定义处理返回内容解构格式]
-  respDeconstruct?: (resp: any) => ResponseData;
+  respDeconstruct?: (resp: any) => Result;
   // Success status - [成功状态]
   successCode?: number;
   // Timeout state - [超时状态]
@@ -59,7 +59,7 @@ export interface Result<T = any> {
   code: number;
   type: 'success' | 'error' | 'warning';
   message: string;
-  result: T;
+  data: T;
 }
 
 /**

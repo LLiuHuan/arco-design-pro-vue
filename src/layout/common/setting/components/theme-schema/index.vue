@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
-  import { ThemeEnum } from '@/enums';
+  import { AppEnum } from '@/enums';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
   import { computed } from 'vue';
   import { SettingItem, SwitchItem, HandlerEnum } from '../common';
@@ -43,22 +43,22 @@
     name: 'ThemeScheme',
   });
 
-  const icons: Record<ThemeEnum, string> = {
-    [ThemeEnum.LIGHT]: 'ic:round-wb-sunny',
-    [ThemeEnum.DARK]: 'ic:round-nightlight',
-    [ThemeEnum.AUTO]: 'ic:round-hdr-auto',
+  const icons: Record<AppEnum, string> = {
+    [AppEnum.LIGHT]: 'ic:round-wb-sunny',
+    [AppEnum.DARK]: 'ic:round-nightlight',
+    [AppEnum.AUTO]: 'ic:round-hdr-auto',
   };
 
   const themeSchema = {
-    [ThemeEnum.LIGHT]: 'layout.setting.themeSchema.light',
-    [ThemeEnum.DARK]: 'layout.setting.themeSchema.dark',
-    [ThemeEnum.AUTO]: 'layout.setting.themeSchema.system',
+    [AppEnum.LIGHT]: 'layout.setting.themeSchema.light',
+    [AppEnum.DARK]: 'layout.setting.themeSchema.dark',
+    [AppEnum.AUTO]: 'layout.setting.themeSchema.system',
   };
 
   const { setDarkMode, getDarkMode, getIsDarkMode } = useRootSetting();
   const { getMenuTheme } = useMenuSetting();
 
-  const getIsMenuDark = computed(() => getMenuTheme.value === ThemeEnum.DARK);
+  const getIsMenuDark = computed(() => getMenuTheme.value === AppEnum.DARK);
 </script>
 
 <style lang="less" scoped></style>

@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import { useAppStore } from '@/store/modules/app';
 
-export function useMultipleTabSetting() {
+export const useMultipleTabSetting = () => {
   const appStore = useAppStore();
 
   // 是否显示多标签页
@@ -10,4 +10,4 @@ export function useMultipleTabSetting() {
   return {
     getShowMultipleTab,
   };
-}
+};

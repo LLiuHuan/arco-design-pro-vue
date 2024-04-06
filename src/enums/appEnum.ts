@@ -1,7 +1,7 @@
 /**
  * @description Theme enum - [主题枚举]
  */
-export enum ThemeEnum {
+export enum AppEnum {
   DARK = 'dark',
   LIGHT = 'light',
   AUTO = 'auto',
@@ -18,6 +18,17 @@ export enum RouterTransitionEnum {
   FADE_SCALE = 'fade-scale',
 }
 
+// Route switching animation
+// 路由切换动画
+export enum RouterTransitionI18nEnum {
+  'zoom-fade' = '渐变',
+  'zoom-out' = '闪现',
+  'fade-slide' = '滑动',
+  'fade' = '消退',
+  'fade-bottom' = '底部消退',
+  'fade-scale' = '缩放消退',
+}
+
 export enum ThemeColorEnum {
   // 主色
   PRIMARY = 'arcoblue',
@@ -27,4 +38,9 @@ export enum ThemeColorEnum {
   WARNING = 'orange',
   // 错误
   ERROR = 'red',
+}
+
+export enum SessionTimeoutProcessingEnum {
+  ROUTE_JUMP,
+  PAGE_COVERAGE,
 }

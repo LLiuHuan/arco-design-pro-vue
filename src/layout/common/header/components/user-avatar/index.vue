@@ -29,12 +29,15 @@
   import { HoverContainer } from '@/components/HoverContainer';
   import { useAuthStore } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
+  import { useRouterPush } from '@/hooks/component';
 
   interface DropdownOption {
     key: string;
     label?: string;
     icon?: () => VNode;
   }
+
+  const { routerPushByKey } = useRouterPush();
 
   const options: DropdownOption[] = [
     {
@@ -52,15 +55,13 @@
     },
   ];
 
-  const handleDropdown = (optionKey: string) => {
+  const handleDropdown = (optionKey: PageRoute.RouteKey | 'logout') => {
     switch (optionKey) {
       case 'logout':
         // handle logout
         break;
-      case 'user-center':
-        // handle user center
-        break;
       default:
+        routerPushByKey(optionKey);
         break;
     }
   };

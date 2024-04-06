@@ -3,7 +3,7 @@
 
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { clone } from 'lodash-es';
-import { RequestEnum, ContentTypeEnum } from '@/enums/httpEnum';
+import { RequestEnum, ContentTypeEnum, ResultEnum } from '@/enums/httpEnum';
 import { useI18n } from '@/hooks/web';
 import axios from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
@@ -43,8 +43,8 @@ const transform: AxiosTransform = {
       isTransformResponse,
       isReturnNativeResponse,
       // isShowMessage,
-      successCode = 0,
-      timeoutCode = 401,
+      successCode = ResultEnum.SUCCESS,
+      timeoutCode = ResultEnum.TIMEOUT,
     } = options;
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -56,13 +56,13 @@ const transform: AxiosTransform = {
       return res.data;
     }
     // 错误的时候返回
-
+    console.log(res);
     const { data } = res;
     if (!data) {
       // return '[HTTP] Request has no return value';
       throw new Error(t('sys.api.apiRequestFailed'));
     }
-    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
+    //  这里 code，data，message为 后台统一的字段，需要在 axios.d.ts 内修改为项目自己的接口返回格式
     const {
       code,
       data: result,

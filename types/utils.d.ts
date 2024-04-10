@@ -1,25 +1,18 @@
 declare namespace TypeUtil {
   interface DataType {
-    number: number;
-    string: string;
     boolean: boolean;
     null: null;
     undefined: undefined;
-    symbol: symbol;
     bigInt: bigint;
-    object: Record<string, any>;
-    array: Array<any>;
-    function: (...args: any[]) => any | void;
-    date: Date;
     regExp: RegExp;
-    promise: Promise<any>;
     set: Set<any>;
     map: Map<any, any>;
     file: File;
+    promise: Promise<any>;
   }
 
-  type DataTypeStringKey = keyof DataType;
+  type TypeStringKey = keyof DataType;
 
-  type DataTypeString<T extends DataTypeStringKey = DataTypeStringKey> =
+  type TypeString<T extends TypeStringKey = TypeStringKey> =
     `[object ${Capitalize<T>}]`;
 }

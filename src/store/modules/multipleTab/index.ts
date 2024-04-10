@@ -9,7 +9,7 @@ import { appSetting } from '@/settings';
 import { defineStore } from 'pinia';
 import { MULTIPLE_TABS_KEY, PageEnum } from '@/enums';
 import { store } from '@/store';
-import { REDIRECT_NAME } from '@/router';
+import { REDIRECT_NAME } from '@/router/common';
 import { clearTabRoutes } from '@/store/modules/multipleTab/helpers';
 import { localStg } from '@/utils/cache';
 import { getRawRoute } from '@/utils/router';

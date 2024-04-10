@@ -27,9 +27,9 @@
   import { computed, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
-  import { useAuthStore } from '@/store/modules/auth';
+  import { useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
-  import { useRouterPush } from '@/hooks/component';
+  import { useGo } from '@/hooks/web/usePage';
 
   interface DropdownOption {
     key: string;
@@ -37,7 +37,7 @@
     icon?: () => VNode;
   }
 
-  const { routerPushByKey } = useRouterPush();
+  const { goKey } = useGo();
 
   const options: DropdownOption[] = [
     {
@@ -55,19 +55,8 @@
     },
   ];
 
-  const handleDropdown = (optionKey: PageRoute.RouteKey | 'logout') => {
-    switch (optionKey) {
-      case 'logout':
-        // handle logout
-        break;
-      default:
-        routerPushByKey(optionKey);
-        break;
-    }
-  };
-
   const getUser = computed(() => {
-    const { getUserInfo } = useAuthStore();
+    const { getUserInfo } = useAuthStoreWithOut();
     const { userName, avatar } = getUserInfo;
 
     return {
@@ -75,6 +64,17 @@
       avatar: avatar || userAvatar,
     };
   });
+
+  const handleDropdown = (optionKey: 'user-center' | 'logout') => {
+    switch (optionKey) {
+      case 'logout':
+        // handle logout
+        break;
+      default:
+        goKey(optionKey);
+        break;
+    }
+  };
 </script>
 
 <style lang="less">

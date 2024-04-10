@@ -4,7 +4,7 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { clone } from 'lodash-es';
 import { RequestEnum, ContentTypeEnum, ResultEnum } from '@/enums/httpEnum';
-import { useI18n } from '@/hooks/web';
+import { useI18n } from '@/hooks/web/useI18n';
 import axios from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
@@ -56,7 +56,6 @@ const transform: AxiosTransform = {
       return res.data;
     }
     // 错误的时候返回
-    console.log(res);
     const { data } = res;
     if (!data) {
       // return '[HTTP] Request has no return value';
@@ -270,7 +269,9 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // TODO: 基础接口地址
         // baseURL: globSetting.apiUrl,
         // 接口前缀
-        prefixUrl: opt?.requestOptions?.urlPrefix || globSetting?.apiUrlPrefix,
+        prefixUrl:
+          opt?.requestOptions?.urlPrefix ||
+          globSetting?.VITE_GLOB_API_URL_PREFIX,
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式
@@ -292,10 +293,11 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 消息提示类型
           errorMessageMode: 'message',
           // TODO: 接口地址
-          apiUrl: globSetting.apiUrl || '',
+          apiUrl: globSetting.VITE_GLOB_API_URL || '',
           // TODO: 接口拼接地址
           urlPrefix:
-            opt?.requestOptions?.urlPrefix || globSetting?.apiUrlPrefix,
+            opt?.requestOptions?.urlPrefix ||
+            globSetting?.VITE_GLOB_API_URL_PREFIX,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

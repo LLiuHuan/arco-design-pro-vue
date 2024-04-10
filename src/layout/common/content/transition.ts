@@ -21,7 +21,6 @@ export function getTransitionName({
   if (!enableTransition) {
     return undefined;
   }
-
   const isInCache = cacheTabs.includes(route.name as string);
   const transitionName = 'fade-slide';
   let name: string | undefined = transitionName;
@@ -30,6 +29,5 @@ export function getTransitionName({
     name = isInCache && route.meta.loaded ? transitionName : undefined;
   }
 
-  console.log('name', name, route.meta.transitionName, def);
   return name || (route.meta.transitionName as string) || def;
 }

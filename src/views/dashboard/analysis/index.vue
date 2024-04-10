@@ -307,14 +307,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { useAuthStore } from '@/store/modules/auth';
-  import { useRoute, useRouter } from 'vue-router';
+  // import { useAuthStore } from '@/store/modules/auth';
+  // import { useRoute, useRouter } from 'vue-router';
 
-  const { logout } = useAuthStore();
-  const route = useRoute();
-  console.log(route);
-  const router = useRouter();
-  console.log(router);
+  import { useAuth } from '@/hooks/web/useAuth';
+
+  const { logout } = useAuth();
+  // const route = useRoute();
+  // const router = useRouter();
 </script>
 
 <style lang="less" scoped></style>

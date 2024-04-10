@@ -1,13 +1,5 @@
 /**
  * 获取所有固定路由的名称集合
- * @param routes - 固定路由
- */
-export function getConstantRouteNames(routes: AuthRoute.Route[]) {
-  return routes.map((route) => getConstantRouteName(route)).flat(1);
-}
-
-/**
- * 获取所有固定路由的名称集合
  * @param route - 固定路由
  */
 function getConstantRouteName(route: AuthRoute.Route) {
@@ -19,3 +11,14 @@ function getConstantRouteName(route: AuthRoute.Route) {
   }
   return names;
 }
+
+/**
+ * 获取所有固定路由的名称集合
+ * @param routes - 固定路由
+ */
+export function getConstantRouteNames(routes: AuthRoute.Route[]) {
+  return routes.map((route) => getConstantRouteName(route)).flat(1);
+}
+
+/** 路由名称 */
+export const routeName = (key: AuthRoute.AllRouteKey) => key;

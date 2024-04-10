@@ -3,9 +3,8 @@
     v-loading="getOpenPageLoading && getPageLoading"
     :class="{
       'p-16px': showPadding,
-      'h-full': getOpenPageLoading && getPageLoading,
     }"
-    class="overflow-hidden"
+    class="overflow-hidden h-full"
   >
     <RouterView
       v-slot="{ Component, route }"

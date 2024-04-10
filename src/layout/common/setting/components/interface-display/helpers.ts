@@ -1,4 +1,4 @@
-import { useI18n } from '@/hooks/web';
+import { useI18n } from '@/hooks/web/useI18n';
 import { RouterTransitionEnum } from '@/enums';
 
 export const getRouterAnimationOptions = () => {

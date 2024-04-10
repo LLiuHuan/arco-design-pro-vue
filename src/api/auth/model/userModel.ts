@@ -7,8 +7,8 @@ export interface LoginParams {
 }
 
 export interface LoginModel {
-  token: string;
-  refreshToken: string;
+  token?: string;
+  refreshToken?: string;
 }
 
 export interface UserInfoModel {

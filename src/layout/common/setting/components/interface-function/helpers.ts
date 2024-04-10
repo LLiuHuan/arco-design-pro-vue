@@ -1,5 +1,5 @@
 import { TriggerEnum } from '@/enums';
-import { useI18n } from '@/hooks/web';
+import { useI18n } from '@/hooks/web/useI18n';
 
 export const getMenuTriggerOptions = (hideTop: boolean) => {
   const { t } = useI18n();

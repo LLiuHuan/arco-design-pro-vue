@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router';
-import { useI18n } from '@/hooks/web';
+import { useI18n } from '@/hooks/web/useI18n';
 import { useTitle } from '@vueuse/core';
 
 export function createTitleGuard(router: Router) {

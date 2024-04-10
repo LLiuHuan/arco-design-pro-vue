@@ -26,5 +26,10 @@ declare module 'vue-router' {
      * 哪些类型的用户有权限才能访问的路由
      */
     roles?: string[];
+    /**
+     * Menu items that need to be selected for the current route
+     * 当前路由需要选中的菜单项
+     */
+    currentActiveMenu?: string;
   }
 }

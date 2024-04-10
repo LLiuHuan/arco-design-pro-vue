@@ -1,7 +1,10 @@
-import { intersectionWith, isEqual, mergeWith, unionWith } from 'lodash-es';
-
-export {
+import {
+  intersectionWith,
+  isEqual,
+  mergeWith,
+  unionWith,
   isArguments,
+  isArray,
   isArrayBuffer,
   isArrayLike,
   isArrayLikeObject,
@@ -10,7 +13,6 @@ export {
   isDate,
   isElement,
   isEmpty,
-  isEqual,
   isEqualWith,
   isError,
   isFunction,
@@ -23,6 +25,7 @@ export {
   isNil,
   isNumber,
   isNull,
+  isObject,
   isObjectLike,
   isPlainObject,
   isRegExp,
@@ -37,64 +40,55 @@ export {
 } from 'lodash-es';
 
 export const dataTypeLabels: {
-  [K in TypeUtil.DataTypeStringKey]: TypeUtil.DataTypeString<K>;
+  [K in TypeUtil.TypeStringKey]: TypeUtil.TypeString<K>;
 } = {
-  string: '[object String]',
-  number: '[object Number]',
   boolean: '[object Boolean]',
   null: '[object Null]',
   undefined: '[object Undefined]',
-  symbol: '[object Symbol]',
   bigInt: '[object BigInt]',
-  object: '[object Object]',
-  function: '[object Function]',
-  array: '[object Array]',
-  date: '[object Date]',
   regExp: '[object RegExp]',
-  promise: '[object Promise]',
   set: '[object Set]',
   map: '[object Map]',
   file: '[object File]',
+  promise: '[object Promise]',
 };
 
-function getDataTypeString<K extends TypeUtil.DataTypeStringKey>(
-  value: unknown,
-) {
-  return Object.prototype.toString.call(value) as TypeUtil.DataTypeString<K>;
+function getTag<K extends TypeUtil.TypeStringKey>(value: unknown) {
+  return Object.prototype.toString.call(value) as TypeUtil.TypeString<K>;
 }
 
 export function isBigInt<T extends bigint>(value: T | unknown): value is T {
-  return getDataTypeString(value) === dataTypeLabels.bigInt;
-}
-
-export function isObject<T extends Record<string, any>>(
-  value: T | unknown,
-): value is T {
-  return getDataTypeString(value) === dataTypeLabels.object;
-}
-
-export function isArray<T extends any[]>(value: T | unknown): value is T {
-  return getDataTypeString(value) === dataTypeLabels.array;
+  return getTag(value) === dataTypeLabels.bigInt;
 }
 
 export function isPromise<T extends Promise<any>>(
   value: T | unknown,
 ): value is T {
-  return getDataTypeString(value) === dataTypeLabels.promise;
+  return getTag(value) === dataTypeLabels.promise;
 }
 
 export function isFile<T extends File>(value: T | unknown): value is T {
-  return getDataTypeString(value) === dataTypeLabels.file;
+  return getTag(value) === dataTypeLabels.file;
 }
 
 /**
- * 判断是否 url
+ * @description 判断是否为 url
  * */
 export function isUrl(url: string) {
   return /^(http|https):\/\//g.test(url);
 }
 
 /**
+ * @description 判断是否为 http url
+ * @param path
+ */
+export function isHttpUrl(path: string): boolean {
+  const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
+  return reg.test(path);
+}
+
+/**
+ * @description 判断是否为外部链接
  * @param {string} path
  * @returns {Boolean}
  */
@@ -154,55 +148,43 @@ export function deepMerge<
   });
 }
 
-export function isHttpUrl(path: string): boolean {
-  const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
-  return reg.test(path);
-}
-
-// export function isNumber<T extends number>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.number;
-// }
-//
-// export function isString<T extends string>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.string;
-// }
-//
-// export function isBoolean<T extends boolean>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.boolean;
-// }
-//
-// export function isNull<T extends null>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.null;
-// }
-//
-// export function isUndefined<T extends undefined>(
-//   value: T | unknown,
-// ): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.undefined;
-// }
-//
-// export function isSymbol<T extends symbol>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.symbol;
-// }
-
-// export function isFunction<T extends (...args: any[]) => any | void>(
-//   value: T | unknown,
-// ): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.function;
-// }
-//
-// export function isDate<T extends Date>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.date;
-// }
-//
-// export function isRegExp<T extends RegExp>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.regExp;
-// }
-//
-// export function isSet<T extends Set<any>>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.set;
-// }
-//
-// export function isMap<T extends Map<any, any>>(value: T | unknown): value is T {
-//   return getDataTypeString(value) === dataTypeLabels.map;
-// }
+export {
+  intersectionWith,
+  isEqual,
+  mergeWith,
+  unionWith,
+  isArguments,
+  isArray,
+  isArrayBuffer,
+  isArrayLike,
+  isArrayLikeObject,
+  isBuffer,
+  isBoolean,
+  isDate,
+  isElement,
+  isEmpty,
+  isEqualWith,
+  isError,
+  isFunction,
+  isFinite,
+  isLength,
+  isMap,
+  isMatch,
+  isMatchWith,
+  isNative,
+  isNil,
+  isNumber,
+  isNull,
+  isObject,
+  isObjectLike,
+  isPlainObject,
+  isRegExp,
+  isSafeInteger,
+  isSet,
+  isString,
+  isSymbol,
+  isTypedArray,
+  isUndefined,
+  isWeakMap,
+  isWeakSet,
+};

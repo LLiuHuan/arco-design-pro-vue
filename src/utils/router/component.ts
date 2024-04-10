@@ -23,16 +23,10 @@ export function getLayoutComponent(layoutType: LayoutComponentType) {
   return layoutComponent[layoutType];
 }
 
-/**
- * 获取页面导入的vue文件
- * @param routeKey - 路由key
- */
-export function getViewComponent(routeKey: AuthRoute.RouteKey) {
-  console.log(views);
-  if (!views[routeKey]) {
-    throw new Error(`路由“${routeKey}”没有对应的组件文件！`);
-  }
-  return setViewComponentName(views[routeKey], routeKey);
+function isAsyncComponent(
+  component: RouteComponent | Lazy<ModuleComponent>,
+): component is Lazy<ModuleComponent> {
+  return isFunction(component);
 }
 
 /** 给页面组件设置名称 */
@@ -53,8 +47,13 @@ function setViewComponentName(
   return component;
 }
 
-function isAsyncComponent(
-  component: RouteComponent | Lazy<ModuleComponent>,
-): component is Lazy<ModuleComponent> {
-  return isFunction(component);
+/**
+ * 获取页面导入的vue文件
+ * @param routeKey - 路由key
+ */
+export function getViewComponent(routeKey: AuthRoute.RouteKey) {
+  if (!views[routeKey]) {
+    throw new Error(`路由“${routeKey}”没有对应的组件文件！`);
+  }
+  return setViewComponentName(views[routeKey], routeKey);
 }

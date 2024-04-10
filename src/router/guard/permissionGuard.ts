@@ -1,16 +1,14 @@
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { PageEnum, REFRESH_TOKEN_KEY } from '@/enums';
-import { INVALID_ROUTE, routeName } from '@/router';
 import { useRouteStoreWithOut } from '@/store/modules/route';
 import { useAuthStoreWithOut } from '@/store/modules/auth';
 import { localStg } from '@/utils/cache';
+import { INVALID_ROUTE } from '@/router/routes';
+import { routeName } from '@/utils/router';
+import { useAuth } from '@/hooks/web/useAuth';
+import { useRoute } from '@/hooks/web/useRoute';
 
-const {
-  BASE_LOGIN_NAME: LOGIN_NAME,
-  ROOT_NAME,
-  INVALID_NAME,
-  BASE_NAME,
-} = PageEnum;
+const { LOGIN: LOGIN_NAME, ROOT, INVALID, BASE } = PageEnum;
 
 // White list, no need to verify permissions
 // 白名单，无需验证权限
@@ -29,6 +27,7 @@ function exeStrategyActions(actions: StrategyAction[]) {
 export function createPermissionGuard(router: Router) {
   const authStore = useAuthStoreWithOut();
   const route = useRouteStoreWithOut();
+  const { handleActionAfterLogin } = useAuth();
   router.beforeEach(async (to, from, next) => {
     const token = authStore.getToken;
 
@@ -37,7 +36,7 @@ export function createPermissionGuard(router: Router) {
     const needLogin = !to.meta.ignoreAuth || Boolean(permissions.length);
     const hasPermission =
       !permissions.length ||
-      permissions.some((role) => authStore.getUserInfo.userRole.includes(role));
+      permissions.some((role) => authStore.getRoleList.includes(role));
 
     // Dynamic route loading (first time)
     // 动态路由加载（首次）
@@ -54,25 +53,26 @@ export function createPermissionGuard(router: Router) {
 
       // const routes = await permissionStore.buildRoutesAction();
       // 记录动态路由加载完成
-      await route.initAuthRoute();
+      const { initAuthRoute } = useRoute();
+      await initAuthRoute();
       router.addRoute(INVALID_ROUTE as unknown as RouteRecordRaw);
       // permissionStore.setDynamicAddedRoute(true);
 
       // 现在的to动态路由加载之前的，可能为PAGE_NOT_FOUND_ROUTE（例如，登陆后，刷新的时候）
       // 此处应当重定向到fullPath，否则会加载404页面内容
-
-      if (to.name === INVALID_NAME) {
+      if (to.name === INVALID) {
         // 动态路由没有加载导致被not-found-page路由捕获，等待权限路由加载好了，回到之前的路由
         // 若路由是从根路由重定向过来的，重新回到根路由
-        const path = to.redirectedFrom?.name === ROOT_NAME ? '/' : to.fullPath;
+        const path = to.redirectedFrom?.name === ROOT ? '/' : to.fullPath;
         next({ path, replace: true, query: to.query, hash: to.hash });
+        // next({ ...to, replace: true });
         return;
       }
     }
 
     // 权限路由已经加载，仍然未找到，重定向到not-found
-    if (to.name === INVALID_NAME) {
-      next({ name: INVALID_NAME, replace: true });
+    if (to.name === INVALID) {
+      next({ name: INVALID, replace: true });
       return;
     }
 
@@ -93,7 +93,7 @@ export function createPermissionGuard(router: Router) {
           if (to.name === LOGIN_NAME && isLogin) {
             const isSessionTimeout = authStore.getSessionTimeout;
             try {
-              authStore.handleActionAfterLogin({
+              handleActionAfterLogin({
                 token,
                 refreshToken: localStg.get(REFRESH_TOKEN_KEY) || '',
               });
@@ -112,16 +112,16 @@ export function createPermissionGuard(router: Router) {
       [
         isLogin && to.name === LOGIN_NAME,
         () => {
-          next({ name: ROOT_NAME });
+          next({ name: ROOT });
         },
       ],
       // If it is a root route and jumps to the homepage, and there is a homepage path in the user information, and the homepage path is not the homepage, then redirect to the user's homepage path.
       // 如果是根路由，且跳转到首页，且用户信息中有首页路径，且首页路径不是首页，则重定向到用户首页路径
       [
-        from.name === ROOT_NAME &&
-          to.name === BASE_NAME &&
+        from.name === ROOT &&
+          to.name === BASE &&
           Boolean(authStore.getUserInfo.homeName) &&
-          authStore.getUserInfo.homeName !== BASE_NAME,
+          authStore.getUserInfo.homeName !== BASE,
         () => {
           next({ name: authStore.getUserInfo.homeName });
         },

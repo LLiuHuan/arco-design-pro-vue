@@ -20,6 +20,12 @@ export const APP_DARK_MODE_IS_AUTO_KEY = '__APP__DARK__MODE__IS__AUTO__';
 
 export const MULTIPLE_TABS_KEY = 'MULTIPLE_TABS__KEY__';
 
+export enum PINIA_CACHE {
+  // pinia-auth-store
+  PINIA_AUTH_STORE = '__PINIA_AUTH_STORE__',
+  PINIA_APP_STORE = '__PINIA_APP_STORE__',
+}
+
 export enum CacheTypeEnum {
   SESSION,
   LOCAL,

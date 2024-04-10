@@ -16,12 +16,14 @@ declare namespace PageRoute {
    * @translate 页面路由
    */
   type RouteKey =
+    | 'feta_:id_sub1'
     | '403'
     | '404'
     | '500'
     | 'redirect'
     | 'constant-page'
     | 'login'
+    | 'not-found-page'
     | 'not-found'
     | 'about'
     | 'dashboard'
@@ -29,7 +31,9 @@ declare namespace PageRoute {
     | 'dashboard_workbench'
     | 'comp'
     | 'comp_loading'
-    | 'user-center';
+    | 'user-center'
+    | 'feta'
+    | 'feta_sub1';
 
   /**
    * last degree route key, which has the page file
@@ -143,7 +147,7 @@ declare namespace AuthRoute {
     /** 路由顺序，可用于菜单的排序 */
     order?: number;
     /** 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况) */
-    activeMenu?: RouteKey;
+    currentActiveMenu?: RouteKey;
     /** 表示是否是多级路由的中间级路由(用于转换路由数据时筛选多级路由的标识，定义路由时不用填写) */
     multi?: boolean;
     /** 是否固定在tab卡不可关闭  */

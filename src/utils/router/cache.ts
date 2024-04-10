@@ -1,6 +1,21 @@
 import { RouteRecordRaw } from 'vue-router';
 
 /**
+ * 路由是否缓存
+ * @param route
+ */
+function isKeepAlive(route: RouteRecordRaw) {
+  return Boolean(route?.meta?.keepAlive);
+}
+/**
+ * 是否有二级路由
+ * @param route
+ */
+function hasChildren(route: RouteRecordRaw) {
+  return Boolean(route.children && route.children.length);
+}
+
+/**
  * 获取缓存的路由对应组件的名称
  * @param routes - 转换后的vue路由
  */
@@ -18,19 +33,4 @@ export function getCacheRoutes(routes: RouteRecordRaw[]) {
     }
   });
   return cacheNames;
-}
-
-/**
- * 路由是否缓存
- * @param route
- */
-function isKeepAlive(route: RouteRecordRaw) {
-  return Boolean(route?.meta?.keepAlive);
-}
-/**
- * 是否有二级路由
- * @param route
- */
-function hasChildren(route: RouteRecordRaw) {
-  return Boolean(route.children && route.children.length);
 }

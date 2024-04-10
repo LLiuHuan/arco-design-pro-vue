@@ -16,9 +16,8 @@ import type {
 } from '~/types/config';
 import type { BeforeMiniState } from '~/types/storage';
 import { darkMode } from '@/settings';
-import { localStg, sessionStg } from '@/utils/cache';
+import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
-import { resetRouter } from '@/router';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -70,7 +69,6 @@ export const useAppStore = defineStore({
     // 获取下一个主题
     getNextDarkMode(): AppEnum {
       const themeSchemes: AppEnum[] = [AppEnum.LIGHT, AppEnum.DARK];
-      console.log(localStg.get(APP_DARK_MODE_IS_AUTO_KEY));
       if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
         themeSchemes.push(AppEnum.AUTO);
       const index = themeSchemes.findIndex((item) => item === this.getDarkMode);
@@ -109,14 +107,16 @@ export const useAppStore = defineStore({
     },
   },
   actions: {
-    // 设置页面加载状态
+    /**
+     * @description Set the page loading status - [设置页面加载状态]
+     * @param loading loading - [加载状态]
+     */
     setPageLoading(loading: boolean): void {
       this.pageLoading = loading;
     },
-
     /**
      * @description Set the theme - [设置主题]
-     * @param mode
+     * @param mode mode - [主题]
      */
     setDarkMode(mode: AppEnum): void {
       this.darkMode = mode;
@@ -155,11 +155,10 @@ export const useAppStore = defineStore({
       );
       localStg.set(PROJ_CFG_KEY, this.projectConfig);
     },
-    async resetAllState() {
-      resetRouter();
-      localStg.clear();
-      sessionStg.clear();
-    },
+    // async resetAllState() {
+    //   localStg.clear();
+    //   sessionStg.clear();
+    // },
     async setPageLoadingAction(loading: boolean): Promise<void> {
       if (loading) {
         clearTimeout(timeId);
@@ -176,6 +175,11 @@ export const useAppStore = defineStore({
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));
     // },
   },
+  // persist: {
+  //   key: PINIA_CACHE.PINIA_APP_STORE,
+  //   storage: localStorage,
+  //   debug: true,
+  // },
 });
 
 // Need to be used outside the setup - [需要在设置外部使用]

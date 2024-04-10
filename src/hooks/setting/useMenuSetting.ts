@@ -97,6 +97,7 @@ export const useMenuSetting = () => {
     getShowHeaderTrigger,
     getIsSidebarType,
     getAccordion,
+    getIsMixSidebar,
 
     setMenuSetting,
     toggleCollapsed,

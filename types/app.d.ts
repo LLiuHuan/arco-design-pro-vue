@@ -19,6 +19,10 @@ declare namespace App {
      * 路由路径 dashboard_analysis => /dashboard/analysis
      */
     routePath: AuthRoute.RoutePath;
+    // /**
+    //  * Menu route params
+    //  */
+    // paramPath: string;
     /**
      * Menu children
      * 菜单子项

@@ -41,7 +41,7 @@
   import { useRootSetting } from '@/hooks/setting';
   import { useClipboard } from '@vueuse/core';
   import { Message } from '@arco-design/web-vue';
-  import { useI18n } from '@/hooks/web';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { appSetting } from '@/settings';
   import { unref } from 'vue';
   import {

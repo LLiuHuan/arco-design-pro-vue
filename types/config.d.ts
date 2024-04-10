@@ -7,22 +7,21 @@ import {
   TriggerEnum,
   SessionTimeoutProcessingEnum,
 } from '@/enums';
-import type { ArcoLang } from '@arco-design/web-vue/es/locale/interface';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
 
 // TODO: 可能需要修改
 export interface GlobEnvConfig {
   // 项目标题，用于显示在浏览器标签和站点标题
-  title: string;
+  VITE_GLOB_APP_TITLE: string;
   // 项目地址
-  apiUrl: string;
+  VITE_GLOB_API_URL: string;
   // 项目地址前缀
-  apiUrlPrefix?: string;
+  VITE_GLOB_API_URL_PREFIX?: string;
   // 上传地址
-  uploadUrl?: string;
+  VITE_GLOB_UPLOAD_URL?: string;
   // 项目标题简称
-  shortTitle?: string;
+  VITE_GLOB_APP_SHORT_TITLE?: string;
 }
 
 export interface LocaleSetting {

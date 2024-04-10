@@ -124,13 +124,13 @@
     IconGoogleCircleFill,
     IconFaceBookCircleFill,
   } from '@arco-design/web-vue/es/icon';
-  import { useRouterPush } from '@/hooks/component';
-  import { useAuthStore } from '@/store/modules/auth';
   import { useLoading } from '@/hooks/common';
   import { localStg } from '@/utils/cache';
   import { LOGIN_INFO } from '@/enums';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useAuth } from '@/hooks/web/useAuth';
 
-  const { toLoginModule } = useRouterPush();
+  const { toLoginModule } = useGo();
 
   interface LoginFormProps {
     username: string;
@@ -140,7 +140,7 @@
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
 
-  const { login } = useAuthStore();
+  const { login } = useAuth();
 
   // const loginConfig = {
   //   rememberPassword: true,

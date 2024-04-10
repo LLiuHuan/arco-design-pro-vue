@@ -60,5 +60,6 @@ declare namespace AuthRouteUtils {
   type GetDynamicPath<P extends AuthRoute.RoutePath> =
     | `${P}/:${string}`
     | `${P}/:${string}(${string})`
-    | `${P}/:${string}(${string})?`;
+    | `${P}/:${string}(${string})?`
+    | `${P}/:${string}/${P}`;
 }

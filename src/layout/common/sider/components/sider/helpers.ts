@@ -42,7 +42,6 @@ export function useDragLine(
       if (iT < minT) iT = minT;
       ele.style.left = `${iT}px`;
       wrap.style.width = `${iT}px`;
-      console.log(`${iT}px`);
       return false;
     };
   }
@@ -55,8 +54,6 @@ export function useDragLine(
       document.onmouseup = null;
       wrap.style.transition = 'width 0.2s';
       const width = parseInt(wrap.style.width, 10);
-
-      console.log('removeMouseup', width);
 
       if (!mix) {
         // TODO: 'getMiniWidthNumber' is not defined.
@@ -88,7 +85,6 @@ export function useDragLine(
       wrap.style.transition = 'unset';
       const clientX = e?.clientX;
       ele.left = ele.offsetLeft;
-      console.log('ele.left', ele.left);
       handleMouseMove(ele, wrap, clientX);
       removeMouseup(ele);
       ele.setCapture?.();

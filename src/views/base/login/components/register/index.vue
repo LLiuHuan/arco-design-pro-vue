@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useRouterPush } from '@/hooks/component';
+  import { useGo } from '@/hooks/web/usePage';
 
   const name = 'register';
-  const { toLoginModule } = useRouterPush();
+  const { toLoginModule } = useGo();
 </script>
 
 <style lang="less" scoped></style>

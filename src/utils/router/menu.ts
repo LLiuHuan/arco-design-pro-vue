@@ -42,13 +42,11 @@ export function transformAuthRouteToMenu(
 ): App.Menu[] {
   const globalMenu: App.Menu[] = [];
   routes.forEach((route) => {
-    console.log(route);
     const { name, path, meta } = route;
     let menuChildren: App.Menu[] | undefined;
     if (route.children && route.children.length > 0) {
       menuChildren = transformAuthRouteToMenu(route.children);
     }
-    console.log(9999);
     const menuItem: App.Menu = addPartialProps({
       menu: {
         routeName: name as AuthRoute.RouteKey,
@@ -59,8 +57,6 @@ export function transformAuthRouteToMenu(
       localIcon: meta.localIcon,
       children: menuChildren,
     });
-
-    console.log('menuItem', menuItem);
 
     if (!hideInMenu(route)) {
       globalMenu.push(menuItem);

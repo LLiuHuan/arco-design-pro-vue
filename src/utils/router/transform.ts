@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { getLayoutComponent, getViewComponent } from '@/utils/router';
 import { consoleError } from '@/utils/common';
+import { getLayoutComponent, getViewComponent } from './component';
 
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
 
@@ -84,7 +84,14 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
         }
       },
       self() {
-        itemRoute.component = getViewComponent(item.name as AuthRoute.RouteKey);
+        // 中间带路由参数的路由，需要将路由参数去掉，才能找到对应的组件
+        // const pathSplitMark = '/';
+        const routeSplitMark = '_';
+        const name = item.name
+          .split(routeSplitMark)
+          .filter((v) => !v.startsWith(':'))
+          .join(routeSplitMark) as AuthRoute.RouteKey;
+        itemRoute.component = getViewComponent(name as AuthRoute.RouteKey);
       },
     };
     try {
@@ -180,7 +187,6 @@ export function transformRoutePathToRouteName(path: AuthRoute.RoutePath) {
 
   const pathSplitMark = '/';
   const routeSplitMark = '_';
-  console.log('transformRoutePathToRouteName', path);
   return path
     .split(pathSplitMark)
     .slice(1)

@@ -6,11 +6,14 @@ export function openWindow(
     noreferrer?: boolean;
   },
 ) {
-  const { target = '__blank', noopener = true, noreferrer = true } = opt || {};
   const feature: string[] = [];
 
-  noopener && feature.push('noopener=yes');
-  noreferrer && feature.push('noreferrer=yes');
+  if (opt?.noopener) {
+    feature.push('noopener=yes');
+  }
+  if (opt?.noreferrer) {
+    feature.push('noreferrer=yes');
+  }
 
-  window.open(url, target, feature.join(','));
+  window.open(url, opt?.target, feature.join(','));
 }

@@ -1,5 +1,5 @@
 import { Message, Modal } from '@arco-design/web-vue';
-import { useI18n } from '@/hooks/web';
+import { useI18n } from '@/hooks/web/useI18n';
 import type { ErrorMessageMode } from '~/types/axios';
 import { useAuthStoreWithOut } from '@/store/modules/auth';
 import { SessionTimeoutProcessingEnum } from '@/enums';

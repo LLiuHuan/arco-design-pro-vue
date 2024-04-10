@@ -32,14 +32,12 @@
   import { useRouteStore } from '@/store/modules/route';
   import { useGo } from '@/hooks/web/usePage';
   import { routeName } from '@/utils/router';
-  import { useRouter } from 'vue-router';
   import { VerticalMenu } from './components';
 
   const { getShowLogo } = useRootSetting();
   const { getIsSidebarType, getCollapsed } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { goKey } = useGo();
-  console.log('11111', useRouter());
 
   interface Props {
     /**

@@ -1,7 +1,7 @@
 <template>
   <MenuItem v-if="!menuHasChildren(item)" :item="item"></MenuItem>
 
-  <ASubMenu v-if="menuHasChildren(item)" :key="`submenu-${item.routeName}`">
+  <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeName}`">
     <template v-if="item.icon" #icon>
       <component :is="item.icon"></component>
     </template>

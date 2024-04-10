@@ -44,7 +44,7 @@
     logoSize: 32,
   });
 
-  const { title: globTitle } = useGlobSetting();
+  const { VITE_GLOB_APP_TITLE: globTitle } = useGlobSetting();
 </script>
 
 <style lang="less" scoped></style>

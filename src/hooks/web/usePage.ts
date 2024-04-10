@@ -3,8 +3,6 @@ import type { RouteLocationRaw, Router } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { unref } from 'vue';
 import { isHttpUrl, openWindow } from '@/utils/common';
-import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
-import { REDIRECT_NAME } from '@/router/common';
 import { routeName } from '@/utils/router';
 import { router } from '@/router';
 
@@ -41,10 +39,9 @@ export function useGo(_router?: Router) {
 
   function go(to?: RouteLocationRawEx): void;
   function go(to: RouteLocationRawEx, isReplace: boolean): void;
-  function go(to: RouteLocationRawEx, goType: GoType): void;
   function go(
     to: RouteLocationRawEx = PageEnum.BASE_HOME,
-    goTypeOrIsReplace: boolean | GoType = false,
+    isReplace: boolean = false,
   ) {
     if (!to) {
       return;
@@ -58,35 +55,8 @@ export function useGo(_router?: Router) {
       return;
     }
 
-    const isReplace =
-      goTypeOrIsReplace === true || goTypeOrIsReplace === GoType.replace;
-    const isAfter = goTypeOrIsReplace === GoType.after;
-
     if (isReplace) {
       replace(to).catch(handleError);
-    } else if (isAfter) {
-      const tabStore = useMultipleTabWithOutStore();
-      const currentName = unref(currentRoute).name;
-      // 当前 tab
-      const currentIndex = tabStore.getTabList.findIndex(
-        (item) => item.name === currentName,
-      );
-      // 当前 tab 数量
-      const currentCount = tabStore.getTabList.length;
-      push(to)
-        .then(() => {
-          if (tabStore.getTabList.length > currentCount) {
-            // 产生新 tab
-            // 新 tab（也是最后一个）
-            const targetIndex = tabStore.getTabList.length - 1;
-            // 新 tab 在 当前 tab 的后面
-            if (currentIndex > -1 && targetIndex > currentIndex) {
-              // 移动 tab
-              tabStore.sortTabs(targetIndex, currentIndex + 1);
-            }
-          }
-        })
-        .catch(handleError);
     } else {
       push(to).catch(handleError);
     }
@@ -149,7 +119,7 @@ export function useGo(_router?: Router) {
       redirect,
     };
 
-    return goKey(routeName('login'), options);
+    return goKey(PageEnum.LOGIN, options);
   }
 
   /**
@@ -160,7 +130,7 @@ export function useGo(_router?: Router) {
     const module = loginModule || 'pwd-login';
 
     const routeLocation: RouteLocationRaw = {
-      name: routeName('login'),
+      name: PageEnum.LOGIN,
       params: { module },
     };
     const { query } = unref(currentRoute);
@@ -195,7 +165,7 @@ export const useRedo = (_router?: Router) => {
   const { query, params = {}, name, fullPath } = unref(currentRoute.value);
   function redo(): Promise<boolean> {
     return new Promise((resolve) => {
-      if (name === REDIRECT_NAME) {
+      if (name === PageEnum.REDIRECT) {
         resolve(false);
         return;
       }
@@ -207,7 +177,9 @@ export const useRedo = (_router?: Router) => {
         params._redirect_type = 'path';
         params.path = fullPath;
       }
-      replace({ name: REDIRECT_NAME, params, query }).then(() => resolve(true));
+      replace({ name: PageEnum.REDIRECT, params, query }).then(() =>
+        resolve(true),
+      );
     });
   }
   return redo;

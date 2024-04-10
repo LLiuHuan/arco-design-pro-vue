@@ -64,6 +64,8 @@ export default {
       routerAnimationFadeScale: 'Fade scale',
 
       transitionEnable: 'Switch animation',
+      transitionLoading: 'Switch loading',
+      transitionNGprogress: 'Top progress bar',
     },
   },
 };

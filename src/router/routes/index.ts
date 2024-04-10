@@ -97,5 +97,5 @@ export const CONSTANT_ROUTES: AuthRoute.Route[] = [
   // NOT_FOUND_ROUTE,
   // SERVER_ERROR_ROUTE,
   INVALID_ROUTE,
-  // REDIRECT_ROUTE,
+  REDIRECT_ROUTE,
 ];

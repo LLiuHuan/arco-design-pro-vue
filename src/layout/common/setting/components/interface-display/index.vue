@@ -26,6 +26,24 @@
         :disabled="!getEnableTransition"
       ></SelectItem>
     </SettingItem>
+    <SettingItem
+      key="3"
+      :label="$t('layout.setting.interfaceDisplay.transitionLoading')"
+    >
+      <SwitchItem
+        :def="getOpenPageLoading"
+        :event="HandlerEnum.TRANSITION_LOADING"
+      />
+    </SettingItem>
+    <SettingItem
+      key="4"
+      :label="$t('layout.setting.interfaceDisplay.transitionNGprogress')"
+    >
+      <SwitchItem
+        :def="getOpenNProgress"
+        :event="HandlerEnum.TRANSITION_NPROGRESS"
+      />
+    </SettingItem>
   </TransitionGroup>
 </template>
 
@@ -34,7 +52,12 @@
   import { HandlerEnum, SelectItem, SettingItem, SwitchItem } from '../common';
   import { getRouterAnimationOptions } from './helpers';
 
-  const { getBasicTransition, getEnableTransition } = useTransitionSetting();
+  const {
+    getBasicTransition,
+    getEnableTransition,
+    getOpenPageLoading,
+    getOpenNProgress,
+  } = useTransitionSetting();
 
   const routerAnimationOptions = getRouterAnimationOptions();
 </script>

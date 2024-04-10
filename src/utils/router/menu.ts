@@ -1,6 +1,30 @@
 import { iconRender } from '@/utils/common';
 import type { App } from '~/types/app';
 
+function getActiveKeyPathsOfMenu(activeKey: string, menu: App.Menu) {
+  const keys: string[] = [];
+  if (activeKey.includes(menu.routeName)) {
+    keys.push(menu.routeName);
+  }
+  if (menu.children) {
+    keys.push(
+      ...menu.children
+        .map((item) => getActiveKeyPathsOfMenu(activeKey, item))
+        .flat(1),
+    );
+  }
+  return keys;
+}
+
+/**
+ * 获取当前路由所在菜单数据的paths // 无用
+ * @param activeKey - 当前路由的key
+ * @param menus - 菜单数据
+ */
+export function getActiveKeyPathsOfMenus(activeKey: string, menus: App.Menu[]) {
+  return menus.map((menu) => getActiveKeyPathsOfMenu(activeKey, menu)).flat(1);
+}
+
 /** 给菜单添加可选属性 */
 function addPartialProps(config: {
   menu: App.Menu;

@@ -17,7 +17,7 @@
     <h2
       v-if="isShowTitle && !tip"
       class="text-24px font-500 text-[rgba(var(--primary-6))]"
-      >{{ title }}</h2
+      >{{ VITE_GLOB_APP_TITLE }}</h2
     >
     <div v-else-if="tip" class="arco-spin-tip">
       {{ tip }}
@@ -45,7 +45,7 @@
     loading: true,
   });
 
-  const { title } = useGlobSetting();
+  const { VITE_GLOB_APP_TITLE } = useGlobSetting();
 </script>
 
 <style lang="less" scoped></style>

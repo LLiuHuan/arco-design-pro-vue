@@ -15,13 +15,8 @@ enum HandlerEnum {
   // transition
   TRANSITION_ENABLE,
   TRANSITION_ROUTER,
-}
-
-function baseHandler(event: HandlerEnum, value: any) {
-  const appStore = useAppStore();
-  const config = handler(event, value);
-  console.log(event, value, config);
-  appStore.setProjectConfig(config);
+  TRANSITION_LOADING,
+  TRANSITION_NPROGRESS,
 }
 
 const handler = (
@@ -60,9 +55,23 @@ const handler = (
       return {
         transitionSetting: { basicTransition: value },
       };
+    case HandlerEnum.TRANSITION_LOADING:
+      return {
+        transitionSetting: { openPageLoading: value },
+      };
+    case HandlerEnum.TRANSITION_NPROGRESS:
+      return {
+        transitionSetting: { openNProgress: value },
+      };
     default:
       return {};
   }
 };
+
+function baseHandler(event: HandlerEnum, value: any) {
+  const appStore = useAppStore();
+  const config = handler(event, value);
+  appStore.setProjectConfig(config);
+}
 
 export { HandlerEnum, baseHandler, handler };

@@ -66,6 +66,9 @@ export default {
       transitionEnable: 'Switch animation',
       transitionLoading: 'Switch loading',
       transitionNGprogress: 'Top progress bar',
+
+      headerBreadcrumb: 'Breadcrumb',
+      headerBreadcrumbIcon: 'Breadcrumb icon',
     },
   },
 };

@@ -90,6 +90,10 @@ const defaultSetting: ProjectConfig = {
   headerSetting: {
     // Header height - [头部高度]
     height: 64,
+    // Whether to show breadcrumbs - [是否显示面包屑]
+    showBreadCrumb: true,
+    // Whether to show the breadcrumb icon - [是否显示面包屑图标]
+    showBreadCrumbIcon: true,
   },
 
   // Whether to cancel the http request that has been sent but not responded when switching the interface

@@ -66,6 +66,9 @@ export default {
       transitionEnable: '切换动画',
       transitionLoading: '切换loading',
       transitionNGprogress: '顶部进度条',
+
+      headerBreadcrumb: '面包屑',
+      headerBreadcrumbIcon: '面包屑图标',
     },
   },
 };

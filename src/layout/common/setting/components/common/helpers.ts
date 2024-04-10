@@ -11,6 +11,8 @@ enum HandlerEnum {
 
   // header
   HEADER_HEIGHT,
+  HEADER_BREADCRUMB,
+  HEADER_BREADCRUMB_ICON,
 
   // transition
   TRANSITION_ENABLE,
@@ -46,6 +48,14 @@ const handler = (
       }
       return {
         headerSetting: { height: value },
+      };
+    case HandlerEnum.HEADER_BREADCRUMB:
+      return {
+        headerSetting: { showBreadCrumb: value },
+      };
+    case HandlerEnum.HEADER_BREADCRUMB_ICON:
+      return {
+        headerSetting: { showBreadCrumbIcon: value },
       };
     case HandlerEnum.TRANSITION_ENABLE:
       return {

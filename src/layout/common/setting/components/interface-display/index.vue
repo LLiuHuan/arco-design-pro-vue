@@ -8,6 +8,24 @@
   >
     <SettingItem
       key="1"
+      :label="$t('layout.setting.interfaceDisplay.headerBreadcrumb')"
+    >
+      <SwitchItem
+        :def="getHeaderShowBreadCrumb"
+        :event="HandlerEnum.HEADER_BREADCRUMB"
+      />
+    </SettingItem>
+    <SettingItem
+      key="2"
+      :label="$t('layout.setting.interfaceDisplay.headerBreadcrumbIcon')"
+    >
+      <SwitchItem
+        :def="getHeaderShowBreadCrumbIcon"
+        :event="HandlerEnum.HEADER_BREADCRUMB_ICON"
+      />
+    </SettingItem>
+    <SettingItem
+      key="3"
       :label="$t('layout.setting.interfaceDisplay.transitionEnable')"
     >
       <SwitchItem
@@ -16,7 +34,7 @@
       />
     </SettingItem>
     <SettingItem
-      key="2"
+      key="4"
       :label="$t('layout.setting.interfaceDisplay.routerAnimation')"
     >
       <SelectItem
@@ -27,7 +45,7 @@
       ></SelectItem>
     </SettingItem>
     <SettingItem
-      key="3"
+      key="5"
       :label="$t('layout.setting.interfaceDisplay.transitionLoading')"
     >
       <SwitchItem
@@ -36,7 +54,7 @@
       />
     </SettingItem>
     <SettingItem
-      key="4"
+      key="6"
       :label="$t('layout.setting.interfaceDisplay.transitionNGprogress')"
     >
       <SwitchItem
@@ -48,7 +66,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useTransitionSetting } from '@/hooks/setting';
+  import { useHeaderSetting, useTransitionSetting } from '@/hooks/setting';
   import { HandlerEnum, SelectItem, SettingItem, SwitchItem } from '../common';
   import { getRouterAnimationOptions } from './helpers';
 
@@ -58,6 +76,8 @@
     getOpenPageLoading,
     getOpenNProgress,
   } = useTransitionSetting();
+  const { getHeaderShowBreadCrumb, getHeaderShowBreadCrumbIcon } =
+    useHeaderSetting();
 
   const routerAnimationOptions = getRouterAnimationOptions();
 </script>

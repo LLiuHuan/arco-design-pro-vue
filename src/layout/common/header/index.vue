@@ -5,14 +5,15 @@
   >
     <div class="flex-center">
       <LayoutTrigger v-if="getShowHeaderTrigger" :sider="false"></LayoutTrigger>
+      <Breadcrumb v-if="getHeaderShowBreadCrumb" />
     </div>
 
     <div class="flex-center h-40px">
-      <ThemeBtn></ThemeBtn>
-      <LanguageBtn></LanguageBtn>
-      <FullScreenBtn></FullScreenBtn>
-      <SettingBtn></SettingBtn>
-      <UserAvatar></UserAvatar>
+      <ThemeBtn />
+      <LanguageBtn />
+      <FullScreenBtn />
+      <SettingBtn />
+      <UserAvatar />
     </div>
   </ALayoutHeader>
 </template>
@@ -26,10 +27,11 @@
     LanguageBtn,
     ThemeBtn,
     UserAvatar,
+    Breadcrumb,
   } from './components';
 
   const { getShowHeaderTrigger } = useMenuSetting();
-  const { getHeaderHeight } = useHeaderSetting();
+  const { getHeaderHeight, getHeaderShowBreadCrumb } = useHeaderSetting();
 </script>
 
 <style lang="less" scoped></style>

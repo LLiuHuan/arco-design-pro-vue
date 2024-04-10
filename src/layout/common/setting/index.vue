@@ -4,6 +4,7 @@
     :visible="getSettingDrawerState"
     :title="$t('layout.setting.drawerTitle')"
     unmount-on-close
+    class="overflow-y-auto overflow-x-hidden"
     @ok="handleOk"
     @cancel="handleCancel"
   >
@@ -28,7 +29,7 @@
         </AButton>
       </ASpace>
     </template>
-    <div class="overflow-hidden h-full">
+    <div class="overflow-hidden">
       <ThemeSchema />
       <ThemeColor />
       <InterfaceFunction />

@@ -105,6 +105,11 @@ export interface ThemeSetting {
 export interface HeaderSetting {
   // Header height - [头部高度]
   height: number;
+  // 是否显示面包屑
+  // Whether to show breadcrumbs
+  showBreadCrumb: boolean;
+  // Whether to show the breadcrumb icon
+  showBreadCrumbIcon: boolean;
 }
 
 export interface ProjectConfig {

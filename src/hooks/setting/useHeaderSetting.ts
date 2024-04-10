@@ -9,12 +9,22 @@ export const useHeaderSetting = () => {
     return appStore.getHeaderSetting.height;
   });
 
+  const getHeaderShowBreadCrumb = computed((): boolean => {
+    return appStore.getHeaderSetting.showBreadCrumb;
+  });
+
+  const getHeaderShowBreadCrumbIcon = computed((): boolean => {
+    return appStore.getHeaderSetting.showBreadCrumbIcon;
+  });
+
   const setHeaderSetting = (setting: Partial<HeaderSetting>) => {
     appStore.setProjectConfig({ headerSetting: setting });
   };
 
   return {
     getHeaderHeight,
+    getHeaderShowBreadCrumb,
+    getHeaderShowBreadCrumbIcon,
 
     setHeaderSetting,
   };

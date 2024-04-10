@@ -1,3 +1,5 @@
+import { transformRouteNameToRoutePath } from './transform';
+
 /**
  * 获取所有固定路由的名称集合
  * @param route - 固定路由
@@ -22,3 +24,6 @@ export function getConstantRouteNames(routes: AuthRoute.Route[]) {
 
 /** 路由名称 */
 export const routeName = (key: AuthRoute.AllRouteKey) => key;
+/** 路由路径 */
+export const routePath = (key: Exclude<AuthRoute.RouteKey, 'not-found'>) =>
+  transformRouteNameToRoutePath(key);

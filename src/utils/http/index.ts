@@ -19,6 +19,9 @@ import {
   setObjToUrlParams,
 } from '@/utils/common';
 import { getToken } from '@/utils/auth';
+import { useGo } from '@/hooks/web/usePage';
+import { router } from '@/router';
+import { PageEnum } from '@/enums';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';
@@ -95,14 +98,14 @@ const transform: AxiosTransform = {
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
+    const { goKey } = useGo(router);
     let timeoutMsg = '';
     switch (code) {
       case timeoutCode:
         timeoutMsg = t('sys.api.timeoutMessage');
-        // TODO: 跳转到登录页面
-        // const userStore = useUserStoreWithOut();
-        // // 被动登出，带redirect地址
-        // userStore.logout(false);
+        goKey(PageEnum.LOGIN, {
+          query: { redirect: router.currentRoute.value.fullPath },
+        });
         break;
       default:
         if (message) {

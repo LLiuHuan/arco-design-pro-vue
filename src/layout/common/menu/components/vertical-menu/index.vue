@@ -1,6 +1,4 @@
 <template>
-  {{ menuState.selectedKeys }}
-  {{ menuState.openKeys }}
   <AMenu
     :selected-keys="menuState.selectedKeys"
     :open-keys="menuState.openKeys"
@@ -9,6 +7,7 @@
     :mode="mode"
     :accordion="getAccordion"
     auto-open-selected
+    auto-scroll-into-view
     @menu-item-click="handleMenuItemClick"
     @sub-menu-click="handleSubMenuItemClick"
   >
@@ -19,14 +18,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { AppEnum } from '@/enums';
+  import { AppEnum, PageEnum } from '@/enums';
   import { useMenuSetting } from '@/hooks/setting';
   import type { MenuMode } from '@arco-design/web-vue/es/menu/interface';
   import type { App } from '~/types/app';
-  import { listenerRouteChange } from '@/utils/router';
+  import {
+    getActiveKeyPathsOfMenus,
+    listenerRouteChange,
+  } from '@/utils/router';
   import { reactive, ref, unref } from 'vue';
-  import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
-  import { isFunction } from '@/utils/common';
   import { SubMenuItem } from './components';
   import { MenuState } from './types';
 
@@ -43,11 +43,6 @@
      * Menu data -[菜单数据]
      */
     menus: App.Menu[];
-
-    /**
-     * The callback function before clicking the menu - [点击菜单前的回调函数]
-     */
-    beforeClickFn?: (key: string | number) => Promise<boolean>;
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -65,56 +60,36 @@
 
   // 判断一下是否点击了菜单
   const isClickGo = ref(false);
-  const currentActiveMenu = ref('');
-
-  const { currentRoute } = useRouter();
 
   const { getCollapsed, getAccordion } = useMenuSetting();
 
   const handleMenuItemClick = (key: string) => {
-    const { beforeClickFn } = props;
-    if (beforeClickFn && isFunction(beforeClickFn)) {
-      const flag = beforeClickFn(key);
-      if (!flag) return;
-    }
-
     emit('menuClick', key);
-
     isClickGo.value = true;
     menuState.selectedKeys = [key];
   };
 
-  const handleSubMenuItemClick = (key: string, openKeys: string[]) => {
-    console.log('sub menu item click', key, openKeys);
+  const handleSubMenuItemClick = (_: string, openKeys: string[]) => {
     menuState.openKeys = openKeys;
   };
 
-  const handleMenuChange = async (route?: RouteLocationNormalizedLoaded) => {
+  listenerRouteChange((route) => {
+    if (route.name === PageEnum.REDIRECT) {
+      return;
+    }
+
+    console.log('listenerRouteChange', route, unref(isClickGo));
+
     if (unref(isClickGo)) {
       isClickGo.value = false;
       return;
     }
+    const activeKey = (route.meta?.currentActiveMenu || route.name) as string;
 
-    const path =
-      (route || unref(currentRoute)).meta?.currentActiveMenu ||
-      (route || unref(currentRoute)).path;
-
-    console.log(path);
-  };
-
-  listenerRouteChange((route) => {
-    if (route.name === '/redirect') {
-      return;
-    }
-    handleMenuChange(route);
-
-    currentActiveMenu.value = route.meta?.currentActiveMenu as string;
-    console.log('route change', route);
-
-    if (unref(currentActiveMenu)) {
-      menuState.selectedKeys = [unref(currentActiveMenu)];
-      // setOpenKeys(unref(currentActiveMenu));
-    }
+    menuState.selectedKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
+    menuState.openKeys = menuState.selectedKeys.slice(
+      menuState.selectedKeys.length - 1,
+    );
   });
 </script>
 

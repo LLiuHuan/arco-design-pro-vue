@@ -1,19 +1,13 @@
-import {
-  RouteLocationNormalized,
-  RouteLocationRaw,
-  Router,
-  useRouter,
-} from 'vue-router';
+import { RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 import { unref } from 'vue';
 import { appSetting } from '@/settings';
 import { defineStore } from 'pinia';
 import { MULTIPLE_TABS_KEY, PageEnum } from '@/enums';
 import { store } from '@/store';
-import { REDIRECT_NAME } from '@/router/common';
 import { clearTabRoutes } from '@/store/modules/multipleTab/helpers';
 import { localStg } from '@/utils/cache';
 import { getRawRoute } from '@/utils/router';
-import { consoleError, isHttpUrl, openWindow } from '@/utils/common';
+import { useGo, useRedo } from '@/hooks/web/usePage';
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -97,7 +91,8 @@ export const useMultipleTabStore = defineStore({
       if (findTab) {
         this.cacheTabList.delete(findTab);
       }
-      await this.Redo(router);
+      const redo = useRedo(router);
+      await redo();
     },
     /**
      * @description Clear the cache - [清空缓存]
@@ -110,6 +105,7 @@ export const useMultipleTabStore = defineStore({
      * @param router
      */
     goToPage(router: Router) {
+      const { go } = useGo(router);
       const len = this.tabList.length;
       const { path } = unref(router.currentRoute);
 
@@ -123,7 +119,7 @@ export const useMultipleTabStore = defineStore({
         }
       }
       // Jump to the current page and report an error
-      if (path !== toPath) this.Go(toPath as PageEnum, true, router);
+      if (path !== toPath) go(toPath as PageEnum, true);
     },
 
     /**
@@ -136,94 +132,6 @@ export const useMultipleTabStore = defineStore({
       this.tabList.splice(oldIndex, 1);
       this.tabList.splice(newIndex, 0, currentTab);
       this.lastDragEndIndex += 1;
-    },
-
-    /**
-     * @description Go to the specified route - [跳转到指定路由]
-     * @param opt
-     * @param goTypeOrIsReplace
-     * @param _router
-     * @constructor
-     */
-    async Go(
-      opt: RouteLocationRawEx,
-      goTypeOrIsReplace: boolean | GoType,
-      _router?: Router,
-    ) {
-      if (!opt) {
-        return;
-      }
-      const { push, replace, currentRoute } = _router || useRouter();
-
-      let path = unref(opt) as string;
-      if (path[0] === '/') {
-        path = path.slice(1);
-      }
-      if (isHttpUrl(path)) {
-        openWindow(path);
-        return;
-      }
-
-      const isReplace =
-        goTypeOrIsReplace === true || goTypeOrIsReplace === GoType.replace;
-      const isAfter = goTypeOrIsReplace === GoType.after;
-
-      if (isReplace) {
-        replace(opt).catch(consoleError);
-      } else if (isAfter) {
-        // const tabStore = useMultipleTabStore();
-        const currentName = unref(currentRoute).name;
-        // 当前 tab
-        const currentIndex = this.getTabList.findIndex(
-          (item) => item.name === currentName,
-        );
-        // 当前 tab 数量
-        const currentCount = this.getTabList.length;
-        push(opt)
-          .then(() => {
-            if (this.getTabList.length > currentCount) {
-              // 产生新 tab
-              // 新 tab（也是最后一个）
-              const targetIndex = this.getTabList.length - 1;
-              // 新 tab 在 当前 tab 的后面
-              if (currentIndex > -1 && targetIndex > currentIndex) {
-                // 移动 tab
-                this.sortTabs(targetIndex, currentIndex + 1);
-              }
-            }
-          })
-          .catch(consoleError);
-      } else {
-        push(opt).catch(consoleError);
-      }
-    },
-
-    /**
-     * @description Redo - [重做]
-     * @param _router
-     * @constructor
-     */
-    async Redo(_router: Router): Promise<boolean> {
-      const { replace, currentRoute } = _router || useRouter();
-      const { query, params = {}, name, fullPath } = unref(currentRoute.value);
-
-      return new Promise((resolve) => {
-        if (name === REDIRECT_NAME) {
-          resolve(false);
-          return;
-        }
-        if (name && Object.keys(params).length > 0) {
-          params._origin_params = JSON.stringify(params ?? {});
-          params._redirect_type = 'name';
-          params.path = String(name);
-        } else {
-          params._redirect_type = 'path';
-          params.path = fullPath;
-        }
-        replace({ name: REDIRECT_NAME, params, query }).then(() =>
-          resolve(true),
-        );
-      });
     },
   },
 });

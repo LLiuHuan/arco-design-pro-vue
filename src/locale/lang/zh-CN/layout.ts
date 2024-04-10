@@ -64,6 +64,8 @@ export default {
       routerAnimationFadeScale: '缩放消退',
 
       transitionEnable: '切换动画',
+      transitionLoading: '切换loading',
+      transitionNGprogress: '顶部进度条',
     },
   },
 };

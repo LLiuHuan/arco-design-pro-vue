@@ -6,6 +6,8 @@ import {
   AppEnum,
   TriggerEnum,
   SessionTimeoutProcessingEnum,
+  MenuModeEnum,
+  SettingButtonPositionEnum,
 } from '@/enums';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
@@ -63,7 +65,10 @@ export interface MultiTabsSetting {
 }
 
 export interface MenuSetting {
+  // Menu type - [菜单类型]
   type: MenuTypeEnum;
+  // Menu mode - [菜单模式]
+  mode: MenuModeEnum;
   // Background color - [背景颜色]
   bgColor: string;
   // Whether to collapse the menu - [是否折叠菜单]
@@ -81,6 +86,8 @@ export interface MenuSetting {
   trigger: TriggerEnum;
   // Drag the sidebar - [拖动侧边栏]
   canDrag: boolean;
+  // 是否显示菜单
+  show: boolean;
 }
 
 export interface ThemeSetting {
@@ -103,6 +110,8 @@ export interface ThemeSetting {
 }
 
 export interface HeaderSetting {
+  // Header show - [头部显示]
+  show: boolean;
   // Header height - [头部高度]
   height: number;
   // 是否显示面包屑
@@ -146,4 +155,17 @@ export interface ProjectConfig {
   // Session timeout processing
   // 会话超时处理
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
+
+  // Whether to show the full screen - [是否显示全屏]
+  fullContent: boolean;
+
+  // Whether to show the configuration button
+  // 是否显示配置按钮
+  showSettingButton: boolean;
+  // Whether to show the theme switch button
+  // 是否显示主题切换按钮
+  showDarkModeToggle: boolean;
+  // Configure where the button is displayed
+  // 配置按钮显示位置
+  settingButtonPosition: SettingButtonPositionEnum;
 }

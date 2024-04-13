@@ -1,20 +1,29 @@
 import type { ProjectConfig } from '~/types/config';
 import {
+  AppEnum,
   CacheTypeEnum,
+  MenuModeEnum,
   MenuTypeEnum,
   RouterTransitionEnum,
-  ThemeColorEnum,
-  AppEnum,
-  TriggerEnum,
   SessionTimeoutProcessingEnum,
+  SettingButtonPositionEnum,
+  ThemeColorEnum,
+  TriggerEnum,
 } from '@/enums';
 import jsonSetting from './projectSetting.json';
 
 const defaultSetting: ProjectConfig = {
+  settingButtonPosition: SettingButtonPositionEnum.AUTO,
   // Permission-related cache is stored in sessionStorage or localStorage - [权限相关缓存存储在sessionStorage还是localStorage中]
   permissionCacheType: CacheTypeEnum.LOCAL,
   // Use error-handler-plugin - [显示错误处理插件]
   useErrorHandle: false,
+  // Whether to show the configuration button
+  // 是否显示配置按钮
+  showSettingButton: true,
+  // Whether to show the theme switch button
+  // 是否显示主题切换按钮
+  showDarkModeToggle: true,
   // Whether to display the logo - [是否显示Logo]
   showLogo: true,
   // Animation configuration - [动画配置]
@@ -55,6 +64,10 @@ const defaultSetting: ProjectConfig = {
   },
   // Menu settings - [菜单设置]
   menuSetting: {
+    // Whether to display - [是否显示]
+    show: true,
+    // Menu mode - [菜单模式]
+    mode: MenuModeEnum.VERTICAL,
     // Whether the menu is collapsed - [菜单是否折叠]
     collapsed: false,
     // Background color - [背景颜色]
@@ -88,6 +101,8 @@ const defaultSetting: ProjectConfig = {
   },
   // Header settings - [头部设置]
   headerSetting: {
+    // Whether to display - [是否显示]
+    show: true,
     // Header height - [头部高度]
     height: 64,
     // Whether to show breadcrumbs - [是否显示面包屑]
@@ -102,6 +117,8 @@ const defaultSetting: ProjectConfig = {
   // Session timeout processing
   // 会话超时处理
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
+  // Whether to full screen display - [是否开启全屏显示]
+  fullContent: false,
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

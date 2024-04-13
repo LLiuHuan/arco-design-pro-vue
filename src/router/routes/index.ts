@@ -82,9 +82,10 @@ export const INVALID_ROUTE: AuthRoute.Route = {
 export const REDIRECT_ROUTE: AuthRoute.Route = {
   name: 'redirect',
   path: '/redirect',
-  component: 'blank',
+  component: 'self',
   meta: {
     title: '重定向',
+    dynamicPath: `/redirect/:path(.*)/:_redirectType(.*)/:_originParams(.*)?`,
     singleLayout: 'blank',
   },
 };

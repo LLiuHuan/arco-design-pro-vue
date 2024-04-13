@@ -1,12 +1,16 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import type { MenuSetting } from '~/types/config';
-import { MenuTypeEnum, TriggerEnum } from '@/enums';
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '@/enums';
+import { useFullContent } from '@/hooks/web/useFullContent';
 
 export const useMenuSetting = () => {
   const appStore = useAppStore();
+  const { getFullContent } = useFullContent();
 
   const getMenuType = computed(() => appStore.getMenuSetting.type);
+
+  const getMenuMode = computed(() => appStore.getMenuSetting.mode);
 
   // 是否折叠左侧菜单
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
@@ -29,6 +33,18 @@ export const useMenuSetting = () => {
   // 获取是否开启手风琴模式
   const getAccordion = computed(() => appStore.getMenuSetting.accordion);
 
+  // 获取是否显示菜单
+  const getShowMenu = computed(() => appStore.getMenuSetting.show);
+
+  const getShowSider = computed(() => {
+    //      unref(getSplit) ||
+    return (
+      unref(getShowMenu) &&
+      unref(getMenuMode) !== MenuModeEnum.HORIZONTAL &&
+      !unref(getFullContent)
+    );
+  });
+
   // 获取是否是混合菜单
   const getIsMixSidebar = computed(() => {
     return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
@@ -37,6 +53,10 @@ export const useMenuSetting = () => {
   // 是否是侧边栏模式
   const getIsSidebarType = computed(
     () => unref(getMenuType) === MenuTypeEnum.SIDEBAR,
+  );
+
+  const getIsTopMenu = computed(
+    () => unref(getMenuType) === MenuTypeEnum.TOP_MENU,
   );
 
   const getShowSiderTrigger = computed(() => {
@@ -98,6 +118,9 @@ export const useMenuSetting = () => {
     getIsSidebarType,
     getAccordion,
     getIsMixSidebar,
+    getIsTopMenu,
+    getShowMenu,
+    getShowSider,
 
     setMenuSetting,
     toggleCollapsed,

@@ -33,3 +33,9 @@ export enum SessionTimeoutProcessingEnum {
   ROUTE_JUMP,
   PAGE_COVERAGE,
 }
+
+export enum SettingButtonPositionEnum {
+  AUTO = 'auto',
+  HEADER = 'header',
+  FIXED = 'fixed',
+}

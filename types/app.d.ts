@@ -61,4 +61,16 @@ declare namespace App {
      */
     meta?: RouteMeta<RoutePath<K>>;
   };
+
+  interface Tab
+    extends Pick<
+      import('vue-router').RouteLocationNormalized,
+      'name' | 'meta' | 'fullPath' | 'query' | 'params'
+    > {
+    /** 滚动的位置 */
+    scrollPosition: {
+      left: number;
+      top: number;
+    };
+  }
 }

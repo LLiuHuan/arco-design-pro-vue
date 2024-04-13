@@ -1,17 +1,19 @@
 <template>
   <ALayout class="wh-full">
-    <ALayoutHeader v-if="false"> </ALayoutHeader>
+    <LayoutFeature />
+    <ALayoutHeader v-if="getShowFullHeaderRef" />
     <ALayout class="w-full h-full">
-      <LayoutSider></LayoutSider>
+      <LayoutSider v-if="getShowSider" />
       <ALayout class="w-full h-full relative">
-        <LayoutHeader></LayoutHeader>
+        <LayoutHeader v-if="getShowInsetHeaderRef" />
+        <LayoutTabs v-if="getShowTabs" />
         <ALayoutContent
           class="adp-default-layout-content overflow-y-auto transition-base bg-[var(--color-fill-2)] relative"
         >
           <LayoutContent />
-          <SettingDrawer></SettingDrawer>
+          <SettingDrawer />
         </ALayoutContent>
-        <LayoutFooter></LayoutFooter>
+        <LayoutFooter />
       </ALayout>
     </ALayout>
     <a-back-top
@@ -23,12 +25,23 @@
 
 <script lang="ts" setup>
   import {
+    useHeaderSetting,
+    useMenuSetting,
+    useMultipleTabSetting,
+  } from '@/hooks/setting';
+  import {
     LayoutContent,
     LayoutFooter,
     LayoutSider,
     SettingDrawer,
     LayoutHeader,
+    LayoutTabs,
+    LayoutFeature,
   } from '../common';
+
+  const { getShowSider } = useMenuSetting();
+  const { getShowFullHeaderRef, getShowInsetHeaderRef } = useHeaderSetting();
+  const { getShowTabs } = useMultipleTabSetting();
 </script>
 
 <style lang="less" scoped></style>

@@ -7,6 +7,7 @@
 import { Router } from 'vue-router';
 import { PageEnum } from '@/enums';
 import { useAuthStoreWithOut } from '@/store/modules/auth';
+import { removeTabChangeListener } from '@/utils/router';
 
 export function createStateGuard(router: Router) {
   router.afterEach((to) => {
@@ -16,6 +17,8 @@ export function createStateGuard(router: Router) {
       const authStore = useAuthStoreWithOut();
 
       authStore.resetAuthStore();
+    } else if (to.name === PageEnum.REDIRECT) {
+      removeTabChangeListener();
     }
   });
 }

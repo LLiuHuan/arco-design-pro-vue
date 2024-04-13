@@ -11,11 +11,14 @@ declare namespace PageRoute {
    */
   type NotFoundRouteKey = 'not-found';
 
+  type RedirectRouteKey = 'redirect';
+
   /**
    * the route key
    * @translate 页面路由
    */
   type RouteKey =
+    | 'redirect-page'
     | 'feta_:id_sub1'
     | '403'
     | '404'
@@ -94,6 +97,10 @@ declare namespace AuthRoute {
   /** 捕获无效路由的路由路径 */
   type NotFoundRoutePath = '/:pathMatch(.*)*';
 
+  type RedirectRoutePath = '/redirect/:pathMatch(.*)';
+
+  type RedirectRouteKey = PageRoute.RedirectRouteKey;
+
   type RootRouteKey = PageRoute.RootRouteKey;
 
   type NotFoundRouteKey = PageRoute.NotFoundRouteKey;
@@ -152,6 +159,9 @@ declare namespace AuthRoute {
     multi?: boolean;
     /** 是否固定在tab卡不可关闭  */
     affix?: boolean;
+
+    hideTab?: boolean;
+    dynamicLevel?: number;
   }
 
   type Route<K extends AllRouteKey = AllRouteKey> = K extends AllRouteKey

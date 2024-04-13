@@ -50,6 +50,15 @@ export const useRootSetting = () => {
   // 获取是否显示logo
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
 
+  // 是否显示设置按钮
+  const getShowSettingButton = computed(
+    () => appStore.getProjectConfig.showSettingButton,
+  );
+
+  const getSettingButtonPosition = computed(
+    () => appStore.getProjectConfig.settingButtonPosition,
+  );
+
   const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
   };
@@ -87,6 +96,8 @@ export const useRootSetting = () => {
     getThemeColor,
     getShowLogo,
     getPageLoading,
+    getShowSettingButton,
+    getSettingButtonPosition,
 
     setRootSetting,
     setDarkMode,

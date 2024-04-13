@@ -15,6 +15,7 @@ import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { RouteLocationNormalized } from 'vue-router';
 import { LoginParams, UserInfoModel } from '@/api/auth/model/userModel';
+import { App } from '~/types/app';
 
 declare namespace StorageInterface {
   interface BasicStore {
@@ -26,7 +27,7 @@ declare namespace StorageInterface {
     /** 项目配置 */
     [PROJ_CFG_KEY]: ProjectConfig | null;
     /** 多标签页列表 */
-    [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
+    [MULTIPLE_TABS_KEY]: App.Tab[];
     /** 用户信息 */
     [USER_INFO_KEY]: UserInfoModel;
     /** 是否开启自动切换主题 */

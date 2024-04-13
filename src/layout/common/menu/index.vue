@@ -2,12 +2,7 @@
   <div class="size-full flex-col-stretch shadow-sider">
     <AppLogo
       v-if="getIsShowLogo"
-      class="text-16px font-bold border-b border-solid border-0"
-      :class="[
-        theme && theme === AppEnum.LIGHT && !getIsDarkMode
-          ? 'border-b-[rgba(242,243,245,1)]'
-          : 'border-b-[rgba(46,46,48,1)]',
-      ]"
+      class="text-16px font-bold border-b-solid border-b-1 border-b-[var(--color-fill-2)]"
       :theme="theme"
       :show-title="!getCollapsed"
       :style="{ height: `${getHeaderHeight + 1}px` }"
@@ -49,14 +44,12 @@
   defineProps<Props>();
 
   const { getMenus } = useRouteStore();
-  const { getIsDarkMode } = useRootSetting();
 
   const getIsShowLogo = computed(
     () => unref(getShowLogo) && unref(getIsSidebarType),
   );
 
   const handleMenuClick = (key: any) => {
-    console.log('menu click', key);
     const routeSplitMark = '_';
     const params: Record<string, string> = {};
     key

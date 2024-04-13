@@ -78,18 +78,15 @@
       return;
     }
 
-    console.log('listenerRouteChange', route, unref(isClickGo));
-
     if (unref(isClickGo)) {
       isClickGo.value = false;
       return;
     }
     const activeKey = (route.meta?.currentActiveMenu || route.name) as string;
+    const activeKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
 
-    menuState.selectedKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
-    menuState.openKeys = menuState.selectedKeys.slice(
-      menuState.selectedKeys.length - 1,
-    );
+    menuState.selectedKeys = activeKeys.slice(-1);
+    menuState.openKeys = activeKeys.slice(0, -1);
   });
 </script>
 

@@ -1,8 +1,5 @@
 import { mitt } from '@/utils/common';
-import type {
-  RouteLocationNormalized,
-  RouteRecordNormalized,
-} from 'vue-router';
+import type { RouteLocationNormalized } from 'vue-router';
 
 const key = Symbol();
 
@@ -12,27 +9,9 @@ const emitter = mitt<{
 
 let lastChangeTab: RouteLocationNormalized;
 
-export function getRawRoute(
-  route: RouteLocationNormalized,
-): RouteLocationNormalized {
-  if (!route) return route;
-  const { matched, ...opt } = route;
-  return {
-    ...opt,
-    matched: (matched
-      ? matched.map((item) => ({
-          meta: item.meta,
-          name: item.name,
-          path: item.path,
-        }))
-      : undefined) as RouteRecordNormalized[],
-  };
-}
-
 export function setRouteChange(lastChangeRoute: RouteLocationNormalized) {
-  const r = getRawRoute(lastChangeRoute);
-  emitter.emit(key, r);
-  lastChangeTab = r;
+  emitter.emit(key, lastChangeRoute);
+  lastChangeTab = lastChangeRoute;
 }
 
 export function listenerRouteChange(

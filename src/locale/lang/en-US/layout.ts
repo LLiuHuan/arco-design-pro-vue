@@ -13,6 +13,14 @@ export default {
     logOutMessage: 'Are you sure you want to log out ?',
     userCenter: 'User center',
   },
+  multipleTab: {
+    reload: 'Reload',
+    close: 'Close tab',
+    closeLeft: 'Close left tab',
+    closeRight: 'Close right tab',
+    closeOther: 'Close other tab',
+    closeAll: 'Close all tab',
+  },
   setting: {
     drawerTitle: 'Project configuration',
 

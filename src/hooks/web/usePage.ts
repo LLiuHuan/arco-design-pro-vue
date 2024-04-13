@@ -159,6 +159,7 @@ export function useGo(_router?: Router) {
 
 /**
  * @description: redo current page
+ * @param _router
  */
 export const useRedo = (_router?: Router) => {
   const { replace, currentRoute } = _router || useRouter();
@@ -170,11 +171,11 @@ export const useRedo = (_router?: Router) => {
         return;
       }
       if (name && Object.keys(params).length > 0) {
-        params._origin_params = JSON.stringify(params ?? {});
-        params._redirect_type = 'name';
+        params._originParams = JSON.stringify(params ?? {});
+        params._redirectType = 'name';
         params.path = String(name);
       } else {
-        params._redirect_type = 'path';
+        params._redirectType = 'path';
         params.path = fullPath;
       }
       replace({ name: PageEnum.REDIRECT, params, query }).then(() =>

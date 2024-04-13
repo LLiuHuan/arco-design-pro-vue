@@ -31,5 +31,11 @@ declare module 'vue-router' {
      * 当前路由需要选中的菜单项
      */
     currentActiveMenu?: string;
+
+    // Never show in tab
+    hideTab?: boolean;
+    dynamicLevel?: number;
+    /** 是否固定在tab卡不可关闭  */
+    affix?: boolean;
   }
 }

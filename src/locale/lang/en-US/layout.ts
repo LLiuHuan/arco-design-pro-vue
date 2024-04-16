@@ -66,6 +66,8 @@ export default {
 
       // height
       headerHeight: 'Header height',
+
+      footerHeight: 'Footer height',
     },
     interfaceDisplay: {
       title: 'Interface display',
@@ -83,6 +85,8 @@ export default {
 
       headerBreadcrumb: 'Breadcrumb',
       headerBreadcrumbIcon: 'Breadcrumb icon',
+
+      footer: 'Footer',
     },
 
     layoutMode: {

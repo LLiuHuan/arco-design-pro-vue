@@ -25,6 +25,10 @@ enum HandlerEnum {
   TRANSITION_LOADING,
   TRANSITION_NPROGRESS,
 
+  // footer
+  SHOW_FOOTER,
+  FOOTER_HEIGHT,
+
   LAYOUT_MODE,
 }
 
@@ -104,6 +108,18 @@ const handler = (
     case HandlerEnum.TRANSITION_NPROGRESS:
       return {
         transitionSetting: { openNProgress: value },
+      };
+    // endregion
+
+    // region footer
+    case HandlerEnum.SHOW_FOOTER:
+      return {
+        footerSetting: { show: value },
+      };
+
+    case HandlerEnum.FOOTER_HEIGHT:
+      return {
+        footerSetting: { height: value },
       };
     // endregion
 

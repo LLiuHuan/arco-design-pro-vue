@@ -21,12 +21,12 @@
       <div class="pr-8px" @click="handleFixedMenu">
         <SvgIcon
           v-if="getMixSideFixed"
-          class="cursor-pointer !text-[#00000073] hover:!text-[#000000d9]"
+          class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
           icon="ri:pushpin-2-fill"
         />
         <SvgIcon
           v-else
-          class="cursor-pointer !text-[#00000073] hover:!text-[#000000d9]"
+          class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
           icon="ri:pushpin-2-line"
         />
       </div>

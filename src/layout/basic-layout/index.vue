@@ -8,7 +8,7 @@
         <LayoutHeader v-if="getShowInsetHeaderRef" />
         <LayoutTabs v-if="getShowTabs" />
         <ALayoutContent
-          class="adp-default-layout-content overflow-y-auto transition-base bg-[var(--color-fill-2)] relative"
+          class="overflow-y-auto transition-base bg-[var(--color-fill-2)] relative"
         >
           <LayoutContent />
           <SettingDrawer />
@@ -16,10 +16,6 @@
         <LayoutFooter />
       </ALayout>
     </ALayout>
-    <a-back-top
-      target-container=".adp-default-layout-content"
-      :style="{ position: 'absolute' }"
-    />
   </ALayout>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
   <a-layout-footer
     ref="footerRef"
-    class="text-[#00000073] flex-col text-center bg-[var(--color-bg-2)] transition-base"
+    class="text-[var(--color-text-3)] flex-col text-center bg-[var(--color-bg-2)] transition-base"
     :style="{ height: `${getFooterHeight}px` }"
   >
     <div class="my-8px">
       <IconGithub
-        class="cursor-pointer !text-[#00000073] hover:!text-[#000000d9]"
+        class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
         @click="openWindow(GITHUB_URL)"
       />
     </div>

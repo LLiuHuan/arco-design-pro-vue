@@ -8,7 +8,7 @@
   >
     <RouterView
       v-slot="{ Component, route }"
-      class="transition duration-300 ease-in-out"
+      class="transition duration-300 ease-in-out h-full"
     >
       <transition
         :name="

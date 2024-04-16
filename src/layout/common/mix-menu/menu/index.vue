@@ -13,7 +13,9 @@
       <AScrollbar
         outer-class="h-full"
         class="h-full overflow-y-auto"
-        :outer-style="{ borderRight: openMenu ? '1px solid #eeeeee' : '' }"
+        :outer-style="{
+          borderRight: openMenu ? '1px solid var(--color-fill-2)' : '',
+        }"
       >
         <ul class="relative pt-1px flex-auto overflow-y-auto">
           <li

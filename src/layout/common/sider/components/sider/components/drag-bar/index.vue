@@ -3,7 +3,7 @@
     class="drag-bar absolute top-0 right-[-2px] z-200 w-2px h-full cursor-col-resize"
     :style="[
       !getCanDrag ? { display: 'none' } : {},
-      getCollapsed ? { left: '48px' } : {},
+      getCollapsed ? { left: `${getMiniWidthNumber}px` } : {},
     ]"
     style="border-top: none; border-bottom: none"
   ></div>
@@ -14,7 +14,7 @@
 
   defineOptions({ name: 'LayoutDragBar' });
 
-  const { getCollapsed, getCanDrag } = useMenuSetting();
+  const { getCollapsed, getMiniWidthNumber, getCanDrag } = useMenuSetting();
 </script>
 
 <style lang="less" scoped>

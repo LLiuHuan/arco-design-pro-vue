@@ -77,6 +77,8 @@ export interface MenuSetting {
   collapsed?: boolean;
   // Menu width - [菜单宽度]
   menuWidth: number;
+  // Menu collapse width - [菜单折叠宽度]
+  collapsedMenuWidth: number;
   // Whether the sidebar is hidden - [侧边栏是否隐藏]
   siderHidden?: boolean;
   // Menu theme - [菜单主题]

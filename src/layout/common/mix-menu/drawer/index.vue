@@ -1,7 +1,7 @@
 <template>
   <div
     ref="sideRef"
-    class="fixed top-0 w-250px h-full transition-base bg-[var(--color-menu-light-bg)]"
+    class="fixed top-0 h-full transition-base bg-[var(--color-menu-light-bg)]"
     :style="{
       width: unref(getOpenMenu) ? `${getMenuWidth}px` : 0,
       left: `${getMixSideWidth}px`,

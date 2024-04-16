@@ -66,29 +66,42 @@ const defaultSetting: ProjectConfig = {
   },
   // Menu settings - [菜单设置]
   menuSetting: {
-    // Whether to display - [是否显示]
+    // Whether to display
+    // 是否显示
     show: true,
-    // Menu mode - [菜单模式] // TODO: 好像没有用了
+    // Menu mode
+    // 菜单模式
     mode: MenuModeEnum.VERTICAL_MIX,
-    // Whether the menu is collapsed - [菜单是否折叠]
-    collapsed: false,
-    // Background color - [背景颜色]
-    bgColor: '#304156',
-    // Menu width - [菜单宽度]
-    menuWidth: 210,
-    // Whether the sidebar is hidden - [侧边栏是否隐藏]
-    siderHidden: false,
-    // Menu collapse trigger position - [菜单折叠触发器位置]
-    trigger: TriggerEnum.HEADER,
-    // Drag the sidebar - [拖动侧边栏]
-    canDrag: true,
-    // Menu theme - [菜单主题]
-    theme: AppEnum.LIGHT,
-    // Whether to enable handover - [是否开启手风琴模式]
-    accordion: true,
-
-    // Menu type - [菜单类型]
+    // Menu type
+    // 菜单类型
     type: MenuTypeEnum.MIX_SIDEBAR,
+    // Whether the menu is collapsed
+    // 菜单是否折叠
+    collapsed: false,
+    // Background color
+    // 背景颜色
+    bgColor: '#304156',
+    // Menu width
+    // 菜单宽度
+    menuWidth: 210,
+    // Menu collapse width
+    // 菜单折叠宽度
+    collapsedMenuWidth: 48,
+    // Whether the sidebar is hidden
+    // 侧边栏是否隐藏
+    siderHidden: false,
+    // Menu collapse trigger position
+    // 菜单折叠触发器位置
+    trigger: TriggerEnum.HEADER,
+    // Drag the sidebar
+    // 拖动侧边栏
+    canDrag: true,
+    // Menu theme
+    // 菜单主题
+    theme: AppEnum.LIGHT,
+    // Whether to enable handover
+    // 是否开启手风琴模式
+    accordion: true,
 
     // 混合菜单是否固定
     // Is the mixed menu fixed?
@@ -98,6 +111,8 @@ const defaultSetting: ProjectConfig = {
     // Mixed menu trigger position
     mixSideTrigger: MixSidebarTriggerEnum.HOVER,
 
+    // 选中菜单后是否关闭混合菜单
+    // Whether to close the mixed menu after selecting the menu
     closeMixSidebarOnChange: true,
   },
   // Theme settings - [主题设置]

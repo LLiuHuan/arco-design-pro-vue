@@ -14,7 +14,7 @@ export function useDragLine(
   dragBarRef: Ref<any>,
   mix = false,
 ) {
-  const { getCollapsed, setMenuSetting } = useMenuSetting();
+  const { getCollapsed, getMiniWidthNumber, setMenuSetting } = useMenuSetting();
 
   function getEl(elRef: Ref<ElRef | ComponentRef>): any {
     const el = unref(elRef);
@@ -35,8 +35,7 @@ export function useDragLine(
       innerE = innerE || Event;
       // TODO: 最大值应该动态获取
       const maxT = 800;
-      // TODO: 'getMiniWidthNumber' is not defined.
-      const minT = 48;
+      const minT = unref(getMiniWidthNumber);
       if (iT < 0) iT = 0;
       if (iT > maxT) iT = maxT;
       if (iT < minT) iT = minT;
@@ -56,8 +55,7 @@ export function useDragLine(
       const width = parseInt(wrap.style.width, 10);
 
       if (!mix) {
-        // TODO: 'getMiniWidthNumber' is not defined.
-        const miniWidth = 48;
+        const miniWidth = unref(getMiniWidthNumber);
         if (!unref(getCollapsed)) {
           if (width > miniWidth + 20) {
             setMenuSetting({ menuWidth: width });

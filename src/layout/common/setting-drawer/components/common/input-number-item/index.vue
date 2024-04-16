@@ -51,7 +51,7 @@
     return props.def ? { 'model-value': props.def } : {};
   });
 
-  const handleChange = (value: boolean | string | number) => {
+  const handleChange = (value: boolean | string | number | undefined) => {
     if (props.event) {
       baseHandler(props.event, value);
     }

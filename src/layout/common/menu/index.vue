@@ -4,6 +4,8 @@
     :open-keys="menuState.openKeys"
     :theme="theme"
     :mode="mode"
+    :collapsed="collapsed"
+    :collapsed-width="getCollapsedMenuWidth"
     :accordion="getAccordion"
     auto-open-selected
     auto-scroll-into-view
@@ -46,6 +48,9 @@
      */
     menus: App.Menu[];
 
+    /**
+     * Whether the menu is collapsed - [菜单是否收起]
+     */
     collapsed?: boolean;
   }
 
@@ -63,11 +68,11 @@
   // 判断一下是否点击了菜单
   const isClickGo = ref(false);
 
-  const { getCollapsed, getAccordion } = useMenuSetting();
+  const { getCollapsed, getAccordion, getCollapsedMenuWidth } =
+    useMenuSetting();
   const { goKey } = useGo();
 
   const collapsed = computed(() => {
-    console.log(isBoolean(props.collapsed));
     if (isBoolean(props.collapsed)) {
       return props.collapsed;
     }

@@ -65,6 +65,30 @@
         :min="48"
       ></InputNumberItem>
     </SettingItem>
+    <SettingItem
+      key="7"
+      :label="$t('layout.setting.interfaceFunction.expandedMenuWidth')"
+    >
+      <InputNumberItem
+        :def="getMenuWidth"
+        :event="HandlerEnum.MENU_EXPANDED_MENU_WIDTH"
+        :min="100"
+        :max="600"
+        :step="10"
+      ></InputNumberItem>
+    </SettingItem>
+    <!--    <SettingItem-->
+    <!--      key="8"-->
+    <!--      :label="$t('layout.setting.interfaceFunction.collapsedMenuWidth')"-->
+    <!--    >-->
+    <!--      <InputNumberItem-->
+    <!--        :def="getCollapsedMenuWidth"-->
+    <!--        :event="HandlerEnum.MENU_COLLAPSED_MENU_WIDTH"-->
+    <!--        :min="48"-->
+    <!--        :max="200"-->
+    <!--        :step="1"-->
+    <!--      ></InputNumberItem>-->
+    <!--    </SettingItem>-->
   </TransitionGroup>
 </template>
 
@@ -93,6 +117,8 @@
     getMixSideFixed,
     getIsMixSidebar,
     getMixSideTrigger,
+    getMenuWidth,
+    getCollapsedMenuWidth,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
 

@@ -11,6 +11,8 @@ enum HandlerEnum {
 
   MENU_TRIGGER_MIX_SIDEBAR,
   MENU_FIXED_MIX_SIDEBAR,
+  MENU_EXPANDED_MENU_WIDTH,
+  MENU_COLLAPSED_MENU_WIDTH,
 
   // header
   HEADER_HEIGHT,
@@ -55,6 +57,14 @@ const handler = (
     case HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR:
       return {
         menuSetting: { mixSideTrigger: value },
+      };
+    case HandlerEnum.MENU_EXPANDED_MENU_WIDTH:
+      return {
+        menuSetting: { menuWidth: value },
+      };
+    case HandlerEnum.MENU_COLLAPSED_MENU_WIDTH:
+      return {
+        menuSetting: { collapsedMenuWidth: value },
       };
 
     // endregion

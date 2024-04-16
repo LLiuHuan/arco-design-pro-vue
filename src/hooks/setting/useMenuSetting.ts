@@ -18,8 +18,13 @@ export const useMenuSetting = () => {
   // 获取菜单背景颜色
   const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor);
 
-  // 获取菜单宽度
+  // 获取菜单展开宽度
   const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
+
+  // 获取菜单折叠宽度
+  const getCollapsedMenuWidth = computed(
+    () => appStore.getMenuSetting.collapsedMenuWidth,
+  );
 
   // 获取是否可以拖拽侧边栏
   const getCanDrag = computed(() => appStore.getMenuSetting.canDrag);
@@ -38,12 +43,18 @@ export const useMenuSetting = () => {
 
   // region 混合菜单
 
+  // 混合菜单是否固定
+  // Is the mixed menu fixed?
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
 
+  // 混合菜单触发器位置
+  // Mixed menu trigger position
   const getMixSideTrigger = computed(
     () => appStore.getMenuSetting.mixSideTrigger,
   );
 
+  // 选中菜单后是否关闭混合菜单
+  // Whether to close the mixed menu after selecting the menu
   const getCloseMixSidebarOnChange = computed(
     () => appStore.getMenuSetting.closeMixSidebarOnChange,
   );
@@ -91,7 +102,10 @@ export const useMenuSetting = () => {
   // 获取是否折叠左侧菜单
   // TODO: 现在是写死的，后续可以根据需求修改
   const getMiniWidthNumber = computed(() => {
-    return 48;
+    // const { siderHidden } = appStore.getMenuSetting;
+    // return siderHidden ? 48 : 80;
+
+    return unref(getCollapsedMenuWidth);
   });
 
   // 获取真实宽度
@@ -119,6 +133,7 @@ export const useMenuSetting = () => {
   return {
     getCollapsed,
     getMenuBgColor,
+    getCollapsedMenuWidth,
     getMenuWidth,
     getCanDrag,
     getTrigger,

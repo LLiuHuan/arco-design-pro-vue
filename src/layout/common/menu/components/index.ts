@@ -1,3 +1,4 @@
-import VerticalMenu from './vertical-menu/index.vue';
+import SubMenuItem from './sub-menu-item/index.vue';
+import MenuItem from './menu-item/index.vue';
 
-export { VerticalMenu };
+export { MenuItem, SubMenuItem };

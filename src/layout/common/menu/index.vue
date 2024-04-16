@@ -1,53 +1,78 @@
 <template>
-  <div class="size-full flex-col-stretch shadow-sider">
-    <AppLogo
-      v-if="getIsShowLogo"
-      class="text-16px font-bold border-b-solid border-b-1 border-b-[var(--color-fill-2)]"
-      :theme="theme"
-      :show-title="!getCollapsed"
-      :style="{ height: `${getHeaderHeight + 1}px` }"
-    />
-    <VerticalMenu
-      :theme="theme"
-      :menus="getMenus"
-      @menu-click="handleMenuClick"
-    />
-  </div>
+  <AMenu
+    :selected-keys="menuState.selectedKeys"
+    :open-keys="menuState.openKeys"
+    :theme="theme"
+    :mode="mode"
+    :accordion="getAccordion"
+    auto-open-selected
+    auto-scroll-into-view
+    @menu-item-click="handleMenuItemClick"
+    @sub-menu-click="handleSubMenuItemClick"
+  >
+    <template v-for="item in menus" :key="item.routeName">
+      <SubMenuItem :item="item"> </SubMenuItem>
+    </template>
+  </AMenu>
 </template>
 
 <script lang="ts" setup>
-  import { AppLogo } from '@/components/AppLogo';
-  import { computed, unref } from 'vue';
+  import { AppEnum, MenuModeEnum, PageEnum } from '@/enums';
+  import { useMenuSetting } from '@/hooks/setting';
+  import type { MenuMode } from '@arco-design/web-vue/es/menu/interface';
+  import type { App } from '~/types/app';
   import {
-    useHeaderSetting,
-    useMenuSetting,
-    useRootSetting,
-  } from '@/hooks/setting';
-  import { AppEnum } from '@/enums';
-  import { useRouteStore } from '@/store/modules/route';
+    getActiveKeyPathsOfMenus,
+    listenerRouteChange,
+    routeName,
+  } from '@/utils/router';
+  import { computed, reactive, ref, unref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
-  import { routeName } from '@/utils/router';
-  import { VerticalMenu } from './components';
-
-  const { getShowLogo } = useRootSetting();
-  const { getIsSidebarType, getCollapsed } = useMenuSetting();
-  const { getHeaderHeight } = useHeaderSetting();
-  const { goKey } = useGo();
+  import { isBoolean } from '@/utils/common';
+  import { SubMenuItem } from './components';
+  import { MenuState } from './types';
 
   interface Props {
     /**
      * The theme of the current parent component - [当前父组件的主题]
      */
     theme?: AppEnum;
+    /**
+     * The mode of the menu - [菜单的模式]
+     */
+    mode?: MenuMode;
+    /**
+     * Menu data -[菜单数据]
+     */
+    menus: App.Menu[];
+
+    collapsed?: boolean;
   }
 
-  defineProps<Props>();
+  const props = withDefaults(defineProps<Props>(), {
+    theme: AppEnum.LIGHT,
+    mode: MenuModeEnum.VERTICAL,
+  });
 
-  const { getMenus } = useRouteStore();
+  const menuState = reactive<MenuState>({
+    selectedKeys: [],
+    defaultSelectedKeys: [],
+    openKeys: [],
+  });
 
-  const getIsShowLogo = computed(
-    () => unref(getShowLogo) && unref(getIsSidebarType),
-  );
+  // 判断一下是否点击了菜单
+  const isClickGo = ref(false);
+
+  const { getCollapsed, getAccordion } = useMenuSetting();
+  const { goKey } = useGo();
+
+  const collapsed = computed(() => {
+    console.log(isBoolean(props.collapsed));
+    if (isBoolean(props.collapsed)) {
+      return props.collapsed;
+    }
+    return unref(getCollapsed);
+  });
 
   const handleMenuClick = (key: any) => {
     const routeSplitMark = '_';
@@ -60,6 +85,32 @@
       });
     goKey(routeName(key), { params });
   };
+
+  const handleMenuItemClick = (key: string) => {
+    handleMenuClick(key);
+    isClickGo.value = true;
+    menuState.selectedKeys = [key];
+  };
+
+  const handleSubMenuItemClick = (_: string, openKeys: string[]) => {
+    menuState.openKeys = openKeys;
+  };
+
+  listenerRouteChange((route) => {
+    if (route.name === PageEnum.REDIRECT) {
+      return;
+    }
+
+    if (unref(isClickGo)) {
+      isClickGo.value = false;
+      return;
+    }
+    const activeKey = (route.meta?.currentActiveMenu || route.name) as string;
+    const activeKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
+
+    menuState.selectedKeys = activeKeys.slice(-1);
+    menuState.openKeys = activeKeys.slice(0, -1);
+  });
 </script>
 
 <style lang="less" scoped></style>

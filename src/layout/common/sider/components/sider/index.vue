@@ -16,16 +16,16 @@
     <template #trigger>
       <LayoutTrigger />
     </template>
-    <LayoutMenu :theme="getMenuTheme"></LayoutMenu>
-    <LayoutDragBar ref="dragBarRef"></LayoutDragBar>
+    <VerticalMenu />
+    <LayoutDragBar ref="dragBarRef" />
   </ALayoutSider>
 </template>
 
 <script lang="ts" setup>
   import { computed, CSSProperties, ref, unref } from 'vue';
-  import { LayoutMenu, LayoutTrigger } from '@/layout/common';
+  import { LayoutTrigger } from '@/layout/common';
   import { useMenuSetting } from '@/hooks/setting';
-  import { LayoutDragBar } from './components';
+  import { LayoutDragBar, VerticalMenu } from './components';
   import { useDragLine, useSiderEvent } from './helpers';
 
   const dragBarRef = ref<ElRef>(null);
@@ -56,18 +56,6 @@
     };
   });
 
-  // TODO: 侧边栏样式
-  // // 侧边栏类名
-  // const getSiderClass = computed(() => {
-  //   return [
-  //     prefixCls,
-  //     {
-  //       [`${prefixCls}--fixed`]: true,
-  //       [`${prefixCls}--mix`]: false,
-  //     },
-  //   ];
-  // });
-
   const getSiderDomStyle = computed((): CSSProperties => {
     const width = `${unref(getRealWidth)}px`;
     return {
@@ -77,10 +65,6 @@
       transition: 'all 0.3s',
     };
   });
-
-  // const showClassSideBarRef = computed(() => {
-  //   return unref(getSplit) ? !unref(getMenuHidden) : true;
-  // });
 </script>
 
 <style lang="less" scoped>

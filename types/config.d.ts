@@ -8,6 +8,8 @@ import {
   SessionTimeoutProcessingEnum,
   MenuModeEnum,
   SettingButtonPositionEnum,
+  PermissionModeEnum,
+  MixSidebarTriggerEnum,
 } from '@/enums';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
@@ -87,7 +89,18 @@ export interface MenuSetting {
   // Drag the sidebar - [拖动侧边栏]
   canDrag: boolean;
   // 是否显示菜单
+  // Whether to display menu
   show: boolean;
+  // 混合菜单是否固定
+  // Is the mixed menu fixed?
+  mixSideFixed: boolean;
+  // 混合菜单触发器位置
+  // Mixed menu trigger position
+  mixSideTrigger: MixSidebarTriggerEnum;
+
+  // 路由切换时是否关闭混合菜单
+  // Whether to close the mixed menu when the route changes
+  closeMixSidebarOnChange?: boolean;
 }
 
 export interface ThemeSetting {
@@ -121,6 +134,13 @@ export interface HeaderSetting {
   showBreadCrumbIcon: boolean;
 }
 
+export interface FooterSetting {
+  // Footer show - [底部显示]
+  show: boolean;
+  // Footer height - [底部高度]
+  height: number;
+}
+
 export interface ProjectConfig {
   // TODO: 感觉没有必要，用户信息不大可能会存储在sessionStorage，不过还是暂时保留
   // Storage location of permission related information - [权限相关信息的存储位置]
@@ -145,6 +165,8 @@ export interface ProjectConfig {
   // Header setting - [头部设置]
   headerSetting: HeaderSetting;
 
+  footerSetting: FooterSetting;
+
   // Show logo - [显示logo]
   showLogo: boolean;
 
@@ -168,4 +190,8 @@ export interface ProjectConfig {
   // Configure where the button is displayed
   // 配置按钮显示位置
   settingButtonPosition: SettingButtonPositionEnum;
+
+  // Permission mode
+  // 权限模式
+  permissionMode: PermissionModeEnum;
 }

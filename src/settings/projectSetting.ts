@@ -4,6 +4,8 @@ import {
   CacheTypeEnum,
   MenuModeEnum,
   MenuTypeEnum,
+  MixSidebarTriggerEnum,
+  PermissionModeEnum,
   RouterTransitionEnum,
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
@@ -66,7 +68,7 @@ const defaultSetting: ProjectConfig = {
   menuSetting: {
     // Whether to display - [是否显示]
     show: true,
-    // Menu mode - [菜单模式]
+    // Menu mode - [菜单模式] // TODO: 好像没有用了
     mode: MenuModeEnum.VERTICAL,
     // Whether the menu is collapsed - [菜单是否折叠]
     collapsed: false,
@@ -86,7 +88,17 @@ const defaultSetting: ProjectConfig = {
     accordion: true,
 
     // Menu type - [菜单类型]
-    type: MenuTypeEnum.SIDEBAR,
+    type: MenuTypeEnum.MIX_SIDEBAR,
+
+    // 混合菜单是否固定
+    // Is the mixed menu fixed?
+    mixSideFixed: false,
+
+    // 混合菜单触发器位置
+    // Mixed menu trigger position
+    mixSideTrigger: MixSidebarTriggerEnum.HOVER,
+
+    closeMixSidebarOnChange: true,
   },
   // Theme settings - [主题设置]
   themeSetting: {
@@ -111,6 +123,13 @@ const defaultSetting: ProjectConfig = {
     showBreadCrumbIcon: true,
   },
 
+  footerSetting: {
+    // Whether to display - [是否显示]
+    show: true,
+    // Footer height - [底部高度]
+    height: 48,
+  },
+
   // Whether to cancel the http request that has been sent but not responded when switching the interface
   // 切换界面时取消未响应的http请求
   removeAllHttpPending: false,
@@ -119,6 +138,8 @@ const defaultSetting: ProjectConfig = {
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
   // Whether to full screen display - [是否开启全屏显示]
   fullContent: false,
+
+  permissionMode: PermissionModeEnum.ROLE,
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

@@ -35,3 +35,8 @@ export enum TriggerEnum {
   // 头部
   HEADER = 'HEADER',
 }
+
+export enum MixSidebarTriggerEnum {
+  HOVER = 'hover',
+  CLICK = 'click',
+}

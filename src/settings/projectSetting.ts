@@ -69,7 +69,7 @@ const defaultSetting: ProjectConfig = {
     // Whether to display - [是否显示]
     show: true,
     // Menu mode - [菜单模式] // TODO: 好像没有用了
-    mode: MenuModeEnum.VERTICAL,
+    mode: MenuModeEnum.VERTICAL_MIX,
     // Whether the menu is collapsed - [菜单是否折叠]
     collapsed: false,
     // Background color - [背景颜色]

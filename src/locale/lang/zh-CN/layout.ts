@@ -53,6 +53,12 @@ export default {
       expandedMenuWidth: '菜单展开宽度',
       collapsedMenuWidth: '菜单折叠宽度',
 
+      // menu mix
+      mixSidebarTrigger: '混合菜单触发方式',
+      triggerHover: '悬停',
+      triggerClick: '点击',
+      mixSidebarFixed: '固定展开菜单',
+
       // menu trigger
       menuTriggerNone: '不显示',
       menuTriggerBottom: '底部',
@@ -77,6 +83,14 @@ export default {
 
       headerBreadcrumb: '面包屑',
       headerBreadcrumbIcon: '面包屑图标',
+    },
+
+    layoutMode: {
+      title: '布局模式',
+      menuTypeSidebar: '侧边菜单',
+      menuTypeMixSidebar: '混合侧边菜单',
+      menuTypeTopMenu: '顶部菜单',
+      menuTypeMixTopMenu: '混合顶部菜单',
     },
   },
 };

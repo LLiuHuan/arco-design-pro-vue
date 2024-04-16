@@ -134,6 +134,9 @@ export const useMenuSetting = () => {
     getShowMenu,
     getShowSider,
 
+    getMenuMode,
+    getMenuType,
+
     getMixSideFixed,
     getMixSideTrigger,
     getCloseMixSidebarOnChange,

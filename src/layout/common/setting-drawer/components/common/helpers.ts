@@ -9,6 +9,9 @@ enum HandlerEnum {
   MENU_COLLAPSE_BTN,
   MENU_ACCORDION,
 
+  MENU_TRIGGER_MIX_SIDEBAR,
+  MENU_FIXED_MIX_SIDEBAR,
+
   // header
   HEADER_HEIGHT,
   HEADER_BREADCRUMB,
@@ -19,6 +22,8 @@ enum HandlerEnum {
   TRANSITION_ROUTER,
   TRANSITION_LOADING,
   TRANSITION_NPROGRESS,
+
+  LAYOUT_MODE,
 }
 
 const handler = (
@@ -26,6 +31,7 @@ const handler = (
   value: any,
 ): DeepPartial<ProjectConfig> => {
   switch (event) {
+    // region menu
     case HandlerEnum.MENU_THEME:
       return {
         menuSetting: { theme: value ? AppEnum.DARK : AppEnum.LIGHT },
@@ -42,6 +48,18 @@ const handler = (
       return {
         menuSetting: { accordion: value },
       };
+    case HandlerEnum.MENU_FIXED_MIX_SIDEBAR:
+      return {
+        menuSetting: { mixSideFixed: value },
+      };
+    case HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR:
+      return {
+        menuSetting: { mixSideTrigger: value },
+      };
+
+    // endregion
+
+    // region header
     case HandlerEnum.HEADER_HEIGHT:
       if (value < 48) {
         value = 48;
@@ -57,6 +75,10 @@ const handler = (
       return {
         headerSetting: { showBreadCrumbIcon: value },
       };
+
+    // endregion
+
+    // region transition
     case HandlerEnum.TRANSITION_ENABLE:
       return {
         transitionSetting: { enable: value },
@@ -72,6 +94,23 @@ const handler = (
     case HandlerEnum.TRANSITION_NPROGRESS:
       return {
         transitionSetting: { openNProgress: value },
+      };
+    // endregion
+
+    case HandlerEnum.LAYOUT_MODE:
+      const { mode, type } = value;
+      // const isMixSidebar = type === MenuTypeEnum.MIX_TOP_MENU;
+      // const mixSideSplitOpt =
+      //   menuSetting.type === MenuTypeEnum.MIX_TOP_MENU ? { split: menuSetting.split } : { split };
+      // const otherSplitOpt = { split: false };
+      // const splitOpt = isMixSidebar ? mixSideSplitOpt : otherSplitOpt;
+
+      return {
+        menuSetting: {
+          mode,
+          type,
+          collapsed: false,
+        },
       };
     default:
       return {};

@@ -2,6 +2,7 @@
   <div
     v-if="getIsFixedSettingDrawer && (!getShowMultipleTab || getFullContent)"
     class="absolute z-10 top-45% right-0 p-10px bg-[rgba(var(--primary-6))] rounded-l-6px flex-center text-[var(--color-white)] cursor-pointer"
+    @click="setSettingDrawerState(true)"
   >
     <SettingBtn :position="SettingButtonPositionEnum.FIXED" :size="16" />
   </div>
@@ -23,7 +24,11 @@
   const { getFullContent } = useFullContent();
   const { getShowMultipleTab } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
-  const { getShowSettingButton, getSettingButtonPosition } = useRootSetting();
+  const {
+    getShowSettingButton,
+    getSettingButtonPosition,
+    setSettingDrawerState,
+  } = useRootSetting();
 
   const getIsFixedSettingDrawer = computed(() => {
     if (!unref(getShowSettingButton)) {

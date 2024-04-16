@@ -9,7 +9,6 @@
         v-model:is-fixed="isFixed"
         :theme="theme"
         :menus="getMenus"
-        hover
       >
         <template #logo>
           <AppLogo
@@ -23,7 +22,7 @@
         <template #trigger>
           <LayoutTrigger
             class="transition-base bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
-            :style="{ height: `${getFooterHeight}px` }"
+            :style="{ height: `${getFooterHeight + 1}px` }"
           />
         </template>
       </LayoutMixMenu>

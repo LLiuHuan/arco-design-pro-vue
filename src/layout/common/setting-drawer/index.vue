@@ -31,6 +31,7 @@
     </template>
     <div class="overflow-hidden">
       <ThemeSchema />
+      <LayoutMode />
       <ThemeColor />
       <InterfaceFunction />
       <InterfaceDisplay />
@@ -50,6 +51,7 @@
     ThemeColor,
     InterfaceFunction,
     InterfaceDisplay,
+    LayoutMode,
   } from './components';
 
   defineOptions({

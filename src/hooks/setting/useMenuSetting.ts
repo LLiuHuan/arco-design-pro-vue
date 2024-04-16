@@ -36,6 +36,19 @@ export const useMenuSetting = () => {
   // 获取是否显示菜单
   const getShowMenu = computed(() => appStore.getMenuSetting.show);
 
+  // region 混合菜单
+
+  const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
+
+  const getMixSideTrigger = computed(
+    () => appStore.getMenuSetting.mixSideTrigger,
+  );
+
+  const getCloseMixSidebarOnChange = computed(
+    () => appStore.getMenuSetting.closeMixSidebarOnChange,
+  );
+  // endregion
+
   const getShowSider = computed(() => {
     //      unref(getSplit) ||
     return (
@@ -84,8 +97,7 @@ export const useMenuSetting = () => {
   // 获取真实宽度
   const getRealWidth = computed(() => {
     if (unref(getIsMixSidebar)) {
-      //  unref(getCollapsed) && !unref(getMixSideFixed)
-      return unref(getCollapsed)
+      return unref(getCollapsed) && !unref(getMixSideFixed)
         ? unref(getMiniWidthNumber)
         : unref(getMenuWidth);
     }
@@ -121,6 +133,10 @@ export const useMenuSetting = () => {
     getIsTopMenu,
     getShowMenu,
     getShowSider,
+
+    getMixSideFixed,
+    getMixSideTrigger,
+    getCloseMixSidebarOnChange,
 
     setMenuSetting,
     toggleCollapsed,

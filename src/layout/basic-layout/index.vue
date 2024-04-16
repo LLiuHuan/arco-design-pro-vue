@@ -1,8 +1,8 @@
 <template>
-  <ALayout class="wh-full">
+  <ALayout class="wh-full transition-base">
     <LayoutFeature />
     <ALayoutHeader v-if="getShowFullHeaderRef" />
-    <ALayout class="w-full h-full">
+    <ALayout class="w-full h-full" :has-sider="getIsMixSidebar">
       <LayoutSider v-if="getShowSider" />
       <ALayout class="w-full h-full relative">
         <LayoutHeader v-if="getShowInsetHeaderRef" />
@@ -39,7 +39,7 @@
     LayoutFeature,
   } from '../common';
 
-  const { getShowSider } = useMenuSetting();
+  const { getShowSider, getIsMixSidebar } = useMenuSetting();
   const { getShowFullHeaderRef, getShowInsetHeaderRef } = useHeaderSetting();
   const { getShowTabs } = useMultipleTabSetting();
 </script>

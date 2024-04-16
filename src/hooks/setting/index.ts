@@ -4,3 +4,4 @@ export * from './useTransitionSetting';
 export * from './useMultipleTabSetting';
 export * from './useMenuSetting';
 export * from './useHeaderSetting';
+export * from './useFooterSetting';

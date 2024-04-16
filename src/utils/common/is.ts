@@ -96,6 +96,10 @@ export function isExternal(path: string) {
   return /^(https?:|mailto:|tel:|http?:)/.test(path);
 }
 
+export const isServer = typeof window === 'undefined';
+
+export const isClient = !isServer;
+
 /**
  * Recursively merge two objects.
  * 递归合并两个对象。

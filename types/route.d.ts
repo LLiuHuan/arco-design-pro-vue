@@ -146,7 +146,7 @@ declare namespace AuthRoute {
     /** 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名) */
     localIcon?: string;
     /** 是否在菜单中隐藏(一些列表、表格的详情页面需要通过参数跳转，所以不能显示在菜单中) */
-    hide?: boolean;
+    hideMenu?: boolean;
     /** 外链链接 */
     href?: string;
     /** 是否支持多个tab页签(默认一个，即相同name的路由会被替换) */

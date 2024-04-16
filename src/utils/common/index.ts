@@ -7,3 +7,4 @@ export * from './window';
 export * from './console';
 export * from './color';
 export * from './icon';
+export * from './domUtils';

@@ -1,4 +1,10 @@
 /**
+ * @description: Menu blend mode width - [菜单混合模式宽度]
+ */
+export const SIDE_BAR_MINI_WIDTH = 48;
+export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80;
+
+/**
  * @description Theme enum - [主题枚举]
  */
 export enum AppEnum {
@@ -38,4 +44,16 @@ export enum SettingButtonPositionEnum {
   AUTO = 'auto',
   HEADER = 'header',
   FIXED = 'fixed',
+}
+
+/**
+ * 权限模式
+ */
+export enum PermissionModeEnum {
+  // role
+  // 角色权限
+  ROLE = 'ROLE',
+  // black
+  // 后端
+  BACK = 'BACK',
 }

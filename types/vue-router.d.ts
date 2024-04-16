@@ -37,5 +37,7 @@ declare module 'vue-router' {
     dynamicLevel?: number;
     /** 是否固定在tab卡不可关闭  */
     affix?: boolean;
+
+    hideMenu?: boolean;
   }
 }

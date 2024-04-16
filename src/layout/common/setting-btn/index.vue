@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-center" @click="setSettingDrawerState(true)">
+  <div class="flex-center">
     <SvgIcon
       :icon="
         position === SettingButtonPositionEnum.HEADER
@@ -13,7 +13,6 @@
 
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
-  import { useRootSetting } from '@/hooks/setting';
   import { SettingButtonPositionEnum } from '@/enums';
 
   interface Props {
@@ -27,8 +26,6 @@
     position: SettingButtonPositionEnum.AUTO,
     size: 20,
   });
-
-  const { setSettingDrawerState } = useRootSetting();
 </script>
 
 <style lang="less" scoped></style>

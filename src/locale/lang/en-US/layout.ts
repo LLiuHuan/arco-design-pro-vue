@@ -53,6 +53,12 @@ export default {
       expandedMenuWidth: 'Menu expand width',
       collapsedMenuWidth: 'Menu collapse width',
 
+      // menu mix
+      mixSidebarTrigger: 'Mixed menu trigger method',
+      triggerHover: 'Hover',
+      triggerClick: 'Click',
+      mixSidebarFixed: 'Fixed expanded menu',
+
       // menu trigger
       menuTriggerNone: 'Do not show',
       menuTriggerBottom: 'Bottom',
@@ -77,6 +83,14 @@ export default {
 
       headerBreadcrumb: 'Breadcrumb',
       headerBreadcrumbIcon: 'Breadcrumb icon',
+    },
+
+    layoutMode: {
+      title: 'Layout mode',
+      menuTypeSidebar: 'Sidebar menu',
+      menuTypeMixSidebar: 'Mix sidebar menu',
+      menuTypeTopMenu: 'Top menu',
+      menuTypeMixTopMenu: 'Mix top menu',
     },
   },
 };

@@ -4,26 +4,26 @@
 export enum MenuTypeEnum {
   // left menu - [左侧菜单]
   SIDEBAR = 'sidebar',
-  // mixin menu - [混合菜单]
+  // mixin menu - [左侧混合菜单]
   MIX_SIDEBAR = 'mix-sidebar',
-  // mixin menu - [混合菜单]
-  MIX = 'mix',
   // top menu - [顶部菜单]
   TOP_MENU = 'top-menu',
+  // mixin menu - [顶部混合菜单]
+  MIX_TOP_MENU = 'mix-top-menu',
 }
 
 /**
- * @description: fold trigger position - [折叠触发器位置]
+ * @description: menu mode - [菜单模式]
  */
 export enum MenuModeEnum {
   // vertical - [垂直]
   VERTICAL = 'vertical',
   // horizontal - [水平]
   HORIZONTAL = 'horizontal',
-  // vertical-right - [垂直右]
-  VERTICAL_RIGHT = 'vertical-right',
-  // inline - [行内]
-  INLINE = 'inline',
+  // vertical-mix - [垂直混合]
+  VERTICAL_MIX = 'vertical-mix',
+  // horizontal-mix - [水平混合]
+  HORIZONTAL_MIX = 'horizontal-mix',
 }
 
 // 折叠触发器位置

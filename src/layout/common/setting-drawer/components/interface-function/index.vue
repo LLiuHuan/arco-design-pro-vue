@@ -16,14 +16,14 @@
       ></SwitchItem>
     </SettingItem>
     <SettingItem
+      v-if="getIsMixSidebar"
       key="2"
-      :label="$t('layout.setting.interfaceFunction.menuCollapseButton')"
+      :label="$t('layout.setting.interfaceFunction.mixSidebarFixed')"
     >
-      <SelectItem
-        :def="getTrigger"
-        :event="HandlerEnum.MENU_COLLAPSE_BTN"
-        :options="triggerOptions"
-      ></SelectItem>
+      <SwitchItem
+        :def="getMixSideFixed"
+        :event="HandlerEnum.MENU_FIXED_MIX_SIDEBAR"
+      ></SwitchItem>
     </SettingItem>
     <SettingItem
       key="3"
@@ -35,7 +35,28 @@
       ></SwitchItem>
     </SettingItem>
     <SettingItem
+      v-if="getIsMixSidebar"
       key="4"
+      :label="$t('layout.setting.interfaceFunction.mixSidebarTrigger')"
+    >
+      <SelectItem
+        :options="mixSidebarTriggerOptions"
+        :event="HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR"
+        :def="getMixSideTrigger"
+      />
+    </SettingItem>
+    <SettingItem
+      key="5"
+      :label="$t('layout.setting.interfaceFunction.menuCollapseButton')"
+    >
+      <SelectItem
+        :def="getTrigger"
+        :event="HandlerEnum.MENU_COLLAPSE_BTN"
+        :options="triggerOptions"
+      ></SelectItem>
+    </SettingItem>
+    <SettingItem
+      key="6"
       :label="$t('layout.setting.interfaceFunction.headerHeight')"
     >
       <InputNumberItem
@@ -50,6 +71,8 @@
 <script lang="ts" setup>
   import { unref } from 'vue';
   import { useHeaderSetting, useMenuSetting } from '@/hooks/setting';
+  import { MixSidebarTriggerEnum } from '@/enums';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { getMenuTriggerOptions } from './helpers';
   import {
     HandlerEnum,
@@ -63,10 +86,30 @@
     name: 'InterfaceFunction',
   });
 
-  const { getCollapsed, getTrigger, getAccordion } = useMenuSetting();
+  const {
+    getCollapsed,
+    getTrigger,
+    getAccordion,
+    getMixSideFixed,
+    getIsMixSidebar,
+    getMixSideTrigger,
+  } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
+
+  const { t } = useI18n();
+
+  const mixSidebarTriggerOptions = [
+    {
+      value: MixSidebarTriggerEnum.HOVER,
+      label: t('layout.setting.interfaceFunction.triggerHover'),
+    },
+    {
+      value: MixSidebarTriggerEnum.CLICK,
+      label: t('layout.setting.interfaceFunction.triggerClick'),
+    },
+  ];
 </script>
 
 <style lang="less" scoped></style>

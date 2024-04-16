@@ -84,11 +84,11 @@
       : SIDE_BAR_SHOW_TIT_MINI_WIDTH;
   });
 
-  function handleFixedMenu() {
+  const handleFixedMenu = () => {
     setMenuSetting({
       mixSideFixed: !unref(props.fixed),
     });
-  }
+  };
 </script>
 
 <style lang="less" scoped></style>

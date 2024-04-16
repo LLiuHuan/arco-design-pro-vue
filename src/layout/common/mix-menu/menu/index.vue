@@ -5,7 +5,6 @@
     v-bind="getMenuEvents"
   >
     <slot name="logo" />
-
     <div
       :style="{
         height: `calc(100% - ${getHeaderHeight}px - ${getFooterHeight}px)`,
@@ -69,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { AppEnum } from '@/enums';
+  import { AppEnum, MixSidebarTriggerEnum } from '@/enums';
   import type { App } from '~/types/app';
   import { computed, ref, unref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
@@ -120,6 +119,8 @@
 
   const mixSideHasChildren = ref(false);
 
+  // 获取是否固定
+  // Get whether it is fixed
   const getIsFixed = computed(() => {
     /* eslint-disable-next-line */
     mixSideHasChildren.value = unref(childrenMenus).length > 0;
@@ -134,15 +135,15 @@
 
   // 关闭子菜单
   // Turn off the sub -menu
-  function closeMenu() {
+  const closeMenu = () => {
     if (!unref(getIsFixed)) {
       openMenu.value = false;
     }
-  }
+  };
 
   // 设置当前活动菜单和子菜单
   // Set the currently active menu and submenu
-  async function setActive(setChildren = false) {
+  const setActive = async (setChildren = false) => {
     const activeKey = (unref(currentRoute)?.meta?.currentActiveMenu ||
       unref(currentRoute)?.name) as string;
     const activeKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
@@ -165,8 +166,10 @@
         }
       }
     }
-  }
+  };
 
+  // 处理菜单点击
+  // Handle menu click
   const handleMixMenuClick = (
     routeName: AuthRoute.RouteKey,
     children: App.Menu[] | undefined,
@@ -202,6 +205,8 @@
     childrenMenus.value = children;
   };
 
+  // 监听路由变化
+  // Listen for route changes
   listenerRouteChange((route) => {
     currentRoute.value = route;
     setActive(true);
@@ -210,13 +215,17 @@
     }
   });
 
-  function handleClickOutside() {
+  // 点击外部
+  // Click outside
+  const handleClickOutside = () => {
     setActive(true);
     closeMenu();
-  }
+  };
 
+  // 获取菜单项事件
+  // Get menu item events
   const getItemEvents = (item: App.Menu) => {
-    if (unref(getMixSideTrigger)) {
+    if (unref(getMixSideTrigger) === MixSidebarTriggerEnum.HOVER) {
       return {
         onMouseenter: () =>
           handleMixMenuClick(item.routeName, item.children, true),
@@ -231,12 +240,12 @@
       };
     }
     return {
-      onClick: () => {
-        goKey(item.routeName);
-      },
+      onClick: () => handleMixMenuClick(item.routeName, item.children),
     };
   };
 
+  // 获取菜单事件
+  // Get menu events
   const getMenuEvents = computed(() => {
     return !unref(getMixSideFixed)
       ? {

@@ -1,10 +1,11 @@
 <template>
   <a-layout-footer
+    v-if="getShowFooter"
     ref="footerRef"
-    class="text-[var(--color-text-3)] flex-col text-center bg-[var(--color-bg-2)] transition-base"
+    class="text-[var(--color-text-3)] flex-col flex-center text-center bg-[var(--color-bg-2)] transition-base"
     :style="{ height: `${getFooterHeight}px` }"
   >
-    <div class="my-8px">
+    <div v-if="getFooterHeight >= 48" class="my-8px">
       <IconGithub
         class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
         @click="openWindow(GITHUB_URL)"
@@ -23,7 +24,7 @@
   const date = new Date();
   const year = date.getFullYear();
 
-  const { getFooterHeight } = useFooterSetting();
+  const { getFooterHeight, getShowFooter } = useFooterSetting();
 </script>
 
 <style lang="less" scoped></style>

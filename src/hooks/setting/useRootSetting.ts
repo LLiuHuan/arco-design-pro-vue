@@ -55,6 +55,8 @@ export const useRootSetting = () => {
     () => appStore.getProjectConfig.showSettingButton,
   );
 
+  // 设置按钮位置
+  // Setting button position
   const getSettingButtonPosition = computed(
     () => appStore.getProjectConfig.settingButtonPosition,
   );

@@ -77,6 +77,17 @@
         :step="10"
       ></InputNumberItem>
     </SettingItem>
+    <SettingItem
+      key="8"
+      :label="$t('layout.setting.interfaceFunction.footerHeight')"
+    >
+      <InputNumberItem
+        :def="getFooterHeight"
+        :event="HandlerEnum.FOOTER_HEIGHT"
+        :min="30"
+        :max="100"
+      ></InputNumberItem>
+    </SettingItem>
     <!--    <SettingItem-->
     <!--      key="8"-->
     <!--      :label="$t('layout.setting.interfaceFunction.collapsedMenuWidth')"-->
@@ -94,7 +105,11 @@
 
 <script lang="ts" setup>
   import { unref } from 'vue';
-  import { useHeaderSetting, useMenuSetting } from '@/hooks/setting';
+  import {
+    useFooterSetting,
+    useHeaderSetting,
+    useMenuSetting,
+  } from '@/hooks/setting';
   import { MixSidebarTriggerEnum } from '@/enums';
   import { useI18n } from '@/hooks/web/useI18n';
   import { getMenuTriggerOptions } from './helpers';
@@ -118,9 +133,9 @@
     getIsMixSidebar,
     getMixSideTrigger,
     getMenuWidth,
-    getCollapsedMenuWidth,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
+  const { getFooterHeight } = useFooterSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
 

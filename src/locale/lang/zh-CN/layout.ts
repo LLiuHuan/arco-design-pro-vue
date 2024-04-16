@@ -66,6 +66,8 @@ export default {
 
       // height
       headerHeight: '头部高度',
+
+      footerHeight: '页脚高度',
     },
     interfaceDisplay: {
       title: '界面显示',
@@ -83,6 +85,8 @@ export default {
 
       headerBreadcrumb: '面包屑',
       headerBreadcrumbIcon: '面包屑图标',
+
+      footer: '页脚',
     },
 
     layoutMode: {

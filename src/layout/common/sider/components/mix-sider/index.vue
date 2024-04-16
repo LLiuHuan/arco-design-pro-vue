@@ -21,7 +21,7 @@
 
         <template #trigger>
           <LayoutTrigger
-            class="transition-base bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
+            class="cursor-pointer transition-base bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
             :style="{ height: `${getFooterHeight + 1}px` }"
           />
         </template>

@@ -33,16 +33,8 @@
         :event="HandlerEnum.TRANSITION_ENABLE"
       />
     </SettingItem>
-    <SettingItem
-      key="4"
-      :label="$t('layout.setting.interfaceDisplay.routerAnimation')"
-    >
-      <SelectItem
-        :def="getBasicTransition"
-        :event="HandlerEnum.TRANSITION_ROUTER"
-        :options="routerAnimationOptions"
-        :disabled="!getEnableTransition"
-      ></SelectItem>
+    <SettingItem key="4" :label="$t('layout.setting.interfaceDisplay.footer')">
+      <SwitchItem :def="getShowFooter" :event="HandlerEnum.SHOW_FOOTER" />
     </SettingItem>
     <SettingItem
       key="5"
@@ -62,11 +54,26 @@
         :event="HandlerEnum.TRANSITION_NPROGRESS"
       />
     </SettingItem>
+    <SettingItem
+      key="7"
+      :label="$t('layout.setting.interfaceDisplay.routerAnimation')"
+    >
+      <SelectItem
+        :def="getBasicTransition"
+        :event="HandlerEnum.TRANSITION_ROUTER"
+        :options="routerAnimationOptions"
+        :disabled="!getEnableTransition"
+      ></SelectItem>
+    </SettingItem>
   </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
-  import { useHeaderSetting, useTransitionSetting } from '@/hooks/setting';
+  import {
+    useFooterSetting,
+    useHeaderSetting,
+    useTransitionSetting,
+  } from '@/hooks/setting';
   import { HandlerEnum, SelectItem, SettingItem, SwitchItem } from '../common';
   import { getRouterAnimationOptions } from './helpers';
 
@@ -78,6 +85,8 @@
   } = useTransitionSetting();
   const { getHeaderShowBreadCrumb, getHeaderShowBreadCrumbIcon } =
     useHeaderSetting();
+
+  const { getShowFooter } = useFooterSetting();
 
   const routerAnimationOptions = getRouterAnimationOptions();
 </script>

@@ -14,7 +14,7 @@ export const useRoute = () => {
   const routeStore = useRouteStoreWithOut();
 
   /**
-   * 处理权限路由
+   * @description 处理权限路由
    * @param routes - 权限路由
    */
   const handleAuthRoute = (routes: AuthRoute.Route[]) => {

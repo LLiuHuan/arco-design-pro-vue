@@ -3,18 +3,18 @@
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:enter" size="16" />
     </div>
-    <div class="key-word">确认</div>
+    <div class="key-word">{{ $t('common.okText') }}</div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:arrow-up" size="16" />
     </div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:arrow-down" size="16" />
     </div>
-    <div class="key-word">切换</div>
+    <div class="key-word">{{ $t('common.toggleText') }}</div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="mdi:keyboard-esc" size="16" />
     </div>
-    <div class="key-word">关闭</div>
+    <div class="key-word">{{ $t('common.closeText') }}</div>
   </div>
 </template>
 

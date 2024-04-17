@@ -13,7 +13,7 @@
             ref="inputRef"
             v-model="keyword"
             class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
-            placeholder="搜索"
+            :placeholder="$t('common.searchText')"
           />
         </div>
 
@@ -21,7 +21,10 @@
       </div>
     </template>
 
-    <AEmpty v-if="searchResult.length === 0"></AEmpty>
+    <AEmpty
+      v-if="searchResult.length === 0"
+      :description="$t('common.noDataText')"
+    ></AEmpty>
     <div v-else class="pb-12px">
       <ul class="max-h-472px m-a overscroll-auto">
         <li

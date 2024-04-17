@@ -40,3 +40,7 @@ declare type ComponentRef<T extends HTMLElement = HTMLDivElement> =
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 
 declare module '@arco-design/color';
+
+declare interface ChangeEvent extends Event {
+  target: HTMLInputElement;
+}

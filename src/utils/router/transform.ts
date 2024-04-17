@@ -211,6 +211,25 @@ export function transformRouteNameToRoutePath(
 }
 
 /**
+ * @description Convert the route name to the route path - [将路由名字中带参数的转换成路由参数]
+ * @param name
+ */
+export const transformRouteNameToOption = (name: AuthRoute.AllRouteKey) => {
+  const routeSplitMark = '_';
+  const params: Record<string, string> = {};
+  name
+    .split(routeSplitMark)
+    .filter((v: string) => v.startsWith(':'))
+    .forEach((v: string) => {
+      params[v.replaceAll(':', '')] = v;
+    });
+
+  return {
+    params,
+  };
+};
+
+/**
  * 将权限路由转换成搜索的菜单数据
  * @param routes - 权限路由
  * @param treeMap

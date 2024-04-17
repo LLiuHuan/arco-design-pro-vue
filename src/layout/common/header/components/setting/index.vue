@@ -1,5 +1,5 @@
 <template>
-  <HoverContainer tooltip-content="主题设置">
+  <HoverContainer :tooltip-content="$t('layout.header.setting')">
     <AButton
       type="text"
       class="!text-[var(--color-text-1)] !h-40px"

@@ -1,15 +1,17 @@
 <template>
-  <AScrollbar
-    outer-class="h-full"
-    class="h-full overflow-y-auto adp-default-layout-content"
-  >
-    <slot></slot>
-  </AScrollbar>
+  <div>
+    <AScrollbar
+      outer-class="h-full"
+      class="h-full overflow-y-auto adp-default-layout-content"
+    >
+      <slot></slot>
+    </AScrollbar>
 
-  <ABackTop
-    target-container=".adp-default-layout-content"
-    :style="{ position: 'absolute' }"
-  />
+    <ABackTop
+      target-container=".adp-default-layout-content"
+      :style="{ position: 'absolute' }"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>

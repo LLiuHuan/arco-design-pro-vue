@@ -53,6 +53,13 @@ export const useRouteStore = defineStore({
     getIsInitAuthRoute(state) {
       return state.isInitAuthRoute;
     },
+    /**
+     * @description Get the searchMenus - [获取searchMenus]
+     * @param state
+     */
+    getSearchMenus(state) {
+      return state.searchMenus;
+    },
   },
   actions: {
     setMenus(menus: App.Menu[]) {

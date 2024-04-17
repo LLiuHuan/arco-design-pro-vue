@@ -9,6 +9,7 @@
     </div>
 
     <div class="flex-center h-40px">
+      <Search />
       <ThemeBtn />
       <LanguageBtn />
       <FullScreenBtn />
@@ -28,6 +29,7 @@
     ThemeBtn,
     UserAvatar,
     Breadcrumb,
+    Search,
   } from './components';
 
   const { getShowHeaderTrigger } = useMenuSetting();

@@ -9,6 +9,10 @@ export default {
     themeDark: 'Click to switch dark theme',
     themeSystem: 'Click to switch system theme',
 
+    setting: 'Theme setting',
+
+    search: 'Search',
+
     logOut: 'Log out',
     logOutMessage: 'Are you sure you want to log out ?',
     userCenter: 'User center',

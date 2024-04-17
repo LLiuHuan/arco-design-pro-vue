@@ -9,6 +9,10 @@ export default {
     themeDark: '点击切换暗色主题',
     themeSystem: '点击切换跟随系统',
 
+    setting: '主题设置',
+
+    search: '搜索',
+
     logOut: '退出系统',
     logOutMessage: '确定要退出系统吗？',
     userCenter: '个人中心',

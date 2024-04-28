@@ -249,3 +249,17 @@ export function transformAuthRouteToSearchMenus(
     return acc;
   }, treeMap);
 }
+
+/**
+ * 获取当前路由的根路由
+ * @param route - 权限路由
+ */
+export function getRouteRootName(route: AuthRoute.Route) {
+  const routeSplitMark = '_';
+  const { hideMenu, currentActiveMenu } = route.meta;
+  const name = route.name as string;
+  const routeName = (hideMenu ? currentActiveMenu : name) || name;
+
+  const [root] = routeName.split(routeSplitMark);
+  return root as AuthRoute.AllRouteKey;
+}

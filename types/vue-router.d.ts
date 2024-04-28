@@ -1,8 +1,8 @@
-export {};
+import 'vue-router';
 
 declare module 'vue-router' {
-  interface RouteMeta
-    extends Record<string | number | symbol, unknown | RouteMeta> {
+  interface RouteMeta {
+    // extends Record<string | number | symbol, unknown | RouteMeta> {
     /**
      * Route name
      * 路由名称

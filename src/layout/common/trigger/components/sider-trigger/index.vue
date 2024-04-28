@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center"
+    class="w-full flex justify-center items-center text-[var(--color-text-1)]"
     @click.stop="toggleCollapsed"
   >
     <SvgIcon

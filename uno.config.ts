@@ -1,10 +1,15 @@
-import { defineConfig } from '@unocss/vite';
-import presetUno from '@unocss/preset-uno';
-import type { Theme } from '@unocss/preset-uno';
-import transformerDirectives from '@unocss/transformer-directives';
-import transformerVariantGroup from '@unocss/transformer-variant-group';
+import {
+  defineConfig,
+  presetUno,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss';
 
-export default defineConfig<Theme>({
+import presetLegacyCompat from '@unocss/preset-legacy-compat';
+import { colors } from '@arco-design/web-vue/es/color-picker/colors';
+
+export default defineConfig({
+  // 内容
   content: {
     pipeline: {
       exclude: [
@@ -20,8 +25,25 @@ export default defineConfig<Theme>({
       ],
     },
   },
-  presets: [presetUno({ dark: 'class' })],
-  transformers: [transformerDirectives(), transformerVariantGroup()],
+  // 预设
+  presets: [
+    presetUno({ dark: 'class' }),
+    // 将颜色函数 (rgb()和hsl()) 从空格分隔转换为逗号分隔，更好的兼容性app端，example：
+    // `rgb(255 0 0)` -> `rgb(255, 0, 0)`
+    // `rgba(255 0 0 / 0.5)` -> `rgba(255, 0, 0, 0.5)`
+    presetLegacyCompat({
+      commaStyleColorFunction: true,
+    }),
+  ],
+  // 自定义转换器
+  transformers: [
+    // 启用 @apply 功能
+    transformerDirectives(),
+    // 启用 () 分组功能
+    // 支持css class组合，eg: `<div class="hover:(bg-gray-400 font-medium) font-(light mono)">测试 unocss</div>`
+    transformerVariantGroup(),
+  ],
+  // 自定义快捷类
   shortcuts: {
     'wh-full': 'w-full h-full',
     'flex-center': 'flex justify-center items-center',
@@ -57,39 +79,22 @@ export default defineConfig<Theme>({
     'nowrap-hidden': 'whitespace-nowrap overflow-hidden',
     'ellipsis-text': 'nowrap-hidden text-ellipsis',
     'transition-base': 'transition-all duration-300 ease-in-out',
+
+    'border-t-base': 'border-t-1 border-t-solid border-t-[var(--color-fill-2)]',
+    'border-b-base': 'border-b-1 border-b-solid border-b-[var(--color-fill-2)]',
+    'border-l-base': 'border-l-1 border-l-solid border-l-[var(--color-fill-2)]',
+    'border-r-base': 'border-r-1 border-r-solid border-r-[var(--color-fill-2)]',
+    'border-x-base': 'border-l-base border-r-base',
+    'border-y-base': 'border-t-base border-b-base',
   },
   theme: {
-    colors: {
-      primary: 'rgb(var(--primary-color))',
-      primary_hover: 'rgb(var(--primary-color-hover))',
-      primary_pressed: 'rgb(var(--primary-color-pressed))',
-      primary_active: 'rgba(var(--primary-color-active),0.1)',
-      primary_1: 'rgb(var(--primary-color1))',
-      primary_2: 'rgb(var(--primary-color2))',
-      primary_3: 'rgb(var(--primary-color3))',
-      primary_4: 'rgb(var(--primary-color4))',
-      primary_5: 'rgb(var(--primary-color5))',
-      primary_6: 'rgb(var(--primary-color6))',
-      primary_7: 'rgb(var(--primary-color7))',
-      primary_8: 'rgb(var(--primary-color8))',
-      primary_9: 'rgb(var(--primary-color9))',
-      info: 'rgb(var(--info-color))',
-      info_hover: 'rgb(var(--info-color-hover))',
-      info_pressed: 'rgb(var(--info-color-pressed))',
-      info_active: 'rgb(var(--info-color-active),0.1)',
-      success: 'rgb(var(--success-color))',
-      success_hover: 'rgb(var(--success-color-hover))',
-      success_pressed: 'rgb(var(--success-color-pressed))',
-      success_active: 'rgb(var(--success-color-active),0.1)',
-      warning: 'rgb(var(--warning-color))',
-      warning_hover: 'rgb(var(--warning-color-hover))',
-      warning_pressed: 'rgb(var(--warning-color-pressed))',
-      warning_active: 'rgb(var(--warning-color-active),0.1)',
-      error: 'rgb(var(--error-color))',
-      error_hover: 'rgb(var(--error-color-hover))',
-      error_pressed: 'rgb(var(--error-color-pressed))',
-      error_active: 'rgb(var(--error-color-active),0.1)',
-      dark: '#18181c',
+    color: {
+      base_text: 'rgb(var(--base-text-color))',
+    },
+    boxShadow: {
+      header: '0 1px 2px rgb(0, 21, 41, 0.08)',
+      sider: '2px 0 8px 0 rgb(29, 35, 41, 0.05)',
+      tab: '0 1px 2px rgb(0, 21, 41, 0.08)',
     },
   },
 });

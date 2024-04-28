@@ -34,17 +34,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMenuSetting } from '@/hooks/setting';
   import { computed, unref } from 'vue';
-  import { HandlerEnum, InputNumberItem, LayoutModeCard } from '../common';
+  import { useLayoutSetting } from '@/hooks/setting';
+  import { HandlerEnum, LayoutModeCard } from '../common';
 
-  const { getMenuMode, setMenuSetting } = useMenuSetting();
+  const { getLayoutMode, setLayoutSetting } = useLayoutSetting();
 
   const menuMode = computed({
-    get: () => unref(getMenuMode),
+    get: () => unref(getLayoutMode),
     set: (mode) => {
-      console.log('menuMode', mode);
-      setMenuSetting({ mode: unref(mode) });
+      setLayoutSetting({ mode: unref(mode) });
     },
   });
 </script>

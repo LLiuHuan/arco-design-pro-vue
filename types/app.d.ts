@@ -3,6 +3,19 @@ import { RouteMeta } from 'vue-router';
 declare namespace App {
   import RoutePath = AuthRoute.RoutePath;
 
+  /**
+   * @description The global header props
+   * @description 全局头部属性
+   */
+  interface Header {
+    /** Whether to show the logo */
+    showLogo?: boolean;
+    /** Whether to show the menu toggle */
+    showMenuToggle?: boolean;
+    /** Whether to show the menu */
+    showMenu?: boolean;
+  }
+
   type Menu = {
     /**
      * Menu icon

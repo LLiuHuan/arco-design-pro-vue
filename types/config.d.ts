@@ -6,7 +6,6 @@ import {
   AppEnum,
   TriggerEnum,
   SessionTimeoutProcessingEnum,
-  MenuModeEnum,
   SettingButtonPositionEnum,
   PermissionModeEnum,
   MixSidebarTriggerEnum,
@@ -64,13 +63,24 @@ export interface MultiTabsSetting {
   showFold: boolean;
   // Whether to automatically collapse - [是否自动折叠]
   autoCollapse: boolean;
+  // tab 高度
+  // Tab height
+  height: number;
+}
+
+export interface LayoutSetting {
+  // 菜单模式
+  // Menu mode
+  mode: ThemeLayoutMode;
+
+  // 滚动模式
+  // Scroll mode
+  scrollMode: ThemeScrollMode;
 }
 
 export interface MenuSetting {
   // Menu type - [菜单类型]
   type: MenuTypeEnum;
-  // Menu mode - [菜单模式]
-  mode: MenuModeEnum;
   // Background color - [背景颜色]
   bgColor: string;
   // Whether to collapse the menu - [是否折叠菜单]
@@ -79,6 +89,12 @@ export interface MenuSetting {
   menuWidth: number;
   // Menu collapse width - [菜单折叠宽度]
   collapsedMenuWidth: number;
+  // Mix menu width - [混合菜单宽度]
+  mixMenuWidth: number;
+  // Mix menu collapse width - [混合菜单折叠宽度]
+  mixCollapsedMenuWidth: number;
+  // Mix menu child width - [混合菜单子宽度]
+  mixChildMenuWidth: number;
   // Whether the sidebar is hidden - [侧边栏是否隐藏]
   siderHidden?: boolean;
   // Menu theme - [菜单主题]
@@ -137,10 +153,15 @@ export interface HeaderSetting {
 }
 
 export interface FooterSetting {
-  // Footer show - [底部显示]
+  // 底部显示
+  // Footer show
   show: boolean;
-  // Footer height - [底部高度]
+  // 底部高度
+  // Footer height
   height: number;
+  // 是否固定底部
+  // Fixed at the bottom
+  fixed: boolean;
 }
 
 export interface ProjectConfig {
@@ -155,6 +176,19 @@ export interface ProjectConfig {
   openKeepAlive: boolean;
   // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
   canEmbedIFramePage: boolean;
+
+  // 是否固定头部和标签
+  // Whether to fix the header and tab
+  getFixedHeaderAndTab: boolean;
+
+  // 内容页面是否可以滚动
+  // Whether the content page can scroll
+  contentXScrollable: boolean;
+
+  // 布局设置
+  // Layout settings
+  layoutSetting: LayoutSetting;
+
   // Multi-tab settings - [多标签页设置]
   multiTabsSetting: MultiTabsSetting;
 

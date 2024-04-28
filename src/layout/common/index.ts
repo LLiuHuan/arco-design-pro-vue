@@ -6,9 +6,7 @@ import LayoutFooter from './footer/index.vue';
 import LayoutSider from './sider/index.vue';
 import LayoutTrigger from './trigger/index.vue';
 import LayoutHeader from './header/index.vue';
-import LayoutMenu from './menu/index.vue';
-import LayoutMixMenu from './mix-menu/menu/index.vue';
-import LayoutMixMenuDrawer from './mix-menu/drawer/index.vue';
+import LayoutMultipleHeader from './header-multiple/index.vue';
 import LayoutTabs from './tabs/index.vue';
 import LayoutFeature from './feature/index.vue';
 
@@ -18,9 +16,7 @@ export {
   LayoutSider,
   LayoutTrigger,
   LayoutHeader,
-  LayoutMenu,
-  LayoutMixMenu,
-  LayoutMixMenuDrawer,
+  LayoutMultipleHeader,
   LayoutTabs,
   LayoutFeature,
   SettingDrawer,

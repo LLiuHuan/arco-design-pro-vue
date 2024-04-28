@@ -6,15 +6,16 @@ import { StorageInterface } from '~/types/storage';
 const { permissionCacheType } = appSetting;
 const isLocal = permissionCacheType === CacheTypeEnum.LOCAL;
 
-export function getToken() {
-  return getAuthCache(TOKEN_KEY) || '';
-}
-
 export const getAuthCache = <T>(key: StorageInterface.BasicKeys) => {
   const fn = isLocal ? localStg.get : sessionStg.get;
   return fn(key) as T;
 };
 
 export const setAuthCache = (key: StorageInterface.BasicKeys, value: any) => {
+  console.log('setAuthCache', key, value, isLocal);
   return isLocal ? localStg.set(key, value) : sessionStg.set(key, value);
 };
+
+export function getToken() {
+  return getAuthCache(TOKEN_KEY) || '';
+}

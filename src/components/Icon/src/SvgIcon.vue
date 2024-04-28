@@ -3,6 +3,7 @@
     <svg
       aria-hidden="true"
       v-bind="bindAttrs"
+      class="svg-icon"
       :class="[spin && 'svg-icon-spin']"
       :style="getStyle"
       width="1em"
@@ -16,6 +17,7 @@
       v-if="icon"
       :icon="icon"
       v-bind="bindAttrs"
+      class="svg-icon"
       :class="[spin && 'svg-icon-spin']"
       :style="getStyle"
     />
@@ -88,13 +90,14 @@
 </script>
 
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name}-svg-icon';
-
-  .@{prefix-cls} {
+  .svg-icon {
     display: inline-block;
-    overflow: hidden;
-    fill: currentcolor;
-    vertical-align: -0.15em;
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    font-style: normal;
+    vertical-align: -0.125rem;
+    outline: none;
   }
 
   .svg-icon-spin {

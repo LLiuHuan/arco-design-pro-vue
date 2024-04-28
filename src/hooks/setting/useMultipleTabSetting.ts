@@ -9,6 +9,8 @@ export const useMultipleTabSetting = () => {
   // 是否显示多标签页
   const getShowMultipleTab = computed(() => appStore.getMultiTabsSetting.show);
 
+  const getTabHeight = computed(() => appStore.getMultiTabsSetting.height);
+
   const getShowFold = computed(() => appStore.getMultiTabsSetting.showFold);
 
   const getShowTabs = computed(() => {
@@ -19,5 +21,6 @@ export const useMultipleTabSetting = () => {
     getShowMultipleTab,
     getShowFold,
     getShowTabs,
+    getTabHeight,
   };
 };

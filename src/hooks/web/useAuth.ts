@@ -13,6 +13,7 @@ import { useRoute } from '@/hooks/web/useRoute';
 export const useAuth = () => {
   const authStore = useAuthStoreWithOut();
   const routeStore = useRouteStoreWithOut();
+  const { goKey } = useGo();
 
   const resetAuthStore = (goLogin: boolean = true) => {
     authStore.resetAuthStore();
@@ -20,7 +21,7 @@ export const useAuth = () => {
     const route = unref(router.currentRoute);
     if (route.meta?.ignoreAuth || goLogin) {
       // Redirect to login page - [重定向到登录页]
-      // router.push({ name: 'login' });
+      goKey('login');
     }
   };
   const loginByToken = async (backendToken: LoginModel) => {

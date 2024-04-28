@@ -10,6 +10,7 @@ export const initAppSetting = (): ProjectConfig => {
   const storageSettings = localStg.get(PROJ_CFG_KEY);
 
   if (isProd && storageSettings) {
+    // if (storageSettings) {
     return storageSettings;
   }
 

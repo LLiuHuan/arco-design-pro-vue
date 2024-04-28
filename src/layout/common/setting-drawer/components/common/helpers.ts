@@ -124,18 +124,9 @@ const handler = (
     // endregion
 
     case HandlerEnum.LAYOUT_MODE:
-      const { mode, type } = value;
-      // const isMixSidebar = type === MenuTypeEnum.MIX_TOP_MENU;
-      // const mixSideSplitOpt =
-      //   menuSetting.type === MenuTypeEnum.MIX_TOP_MENU ? { split: menuSetting.split } : { split };
-      // const otherSplitOpt = { split: false };
-      // const splitOpt = isMixSidebar ? mixSideSplitOpt : otherSplitOpt;
-
       return {
-        menuSetting: {
-          mode,
-          type,
-          collapsed: false,
+        layoutSetting: {
+          mode: value,
         },
       };
     default:

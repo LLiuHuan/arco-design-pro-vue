@@ -21,7 +21,8 @@ import {
 import { getToken } from '@/utils/auth';
 import { useGo } from '@/hooks/web/usePage';
 import { router } from '@/router';
-import { PageEnum } from '@/enums';
+import { PageEnum, TOKEN_KEY } from '@/enums';
+import { localStg } from '@/utils/cache';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';
@@ -191,6 +192,13 @@ const transform: AxiosTransform = {
   requestInterceptors: (config, options) => {
     // 请求之前处理config
     const token = getToken();
+    console.log(localStg.get(TOKEN_KEY));
+    console.log(token, 'token');
+    console.log(
+      (config as Recordable)?.requestOptions?.withToken !== false,
+      'withToken',
+    );
+    console.log(options.authenticationScheme);
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       (config as Recordable).headers.Authorization =

@@ -8,6 +8,7 @@ import {
 } from '@/enums';
 import type {
   HeaderSetting,
+  LayoutSetting,
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
@@ -104,6 +105,9 @@ export const useAppStore = defineStore({
     },
     getHeaderSetting(): HeaderSetting {
       return this.getProjectConfig.headerSetting;
+    },
+    getLayoutSetting(): LayoutSetting {
+      return this.getProjectConfig.layoutSetting;
     },
   },
   actions: {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="system-logo flex-center flex-center cursor-pointer transition-base !text-[rgba(var(--primary-6))]"
+    class="system-logo flex-center cursor-pointer transition-base !text-[rgba(var(--primary-6))]"
     @click="goHome"
   >
     <img :style="{ width: `${logoSize}px` }" src="/logo.png" alt="logo" />

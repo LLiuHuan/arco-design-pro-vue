@@ -21,3 +21,19 @@ type LoginModuleType =
  * - blank 空白布局
  */
 type LayoutComponentType = 'basic' | 'blank';
+
+/**
+ * The layout mode
+ *
+ * - vertical: the vertical menu in left
+ * - horizontal: the horizontal menu in top
+ * - vertical-mix: two vertical mixed menus in left
+ * - horizontal-mix: the vertical menu in left and horizontal menu in top
+ */
+type ThemeLayoutMode =
+  | 'vertical'
+  | 'horizontal'
+  | 'vertical-mix'
+  | 'horizontal-mix';
+
+type ThemeScrollMode = import('@adp/materials').LayoutScrollMode;

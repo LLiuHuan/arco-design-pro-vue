@@ -4,7 +4,7 @@
     :class="{
       'p-16px': showPadding,
     }"
-    class="overflow-hidden h-full"
+    class="overflow-hidden h-full bg-[var(--color-fill-1)] text-[var(--color-text-1)]"
   >
     <RouterView
       v-slot="{ Component, route }"

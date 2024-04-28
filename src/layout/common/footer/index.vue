@@ -1,9 +1,6 @@
 <template>
   <a-layout-footer
-    v-if="getShowFooter"
-    ref="footerRef"
-    class="text-[var(--color-text-3)] flex-col flex-center text-center bg-[var(--color-bg-2)] transition-base"
-    :style="{ height: `${getFooterHeight}px` }"
+    class="h-full text-[var(--color-text-3)] flex-col flex-center text-center bg-[var(--color-bg-2)]"
   >
     <div v-if="getFooterHeight >= 48" class="my-8px">
       <IconGithub
@@ -24,7 +21,7 @@
   const date = new Date();
   const year = date.getFullYear();
 
-  const { getFooterHeight, getShowFooter } = useFooterSetting();
+  const { getFooterHeight } = useFooterSetting();
 </script>
 
 <style lang="less" scoped></style>

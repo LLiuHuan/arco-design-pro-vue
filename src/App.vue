@@ -14,9 +14,9 @@
 </script>
 
 <template>
-  <a-config-provider :locale="arcoLocale">
+  <AConfigProvider :locale="arcoLocale">
     <RouterView />
-  </a-config-provider>
+  </AConfigProvider>
 </template>
 
 <style scoped></style>

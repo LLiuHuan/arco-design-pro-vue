@@ -40,7 +40,7 @@
           @mouseenter="handleMouseenter"
           @click="handleEnter"
         >
-          <div class="px-5px flex-center">
+          <div class="pl-10px pr-5px flex-center">
             <SvgIcon
               :icon="item.meta.icon || 'solar:document-broken'"
               :local-icon="item.meta.localIcon"
@@ -53,7 +53,7 @@
             }}
           </div>
           <div
-            class="px-5px flex-center"
+            class="pr-10px flex-center"
             :style="{
               opacity: activeIndex === index ? 1 : 0,
             }"

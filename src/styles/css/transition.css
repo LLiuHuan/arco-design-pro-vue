@@ -7,7 +7,7 @@
 .interface-function-move,
 .interface-function-enter-active,
 .interface-function-leave-active {
-    --uno: transition-all-300;
+    --uno: transition-base;
 }
 
 .interface-function-enter-from,
@@ -27,7 +27,7 @@
  */
 .dark-menu-enter-active,
 .dark-menu-leave-active {
-    --uno: h-22px transition-all-300;
+    --uno: h-22px transition-base;
 }
 
 .dark-menu-enter-from,

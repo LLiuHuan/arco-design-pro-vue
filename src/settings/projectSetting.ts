@@ -64,14 +64,19 @@ const defaultSetting: ProjectConfig = {
     // Auto collapsed - [自动折叠]
     autoCollapse: false,
   },
+  layoutSetting: {
+    // Menu mode
+    // 菜单模式
+    mode: MenuModeEnum.VERTICAL_MIX,
+    // 滚动模式
+    // Scroll mode
+    scrollMode: 'content',
+  },
   // Menu settings - [菜单设置]
   menuSetting: {
     // Whether to display
     // 是否显示
     show: true,
-    // Menu mode
-    // 菜单模式
-    mode: MenuModeEnum.VERTICAL_MIX,
     // Menu type
     // 菜单类型
     type: MenuTypeEnum.MIX_SIDEBAR,
@@ -81,12 +86,21 @@ const defaultSetting: ProjectConfig = {
     // Background color
     // 背景颜色
     bgColor: '#304156',
-    // Menu width
     // 菜单宽度
+    // Menu width
     menuWidth: 210,
-    // Menu collapse width
     // 菜单折叠宽度
+    // Menu collapse width
     collapsedMenuWidth: 48,
+    // 混合菜单宽度
+    // Mix menu width
+    mixMenuWidth: 80,
+    // 混合菜单折叠宽度
+    // Mix menu collapse width
+    mixCollapsedMenuWidth: 48,
+    // 混合菜单子宽度
+    // Mix menu child width
+    mixChildMenuWidth: 210,
     // Whether the sidebar is hidden
     // 侧边栏是否隐藏
     siderHidden: false,
@@ -139,10 +153,15 @@ const defaultSetting: ProjectConfig = {
   },
 
   footerSetting: {
-    // Whether to display - [是否显示]
+    // 是否显示
+    // Whether to display
     show: true,
-    // Footer height - [底部高度]
+    // 底部高度
+    // Footer height
     height: 48,
+    // 是否固定底部
+    // Whether to fix the bottom
+    fixed: false,
   },
 
   // Whether to cancel the http request that has been sent but not responded when switching the interface

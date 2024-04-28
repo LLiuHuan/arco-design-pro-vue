@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center relative border-t-1 border-t-[var(--color-fill-2)] border-t-solid bg-[var(--color-bg-2)] h-38px transition-base"
+    class="flex items-center relative bg-[var(--color-bg-2)] h-full shadow-tab text-[var(--color-text-1)]"
     :class="{
       'mt-[-38px]': getShowMultipleTab && getIsUnFold,
       'mt-0': mouseY < 38,
@@ -135,7 +135,7 @@
 
   const { getShowFold, getShowMultipleTab } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
-  const { getShowMenu } = useMenuSetting();
+  const { getShowMenu, getIsTopMixSidebar, getMixSideWidth } = useMenuSetting();
 
   const getIsUnFold = computed(
     () => !unref(getShowMenu) && !unref(getShowHeader),
@@ -243,7 +243,6 @@
   }
 
   // endregion scroll
-
   listenerRouteChange((route) => {
     const { name } = route;
     if (name === PageEnum.REDIRECT || !route || !userStore.getToken) {

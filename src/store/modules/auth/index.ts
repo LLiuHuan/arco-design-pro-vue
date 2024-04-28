@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import {
-  PINIA_CACHE,
   REFRESH_TOKEN_KEY,
   ROLES_KEY,
   TOKEN_KEY,
@@ -95,8 +94,10 @@ export const useAuthStore = defineStore({
      * @param {LoginModel} backendToken
      */
     setToken(backendToken: LoginModel) {
+      console.log(backendToken);
       const { token, refreshToken } = backendToken;
       this.token = token ?? '';
+      console.log(token, TOKEN_KEY);
       setAuthCache(TOKEN_KEY, token ?? '');
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken ?? '');
     },
@@ -138,11 +139,11 @@ export const useAuthStore = defineStore({
     },
   },
 
-  persist: {
-    key: PINIA_CACHE.PINIA_AUTH_STORE,
-    storage: localStorage,
-    debug: true,
-  },
+  // persist: {
+  //   key: PINIA_CACHE.PINIA_AUTH_STORE,
+  //   storage: localStorage,
+  //   debug: true,
+  // },
 });
 
 // // Need to be used outside the setup - [需要在设置之外使用]

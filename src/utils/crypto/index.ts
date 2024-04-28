@@ -21,7 +21,9 @@ export const encrypt = (data: any) => {
       consoleLog('encrypt error:', error);
     }
   }
+  console.log(data);
   const dataHex = CryptoJS.enc.Utf8.parse(data);
+  console.log(dataHex);
   const encrypted = CryptoJS.AES.encrypt(dataHex, SECRET_KEY, {
     iv: SECRET_IV,
     mode: CryptoJS.mode.CBC,
@@ -37,12 +39,12 @@ export const encrypt = (data: any) => {
 export const decrypt = (cipherText: string) => {
   const encryptedHexStr = CryptoJS.enc.Hex.parse(cipherText);
   const str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-  const decrypt = CryptoJS.AES.decrypt(str, SECRET_KEY, {
+  const decrypted = CryptoJS.AES.decrypt(str, SECRET_KEY, {
     iv: SECRET_IV,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
   });
-  const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+  const decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
   if (decryptedStr) {
     return JSON.parse(decryptedStr.toString());
   }

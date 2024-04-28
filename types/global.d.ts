@@ -44,3 +44,6 @@ declare module '@arco-design/color';
 declare interface ChangeEvent extends Event {
   target: HTMLInputElement;
 }
+
+/** Build time of the project */
+declare const BUILD_TIME: string;

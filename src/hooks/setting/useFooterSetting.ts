@@ -17,6 +17,10 @@ export const useFooterSetting = () => {
     () => appStore.getProjectConfig.footerSetting.height,
   );
 
+  const getFooterFixed = computed(
+    () => appStore.getProjectConfig.footerSetting.fixed,
+  );
+
   // 设置菜单配置
   function setFooterSetting(footerSetting: Partial<FooterSetting>): void {
     appStore.setProjectConfig({ footerSetting });
@@ -26,6 +30,7 @@ export const useFooterSetting = () => {
     getFooterSetting,
     getShowFooter,
     getFooterHeight,
+    getFooterFixed,
 
     setFooterSetting,
   };

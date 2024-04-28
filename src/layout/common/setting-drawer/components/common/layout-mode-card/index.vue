@@ -87,7 +87,7 @@
 
   function handleChangeMode(mode: MenuTypeItem) {
     if (props.disabled) return;
-    baseHandler(props.event, mode);
+    baseHandler(props.event, mode.mode);
   }
 </script>
 

@@ -12,6 +12,14 @@ export const useRootSetting = () => {
 
   const getPageLoading = computed(() => appStore.getPageLoading);
 
+  const getFixedHeaderAndTab = computed(
+    () => appStore.getProjectConfig.getFixedHeaderAndTab,
+  );
+
+  const getContentXScrollable = computed(
+    () => appStore.getProjectConfig.contentXScrollable,
+  );
+
   /**
    * @description: 获取项目配置
    */
@@ -100,6 +108,8 @@ export const useRootSetting = () => {
     getPageLoading,
     getShowSettingButton,
     getSettingButtonPosition,
+    getFixedHeaderAndTab,
+    getContentXScrollable,
 
     setRootSetting,
     setDarkMode,

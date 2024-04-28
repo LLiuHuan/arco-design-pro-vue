@@ -13,7 +13,6 @@ import {
 } from '@/enums';
 import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
-import { RouteLocationNormalized } from 'vue-router';
 import { LoginParams, UserInfoModel } from '@/api/auth/model/userModel';
 import { App } from '~/types/app';
 

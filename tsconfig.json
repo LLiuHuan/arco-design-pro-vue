@@ -31,7 +31,7 @@
       "vite/client",
       "node",
 //      "vite-plugin-svg-icons/client"
-      "unplugin-icons/types/vue",
+//      "unplugin-icons/types/vue",
     ],
     // 声明文件包
     "typeRoots": [

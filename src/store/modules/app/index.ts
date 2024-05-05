@@ -23,26 +23,36 @@ import { initAppSetting } from './helpers';
 
 interface AppState {
   /**
-   * @description Theme enum - [主题枚举]
+   * @description 主题枚举
+   * @description Theme enum
    */
   darkMode?: AppEnum;
   /**
-   * @description Setting Drawer Status - [设置抽屉状态]
+   * @description 设置抽屉状态
+   * @description setting drawer status
    */
   settingDrawerState?: boolean;
   /**
-   * @description Page loading status - [页面加载状态]
+   * @description 页面加载状态
+   * @description page loading status
    */
   pageLoading: boolean;
   /**
-   * @description project config - [项目配置信息]
+   * @description 项目配置信息
+   * @description project config
    */
   projectConfig: ProjectConfig | null;
   /**
+   * @description 当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态
    * @description When the window shrinks, remember some states, and restore these states when the window is restored
-   * @description [当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态]
    */
   beforeMiniInfo: BeforeMiniState;
+
+  /**
+   * @description 是否为移动端
+   * @description Whether it is a mobile end
+   */
+  isMobile: boolean;
 }
 
 let timeId: TimeoutHandle;
@@ -53,8 +63,12 @@ export const useAppStore = defineStore({
     pageLoading: false,
     projectConfig: initAppSetting(),
     beforeMiniInfo: {},
+    isMobile: false,
   }),
   getters: {
+    getIsMobile(state): boolean {
+      return state.isMobile;
+    },
     // 获取页面加载状态
     getPageLoading(state): boolean {
       return state.pageLoading;
@@ -111,6 +125,14 @@ export const useAppStore = defineStore({
     },
   },
   actions: {
+    /**
+     * @description 设置是否为移动端
+     * @description Set whether it is a mobile terminal
+     * @param isMobile
+     */
+    setMobile(isMobile: boolean): void {
+      this.isMobile = isMobile;
+    },
     /**
      * @description Set the page loading status - [设置页面加载状态]
      * @param loading loading - [加载状态]

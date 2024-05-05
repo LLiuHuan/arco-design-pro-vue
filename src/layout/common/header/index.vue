@@ -14,7 +14,10 @@
     />
     <div v-else class="h-full flex-y-center flex-1-hidden">
       <LayoutTrigger v-if="showMenuToggle" :sider="false"></LayoutTrigger>
-      <Breadcrumb v-if="getShowContent && getShowBread" class="pl-5px" />
+      <Breadcrumb
+        v-if="!getIsMobile && getShowContent && getShowBread"
+        class="pl-5px"
+      />
     </div>
     <!--  left end  -->
 
@@ -23,7 +26,7 @@
       <Search />
       <ThemeBtn />
       <LanguageBtn />
-      <FullScreenBtn />
+      <FullScreenBtn v-if="!getIsMobile" />
       <SettingBtn />
       <UserAvatar />
     </div>
@@ -32,7 +35,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHeaderSetting, useMenuSetting } from '@/hooks/setting';
+  import {
+    useHeaderSetting,
+    useMenuSetting,
+    useRootSetting,
+  } from '@/hooks/setting';
   import { useRouteStoreWithOut } from '@/store/modules/route';
   import { MenuModeEnum } from '@/enums';
   import { AppLogo } from '@/components/AppLogo';
@@ -63,6 +70,7 @@
 
   defineProps<Props>();
 
+  const { getIsMobile } = useRootSetting();
   const { getMenuWidth } = useMenuSetting();
   const { getShowBread, getShowContent } = useHeaderSetting();
   const { getLayoutMode } = useLayoutSetting();

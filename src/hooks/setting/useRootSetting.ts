@@ -69,6 +69,8 @@ export const useRootSetting = () => {
     () => appStore.getProjectConfig.settingButtonPosition,
   );
 
+  const getIsMobile = computed(() => appStore.getIsMobile);
+
   const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
   };
@@ -110,6 +112,7 @@ export const useRootSetting = () => {
     getSettingButtonPosition,
     getFixedHeaderAndTab,
     getContentXScrollable,
+    getIsMobile,
 
     setRootSetting,
     setDarkMode,

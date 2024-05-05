@@ -1,7 +1,11 @@
 <template>
   <ADivider>{{ $t('layout.setting.layoutMode.title') }}</ADivider>
 
-  <LayoutModeCard :event="HandlerEnum.LAYOUT_MODE" :def="menuMode">
+  <LayoutModeCard
+    :event="HandlerEnum.LAYOUT_MODE"
+    :def="menuMode"
+    :disabled="getIsMobile"
+  >
     <template #vertical>
       <div class="layout-sider h-full w-18px"></div>
       <div class="vertical-wrapper">
@@ -35,10 +39,11 @@
 
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { useLayoutSetting } from '@/hooks/setting';
+  import { useLayoutSetting, useRootSetting } from '@/hooks/setting';
   import { HandlerEnum, LayoutModeCard } from '../common';
 
   const { getLayoutMode, setLayoutSetting } = useLayoutSetting();
+  const { getIsMobile } = useRootSetting();
 
   const menuMode = computed({
     get: () => unref(getLayoutMode),

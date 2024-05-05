@@ -4,6 +4,7 @@
     :mode="layoutMode"
     :scroll-el-id="LAYOUT_SCROLL_EL_ID"
     :scroll-mode="getLayoutScrollMode"
+    :is-mobile="getIsMobile"
     :full-content="getFullContent"
     :fixed-top="getFixedHeaderAndTab"
     :header-height="getHeaderHeight"
@@ -15,7 +16,7 @@
     :sider-collapsed-width="getSiderCollapsedWidth"
     :footer-visible="getShowFooter"
     :footer-height="getFooterHeight"
-    :fixed-footer="false"
+    :fixed-footer="getFooterFixed"
     :right-footer="true"
   >
     <template #header>
@@ -74,14 +75,15 @@
   const { getShowFooter, getFooterHeight, getFooterFixed } = useFooterSetting();
   const { getLayoutMode, getLayoutScrollMode } = useLayoutSetting();
   const { getFullContent } = useFullContent();
-  const { getFixedHeaderAndTab, getContentXScrollable } = useRootSetting();
+  const { getFixedHeaderAndTab, getContentXScrollable, getIsMobile } =
+    useRootSetting();
 
-  const layoutMode = computed(() => {
-    const vertical: LayoutMode = 'vertical';
-    const horizontal: LayoutMode = 'horizontal';
-    console.log(unref(getLayoutMode));
-    return unref(getLayoutMode).includes(vertical) ? vertical : horizontal;
-  });
+  const layoutMode = computed(
+    (): LayoutMode =>
+      unref(getLayoutMode).includes(MenuModeEnum.VERTICAL)
+        ? MenuModeEnum.VERTICAL
+        : MenuModeEnum.HORIZONTAL,
+  );
 
   const headerPropsConfig: Record<MenuModeEnum, App.Header> = {
     [MenuModeEnum.VERTICAL]: {
@@ -106,7 +108,12 @@
     },
   };
 
+  // 头部配置
+  // Header configuration
   const headerProps = computed(() => headerPropsConfig[unref(getLayoutMode)]);
+
+  // 侧边栏折叠
+  // Sidebar collapse
   const siderCollapse = computed({
     get: () => unref(getCollapsed),
     set: (val) => {

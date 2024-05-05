@@ -6,7 +6,6 @@ import {
 } from 'unocss';
 
 import presetLegacyCompat from '@unocss/preset-legacy-compat';
-import { colors } from '@arco-design/web-vue/es/color-picker/colors';
 
 export default defineConfig({
   // 内容

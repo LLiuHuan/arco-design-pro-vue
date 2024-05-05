@@ -17,6 +17,7 @@ import { RequestOptions, Result, CreateAxiosOptions } from './types';
 // import { checkStatus } from './checkStatus';
 import { AxiosTransform } from './transform';
 import { AAxios } from './Axios';
+import { Recordable } from '@/typings/global';
 
 /**
  * @description: 数据处理，方便区分多种处理方式

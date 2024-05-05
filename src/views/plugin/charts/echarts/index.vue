@@ -382,7 +382,7 @@
       },
     ],
   });
-  let intervalId: NodeJS.Timer;
+  let intervalId: NodeJS.Timeout;
   const { domRef: gaugeRef } = useEcharts(gaugeOptions, (chart) => {
     intervalId = setInterval(() => {
       const date = new Date();

@@ -1,3 +1,5 @@
+import { Recordable } from '@/typings/global';
+
 /**
  * 将对象添加当作参数拼接到URL上面
  * @param baseUrl 需要拼接的url

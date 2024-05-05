@@ -1,5 +1,6 @@
 import { InternalAxiosRequestConfig } from 'axios';
 import { AxiosTransform } from './transform';
+import { Recordable } from '@/typings/global';
 
 // axios 配置
 export interface CreateAxiosOptions extends InternalAxiosRequestConfig {

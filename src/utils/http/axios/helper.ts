@@ -1,4 +1,5 @@
 import { isObject, isString } from '@/utils';
+import { Recordable } from '@/typings/global';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
 

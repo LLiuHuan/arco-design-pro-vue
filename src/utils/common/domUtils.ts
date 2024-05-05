@@ -1,4 +1,5 @@
 import { upperFirst } from 'lodash-es';
+import { Fn } from '@/typings/global';
 
 export interface ViewportOffsetResult {
   left: number;

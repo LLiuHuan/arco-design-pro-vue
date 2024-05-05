@@ -1,5 +1,6 @@
 import type { ComponentPublicInstance, DirectiveBinding, ObjectDirective } from 'vue';
 import { isServer, on } from '@/utils';
+import { Nullable } from '@/typings/global';
 
 type DocumentHandler = <T extends MouseEvent>(mouseup: T, mousedown: T) => void;
 

@@ -9,6 +9,8 @@
 //   MonacoEnvironment: import('monaco-editor').Environment;
 // }
 
+import JSX from 'vue/jsx';
+
 /** 通用类型 */
 declare namespace Common {
   /**

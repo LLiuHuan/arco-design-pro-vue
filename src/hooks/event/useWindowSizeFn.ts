@@ -1,4 +1,5 @@
 import { tryOnMounted, tryOnUnmounted, useDebounceFn } from '@vueuse/core';
+import { Fn } from '@/typings/global';
 
 interface WindowSizeOptions {
   once?: boolean;

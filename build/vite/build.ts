@@ -29,5 +29,14 @@ export function createViteBuild(env: ImportMetaEnv) {
     brotliSize: false,
     // chunk 大小警告的限制（以 kbs 为单位）。
     chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        manualChunks(id: any) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        },
+      },
+    },
   };
 }

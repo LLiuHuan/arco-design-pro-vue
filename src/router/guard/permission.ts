@@ -3,6 +3,7 @@ import { routeName } from '@/router';
 import { useAuthStore } from '@/store';
 import { exeStrategyActions, getToken } from '@/utils';
 import { createDynamicRouteGuard } from './dynamic';
+import { Common } from "@/typings/global";
 
 /** 处理路由页面的权限 */
 export async function createPermissionGuard(

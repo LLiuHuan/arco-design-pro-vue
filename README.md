@@ -21,9 +21,11 @@
 > 原本是打算实现 arco-design-pro 的vue版本，但是看官方说21年12月份就会推出vue版本的，所以这个项目就不会完全照搬 arco-design-pro 了
 > 预想开发一个可以在生产环境使用的中后台前端项目，并且会开发多个后端供大家选择  
 
-在线预览
-：[https://lliuhuan.github.io/arco-design-pro-vue](https://lliuhuan.github.io/arco-design-pro-vue)  
-（请使用 Chrome 打开）
+
+- 旧版本
+    - [在线预览](http://arco_legacy.0x3.cn/)  
+    （请使用 Chrome 打开）
+    - [Github 地址](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
 
 ### 1.2 有什么好的想法和思路可以提Issues
 

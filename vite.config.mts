@@ -40,12 +40,12 @@ export default defineConfig((configEnv) => {
     build: createViteBuild(viteEnv),
     css: {
       preprocessorOptions: {
-        less: {
-          modifyVars: {
-            hack: `true; @import (reference) "${resolve('src/styles/config.less')}";`,
-          },
-          javascriptEnabled: true,
-        },
+        // less: {
+        //   modifyVars: {
+        //     hack: `true; @import (reference) "${resolve('src/styles/config.less')}";`,
+        //   },
+        //   javascriptEnabled: true,
+        // },
       },
     },
   };

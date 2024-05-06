@@ -1,6 +1,7 @@
 import type { ProjectConfig } from '~/types/config';
 import { useAppStore } from '@/store/modules/app';
 import { AppEnum } from '@/enums';
+import { toggleClass } from '@/utils/common';
 
 enum HandlerEnum {
   // menu
@@ -30,6 +31,8 @@ enum HandlerEnum {
   FOOTER_HEIGHT,
 
   LAYOUT_MODE,
+  GRAY_MODE,
+  WEAK_MODE,
 }
 
 const handler = (
@@ -128,6 +131,16 @@ const handler = (
         layoutSetting: {
           mode: value,
         },
+      };
+    case HandlerEnum.GRAY_MODE:
+      toggleClass(value, 'gray-mode', document.documentElement);
+      return {
+        grayMode: value,
+      };
+    case HandlerEnum.WEAK_MODE:
+      toggleClass(value, 'color-weak', document.documentElement);
+      return {
+        colorWeak: value,
       };
     default:
       return {};

@@ -91,6 +91,9 @@ export default {
       headerBreadcrumbIcon: '面包屑图标',
 
       footer: '页脚',
+
+      grayMode: '灰色模式',
+      colorWeak: '色弱模式',
     },
 
     layoutMode: {

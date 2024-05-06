@@ -131,15 +131,25 @@ const defaultSetting: ProjectConfig = {
   },
   // Theme settings - [主题设置]
   themeSetting: {
-    // Theme color - [主题色]
+    // 主题色
+    // Theme color
     [ThemeColorEnum.PRIMARY]: '#165DFF',
-    // Success color - [成功色]
+    // 成功色
+    // Success color
     [ThemeColorEnum.SUCCESS]: '#00B42A',
-    // Warning color - [警告色]
+    // 警告色
+    // Warning color
     [ThemeColorEnum.WARNING]: '#FF7D00',
-    // Error color - [错误色]
+    // 错误色
+    // Error color
     [ThemeColorEnum.ERROR]: '#F53F3F',
   },
+  // 灰色模式
+  // Gray mode
+  grayMode: false,
+  // 色弱模式
+  // Weak mode
+  colorWeak: false,
   // Header settings - [头部设置]
   headerSetting: {
     // Whether to display - [是否显示]

@@ -1,6 +1,6 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
-import { ThemeColorEnum, AppEnum } from '@/enums';
+import { AppEnum, ThemeColorEnum } from '@/enums';
 import type { ProjectConfig } from '~/types/config';
 import { setBaseColor } from '@/utils/common';
 import { usePreferredColorScheme } from '@vueuse/core';
@@ -69,7 +69,16 @@ export const useRootSetting = () => {
     () => appStore.getProjectConfig.settingButtonPosition,
   );
 
+  // 获取是否是移动端
+  // Whether it is a mobile terminal
   const getIsMobile = computed(() => appStore.getIsMobile);
+
+  // 获取是否开启色弱模式
+  // Whether to enable color weak mode
+  const getWeakMode = computed(() => appStore.getProjectConfig.colorWeak);
+  // 获取是否开启灰色模式
+  // Whether to enable gray mode
+  const getGrayMode = computed(() => appStore.getProjectConfig.grayMode);
 
   const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
@@ -113,6 +122,8 @@ export const useRootSetting = () => {
     getFixedHeaderAndTab,
     getContentXScrollable,
     getIsMobile,
+    getWeakMode,
+    getGrayMode,
 
     setRootSetting,
     setDarkMode,

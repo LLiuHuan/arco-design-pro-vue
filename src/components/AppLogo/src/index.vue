@@ -3,7 +3,8 @@
     class="system-logo flex-center cursor-pointer transition-base !text-[rgba(var(--primary-6))]"
     @click="goHome"
   >
-    <img :style="{ width: `${logoSize}px` }" src="/logo.png" alt="logo" />
+    <!--    <img :style="{ width: `${logoSize}px` }" src="/logo.png" alt="logo" />-->
+    <SvgIcon local-icon="logo" :size="logoSize" />
     <div
       v-show="showTitle"
       class="text-16px font-bold leading-normal ml-2 truncate md:opacity-100"
@@ -16,10 +17,17 @@
   import { useGlobSetting } from '@/hooks/setting';
   import { AppEnum } from '@/enums';
   import { useGo } from '@/hooks/web/usePage';
+  import systemLogo from '@/assets/icons/logo.svg?raw';
+  import { SvgIcon } from '@/components/Icon';
 
   const { goHome } = useGo();
 
   defineOptions({ name: 'AppLogo' });
+
+  const logoWithClass = systemLogo.replace(
+    '<svg',
+    `<svg class="size-128px text-primary"`,
+  );
 
   interface Props {
     /** 项目标题名称，不填写就显示默认的 */

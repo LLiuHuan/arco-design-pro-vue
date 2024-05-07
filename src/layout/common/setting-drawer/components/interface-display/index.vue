@@ -65,6 +65,18 @@
         :disabled="!getEnableTransition"
       ></SelectItem>
     </SettingItem>
+    <SettingItem
+      key="8"
+      :label="$t('layout.setting.interfaceDisplay.grayMode')"
+    >
+      <SwitchItem :def="getGrayMode" :event="HandlerEnum.GRAY_MODE" />
+    </SettingItem>
+    <SettingItem
+      key="9"
+      :label="$t('layout.setting.interfaceDisplay.colorWeak')"
+    >
+      <SwitchItem :def="getWeakMode" :event="HandlerEnum.WEAK_MODE" />
+    </SettingItem>
   </TransitionGroup>
 </template>
 
@@ -72,6 +84,7 @@
   import {
     useFooterSetting,
     useHeaderSetting,
+    useRootSetting,
     useTransitionSetting,
   } from '@/hooks/setting';
   import { HandlerEnum, SelectItem, SettingItem, SwitchItem } from '../common';
@@ -87,6 +100,7 @@
     useHeaderSetting();
 
   const { getShowFooter } = useFooterSetting();
+  const { getWeakMode, getGrayMode } = useRootSetting();
 
   const routerAnimationOptions = getRouterAnimationOptions();
 </script>

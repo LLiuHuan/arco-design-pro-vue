@@ -198,6 +198,13 @@ export interface ProjectConfig {
   // Theme setting - [主题设置]
   themeSetting: ThemeSetting;
 
+  // 灰色模式
+  // Gray mode
+  grayMode: boolean;
+  // 弱色模式
+  // Weak mode
+  colorWeak: boolean;
+
   // Header setting - [头部设置]
   headerSetting: HeaderSetting;
 

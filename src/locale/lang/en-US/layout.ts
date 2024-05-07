@@ -91,6 +91,9 @@ export default {
       headerBreadcrumbIcon: 'Breadcrumb icon',
 
       footer: 'Footer',
+
+      grayMode: 'Gray mode',
+      colorWeak: 'Color weak mode',
     },
 
     layoutMode: {

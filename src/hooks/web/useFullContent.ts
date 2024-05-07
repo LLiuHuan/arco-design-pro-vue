@@ -22,5 +22,9 @@ export const useFullContent = () => {
     return appStore.getProjectConfig.fullContent;
   });
 
-  return { getFullContent };
+  const setFullContent = (fullContent: boolean) => {
+    appStore.setProjectConfig({ fullContent });
+  };
+
+  return { getFullContent, setFullContent };
 };

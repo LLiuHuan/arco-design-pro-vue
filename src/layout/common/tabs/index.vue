@@ -33,42 +33,44 @@
           @change="sortTabs"
         >
           <template #item="{ element }">
-            <ContentMenu :tab-item="element" :active-key="activeKeyRef">
-              <div
-                :id="element.fullPath"
-                class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
-                @click.stop="
-                  handleActive(element.fullPath, {
-                    params: element.params,
-                    query: element.query,
-                  })
-                "
-              >
-                <span
-                  :class="{
-                    'text-[rgba(var(--arcoblue-6))]':
-                      activeKeyRef === element.fullPath,
-                  }"
-                >
-                  {{
-                    element.meta?.i18nTitle
-                      ? $t(element.meta.i18nTitle)
-                      : element.meta?.title
-                  }}
-                </span>
+            <div>
+              <ContentMenu :tab-item="element" :active-key="activeKeyRef">
                 <div
-                  v-if="!(element && element.meta && element.meta.affix)"
-                  class="flex-center py-2px"
-                  @click.stop="handleClose(element.fullPath)"
+                  :id="element.fullPath"
+                  class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
+                  @click.stop="
+                    handleActive(element.fullPath, {
+                      params: element.params,
+                      query: element.query,
+                    })
+                  "
                 >
-                  <SvgIcon
-                    class="ml-6px"
-                    icon="mingcute:close-fill"
-                    size="12"
-                  />
+                  <span
+                    :class="{
+                      'text-[rgba(var(--arcoblue-6))]':
+                        activeKeyRef === element.fullPath,
+                    }"
+                  >
+                    {{
+                      element.meta?.i18nTitle
+                        ? $t(element.meta.i18nTitle)
+                        : element.meta?.title
+                    }}
+                  </span>
+                  <div
+                    v-if="!(element && element.meta && element.meta.affix)"
+                    class="flex-center py-2px"
+                    @click.stop="handleClose(element.fullPath)"
+                  >
+                    <SvgIcon
+                      class="ml-6px"
+                      icon="mingcute:close-fill"
+                      size="12"
+                    />
+                  </div>
                 </div>
-              </div>
-            </ContentMenu>
+              </ContentMenu>
+            </div>
           </template>
         </Draggable>
       </div>
@@ -135,7 +137,7 @@
 
   const { getShowFold, getShowMultipleTab } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
-  const { getShowMenu, getIsTopMixSidebar, getMixSideWidth } = useMenuSetting();
+  const { getShowMenu } = useMenuSetting();
 
   const getIsUnFold = computed(
     () => !unref(getShowMenu) && !unref(getShowHeader),

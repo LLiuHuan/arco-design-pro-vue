@@ -47,14 +47,12 @@ export function createStorage<T extends object>(type: StorageType) {
       value: T[K],
       expire: number | null = DEFAULT_CACHE_TIME,
     ) {
-      console.log('set', key, value, expire);
       const storageData: StorageData<T[K]> = {
         value,
         expire: expire !== null ? new Date().getTime() + expire * 1000 : null,
       };
 
       const json = crypto.encrypt(storageData);
-      console.log(json, 'json', key, value, storageData);
 
       stg.setItem(key as string, json);
     },
@@ -65,7 +63,6 @@ export function createStorage<T extends object>(type: StorageType) {
      */
     get<K extends keyof T>(key: K): T[K] | null {
       const json = stg.getItem(key as string);
-      console.log(key, json);
       if (json) {
         let storageData: StorageData<T[K]> | null = null;
 
@@ -74,10 +71,8 @@ export function createStorage<T extends object>(type: StorageType) {
         } catch {
           /* empty */
         }
-        console.info('storageData', storageData, json, key);
         if (storageData) {
           const { value, expire } = storageData;
-          console.log(value, expire, 'value, expire');
           // 在有效期内直接返回
           if (expire === null || expire >= Date.now()) {
             return value as T[K];

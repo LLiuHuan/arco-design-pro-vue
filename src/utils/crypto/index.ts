@@ -21,9 +21,7 @@ export const encrypt = (data: any) => {
       consoleLog('encrypt error:', error);
     }
   }
-  console.log(data);
   const dataHex = CryptoJS.enc.Utf8.parse(data);
-  console.log(dataHex);
   const encrypted = CryptoJS.AES.encrypt(dataHex, SECRET_KEY, {
     iv: SECRET_IV,
     mode: CryptoJS.mode.CBC,

@@ -19,13 +19,13 @@ export function useContextMenu(
       case 'bl':
         popupStyle.value = {
           left: `${rect.left}px`,
-          top: `${rect.top + rect.height + 2}px`,
+          top: `${rect.top + rect.height + 10}px`,
         };
         break;
       case 'br':
         popupStyle.value = {
           right: `${rect.right - rect.left}px`,
-          top: `${rect.top + rect.height + 2}px`,
+          top: `${rect.top + rect.height + 10}px`,
         };
         break;
       default:
@@ -34,6 +34,7 @@ export function useContextMenu(
   };
 
   const closeMenu = () => {
+    console.log('closeMenu');
     visible.value = false;
   };
 

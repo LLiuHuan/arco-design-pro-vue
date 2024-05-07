@@ -70,8 +70,17 @@ export default {
 
       // height
       headerHeight: '头部高度',
+      fixedHeaderAndTab: '固定头部和标签',
 
+      // footer
       footerHeight: '页脚高度',
+      footerFixed: '固定页脚',
+
+      scrollMode: {
+        title: '滚动模式',
+        wrapper: '外层滚动',
+        content: '主体滚动',
+      },
     },
     interfaceDisplay: {
       title: '界面显示',

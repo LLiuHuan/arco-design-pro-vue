@@ -23,3 +23,18 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
         ]),
   ];
 };
+
+export const getScrollModeOptions = () => {
+  const { t } = useI18n();
+
+  return [
+    {
+      value: 'wrapper',
+      label: t('layout.setting.interfaceFunction.scrollMode.wrapper'),
+    },
+    {
+      value: 'content',
+      label: t('layout.setting.interfaceFunction.scrollMode.content'),
+    },
+  ];
+};

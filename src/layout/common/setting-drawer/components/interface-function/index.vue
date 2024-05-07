@@ -7,6 +7,16 @@
     class="flex-col-stretch gap-12px"
   >
     <SettingItem
+      key="12"
+      :label="$t('layout.setting.interfaceFunction.scrollMode.title')"
+    >
+      <SelectItem
+        :options="scrollModeOptions"
+        :event="HandlerEnum.LAYOUT_SCROLL_MODE"
+        :def="getLayoutScrollMode"
+      />
+    </SettingItem>
+    <SettingItem
       key="1"
       :label="$t('layout.setting.interfaceFunction.menuCollapse')"
     >
@@ -32,6 +42,15 @@
       <SwitchItem
         :def="getAccordion"
         :event="HandlerEnum.MENU_ACCORDION"
+      ></SwitchItem>
+    </SettingItem>
+    <SettingItem
+      key="9"
+      :label="$t('layout.setting.interfaceFunction.fixedHeaderAndTab')"
+    >
+      <SwitchItem
+        :def="getFixedHeaderAndTab"
+        :event="HandlerEnum.HEADER_FIXED"
       ></SwitchItem>
     </SettingItem>
     <SettingItem
@@ -78,6 +97,15 @@
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
+      key="10"
+      :label="$t('layout.setting.interfaceFunction.footerFixed')"
+    >
+      <SwitchItem
+        :def="getFooterFixed"
+        :event="HandlerEnum.FOOTER_FIXED"
+      ></SwitchItem>
+    </SettingItem>
+    <SettingItem
       key="8"
       :label="$t('layout.setting.interfaceFunction.footerHeight')"
     >
@@ -108,11 +136,13 @@
   import {
     useFooterSetting,
     useHeaderSetting,
+    useLayoutSetting,
     useMenuSetting,
+    useRootSetting,
   } from '@/hooks/setting';
   import { MixSidebarTriggerEnum } from '@/enums';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { getMenuTriggerOptions } from './helpers';
+  import { getMenuTriggerOptions, getScrollModeOptions } from './helpers';
   import {
     HandlerEnum,
     SelectItem,
@@ -135,9 +165,12 @@
     getMenuWidth,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
-  const { getFooterHeight } = useFooterSetting();
+  const { getFooterHeight, getFooterFixed } = useFooterSetting();
+  const { getFixedHeaderAndTab } = useRootSetting();
+  const { getLayoutScrollMode } = useLayoutSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
+  const scrollModeOptions = getScrollModeOptions();
 
   const { t } = useI18n();
 

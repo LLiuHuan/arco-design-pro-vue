@@ -180,7 +180,7 @@ export interface ProjectConfig {
 
   // 是否固定头部和标签
   // Whether to fix the header and tab
-  getFixedHeaderAndTab: boolean;
+  fixedHeaderAndTab: boolean;
 
   // 内容页面是否可以滚动
   // Whether the content page can scroll

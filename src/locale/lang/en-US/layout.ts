@@ -70,8 +70,17 @@ export default {
 
       // height
       headerHeight: 'Header height',
+      fixedHeaderAndTab: 'Fixed header and tab',
 
+      // footer
       footerHeight: 'Footer height',
+      footerFixed: 'Footer fixed',
+
+      scrollMode: {
+        title: 'Scroll mode',
+        wrapper: 'Outer scroll',
+        content: 'Main scroll',
+      },
     },
     interfaceDisplay: {
       title: 'Interface display',

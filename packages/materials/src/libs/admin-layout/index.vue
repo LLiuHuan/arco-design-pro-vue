@@ -261,6 +261,8 @@
         ></div>
       </template>
     </div>
+
+    <ABackTop :target-container="`#${scrollElId}`" />
   </div>
 </template>
 

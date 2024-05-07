@@ -13,7 +13,7 @@ export const useRootSetting = () => {
   const getPageLoading = computed(() => appStore.getPageLoading);
 
   const getFixedHeaderAndTab = computed(
-    () => appStore.getProjectConfig.getFixedHeaderAndTab,
+    () => appStore.getProjectConfig.fixedHeaderAndTab,
   );
 
   const getContentXScrollable = computed(

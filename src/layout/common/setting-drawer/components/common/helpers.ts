@@ -19,6 +19,7 @@ enum HandlerEnum {
   HEADER_HEIGHT,
   HEADER_BREADCRUMB,
   HEADER_BREADCRUMB_ICON,
+  HEADER_FIXED,
 
   // transition
   TRANSITION_ENABLE,
@@ -29,8 +30,10 @@ enum HandlerEnum {
   // footer
   SHOW_FOOTER,
   FOOTER_HEIGHT,
+  FOOTER_FIXED,
 
   LAYOUT_MODE,
+  LAYOUT_SCROLL_MODE,
   GRAY_MODE,
   WEAK_MODE,
 }
@@ -92,6 +95,10 @@ const handler = (
       return {
         headerSetting: { showBreadCrumbIcon: value },
       };
+    case HandlerEnum.HEADER_FIXED:
+      return {
+        fixedHeaderAndTab: value,
+      };
 
     // endregion
 
@@ -124,12 +131,22 @@ const handler = (
       return {
         footerSetting: { height: value },
       };
+    case HandlerEnum.FOOTER_FIXED:
+      return {
+        footerSetting: { fixed: value },
+      };
     // endregion
 
     case HandlerEnum.LAYOUT_MODE:
       return {
         layoutSetting: {
           mode: value,
+        },
+      };
+    case HandlerEnum.LAYOUT_SCROLL_MODE:
+      return {
+        layoutSetting: {
+          scrollMode: value,
         },
       };
     case HandlerEnum.GRAY_MODE:

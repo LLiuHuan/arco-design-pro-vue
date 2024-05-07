@@ -1,6 +1,6 @@
 import { useAppStore } from '@/store/modules/app';
-import { useDebounceFn, useWindowSize } from '@vueuse/core';
-import { effectScope, onScopeDispose, unref, watch } from 'vue';
+import { effectScope, nextTick, onScopeDispose, watch } from 'vue';
+import { MenuModeEnum } from '@/enums';
 
 /**
  * @description 订阅是否是移动端 store
@@ -8,18 +8,42 @@ import { effectScope, onScopeDispose, unref, watch } from 'vue';
 export default function subscribeMobileStore() {
   const appStore = useAppStore();
 
-  const { width } = useWindowSize();
-
-  const setMobileFn = useDebounceFn((newWidth: number) => {
-    appStore.setMobile(unref(newWidth) - 1 < 576);
-  }, 20);
-
   const scope = effectScope();
   scope.run(() => {
     watch(
-      () => unref(width),
+      () => appStore.isMobile,
       (newValue) => {
-        setMobileFn(newValue);
+        if (newValue) {
+          appStore.setBeforeMiniInfo({
+            layoutMode: appStore.projectConfig?.layoutSetting.mode,
+            siderCollapsed: appStore.projectConfig?.menuSetting.collapsed,
+          });
+
+          appStore.setProjectConfig({
+            layoutSetting: {
+              mode: MenuModeEnum.VERTICAL,
+            },
+            menuSetting: {
+              collapsed: true,
+            },
+          });
+        } else {
+          const { beforeMiniInfo } = appStore;
+          if (beforeMiniInfo) {
+            nextTick(() => {
+              appStore.setProjectConfig({
+                layoutSetting: {
+                  mode: beforeMiniInfo.layoutMode,
+                },
+                menuSetting: {
+                  collapsed: beforeMiniInfo.siderCollapsed,
+                },
+              });
+
+              appStore.setBeforeMiniInfo({});
+            });
+          }
+        }
       },
       { immediate: true },
     );

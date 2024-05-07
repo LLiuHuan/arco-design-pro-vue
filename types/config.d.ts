@@ -9,6 +9,7 @@ import {
   SettingButtonPositionEnum,
   PermissionModeEnum,
   MixSidebarTriggerEnum,
+  MenuModeEnum,
 } from '@/enums';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
@@ -71,7 +72,7 @@ export interface MultiTabsSetting {
 export interface LayoutSetting {
   // 菜单模式
   // Menu mode
-  mode: ThemeLayoutMode;
+  mode: MenuModeEnum;
 
   // 滚动模式
   // Scroll mode

@@ -19,6 +19,8 @@ import type { BeforeMiniState } from '~/types/storage';
 import { darkMode } from '@/settings';
 import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import { Ref } from 'vue';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -52,10 +54,12 @@ interface AppState {
    * @description 是否为移动端
    * @description Whether it is a mobile end
    */
-  isMobile: boolean;
+  isMobile: Ref<boolean>;
 }
 
 let timeId: TimeoutHandle;
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
 
 export const useAppStore = defineStore({
   id: 'store-app',
@@ -63,12 +67,9 @@ export const useAppStore = defineStore({
     pageLoading: false,
     projectConfig: initAppSetting(),
     beforeMiniInfo: {},
-    isMobile: false,
+    isMobile: breakpoints.smaller('sm'),
   }),
   getters: {
-    getIsMobile(state): boolean {
-      return state.isMobile;
-    },
     // 获取页面加载状态
     getPageLoading(state): boolean {
       return state.pageLoading;
@@ -125,14 +126,6 @@ export const useAppStore = defineStore({
     },
   },
   actions: {
-    /**
-     * @description 设置是否为移动端
-     * @description Set whether it is a mobile terminal
-     * @param isMobile
-     */
-    setMobile(isMobile: boolean): void {
-      this.isMobile = isMobile;
-    },
     /**
      * @description Set the page loading status - [设置页面加载状态]
      * @param loading loading - [加载状态]
@@ -205,6 +198,7 @@ export const useAppStore = defineStore({
   //   key: PINIA_CACHE.PINIA_APP_STORE,
   //   storage: localStorage,
   //   debug: true,
+  //   paths: ['beforeMiniInfo'],
   // },
 });
 

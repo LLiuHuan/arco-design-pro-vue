@@ -55,7 +55,6 @@ export const useHeaderSetting = () => {
   // Whether to display the embedded header
   const getShowInsetHeaderRef = computed(() => {
     const need = !unref(getFullContent) && unref(getShowHeader);
-    console.log(need);
     return (
       (need && !unref(getShowMixHeaderRef)) ||
       (need && unref(getIsTopMenu)) ||

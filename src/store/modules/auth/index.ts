@@ -94,10 +94,8 @@ export const useAuthStore = defineStore({
      * @param {LoginModel} backendToken
      */
     setToken(backendToken: LoginModel) {
-      console.log(backendToken);
       const { token, refreshToken } = backendToken;
       this.token = token ?? '';
-      console.log(token, TOKEN_KEY);
       setAuthCache(TOKEN_KEY, token ?? '');
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken ?? '');
     },

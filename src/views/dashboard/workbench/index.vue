@@ -2,9 +2,9 @@
   <div>
     {{ name }}
 
-    {{ routeStore.getSearchMenus }}
+    <!--    {{ routeStore.getSearchMenus }}-->
     <div>111</div>
-    {{ routeStore.getMenus }}
+    <!--    {{ routeStore.getMenus }}-->
   </div>
 </template>
 

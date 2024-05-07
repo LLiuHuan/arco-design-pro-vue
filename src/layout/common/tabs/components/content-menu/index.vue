@@ -1,39 +1,25 @@
 <template>
-  <div ref="containerRef">
-    <slot></slot>
+  <ADropdown :position="position" :trigger="trigger" @select="handleDropdown">
+    <slot />
 
-    <Teleport to="body">
-      <Transition
-        @before-enter="handleBeforeEnter"
-        @enter="handleEnter"
-        @after-enter="handleAfterEnter"
+    <template #content>
+      <ADoption
+        v-for="item in getOptions"
+        :key="item.event"
+        :value="item.event"
+        :disabled="item.disabled"
       >
-        <div
-          v-if="visible"
-          class="absolute overflow-hidden arco-dropdown"
-          :style="popupStyle"
-        >
-          <div
-            v-for="item in getOptions"
-            :key="item.event"
-            @click="handleClick(item.event, item.disabled)"
-          >
-            <ADoption :value="item.event" :disabled="item.disabled">
-              {{ item.label }}
-              <template #icon>
-                <SvgIcon :icon="item.icon"></SvgIcon>
-              </template>
-            </ADoption>
-            <ADivider v-if="item.divider" class="!m-0"></ADivider>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
-  </div>
+        {{ item.label }}
+        <template #icon>
+          <SvgIcon :icon="item.icon" />
+        </template>
+      </ADoption>
+    </template>
+  </ADropdown>
 </template>
 
 <script lang="ts" setup>
-  import { computed, Ref, ref, unref } from 'vue';
+  import { computed, unref } from 'vue';
   import { useI18n } from '@/hooks/web/useI18n';
   import { SvgIcon } from '@/components/Icon';
   import { useRouter } from 'vue-router';
@@ -42,7 +28,6 @@
   import { App } from '~/types/app';
   import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
   import { DropOption, TabEventEnum } from './types';
-  import { useContextMenu } from './helper';
 
   const { t } = useI18n();
 
@@ -81,14 +66,6 @@
     trigger: 'contextMenu',
   });
 
-  const containerRef = ref<HTMLElement>();
-
-  const { popupStyle, visible } = useContextMenu(
-    containerRef as Ref<HTMLElement>,
-    props.trigger,
-    props.position,
-  );
-
   const { currentRoute } = useRouter();
   const tabStore = useMultipleTabWithOutStore();
 
@@ -113,6 +90,7 @@
     const tabIndex = tabStore.getTabList.findIndex(
       (tab) => tab.fullPath === props.tabItem.fullPath,
     );
+
     const refreshDisabled = !isCurItem;
 
     // Close left
@@ -169,12 +147,7 @@
     return options;
   });
 
-  // 菜单的点击事件
-  function handleClick(event: TabEventEnum, disabled: boolean | undefined) {
-    if (disabled) return;
-    // 选中菜单后关闭菜单
-    visible.value = false;
-
+  const handleDropdown = (event: TabEventEnum) => {
     switch (event) {
       case TabEventEnum.REFRESH_PAGE:
         // refresh page
@@ -203,25 +176,7 @@
       default:
         break;
     }
-  }
-
-  function handleBeforeEnter(el: any) {
-    el.style.height = 0;
-  }
-
-  function handleEnter(el: any) {
-    el.style.height = 'auto';
-    const h = el.clientHeight;
-    el.style.height = 0;
-    requestAnimationFrame(() => {
-      el.style.transition = '.3s';
-      el.style.height = `${h}px`;
-    });
-  }
-
-  function handleAfterEnter(el: any) {
-    el.style.transition = 'none';
-  }
+  };
 </script>
 
 <style lang="less" scoped></style>

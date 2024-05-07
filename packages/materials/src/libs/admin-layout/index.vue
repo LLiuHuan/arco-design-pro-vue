@@ -119,9 +119,6 @@
     if (showHeader.value && !headerLeftGapClass.value) {
       cls += style['sider-padding-top'];
     }
-    console.log('footerLeftGapClass', footerLeftGapClass.value);
-    console.log('showFooter', showFooter.value);
-    console.log('props.footerVisible', isVertical.value);
     if (showFooter.value && !footerLeftGapClass.value) {
       cls += ` ${style['sider-padding-bottom']}`;
     }

@@ -45,6 +45,7 @@
       ></SwitchItem>
     </SettingItem>
     <SettingItem
+      v-if="isWrapperScrollMode"
       key="9"
       :label="$t('layout.setting.interfaceFunction.fixedHeaderAndTab')"
     >
@@ -97,6 +98,7 @@
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
+      v-if="isWrapperScrollMode"
       key="10"
       :label="$t('layout.setting.interfaceFunction.footerFixed')"
     >
@@ -132,7 +134,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { unref } from 'vue';
+  import { computed, unref } from 'vue';
   import {
     useFooterSetting,
     useHeaderSetting,
@@ -171,6 +173,10 @@
 
   const triggerOptions = getMenuTriggerOptions(unref(false));
   const scrollModeOptions = getScrollModeOptions();
+
+  const isWrapperScrollMode = computed(
+    () => unref(getLayoutScrollMode) === 'wrapper',
+  );
 
   const { t } = useI18n();
 

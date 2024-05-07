@@ -4,7 +4,7 @@
     :visible="getSettingDrawerState"
     :title="$t('layout.setting.drawerTitle')"
     unmount-on-close
-    class="overflow-y-auto overflow-x-hidden"
+    class="overflow-y-auto overflow-x-hidden setting-drawer"
     @ok="handleOk"
     @cancel="handleCancel"
   >

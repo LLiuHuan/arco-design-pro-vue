@@ -28,6 +28,9 @@ const defaultSetting: ProjectConfig = {
   showDarkModeToggle: true,
   // Whether to display the logo - [是否显示Logo]
   showLogo: true,
+  // 是否固定头部和标签
+  // Whether to fix the header and tab
+  fixedHeaderAndTab: true,
   // Animation configuration - [动画配置]
   transitionSetting: {
     // Whether to open the page switching animation - [是否开启页面切换动画]
@@ -70,7 +73,8 @@ const defaultSetting: ProjectConfig = {
     mode: MenuModeEnum.VERTICAL_MIX,
     // 滚动模式
     // Scroll mode
-    scrollMode: 'content',
+    // scrollMode: 'content',
+    scrollMode: 'wrapper',
   },
   // Menu settings - [菜单设置]
   menuSetting: {

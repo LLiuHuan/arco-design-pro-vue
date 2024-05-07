@@ -10,7 +10,7 @@
       v-slot="{ Component, route }"
       class="transition duration-300 ease-in-out h-full"
     >
-      <transition
+      <Transition
         :name="
           getTransitionName({
             route,
@@ -23,11 +23,11 @@
         mode="out-in"
         appear
       >
-        <keep-alive v-if="openCache" :include="getCaches">
-          <component :is="Component" :key="route.fullPath" />
-        </keep-alive>
-        <component :is="Component" v-else :key="route.fullPath" />
-      </transition>
+        <KeepAlive v-if="openCache" :include="getCaches">
+          <Component :is="Component" :key="route.fullPath" />
+        </KeepAlive>
+        <Component :is="Component" v-else :key="route.fullPath" />
+      </Transition>
     </RouterView>
   </div>
 </template>

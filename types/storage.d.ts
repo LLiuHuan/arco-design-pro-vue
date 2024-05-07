@@ -3,7 +3,6 @@ import {
   LOCALE_KEY,
   LOGIN_INFO,
   MenuModeEnum,
-  MenuTypeEnum,
   MULTIPLE_TABS_KEY,
   PROJ_CFG_KEY,
   REFRESH_TOKEN_KEY,
@@ -15,6 +14,13 @@ import type { LocaleSetting, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { LoginParams, UserInfoModel } from '@/api/auth/model/userModel';
 import { App } from '~/types/app';
+
+// When the window shrinks, remember some states, and restore these states when the window is restored
+// [当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态]
+export interface BeforeMiniState {
+  layoutMode?: MenuModeEnum;
+  siderCollapsed?: boolean;
+}
 
 declare namespace StorageInterface {
   interface BasicStore {
@@ -67,13 +73,4 @@ export interface ErrorLogInfo {
   url: string;
   // Error time - [错误时间]
   time?: string;
-}
-
-// When the window shrinks, remember some states, and restore these states when the window is restored
-// [当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态]
-export interface BeforeMiniState {
-  menuCollapsed?: boolean;
-  menuSplit?: boolean;
-  menuMode?: MenuModeEnum;
-  menuType?: MenuTypeEnum;
 }

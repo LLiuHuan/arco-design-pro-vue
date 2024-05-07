@@ -71,7 +71,7 @@ export const useRootSetting = () => {
 
   // 获取是否是移动端
   // Whether it is a mobile terminal
-  const getIsMobile = computed(() => appStore.getIsMobile);
+  const getIsMobile = computed(() => appStore.isMobile);
 
   // 获取是否开启色弱模式
   // Whether to enable color weak mode

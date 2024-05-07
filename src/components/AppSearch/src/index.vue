@@ -250,7 +250,6 @@
   watch(
     () => props.show,
     (visible: boolean) => {
-      console.log(visible, inputRef);
       if (visible) {
         nextTick(() => {
           unref(inputRef)?.focus();

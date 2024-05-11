@@ -45,6 +45,7 @@ export default {
     themeColor: {
       title: '主题颜色',
       arcoblue: '主色',
+      primary: '主色',
       green: '成功色',
       orange: '警告色',
       red: '错误色',
@@ -112,5 +113,11 @@ export default {
       menuTypeTopMenu: '顶部菜单',
       menuTypeMixTopMenu: '混合顶部菜单',
     },
+  },
+
+  themeStore: {
+    title: '主题商店',
+    currentTheme: '当前主题',
+    restoreThemeDefault: '恢复默认主题',
   },
 };

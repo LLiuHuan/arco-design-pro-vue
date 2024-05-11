@@ -45,6 +45,7 @@ export default {
     themeColor: {
       title: 'Theme color',
       arcoblue: 'Primary color',
+      primary: 'Primary color',
       green: 'Success color',
       orange: 'Warning color',
       red: 'Error color',
@@ -112,5 +113,11 @@ export default {
       menuTypeTopMenu: 'Top menu',
       menuTypeMixTopMenu: 'Mix top menu',
     },
+  },
+
+  themeStore: {
+    title: 'Theme store',
+    currentTheme: 'Current theme',
+    restoreThemeDefault: 'Restore default theme',
   },
 };

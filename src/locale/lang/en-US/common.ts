@@ -8,4 +8,6 @@ export default {
 
   inputText: 'Please Input',
   chooseText: 'Please Choose',
+
+  install: 'Install',
 };

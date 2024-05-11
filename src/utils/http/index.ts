@@ -21,8 +21,7 @@ import {
 import { getToken } from '@/utils/auth';
 import { useGo } from '@/hooks/web/usePage';
 import { router } from '@/router';
-import { PageEnum, TOKEN_KEY } from '@/enums';
-import { localStg } from '@/utils/cache';
+import { PageEnum } from '@/enums';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';

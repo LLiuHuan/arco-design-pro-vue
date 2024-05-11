@@ -165,6 +165,29 @@ export interface FooterSetting {
   fixed: boolean;
 }
 
+export interface ThemeInfo {
+  // 作者
+  // Author
+  author: string;
+  // logo
+  logo?: string;
+  // 主题名称
+  // Theme name
+  themeName: string;
+  // 描述
+  // Description
+  description?: string;
+  // 包名
+  // Package name
+  packageName: string;
+  // 依赖库
+  // Dependent library
+  depLibrary: string;
+  // 颜色
+  // Colors
+  colors: ThemeSetting;
+}
+
 export interface ProjectConfig {
   // TODO: 感觉没有必要，用户信息不大可能会存储在sessionStorage，不过还是暂时保留
   // Storage location of permission related information - [权限相关信息的存储位置]
@@ -198,6 +221,7 @@ export interface ProjectConfig {
 
   // Theme setting - [主题设置]
   themeSetting: ThemeSetting;
+  themeProSetting: ThemeInfo | null;
 
   // 灰色模式
   // Gray mode

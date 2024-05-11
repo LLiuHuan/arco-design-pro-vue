@@ -4,6 +4,7 @@ import { AppEnum, ThemeColorEnum } from '@/enums';
 import type { ProjectConfig } from '~/types/config';
 import { setBaseColor } from '@/utils/common';
 import { usePreferredColorScheme } from '@vueuse/core';
+import { ThemeInfo } from '~/types/config';
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
@@ -80,6 +81,8 @@ export const useRootSetting = () => {
   // Whether to enable gray mode
   const getGrayMode = computed(() => appStore.getProjectConfig.grayMode);
 
+  const getThemePro = computed(() => appStore.getProjectConfig.themeProSetting);
+
   const setRootSetting = (setting: Partial<ProjectConfig>) => {
     appStore.setProjectConfig(setting);
   };
@@ -96,6 +99,13 @@ export const useRootSetting = () => {
     });
 
     setBaseColor(value, key, unref(getIsDarkMode));
+  };
+
+  const setThemePro = (theme?: ThemeInfo | null) => {
+    // 设置主题信息
+    appStore.setProjectConfig({
+      themeProSetting: theme,
+    });
   };
 
   const toggleDarkMode = () => {
@@ -124,11 +134,13 @@ export const useRootSetting = () => {
     getIsMobile,
     getWeakMode,
     getGrayMode,
+    getThemePro,
 
     setRootSetting,
     setDarkMode,
     toggleDarkMode,
     setSettingDrawerState,
     setThemeColor,
+    setThemePro,
   };
 };

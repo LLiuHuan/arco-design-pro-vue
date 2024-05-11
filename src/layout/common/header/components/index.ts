@@ -5,6 +5,7 @@ import ThemeBtn from './theme/index.vue';
 import UserAvatar from './user-avatar/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
 import Search from './search/index.vue';
+import ThemeStore from './theme-store/index.vue';
 
 export {
   SettingBtn,
@@ -14,4 +15,5 @@ export {
   UserAvatar,
   Breadcrumb,
   Search,
+  ThemeStore,
 };

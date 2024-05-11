@@ -8,4 +8,6 @@ export default {
 
   inputText: '请输入',
   chooseText: '请选择',
+
+  install: '安装',
 };

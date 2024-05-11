@@ -6,5 +6,6 @@ import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const configArcoPlugin = () => {
   return vitePluginForArco({
     style: 'css',
+    // style: false,
   });
 };

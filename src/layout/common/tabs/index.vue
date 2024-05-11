@@ -47,7 +47,7 @@
                 >
                   <span
                     :class="{
-                      'text-[rgba(var(--arcoblue-6))]':
+                      'text-[rgba(var(--primary-6))]':
                         activeKeyRef === element.fullPath,
                     }"
                   >

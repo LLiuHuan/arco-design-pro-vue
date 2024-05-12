@@ -52,6 +52,14 @@ interface AdminLayoutTabConfig {
    * @default 48px
    */
   tabHeight?: number;
+
+  /**
+   * @description 全屏时标签是否自动隐藏
+   * @description Whether the tab is automatically hidden when full screen
+   *
+   * @default false
+   */
+  tabAutoCollapse?: boolean;
 }
 
 /**

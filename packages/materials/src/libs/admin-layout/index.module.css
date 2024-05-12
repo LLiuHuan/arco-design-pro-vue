@@ -15,6 +15,10 @@
     z-index: var(--adp-tab-z-index);
 }
 
+.layout-hidden-tab {
+    margin-top: calc(0px - var(--adp-tab-height));
+}
+
 .layout-tab-placement {
     height: var(--adp-tab-height);
 }

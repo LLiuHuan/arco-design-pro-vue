@@ -10,8 +10,9 @@
     :header-height="getHeaderHeight"
     :tab-visible="getShowMultipleTab"
     :tab-height="getTabHeight"
+    :tab-auto-collapse="getFoldAutoCollapse"
     :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
-    :sider-visible="getSiderVisible"
+    :sider-visible="isSiderVisible"
     :sider-width="getSiderWidth"
     :sider-collapsed-width="getSiderCollapsedWidth"
     :footer-visible="getShowFooter"
@@ -67,11 +68,12 @@
     getSiderWidth,
     getSiderCollapsedWidth,
     getCollapsed,
-    getSiderVisible,
+    isSiderVisible,
     setMenuSetting,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
-  const { getShowMultipleTab, getTabHeight } = useMultipleTabSetting();
+  const { getShowMultipleTab, getTabHeight, getFoldAutoCollapse } =
+    useMultipleTabSetting();
   const { getShowFooter, getFooterHeight, getFooterFixed } = useFooterSetting();
   const { getLayoutMode, getLayoutScrollMode } = useLayoutSetting();
   const { getFullContent } = useFullContent();

@@ -1,16 +1,16 @@
-/**
- * @description: menu type - [菜单类型]
- */
-export enum MenuTypeEnum {
-  // left menu - [左侧菜单]
-  SIDEBAR = 'sidebar',
-  // mixin menu - [左侧混合菜单]
-  MIX_SIDEBAR = 'mix-sidebar',
-  // top menu - [顶部菜单]
-  TOP_MENU = 'top-menu',
-  // mixin menu - [顶部混合菜单]
-  MIX_TOP_MENU = 'mix-top-menu',
-}
+// /**
+//  * @description: menu type - [菜单类型]
+//  */
+// export enum MenuTypeEnum {
+//   // left menu - [左侧菜单]
+//   SIDEBAR = 'sidebar',
+//   // mixin menu - [左侧混合菜单]
+//   MIX_SIDEBAR = 'mix-sidebar',
+//   // top menu - [顶部菜单]
+//   TOP_MENU = 'top-menu',
+//   // mixin menu - [顶部混合菜单]
+//   MIX_TOP_MENU = 'mix-top-menu',
+// }
 
 /**
  * @description: menu mode - [菜单模式]

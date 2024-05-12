@@ -14,10 +14,7 @@
     />
     <div v-else class="h-full flex-y-center flex-1-hidden">
       <LayoutTrigger v-if="showMenuToggle" :sider="false"></LayoutTrigger>
-      <Breadcrumb
-        v-if="!getIsMobile && getShowContent && getShowBread"
-        class="pl-5px"
-      />
+      <Breadcrumb v-if="!getIsMobile" class="pl-5px" />
     </div>
     <!--  left end  -->
 
@@ -74,7 +71,6 @@
 
   const { getIsMobile } = useRootSetting();
   const { getMenuWidth } = useMenuSetting();
-  const { getShowBread, getShowContent } = useHeaderSetting();
   const { getLayoutMode } = useLayoutSetting();
   const { getMenus } = useRouteStoreWithOut();
   const { menus } = useMixMenuContext();

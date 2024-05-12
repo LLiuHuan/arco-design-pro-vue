@@ -3,7 +3,6 @@ import {
   AppEnum,
   CacheTypeEnum,
   MenuModeEnum,
-  MenuTypeEnum,
   MixSidebarTriggerEnum,
   PermissionModeEnum,
   RouterTransitionEnum,
@@ -66,6 +65,9 @@ const defaultSetting: ProjectConfig = {
     showFold: true,
     // Auto collapsed - [自动折叠]
     autoCollapse: false,
+    // tab 高度
+    // Tab height
+    height: 48,
   },
   layoutSetting: {
     // Menu mode
@@ -78,12 +80,6 @@ const defaultSetting: ProjectConfig = {
   },
   // Menu settings - [菜单设置]
   menuSetting: {
-    // Whether to display
-    // 是否显示
-    show: true,
-    // Menu type
-    // 菜单类型
-    type: MenuTypeEnum.MIX_SIDEBAR,
     // Whether the menu is collapsed
     // 菜单是否折叠
     collapsed: false,

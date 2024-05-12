@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
+  import { computed, unref } from 'vue';
+  import { useMouse } from '@vueuse/core';
   import type { AdminLayoutProps } from '../../types';
   import {
     LAYOUT_MAX_Z_INDEX,
@@ -11,6 +12,8 @@
   defineOptions({
     name: 'AdminLayout',
   });
+
+  const { y: mouseY } = useMouse();
 
   const props = withDefaults(defineProps<AdminLayoutProps>(), {
     mode: 'vertical',
@@ -172,6 +175,9 @@
             style['layout-tab'],
             commonClass,
             tabClass,
+            fullContent && tabAutoCollapse && mouseY >= tabHeight
+              ? style['layout-hidden-tab']
+              : '',
             { 'top-0!': fullContent || !showHeader },
             leftGapClass,
             { 'absolute left-0 w-full': fixedHeaderAndTab },
@@ -182,7 +188,9 @@
         <div
           v-show="fullContent || fixedHeaderAndTab"
           class="flex-shrink-0 overflow-hidden"
-          :class="[style['layout-tab-placement']]"
+          :class="[
+            fullContent && tabAutoCollapse ? '' : style['layout-tab-placement'],
+          ]"
         ></div>
       </template>
 

@@ -6,12 +6,31 @@ export const useMultipleTabSetting = () => {
   const appStore = useAppStore();
   const { getFullContent } = useFullContent();
 
-  // 是否显示多标签页
+  /**
+   * @description 获取是否显示多标签页
+   * @description Get whether to display multiple tabs
+   */
   const getShowMultipleTab = computed(() => appStore.getMultiTabsSetting.show);
 
+  /**
+   * @description 获取多标签页高度
+   * @description Get tab height
+   */
   const getTabHeight = computed(() => appStore.getMultiTabsSetting.height);
 
+  /**
+   * @description 获取是否显示折叠
+   * @description Get whether to display the fold
+   */
   const getShowFold = computed(() => appStore.getMultiTabsSetting.showFold);
+
+  /**
+   * @description 获取折叠自动收起
+   * @description Get fold auto collapse
+   */
+  const getFoldAutoCollapse = computed(
+    () => appStore.getMultiTabsSetting.autoCollapse,
+  );
 
   const getShowTabs = computed(() => {
     return unref(getShowMultipleTab) && !unref(getFullContent);
@@ -22,5 +41,6 @@ export const useMultipleTabSetting = () => {
     getShowFold,
     getShowTabs,
     getTabHeight,
+    getFoldAutoCollapse,
   };
 };

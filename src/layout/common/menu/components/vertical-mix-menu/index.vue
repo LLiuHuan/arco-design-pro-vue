@@ -64,7 +64,7 @@
   const { getMenus } = useRouteStore();
   const {
     getMixSideFixed,
-    getIsMixSidebar,
+    isVerticalMix,
     getCloseMixSidebarOnChange,
     getMixChildMenuWidth,
     setMenuSetting,
@@ -115,7 +115,7 @@
     const activeKeys = getActiveKeyPathsOfMenus(activeKey, getMenus);
     if (!activeKeys) return;
     activeName.value = activeKeys ? activeKeys[0] : '';
-    if (unref(getIsMixSidebar)) {
+    if (unref(isVerticalMix)) {
       const activeMenu = unref(getMenus).find(
         (item) => item.routeName === unref(activeName),
       );

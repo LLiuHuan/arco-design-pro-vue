@@ -1,10 +1,6 @@
 <template>
   <div
     class="flex items-center relative bg-[var(--color-bg-2)] h-full shadow-tab text-[var(--color-text-1)]"
-    :class="{
-      'mt-[-38px]': getShowMultipleTab && getIsUnFold,
-      'mt-0': mouseY < 38,
-    }"
   >
     <div class="flex-auto flex items-center h-full relative nowrap-hidden">
       <span
@@ -84,7 +80,7 @@
       </span>
     </div>
     <div class="flex-center h-full">
-      <Setting v-if="(getShowFold && getIsUnFold) || !getShowHeader" />
+      <Setting v-if="(getShowFold && getFullContent) || !getShowHeader" />
       <Redo />
       <ContentMenu
         :tab-item="$route"
@@ -113,12 +109,9 @@
   import { RouteLocationNormalized, RouteMeta, useRouter } from 'vue-router';
   import { useGo } from '@/hooks/web/usePage';
   import { useDebounceFn, useMouse, useResizeObserver } from '@vueuse/core';
-  import {
-    useHeaderSetting,
-    useMenuSetting,
-    useMultipleTabSetting,
-  } from '@/hooks/setting';
+  import { useHeaderSetting, useMultipleTabSetting } from '@/hooks/setting';
   import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
+  import { useFullContent } from '@/hooks/web/useFullContent';
   import { Redo, Dropdown, Fold, Setting, ContentMenu } from './components';
 
   const activeKeyRef = ref('');
@@ -133,15 +126,9 @@
   const userStore = useAuthStoreWithOut();
   const { goKey } = useGo();
 
-  const { y: mouseY } = useMouse();
-
   const { getShowFold, getShowMultipleTab } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
-  const { getShowMenu } = useMenuSetting();
-
-  const getIsUnFold = computed(
-    () => !unref(getShowMenu) && !unref(getShowHeader),
-  );
+  const { getFullContent } = useFullContent();
 
   const getTabsState = computed(() => {
     return tabStore.getTabList.filter((item) => !item.meta?.hideTab);

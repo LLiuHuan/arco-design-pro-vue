@@ -87,7 +87,7 @@
 
   const { getMenus } = useRouteStore();
   const { goKey } = useGo();
-  const { getCollapsed, getMixSideTrigger, getIsMixSidebar } = useMenuSetting();
+  const { getCollapsed, getMixSideTrigger, isVerticalMix } = useMenuSetting();
   const { getFooterHeight } = useFooterSetting();
 
   const handleMixMenuClick = (item: App.Menu, hover: boolean = false) => {
@@ -98,7 +98,7 @@
   // Get menu item events
   const getItemEvents = (item: App.Menu) => {
     if (
-      unref(getIsMixSidebar) &&
+      unref(isVerticalMix) &&
       unref(getMixSideTrigger) === MixSidebarTriggerEnum.HOVER
     ) {
       return {

@@ -26,7 +26,7 @@
       ></SwitchItem>
     </SettingItem>
     <SettingItem
-      v-if="getIsMixSidebar"
+      v-if="isVerticalMix"
       key="2"
       :label="$t('layout.setting.interfaceFunction.mixSidebarFixed')"
     >
@@ -55,7 +55,7 @@
       ></SwitchItem>
     </SettingItem>
     <SettingItem
-      v-if="getIsMixSidebar"
+      v-if="isVerticalMix"
       key="4"
       :label="$t('layout.setting.interfaceFunction.mixSidebarTrigger')"
     >
@@ -162,7 +162,7 @@
     getTrigger,
     getAccordion,
     getMixSideFixed,
-    getIsMixSidebar,
+    isVerticalMix,
     getMixSideTrigger,
     getMenuWidth,
   } = useMenuSetting();

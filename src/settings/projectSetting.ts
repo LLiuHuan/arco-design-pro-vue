@@ -48,8 +48,8 @@ const defaultSetting: ProjectConfig = {
   },
   // pageLayout whether to enable keep-alive - [页面布局是否开启keep-alive]
   openKeepAlive: true,
-  // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
-  canEmbedIFramePage: true,
+  // // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
+  // canEmbedIFramePage: true,
   // Multi-tab settings - [多标签页设置]
   multiTabsSetting: {
     cache: false,
@@ -184,6 +184,8 @@ const defaultSetting: ProjectConfig = {
   fullContent: false,
 
   permissionMode: PermissionModeEnum.ROLE,
+  themeProSetting: null,
+  contentXScrollable: false,
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

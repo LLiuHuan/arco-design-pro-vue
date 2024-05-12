@@ -130,9 +130,6 @@ export interface MenuSetting {
   // 拖动侧边栏
   // Drag the sidebar
   canDrag: boolean;
-  // 是否显示菜单
-  // Whether to display menu
-  show: boolean;
   // 混合菜单是否固定
   // Is the mixed menu fixed?
   mixSideFixed: boolean;

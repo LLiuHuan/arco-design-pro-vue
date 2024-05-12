@@ -131,18 +131,20 @@ const defaultSetting: ProjectConfig = {
   },
   // Theme settings - [主题设置]
   themeSetting: {
-    // 主题色
-    // Theme color
-    [ThemeColorEnum.PRIMARY]: '#165DFF',
-    // 成功色
-    // Success color
-    [ThemeColorEnum.SUCCESS]: '#00B42A',
-    // 警告色
-    // Warning color
-    [ThemeColorEnum.WARNING]: '#FF7D00',
-    // 错误色
-    // Error color
-    [ThemeColorEnum.ERROR]: '#F53F3F',
+    colors: {
+      // 信息色
+      // Primary color
+      [ThemeColorEnum.PRIMARY]: '#165DFF',
+      // 成功色
+      // Success color
+      [ThemeColorEnum.SUCCESS]: '#00B42A',
+      // 警告色
+      // Warning color
+      [ThemeColorEnum.WARNING]: '#FF7D00',
+      // 错误色
+      // Error color
+      [ThemeColorEnum.ERROR]: '#F53F3F',
+    },
   },
   // 灰色模式
   // Gray mode

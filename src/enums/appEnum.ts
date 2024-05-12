@@ -25,7 +25,7 @@ export enum RouterTransitionEnum {
 }
 
 export enum ThemeColorEnum {
-  // 主色
+  // 信息色
   PRIMARY = 'primary',
   // 成功
   SUCCESS = 'green',

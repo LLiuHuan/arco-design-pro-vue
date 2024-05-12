@@ -1,10 +1,10 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import { AppEnum, ThemeColorEnum } from '@/enums';
-import type { ProjectConfig } from '~/types/config';
-import { setBaseColor } from '@/utils/common';
+import type { ProjectConfig, ThemeSettingColors } from '~/types/config';
 import { usePreferredColorScheme } from '@vueuse/core';
 import { ThemeInfo } from '~/types/config';
+import { setThemeColors } from '@/utils/common';
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
@@ -75,7 +75,9 @@ export const useRootSetting = () => {
    * @description: 获取主题颜色
    * @description: Get theme color
    */
-  const getThemeColor = computed(() => appStore.getProjectConfig.themeSetting);
+  const getThemeColor = computed(
+    () => appStore.getProjectConfig.themeSetting.colors,
+  );
 
   /**
    * @description: 获取设置抽屉状态
@@ -158,11 +160,25 @@ export const useRootSetting = () => {
   const setThemeColor = (key: ThemeColorEnum, value: string) => {
     appStore.setProjectConfig({
       themeSetting: {
-        [key]: value,
+        colors: {
+          [key]: value,
+        },
       },
     });
 
-    setBaseColor(value, key, unref(getIsDarkMode));
+    setThemeColors(appStore.getThemeColors);
+  };
+
+  /**
+   * @description 修改全部主题颜色
+   * @param colors
+   */
+  const setThemeAllColor = (colors: ThemeSettingColors) => {
+    appStore.setProjectConfig({
+      themeSetting: {
+        colors,
+      },
+    });
   };
 
   /**
@@ -220,6 +236,7 @@ export const useRootSetting = () => {
     toggleDarkMode,
     setSettingDrawerState,
     setThemeColor,
+    setThemeAllColor,
     setThemePro,
   };
 };

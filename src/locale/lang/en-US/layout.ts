@@ -44,7 +44,7 @@ export default {
     },
     themeColor: {
       title: 'Theme color',
-      arcoblue: 'Primary color',
+      arcoblue: 'Main color',
       primary: 'Primary color',
       green: 'Success color',
       orange: 'Warning color',
@@ -57,6 +57,9 @@ export default {
       menuAccordion: 'Side menu accordion mode',
       expandedMenuWidth: 'Menu expand width',
       collapsedMenuWidth: 'Menu collapse width',
+      mixExpandMenuWidth: 'Mixed menu expand width',
+      mixCollapsedMenuWidth: 'Mixed menu collapse width',
+      mixChildMenuWidth: 'Mixed menu collapse child menu',
 
       // menu mix
       mixSidebarTrigger: 'Mixed menu trigger method',

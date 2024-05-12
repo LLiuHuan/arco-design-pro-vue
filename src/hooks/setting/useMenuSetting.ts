@@ -89,6 +89,12 @@ export const useMenuSetting = () => {
     () => unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX,
   );
 
+  const isMixMenu = computed(
+    () => unref(isVerticalMix) || unref(isHorizontalMix),
+  );
+
+  const isNotMixMenu = computed(() => !unref(isMixMenu));
+
   /**
    * @description 获取菜单宽度 展开时的宽度
    * @description Get menu width width when expanded
@@ -185,6 +191,8 @@ export const useMenuSetting = () => {
     isSiderVisible,
     isVerticalMix,
     isHorizontalMix,
+    isMixMenu,
+    isNotMixMenu,
 
     getMenuWidth,
     getCollapsedMenuWidth,

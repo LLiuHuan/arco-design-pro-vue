@@ -1,7 +1,7 @@
 import { Router, useRouter } from 'vue-router';
-import { useMultipleTabStore } from '@/store/modules/multipleTab';
 import { App } from '~/types/app';
-import { useAppStore } from '@/store/modules/app';
+import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
+import { useAppStoreWithOut } from '@/store/modules/app';
 import { unref } from 'vue';
 
 enum TabActionEnum {
@@ -16,7 +16,9 @@ enum TabActionEnum {
 }
 
 export const useTabs = (_router?: Router) => {
-  const appStore = useAppStore();
+  const appStore = useAppStoreWithOut();
+  const tabStore = useMultipleTabWithOutStore();
+  const router = _router || useRouter();
 
   const canIUseTabs = (): boolean => {
     const { show } = appStore.getMultiTabsSetting;
@@ -27,9 +29,6 @@ export const useTabs = (_router?: Router) => {
     }
     return show;
   };
-
-  const tabStore = useMultipleTabStore();
-  const router = _router || useRouter();
 
   const { currentRoute } = router;
 
@@ -65,7 +64,7 @@ export const useTabs = (_router?: Router) => {
 
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
-        await tabStore.refreshPage();
+        await appStore.refreshPage();
         break;
 
       case TabActionEnum.CLOSE_ALL:

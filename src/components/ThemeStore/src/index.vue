@@ -77,12 +77,13 @@
     total: 0,
     loading: false,
   });
-  const { setThemePro } = useRootSetting();
+  const { setThemePro, setThemeAllColor } = useRootSetting();
   const setTheme = async (theme: ThemeInfo) => {
     installing.value = true;
     await setThemeInfo(theme.packageName, theme.colors).then(() => {
       installing.value = false;
       setThemePro(theme);
+      setThemeAllColor(theme.colors);
     });
   };
 

@@ -13,6 +13,7 @@ import type {
   MultiTabsSetting,
   ProjectConfig,
   ThemeSetting,
+  ThemeSettingColors,
   TransitionSetting,
 } from '~/types/config';
 import type { BeforeMiniState } from '~/types/storage';
@@ -130,6 +131,13 @@ export const useAppStore = defineStore({
     },
     getLayoutSetting(): LayoutSetting {
       return this.getProjectConfig.layoutSetting;
+    },
+    getThemeColors(): ThemeSettingColors {
+      const { colors } = this.getProjectConfig.themeSetting;
+      const themeColors = {
+        ...colors,
+      };
+      return themeColors;
     },
   },
   actions: {

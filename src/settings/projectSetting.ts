@@ -3,7 +3,6 @@ import {
   AppEnum,
   CacheTypeEnum,
   MenuModeEnum,
-  MenuTypeEnum,
   MixSidebarTriggerEnum,
   PermissionModeEnum,
   RouterTransitionEnum,
@@ -49,8 +48,8 @@ const defaultSetting: ProjectConfig = {
   },
   // pageLayout whether to enable keep-alive - [页面布局是否开启keep-alive]
   openKeepAlive: true,
-  // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
-  canEmbedIFramePage: true,
+  // // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
+  // canEmbedIFramePage: true,
   // Multi-tab settings - [多标签页设置]
   multiTabsSetting: {
     cache: false,
@@ -66,6 +65,9 @@ const defaultSetting: ProjectConfig = {
     showFold: true,
     // Auto collapsed - [自动折叠]
     autoCollapse: false,
+    // tab 高度
+    // Tab height
+    height: 48,
   },
   layoutSetting: {
     // Menu mode
@@ -78,12 +80,6 @@ const defaultSetting: ProjectConfig = {
   },
   // Menu settings - [菜单设置]
   menuSetting: {
-    // Whether to display
-    // 是否显示
-    show: true,
-    // Menu type
-    // 菜单类型
-    type: MenuTypeEnum.MIX_SIDEBAR,
     // Whether the menu is collapsed
     // 菜单是否折叠
     collapsed: false,
@@ -188,6 +184,8 @@ const defaultSetting: ProjectConfig = {
   fullContent: false,
 
   permissionMode: PermissionModeEnum.ROLE,
+  themeProSetting: null,
+  contentXScrollable: false,
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

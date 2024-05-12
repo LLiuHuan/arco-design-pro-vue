@@ -6,14 +6,14 @@
       :show-title="!getCollapsed"
       :style="{ height: `${getHeaderHeight + 1}px` }"
     />
-    <LayoutVerticalMixMenu v-if="getIsMixSidebar">
+    <LayoutVerticalMixMenu v-if="isVerticalMix">
       <AppLogo
         class="transition-base text-16px font-bold"
         :show-title="false"
         :style="{ height: `${getHeaderHeight + 1}px` }"
       />
     </LayoutVerticalMixMenu>
-    <LayoutHorizontalMixMenu v-else-if="getIsTopMixSidebar" />
+    <LayoutHorizontalMixMenu v-else-if="isHorizontalMix" />
     <LayoutVerticalMenu
       v-else
       :menus="getMenus"
@@ -33,13 +33,12 @@
     LayoutVerticalMenu,
   } from '../menu';
 
-  const { getIsMixSidebar, getIsTopMixSidebar, getCollapsed } =
-    useMenuSetting();
+  const { isVerticalMix, isHorizontalMix, getCollapsed } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { getMenus } = useRouteStoreWithOut();
 
   const showLogo = computed(
-    () => !unref(getIsMixSidebar) && !unref(getIsTopMixSidebar),
+    () => !unref(isVerticalMix) && !unref(isHorizontalMix),
   );
 </script>
 

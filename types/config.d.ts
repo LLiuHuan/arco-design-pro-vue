@@ -1,6 +1,5 @@
 import {
   CacheTypeEnum,
-  MenuTypeEnum,
   RouterTransitionEnum,
   ThemeColorEnum,
   AppEnum,
@@ -30,39 +29,53 @@ export interface GlobEnvConfig {
 
 export interface LocaleSetting {
   showPicker: boolean;
-  // Current language - [当前语言]
+  // 当前语言
+  // Current language
   locale: LocaleType;
-  // default language - [默认语言]
+  // 默认语言
+  // default language
   fallback: LocaleType;
-  // available Locales - [可用语言]
+  // 可用语言
+  // available Locales
   availableLocales: LocaleType[];
 }
 
 export interface TransitionSetting {
-  //  Whether to open the page switching animation - [是否开启页面切换动画]
+  // 是否开启页面切换动画
+  // Whether to open the page switching animation
   enable: boolean;
-  // Route basic switching animation - [路由基本切换动画]
+  // 路由基本切换动画
+  // Route basic switching animation
   basicTransition: RouterTransitionEnum;
-  // Whether to open page switching loading - [是否开启页面切换loading]
+  // 是否开启页面切换loading
+  // Whether to open page switching loading
   openPageLoading: boolean;
-  // Whether to open the top progress bar - [是否开启顶部进度条]
+  // 是否开启顶部进度条
+  // Whether to open the top progress bar
   openNProgress: boolean;
 }
 
 export interface MultiTabsSetting {
-  // Whether to enable tab - [是否开启tab]
+  // 是否开启tab
+  // Whether to enable tab
   cache: boolean;
-  // Whether to display tab - [是否显示tab]
+  // 是否显示tab
+  // Whether to display tab
   show: boolean;
-  // Whether to display the quick button - [是否显示快捷按钮]
+  // 是否显示快捷按钮 下拉操作
+  // Whether to display the quick button
   showQuick: boolean;
-  // Whether to allow drag and drop - [是否允许拖拽]
+  // 是否允许拖拽
+  // Whether to allow drag and drop
   canDrag: boolean;
-  // Whether to display the redo button - [是否显示重做按钮]
+  // 是否显示刷新按钮
+  // Whether to display the refresh button
   showRedo: boolean;
-  // Whether to display the fold button - [是否显示折叠按钮]
+  // 是否显示折叠按钮 全屏内容
+  // Whether to display the fold button
   showFold: boolean;
-  // Whether to automatically collapse - [是否自动折叠]
+  // fold模式下自动收起标签页
+  // Automatically collapse tabs in fold mode
   autoCollapse: boolean;
   // tab 高度
   // Tab height
@@ -80,36 +93,43 @@ export interface LayoutSetting {
 }
 
 export interface MenuSetting {
-  // Menu type - [菜单类型]
-  type: MenuTypeEnum;
-  // Background color - [背景颜色]
+  // 背景颜色
+  // Background color
   bgColor: string;
-  // Whether to collapse the menu - [是否折叠菜单]
+  // 是否折叠菜单
+  // Whether to collapse the menu
   collapsed?: boolean;
-  // Menu width - [菜单宽度]
+  // 菜单宽度
+  // Menu width
   menuWidth: number;
-  // Menu collapse width - [菜单折叠宽度]
+  // 菜单折叠宽度
+  // Menu collapse width
   collapsedMenuWidth: number;
-  // Mix menu width - [混合菜单宽度]
+  // 混合菜单宽度
+  // Mix menu width
   mixMenuWidth: number;
-  // Mix menu collapse width - [混合菜单折叠宽度]
+  // 混合菜单折叠宽度
+  // Mix menu collapse width
   mixCollapsedMenuWidth: number;
-  // Mix menu child width - [混合菜单子宽度]
+  // 混合菜单子宽度
+  // Mix menu child width
   mixChildMenuWidth: number;
-  // Whether the sidebar is hidden - [侧边栏是否隐藏]
+  // 侧边栏是否隐藏
+  // Whether the sidebar is hidden
   siderHidden?: boolean;
-  // Menu theme - [菜单主题]
+  // 菜单主题
+  // Menu theme
   theme: AppEnum;
-  // Whether to enable handover - [是否开启手风琴模式]
+  // 是否开启手风琴模式
+  // Whether to enable handover
   accordion: boolean;
 
-  // Menu collapse trigger position - [菜单折叠触发器位置]
+  // 菜单折叠触发器位置
+  // Menu collapse trigger position
   trigger: TriggerEnum;
-  // Drag the sidebar - [拖动侧边栏]
+  // 拖动侧边栏
+  // Drag the sidebar
   canDrag: boolean;
-  // 是否显示菜单
-  // Whether to display menu
-  show: boolean;
   // 混合菜单是否固定
   // Is the mixed menu fixed?
   mixSideFixed: boolean;
@@ -124,31 +144,38 @@ export interface MenuSetting {
 
 export interface ThemeSetting {
   /**
-   * @description Theme color - [主题色]
+   * @description 主题色
+   * @description Theme color
    */
   [ThemeColorEnum.PRIMARY]: string;
   /**
-   * @description Success color - [成功色]
+   * @description 成功色
+   * @description Success color
    */
   [ThemeColorEnum.SUCCESS]: string;
   /**
-   * @description Warning color - [警告色]
+   * @description 警告色
+   * @description Warning color
    */
   [ThemeColorEnum.WARNING]: string;
   /**
-   * @description Error color - [错误色]
+   * @description 错误色
+   * @description Error color
    */
   [ThemeColorEnum.ERROR]: string;
 }
 
 export interface HeaderSetting {
-  // Header show - [头部显示]
+  // 头部显示
+  // Header show
   show: boolean;
-  // Header height - [头部高度]
+  // 头部高度
+  // Header height
   height: number;
   // 是否显示面包屑
   // Whether to show breadcrumbs
   showBreadCrumb: boolean;
+  // 是否显示面包屑图标
   // Whether to show the breadcrumb icon
   showBreadCrumbIcon: boolean;
 }
@@ -190,16 +217,18 @@ export interface ThemeInfo {
 
 export interface ProjectConfig {
   // TODO: 感觉没有必要，用户信息不大可能会存储在sessionStorage，不过还是暂时保留
-  // Storage location of permission related information - [权限相关信息的存储位置]
+  // 权限相关信息的存储位置
+  // Storage location of permission related information
   permissionCacheType: CacheTypeEnum;
-  // Use error-handler-plugin - [显示错误处理插件]
+  // 显示错误处理插件
+  // Use error-handler-plugin
   useErrorHandle: boolean;
-  // Animation configuration - [动画配置]
+  // 动画配置
+  // Animation configuration
   transitionSetting: TransitionSetting;
-  // pageLayout whether to enable keep-alive - [页面布局是否开启keep-alive]
+  // 页面布局是否开启keep-alive
+  // pageLayout whether to enable keep-alive
   openKeepAlive: boolean;
-  // Is it possible to embed iframe pages - [是否可以嵌入iframe页面]
-  canEmbedIFramePage: boolean;
 
   // 是否固定头部和标签
   // Whether to fix the header and tab
@@ -213,16 +242,20 @@ export interface ProjectConfig {
   // Layout settings
   layoutSetting: LayoutSetting;
 
-  // Multi-tab settings - [多标签页设置]
+  // 多标签页设置
+  // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
 
-  // menuSetting - [菜单设置]
+  // 菜单设置
+  // menuSetting
   menuSetting: MenuSetting;
 
-  // Theme setting - [主题设置]
+  // 主题设置
+  // Theme setting
   themeSetting: ThemeSetting;
+  // 换肤设置
+  // Skin setting
   themeProSetting: ThemeInfo | null;
-
   // 灰色模式
   // Gray mode
   grayMode: boolean;
@@ -230,36 +263,40 @@ export interface ProjectConfig {
   // Weak mode
   colorWeak: boolean;
 
-  // Header setting - [头部设置]
+  // 头部设置
+  // Header setting
   headerSetting: HeaderSetting;
-
+  // 底部设置
+  // Footer setting
   footerSetting: FooterSetting;
 
-  // Show logo - [显示logo]
+  // 显示logo
+  // Show logo
   showLogo: boolean;
 
-  // Whether to cancel the http request that has been sent but not responded when switching the interface.
   // 切换接口时是否取消已发送但未响应的http请求
+  // Whether to cancel the http request that has been sent but not responded when switching the interface.
   removeAllHttpPending: boolean;
 
-  // Session timeout processing
   // 会话超时处理
+  // Session timeout processing
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
 
-  // Whether to show the full screen - [是否显示全屏]
+  // 是否显示全屏
+  // Whether to show the full screen
   fullContent: boolean;
 
-  // Whether to show the configuration button
   // 是否显示配置按钮
+  // Whether to show the configuration button
   showSettingButton: boolean;
+  // 是否显示主题切换按钮 TODO：暂时没用
   // Whether to show the theme switch button
-  // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
-  // Configure where the button is displayed
   // 配置按钮显示位置
+  // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
 
-  // Permission mode
   // 权限模式
+  // Permission mode
   permissionMode: PermissionModeEnum;
 }

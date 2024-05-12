@@ -17,17 +17,29 @@ export const useErrorLogStore = defineStore({
     errorLogListCount: 0,
   }),
   getters: {
-    // Get error log list - [获取错误日志列表]
+    /**
+     * @description 获取错误日志列表
+     * @description Get the error log list
+     * @param state
+     */
     getErrorLogInfoList(state): ErrorLogInfo[] {
       return state.errorLogInfoList || [];
     },
-    // Get error log list count - [获取错误日志列表数量]
+    /**
+     * @description 获取错误日志列表数量
+     * @description Get the number of error log lists
+     * @param state
+     */
     getErrorLogListCount(state): number {
       return state.errorLogListCount;
     },
   },
   actions: {
-    // Add error log information - [添加错误日志信息]
+    /**
+     * @description 添加错误日志信息
+     * @description Add error log information
+     * @param info
+     */
     addErrorLogInfo(info: ErrorLogInfo) {
       const item = {
         ...info,
@@ -36,13 +48,18 @@ export const useErrorLogStore = defineStore({
       this.errorLogInfoList = [item, ...(this.errorLogInfoList || [])];
       this.errorLogListCount += 1;
     },
-    // Set the number of error log lists - [设置错误日志列表数量]
+    /**
+     * @description 设置错误日志列表数量
+     * @description Set the number of error log lists
+     * @param count
+     */
     setErrorLogListCount(count: number): void {
       this.errorLogListCount = count;
     },
 
     /**
-     * Triggered after ajax request error - [ajax 请求错误后触发]
+     * @description ajax 请求错误后触发
+     * @description Triggered after ajax request error
      * @param error
      * @returns
      */
@@ -76,7 +93,8 @@ export const useErrorLogStore = defineStore({
   },
 });
 
-// Need to be used outside the setup - [需要在设置外部使用]
+// 需要在设置外部使用
+// Need to be used outside the setup
 export function useErrorLogStoreWithOut() {
   return useErrorLogStore(store);
 }

@@ -26,9 +26,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { MenuModeEnum, MenuTypeEnum } from '@/enums';
-  import { HandlerEnum } from '@/layout/common/setting-drawer/components/common';
-  import { baseHandler } from '@/layout/common/setting-drawer/components/common/helpers';
+  import { MenuModeEnum } from '@/enums';
+  import { baseHandler, HandlerEnum } from '../helpers';
 
   defineOptions({
     name: 'LayoutModeCard',
@@ -54,7 +53,6 @@
   interface MenuTypeItem {
     title: string;
     mode: MenuModeEnum;
-    type: MenuTypeEnum;
     position: 'top' | 'bottom';
   }
 
@@ -62,25 +60,21 @@
     {
       title: 'layout.setting.layoutMode.menuTypeSidebar',
       mode: MenuModeEnum.VERTICAL,
-      type: MenuTypeEnum.SIDEBAR,
       position: 'bottom',
     },
     {
       title: 'layout.setting.layoutMode.menuTypeMixSidebar',
       mode: MenuModeEnum.VERTICAL_MIX,
-      type: MenuTypeEnum.MIX_SIDEBAR,
       position: 'bottom',
     },
     {
       title: 'layout.setting.layoutMode.menuTypeTopMenu',
       mode: MenuModeEnum.HORIZONTAL,
-      type: MenuTypeEnum.TOP_MENU,
       position: 'bottom',
     },
     {
       title: 'layout.setting.layoutMode.menuTypeMixTopMenu',
       mode: MenuModeEnum.HORIZONTAL_MIX,
-      type: MenuTypeEnum.MIX_TOP_MENU,
       position: 'bottom',
     },
   ];

@@ -3,6 +3,7 @@ declare const styles: {
   readonly 'layout-footer-placement': string;
   readonly 'layout-header': string;
   readonly 'layout-header-placement': string;
+  readonly 'layout-hidden-tab': string;
   readonly 'layout-mobile-sider': string;
   readonly 'layout-mobile-sider-mask': string;
   readonly 'layout-sider': string;

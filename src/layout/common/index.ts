@@ -6,7 +6,6 @@ import LayoutFooter from './footer/index.vue';
 import LayoutSider from './sider/index.vue';
 import LayoutTrigger from './trigger/index.vue';
 import LayoutHeader from './header/index.vue';
-import LayoutMultipleHeader from './header-multiple/index.vue';
 import LayoutTabs from './tabs/index.vue';
 import LayoutFeature from './feature/index.vue';
 
@@ -16,7 +15,6 @@ export {
   LayoutSider,
   LayoutTrigger,
   LayoutHeader,
-  LayoutMultipleHeader,
   LayoutTabs,
   LayoutFeature,
   SettingDrawer,

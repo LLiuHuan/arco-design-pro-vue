@@ -24,7 +24,11 @@
         appear
       >
         <KeepAlive v-if="openCache" :include="getCaches">
-          <Component :is="Component" :key="route.fullPath" />
+          <Component
+            :is="Component"
+            v-if="tabStore.reloadFlag"
+            :key="route.fullPath"
+          />
         </KeepAlive>
         <Component :is="Component" v-else :key="route.fullPath" />
       </Transition>

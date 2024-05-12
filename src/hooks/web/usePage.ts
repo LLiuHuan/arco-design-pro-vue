@@ -158,7 +158,9 @@ export function useGo(_router?: Router) {
 }
 
 /**
+ * @description 重新加载当前页面 弃用
  * @description: redo current page
+ *
  * @param _router
  */
 export const useRedo = (_router?: Router) => {

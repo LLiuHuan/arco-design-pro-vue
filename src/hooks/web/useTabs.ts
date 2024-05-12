@@ -65,7 +65,7 @@ export const useTabs = (_router?: Router) => {
 
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
-        await tabStore.refreshPage(router);
+        await tabStore.refreshPage();
         break;
 
       case TabActionEnum.CLOSE_ALL:

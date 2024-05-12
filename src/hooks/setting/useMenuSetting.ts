@@ -1,206 +1,175 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import type { MenuSetting } from '~/types/config';
-import {
-  MenuModeEnum,
-  MenuTypeEnum,
-  SIDE_BAR_MINI_WIDTH,
-  SIDE_BAR_SHOW_TIT_MINI_WIDTH,
-  TriggerEnum,
-} from '@/enums';
-import { useFullContent } from '@/hooks/web/useFullContent';
+import { MenuModeEnum } from '@/enums';
 import { useLayoutSetting } from '@/hooks/setting/useLayoutSetting';
 
 export const useMenuSetting = () => {
   const appStore = useAppStore();
-  const { getFullContent } = useFullContent();
   const { getLayoutMode } = useLayoutSetting();
 
-  const getMenuType = computed(() => appStore.getMenuSetting.type);
-
-  // 是否折叠左侧菜单
+  /**
+   * @description 是否折叠左侧菜单
+   * @description Whether to collapse the left menu
+   */
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
 
-  // 获取菜单背景颜色
+  /**
+   * @description 获取菜单背景颜色
+   * @description Get menu background color
+   */
   const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor);
 
-  // 获取菜单展开宽度
-  const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
-
-  // 获取菜单折叠宽度
-  const getCollapsedMenuWidth = computed(
-    () => appStore.getMenuSetting.collapsedMenuWidth,
-  );
-
-  // 获取是否可以拖拽侧边栏
+  /**
+   * @description 获取是否可以拖拽侧边栏
+   * @description Get whether the sidebar can be dragged
+   */
   const getCanDrag = computed(() => appStore.getMenuSetting.canDrag);
 
-  // 获取菜单触发方式位置
+  /**
+   * @description 获取菜单触发方式位置
+   */
   const getTrigger = computed(() => appStore.getMenuSetting.trigger);
 
-  // 获取菜单主题
+  /**
+   * @description 获取菜单主题
+   * @description Get menu theme
+   */
   const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
 
-  // 获取是否开启手风琴模式
+  /**
+   * @description 获取手风琴模式
+   * @description Get accordion mode
+   */
   const getAccordion = computed(() => appStore.getMenuSetting.accordion);
-
-  // 获取是否显示菜单
-  const getShowMenu = computed(() => appStore.getMenuSetting.show);
-
-  const getMixSideWidth = computed(() => {
-    return unref(getCollapsed)
-      ? SIDE_BAR_MINI_WIDTH
-      : SIDE_BAR_SHOW_TIT_MINI_WIDTH;
-  });
-
-  // 获取左侧菜单是否展示
-  const getSiderVisible = computed(
-    () => unref(getLayoutMode) !== MenuModeEnum.HORIZONTAL,
-  );
 
   // region 混合菜单
 
-  // 混合菜单是否固定
-  // Is the mixed menu fixed?
+  /**
+   * @description 混合菜单是否固定
+   * @description Is the mixed menu fixed?
+   */
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
 
-  const getMixChildMenuWidth = computed(
-    () => appStore.getMenuSetting.mixChildMenuWidth,
-  );
-
-  // 混合菜单触发器位置
-  // Mixed menu trigger position
+  /**
+   * @description 混合菜单触发器位置
+   * @description Mixed menu trigger position
+   */
   const getMixSideTrigger = computed(
     () => appStore.getMenuSetting.mixSideTrigger,
   );
 
-  // 选中菜单后是否关闭混合菜单
-  // Whether to close the mixed menu after selecting the menu
+  /**
+   * @description 选中菜单后是否关闭混合菜单
+   * @description Whether to close the mixed menu after selecting the menu
+   */
   const getCloseMixSidebarOnChange = computed(
     () => appStore.getMenuSetting.closeMixSidebarOnChange,
   );
   // endregion
 
-  const getShowTopMenu = computed(() => {
-    return unref(getLayoutMode) === MenuModeEnum.HORIZONTAL;
-  });
-
-  const getShowSider = computed(() => {
-    //      unref(getSplit) ||
-    return (
-      unref(getShowMenu) &&
-      unref(getLayoutMode) !== MenuModeEnum.HORIZONTAL &&
-      !unref(getFullContent)
-    );
-  });
-
-  const getIsSidebar = computed(() => {
-    return unref(getMenuType) === MenuModeEnum.VERTICAL;
-  });
-
-  const getIsTopMenu = computed(() => {
-    return unref(getMenuType) === MenuModeEnum.HORIZONTAL;
-  });
-
-  // 获取是否是混合菜单
-  const getIsMixSidebar = computed(() => {
-    return unref(getLayoutMode) === MenuModeEnum.VERTICAL_MIX;
-  });
-
-  // 获取是否是顶部混合菜单
-  const getIsTopMixSidebar = computed(() => {
-    return unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX;
-  });
-
-  // 是否是侧边栏模式
-  const getIsSidebarType = computed(
-    () => unref(getMenuType) === MenuTypeEnum.SIDEBAR,
+  // 获取左侧菜单是否展示
+  const isSiderVisible = computed(
+    () => unref(getLayoutMode) !== MenuModeEnum.HORIZONTAL,
   );
 
-  // const getIsTopMenu = computed(
-  //   () => unref(getMenuType) === MenuTypeEnum.TOP_MENU,
-  // );
-
-  const getShowSiderTrigger = computed(() => {
-    const trigger = unref(getTrigger);
-
-    return trigger !== TriggerEnum.NONE && trigger === TriggerEnum.FOOTER;
-  });
-
-  // 是否显示头部触发器
-  // Whether to display the header trigger
-  const getShowHeaderTrigger = computed(() => {
-    // TODO: !getShowMenu || getMenuHidden ??????
-    if (unref(getMenuType) === MenuTypeEnum.TOP_MENU) {
-      return false;
-    }
-
-    return unref(getTrigger) === TriggerEnum.HEADER;
-  });
-
-  // const getMenuHidden = computed(() => appStore.getMenuSetting.hidden);
-
-  // 获取是否折叠左侧菜单
-  // TODO: 现在是写死的，后续可以根据需求修改
-  const getMiniWidthNumber = computed(() => {
-    // const { siderHidden } = appStore.getMenuSetting;
-    // return siderHidden ? 48 : 80;
-
-    return unref(getCollapsedMenuWidth);
-  });
-
+  /**
+   * @description 获取是否是垂直混合模式
+   * @description Get whether it is vertical mixed mode
+   */
   const isVerticalMix = computed(
     () => unref(getLayoutMode) === MenuModeEnum.VERTICAL_MIX,
   );
 
+  /**
+   * @description 获取是否是水平混合模式
+   * @description Get whether it is horizontal mixed mode
+   */
   const isHorizontalMix = computed(
     () => unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX,
   );
 
+  /**
+   * @description 获取菜单宽度 展开时的宽度
+   * @description Get menu width width when expanded
+   */
+  const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
+
+  /**
+   * @description 获取折叠菜单宽度
+   * @description Get collapsed menu width
+   */
+  const getCollapsedMenuWidth = computed(
+    () => appStore.getMenuSetting.collapsedMenuWidth,
+  );
+
+  /**
+   * @description 获取混合菜单宽度
+   * @description Get mixed menu width
+   */
+  const getMixMenuWidth = computed(() => appStore.getMenuSetting.mixMenuWidth);
+
+  /**
+   * @description 获取混合折叠菜单宽度
+   * @description Get mixed collapsed menu width
+   */
+  const getMixCollapsedMenuWidth = computed(
+    () => appStore.getMenuSetting.mixCollapsedMenuWidth,
+  );
+
+  /**
+   * @description 获取混合子菜单宽度
+   * @description Get mixed child menu width
+   */
+  const getMixChildMenuWidth = computed(
+    () => appStore.getMenuSetting.mixChildMenuWidth,
+  );
+
+  /**
+   * @description 获取菜单宽度，根据是否混合模式来判断
+   * @description Get menu width
+   */
   const getSiderWidth = computed(() => {
-    const { menuWidth, mixMenuWidth, mixChildMenuWidth } =
-      appStore.getMenuSetting;
-    let w =
-      unref(isVerticalMix) || unref(isHorizontalMix) ? mixMenuWidth : menuWidth;
-    if (unref(isVerticalMix) && unref(getMixSideFixed)) {
-      w += mixChildMenuWidth;
-    }
-    return w;
-  });
-
-  const getSiderCollapsedWidth = computed(() => {
-    const { collapsedMenuWidth, mixCollapsedMenuWidth, mixChildMenuWidth } =
-      appStore.getMenuSetting;
-
     let w =
       unref(isVerticalMix) || unref(isHorizontalMix)
-        ? mixCollapsedMenuWidth
-        : collapsedMenuWidth;
+        ? unref(getMixMenuWidth)
+        : unref(getMenuWidth);
+    if (unref(isVerticalMix) && unref(getMixSideFixed)) {
+      w += unref(getMixChildMenuWidth);
+    }
+    return w;
+  });
+
+  /**
+   * @description 获取折叠菜单宽度
+   * @description Get collapsed menu width
+   */
+  const getSiderCollapsedWidth = computed(() => {
+    let w =
+      unref(isVerticalMix) || unref(isHorizontalMix)
+        ? unref(getMixCollapsedMenuWidth)
+        : unref(getCollapsedMenuWidth);
 
     if (unref(isVerticalMix) && unref(getMixSideFixed)) {
-      w += mixChildMenuWidth;
+      w += unref(getMixChildMenuWidth);
     }
 
     return w;
   });
 
-  // 获取真实宽度
-  const getRealWidth = computed(() => {
-    if (unref(getIsMixSidebar)) {
-      return unref(getCollapsed) && !unref(getMixSideFixed)
-        ? unref(getMiniWidthNumber)
-        : unref(getMenuWidth);
-    }
-    return unref(getCollapsed)
-      ? unref(getMiniWidthNumber)
-      : unref(getMenuWidth);
-  });
-
-  // 设置菜单配置
+  /**
+   * @description 设置菜单配置
+   * @description Set menu configuration
+   * @param menuSetting Partial<MenuSetting> 菜单配置
+   */
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     appStore.setProjectConfig({ menuSetting });
   }
 
+  /**
+   * @description 切换左侧菜单是否折叠
+   * @description Toggle whether the left menu is collapsed
+   */
   function toggleCollapsed() {
     setMenuSetting({
       collapsed: !unref(getCollapsed),
@@ -209,34 +178,23 @@ export const useMenuSetting = () => {
   return {
     getCollapsed,
     getMenuBgColor,
-    getCollapsedMenuWidth,
-    getMenuWidth,
     getCanDrag,
     getTrigger,
     getMenuTheme,
-    getRealWidth,
-    getMiniWidthNumber,
-    getShowSiderTrigger,
-    getShowHeaderTrigger,
-    getIsSidebarType,
     getAccordion,
-    getIsMixSidebar,
-    // getIsTopMenu,
-    getIsTopMixSidebar,
-    getShowMenu,
-    getShowSider,
-    getShowTopMenu,
-    getMixSideWidth,
-    getSiderVisible,
+    isSiderVisible,
+    isVerticalMix,
+    isHorizontalMix,
 
-    getMenuType,
+    getMenuWidth,
+    getCollapsedMenuWidth,
+    getMixMenuWidth,
+    getMixCollapsedMenuWidth,
+    getMixChildMenuWidth,
 
     getMixSideFixed,
     getMixSideTrigger,
-    getMixChildMenuWidth,
     getCloseMixSidebarOnChange,
-    getIsSidebar,
-    getIsTopMenu,
 
     setMenuSetting,
     toggleCollapsed,

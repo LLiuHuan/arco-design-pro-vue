@@ -1,6 +1,10 @@
 import { GlobEnvConfig } from '~/types/config';
 import { getAppEnvConfig } from '@/utils/envs';
 
+/**
+ * @description 获取全局配置
+ * @description Get global configuration
+ */
 export const useGlobSetting = (): Readonly<GlobEnvConfig> => {
   const {
     VITE_GLOB_APP_TITLE,

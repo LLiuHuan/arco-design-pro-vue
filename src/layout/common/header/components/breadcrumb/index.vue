@@ -1,14 +1,14 @@
 <template>
-  <a-breadcrumb class="cursor-pointer">
+  <ABreadcrumb v-if="getHeaderShowBreadCrumb" class="cursor-pointer">
     <template v-for="breadcrumb in breadcrumbs" :key="breadcrumb.key">
-      <a-breadcrumb-item>
-        <a-dropdown
+      <ABreadcrumbItem>
+        <ADropdown
           v-if="breadcrumb.children"
           trigger="hover"
           @select="dropdownSelect"
         >
           <template #content>
-            <a-doption
+            <ADoption
               v-for="(item, itemIndex) in breadcrumb.children"
               :key="itemIndex"
               :value="item"
@@ -21,7 +21,7 @@
               <span>{{
                 item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
               }}</span>
-            </a-doption>
+            </ADoption>
           </template>
           <span class="link-text">
             <component
@@ -35,7 +35,7 @@
                 : breadcrumb.meta.title
             }}</span>
           </span>
-        </a-dropdown>
+        </ADropdown>
         <span v-else class="link-text">
           <component
             :is="breadcrumb.icon"
@@ -48,9 +48,9 @@
               : breadcrumb.meta.title
           }}</span>
         </span>
-      </a-breadcrumb-item>
+      </ABreadcrumbItem>
     </template>
-  </a-breadcrumb>
+  </ABreadcrumb>
 </template>
 
 <script lang="ts" setup>
@@ -67,6 +67,8 @@
   const { getMenus } = useRouteStoreWithOut();
   const { getHeaderShowBreadCrumbIcon } = useHeaderSetting();
   const { goKey } = useGo();
+
+  const { getHeaderShowBreadCrumb } = useHeaderSetting();
 
   const pathSplitMark = '/';
   const routeSplitMark = '_';

@@ -1,230 +1,232 @@
+<div align="center">
+    <img width="100" src="./public/logo.png" alt="LOGO" />
+</div>
 
-<p align="center">
-  <img width="60" src="./public/logo.png" alt="LOGO" />
-</p>
+<div align="center">
+    <a href="https://www.oscs1024.com/project/oscs/LLiuHuan/arco-design-pro-vue?ref=badge_small" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/LLiuHuan/arco-design-pro-vue.svg?size=small"/></a>
+    <a href="https://github.com/LLiuHuan/arco-design-pro-vue"><img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg?sanitize=true" alt="Build Status"></a>
+    <a href="https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"></a>
+</div>
 
-<p align="center">
-<a href="https://www.oscs1024.com/project/oscs/LLiuHuan/arco-design-pro-vue?ref=badge_small" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/LLiuHuan/arco-design-pro-vue.svg?size=small"/></a>
-  <a href="https://github.com/LLiuHuan/arco-design-pro-vue"><img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg?sanitize=true" alt="Build Status"></a>
-  <a href="https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"></a>
-</p>
+<div align="center">
+    <span>English | <a href="./README.zh_CN.md">中文</a></span>
+</div>
+
+---
+
+> I'm a front-end novice and I don't have much time. I just write and see how I can deal with it. If you like it, you can click Start.
+
+> It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be developed.
+
+## 1. Basic introduction
+
+### 1.1 Project Introduction
+
+> It was originally planned to implement the vue version of arco-design-pro, but the official said that the vue version will be launched in December 2021, so this project will not completely copy arco-design-pro.
+> It is envisioned to develop a mid- and back-end front-end project that can be used in a production environment, and will develop multiple back-ends for everyone to choose from. 
 
 
-> 前端菜鸟，也没啥时间，随便写写，对付看吧，喜欢的话可以点个 Start
+- Old version
+    - [Online preview](http://arco_legacy.0x3.cn/)  
+    （Please use Chrome to open）
+    - [Github address](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
 
-> 预计23年内全部完善，最少最少最少开发一套前端+一套后端
+### 1.2 Do you have any good ideas? Issues can be raised
 
-## 1. 基本介绍
+## 2. Instructions for use
 
-### 1.1 项目介绍
-
-> 原本是打算实现 arco-design-pro 的vue版本，但是看官方说21年12月份就会推出vue版本的，所以这个项目就不会完全照搬 arco-design-pro 了
-> 预想开发一个可以在生产环境使用的中后台前端项目，并且会开发多个后端供大家选择  
-
-
-- 旧版本
-    - [在线预览](http://arco_legacy.0x3.cn/)  
-    （请使用 Chrome 打开）
-    - [Github 地址](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
-
-### 1.2 有什么好的想法和思路可以提Issues
-
-## 2. 使用说明
-
-### 2.1 开发
+### 2.1 Develop
 
 ```
-# 克隆项目
+# Clone project
 git clone https://github.com/LLiuHuan/arco-design-pro-vue.git
 
-# 进入项目目录
+# Enter the project directory
 cd arco-design-pro-vue
 
 # pnpm
 
-# 安装依赖
+# Installation dependence
 pnpm install
 
-# 启动服务
+# Start service
 pnpm dev
 ```
 
-## 3. 项目截图
+## 3. Project screenshot
 
-还没弄，等功能完善了再弄
+Not done yet, will do it after the function is perfected
 
-## 4. 后端
+## 4. Back end
 
-还没开始弄，准备弄多个后端，供大家选择
+I haven’t started working on it yet, but I’m planning to work on multiple backends for everyone to choose from.
 
-主要还是看时间吧，哈哈哈
+It mainly depends on the time, hahaha
 
-按照以下顺序进行开发
+Develop in the following order
 
-1. 基于Go语言的后端，采用Gin框架
-2. 基于Go语言的后端，微服务形式
-3. 基于Java语言的后端，采用SpringBoot框架
-4. 基于Java语言的后端，微服务形式
-5. 基于Rust语言的后端，采用Actix框架
-6. 基于Node.js语言的后端，采用Koa框架
-7. 基于Python语言的后端，采用Flask/Django框架
+1. Backend based on Go language, using Gin framework
+2. Backend based on Go language, microservice form
+3. Backend based on Java language, using Spring Boot framework
+4. Backend based on Java language, microservice form
+5. Backend based on Rust language, using Actix framework
+6. Backend based on Node.js language, using Koa framework
+7. Backend based on Python language, using Flask/Django framework
 
-## 5. 更新日志（不太会弄，不准，哈哈哈）
+## 5. Update log (not very good at it, hahaha)
 
 [CHANGELOG](CHANGELOG.md)
 
-### 6. 计划
+### 6. Plan
 
-#### 0x00. 纠结
+#### 0x01. All features
 
-- [ ] 缓存页面
+##### 0x01.1 Basic function
+  - [x] Light/Dark/Follow System
+  - [x] Internationalization (Chinese and English)
+  - [x] Full screen
+  - [x] Login page
+  - [ ] Registration page
+  - [ ] Forgot the password
+  - [x] Search
+  - [ ] Notification
+  - [ ] Lock screen
+  - [x] Project configuration
+  - [ ] Cache page
 
-#### 0x01. 全部功能
+##### 0x01.2 Dashboard
+  - [ ] Analysis page
+  - [ ] Monitoring page
+  - [ ] Workbench page
 
-##### 0x01.1 基础功能
-    - [ ] 亮色/暗黑模式切换（需不需要加个跟随系统）
-    - [ ] 国际化（中英文）
-    - [ ] 全屏
-    - [ ] 登陆页
-    - [ ] 注册页
-    - [ ] 忘记密码
-    - [ ] 搜索
-    - [ ] 消息通知
-    - [ ] 锁定屏幕
-    - [ ] 项目配置
+##### 0x01.3 Document
+  - [ ] Vue documentation
+  - [ ] Vue documentation (new version)
+  - [ ] Vite Documentation
+  - [ ] Baidu (external link)
+  - [ ] Documentation (external link)
 
-##### 0x01.2 仪表盘
-    - [ ] 分析页
-    - [ ] 监控页
-    - [ ] 工作台
+##### 0x01.4 Component example
+  - [ ] Button component
+  - [ ] Card component
+  - [ ] Table component
+  - [ ] Form component
+  - [ ] Chart component
+    - [ ] ECharts
+    - [ ] D3
+  - [ ] Map component
+  - [ ] Video component
+  - [ ] Editor component
+    - [ ] Rich text component
+    - [ ] Markdown
+    - [ ] Yarm
+    - [ ] Json component
+  - [ ] Swiper component
+  - [ ] Icon component
+  - [ ] Avatar upload component
+  - [ ] Image cropping component
+  - [ ] Upload component
+  - [ ] QR code component
+  - [ ] Password strength component
+  - [ ] Animation component
+  - [ ] Digital animation components
+  - [ ] Rolling component
+  - [ ] Popup component
+  - [ ] Lazy loading component
+  - [ ] Verification component
+    - [ ] Drag verification
+    - [ ] Picture restore
+  - [ ] Loading component
+  - [ ] Table selector component
 
-##### 0x01.3 文档
-    - [ ] Vue文档
-    - [ ] Vue文档（新版）
-    - [ ] Vite文档
-    - [ ] 百度（外链）
+##### 0x01.5 Functional example
+  - [ ] Websocket test
+  - [ ] Login expired
+  - [ ] Error log
+  - [ ] Error log collection
+  - [ ] Print
+  - [ ] Tab operation
+  - [ ] Right click menu
+  - [ ] File download
+  - [ ] Picture Preview
+  - [ ] Watermark
+  - [ ] Full screen
+  - [ ] QR code
+  - [ ] Error log
+  - [ ] Tab with parameters
+  - [ ] Third party login
+  - [x] Dynamic skin exchange
+  - [ ] Breakpoint continuation
 
-##### 0x01.4 组件示例
-    - [ ] 按钮组件
-    - [ ] 卡片组件
-    - [ ] 表格组件
-    - [ ] 表单组件
-    - [ ] 图表组件
-      - [ ] ECharts
-      - [ ] D3
-    - [ ] 地图组件
-    - [ ] 视频组件
-    - [ ] 编辑器组件
-      - [ ] 富文本组件
-      - [ ] Markdown
-      - [ ] Yarm
-      - [ ] Json组件
-    - [ ] Swiper组件
-    - [ ] 图标组件
-    - [ ] 头像上传组件
-    - [ ] 图片裁剪组件
-    - [ ] 上传组件
-    - [ ] 二维码组件
-    - [ ] 密码强度组件
-    - [ ] 动画组件
-    - [ ] 数字动画组件
-    - [ ] 滚动组件
-    - [ ] 弹窗组件
-    - [ ] 懒加载组件
-    - [ ] 验证组件
-      - [ ] 拖拽验证
-      - [ ] 图片还原
-    - [ ] Loading组件
-    - [ ] 表格选择器组件
+##### 0x01.6 Permissions example
+  - [ ] Based on front-end permissions
+    - [ ] Page level permissions
+    - [ ] Button level permissions
+    - [ ] Front-end permission test page
+  - [ ] Based on backend permissions
+    - [ ] Page level permissions
+    - [ ] Button level permissions
+    - [ ] Backend permission test page
 
-##### 0x01.5 功能示例
-    - [ ] websocket测试
-    - [ ] 登陆过期
-    - [ ] 错误日志
-    - [ ] 错误日志收集
-    - [ ] 打印
-    - [ ] 标签页操作
-    - [ ] 右键菜单
-    - [ ] 文件下载
-    - [ ] 图片预览
-    - [ ] 水印
-    - [ ] 全屏
-    - [ ] 二维码
-    - [ ] 错误日志
-    - [ ] Tab带参
-    - [ ] 第三方登陆
-    - [ ] 动态换肤
-    - [ ] 断点续传
+##### 0x01.7 System Management
+  - [ ] User Management
+  - [ ] Role management
+  - [ ] Menu management
+  - [ ] Menu management2
+  - [ ] Department management
+  - [ ] Dictionary management
+  - [ ] Parameter management
+  - [ ] Notification management
+  - [ ] Operating log
+  - [ ] Login log
+  - [ ] Online user
+  - [ ] Timing task
+  - [ ] Service monitoring
+  - [ ] System restart
+  - [ ] Change Password
+  - [ ] API management
 
-##### 0x01.6 权限示例
-    - [ ] 基于前端权限
-      - [ ] 页面级权限
-      - [ ] 按钮级权限
-      - [ ] 前端权限测试页
-    - [ ] 基于后端权限
-      - [ ] 页面级权限
-      - [ ] 按钮级权限
-      - [ ] 后端权限测试页
+##### 0x01.8 Page
+  - [ ] Form page
+    - [ ] Basic form
+    - [ ] Stepping form
+    - [ ] Advanced form
+  - [ ] Details page
+    - [ ] Basic details page
+    - [ ] Advanced detail page
+  - [ ] Result page
+    - [ ] Successful page
+    - [ ] Failed page
+  - [ ] Personal page
+    - [ ] Personal center
+    - [ ] Personal settings
+  - [ ] Abnormal pages
+    - [ ] 403
+    - [ ] 404
+    - [ ] 500
+    - [ ] Network Error
+    - [ ] No data
+  - [ ] List page
+    - [ ] Standard list
+    - [ ] Card list
+    - [ ] Search list
 
-##### 0x01.7 系统管理
-    - [ ] 用户管理
-    - [ ] 角色管理
-    - [ ] 菜单管理
-    - [ ] 菜单管理2
-    - [ ] 部门管理
-    - [ ] 字典管理
-    - [ ] 参数管理
-    - [ ] 通知管理
-    - [ ] 操作日志
-    - [ ] 登录日志
-    - [ ] 在线用户
-    - [ ] 定时任务
-    - [ ] 服务监控
-    - [ ] 系统重启
-    - [ ] 修改密码
-    - [ ] Api管理
+##### 0x01.9 Graphic editor ?
+  - [ ] Flow chart
 
-##### 0x01.8 页面
-    - [ ] 表单页
-      - [ ] 基础表单
-      - [ ] 分步表单
-      - [ ] 高级表单
-    - [ ] 详情页
-      - [ ] 基础详情页
-      - [ ] 高级详情页
-    - [ ] 结果页
-      - [ ] 成功页
-      - [ ] 失败页
-    - [ ] 个人页
-      - [ ] 个人中心
-      - [ ] 个人设置
-    - [ ] 异常页
-      - [ ] 403
-      - [ ] 404
-      - [ ] 500
-      - [ ] 网络错误
-      - [ ] 无数据
-    - [ ] 列表页
-      - [ ] 标准列表
-      - [ ] 卡片列表
-      - [ ] 搜索列表
+##### 0x01.10 Guide pages
+  - [ ] Guide pages
 
-##### 0x01.9 图形编辑器
-    - [ ] 流程图
-
-##### 0x01.10 引导页
-    - [ ] 引导页
-
-##### 0x01.11 关于
+##### 0x01.11 About
 
 
-## 7. 项目结构
+## 7. Project structure
 
 ```
-后续添加吧，还没确定好，主要依据功能来弄
+I’ll add it later, it’s not decided yet, it will mainly be based on function.
 ```
 
-##  致谢
+## Thank you
 
 <a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
   <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">

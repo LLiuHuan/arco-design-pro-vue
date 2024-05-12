@@ -55,6 +55,12 @@ interface AppState {
    * @description Whether it is a mobile end
    */
   isMobile: Ref<boolean>;
+
+  /**
+   * @description 刷新页面状态
+   * @description Refresh page status
+   */
+  reloadFlag: boolean;
 }
 
 let timeId: TimeoutHandle;
@@ -68,6 +74,7 @@ export const useAppStore = defineStore({
     projectConfig: initAppSetting(),
     beforeMiniInfo: {},
     isMobile: breakpoints.smaller('sm'),
+    reloadFlag: true,
   }),
   getters: {
     // 获取页面加载状态
@@ -189,6 +196,20 @@ export const useAppStore = defineStore({
         this.setPageLoading(loading);
         clearTimeout(timeId);
       }
+    },
+    /**
+     * Refresh tabs - [刷新标签]
+     */
+    async refreshPage(duration = 300) {
+      this.reloadFlag = false;
+
+      const d = this.getProjectConfig.transitionSetting.enable ? duration : 40;
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, d);
+      });
+
+      this.reloadFlag = true;
     },
     // setApiAddress(config: ApiAddress): void {
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));

@@ -8,14 +8,12 @@ import { localStg } from '@/utils/cache';
 import { useGo } from '@/hooks/web/usePage';
 import { App } from '~/types/app';
 import { useAuthStore } from '@/store/modules/auth';
-import { useAppStore } from '@/store/modules/app';
 import { clearTabRoutes, getTabRouteByVueRoute } from './helpers';
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
   tabList: App.Tab[];
   lastDragEndIndex: number;
-  reloadFlag: boolean;
 }
 
 export type PathAsPageEnum<T> = T extends { path: string }
@@ -43,7 +41,6 @@ const getToTarget = (tabItem: App.Tab) => {
 };
 
 const cacheTab = appSetting.multiTabsSetting.cache;
-const appStore = useAppStore();
 
 export const useMultipleTabStore = defineStore({
   id: 'store-multiple-tab',
@@ -54,8 +51,6 @@ export const useMultipleTabStore = defineStore({
     tabList: cacheTab ? localStg.get(MULTIPLE_TABS_KEY) || [] : [],
     // Index of the last moved tab - [最后一次移动标签的索引]
     lastDragEndIndex: 0,
-
-    reloadFlag: true,
   }),
   getters: {
     // Get the tab list - [获取标签列表]
@@ -97,23 +92,6 @@ export const useMultipleTabStore = defineStore({
         cacheMap.add(name);
       }
       this.cacheTabList = cacheMap;
-    },
-    /**
-     * Refresh tabs - [刷新标签]
-     */
-    // async refreshPage(router: Router) {
-    async refreshPage(duration = 300) {
-      this.reloadFlag = false;
-
-      const d = appStore.getProjectConfig.transitionSetting.enable
-        ? duration
-        : 40;
-
-      await new Promise((resolve) => {
-        setTimeout(resolve, d);
-      });
-
-      this.reloadFlag = true;
     },
     /**
      * @description Clear the cache - [清空缓存]

@@ -14,7 +14,7 @@
       <div
         class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
         :style="{
-          width: unref(showDrawer) ? `${getMixChildMenuWidth}px` : '0px',
+          width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
         }"
       >
         <header
@@ -82,7 +82,9 @@
   // 是否显示子菜单
   // Whether to show the drawer
   const showDrawer = computed(
-    () => (unref(openMenu) && unref(childrenMenus).length) || getMixSideFixed,
+    () =>
+      (unref(openMenu) && unref(childrenMenus).length > 0) ||
+      unref(getMixSideFixed),
   );
 
   // 是否固定子菜单

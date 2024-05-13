@@ -42,7 +42,8 @@
      * 当前选中的tab
      * Currently selected tab
      */
-    tabItem: App.Tab;
+    // tabItem: App.Tab;
+    tabItem: any;
     /**
      * 是否是功能区的
      * Is it from the functional area?

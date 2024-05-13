@@ -64,7 +64,7 @@ const defaultSetting: ProjectConfig = {
     // Whether to show the collapse button - [是否显示折叠按钮]
     showFold: true,
     // Auto collapsed - [自动折叠]
-    autoCollapse: false,
+    autoCollapse: true,
     // tab 高度
     // Tab height
     height: 48,

@@ -26,7 +26,7 @@
         <KeepAlive v-if="openCache" :include="getCaches">
           <Component
             :is="Component"
-            v-if="tabStore.reloadFlag"
+            v-if="appStore.reloadFlag"
             :key="route.fullPath"
           />
         </KeepAlive>
@@ -37,13 +37,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMultipleTabStore } from '@/store/modules/multipleTab';
+  import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import {
     useRootSetting,
     useMultipleTabSetting,
     useTransitionSetting,
   } from '@/hooks/setting';
   import { computed, unref } from 'vue';
+  import { useAppStoreWithOut } from '@/store/modules/app';
   import { getTransitionName } from './transition';
 
   defineOptions({ name: 'LayoutContent' });
@@ -57,7 +58,8 @@
     showPadding: true,
   });
 
-  const tabStore = useMultipleTabStore();
+  const tabStore = useMultipleTabWithOutStore();
+  const appStore = useAppStoreWithOut();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
   const { getOpenKeepAlive, getPageLoading } = useRootSetting();

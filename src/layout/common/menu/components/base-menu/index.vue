@@ -1,25 +1,38 @@
 <template>
-  <AMenu
-    class="transition-base"
-    :selected-keys="menuState.selectedKeys"
-    :open-keys="menuState.openKeys"
-    :theme="theme"
-    :mode="mode"
-    :collapsed="collapsed"
-    :collapsed-width="getCollapsedMenuWidth"
-    :accordion="getAccordion"
-    auto-open-selected
-    auto-scroll-into-view
-    @menu-item-click="handleMenuItemClick"
-    @sub-menu-click="handleSubMenuItemClick"
-  >
-    <SubMenuItem v-for="item in menus" :key="item.routeName" :item="item" />
-  </AMenu>
+  <div class="h-full flex-col-stretch flex-1-hidden">
+    <AScrollbar
+      outer-class="h-full flex-1-hidden"
+      class="h-full overflow-y-auto"
+    >
+      <AMenu
+        class="transition-base"
+        :selected-keys="menuState.selectedKeys"
+        :open-keys="menuState.openKeys"
+        :theme="theme"
+        :mode="mode"
+        :collapsed="collapsed"
+        :collapsed-width="getCollapsedMenuWidth"
+        :accordion="getAccordion"
+        auto-open-selected
+        auto-scroll-into-view
+        @menu-item-click="handleMenuItemClick"
+        @sub-menu-click="handleSubMenuItemClick"
+      >
+        <SubMenuItem v-for="item in menus" :key="item.routeName" :item="item" />
+      </AMenu>
+    </AScrollbar>
+
+    <LayoutTrigger
+      v-if="isTrigger && getTrigger === 'FOOTER'"
+      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
+      :style="{ height: `${getFooterHeight + 1}px` }"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
   import { AppEnum, MenuModeEnum, PageEnum } from '@/enums';
-  import { useMenuSetting } from '@/hooks/setting';
+  import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
   import type { MenuMode } from '@arco-design/web-vue/es/menu/interface';
   import type { App } from '~/types/app';
   import { getActiveKeyPathsOfMenus, routeName } from '@/utils/router';
@@ -27,6 +40,7 @@
   import { useGo } from '@/hooks/web/usePage';
   import { isBoolean } from '@/utils/common';
   import { useRoute } from 'vue-router';
+  import { LayoutTrigger } from '@/layout/common';
   import { SubMenuItem } from './components';
 
   interface Props {
@@ -68,8 +82,14 @@
 
   const route = useRoute();
 
-  const { getCollapsed, getAccordion, getCollapsedMenuWidth } =
-    useMenuSetting();
+  const {
+    getCollapsed,
+    getAccordion,
+    getCollapsedMenuWidth,
+    isTrigger,
+    getTrigger,
+  } = useMenuSetting();
+  const { getFooterHeight } = useFooterSetting();
 
   // 判断一下是否点击了菜单
   const isClickGo = ref(false);

@@ -40,12 +40,11 @@
   import { SvgIcon } from '@/components/Icon';
   import { ref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
-  import { resetProTheme } from '@/utils/common';
-  import { ThemeColorEnum } from '@/enums';
+  import { resetProTheme, setThemeColors } from '@/utils/common';
   import { appSetting } from '@/settings';
 
   const show = ref(false);
-  const { getThemePro, setThemePro, setThemeColor } = useRootSetting();
+  const { getThemePro, setThemePro } = useRootSetting();
 
   // 打开/关闭主题商店
   const toggleModal = () => {
@@ -55,12 +54,10 @@
   // 重置主题
   const resetTheme = async () => {
     resetProTheme();
-    const colors = appSetting.themeSetting;
+    const { colors } = appSetting.themeSetting;
     setThemePro(null);
 
-    Object.keys(colors).forEach((key: ThemeColorEnum) => {
-      setThemeColor(key, colors[key]);
-    });
+    setThemeColors(colors);
   };
 </script>
 

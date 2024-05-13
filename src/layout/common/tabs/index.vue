@@ -108,7 +108,7 @@
   import { useAuthStoreWithOut } from '@/store/modules/auth';
   import { RouteLocationNormalized, RouteMeta, useRouter } from 'vue-router';
   import { useGo } from '@/hooks/web/usePage';
-  import { useDebounceFn, useMouse, useResizeObserver } from '@vueuse/core';
+  import { useDebounceFn, useResizeObserver } from '@vueuse/core';
   import { useHeaderSetting, useMultipleTabSetting } from '@/hooks/setting';
   import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
   import { useFullContent } from '@/hooks/web/useFullContent';
@@ -126,7 +126,7 @@
   const userStore = useAuthStoreWithOut();
   const { goKey } = useGo();
 
-  const { getShowFold, getShowMultipleTab } = useMultipleTabSetting();
+  const { getShowFold } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
   const { getFullContent } = useFullContent();
 

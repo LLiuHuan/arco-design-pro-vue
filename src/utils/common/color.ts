@@ -1,6 +1,51 @@
 import { generate, getRgbStr } from '@arco-design/color';
 import { ThemeColorEnum } from '@/enums';
+import { ThemeSettingColors } from '~/types/config';
 import { setCssVar } from './domUtils';
+
+const addThemeVarsToTtml = (cssVar: string, darkCssVar: string) => {
+  const css = `
+  body {
+  ${cssVar}
+  }
+  `;
+
+  const darkCss = `
+  body[arco-theme=dark] {
+  ${darkCssVar}
+  }
+  `;
+  const styleId = 'theme-vars';
+
+  const style =
+    document.querySelector(`#${styleId}`) || document.createElement('style');
+
+  style.id = styleId;
+
+  style.textContent = css + darkCss;
+
+  document.head.appendChild(style);
+};
+
+export const setThemeColors = (colors: ThemeSettingColors) => {
+  let cssStr = ``;
+  let darkCssStr = ``;
+  Object.keys(colors).forEach((key: ThemeColorEnum) => {
+    const cssColors = generate(colors[key], { list: true, format: 'hex' });
+    const darkCssColors = generate(colors[key], {
+      list: true,
+      format: 'hex',
+      dark: true,
+    });
+
+    for (let i = 1; i < cssColors.length; i += 1) {
+      cssStr += `--${key}-${i}: ${getRgbStr(cssColors[i])};`;
+      darkCssStr += `--${key}-${i}: ${getRgbStr(darkCssColors[i])};`;
+    }
+  });
+
+  addThemeVarsToTtml(cssStr, darkCssStr);
+};
 
 export const setBaseColor = (
   val: string,
@@ -16,21 +61,23 @@ export const setBaseColor = (
 
 export const setProTheme = (theme: string) => {
   return new Promise((resolve, reject) => {
+    const linkId = 'pro-custom-theme';
     const styleList = (document.body.getAttribute('style') || '')
       .split(';')
       .map((style) => style.trim())
       .filter((style) => style)
       .filter(
         (style) =>
-          !style.startsWith('--primary-') &&
           !style.startsWith(`--${ThemeColorEnum.PRIMARY}-`) &&
           !style.startsWith(`--${ThemeColorEnum.WARNING}-`) &&
           !style.startsWith(`--${ThemeColorEnum.SUCCESS}-`) &&
           !style.startsWith(`--${ThemeColorEnum.ERROR}-`),
       );
     document.body.setAttribute('style', styleList.join(';'));
-    const proTheme = document.getElementById('pro-custom-theme');
+    const proTheme =
+      document.getElementById(linkId) || document.createElement('link');
     const link = proTheme?.cloneNode(true) as HTMLLinkElement;
+    link.id = linkId;
     link.href = theme ? `https://unpkg.com/${theme}/css/arco.css` : '';
     link.onload = () => {
       if (proTheme) {
@@ -41,7 +88,7 @@ export const setProTheme = (theme: string) => {
     link.onerror = (err) => {
       reject(err);
     };
-    document.head.after(link);
+    document.head.appendChild(link);
   });
 };
 

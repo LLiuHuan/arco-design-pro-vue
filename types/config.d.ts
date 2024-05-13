@@ -142,10 +142,10 @@ export interface MenuSetting {
   closeMixSidebarOnChange?: boolean;
 }
 
-export interface ThemeSetting {
+export interface ThemeSettingColors {
   /**
    * @description 主题色
-   * @description Theme color
+   * @description Primary color
    */
   [ThemeColorEnum.PRIMARY]: string;
   /**
@@ -163,6 +163,10 @@ export interface ThemeSetting {
    * @description Error color
    */
   [ThemeColorEnum.ERROR]: string;
+}
+
+export interface ThemeSetting {
+  colors: ThemeSettingColors;
 }
 
 export interface HeaderSetting {
@@ -212,7 +216,7 @@ export interface ThemeInfo {
   depLibrary: string;
   // 颜色
   // Colors
-  colors: ThemeSetting;
+  colors: ThemeSettingColors;
 }
 
 export interface ProjectConfig {

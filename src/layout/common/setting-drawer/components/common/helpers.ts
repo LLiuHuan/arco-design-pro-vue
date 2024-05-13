@@ -14,6 +14,9 @@ enum HandlerEnum {
   MENU_FIXED_MIX_SIDEBAR,
   MENU_EXPANDED_MENU_WIDTH,
   MENU_COLLAPSED_MENU_WIDTH,
+  MIX_MENU_EXPANDED_MENU_WIDTH,
+  MIX_MENU_COLLAPSED_MENU_WIDTH,
+  MIX_MENU_CHILD_MENU_WIDTH,
 
   // header
   HEADER_HEIGHT,
@@ -75,6 +78,18 @@ const handler = (
     case HandlerEnum.MENU_COLLAPSED_MENU_WIDTH:
       return {
         menuSetting: { collapsedMenuWidth: value },
+      };
+    case HandlerEnum.MIX_MENU_EXPANDED_MENU_WIDTH:
+      return {
+        menuSetting: { mixMenuWidth: value },
+      };
+    case HandlerEnum.MIX_MENU_COLLAPSED_MENU_WIDTH:
+      return {
+        menuSetting: { mixCollapsedMenuWidth: value },
+      };
+    case HandlerEnum.MIX_MENU_CHILD_MENU_WIDTH:
+      return {
+        menuSetting: { mixChildMenuWidth: value },
       };
 
     // endregion

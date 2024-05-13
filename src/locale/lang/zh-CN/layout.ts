@@ -57,6 +57,9 @@ export default {
       menuAccordion: '侧边菜单手风琴模式',
       expandedMenuWidth: '菜单展开宽度',
       collapsedMenuWidth: '菜单折叠宽度',
+      mixExpandMenuWidth: '混合菜单展开宽度',
+      mixCollapsedMenuWidth: '混合菜单折叠宽度',
+      mixChildMenuWidth: '混合菜单折叠子菜单',
 
       // menu mix
       mixSidebarTrigger: '混合菜单触发方式',

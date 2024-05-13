@@ -66,6 +66,7 @@
       />
     </SettingItem>
     <SettingItem
+      v-if="isVerticalMix || isVertical"
       key="5"
       :label="$t('layout.setting.interfaceFunction.menuCollapseButton')"
     >
@@ -86,6 +87,7 @@
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
+      v-if="isNotMixMenu"
       key="7"
       :label="$t('layout.setting.interfaceFunction.expandedMenuWidth')"
     >
@@ -95,6 +97,54 @@
         :min="100"
         :max="600"
         :step="10"
+      ></InputNumberItem>
+    </SettingItem>
+    <SettingItem
+      v-if="isNotMixMenu"
+      key="13"
+      :label="$t('layout.setting.interfaceFunction.collapsedMenuWidth')"
+    >
+      <InputNumberItem
+        :def="getCollapsedMenuWidth"
+        :event="HandlerEnum.MENU_COLLAPSED_MENU_WIDTH"
+        :min="48"
+        :max="200"
+        :step="1"
+      ></InputNumberItem>
+    </SettingItem>
+    <SettingItem
+      v-if="isMixMenu"
+      key="14"
+      :label="$t('layout.setting.interfaceFunction.mixExpandMenuWidth')"
+    >
+      <InputNumberItem
+        :def="getMixMenuWidth"
+        :event="HandlerEnum.MIX_MENU_EXPANDED_MENU_WIDTH"
+        :min="80"
+        :max="200"
+      ></InputNumberItem>
+    </SettingItem>
+    <SettingItem
+      v-if="isMixMenu"
+      key="15"
+      :label="$t('layout.setting.interfaceFunction.mixCollapsedMenuWidth')"
+    >
+      <InputNumberItem
+        :def="getMixCollapsedMenuWidth"
+        :event="HandlerEnum.MIX_MENU_COLLAPSED_MENU_WIDTH"
+        :min="48"
+        :max="200"
+      ></InputNumberItem>
+    </SettingItem>
+    <SettingItem
+      v-if="isMixMenu"
+      key="16"
+      :label="$t('layout.setting.interfaceFunction.mixChildMenuWidth')"
+    >
+      <InputNumberItem
+        :def="getMixChildMenuWidth"
+        :event="HandlerEnum.MIX_MENU_CHILD_MENU_WIDTH"
+        :min="200"
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
@@ -118,18 +168,6 @@
         :max="100"
       ></InputNumberItem>
     </SettingItem>
-    <!--    <SettingItem-->
-    <!--      key="8"-->
-    <!--      :label="$t('layout.setting.interfaceFunction.collapsedMenuWidth')"-->
-    <!--    >-->
-    <!--      <InputNumberItem-->
-    <!--        :def="getCollapsedMenuWidth"-->
-    <!--        :event="HandlerEnum.MENU_COLLAPSED_MENU_WIDTH"-->
-    <!--        :min="48"-->
-    <!--        :max="200"-->
-    <!--        :step="1"-->
-    <!--      ></InputNumberItem>-->
-    <!--    </SettingItem>-->
   </TransitionGroup>
 </template>
 
@@ -163,8 +201,15 @@
     getAccordion,
     getMixSideFixed,
     isVerticalMix,
+    isVertical,
     getMixSideTrigger,
     getMenuWidth,
+    getCollapsedMenuWidth,
+    getMixMenuWidth,
+    getMixCollapsedMenuWidth,
+    getMixChildMenuWidth,
+    isMixMenu,
+    isNotMixMenu,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { getFooterHeight, getFooterFixed } = useFooterSetting();

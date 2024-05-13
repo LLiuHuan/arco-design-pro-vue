@@ -34,6 +34,7 @@ interface AuthState {
 }
 
 const emptyInfo: UserInfoModel = {
+  user: '',
   userId: '',
   userName: '',
   avatar: '',

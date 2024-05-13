@@ -1,5 +1,5 @@
 <template>
-  <a-spin class="w-full" :loading="pageInfo.loading">
+  <ASpin class="w-full" :loading="pageInfo.loading">
     <AGrid
       :cols="{ xxl: 3, xl: 3, lg: 2, md: 1, sm: 1, xs: 1 }"
       :row-gap="16"
@@ -28,8 +28,8 @@
                 size="mini"
                 :loading="installing"
                 @click="setTheme(item)"
-                >{{ $t('common.install') }}</AButton
-              >
+                >{{ $t('common.install') }}
+              </AButton>
             </template>
           </ACard>
         </AGridItem>
@@ -57,7 +57,7 @@
         />
       </AGridItem>
     </AGrid>
-  </a-spin>
+  </ASpin>
 </template>
 
 <script lang="ts" setup>

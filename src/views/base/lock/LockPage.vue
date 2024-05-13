@@ -67,7 +67,7 @@
                 {{ $t('sys.lock.alert') }}
               </span>
               <div class="flex justify-between enter-x">
-                <a-button
+                <AButton
                   type="text"
                   size="small"
                   class="mt-2 mr-2 enter-x"
@@ -75,8 +75,8 @@
                   @click="handleShowForm(true)"
                 >
                   {{ $t('common.back') }}
-                </a-button>
-                <a-button
+                </AButton>
+                <AButton
                   type="text"
                   size="small"
                   class="mt-2 mr-2 enter-x"
@@ -84,8 +84,8 @@
                   @click="goLogin"
                 >
                   {{ $t('sys.lock.backToLogin') }}
-                </a-button>
-                <a-button
+                </AButton>
+                <AButton
                   class="mt-2"
                   type="text"
                   size="small"
@@ -93,7 +93,7 @@
                   @click="unLock()"
                 >
                   {{ $t('sys.lock.entry') }}
-                </a-button>
+                </AButton>
               </div>
             </AForm>
           </div>

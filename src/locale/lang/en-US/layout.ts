@@ -20,6 +20,15 @@ export default {
     logOut: 'Log out',
     logOutMessage: 'Are you sure you want to log out ?',
     userCenter: 'User center',
+
+    tooltipNotify: 'Message notification',
+    msgTabMessage: 'Message',
+    msgTabNotice: 'Notice',
+    msgTabBtn: 'Clear',
+    msgTabTodo: 'To do',
+    msgAllRead: 'All read',
+    msgViewMore: 'View more',
+    msgNoContent: 'No message',
   },
   multipleTab: {
     reload: 'Reload',

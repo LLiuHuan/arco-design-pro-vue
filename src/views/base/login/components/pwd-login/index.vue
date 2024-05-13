@@ -3,13 +3,13 @@
     <div class="h-32px leading-32px text-[rgba(var(--red-6))]"
       >{{ errorMessage }}
     </div>
-    <a-form
+    <AForm
       ref="loginForm"
       :model="userInfo"
       layout="vertical"
       @submit="handleSubmit"
     >
-      <a-form-item
+      <AFormItem
         field="username"
         :rules="[
           {
@@ -20,16 +20,16 @@
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input
+        <AInput
           v-model="userInfo.username"
           :placeholder="$t('sys.login.common.userNamePlaceholder')"
         >
           <template #prefix>
             <icon-user />
           </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item
+        </AInput>
+      </AFormItem>
+      <AFormItem
         field="password"
         :rules="[
           {
@@ -40,7 +40,7 @@
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input-password
+        <AInputPassword
           v-model="userInfo.password"
           :placeholder="$t('sys.login.common.passwordPlaceholder')"
           allow-clear
@@ -49,40 +49,40 @@
           <template #prefix>
             <icon-lock />
           </template>
-        </a-input-password>
-      </a-form-item>
-      <a-space :size="16" direction="vertical">
+        </AInputPassword>
+      </AFormItem>
+      <ASpace :size="16" direction="vertical">
         <div class="flex justify-between">
-          <a-checkbox
+          <ACheckbox
             checked="rememberPassword"
             :model-value="loginConfig.rememberPassword"
             @change="setRememberPassword"
           >
             {{ $t('sys.login.pwdLogin.rememberMe') }}
-          </a-checkbox>
-          <a-link @click="toLoginModule('forget-pwd')"
+          </ACheckbox>
+          <ALink @click="toLoginModule('forget-pwd')"
             >{{ $t('sys.login.pwdLogin.forgetPwd') }}
-          </a-link>
+          </ALink>
         </div>
-        <a-button type="primary" html-type="submit" long :loading="loading">
+        <AButton type="primary" html-type="submit" long :loading="loading">
           {{ $t('sys.login.common.login') }}
-        </a-button>
+        </AButton>
         <div class="flex w-full">
-          <a-button type="text" long class="!text-[var(--color-text-3)]">
+          <AButton type="text" long class="!text-[var(--color-text-3)]">
             {{ $t('sys.login.pwdLogin.mobileLogin') }}
-          </a-button>
-          <a-button
+          </AButton>
+          <AButton
             type="text"
             long
             class="!text-[var(--color-text-3)]"
             @click="toLoginModule('register')"
           >
             {{ $t('sys.login.pwdLogin.register') }}
-          </a-button>
+          </AButton>
         </div>
-        <a-divider orientation="center"
+        <ADivider orientation="center"
           >{{ $t('sys.login.pwdLogin.otherLoginMode') }}
-        </a-divider>
+        </ADivider>
         <div class="w-full flex justify-evenly">
           <IconGithub
             class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
@@ -109,8 +109,8 @@
             size="24"
           />
         </div>
-      </a-space>
-    </a-form>
+      </ASpace>
+    </AForm>
   </div>
 </template>
 

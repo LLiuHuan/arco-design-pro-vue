@@ -18,7 +18,7 @@
       />
     </div>
     <router-link :to="{ name: routeHomePath }">
-      <a-button type="primary">回到首页</a-button>
+      <AButton type="primary">回到首页</AButton>
     </router-link>
   </div>
 </template>

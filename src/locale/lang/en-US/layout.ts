@@ -13,6 +13,10 @@ export default {
 
     search: 'Search',
 
+    tooltipLock: 'Lock screen',
+    lockScreenPassword: 'Lock screen password',
+    lockScreen: 'Lock screen',
+
     logOut: 'Log out',
     logOutMessage: 'Are you sure you want to log out ?',
     userCenter: 'User center',

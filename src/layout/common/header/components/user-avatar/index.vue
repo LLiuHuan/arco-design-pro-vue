@@ -30,6 +30,7 @@
   import { useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useGo } from '@/hooks/web/usePage';
+  import { useAuth } from '@/hooks/web/useAuth';
 
   interface DropdownOption {
     key: string;
@@ -38,6 +39,7 @@
   }
 
   const { goKey } = useGo();
+  const auth = useAuth();
 
   const options: DropdownOption[] = [
     {
@@ -69,6 +71,7 @@
     switch (optionKey) {
       case 'logout':
         // handle logout
+        auth.logout();
         break;
       default:
         goKey(optionKey);

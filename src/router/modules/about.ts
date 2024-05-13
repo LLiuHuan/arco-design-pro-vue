@@ -4,7 +4,7 @@ const about: AuthRoute.Route = {
   component: 'self',
   meta: {
     title: '关于',
-    icon: 'mdi:monitor-dashboard',
+    icon: 'simple-icons:aboutdotme',
     order: 10,
     // i18nTitle: 'routes.dashboard.title',
     singleLayout: 'basic',

@@ -15,7 +15,7 @@ const components: AuthRoute.Route = {
   ],
   meta: {
     title: '组件',
-    icon: 'mdi:monitor-dashboard',
+    icon: 'ci:main-component',
     order: 5,
   },
 };

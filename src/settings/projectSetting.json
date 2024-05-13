@@ -9,7 +9,7 @@
   "transitionSetting": {
     "enable": true,
     "basicTransition": "fade-slide",
-    "openPageLoading": true,
+    "openPageLoading": false,
     "openNProgress": true
   },
   "openKeepAlive": true,

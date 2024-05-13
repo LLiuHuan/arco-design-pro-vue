@@ -1,5 +1,5 @@
 <template>
-  <a-layout-footer
+  <ALayoutFooter
     class="h-full text-[var(--color-text-3)] flex-col flex-center text-center bg-[var(--color-bg-2)]"
   >
     <div v-if="getFooterHeight >= 48" class="my-8px">
@@ -10,7 +10,7 @@
     </div>
 
     <div>Copyright &copy;{{ year }} Arco Design Pro</div>
-  </a-layout-footer>
+  </ALayoutFooter>
 </template>
 
 <script lang="ts" setup>

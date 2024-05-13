@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ name }}
-    <a-button @click="toLoginModule('pwd-login')">注册</a-button>
+    <AButton @click="toLoginModule('pwd-login')">注册</AButton>
   </div>
 </template>
 

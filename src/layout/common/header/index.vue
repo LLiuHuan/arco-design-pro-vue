@@ -27,6 +27,7 @@
       <ThemeBtn />
       <LanguageBtn />
       <FullScreenBtn v-if="!getIsMobile" />
+      <SystemMessage />
       <SettingBtn />
       <ThemeStore />
       <UserAvatar />
@@ -51,9 +52,10 @@
     LanguageBtn,
     Search,
     SettingBtn,
+    SystemMessage,
     ThemeBtn,
-    UserAvatar,
     ThemeStore,
+    UserAvatar,
   } from './components';
   import { LayoutVerticalMenu } from '../menu';
 

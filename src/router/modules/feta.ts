@@ -14,6 +14,8 @@ const components: AuthRoute.Route = {
   ],
   meta: {
     title: '功能',
+    icon: 'ion:git-compare-outline',
+    order: 5,
   },
 };
 

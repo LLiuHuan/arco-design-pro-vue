@@ -1,6 +1,6 @@
 import { useAuthStoreWithOut } from '@/store/modules/auth';
 import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
-import { LoginModel } from '@/api/auth/model/userModel';
+import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
 import { isArray } from '@/utils/common';
 import { useRouteStoreWithOut } from '@/store/modules/route';
 import { useI18n } from '@/hooks/web/useI18n';
@@ -49,8 +49,10 @@ export const useAuth = () => {
    * @description Handle action after login - [登录后处理动作]
    * @param backendToken - [后端返回的token]
    */
-  const handleActionAfterLogin = async (backendToken: LoginModel) => {
-    if (!backendToken) return;
+  const handleActionAfterLogin = async (
+    backendToken: LoginModel,
+  ): Promise<UserInfoModel | null> => {
+    if (!backendToken) return null;
 
     const userInfo = await loginByToken(backendToken);
 
@@ -75,10 +77,11 @@ export const useAuth = () => {
         });
       }
 
-      return;
+      return userInfo;
     }
 
     resetAuthStore();
+    return null;
   };
 
   /**
@@ -95,11 +98,16 @@ export const useAuth = () => {
       password,
     });
 
-    if (resp) {
-      await handleActionAfterLogin(resp);
+    if (!resp) {
+      setLoginLoading(false);
+      return null;
     }
 
+    const userinfo = await handleActionAfterLogin(resp);
+
     setLoginLoading(false);
+
+    return userinfo;
   };
 
   const logout = async () => {

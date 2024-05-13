@@ -16,7 +16,7 @@
               <component
                 :is="item.icon"
                 v-if="getHeaderShowBreadCrumbIcon"
-                class="inline-block align-text-bottom mr-4px text-16px"
+                class="inline-block align-text-bottom mr-10px text-16px"
               />
               <span>{{
                 item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
@@ -27,7 +27,7 @@
             <component
               :is="breadcrumb.icon"
               v-if="getHeaderShowBreadCrumbIcon"
-              class="inline-block align-text-bottom mr-4px text-16px"
+              class="inline-block align-text-bottom mr-10px text-16px"
             />
             <span>{{
               breadcrumb.meta.i18nTitle
@@ -40,7 +40,7 @@
           <component
             :is="breadcrumb.icon"
             v-if="getHeaderShowBreadCrumbIcon"
-            class="inline-block align-text-bottom mr-4px text-16px"
+            class="inline-block align-text-bottom mr-10px text-16px"
           />
           <span>{{
             breadcrumb.meta.i18nTitle

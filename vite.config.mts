@@ -1,5 +1,4 @@
 import { defineConfig, loadEnv } from 'vite';
-import { resolve } from 'path';
 import { getEnvConfig } from '.env.config';
 import {
   createViteBuild,

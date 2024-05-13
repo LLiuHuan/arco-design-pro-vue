@@ -6,6 +6,7 @@ import UserAvatar from './user-avatar/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
 import Search from './search/index.vue';
 import ThemeStore from './theme-store/index.vue';
+import SystemMessage from './system-message/index.vue';
 
 export {
   SettingBtn,
@@ -16,4 +17,5 @@ export {
   Breadcrumb,
   Search,
   ThemeStore,
+  SystemMessage,
 };

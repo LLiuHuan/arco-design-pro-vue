@@ -1,6 +1,7 @@
 import {
   APP_DARK_MODE_IS_AUTO_KEY,
   LOCALE_KEY,
+  LOCK_INFO_KEY,
   LOGIN_INFO,
   MenuModeEnum,
   MULTIPLE_TABS_KEY,
@@ -22,6 +23,17 @@ export interface BeforeMiniState {
   siderCollapsed?: boolean;
 }
 
+// 锁屏信息
+// Lock screen information
+export interface LockInfo {
+  // 要求输入密码
+  // Password required
+  pwd?: string | undefined;
+  // 是否已锁定？
+  // Is it locked?
+  isLock?: boolean;
+}
+
 declare namespace StorageInterface {
   interface BasicStore {
     /** 本地语言缓存 */
@@ -41,6 +53,8 @@ declare namespace StorageInterface {
     [LOGIN_INFO]: LoginParams;
     /** 角色列表 */
     [ROLES_KEY]: string[];
+    /** 锁屏信息 */
+    [LOCK_INFO_KEY]: LockInfo;
   }
 
   /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */

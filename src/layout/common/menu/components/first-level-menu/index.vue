@@ -81,8 +81,9 @@
     /** Active menu item */
     active: boolean;
     /** Mini size */
-    isCollapsed: boolean;
+    isCollapsed?: boolean;
   }
+
   const [DefineMixMenuItem, MixMenuItem] =
     createReusableTemplate<MixMenuItemProps>();
 
@@ -133,6 +134,7 @@
     font-weight: 700;
     color: rgba(var(--primary-6), 1) !important;
   }
+
   .activeItem:before {
     content: '';
     position: absolute;

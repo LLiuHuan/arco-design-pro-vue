@@ -3,7 +3,7 @@
 
   <div class="flex-col-stretch gap-12px">
     <div class="flex justify-center items-center">
-      <a-radio-group
+      <ARadioGroup
         v-for="(_, key) in themeSchema"
         :key="key"
         type="button"
@@ -11,12 +11,12 @@
         :model-value="getDarkMode"
         @change="setDarkMode"
       >
-        <a-radio :value="key">
+        <ARadio :value="key">
           <div class="h-30px w-50px flex justify-center items-center">
             <SvgIcon :icon="icons[key]" size="20"></SvgIcon>
           </div>
-        </a-radio>
-      </a-radio-group>
+        </ARadio>
+      </ARadioGroup>
     </div>
     <Transition name="dark-menu">
       <SettingItem
@@ -37,7 +37,7 @@
   import { AppEnum } from '@/enums';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
   import { computed } from 'vue';
-  import { SettingItem, SwitchItem, HandlerEnum } from '../common';
+  import { HandlerEnum, SettingItem, SwitchItem } from '../common';
 
   defineOptions({
     name: 'ThemeScheme',

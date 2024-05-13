@@ -4,6 +4,7 @@ import type { ErrorMessageMode } from '~/types/axios';
 import { useAuthStoreWithOut } from '@/store/modules/auth';
 import { SessionTimeoutProcessingEnum } from '@/enums';
 import { appSetting } from '@/settings';
+import {useAuth} from "@/hooks/web/useAuth";
 
 const error = Message.error!;
 const stp = appSetting.sessionTimeoutProcessing;
@@ -15,6 +16,7 @@ export function checkStatus(
 ): void {
   const { t } = useI18n();
   const authStore = useAuthStoreWithOut();
+  const auth = useAuth();
   let errMessage = '';
 
   switch (status) {
@@ -25,13 +27,13 @@ export function checkStatus(
     // Jump to the login page if not logged in, and carry the path of the current page
     // Return to the current page after successful login. This step needs to be operated on the login page.
     case 401:
-      authStore.setToken('');
+      authStore.resetAuthStore();
       errMessage = msg || t('sys.api.errMsg401');
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
         authStore.setSessionTimeout(true);
       } else {
         // 被动登出，带redirect地址
-        authStore.logout(false);
+        auth.logout();
       }
       break;
     case 403:

@@ -1,4 +1,5 @@
 <template>
+  <LayoutLockPage />
   <div
     v-if="getIsFixedSettingDrawer && (!getShowMultipleTab || getFullContent)"
     class="absolute z-10 top-45% right-0 p-10px bg-[rgba(var(--primary-6))] rounded-l-6px flex-center text-[var(--color-white)] cursor-pointer"
@@ -18,6 +19,7 @@
   import { computed, unref } from 'vue';
   import { SettingButtonPositionEnum } from '@/enums';
   import SettingBtn from '@/layout/common/setting-btn/index.vue';
+  import LayoutLockPage from '@/views/base/lock/index.vue';
 
   defineOptions({ name: 'LayoutFeatures' });
 

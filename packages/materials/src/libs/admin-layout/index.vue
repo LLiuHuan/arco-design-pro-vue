@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { computed, unref } from 'vue';
+  import { computed } from 'vue';
   import { useMouse } from '@vueuse/core';
   import type { AdminLayoutProps } from '../../types';
   import {
+    createLayoutCssVars,
     LAYOUT_MAX_Z_INDEX,
     LAYOUT_SCROLL_EL_ID,
-    createLayoutCssVars,
   } from './shared';
   import style from './index.module.css';
 

@@ -21,15 +21,19 @@
       </template>
     </template>
   </ADropdown>
+
+  <Lock :visible="lockVisible" @cancel="lockVisible = false" />
 </template>
 
 <script lang="ts" setup>
-  import { computed, VNode } from 'vue';
+  import { computed, ref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
   import { useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useGo } from '@/hooks/web/usePage';
+  import { useAuth } from '@/hooks/web/useAuth';
+  import Lock from '../lock/index.vue';
 
   interface DropdownOption {
     key: string;
@@ -38,12 +42,20 @@
   }
 
   const { goKey } = useGo();
+  const auth = useAuth();
+
+  const lockVisible = ref(false);
 
   const options: DropdownOption[] = [
     {
       label: 'layout.header.userCenter',
       key: 'user-center',
       icon: iconRender({ icon: 'ph:user-circle', fontSize: 18 }),
+    },
+    {
+      label: 'layout.header.tooltipLock',
+      key: 'lock',
+      icon: iconRender({ icon: 'ph:lock', fontSize: 18 }),
     },
     {
       key: 'divider',
@@ -65,10 +77,14 @@
     };
   });
 
-  const handleDropdown = (optionKey: 'user-center' | 'logout') => {
+  const handleDropdown = (optionKey: 'user-center' | 'logout' | 'lock') => {
     switch (optionKey) {
       case 'logout':
         // handle logout
+        auth.logout();
+        break;
+      case 'lock':
+        lockVisible.value = true;
         break;
       default:
         goKey(optionKey);

@@ -1,13 +1,13 @@
 <template>
   <div v-if="showTooltip">
-    <a-tooltip :position="position" mini :content="tooltipContent">
+    <ATooltip :position="position" mini :content="tooltipContent">
       <div
         class="flex-center h-full cursor-pointer dark:hover:bg-#333"
         :class="contentClassName"
       >
         <slot></slot>
       </div>
-    </a-tooltip>
+    </ATooltip>
   </div>
   <div
     v-else

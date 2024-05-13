@@ -10,4 +10,7 @@ export default {
   chooseText: 'Please Choose',
 
   install: 'Install',
+
+  redo: 'Refresh',
+  back: 'Back',
 };

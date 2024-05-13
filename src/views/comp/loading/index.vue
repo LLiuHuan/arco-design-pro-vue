@@ -7,12 +7,12 @@
     <div ref="wrapEl">
       <AAlert :show-icon="false">组件方式</AAlert>
 
-      <a-button class="my-4 mr-4" type="primary" @click="openCompFullLoading">
+      <AButton class="my-4 mr-4" type="primary" @click="openCompFullLoading">
         全屏 Loading
-      </a-button>
-      <a-button class="my-4" type="primary" @click="openCompAbsolute">
+      </AButton>
+      <AButton class="my-4" type="primary" @click="openCompAbsolute">
         容器内 Loading
-      </a-button>
+      </AButton>
       <AppLoading
         :loading="compState.loading"
         :absolute="compState.absolute"
@@ -21,18 +21,18 @@
 
       <AAlert :show-icon="false">函数方式</AAlert>
 
-      <a-button class="my-4 mr-4" type="primary" @click="openFnFullLoading">
+      <AButton class="my-4 mr-4" type="primary" @click="openFnFullLoading">
         全屏 Loading
-      </a-button>
-      <a-button class="my-4" type="primary" @click="openFnWrapLoading">
+      </AButton>
+      <AButton class="my-4" type="primary" @click="openFnWrapLoading">
         容器内 Loading
-      </a-button>
+      </AButton>
 
       <AAlert :show-icon="false">指令方式</AAlert>
 
-      <a-button class="my-4 mr-4" type="primary" @click="openDirectiveLoading">
+      <AButton class="my-4 mr-4" type="primary" @click="openDirectiveLoading">
         打开指令Loading
-      </a-button>
+      </AButton>
     </div>
   </PageWrapper>
 </template>

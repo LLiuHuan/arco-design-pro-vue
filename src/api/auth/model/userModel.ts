@@ -12,6 +12,7 @@ export interface LoginModel {
 }
 
 export interface UserInfoModel {
+  user: string;
   userId: string;
   userName: string;
   avatar: string;

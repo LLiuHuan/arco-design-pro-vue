@@ -13,9 +13,22 @@ export default {
 
     search: '搜索',
 
+    tooltipLock: '锁定屏幕',
+    lockScreenPassword: '锁屏密码',
+    lockScreen: '锁定屏幕',
+
     logOut: '退出系统',
     logOutMessage: '确定要退出系统吗？',
     userCenter: '个人中心',
+
+    tooltipNotify: '消息通知',
+    msgTabMessage: '消息',
+    msgTabNotice: '通知',
+    msgTabBtn: '清空',
+    msgTabTodo: '待办',
+    msgAllRead: '全部已读',
+    msgViewMore: '查看更多',
+    msgNoContent: '暂无消息',
   },
   multipleTab: {
     reload: '重新加载',

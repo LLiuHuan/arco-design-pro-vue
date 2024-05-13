@@ -10,7 +10,6 @@ const dashboard: AuthRoute.Route = {
       meta: {
         title: '分析页',
         ignoreAuth: true,
-        icon: 'icon-park-outline:analysis',
         i18nTitle: 'routes.dashboard.analysis',
       },
     },
@@ -21,7 +20,6 @@ const dashboard: AuthRoute.Route = {
       meta: {
         title: '工作台',
         ignoreAuth: true,
-        icon: 'icon-park-outline:workbench',
         i18nTitle: 'routes.dashboard.workbench',
       },
     },

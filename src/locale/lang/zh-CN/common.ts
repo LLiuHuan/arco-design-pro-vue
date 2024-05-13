@@ -10,4 +10,7 @@ export default {
   chooseText: '请选择',
 
   install: '安装',
+
+  redo: '刷新',
+  back: '返回',
 };

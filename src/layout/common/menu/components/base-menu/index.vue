@@ -5,7 +5,7 @@
       class="h-full overflow-y-auto"
     >
       <AMenu
-        class="transition-base"
+        class="transition-base vertical-mix-menu"
         :selected-keys="menuState.selectedKeys"
         :open-keys="menuState.openKeys"
         :theme="theme"
@@ -47,7 +47,7 @@
     /**
      * The theme of the current parent component - [当前父组件的主题]
      */
-    theme?: AppEnum;
+    theme?: 'light' | 'dark';
     /**
      * The mode of the menu - [菜单的模式]
      */

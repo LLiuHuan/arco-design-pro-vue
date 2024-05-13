@@ -96,7 +96,7 @@
     [MenuModeEnum.VERTICAL_MIX]: {
       showLogo: false,
       showMenu: false,
-      showMenuToggle: false,
+      showMenuToggle: true,
     },
     [MenuModeEnum.HORIZONTAL]: {
       showLogo: true,

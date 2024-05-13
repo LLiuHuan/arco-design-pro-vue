@@ -13,7 +13,10 @@
       class="px-12px"
     />
     <div v-else class="h-full flex-y-center flex-1-hidden">
-      <LayoutTrigger v-if="showMenuToggle" :sider="false"></LayoutTrigger>
+      <LayoutTrigger
+        v-if="showMenuToggle && isTrigger && getTrigger === 'HEADER'"
+        :sider="false"
+      ></LayoutTrigger>
       <Breadcrumb v-if="!getIsMobile" class="pl-5px" />
     </div>
     <!--  left end  -->
@@ -33,11 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-  import {
-    useHeaderSetting,
-    useMenuSetting,
-    useRootSetting,
-  } from '@/hooks/setting';
+  import { useMenuSetting, useRootSetting } from '@/hooks/setting';
   import { useRouteStoreWithOut } from '@/store/modules/route';
   import { MenuModeEnum } from '@/enums';
   import { AppLogo } from '@/components/AppLogo';
@@ -70,7 +69,7 @@
   defineProps<Props>();
 
   const { getIsMobile } = useRootSetting();
-  const { getMenuWidth } = useMenuSetting();
+  const { getMenuWidth, isTrigger, getTrigger } = useMenuSetting();
   const { getLayoutMode } = useLayoutSetting();
   const { getMenus } = useRouteStoreWithOut();
   const { menus } = useMixMenuContext();

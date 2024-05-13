@@ -66,6 +66,7 @@
       />
     </SettingItem>
     <SettingItem
+      v-if="isVerticalMix || isVertical"
       key="5"
       :label="$t('layout.setting.interfaceFunction.menuCollapseButton')"
     >
@@ -200,6 +201,7 @@
     getAccordion,
     getMixSideFixed,
     isVerticalMix,
+    isVertical,
     getMixSideTrigger,
     getMenuWidth,
     getCollapsedMenuWidth,

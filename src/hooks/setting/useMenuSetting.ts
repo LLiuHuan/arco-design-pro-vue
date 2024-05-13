@@ -82,6 +82,14 @@ export const useMenuSetting = () => {
   );
 
   /**
+   * @description 获取是否是垂直混合模式
+   * @description Get whether it is vertical mixed mode
+   */
+  const isVertical = computed(
+    () => unref(getLayoutMode) === MenuModeEnum.VERTICAL,
+  );
+
+  /**
    * @description 获取是否是水平混合模式
    * @description Get whether it is horizontal mixed mode
    */
@@ -94,6 +102,8 @@ export const useMenuSetting = () => {
   );
 
   const isNotMixMenu = computed(() => !unref(isMixMenu));
+
+  const isTrigger = computed(() => unref(getTrigger) !== 'NONE');
 
   /**
    * @description 获取菜单宽度 展开时的宽度
@@ -193,6 +203,8 @@ export const useMenuSetting = () => {
     isHorizontalMix,
     isMixMenu,
     isNotMixMenu,
+    isVertical,
+    isTrigger,
 
     getMenuWidth,
     getCollapsedMenuWidth,

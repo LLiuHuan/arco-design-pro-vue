@@ -182,7 +182,6 @@ const handler = (
 function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
   const config = handler(event, value);
-  console.log(config);
   appStore.setProjectConfig(config);
 }
 

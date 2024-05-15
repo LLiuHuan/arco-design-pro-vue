@@ -6,8 +6,6 @@
   defineOptions({
     name: 'UserCenter',
   });
-
-  console.log('33333');
 </script>
 
 <style lang="less" scoped></style>

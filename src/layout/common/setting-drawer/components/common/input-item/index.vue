@@ -41,7 +41,6 @@
 
   const handleChange = (value: boolean | string | number | undefined) => {
     if (props.event) {
-      console.log('handleChange', value, props.event);
       baseHandler(props.event, value);
     }
   };

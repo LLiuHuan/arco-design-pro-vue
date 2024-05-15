@@ -2,7 +2,8 @@
   <AWatermark
     class="wh-full"
     :content="getShowWatermark ? getWatermarkText.split(/[,，]/) : ''"
-    :z-index="110"
+    :z-index="520"
+    :grayscale="getGrayMode"
   >
     <AdminLayout
       v-model:sider-collapse="siderCollapse"
@@ -16,7 +17,7 @@
       :tab-visible="getShowMultipleTab"
       :tab-height="getTabHeight"
       :tab-auto-collapse="getFoldAutoCollapse"
-      :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
+      :content-class="!getContentXScrollable ? 'overflow-x-hidden' : ''"
       :sider-visible="isSiderVisible"
       :sider-width="getSiderWidth"
       :sider-collapsed-width="getSiderCollapsedWidth"
@@ -71,6 +72,7 @@
     LayoutTabs,
     SettingDrawer,
   } from '../common';
+  // TODO: 循环引用
   import { setupMixMenuContext } from '../context';
 
   const {
@@ -92,6 +94,7 @@
     getIsMobile,
     getShowWatermark,
     getWatermarkText,
+    getGrayMode,
   } = useRootSetting();
 
   const layoutMode = computed(

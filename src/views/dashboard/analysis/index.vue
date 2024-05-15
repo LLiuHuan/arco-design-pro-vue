@@ -115,8 +115,6 @@
   const { logout } = useAuth();
   // const route = useRoute();
   // const router = useRouter();
-
-  console.log('1111222');
 </script>
 
 <style lang="less" scoped></style>

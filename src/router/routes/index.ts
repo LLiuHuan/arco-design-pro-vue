@@ -46,6 +46,9 @@ export const NO_PERMISSION_ROUTE: AuthRoute.Route = {
     title: '无权限',
     singleLayout: 'blank',
   },
+  props: {
+    status: 403,
+  },
 };
 
 export const NOT_FOUND_ROUTE: AuthRoute.Route = {
@@ -93,10 +96,10 @@ export const REDIRECT_ROUTE: AuthRoute.Route = {
 export const CONSTANT_ROUTES: AuthRoute.Route[] = [
   ROOT_ROUTE,
   LOGIN_ROUTE,
-  // CONSTANT_PAGE_ROUTE,
-  // NO_PERMISSION_ROUTE,
-  // NOT_FOUND_ROUTE,
-  // SERVER_ERROR_ROUTE,
+  CONSTANT_PAGE_ROUTE,
+  NO_PERMISSION_ROUTE,
+  NOT_FOUND_ROUTE,
+  SERVER_ERROR_ROUTE,
   INVALID_ROUTE,
   REDIRECT_ROUTE,
 ];

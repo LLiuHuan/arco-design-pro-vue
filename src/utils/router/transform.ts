@@ -60,7 +60,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
 
   // 外链路由
   if (hasHref(item)) {
-    Object.assign(itemRoute, { component: getViewComponent('404') });
+    Object.assign(itemRoute, { component: getViewComponent('not-found') });
   }
 
   // 路由组件

@@ -34,7 +34,6 @@ export function useContextMenu(
   };
 
   const closeMenu = () => {
-    console.log('closeMenu');
     visible.value = false;
   };
 

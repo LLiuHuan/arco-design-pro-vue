@@ -1,41 +1,50 @@
 <template>
-  <AdminLayout
-    v-model:sider-collapse="siderCollapse"
-    :mode="layoutMode"
-    :scroll-el-id="LAYOUT_SCROLL_EL_ID"
-    :scroll-mode="getLayoutScrollMode"
-    :is-mobile="getIsMobile"
-    :full-content="getFullContent"
-    :fixed-top="getFixedHeaderAndTab"
-    :header-height="getHeaderHeight"
-    :tab-visible="getShowMultipleTab"
-    :tab-height="getTabHeight"
-    :tab-auto-collapse="getFoldAutoCollapse"
-    :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
-    :sider-visible="isSiderVisible"
-    :sider-width="getSiderWidth"
-    :sider-collapsed-width="getSiderCollapsedWidth"
-    :footer-visible="getShowFooter"
-    :footer-height="getFooterHeight"
-    :fixed-footer="getFooterFixed"
-    :right-footer="true"
+  <AWatermark
+    class="wh-full"
+    :content="getShowWatermark ? getWatermarkText.split(/[,，]/) : ''"
+    :z-index="110"
   >
-    <template #header>
-      <LayoutHeader v-bind="headerProps" />
-    </template>
-    <template #tab>
-      <LayoutTabs />
-    </template>
-    <template #sider>
-      <LayoutSider />
-    </template>
-    <LayoutContent />
-    <SettingDrawer />
-    <LayoutFeature />
-    <template #footer>
-      <LayoutFooter />
-    </template>
-  </AdminLayout>
+    <AdminLayout
+      v-model:sider-collapse="siderCollapse"
+      :mode="layoutMode"
+      :scroll-el-id="LAYOUT_SCROLL_EL_ID"
+      :scroll-mode="getLayoutScrollMode"
+      :is-mobile="getIsMobile"
+      :full-content="getFullContent"
+      :fixed-top="getFixedHeaderAndTab"
+      :header-height="getHeaderHeight"
+      :tab-visible="getShowMultipleTab"
+      :tab-height="getTabHeight"
+      :tab-auto-collapse="getFoldAutoCollapse"
+      :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
+      :sider-visible="isSiderVisible"
+      :sider-width="getSiderWidth"
+      :sider-collapsed-width="getSiderCollapsedWidth"
+      :footer-visible="getShowFooter"
+      :footer-height="getFooterHeight"
+      :fixed-footer="getFooterFixed"
+      :right-footer="true"
+    >
+      <template #header>
+        <LayoutHeader v-bind="headerProps" />
+      </template>
+      <template #tab>
+        <LayoutTabs />
+      </template>
+      <template #sider>
+        <LayoutSider />
+      </template>
+      <LayoutContent />
+      <SettingDrawer />
+      <LayoutFeature />
+      <template #footer>
+        <LayoutFooter />
+      </template>
+      <template #backTop>
+        <ABackTop :target-container="`#${LAYOUT_SCROLL_EL_ID}`" />
+      </template>
+    </AdminLayout>
+  </AWatermark>
 </template>
 
 <script lang="ts" setup>
@@ -46,8 +55,8 @@
     useMultipleTabSetting,
     useRootSetting,
   } from '@/hooks/setting';
-  import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@adp/materials';
   import type { LayoutMode } from '@adp/materials';
+  import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@adp/materials';
   import { MenuModeEnum } from '@/enums';
   import { App } from '~/types/app';
   import { computed, unref } from 'vue';
@@ -55,12 +64,12 @@
   import { useFullContent } from '@/hooks/web/useFullContent';
   import {
     LayoutContent,
-    LayoutFooter,
-    LayoutSider,
-    SettingDrawer,
-    LayoutHeader,
-    LayoutTabs,
     LayoutFeature,
+    LayoutFooter,
+    LayoutHeader,
+    LayoutSider,
+    LayoutTabs,
+    SettingDrawer,
   } from '../common';
   import { setupMixMenuContext } from '../context';
 
@@ -77,8 +86,13 @@
   const { getShowFooter, getFooterHeight, getFooterFixed } = useFooterSetting();
   const { getLayoutMode, getLayoutScrollMode } = useLayoutSetting();
   const { getFullContent } = useFullContent();
-  const { getFixedHeaderAndTab, getContentXScrollable, getIsMobile } =
-    useRootSetting();
+  const {
+    getFixedHeaderAndTab,
+    getContentXScrollable,
+    getIsMobile,
+    getShowWatermark,
+    getWatermarkText,
+  } = useRootSetting();
 
   const layoutMode = computed(
     (): LayoutMode =>
@@ -126,4 +140,14 @@
   setupMixMenuContext();
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less">
+  @import '@/styles/scrollbar.less';
+
+  #__SCROLL_EL_ID__ {
+    .scrollbar(8px, #e1e1e1);
+  }
+
+  .dark #__SCROLL_EL_ID__ {
+    .scrollbar(8px, #555);
+  }
+</style>

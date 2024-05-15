@@ -4,7 +4,7 @@
     :class="{
       'p-16px': showPadding,
     }"
-    class="overflow-hidden h-full bg-[var(--color-fill-1)] text-[var(--color-text-1)]"
+    class="min-h-full h-full bg-[var(--color-fill-1)] text-[var(--color-text-1)]"
   >
     <RouterView
       v-slot="{ Component, route }"
@@ -39,8 +39,8 @@
 <script lang="ts" setup>
   import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import {
-    useRootSetting,
     useMultipleTabSetting,
+    useRootSetting,
     useTransitionSetting,
   } from '@/hooks/setting';
   import { computed, unref } from 'vue';

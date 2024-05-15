@@ -2,8 +2,8 @@ import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import { AppEnum, ThemeColorEnum } from '@/enums';
 import type { ProjectConfig, ThemeSettingColors } from '~/types/config';
-import { usePreferredColorScheme } from '@vueuse/core';
 import { ThemeInfo } from '~/types/config';
+import { usePreferredColorScheme } from '@vueuse/core';
 import { setThemeColors } from '@/utils/common';
 
 export const useRootSetting = () => {
@@ -131,6 +131,20 @@ export const useRootSetting = () => {
   const getThemePro = computed(() => appStore.getProjectConfig.themeProSetting);
 
   /**
+   * @description: 获取是否开启水印
+   * @description: Get whether to enable watermark
+   */
+  const getShowWatermark = computed(() => appStore.getProjectConfig.watermark);
+
+  /**
+   * @description: 获取水印文本
+   * @description: Get watermark text
+   */
+  const getWatermarkText = computed(
+    () => appStore.getProjectConfig.watermarkText,
+  );
+
+  /**
    * @description: 设置项目配置
    * @description: Set project configuration
    *
@@ -230,6 +244,8 @@ export const useRootSetting = () => {
     getWeakMode,
     getGrayMode,
     getThemePro,
+    getShowWatermark,
+    getWatermarkText,
 
     setRootSetting,
     setDarkMode,

@@ -1,5 +1,5 @@
 <template>
-  <BaseScrollbarContext>
+  <div>
     <AGrid :cols="1" :col-gap="12" :row-gap="12">
       <AGridItem>
         <ACard :title="$t('routes.about.title')">
@@ -67,11 +67,10 @@
         </ACard>
       </AGridItem>
     </AGrid>
-  </BaseScrollbarContext>
+  </div>
 </template>
 
 <script lang="ts" setup>
-  import BaseScrollbarContext from '@/components/BaseScrollbarContent/src/index.vue';
   import { pkgJson } from './model';
 
   const {

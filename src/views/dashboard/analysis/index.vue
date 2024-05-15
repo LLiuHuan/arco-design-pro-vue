@@ -1,5 +1,5 @@
 <template>
-  <BaseScrollbarContext>
+  <div>
     <AButton @click="logout">退出</AButton>
     <ul>
       <li><a href="#">item 1</a></li>
@@ -103,7 +103,7 @@
       <li><a href="#">item 99</a></li>
       <li><a href="#">item 100</a></li>
     </ul>
-  </BaseScrollbarContext>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -111,7 +111,6 @@
   // import { useRoute, useRouter } from 'vue-router';
 
   import { useAuth } from '@/hooks/web/useAuth';
-  import { BaseScrollbarContext } from '@/components/BaseScrollbarContent';
 
   const { logout } = useAuth();
   // const route = useRoute();

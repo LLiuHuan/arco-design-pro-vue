@@ -39,6 +39,9 @@ enum HandlerEnum {
   LAYOUT_SCROLL_MODE,
   GRAY_MODE,
   WEAK_MODE,
+
+  WATERMARK,
+  WATERMARK_TEXT,
 }
 
 const handler = (
@@ -173,6 +176,15 @@ const handler = (
       toggleClass(value, 'color-weak', document.documentElement);
       return {
         colorWeak: value,
+      };
+
+    case HandlerEnum.WATERMARK:
+      return {
+        watermark: value,
+      };
+    case HandlerEnum.WATERMARK_TEXT:
+      return {
+        watermarkText: value,
       };
     default:
       return {};

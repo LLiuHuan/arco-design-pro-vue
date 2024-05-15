@@ -188,6 +188,13 @@ const defaultSetting: ProjectConfig = {
   permissionMode: PermissionModeEnum.ROLE,
   themeProSetting: null,
   contentXScrollable: false,
+
+  // 是否打开水印
+  // Whether to open the watermark
+  watermark: false,
+  // 水印文本
+  // Watermark text
+  watermarkText: 'Arco Vue3',
 };
 
 export const appSetting = { ...defaultSetting, ...jsonSetting };

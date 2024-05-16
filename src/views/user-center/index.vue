@@ -1,11 +1,13 @@
 <template>
-  <span>USER_CENTER</span>
+  <LookForward/>
 </template>
 
 <script lang="ts" setup>
-  defineOptions({
-    name: 'UserCenter',
-  });
+defineOptions({
+  name: 'UserCenter',
+});
+
+import {LookForward} from "@/components/LookForward";
 </script>
 
 <style lang="less" scoped></style>

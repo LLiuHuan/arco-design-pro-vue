@@ -1,4 +1,4 @@
-import type { ProjectConfig } from '~/types/config';
+import type {ProjectConfig} from '~/types/config';
 import {
   AppEnum,
   CacheTypeEnum,
@@ -201,3 +201,8 @@ export const appSetting: ProjectConfig = {
   ...defaultSetting,
   ...(jsonSetting as ProjectConfig),
 };
+
+
+export {
+  jsonSetting as ProjectSetting,
+}

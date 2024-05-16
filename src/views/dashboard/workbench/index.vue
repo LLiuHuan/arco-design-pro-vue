@@ -1,15 +1,9 @@
 <template>
-  <div>
-    {{ name }}
-
-    <!--    {{ routeStore.getSearchMenus }}-->
-    <div>111</div>
-    <!--    {{ routeStore.getMenus }}-->
-  </div>
+  <LookForward/>
 </template>
 
 <script lang="ts" setup>
-  const name = 'WORKBENCH';
+import {LookForward} from "@/components/LookForward";
 </script>
 
 <style lang="less" scoped></style>

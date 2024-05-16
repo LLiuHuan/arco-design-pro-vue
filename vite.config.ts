@@ -1,8 +1,11 @@
 import {defineConfig, loadEnv} from 'vite';
-import {getEnvConfig} from '.env.config';
+import {fileURLToPath} from 'node:url';
+import dayjs from 'dayjs';
+import {getEnvConfig} from './.env.config';
 import {createViteBuild, createVitePlugins, createViteProxy,} from './build/vite';
-import {fileURLToPath} from "node:url";
-import dayjs from "dayjs";
+
+// crypto-js 默认使用4.1.1，最新版打包以后报错
+// unocss默认使用0.58.5，最新版改成ejs了，需要手动改回0.58.5
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => {
@@ -22,11 +25,9 @@ export default defineConfig((configEnv) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    plugins: createVitePlugins(viteEnv, {
-      isBuild: configEnv.command === 'build',
-    }),
+    plugins: createVitePlugins(viteEnv, configEnv.command === 'build'),
     define: {
-      BUILD_TIME: JSON.stringify(buildTime)
+      BUILD_TIME: JSON.stringify(buildTime),
     },
     server: {
       host: '0.0.0.0',
@@ -35,7 +36,7 @@ export default defineConfig((configEnv) => {
       proxy: createViteProxy(VITE_HTTP_PROXY, envConfig),
     },
     optimizeDeps: {
-      exclude: ['crypto-js']
+      exclude: ['crypto-js'],
     },
     build: createViteBuild(viteEnv),
     css: {

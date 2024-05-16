@@ -1,21 +1,21 @@
-import CryptoJS from 'crypto-js';
+import CryptoES from 'crypto-es';
 
 export class Crypto<T extends object> {
-  key: CryptoJS.lib.WordArray;
+  key: CryptoES.lib.WordArray;
 
-  iv: CryptoJS.lib.WordArray;
+  iv: CryptoES.lib.WordArray;
 
   constructor(secretKey?: string, secretIv?: string) {
     if (secretKey === undefined) {
-      this.key = CryptoJS.lib.WordArray.random(16);
+      this.key = CryptoES.lib.WordArray.random(16);
     } else {
-      this.key = CryptoJS.enc.Utf8.parse(secretKey);
+      this.key = CryptoES.enc.Utf8.parse(secretKey);
     }
 
     if (secretIv === undefined) {
-      this.iv = CryptoJS.lib.WordArray.random(16);
+      this.iv = CryptoES.lib.WordArray.random(16);
     } else {
-      this.iv = CryptoJS.enc.Utf8.parse(secretIv);
+      this.iv = CryptoES.enc.Utf8.parse(secretIv);
     }
   }
 
@@ -25,13 +25,13 @@ export class Crypto<T extends object> {
   // AES 加密
   encryptAES(encryptData: T) {
     const dataString = JSON.stringify(encryptData);
-    const encrypted = CryptoJS.AES.encrypt(dataString, this.key, {
+    const encrypted = CryptoES.AES.encrypt(dataString, this.key, {
       iv: this.iv, // 使用密钥偏移量
-      mode: CryptoJS.mode.CBC, // 使用 CBC 模式
+      mode: CryptoES.mode.CBC, // 使用 CBC 模式
       // 除了CBC（密码块链模式）之外
       // crypto-js 库还支持：
       // 1. ECB（电子密码本模式）2. CFB（密码反馈模式）3. OFB（输出反馈模式）4. CTR（计数器模式）
-      padding: CryptoJS.pad.Pkcs7,
+      padding: CryptoES.pad.Pkcs7,
     });
     return encrypted.toString();
   }
@@ -39,12 +39,12 @@ export class Crypto<T extends object> {
   // AES 解密
   decryptAES(encryptData: string) {
     try {
-      const decrypt = CryptoJS.AES.decrypt(encryptData, this.key, {
+      const decrypt = CryptoES.AES.decrypt(encryptData, this.key, {
         iv: this.iv, // 使用密钥偏移量
-        mode: CryptoJS.mode.CBC, // 使用 CBC 模式
-        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoES.mode.CBC, // 使用 CBC 模式
+        padding: CryptoES.pad.Pkcs7,
       });
-      const decryptString = CryptoJS.enc.Utf8.stringify(decrypt);
+      const decryptString = CryptoES.enc.Utf8.stringify(decrypt);
       return JSON.parse(decryptString);
     } catch (error) {
       console.error('解密失败:', error);
@@ -58,23 +58,23 @@ export class Crypto<T extends object> {
   // DES 加密
   encryptDES(encryptData: T) {
     const dataString = JSON.stringify(encryptData);
-    const dataHex = CryptoJS.enc.Utf8.parse(dataString);
-    const encrypted = CryptoJS.DES.encrypt(dataHex, this.key, {
+    const dataHex = CryptoES.enc.Utf8.parse(dataString);
+    const encrypted = CryptoES.DES.encrypt(dataHex, this.key, {
       iv: this.iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      mode: CryptoES.mode.CBC,
+      padding: CryptoES.pad.Pkcs7,
     });
     return encrypted.toString();
   }
 
   // DES 解密
   decryptDES(encryptedData: string) {
-    const decrypt = CryptoJS.DES.decrypt(encryptedData, this.key, {
+    const decrypt = CryptoES.DES.decrypt(encryptedData, this.key, {
       iv: this.iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      mode: CryptoES.mode.CBC,
+      padding: CryptoES.pad.Pkcs7,
     });
-    const decryptString = CryptoJS.enc.Utf8.stringify(decrypt);
+    const decryptString = CryptoES.enc.Utf8.stringify(decrypt);
     return JSON.parse(decryptString);
   }
 
@@ -85,23 +85,23 @@ export class Crypto<T extends object> {
   // Triple DES 加密
   encryptTripleDES(encryptData: T) {
     const dataString = JSON.stringify(encryptData);
-    const dataHex = CryptoJS.enc.Utf8.parse(dataString);
-    const encrypted = CryptoJS.TripleDES.encrypt(dataHex, this.key, {
+    const dataHex = CryptoES.enc.Utf8.parse(dataString);
+    const encrypted = CryptoES.TripleDES.encrypt(dataHex, this.key, {
       iv: this.iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      mode: CryptoES.mode.CBC,
+      padding: CryptoES.pad.Pkcs7,
     });
     return encrypted.toString();
   }
 
   // Triple DES 解密
   decryptTripleDES(encryptedData: string) {
-    const decrypt = CryptoJS.TripleDES.decrypt(encryptedData, this.key, {
+    const decrypt = CryptoES.TripleDES.decrypt(encryptedData, this.key, {
       iv: this.iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      mode: CryptoES.mode.CBC,
+      padding: CryptoES.pad.Pkcs7,
     });
-    const decryptString = CryptoJS.enc.Utf8.stringify(decrypt);
+    const decryptString = CryptoES.enc.Utf8.stringify(decrypt);
     return JSON.parse(decryptString);
   }
 
@@ -110,8 +110,8 @@ export class Crypto<T extends object> {
   // Rabbit 加密
   encryptRabbit(encryptData: string) {
     const dataString = JSON.stringify(encryptData);
-    const dataHex = CryptoJS.enc.Utf8.parse(dataString);
-    const encrypted = CryptoJS.Rabbit.encrypt(dataHex, this.key, {
+    const dataHex = CryptoES.enc.Utf8.parse(dataString);
+    const encrypted = CryptoES.Rabbit.encrypt(dataHex, this.key, {
       iv: this.iv,
     });
     return encrypted.toString();
@@ -119,10 +119,10 @@ export class Crypto<T extends object> {
 
   // Rabbit 解密
   decryptRabbit(encryptedData: string) {
-    const decrypt = CryptoJS.Rabbit.decrypt(encryptedData, this.key, {
+    const decrypt = CryptoES.Rabbit.decrypt(encryptedData, this.key, {
       iv: this.iv,
     });
-    const decryptString = CryptoJS.enc.Utf8.stringify(decrypt);
+    const decryptString = CryptoES.enc.Utf8.stringify(decrypt);
     return JSON.parse(decryptString);
   }
 
@@ -131,19 +131,19 @@ export class Crypto<T extends object> {
   // RC4 加密
   encryptRC4(encryptData: T) {
     const dataString = JSON.stringify(encryptData);
-    const encrypted = CryptoJS.RC4.encrypt(dataString, this.key);
+    const encrypted = CryptoES.RC4.encrypt(dataString, this.key);
     return encrypted.toString();
   }
 
   // RC4 解密
   decryptRC4(encryptedData: string) {
-    const decrypted = CryptoJS.RC4.decrypt(encryptedData, this.key);
-    return decrypted.toString(CryptoJS.enc.Utf8);
+    const decrypted = CryptoES.RC4.decrypt(encryptedData, this.key);
+    return decrypted.toString(CryptoES.enc.Utf8);
   }
 
   // SHA256 哈希
-  hashSHA256(data: string | CryptoJS.lib.WordArray) {
-    const hash = CryptoJS.SHA256(data);
+  hashSHA256(data: string | CryptoES.lib.WordArray) {
+    const hash = CryptoES.SHA256(data);
     return hash.toString();
   }
 }

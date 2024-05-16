@@ -4,7 +4,7 @@
   "useErrorHandle": false,
   "showSettingButton": true,
   "showDarkModeToggle": true,
-  "showLogo": false,
+  "showLogo": true,
   "fixedHeaderAndTab": true,
   "transitionSetting": {
     "enable": true,
@@ -70,5 +70,7 @@
   "fullContent": false,
   "permissionMode": "ROLE",
   "themeProSetting": null,
-  "contentXScrollable": false
+  "contentXScrollable": false,
+  "watermark": false,
+  "watermarkText": "Arco Vue3"
 }

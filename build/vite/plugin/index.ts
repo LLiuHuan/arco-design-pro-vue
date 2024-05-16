@@ -15,12 +15,11 @@ import { createAppConfigPlugin } from './appConfig';
 /**
  * vite插件
  * @param viteEnv - 环境变量配置
- * @param root
  * @param isBuild
  */
 export function createVitePlugins(
   viteEnv: ImportMetaEnv,
-  { isBuild }: { root: string; isBuild: boolean },
+  isBuild: boolean,
 ): (PluginOption | PluginOption[])[] {
   const plugins: (PluginOption | PluginOption[])[] = [
     ...configVuePlugin(), // vue基础插件

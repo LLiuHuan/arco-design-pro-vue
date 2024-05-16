@@ -1,9 +1,4 @@
-import {
-  defineConfig,
-  presetUno,
-  transformerDirectives,
-  transformerVariantGroup,
-} from 'unocss';
+import {defineConfig, presetUno, transformerDirectives, transformerVariantGroup} from 'unocss';
 
 import presetLegacyCompat from '@unocss/preset-legacy-compat';
 
@@ -26,7 +21,7 @@ export default defineConfig({
   },
   // 预设
   presets: [
-    presetUno({ dark: 'class' }),
+    presetUno({dark: 'class'}),
     // 将颜色函数 (rgb()和hsl()) 从空格分隔转换为逗号分隔，更好的兼容性app端，example：
     // `rgb(255 0 0)` -> `rgb(255, 0, 0)`
     // `rgba(255 0 0 / 0.5)` -> `rgba(255, 0, 0, 0.5)`
@@ -87,9 +82,6 @@ export default defineConfig({
     'border-y-base': 'border-t-base border-b-base',
   },
   theme: {
-    color: {
-      base_text: 'rgb(var(--base-text-color))',
-    },
     boxShadow: {
       header: '0 1px 2px rgb(0, 21, 41, 0.08)',
       sider: '2px 0 8px 0 rgb(29, 35, 41, 0.05)',

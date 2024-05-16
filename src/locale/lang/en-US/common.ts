@@ -13,4 +13,6 @@ export default {
 
   redo: 'Refresh',
   back: 'Back',
+
+  lookForward: 'Under development, please stay tuned!',
 };

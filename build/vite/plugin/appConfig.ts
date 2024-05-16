@@ -1,7 +1,7 @@
-import { PluginOption } from 'vite';
+import {PluginOption} from 'vite';
 import colors from 'picocolors';
-import { createContentHash, strToHex } from '../utils/hash';
-import { getEnvConfig } from '../utils/env';
+import {createContentHash, strToHex} from '../utils/hash';
+import {getEnvConfig} from '../utils/env';
 import pkg from '../../../package.json';
 
 const GLOBAL_CONFIG_FILE_NAME = '_app.config.js';
@@ -38,8 +38,8 @@ interface CreateAppConfigPluginOptions {
 }
 
 function createAppConfigPlugin({
-  isBuild,
-}: CreateAppConfigPluginOptions): PluginOption {
+                                 isBuild,
+                               }: CreateAppConfigPluginOptions): PluginOption {
   let publicPath: string;
   let source: string;
   if (!isBuild) {
@@ -47,7 +47,7 @@ function createAppConfigPlugin({
       name: PLUGIN_NAME,
     };
   }
-  const { version } = pkg;
+  const {version} = pkg;
 
   return {
     name: PLUGIN_NAME,
@@ -84,7 +84,7 @@ function createAppConfigPlugin({
           source,
         });
         console.log(
-          colors.cyan(`\n✨configuration file is build successfully!`),
+          colors.cyan(`\n✨configuration file is build successfully!\n`),
         );
       } catch (error) {
         console.log(
@@ -97,4 +97,4 @@ function createAppConfigPlugin({
   };
 }
 
-export { createAppConfigPlugin };
+export {createAppConfigPlugin};

@@ -27,7 +27,10 @@
       :right-footer="true"
     >
       <template #header>
-        <LayoutHeader v-bind="headerProps" />
+        <LayoutHeader
+          v-bind="headerProps"
+          :show-logo="headerProps.showLogo && getShowLogo"
+        />
       </template>
       <template #tab>
         <LayoutTabs />
@@ -94,6 +97,7 @@
     getShowWatermark,
     getWatermarkText,
     getGrayMode,
+    getShowLogo,
   } = useRootSetting();
 
   const layoutMode = computed(

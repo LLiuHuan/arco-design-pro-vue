@@ -1,10 +1,6 @@
-import { defineConfig, loadEnv } from 'vite';
-import { getEnvConfig } from '.env.config';
-import {
-  createViteBuild,
-  createVitePlugins,
-  createViteProxy,
-} from './build/vite';
+import {defineConfig, loadEnv} from 'vite';
+import {getEnvConfig} from '.env.config';
+import {createViteBuild, createVitePlugins, createViteProxy,} from './build/vite';
 import {fileURLToPath} from "node:url";
 import dayjs from "dayjs";
 
@@ -12,7 +8,7 @@ import dayjs from "dayjs";
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd()) as ImportMetaEnv;
 
-  const { VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT } = viteEnv;
+  const {VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT} = viteEnv;
 
   const envConfig = getEnvConfig(viteEnv);
 
@@ -26,7 +22,9 @@ export default defineConfig((configEnv) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    plugins: createVitePlugins(viteEnv),
+    plugins: createVitePlugins(viteEnv, {
+      isBuild: configEnv.command === 'build',
+    }),
     define: {
       BUILD_TIME: JSON.stringify(buildTime)
     },
@@ -35,6 +33,9 @@ export default defineConfig((configEnv) => {
       port: VITE_PORT || 3200,
       open: true,
       proxy: createViteProxy(VITE_HTTP_PROXY, envConfig),
+    },
+    optimizeDeps: {
+      exclude: ['crypto-js']
     },
     build: createViteBuild(viteEnv),
     css: {

@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-  const name = 'workbench';
+  const name = 'WORKBENCH';
 </script>
 
 <style lang="less" scoped></style>

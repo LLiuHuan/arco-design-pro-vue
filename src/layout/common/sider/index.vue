@@ -2,13 +2,14 @@
   <div class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]">
     <AppLogo
       v-if="showLogo"
-      class="transition-base text-16px font-bold"
+      class="text-16px font-bold"
       :show-title="!getCollapsed"
       :style="{ height: `${getHeaderHeight + 1}px` }"
     />
     <LayoutVerticalMixMenu v-if="isVerticalMix">
       <AppLogo
-        class="transition-base text-16px font-bold"
+        v-if="getShowLogo"
+        class="text-16px font-bold"
         :show-title="false"
         :style="{ height: `${getHeaderHeight + 1}px` }"
       />
@@ -23,22 +24,28 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHeaderSetting, useMenuSetting } from '@/hooks/setting';
+  import {
+    useHeaderSetting,
+    useMenuSetting,
+    useRootSetting,
+  } from '@/hooks/setting';
   import { AppLogo } from '@/components/AppLogo';
   import { computed, unref } from 'vue';
   import { useRouteStoreWithOut } from '@/store/modules/route';
   import {
     LayoutHorizontalMixMenu,
-    LayoutVerticalMixMenu,
     LayoutVerticalMenu,
+    LayoutVerticalMixMenu,
   } from '../menu';
 
   const { isVerticalMix, isHorizontalMix, getCollapsed } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
+  const { getShowLogo } = useRootSetting();
   const { getMenus } = useRouteStoreWithOut();
 
   const showLogo = computed(
-    () => !unref(isVerticalMix) && !unref(isHorizontalMix),
+    () =>
+      unref(getShowLogo) && !unref(isVerticalMix) && !unref(isHorizontalMix),
   );
 </script>
 

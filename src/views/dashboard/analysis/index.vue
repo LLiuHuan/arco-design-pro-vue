@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AButton @click="logout">退出</AButton>
+    <div>ANALYSIS</div>
     <ul>
       <li><a href="#">item 1</a></li>
       <li><a href="#">item 2</a></li>
@@ -107,14 +107,9 @@
 </template>
 
 <script lang="ts" setup>
-  // import { useAuthStore } from '@/store/modules/auth';
-  // import { useRoute, useRouter } from 'vue-router';
+  // import { useAuth } from '@/hooks/web/useAuth';
 
-  import { useAuth } from '@/hooks/web/useAuth';
-
-  const { logout } = useAuth();
-  // const route = useRoute();
-  // const router = useRouter();
+  // const { logout } = useAuth();
 </script>
 
 <style lang="less" scoped></style>

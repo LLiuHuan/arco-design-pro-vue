@@ -4,7 +4,7 @@
   "useErrorHandle": false,
   "showSettingButton": true,
   "showDarkModeToggle": true,
-  "showLogo": true,
+  "showLogo": false,
   "fixedHeaderAndTab": true,
   "transitionSetting": {
     "enable": true,

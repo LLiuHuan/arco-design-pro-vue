@@ -170,7 +170,7 @@
     </SettingItem>
     <SettingItem
       key="17"
-      :label="$t('layout.setting.interfaceFunction.footerFixed')"
+      :label="$t('layout.setting.interfaceFunction.watermark')"
     >
       <SwitchItem
         :def="getShowWatermark"
@@ -179,7 +179,7 @@
     </SettingItem>
     <SettingItem
       key="18"
-      :label="$t('layout.setting.interfaceFunction.footerFixed')"
+      :label="$t('layout.setting.interfaceFunction.watermarkText')"
     >
       <InputItem :def="getWatermarkText" :event="HandlerEnum.WATERMARK_TEXT" />
     </SettingItem>

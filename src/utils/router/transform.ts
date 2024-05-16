@@ -4,7 +4,6 @@
  */
 export function transformRoutePathToRouteName(path: AuthRoute.RoutePath) {
   if (path === '/') return 'root';
-
   const pathSplitMark = '/';
   const routeSplitMark = '_';
   return path

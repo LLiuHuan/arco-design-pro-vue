@@ -12,7 +12,7 @@ export function configPWAPlugin(viteEnv: ImportMetaEnv) {
     manifest: {
       name: VITE_GLOB_APP_TITLE,
       short_name: VITE_GLOB_APP_SHORT_NAME,
-      // theme_color: '#fff',
+      theme_color: '#fff',
       icons: [
         {
           src: '/logo.png',

@@ -6,10 +6,7 @@
     }"
     class="min-h-full h-full bg-[var(--color-fill-1)] text-[var(--color-text-1)]"
   >
-    <RouterView
-      v-slot="{ Component, route }"
-      class="transition duration-300 ease-in-out h-full"
-    >
+    <RouterView v-slot="{ Component, route }" class="h-full">
       <Transition
         :name="
           getTransitionName({

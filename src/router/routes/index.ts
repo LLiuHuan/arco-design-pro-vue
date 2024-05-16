@@ -28,15 +28,15 @@ export const LOGIN_ROUTE: AuthRoute.Route = {
   },
 };
 
-export const CONSTANT_PAGE_ROUTE: AuthRoute.Route = {
-  name: 'constant-page',
-  path: '/constant-page',
-  component: 'self',
-  meta: {
-    title: '固定页面',
-    singleLayout: 'blank',
-  },
-};
+// export const CONSTANT_PAGE_ROUTE: AuthRoute.Route = {
+//   name: 'constant-page',
+//   path: '/constant-page',
+//   component: 'self',
+//   meta: {
+//     title: '固定页面',
+//     singleLayout: 'blank',
+//   },
+// };
 
 export const NO_PERMISSION_ROUTE: AuthRoute.Route = {
   name: '403',
@@ -96,7 +96,7 @@ export const REDIRECT_ROUTE: AuthRoute.Route = {
 export const CONSTANT_ROUTES: AuthRoute.Route[] = [
   ROOT_ROUTE,
   LOGIN_ROUTE,
-  CONSTANT_PAGE_ROUTE,
+  // CONSTANT_PAGE_ROUTE,
   NO_PERMISSION_ROUTE,
   NOT_FOUND_ROUTE,
   SERVER_ERROR_ROUTE,

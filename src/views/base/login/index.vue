@@ -2,7 +2,7 @@
   <div class="flex">
     <AppLogo
       class="fixed top-24px left-22px text-[var(--color-fill-1)] text-20px"
-      :title="$t('system.title')"
+      :title="VITE_GLOB_APP_TITLE"
     ></AppLogo>
     <div class="fixed top-24px right-22px z-101">
       <AButton
@@ -59,6 +59,8 @@
   import { SvgIcon } from '@/components/Icon';
   import { useLocale } from '@/locale/useLocale';
   import { LocaleType } from '~/types/config';
+  import { dateUtil } from '@/utils/date';
+  import { getAppEnvConfig } from '@/utils/envs';
   import { loginModuleLabels } from './enum';
   import {
     BindWechat,
@@ -70,10 +72,11 @@
     ResetPwd,
   } from './components';
 
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = dateUtil().year();
   const { toggleDarkMode } = useRootSetting();
   const { changeLocale } = useLocale();
+
+  const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
 
   const handleSelect = (value: string) => {
     changeLocale(value as LocaleType);

@@ -12,6 +12,7 @@ export const getAuthCache = <T>(key: StorageInterface.BasicKeys) => {
 };
 
 export const setAuthCache = (key: StorageInterface.BasicKeys, value: any) => {
+  localStg.set(key, value);
   return isLocal ? localStg.set(key, value) : sessionStg.set(key, value);
 };
 

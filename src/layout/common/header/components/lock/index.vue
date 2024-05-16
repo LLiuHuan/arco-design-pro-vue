@@ -23,7 +23,7 @@
         <AFormItem
           field="password"
           :label="$t('layout.header.lockScreenPassword')"
-          :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
+          :rules="[{ required: true, message: '请输入密码' }]"
           :validate-trigger="['change', 'input']"
         >
           <AInputPassword

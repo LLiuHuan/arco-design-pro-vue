@@ -10,13 +10,17 @@ import { configPWAPlugin } from './pwa';
 import { configImageminPlugin } from './imagemin';
 import { configUnocssPlugin } from './unocss';
 import { configSvgIconsPlugin } from './svgIcons';
+import { createAppConfigPlugin } from './appConfig';
 
 /**
  * vite插件
  * @param viteEnv - 环境变量配置
+ * @param root
+ * @param isBuild
  */
 export function createVitePlugins(
   viteEnv: ImportMetaEnv,
+  { isBuild }: { root: string; isBuild: boolean },
 ): (PluginOption | PluginOption[])[] {
   const plugins: (PluginOption | PluginOption[])[] = [
     ...configVuePlugin(), // vue基础插件
@@ -24,6 +28,7 @@ export function createVitePlugins(
     configProgressPlugin(), // 打包进度条
     configSvgIconsPlugin(viteEnv), // svg图标
   ];
+  plugins.push(createAppConfigPlugin({ isBuild }));
 
   // 添加ArcoDesign插件
   // @arco-plugins/vite-vue
@@ -31,7 +36,7 @@ export function createVitePlugins(
 
   // 添加动态index.html插件
   // vite-plugin-html
-  plugins.push(configHtmlPlugin(viteEnv));
+  plugins.push(configHtmlPlugin(viteEnv, isBuild));
 
   // 开启打包文件大小结果分析
   if (viteEnv.VITE_VISUALIZER === 'Y') {

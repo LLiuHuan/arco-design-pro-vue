@@ -26,7 +26,7 @@ const defaultSetting: ProjectConfig = {
   // 是否显示主题切换按钮
   showDarkModeToggle: true,
   // Whether to display the logo - [是否显示Logo]
-  showLogo: true,
+  showLogo: false,
   // 是否固定头部和标签
   // Whether to fix the header and tab
   fixedHeaderAndTab: true,
@@ -197,4 +197,7 @@ const defaultSetting: ProjectConfig = {
   watermarkText: 'Arco Vue3',
 };
 
-export const appSetting = { ...defaultSetting, ...jsonSetting };
+export const appSetting: ProjectConfig = {
+  ...defaultSetting,
+  ...(jsonSetting as ProjectConfig),
+};

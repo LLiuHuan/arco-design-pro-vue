@@ -14,22 +14,28 @@
 
 ---
 
-> I'm a front-end novice and I don't have much time. I just write and see how I can deal with it. If you like it, you can click Start.
+> I'm a front-end novice and I don't have much time. I just write and see how I can deal with it. If you like it, you
+> can click Start.
 
-> It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be developed.
+> It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be
+> developed.
 
 ## 1. Basic introduction
 
 ### 1.1 Project Introduction
 
-> It was originally planned to implement the vue version of arco-design-pro, but the official said that the vue version will be launched in December 2021, so this project will not completely copy arco-design-pro.
-> It is envisioned to develop a mid- and back-end front-end project that can be used in a production environment, and will develop multiple back-ends for everyone to choose from. 
-
+> It was originally planned to implement the vue version of arco-design-pro, but the official said that the vue version
+> will be launched in December 2021, so this project will not completely copy arco-design-pro.
+> It is envisioned to develop a mid- and back-end front-end project that can be used in a production environment, and
+> will develop multiple back-ends for everyone to choose from.
 
 - Old version
     - [Online preview](http://arco_legacy.0x3.cn/)  
-    （Please use Chrome to open）
+      （Please use Chrome to open）
     - [Github address](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
+- New version
+    - [Online preview](http://arco.0x3.cn/)
+    - Document address Under development
 
 ### 1.2 Do you have any good ideas? Issues can be raised
 
@@ -82,143 +88,152 @@ Develop in the following order
 #### 0x01. All features
 
 ##### 0x01.1 Basic function
-  - [x] Light/Dark/Follow System
-  - [x] Internationalization (Chinese and English)
-  - [x] Full screen
-  - [x] Login page
-  - [ ] Registration page
-  - [ ] Forgot the password
-  - [x] Search
-  - [ ] Notification
-  - [ ] Lock screen
-  - [x] Project configuration
-  - [ ] Cache page
+
+- [x] Light/Dark/Follow System
+- [x] Internationalization (Chinese and English)
+- [x] Full screen
+- [x] Login page
+- [ ] Registration page
+- [ ] Forgot the password
+- [x] Search
+- [ ] Notification
+- [ ] Lock screen
+- [x] Project configuration
+- [ ] Cache page
 
 ##### 0x01.2 Dashboard
-  - [ ] Analysis page
-  - [ ] Monitoring page
-  - [ ] Workbench page
+
+- [ ] Analysis page
+- [ ] Monitoring page
+- [ ] Workbench page
 
 ##### 0x01.3 Document
-  - [ ] Vue documentation
-  - [ ] Vue documentation (new version)
-  - [ ] Vite Documentation
-  - [ ] Baidu (external link)
-  - [ ] Documentation (external link)
+
+- [ ] Vue documentation
+- [ ] Vue documentation (new version)
+- [ ] Vite Documentation
+- [ ] Baidu (external link)
+- [ ] Documentation (external link)
 
 ##### 0x01.4 Component example
-  - [ ] Button component
-  - [ ] Card component
-  - [ ] Table component
-  - [ ] Form component
-  - [ ] Chart component
+
+- [ ] Button component
+- [ ] Card component
+- [ ] Table component
+- [ ] Form component
+- [ ] Chart component
     - [ ] ECharts
     - [ ] D3
-  - [ ] Map component
-  - [ ] Video component
-  - [ ] Editor component
+- [ ] Map component
+- [ ] Video component
+- [ ] Editor component
     - [ ] Rich text component
     - [ ] Markdown
     - [ ] Yarm
     - [ ] Json component
-  - [ ] Swiper component
-  - [ ] Icon component
-  - [ ] Avatar upload component
-  - [ ] Image cropping component
-  - [ ] Upload component
-  - [ ] QR code component
-  - [ ] Password strength component
-  - [ ] Animation component
-  - [ ] Digital animation components
-  - [ ] Rolling component
-  - [ ] Popup component
-  - [ ] Lazy loading component
-  - [ ] Verification component
+- [ ] Swiper component
+- [ ] Icon component
+- [ ] Avatar upload component
+- [ ] Image cropping component
+- [ ] Upload component
+- [ ] QR code component
+- [ ] Password strength component
+- [ ] Animation component
+- [ ] Digital animation components
+- [ ] Rolling component
+- [ ] Popup component
+- [ ] Lazy loading component
+- [ ] Verification component
     - [ ] Drag verification
     - [ ] Picture restore
-  - [ ] Loading component
-  - [ ] Table selector component
+- [ ] Loading component
+- [ ] Table selector component
 
 ##### 0x01.5 Functional example
-  - [ ] Websocket test
-  - [ ] Login expired
-  - [ ] Error log
-  - [ ] Error log collection
-  - [ ] Print
-  - [ ] Tab operation
-  - [ ] Right click menu
-  - [ ] File download
-  - [ ] Picture Preview
-  - [ ] Watermark
-  - [ ] Full screen
-  - [ ] QR code
-  - [ ] Error log
-  - [ ] Tab with parameters
-  - [ ] Third party login
-  - [x] Dynamic skin exchange
-  - [ ] Breakpoint continuation
+
+- [ ] Websocket test
+- [ ] Login expired
+- [ ] Error log
+- [ ] Error log collection
+- [ ] Print
+- [ ] Tab operation
+- [ ] Right click menu
+- [ ] File download
+- [ ] Picture Preview
+- [ ] Watermark
+- [ ] Full screen
+- [ ] QR code
+- [ ] Error log
+- [ ] Tab with parameters
+- [ ] Third party login
+- [x] Dynamic skin exchange
+- [ ] Breakpoint continuation
 
 ##### 0x01.6 Permissions example
-  - [ ] Based on front-end permissions
+
+- [ ] Based on front-end permissions
     - [ ] Page level permissions
     - [ ] Button level permissions
     - [ ] Front-end permission test page
-  - [ ] Based on backend permissions
+- [ ] Based on backend permissions
     - [ ] Page level permissions
     - [ ] Button level permissions
     - [ ] Backend permission test page
 
 ##### 0x01.7 System Management
-  - [ ] User Management
-  - [ ] Role management
-  - [ ] Menu management
-  - [ ] Menu management2
-  - [ ] Department management
-  - [ ] Dictionary management
-  - [ ] Parameter management
-  - [ ] Notification management
-  - [ ] Operating log
-  - [ ] Login log
-  - [ ] Online user
-  - [ ] Timing task
-  - [ ] Service monitoring
-  - [ ] System restart
-  - [ ] Change Password
-  - [ ] API management
+
+- [ ] User Management
+- [ ] Role management
+- [ ] Menu management
+- [ ] Menu management2
+- [ ] Department management
+- [ ] Dictionary management
+- [ ] Parameter management
+- [ ] Notification management
+- [ ] Operating log
+- [ ] Login log
+- [ ] Online user
+- [ ] Timing task
+- [ ] Service monitoring
+- [ ] System restart
+- [ ] Change Password
+- [ ] API management
 
 ##### 0x01.8 Page
-  - [ ] Form page
+
+- [ ] Form page
     - [ ] Basic form
     - [ ] Stepping form
     - [ ] Advanced form
-  - [ ] Details page
+- [ ] Details page
     - [ ] Basic details page
     - [ ] Advanced detail page
-  - [ ] Result page
+- [ ] Result page
     - [ ] Successful page
     - [ ] Failed page
-  - [ ] Personal page
+- [ ] Personal page
     - [ ] Personal center
     - [ ] Personal settings
-  - [ ] Abnormal pages
+- [ ] Abnormal pages
     - [ ] 403
     - [ ] 404
     - [ ] 500
     - [ ] Network Error
     - [ ] No data
-  - [ ] List page
+- [ ] List page
     - [ ] Standard list
     - [ ] Card list
     - [ ] Search list
 
 ##### 0x01.9 Graphic editor ?
-  - [ ] Flow chart
+
+- [ ] Flow chart
 
 ##### 0x01.10 Guide pages
-  - [ ] Guide pages
+
+- [ ] Guide pages
 
 ##### 0x01.11 About
-
 
 ## 7. Project structure
 
@@ -231,8 +246,6 @@ I’ll add it later, it’s not decided yet, it will mainly be based on function
 <a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
   <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">
 </a>
-
-
 
 ## License
 

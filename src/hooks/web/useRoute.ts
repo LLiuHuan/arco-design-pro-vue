@@ -4,11 +4,11 @@ import {
   filterAuthRoutesByUserPermission,
   getCacheRoutes,
   transformAuthRouteToSearchMenus,
-  transformAuthRouteToVueRoutes,
 } from '@/utils/router';
 import { routes as staticRoutes } from '@/router/modules';
 import { transformAuthRouteToMenu } from '@/utils/router/menu';
 import { router } from '@/router';
+import { transformAuthRouteToVueRoutes } from '@/router/helper/transform';
 
 export const useRoute = () => {
   const routeStore = useRouteStoreWithOut();

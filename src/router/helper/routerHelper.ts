@@ -1,7 +1,7 @@
 import { router } from '@/router';
 import { useRouteStoreWithOut } from '@/store/modules/route';
-import { transformAuthRouteToVueRoutes } from '@/utils/router';
 import { CONSTANT_ROUTES } from '@/router/routes';
+import { transformAuthRouteToVueRoutes } from '@/router/helper/transform';
 
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = [];

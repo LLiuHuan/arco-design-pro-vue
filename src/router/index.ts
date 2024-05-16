@@ -4,7 +4,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import type { App } from 'vue';
-import { transformAuthRouteToVueRoutes } from '@/utils/router';
+import { transformAuthRouteToVueRoutes } from '@/router/helper/transform';
 import { CONSTANT_ROUTES } from './routes';
 
 const { VITE_HASH_ROUTE = 'N', VITE_GLOB_BASE_URL } = import.meta.env;

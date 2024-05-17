@@ -23,6 +23,7 @@ declare namespace PageRoute {
     | '403'
     | '404'
     | '500'
+    | 'exception'
     | 'redirect'
     | 'constant-page'
     | 'login'
@@ -36,7 +37,10 @@ declare namespace PageRoute {
     | 'comp_loading'
     | 'user-center'
     | 'feta'
-    | 'feta_sub1';
+    | 'feta_sub1'
+    | 'document'
+    | 'document_vue3'
+    | 'document_github';
 
   /**
    * last degree route key, which has the page file

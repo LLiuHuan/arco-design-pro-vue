@@ -7,7 +7,7 @@
 <script lang="ts" setup>
   import { useLockStore } from '@/store/modules/lock';
   import { computed } from 'vue';
-  import LockPage from './LockPage.vue';
+  import LockPage from './lockPage.vue';
 
   const lockStore = useLockStore();
   const getIsLock = computed(() => lockStore?.getLockInfo?.isLock ?? false);

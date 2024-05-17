@@ -98,6 +98,9 @@ export default {
         wrapper: '外层滚动',
         content: '主体滚动',
       },
+
+      watermark: '水印',
+      watermarkText: '水印文本',
     },
     interfaceDisplay: {
       title: '界面显示',
@@ -120,6 +123,13 @@ export default {
 
       grayMode: '灰色模式',
       colorWeak: '色弱模式',
+
+      showLogo: 'Logo',
+
+      tabs: '标签页',
+      tabsQuickBtn: '标签页快捷按钮',
+      tabsRedoBtn: '标签页刷新按钮',
+      tabsFoldBtn: '标签页折叠按钮',
     },
 
     layoutMode: {

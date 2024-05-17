@@ -52,7 +52,7 @@ export function createStorage<T extends object>(type: StorageType) {
         expire: expire !== null ? new Date().getTime() + expire * 1000 : null,
       };
 
-      const json = crypto.encrypt(storageData);
+      const json = crypto.encryptAES(storageData);
 
       stg.setItem(key as string, json);
     },
@@ -67,8 +67,8 @@ export function createStorage<T extends object>(type: StorageType) {
         let storageData: StorageData<T[K]> | null = null;
 
         try {
-          storageData = crypto.decrypt(json);
-        } catch {
+          storageData = crypto.decryptAES(json);
+        } catch (e) {
           /* empty */
         }
         if (storageData) {

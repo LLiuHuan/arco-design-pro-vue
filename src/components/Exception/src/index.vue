@@ -1,6 +1,6 @@
 <template>
   <div class="flex-col-center gap-24px min-h-520px wh-full overflow-hidden">
-    <div class="flex text-400px text-primary">
+    <div class="flex text-400px text-primary text-[rgba(var(--primary-6))]">
       <SvgIcon
         v-if="type === '403'"
         local-icon="no-permission"

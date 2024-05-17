@@ -1,14 +1,14 @@
 import {
-  CacheTypeEnum,
-  RouterTransitionEnum,
-  ThemeColorEnum,
   AppEnum,
-  TriggerEnum,
+  CacheTypeEnum,
+  MenuModeEnum,
+  MixSidebarTriggerEnum,
+  PermissionModeEnum,
+  RouterTransitionEnum,
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
-  PermissionModeEnum,
-  MixSidebarTriggerEnum,
-  MenuModeEnum,
+  ThemeColorEnum,
+  TriggerEnum,
 } from '@/enums';
 
 export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
@@ -303,4 +303,11 @@ export interface ProjectConfig {
   // 权限模式
   // Permission mode
   permissionMode: PermissionModeEnum;
+
+  // 是否打开水印
+  // Whether to open the watermark
+  watermark: boolean;
+  // 水印文本
+  // Watermark text
+  watermarkText: string;
 }

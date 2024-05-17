@@ -19,6 +19,18 @@ export const useMultipleTabSetting = () => {
   const getTabHeight = computed(() => appStore.getMultiTabsSetting.height);
 
   /**
+   * @description 获取是否显示快捷操作
+   * @description Get whether to display quick operations
+   */
+  const getShowQuick = computed(() => appStore.getMultiTabsSetting.showQuick);
+
+  /**
+   * @description 获取是否显示刷新
+   * @description Get whether to display refresh
+   */
+  const getShowRedo = computed(() => appStore.getMultiTabsSetting.showRedo);
+
+  /**
    * @description 获取是否显示折叠
    * @description Get whether to display the fold
    */
@@ -38,6 +50,8 @@ export const useMultipleTabSetting = () => {
 
   return {
     getShowMultipleTab,
+    getShowQuick,
+    getShowRedo,
     getShowFold,
     getShowTabs,
     getTabHeight,

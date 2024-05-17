@@ -168,6 +168,21 @@
         :max="100"
       ></InputNumberItem>
     </SettingItem>
+    <SettingItem
+      key="17"
+      :label="$t('layout.setting.interfaceFunction.watermark')"
+    >
+      <SwitchItem
+        :def="getShowWatermark"
+        :event="HandlerEnum.WATERMARK"
+      ></SwitchItem>
+    </SettingItem>
+    <SettingItem
+      key="18"
+      :label="$t('layout.setting.interfaceFunction.watermarkText')"
+    >
+      <InputItem :def="getWatermarkText" :event="HandlerEnum.WATERMARK_TEXT" />
+    </SettingItem>
   </TransitionGroup>
 </template>
 
@@ -185,10 +200,11 @@
   import { getMenuTriggerOptions, getScrollModeOptions } from './helpers';
   import {
     HandlerEnum,
+    InputItem,
+    InputNumberItem,
     SelectItem,
     SettingItem,
     SwitchItem,
-    InputNumberItem,
   } from '../common';
 
   defineOptions({
@@ -213,7 +229,8 @@
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { getFooterHeight, getFooterFixed } = useFooterSetting();
-  const { getFixedHeaderAndTab } = useRootSetting();
+  const { getFixedHeaderAndTab, getShowWatermark, getWatermarkText } =
+    useRootSetting();
   const { getLayoutScrollMode } = useLayoutSetting();
 
   const triggerOptions = getMenuTriggerOptions(unref(false));

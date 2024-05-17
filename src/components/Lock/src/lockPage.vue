@@ -1,24 +1,25 @@
 <template>
-  <div class="fixed inset-0 flex-center wh-full bg-black z-999999">
-    <div
-      class="absolute wh-full text-gray-300 xl:text-xl 2xl:text-3xl text-center enter-y"
-    >
+  <div class="fixed inset-0 flex-center wh-full bg-black z-120">
+    <div class="absolute wh-full text-gray-300 text-center enter-y">
       <div
         v-show="showDate"
-        class="absolute top-0 left-1/2 flex pt-5 h-16 items-center justify-center sm:text-md xl:text-xl text-white flex-col cursor-pointer transform translate-x-1/2"
-        :class="`transform translate-x-1/2`"
+        class="absolute top-0 left-1/2 flex pt-5 h-16 items-center justify-center sm:text-md xl:text-xl text-white flex-col cursor-pointer translate-x-[-50%]"
         @click="handleShowForm(false)"
       >
-        <SvgIcon icon="ph:lock" />
+        <div>
+          <SvgIcon icon="ph:lock" size="20px" />
+        </div>
         <span>{{ $t('sys.lock.unlock') }}</span>
       </div>
 
-      <div class="flex w-screen h-screen justify-center items-center">
+      <div class="flex w-screen h-screen justify-center items-center font-bold">
         <div
-          class="relative mr-5 md:mr-20 w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa] font-weight-700"
-          :class="`sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px`"
+          class="relative mr-5 md:mr-20 w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa]"
         >
-          <span>{{ hour }}</span>
+          <span
+            class="sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
+            >{{ hour }}</span
+          >
           <span
             v-show="showDate"
             class="meridiem absolute left-5 top-5 text-md xl:text-xl"
@@ -27,10 +28,13 @@
           </span>
         </div>
         <div
-          class="w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa] font-weight-700"
-          :class="`sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px`"
+          class="w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa]"
         >
-          <span> {{ minute }}</span>
+          <span
+            class="sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
+          >
+            {{ minute }}</span
+          >
         </div>
       </div>
 
@@ -41,16 +45,17 @@
           style="backdrop-filter: blur(8px)"
         >
           <div class="w-260px">
-            <div class="text-center enter-x">
+            <div class="text-center enter-x flex-col-center pb-10px">
               <img
                 :src="authStore.getUserInfo.avatar || userAvatar"
                 class="w-70px m-0 rounded-50%"
+                alt=""
               />
-              <p class="mt-5px text-[#bababa] font-500">
+              <p class="mt-2 text-[#bababa]">
                 {{ authStore.getUserInfo.userName }}
               </p>
             </div>
-            <AForm :model="lockForm">
+            <AForm class="mt-2" :model="lockForm">
               <AFormItem field="password" hide-label>
                 <AInputPassword
                   v-model:model-value="lockForm.password"
@@ -70,7 +75,7 @@
                 <AButton
                   type="text"
                   size="small"
-                  class="mt-2 mr-2 enter-x"
+                  class="mr-2 enter-x"
                   :disabled="loading"
                   @click="handleShowForm(true)"
                 >
@@ -79,14 +84,13 @@
                 <AButton
                   type="text"
                   size="small"
-                  class="mt-2 mr-2 enter-x"
+                  class="mr-2 enter-x"
                   :disabled="loading"
                   @click="goLogin"
                 >
                   {{ $t('sys.lock.backToLogin') }}
                 </AButton>
                 <AButton
-                  class="mt-2"
                   type="text"
                   size="small"
                   :loading="loading"

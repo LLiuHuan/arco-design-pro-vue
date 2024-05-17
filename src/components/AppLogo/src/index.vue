@@ -1,14 +1,14 @@
 <template>
   <div
-    class="system-logo flex-center cursor-pointer transition-base !text-[rgba(var(--primary-6))]"
+    class="system-logo flex-center cursor-pointer !text-[rgba(var(--primary-6))]"
     @click="goHome"
   >
     <SvgIcon local-icon="logo" :size="logoSize" />
     <div
       v-show="showTitle"
       class="text-16px font-bold leading-normal ml-2 truncate md:opacity-100"
-      >{{ title ?? globTitle }}</div
-    >
+      >{{ title ?? globTitle }}
+    </div>
   </div>
 </template>
 

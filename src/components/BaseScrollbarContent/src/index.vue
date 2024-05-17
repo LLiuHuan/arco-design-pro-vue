@@ -6,11 +6,6 @@
     >
       <slot></slot>
     </AScrollbar>
-
-    <ABackTop
-      target-container=".adp-default-layout-content"
-      :style="{ position: 'absolute' }"
-    />
   </div>
 </template>
 

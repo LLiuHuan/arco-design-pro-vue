@@ -17,9 +17,9 @@
   import { GITHUB_URL } from '@/settings';
   import { openWindow } from '@/utils/common';
   import { useFooterSetting } from '@/hooks/setting';
+  import { dateUtil } from '@/utils/date';
 
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = dateUtil().year();
 
   const { getFooterHeight } = useFooterSetting();
 </script>

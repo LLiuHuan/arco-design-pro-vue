@@ -1,8 +1,8 @@
 <template>
-  <div class="flex h-full">
+  <div class="flex">
     <AppLogo
       class="fixed top-24px left-22px text-[var(--color-fill-1)] text-20px"
-      :title="$t('system.title')"
+      :title="VITE_GLOB_APP_TITLE"
     ></AppLogo>
     <div class="fixed top-24px right-22px z-101">
       <AButton
@@ -15,7 +15,7 @@
 
       <ADropdown trigger="click" @select="handleSelect">
         <AButton type="text" class="!text-[var(--color-text-1)]">
-          <SvgIcon icon="heroicons:language-16-solid" size="20"> </SvgIcon>
+          <SvgIcon icon="heroicons:language-16-solid" size="20"></SvgIcon>
         </AButton>
         <template #content>
           <ADoption :value="LOCALE.ZH_CN">中文</ADoption>
@@ -29,10 +29,9 @@
     />
     <div class="flex flex-1 items-center justify-center pb-40px relative">
       <div class="content-inner">
-        <div
-          class="text-[var(--color-text-1)] text-24px font-medium leading-8"
-          >{{ $t(activeModule.label) }}</div
-        >
+        <div class="text-[var(--color-text-1)] text-24px font-medium leading-8"
+          >{{ $t(activeModule.label) }}
+        </div>
         <div>
           <transition name="fade-slide" mode="out-in" appear>
             <component :is="activeModule.component" />
@@ -51,8 +50,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
   import type { Component } from 'vue';
+  import { computed } from 'vue';
   import { AppLogo } from '@/components/AppLogo';
   import { DarkModeSwitch } from '@/components/DarkModeSwitch';
   import { useRootSetting } from '@/hooks/setting';
@@ -60,21 +59,24 @@
   import { SvgIcon } from '@/components/Icon';
   import { useLocale } from '@/locale/useLocale';
   import { LocaleType } from '~/types/config';
+  import { dateUtil } from '@/utils/date';
+  import { getAppEnvConfig } from '@/utils/envs';
   import { loginModuleLabels } from './enum';
   import {
     BindWechat,
     CodeLogin,
+    ForgetPwd,
+    LoginBg,
     PwdLogin,
     Register,
     ResetPwd,
-    LoginBg,
-    ForgetPwd,
   } from './components';
 
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = dateUtil().year();
   const { toggleDarkMode } = useRootSetting();
   const { changeLocale } = useLocale();
+
+  const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
 
   const handleSelect = (value: string) => {
     changeLocale(value as LocaleType);

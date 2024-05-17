@@ -1,4 +1,4 @@
-import type { ProjectConfig } from '~/types/config';
+import type {ProjectConfig} from '~/types/config';
 import {
   AppEnum,
   CacheTypeEnum,
@@ -26,7 +26,7 @@ const defaultSetting: ProjectConfig = {
   // 是否显示主题切换按钮
   showDarkModeToggle: true,
   // Whether to display the logo - [是否显示Logo]
-  showLogo: true,
+  showLogo: false,
   // 是否固定头部和标签
   // Whether to fix the header and tab
   fixedHeaderAndTab: true,
@@ -188,6 +188,21 @@ const defaultSetting: ProjectConfig = {
   permissionMode: PermissionModeEnum.ROLE,
   themeProSetting: null,
   contentXScrollable: false,
+
+  // 是否打开水印
+  // Whether to open the watermark
+  watermark: false,
+  // 水印文本
+  // Watermark text
+  watermarkText: 'Arco Vue3',
 };
 
-export const appSetting = { ...defaultSetting, ...jsonSetting };
+export const appSetting: ProjectConfig = {
+  ...defaultSetting,
+  ...(jsonSetting as ProjectConfig),
+};
+
+
+export {
+  jsonSetting as ProjectSetting,
+}

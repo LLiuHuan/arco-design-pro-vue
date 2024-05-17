@@ -55,6 +55,8 @@
     sider?: SlotFn;
     /** Footer */
     footer?: SlotFn;
+    /** BackTop */
+    backTop?: SlotFn;
   };
 
   const slots = defineSlots<Slots>();
@@ -270,7 +272,7 @@
       </template>
     </div>
 
-    <ABackTop :target-container="`#${scrollElId}`" />
+    <slot name="backTop"></slot>
   </div>
 </template>
 

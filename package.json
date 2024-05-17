@@ -2,6 +2,7 @@
   "name": "arco-design-pro-vue",
   "version": "0.0.1.bate.1",
   "license": "MIT",
+  "type": "module",
   "author": {
     "name": "LLiuHuan",
     "email": "184555556@qq.com",
@@ -49,10 +50,10 @@
     "@arco-plugins/vite-vue": "^1.4.5",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
-    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.11",
     "mozjpeg": "7.1.1",
     "pinia": "^2.1.7",
+    "postcss": "^8.4.38",
     "vue": "^3.4.27",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.2",
@@ -60,15 +61,15 @@
   },
   "devDependencies": {
     "@iconify/vue": "^4.1.2",
-    "@types/crypto-js": "^4.2.2",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.15",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@unocss/preset-legacy-compat": "^0.59.4",
+    "@unocss/preset-legacy-compat": "^0.60.2",
     "@vitejs/plugin-vue": "^4.6.2",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
@@ -80,11 +81,11 @@
     "less-loader": "^12.2.0",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
+    "picocolors": "^1.0.1",
     "qs": "^6.12.1",
     "rollup-plugin-visualizer": "^5.12.0",
     "typescript": "^5.4.5",
-    "unocss": "^0.59.4",
-    "unocss-applet": "^0.8.1",
+    "unocss": "^0.60.2",
     "vite": "^5.2.11",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.2",
@@ -94,13 +95,8 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.8.27"
   },
-  "pnpm": {
-    "overrides": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
-  },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "keywords": [
     "vue",

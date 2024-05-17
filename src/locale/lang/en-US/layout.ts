@@ -98,6 +98,9 @@ export default {
         wrapper: 'Outer scroll',
         content: 'Main scroll',
       },
+
+      watermark: 'Watermark',
+      watermarkText: 'Watermark text',
     },
     interfaceDisplay: {
       title: 'Interface display',
@@ -120,6 +123,13 @@ export default {
 
       grayMode: 'Gray mode',
       colorWeak: 'Color weak mode',
+
+      showLogo: 'Logo',
+
+      tabs: 'Tabs',
+      tabsQuickBtn: 'Tabs quick button',
+      tabsRedoBtn: 'Tabs refresh button',
+      tabsFoldBtn: 'Tabs fold button',
     },
 
     layoutMode: {

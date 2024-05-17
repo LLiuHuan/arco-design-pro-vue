@@ -1,7 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
 import '@/styles/index.less';
 // vite-plugin-svg-icons 所需必须引入的文件
+// eslint-disable-next-line import/no-unresolved
 import 'virtual:svg-icons-register';
+// eslint-disable-next-line import/no-unresolved
 import 'virtual:uno.css';
 
 /**

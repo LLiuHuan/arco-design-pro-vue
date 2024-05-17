@@ -35,10 +35,20 @@ enum HandlerEnum {
   FOOTER_HEIGHT,
   FOOTER_FIXED,
 
+  // tabs
+  SHOW_TABS,
+  SHOW_TABS_QUICK_BTN,
+  SHOW_TABS_REDO_BTN,
+  SHOW_TABS_FOLD_BTN,
+
   LAYOUT_MODE,
   LAYOUT_SCROLL_MODE,
   GRAY_MODE,
   WEAK_MODE,
+  SHOW_LOGO,
+
+  WATERMARK,
+  WATERMARK_TEXT,
 }
 
 const handler = (
@@ -152,6 +162,25 @@ const handler = (
       };
     // endregion
 
+    // region tabs
+    case HandlerEnum.SHOW_TABS:
+      return {
+        multiTabsSetting: { show: value },
+      };
+    case HandlerEnum.SHOW_TABS_QUICK_BTN:
+      return {
+        multiTabsSetting: { showQuick: value },
+      };
+    case HandlerEnum.SHOW_TABS_REDO_BTN:
+      return {
+        multiTabsSetting: { showRedo: value },
+      };
+    case HandlerEnum.SHOW_TABS_FOLD_BTN:
+      return {
+        multiTabsSetting: { showFold: value },
+      };
+    // endregion
+
     case HandlerEnum.LAYOUT_MODE:
       return {
         layoutSetting: {
@@ -173,6 +202,19 @@ const handler = (
       toggleClass(value, 'color-weak', document.documentElement);
       return {
         colorWeak: value,
+      };
+    case HandlerEnum.SHOW_LOGO:
+      return {
+        showLogo: value,
+      };
+
+    case HandlerEnum.WATERMARK:
+      return {
+        watermark: value,
+      };
+    case HandlerEnum.WATERMARK_TEXT:
+      return {
+        watermarkText: value,
       };
     default:
       return {};

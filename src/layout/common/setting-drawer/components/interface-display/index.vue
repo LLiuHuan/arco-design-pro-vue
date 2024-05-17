@@ -77,6 +77,36 @@
     >
       <SwitchItem :def="getWeakMode" :event="HandlerEnum.WEAK_MODE" />
     </SettingItem>
+    <SettingItem
+      key="10"
+      :label="$t('layout.setting.interfaceDisplay.showLogo')"
+    >
+      <SwitchItem :def="getShowLogo" :event="HandlerEnum.SHOW_LOGO" />
+    </SettingItem>
+    <SettingItem key="11" :label="$t('layout.setting.interfaceDisplay.tabs')">
+      <SwitchItem :def="getShowMultipleTab" :event="HandlerEnum.SHOW_TABS" />
+    </SettingItem>
+    <SettingItem
+      key="12"
+      :label="$t('layout.setting.interfaceDisplay.tabsQuickBtn')"
+    >
+      <SwitchItem
+        :def="getShowQuick"
+        :event="HandlerEnum.SHOW_TABS_QUICK_BTN"
+      />
+    </SettingItem>
+    <SettingItem
+      key="13"
+      :label="$t('layout.setting.interfaceDisplay.tabsRedoBtn')"
+    >
+      <SwitchItem :def="getShowRedo" :event="HandlerEnum.SHOW_TABS_REDO_BTN" />
+    </SettingItem>
+    <SettingItem
+      key="14"
+      :label="$t('layout.setting.interfaceDisplay.tabsFoldBtn')"
+    >
+      <SwitchItem :def="getShowFold" :event="HandlerEnum.SHOW_TABS_FOLD_BTN" />
+    </SettingItem>
   </TransitionGroup>
 </template>
 
@@ -84,6 +114,7 @@
   import {
     useFooterSetting,
     useHeaderSetting,
+    useMultipleTabSetting,
     useRootSetting,
     useTransitionSetting,
   } from '@/hooks/setting';
@@ -100,7 +131,9 @@
     useHeaderSetting();
 
   const { getShowFooter } = useFooterSetting();
-  const { getWeakMode, getGrayMode } = useRootSetting();
+  const { getWeakMode, getGrayMode, getShowLogo } = useRootSetting();
+  const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } =
+    useMultipleTabSetting();
 
   const routerAnimationOptions = getRouterAnimationOptions();
 </script>

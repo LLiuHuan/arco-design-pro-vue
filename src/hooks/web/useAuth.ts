@@ -55,7 +55,6 @@ export const useAuth = () => {
     if (!backendToken) return null;
 
     const userInfo = await loginByToken(backendToken);
-
     if (userInfo) {
       // 登录成功后重定向到登录后的地址
       const { initAuthRoute } = useRoute();

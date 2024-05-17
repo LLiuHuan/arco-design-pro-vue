@@ -79,10 +79,11 @@
         <SvgIcon icon="mingcute:right-fill" />
       </span>
     </div>
-    <div class="flex-center h-full">
+    <div v-if="getShowRedo || getShowQuick" class="flex-center h-full">
       <Setting v-if="(getShowFold && getFullContent) || !getShowHeader" />
-      <Redo />
+      <Redo v-if="getShowRedo" />
       <ContentMenu
+        v-if="getShowQuick"
         :tab-item="$route"
         :active-key="activeKeyRef"
         position="br"
@@ -112,7 +113,7 @@
   import { useHeaderSetting, useMultipleTabSetting } from '@/hooks/setting';
   import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
   import { useFullContent } from '@/hooks/web/useFullContent';
-  import { Redo, Dropdown, Fold, Setting, ContentMenu } from './components';
+  import { ContentMenu, Dropdown, Fold, Redo, Setting } from './components';
 
   const activeKeyRef = ref('');
   const navScroll = ref();
@@ -126,7 +127,7 @@
   const userStore = useAuthStoreWithOut();
   const { goKey } = useGo();
 
-  const { getShowFold } = useMultipleTabSetting();
+  const { getShowFold, getShowQuick, getShowRedo } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
   const { getFullContent } = useFullContent();
 

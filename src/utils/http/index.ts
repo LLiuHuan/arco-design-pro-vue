@@ -2,10 +2,10 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import { clone } from 'lodash-es';
-import { RequestEnum, ContentTypeEnum, ResultEnum } from '@/enums/httpEnum';
-import { useI18n } from '@/hooks/web/useI18n';
 import axios from 'axios';
+import { clone } from 'lodash-es';
+import { ContentTypeEnum, RequestEnum, ResultEnum } from '@/enums/httpEnum';
+import { useI18n } from '@/hooks/web/useI18n';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
 import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
@@ -22,7 +22,7 @@ import { getToken } from '@/utils/auth';
 import { useGo } from '@/hooks/web/usePage';
 import { router } from '@/router';
 import { PageEnum } from '@/enums';
-import { joinTimestamp, formatRequestDate } from './helper';
+import { formatRequestDate, joinTimestamp } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';
 import { AxiosRetry } from './httpRetry';
@@ -318,6 +318,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
+
 export const defHttp = createAxios();
 
 // other api url

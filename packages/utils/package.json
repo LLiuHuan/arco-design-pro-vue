@@ -12,11 +12,8 @@
     }
   },
   "dependencies": {
-    "crypto-js": "^4.2.0",
+    "crypto-es": "^2.1.0",
     "localforage": "^1.10.0",
     "nanoid": "^5.0.7"
-  },
-  "devDependencies": {
-    "@types/crypto-js": "4.2.2"
   }
 }

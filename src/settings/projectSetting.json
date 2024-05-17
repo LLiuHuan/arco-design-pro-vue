@@ -70,5 +70,7 @@
   "fullContent": false,
   "permissionMode": "ROLE",
   "themeProSetting": null,
-  "contentXScrollable": false
+  "contentXScrollable": false,
+  "watermark": false,
+  "watermarkText": "Arco Vue3"
 }

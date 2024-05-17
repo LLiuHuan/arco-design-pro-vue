@@ -13,24 +13,24 @@
 
       <div
         ref="navScroll"
-        class="flex-auto navScroll nowrap-hidden"
         :class="{
           'mx-36px': tabState.scrollable,
           'mx-6px': !tabState.scrollable,
         }"
+        class="flex-auto navScroll nowrap-hidden"
         @wheel="wheel"
       >
         <Draggable
           :list="getTabsState"
-          animation="300"
           align-point
-          item-key="fullPath"
+          animation="300"
           class="flex items-center"
+          item-key="fullPath"
           @change="sortTabs"
         >
           <template #item="{ element }">
             <div>
-              <ContentMenu :tab-item="element" :active-key="activeKeyRef">
+              <ContentMenu :active-key="activeKeyRef" :tab-item="element">
                 <div
                   :id="element.fullPath"
                   class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
@@ -84,8 +84,8 @@
       <Redo v-if="getShowRedo" />
       <ContentMenu
         v-if="getShowQuick"
-        :tab-item="$route"
         :active-key="activeKeyRef"
+        :tab-item="$route"
         position="br"
         trigger="click"
       >
@@ -239,7 +239,8 @@
       return;
     }
     const { path, fullPath, meta = {} } = route;
-    const { currentActiveMenu, hideTab } = meta as RouteMeta;
+    const { currentActiveMenu, hideTab, href } = meta as RouteMeta;
+    if (href) return;
     const isHide = !hideTab ? null : currentActiveMenu;
     const p = isHide || fullPath || path;
     if (activeKeyRef.value !== p) {

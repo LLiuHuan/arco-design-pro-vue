@@ -1,7 +1,7 @@
-import { views } from '@/views';
-import { RouteComponent } from 'vue-router';
-import { isFunction } from '@/utils/common';
-import { BasicLayout, BlankLayout } from '@/layout';
+import {views} from '@/views';
+import {RouteComponent} from 'vue-router';
+import {isFunction} from '@/utils/common';
+import {BasicLayout, BlankLayout, FlowLayout} from '@/layout';
 
 type Lazy<T> = () => Promise<T>;
 
@@ -19,6 +19,7 @@ export function getLayoutComponent(layoutType: LayoutComponentType) {
   const layoutComponent: LayoutComponent = {
     basic: BasicLayout,
     blank: BlankLayout,
+    flow: FlowLayout,
   };
   return layoutComponent[layoutType];
 }
@@ -37,12 +38,12 @@ function setViewComponentName(
   if (isAsyncComponent(component)) {
     return async () => {
       const result = await component();
-      Object.assign(result.default, { name });
+      Object.assign(result.default, {name});
       return result;
     };
   }
 
-  Object.assign(component, { name });
+  Object.assign(component, {name});
 
   return component;
 }

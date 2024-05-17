@@ -1,49 +1,20 @@
 <template>
-  <div class="flex">
-    <AppLogo
-      class="fixed top-24px left-22px text-[var(--color-fill-1)] text-20px"
-      :title="VITE_GLOB_APP_TITLE"
-    ></AppLogo>
-    <div class="fixed top-24px right-22px z-101">
-      <AButton
-        type="text"
-        class="!text-[var(--color-text-1)]"
-        @click="toggleDarkMode"
-      >
-        <DarkModeSwitch></DarkModeSwitch>
-      </AButton>
-
-      <ADropdown trigger="click" @select="handleSelect">
-        <AButton type="text" class="!text-[var(--color-text-1)]">
-          <SvgIcon icon="heroicons:language-16-solid" size="20"></SvgIcon>
-        </AButton>
-        <template #content>
-          <ADoption :value="LOCALE.ZH_CN">中文</ADoption>
-          <ADoption :value="LOCALE.EN_US">English</ADoption>
-        </template>
-      </ADropdown>
-    </div>
+  <div class="wh-full flex">
     <LoginBg
+      v-if="!getIsMobile"
       class="w-35%"
       style="background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%)"
     />
     <div class="flex flex-1 items-center justify-center pb-40px relative">
-      <div class="content-inner">
-        <div class="text-[var(--color-text-1)] text-24px font-medium leading-8"
-          >{{ $t(activeModule.label) }}
-        </div>
-        <div>
-          <transition name="fade-slide" mode="out-in" appear>
-            <component :is="activeModule.component" />
-          </transition>
-        </div>
-      </div>
-      <div class="footer absolute right-0 bottom-0 w-full">
-        <div
-          class="flex justify-center items-center text-[var(--color-text-2)] h-40px"
-        >
-          Arco Design Pro © {{ year }}
-        </div>
+      <div class="content-inner transition-base">
+        <transition appear mode="out-in" name="fade-slide">
+          <component
+            :is="activeModule.component"
+            :style="{
+              width: getIsMobile ? '290px' : '320px',
+            }"
+          />
+        </transition>
       </div>
     </div>
   </div>
@@ -52,15 +23,7 @@
 <script lang="ts" setup>
   import type { Component } from 'vue';
   import { computed } from 'vue';
-  import { AppLogo } from '@/components/AppLogo';
-  import { DarkModeSwitch } from '@/components/DarkModeSwitch';
   import { useRootSetting } from '@/hooks/setting';
-  import { LOCALE } from '@/settings';
-  import { SvgIcon } from '@/components/Icon';
-  import { useLocale } from '@/locale/useLocale';
-  import { LocaleType } from '~/types/config';
-  import { dateUtil } from '@/utils/date';
-  import { getAppEnvConfig } from '@/utils/envs';
   import { loginModuleLabels } from './enum';
   import {
     BindWechat,
@@ -72,15 +35,7 @@
     ResetPwd,
   } from './components';
 
-  const year = dateUtil().year();
-  const { toggleDarkMode } = useRootSetting();
-  const { changeLocale } = useLocale();
-
-  const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
-
-  const handleSelect = (value: string) => {
-    changeLocale(value as LocaleType);
-  };
+  const { getIsMobile } = useRootSetting();
 
   interface Props {
     /** 登录模块分类 */

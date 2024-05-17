@@ -20,7 +20,7 @@ type LoginModuleType =
  * - basic 基础布局
  * - blank 空白布局
  */
-type LayoutComponentType = 'basic' | 'blank';
+type LayoutComponentType = 'basic' | 'blank' | 'flow';
 
 /**
  * The layout mode

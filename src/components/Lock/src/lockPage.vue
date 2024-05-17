@@ -17,7 +17,7 @@
           class="relative mr-5 md:mr-20 w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa]"
         >
           <span
-            class="sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
+            class="text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
             >{{ hour }}</span
           >
           <span
@@ -31,7 +31,7 @@
           class="w-2/5 h-2/5 md:h-4/5 flex-center rounded-30px bg-[#141313] color-[#bababa]"
         >
           <span
-            class="sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
+            class="text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px leading-none"
           >
             {{ minute }}</span
           >
@@ -48,21 +48,21 @@
             <div class="text-center enter-x flex-col-center pb-10px">
               <img
                 :src="authStore.getUserInfo.avatar || userAvatar"
-                class="w-70px m-0 rounded-50%"
                 alt=""
+                class="w-70px m-0 rounded-50%"
               />
               <p class="mt-2 text-[#bababa]">
                 {{ authStore.getUserInfo.userName }}
               </p>
             </div>
-            <AForm class="mt-2" :model="lockForm">
+            <AForm :model="lockForm" class="mt-2">
               <AFormItem field="password" hide-label>
                 <AInputPassword
                   v-model:model-value="lockForm.password"
                   :placeholder="$t('sys.lock.placeholder')"
-                  class="enter-x"
                   allow-clear
                   autocomplete="off"
+                  class="enter-x"
                 />
               </AFormItem>
               <span
@@ -73,27 +73,27 @@
               </span>
               <div class="flex justify-between enter-x">
                 <AButton
-                  type="text"
-                  size="small"
-                  class="mr-2 enter-x"
                   :disabled="loading"
+                  class="mr-2 enter-x"
+                  size="small"
+                  type="text"
                   @click="handleShowForm(true)"
                 >
                   {{ $t('common.back') }}
                 </AButton>
                 <AButton
-                  type="text"
-                  size="small"
-                  class="mr-2 enter-x"
                   :disabled="loading"
+                  class="mr-2 enter-x"
+                  size="small"
+                  type="text"
                   @click="goLogin"
                 >
                   {{ $t('sys.lock.backToLogin') }}
                 </AButton>
                 <AButton
-                  type="text"
-                  size="small"
                   :loading="loading"
+                  size="small"
+                  type="text"
                   @click="unLock()"
                 >
                   {{ $t('sys.lock.entry') }}
@@ -105,7 +105,7 @@
       </transition>
 
       <div
-        class="absolute bottom-5 w-full text-gray-300 xl:text-xl 2xl:text-3xl text-center enter-y"
+        class="absolute bottom-5 w-full text-gray-300 text-2xl xl:text-xl 2xl:text-3xl text-center enter-y"
       >
         <div v-show="!showDate" class="text-5xl mb-4 enter-x">
           {{ hour }}:{{ minute }} <span class="text-3xl">{{ meridiem }}</span>

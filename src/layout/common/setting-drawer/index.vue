@@ -1,15 +1,16 @@
 <template>
   <ADrawer
-    :width="360"
-    :visible="getSettingDrawerState"
+    :drawer-style="{ padding: 0 }"
     :title="$t('layout.setting.drawerTitle')"
+    :visible="getSettingDrawerState"
+    :width="getIsMobile ? '90%' : '320px'"
+    class="overflow-hidden setting-drawer"
     unmount-on-close
-    class="overflow-y-auto overflow-x-hidden setting-drawer"
-    @ok="handleOk"
     @cancel="handleCancel"
+    @ok="handleOk"
   >
     <template #footer>
-      <ASpace :size="16" direction="vertical" class="w-full">
+      <ASpace :size="16" class="w-full" direction="vertical">
         <AButton class="w-full" type="primary" @click="copySettings">
           <template #icon>
             <icon-copy />
@@ -18,8 +19,8 @@
         </AButton>
         <AButton
           class="w-full"
-          type="primary"
           status="warning"
+          type="primary"
           @click="handleResetSetting"
         >
           <template #icon>
@@ -29,29 +30,28 @@
         </AButton>
       </ASpace>
     </template>
-    <div class="overflow-hidden">
+    <AScrollbar class="overflow-auto h-full" outer-class="h-full">
       <ThemeSchema />
       <LayoutMode />
       <ThemeColor />
       <InterfaceFunction />
       <InterfaceDisplay />
-    </div>
+    </AScrollbar>
   </ADrawer>
 </template>
 
 <script lang="ts" setup>
   import { useRootSetting } from '@/hooks/setting';
-  import { useClipboard } from '@vueuse/core';
-  import { Message } from '@arco-design/web-vue';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { appSetting } from '@/settings';
+  import { defaultSetting } from '@/settings';
   import { unref } from 'vue';
+  import { copyText } from '@/utils/common/copy';
   import {
-    ThemeSchema,
-    ThemeColor,
-    InterfaceFunction,
     InterfaceDisplay,
+    InterfaceFunction,
     LayoutMode,
+    ThemeColor,
+    ThemeSchema,
   } from './components';
 
   defineOptions({
@@ -63,8 +63,8 @@
     setSettingDrawerState,
     getRootSetting,
     setRootSetting,
+    getIsMobile,
   } = useRootSetting();
-  const { copy } = useClipboard();
   const { t } = useI18n();
 
   const handleOk = () => {
@@ -77,17 +77,20 @@
 
   const copySettings = async () => {
     const text = JSON.stringify(unref(getRootSetting), null, 2);
-    await copy(text);
-    Message.success(t('layout.setting.copySettingMsg'));
+    await copyText(text, t('layout.setting.copySettingMsg'));
   };
 
   const handleResetSetting = () => {
     try {
-      setRootSetting(appSetting);
+      setRootSetting(defaultSetting);
     } catch (error: any) {
       console.error(error);
     }
   };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+  :deep(.arco-drawer-body) {
+    padding: 0;
+  }
+</style>

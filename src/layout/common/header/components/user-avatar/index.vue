@@ -2,7 +2,7 @@
   <ADropdown @select="handleDropdown">
     <HoverContainer class="px-10px">
       <div class="!h-40px flex-center">
-        <AAvatar :size="24" :image-url="getUser.avatar"></AAvatar>
+        <AAvatar :image-url="getUser.avatar" :size="24"></AAvatar>
         <span class="pl-8px text-16px text-[var(--color-text-2)]">
           {{ getUser.userName }}
         </span>
@@ -26,13 +26,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, VNode } from 'vue';
+  import { computed, h, ref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
   import { useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useGo } from '@/hooks/web/usePage';
   import { useAuth } from '@/hooks/web/useAuth';
+  import { Modal } from '@arco-design/web-vue';
+  import { SvgIcon } from '@/components/Icon';
+  import { useRootSetting } from '@/hooks/setting';
   import Lock from '../lock/index.vue';
 
   interface DropdownOption {
@@ -43,6 +46,7 @@
 
   const { goKey } = useGo();
   const auth = useAuth();
+  const { getIsMobile } = useRootSetting();
 
   const lockVisible = ref(false);
 
@@ -81,7 +85,28 @@
     switch (optionKey) {
       case 'logout':
         // handle logout
-        auth.logout();
+        Modal.open({
+          title: () =>
+            h('div', { class: 'flex justify-start items-center w-full' }, [
+              h(SvgIcon, {
+                icon: 'material-symbols:info',
+                size: 24,
+                color: '#faad14',
+              }),
+              h('span', { style: 'margin-left: 8px' }, ['温馨提示']),
+            ]),
+          content: '是否确认退出系统？',
+          okText: '确认',
+          okButtonProps: { size: 'small' },
+          cancelText: '取消',
+          cancelButtonProps: { size: 'small' },
+          closable: true,
+          simple: true,
+          width: getIsMobile ? '90%' : 'auto',
+          onOk() {
+            auth.logout();
+          },
+        });
         break;
       case 'lock':
         lockVisible.value = true;

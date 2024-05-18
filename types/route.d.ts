@@ -36,11 +36,12 @@ declare namespace PageRoute {
     | 'comp'
     | 'comp_loading'
     | 'user-center'
-    | 'feta'
-    | 'feta_sub1'
     | 'document'
     | 'document_vue3'
-    | 'document_github';
+    | 'document_github'
+    | 'func'
+    | 'func_sub1'
+    | 'func_error-log';
 
   /**
    * last degree route key, which has the page file

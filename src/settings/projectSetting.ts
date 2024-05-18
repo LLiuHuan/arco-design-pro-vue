@@ -18,7 +18,7 @@ export const defaultSetting: ProjectConfig = {
   // Permission-related cache is stored in sessionStorage or localStorage - [权限相关缓存存储在sessionStorage还是localStorage中]
   permissionCacheType: CacheTypeEnum.LOCAL,
   // Use error-handler-plugin - [显示错误处理插件]
-  useErrorHandle: false,
+  useErrorHandle: true,
   // Whether to show the configuration button
   // 是否显示配置按钮
   showSettingButton: true,

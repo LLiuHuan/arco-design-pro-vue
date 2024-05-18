@@ -4,6 +4,7 @@ import type { ErrorLogInfo } from '~/types/storage';
 import { ErrorTypeEnum } from '@/enums';
 import { appSetting } from '@/settings';
 import { formatToDateTime } from '@/utils/date';
+import { unref } from 'vue';
 
 export interface ErrorLogState {
   errorLogInfoList: Nullable<ErrorLogInfo[]>;
@@ -23,7 +24,7 @@ export const useErrorLogStore = defineStore({
      * @param state
      */
     getErrorLogInfoList(state): ErrorLogInfo[] {
-      return state.errorLogInfoList || [];
+      return state.errorLogInfoList ?? [];
     },
     /**
      * @description 获取错误日志列表数量
@@ -45,8 +46,9 @@ export const useErrorLogStore = defineStore({
         ...info,
         time: formatToDateTime(new Date()),
       };
-      this.errorLogInfoList = [item, ...(this.errorLogInfoList || [])];
+      this.errorLogInfoList = [item, ...(unref(this.errorLogInfoList) ?? [])];
       this.errorLogListCount += 1;
+      console.log('errorLogInfoList', this.errorLogInfoList, item);
     },
     /**
      * @description 设置错误日志列表数量

@@ -8,6 +8,7 @@ import { initProjectSetting } from '@/settings/initProjectSetting';
 import { setupGlobDirectives } from '@/directives';
 import { AppLoading } from '@/components/AppLoading';
 import { setupRouterGuard } from '@/router/guard';
+import { setupErrorHandle } from '@/logics/error-handle';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -32,6 +33,9 @@ const setupApp = async () => {
 
   // 注册全局指令
   setupGlobDirectives(app);
+
+  // 配置全局错误处理
+  setupErrorHandle(app);
 
   await router.isReady();
 

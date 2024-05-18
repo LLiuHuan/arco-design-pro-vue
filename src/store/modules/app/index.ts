@@ -3,8 +3,8 @@ import { defineStore } from 'pinia';
 import {
   APP_DARK_MODE_IS_AUTO_KEY,
   APP_DARK_MODE_KEY,
-  PROJ_CFG_KEY,
   AppEnum,
+  PROJ_CFG_KEY,
 } from '@/enums';
 import type {
   HeaderSetting,
@@ -134,10 +134,9 @@ export const useAppStore = defineStore({
     },
     getThemeColors(): ThemeSettingColors {
       const { colors } = this.getProjectConfig.themeSetting;
-      const themeColors = {
+      return {
         ...colors,
       };
-      return themeColors;
     },
   },
   actions: {

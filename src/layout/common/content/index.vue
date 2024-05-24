@@ -19,10 +19,10 @@
         "
         appear
         mode="out-in"
-        @before-leave="setRootSetting({ contentXScrollable: true })"
-        @after-enter="setRootSetting({ contentXScrollable: false })"
+        @before-leave="appStore.setContentXScrollable(true)"
+        @after-enter="appStore.setContentXScrollable(false)"
       >
-        <KeepAlive v-if="openCache" :include="getCaches">
+        <KeepAlive v-if="openCache" :include="getCaches" :max="12">
           <Component
             :is="Component"
             v-if="appStore.reloadFlag"
@@ -61,7 +61,7 @@
   const appStore = useAppStoreWithOut();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
-  const { getOpenKeepAlive, getPageLoading, setRootSetting } = useRootSetting();
+  const { getOpenKeepAlive, getPageLoading } = useRootSetting();
   const { getBasicTransition, getEnableTransition, getOpenPageLoading } =
     useTransitionSetting();
   // 是否开启缓存

@@ -30,9 +30,9 @@
           </ACheckbox>
         </ASpace>
 
-        <AButton class="neutral-btn" size="mini" type="outline">
-          {{ $t('common.resetText') }}
-        </AButton>
+        <!--        <AButton class="neutral-btn" size="mini" type="outline">-->
+        <!--          {{ $t('common.resetText') }}-->
+        <!--        </AButton>-->
       </div>
     </template>
 

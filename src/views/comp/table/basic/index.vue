@@ -23,6 +23,19 @@
           <AButton type="primary" @click="toggleLoading"> 开启loading</AButton>
           <AButton type="primary" @click="exportAll"> 展开全部</AButton>
         </template>
+
+        <template #name="{ record }">
+          <EditableCell v-model:value="record.name" />
+        </template>
+
+        <template #salary="{ record }">
+          <EditableCell
+            v-model:value="record.salary"
+            :number-props="{ step: 100 }"
+            type="inputNumber"
+          />
+        </template>
+
         <template #optional="{ record }">
           <a-button
             @click="$modal.info({ title: 'Name', content: record.name })"
@@ -36,7 +49,7 @@
 
 <script lang="ts" setup>
   import { reactive, ref, unref } from 'vue';
-  import { BasicTable } from '@/components/Table';
+  import { BasicTable, EditableCell } from '@/components/Table';
   import { ComponentRef } from '~/types/global';
 
   const basicTableRef = ref<ComponentRef>(null);
@@ -75,11 +88,13 @@
     {
       title: 'Name',
       dataIndex: 'name',
+      slotName: 'name',
       helpMessage: '123 helpMessage',
     },
     {
       title: 'Salary',
       dataIndex: 'salary',
+      slotName: 'salary',
       helpMessage: ['123 helpMessage', '456 helpMessage'],
     },
     {
@@ -97,7 +112,7 @@
       width: 150,
     },
   ];
-  const data = [
+  const data = reactive([
     {
       key: '1',
       name: 'Jane Doe',
@@ -166,7 +181,7 @@
       email: 'william.smith@example.com',
       children: [],
     },
-  ];
+  ]);
 
   const toggleLoading = () => {
     console.log('loading');

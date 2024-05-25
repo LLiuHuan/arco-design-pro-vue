@@ -268,7 +268,7 @@ export function useColumns(
             h('span', title),
             h(BasicHelp, {
               position: 'top',
-              content: helpMessage as any,
+              text: helpMessage,
             }),
           ]);
         };

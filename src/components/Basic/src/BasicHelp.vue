@@ -1,14 +1,12 @@
 <template>
-  <ATooltip v-bind="props">
+  <ATooltip v-bind="getProps">
     <template #content>
-      <slot>
-        <div v-if="getText">
-          <p v-for="(item, index) in getText" :key="index" class="mb-0">
-            {{ showIndex ? (getText.length > 0 ? index + 1 : '') : '' }}
-            {{ item }}
-          </p>
-        </div>
-      </slot>
+      <div>
+        <p v-for="(item, index) in getText" :key="index" class="mb-0">
+          {{ showIndex ? (getText.length > 0 ? index + 1 : '') : '' }}
+          {{ item }}
+        </p>
+      </div>
     </template>
     <span
       class="inline-block ml-6px text-14px cursor-pointer text-[var(--color-fill-4)] hover:text-[rgba(var(--primary-6))]"
@@ -36,7 +34,7 @@
      * @description 帮助文本列表
      * @description Help text list
      */
-    content: string | [];
+    text: string | string[];
     /**
      * @description 弹出位置
      * @description Popping position
@@ -96,12 +94,16 @@
     mini: false,
   });
 
+  const getProps = computed(() => {
+    return { ...props };
+  });
+
   const getText = computed(() => {
-    if (isString(props.content)) {
-      return [props.content];
+    if (isString(props.text)) {
+      return [props.text];
     }
 
-    return props.content;
+    return props.text;
   });
 </script>
 

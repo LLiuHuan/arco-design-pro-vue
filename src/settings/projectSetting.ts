@@ -1,4 +1,4 @@
-import type {ProjectConfig} from '~/types/config';
+import type { ProjectConfig } from '~/types/config';
 import {
   AppEnum,
   CacheTypeEnum,
@@ -13,12 +13,12 @@ import {
 } from '@/enums';
 import jsonSetting from './projectSetting.json';
 
-const defaultSetting: ProjectConfig = {
+export const defaultSetting: ProjectConfig = {
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
   // Permission-related cache is stored in sessionStorage or localStorage - [权限相关缓存存储在sessionStorage还是localStorage中]
   permissionCacheType: CacheTypeEnum.LOCAL,
   // Use error-handler-plugin - [显示错误处理插件]
-  useErrorHandle: false,
+  useErrorHandle: true,
   // Whether to show the configuration button
   // 是否显示配置按钮
   showSettingButton: true,
@@ -26,7 +26,7 @@ const defaultSetting: ProjectConfig = {
   // 是否显示主题切换按钮
   showDarkModeToggle: true,
   // Whether to display the logo - [是否显示Logo]
-  showLogo: false,
+  showLogo: true,
   // 是否固定头部和标签
   // Whether to fix the header and tab
   fixedHeaderAndTab: true,
@@ -201,8 +201,3 @@ export const appSetting: ProjectConfig = {
   ...defaultSetting,
   ...(jsonSetting as ProjectConfig),
 };
-
-
-export {
-  jsonSetting as ProjectSetting,
-}

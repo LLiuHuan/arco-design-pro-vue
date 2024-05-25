@@ -13,6 +13,7 @@ export default {
 
   redo: 'Refresh',
   back: 'Back',
+  resetText: 'Reset',
 
   lookForward: 'Under development, please stay tuned!',
 };

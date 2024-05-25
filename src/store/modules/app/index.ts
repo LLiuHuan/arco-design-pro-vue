@@ -3,8 +3,8 @@ import { defineStore } from 'pinia';
 import {
   APP_DARK_MODE_IS_AUTO_KEY,
   APP_DARK_MODE_KEY,
-  PROJ_CFG_KEY,
   AppEnum,
+  PROJ_CFG_KEY,
 } from '@/enums';
 import type {
   HeaderSetting,
@@ -22,6 +22,7 @@ import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { Ref } from 'vue';
+import { DeepPartial, TimeoutHandle } from '~/types/global';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -134,10 +135,9 @@ export const useAppStore = defineStore({
     },
     getThemeColors(): ThemeSettingColors {
       const { colors } = this.getProjectConfig.themeSetting;
-      const themeColors = {
+      return {
         ...colors,
       };
-      return themeColors;
     },
   },
   actions: {
@@ -218,6 +218,10 @@ export const useAppStore = defineStore({
       });
 
       this.reloadFlag = true;
+    },
+    setContentXScrollable(flag: boolean): void {
+      this.projectConfig!.contentXScrollable = flag;
+      localStg.set(PROJ_CFG_KEY, this.projectConfig);
     },
     // setApiAddress(config: ApiAddress): void {
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));

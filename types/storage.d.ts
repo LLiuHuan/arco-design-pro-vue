@@ -75,6 +75,8 @@ export interface ErrorLogInfo {
   type: ErrorTypeEnum;
   // Error file - [错误文件]
   file: string;
+  // Error line number - [错误行号]
+  colno?: number;
   // Error name - [错误名称]
   name?: string;
   // Error message - [错误信息]

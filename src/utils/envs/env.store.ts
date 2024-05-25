@@ -3,12 +3,22 @@ import { GlobEnvConfig } from '~/types/config';
 import { API_ADDRESS } from '@/enums';
 
 /**
- * @description: Is it a development mode - [是否是开发模式]
+ * @description: 是否是开发模式
+ * @description: Is it a development mode
  * @returns:
  * @example:
  */
 export function isDevMode(): boolean {
   return import.meta.env.DEV;
+}
+
+/**
+ * @description 是否是生产模式
+ * @description: Is it a production mode
+ * @returns:
+ */
+export function isProdMode(): boolean {
+  return import.meta.env.PROD;
 }
 
 /**
@@ -34,6 +44,7 @@ const getVariableName = (title: string) => {
     }
     return result.join('').toUpperCase();
   }
+
   return `__PRODUCTION__${strToHex(title) || '__APP'}__CONF__`
     .toUpperCase()
     .replace(/\s/g, '');
@@ -44,7 +55,7 @@ const getVariableName = (title: string) => {
  */
 export function getAppEnvConfig() {
   const ENV_NAME: any = getVariableName(import.meta.env.VITE_GLOB_APP_TITLE);
-  const ENV = import.meta.env.DEV
+  const ENV = isDevMode()
     ? // Get the global configuration (the configuration will be extracted independently when packaging)
       (import.meta.env as unknown as GlobEnvConfig)
     : (window[ENV_NAME] as unknown as GlobEnvConfig);

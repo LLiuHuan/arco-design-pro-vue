@@ -1,9 +1,9 @@
 <template>
   <div v-if="showTooltip">
-    <ATooltip :position="position" mini :content="tooltipContent">
+    <ATooltip :content="tooltipContent" :position="position" mini>
       <div
-        class="flex-center h-full cursor-pointer dark:hover:bg-#333"
         :class="contentClassName"
+        class="flex-center h-full cursor-pointer dark:hover:bg-#333"
       >
         <slot></slot>
       </div>
@@ -11,15 +11,16 @@
   </div>
   <div
     v-else
-    class="flex-center cursor-pointer dark:hover:bg-#333"
     :class="contentClassName"
+    class="flex-center cursor-pointer dark:hover:bg-#333"
   >
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, unref } from 'vue';
+  import { useRootSetting } from '@/hooks/setting';
 
   defineOptions({ name: 'HoverContainer' });
 
@@ -53,7 +54,11 @@
     inverted: false,
   });
 
-  const showTooltip = computed(() => Boolean(props.tooltipContent));
+  const { getIsMobile } = useRootSetting();
+
+  const showTooltip = computed(() =>
+    Boolean(props.tooltipContent && !unref(getIsMobile)),
+  );
 
   const contentClassName = computed(
     () =>

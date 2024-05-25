@@ -13,62 +13,53 @@
 
       <div
         ref="navScroll"
-        class="flex-auto navScroll nowrap-hidden"
         :class="{
           'mx-36px': tabState.scrollable,
           'mx-6px': !tabState.scrollable,
         }"
+        class="flex-auto navScroll nowrap-hidden"
         @wheel="wheel"
       >
-        <Draggable
-          :list="getTabsState"
-          animation="300"
-          align-point
-          item-key="fullPath"
-          class="flex items-center"
-          @change="sortTabs"
-        >
-          <template #item="{ element }">
-            <div>
-              <ContentMenu :tab-item="element" :active-key="activeKeyRef">
-                <div
-                  :id="element.fullPath"
-                  class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
-                  @click.stop="
-                    handleActive(element.fullPath, {
-                      params: element.params,
-                      query: element.query,
-                    })
-                  "
+        <div ref="draggableRef" class="flex items-center">
+          <div v-for="element in getTabsState" :key="element.fullPath">
+            <ContentMenu :active-key="activeKeyRef" :tab-item="element">
+              <div
+                :id="element.fullPath"
+                class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
+                @click.stop="
+                  handleActive(element.fullPath, {
+                    params: element.params,
+                    query: element.query,
+                  })
+                "
+              >
+                <span
+                  :class="{
+                    'text-[rgba(var(--primary-6))]':
+                      activeKeyRef === element.fullPath,
+                  }"
                 >
-                  <span
-                    :class="{
-                      'text-[rgba(var(--primary-6))]':
-                        activeKeyRef === element.fullPath,
-                    }"
-                  >
-                    {{
-                      element.meta?.i18nTitle
-                        ? $t(element.meta.i18nTitle)
-                        : element.meta?.title
-                    }}
-                  </span>
-                  <div
-                    v-if="!(element && element.meta && element.meta.affix)"
-                    class="flex-center py-2px"
-                    @click.stop="handleClose(element.fullPath)"
-                  >
-                    <SvgIcon
-                      class="ml-6px"
-                      icon="mingcute:close-fill"
-                      size="12"
-                    />
-                  </div>
+                  {{
+                    element.meta?.i18nTitle
+                      ? $t(element.meta.i18nTitle)
+                      : element.meta?.title
+                  }}
+                </span>
+                <div
+                  v-if="!(element && element.meta && element.meta.affix)"
+                  class="flex-center py-2px"
+                  @click.stop="handleClose(element.fullPath)"
+                >
+                  <SvgIcon
+                    class="ml-6px"
+                    icon="mingcute:close-fill"
+                    size="12"
+                  />
                 </div>
-              </ContentMenu>
-            </div>
-          </template>
-        </Draggable>
+              </div>
+            </ContentMenu>
+          </div>
+        </div>
       </div>
 
       <span
@@ -84,8 +75,8 @@
       <Redo v-if="getShowRedo" />
       <ContentMenu
         v-if="getShowQuick"
-        :tab-item="$route"
         :active-key="activeKeyRef"
+        :tab-item="$route"
         position="br"
         trigger="click"
       >
@@ -98,7 +89,7 @@
 
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
-  import Draggable from 'vuedraggable';
+  import { useDraggable } from 'vue-draggable-plus';
   import { computed, nextTick, reactive, ref, unref } from 'vue';
   import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import {
@@ -120,6 +111,7 @@
   const tabState = reactive({
     scrollable: false,
   });
+  const draggableRef = ref();
 
   const router = useRouter();
 
@@ -131,15 +123,16 @@
   const { getShowHeader } = useHeaderSetting();
   const { getFullContent } = useFullContent();
 
-  const getTabsState = computed(() => {
-    return tabStore.getTabList.filter((item) => !item.meta?.hideTab);
+  const getTabsState = computed({
+    get: () => {
+      return tabStore.getTabNotHideList;
+    },
+    set: (value) => {
+      tabStore.setTabList(value);
+    },
   });
 
   const unClose = computed(() => unref(getTabsState).length === 1);
-
-  const sortTabs = (val: { moved: { newIndex: number; oldIndex: number } }) => {
-    tabStore.sortTabs(val.moved.oldIndex, val.moved.newIndex);
-  };
 
   const handleActive = (activeKey: any, options: any) => {
     activeKeyRef.value = activeKey;
@@ -232,6 +225,10 @@
     }
   }
 
+  const { start } = useDraggable(draggableRef, getTabsState, {
+    animation: 300,
+  });
+
   // endregion scroll
   listenerRouteChange((route) => {
     const { name } = route;
@@ -239,7 +236,8 @@
       return;
     }
     const { path, fullPath, meta = {} } = route;
-    const { currentActiveMenu, hideTab } = meta as RouteMeta;
+    const { currentActiveMenu, hideTab, href } = meta as RouteMeta;
+    if (href) return;
     const isHide = !hideTab ? null : currentActiveMenu;
     const p = isHide || fullPath || path;
     if (activeKeyRef.value !== p) {
@@ -278,6 +276,10 @@
   });
 
   updateNavScroll();
+
+  nextTick(() => {
+    start();
+  });
 </script>
 
 <style lang="less" scoped></style>

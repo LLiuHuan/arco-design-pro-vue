@@ -24,7 +24,7 @@ export const LOGIN_ROUTE: AuthRoute.Route = {
     title: '登录',
     i18nTitle: 'route.login',
     dynamicPath: `/login/:module(${getLoginModuleRegExp()})?`,
-    singleLayout: 'blank',
+    singleLayout: 'flow',
   },
 };
 

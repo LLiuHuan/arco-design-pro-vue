@@ -1,112 +1,126 @@
 <template>
-  <div class="w-320px">
+  <div>
+    <div
+      class="justify-start -enter-x text-[var(--color-text-1)] text-24px font-medium leading-8"
+      >{{ $t(loginModuleLabels['pwd-login']) }}
+    </div>
+
     <div class="h-32px leading-32px text-[rgba(var(--red-6))]"
-    >{{ errorMessage }}
+      >{{ errorMessage }}
     </div>
     <AForm
-        ref="loginForm"
-        :model="userInfo"
-        layout="vertical"
-        @submit="handleSubmit"
+      ref="loginForm"
+      :model="userInfo"
+      class="-enter-x"
+      layout="vertical"
+      @submit="handleSubmit"
     >
       <AFormItem
-          field="username"
-          :rules="[
+        :rules="[
           {
             required: true,
             message: $t('sys.login.common.userNamePlaceholder'),
           },
         ]"
-          :validate-trigger="['change', 'blur']"
-          hide-label
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="username"
+        hide-label
       >
         <AInput
-            v-model="userInfo.username"
-            :placeholder="$t('sys.login.common.userNamePlaceholder')"
+          v-model="userInfo.username"
+          :placeholder="$t('sys.login.common.userNamePlaceholder')"
         >
           <template #prefix>
-            <icon-user/>
+            <icon-user />
           </template>
         </AInput>
       </AFormItem>
       <AFormItem
-          field="password"
-          :rules="[
+        :rules="[
           {
             required: true,
             message: $t('sys.login.common.passwordPlaceholder'),
           },
         ]"
-          :validate-trigger="['change', 'blur']"
-          hide-label
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="password"
+        hide-label
       >
         <AInputPassword
-            v-model="userInfo.password"
-            :placeholder="$t('sys.login.common.passwordPlaceholder')"
-            allow-clear
-            autocomplete="off"
+          v-model="userInfo.password"
+          :placeholder="$t('sys.login.common.passwordPlaceholder')"
+          allow-clear
+          autocomplete="off"
         >
           <template #prefix>
-            <icon-lock/>
+            <icon-lock />
           </template>
         </AInputPassword>
       </AFormItem>
-      <ASpace :size="16" direction="vertical">
-        <div class="flex justify-between">
+      <ASpace :size="16" class="-enter-x" direction="vertical">
+        <div class="flex justify-between -enter-x">
           <ACheckbox
-              checked="rememberPassword"
-              :model-value="loginConfig.rememberPassword"
-              @change="setRememberPassword"
+            :model-value="loginConfig.rememberPassword"
+            checked="rememberPassword"
+            @change="setRememberPassword"
           >
             {{ $t('sys.login.pwdLogin.rememberMe') }}
           </ACheckbox>
           <ALink @click="toLoginModule('forget-pwd')"
-          >{{ $t('sys.login.pwdLogin.forgetPwd') }}
+            >{{ $t('sys.login.pwdLogin.forgetPwd') }}
           </ALink>
         </div>
-        <AButton type="primary" html-type="submit" long :loading="loading">
+        <AButton
+          :loading="loading"
+          class="-enter-x"
+          html-type="submit"
+          long
+          type="primary"
+        >
           {{ $t('sys.login.common.login') }}
         </AButton>
-        <div class="flex w-full">
-          <AButton type="text" long class="!text-[var(--color-text-3)]">
+        <div class="flex w-full -enter-x">
+          <AButton class="!text-[var(--color-text-3)]" long type="text">
             {{ $t('sys.login.pwdLogin.mobileLogin') }}
           </AButton>
           <AButton
-              type="text"
-              long
-              class="!text-[var(--color-text-3)]"
-              @click="toLoginModule('register')"
+            class="!text-[var(--color-text-3)]"
+            long
+            type="text"
+            @click="toLoginModule('register')"
           >
             {{ $t('sys.login.pwdLogin.register') }}
           </AButton>
         </div>
-        <ADivider orientation="center"
-        >{{ $t('sys.login.pwdLogin.otherLoginMode') }}
+        <ADivider class="-enter-x" orientation="center"
+          >{{ $t('sys.login.pwdLogin.otherLoginMode') }}
         </ADivider>
-        <div class="w-full flex justify-evenly">
+        <div class="w-full flex justify-evenly -enter-x">
           <IconGithub
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
           <IconWechat
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
           <IconQqCircleFill
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
           <IconAlipayCircle
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
           <IconGoogleCircleFill
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
           <IconFaceBookCircleFill
-              class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-              size="24"
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
           />
         </div>
       </ASpace>
@@ -115,93 +129,94 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref, unref} from 'vue';
-import {ValidatedError} from '@arco-design/web-vue/es/form/interface';
-import {
-  IconAlipayCircle,
-  IconFaceBookCircleFill,
-  IconGithub,
-  IconGoogleCircleFill,
-  IconQqCircleFill,
-  IconWechat,
-} from '@arco-design/web-vue/es/icon';
-import {localStg} from '@/utils/cache';
-import {LOGIN_INFO} from '@/enums';
-import {useGo} from '@/hooks/web/usePage';
-import {useAuth} from '@/hooks/web/useAuth';
-import {useLoading} from '@adp/hooks';
+  import { reactive, ref, unref } from 'vue';
+  import { ValidatedError } from '@arco-design/web-vue';
+  import {
+    IconAlipayCircle,
+    IconFaceBookCircleFill,
+    IconGithub,
+    IconGoogleCircleFill,
+    IconQqCircleFill,
+    IconWechat,
+  } from '@arco-design/web-vue/es/icon';
+  import { localStg } from '@/utils/cache';
+  import { LOGIN_INFO } from '@/enums';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useAuth } from '@/hooks/web/useAuth';
+  import { useLoading } from '@adp/hooks';
+  import { loginModuleLabels } from '../../enum';
 
-const {toLoginModule} = useGo();
+  const { toLoginModule } = useGo();
 
-interface LoginFormProps {
-  username: string;
-  password: string;
-}
+  interface LoginFormProps {
+    username: string;
+    password: string;
+  }
 
-const errorMessage = ref('');
-const {loading, startLoading, endLoading} = useLoading();
-const {login} = useAuth();
+  const errorMessage = ref('');
+  const { loading, startLoading, endLoading } = useLoading();
+  const { login } = useAuth();
 
-// const loginConfig = {
-//   rememberPassword: true,
-//   username: 'Arco', // 演示默认值
-//   password: 'arco123', // demo default value
-// };
+  // const loginConfig = {
+  //   rememberPassword: true,
+  //   username: 'Arco', // 演示默认值
+  //   password: 'arco123', // demo default value
+  // };
 
-const loginConfig = ref(
+  const loginConfig = ref(
     localStg.get(LOGIN_INFO) || {
       rememberPassword: true,
       username: 'admin', // 演示默认值
       password: 'admin', // demo default value
     },
-);
+  );
 
-const userInfo = reactive({
-  username: unref(loginConfig).username,
-  password: unref(loginConfig).password,
-});
+  const userInfo = reactive({
+    username: unref(loginConfig).username,
+    password: unref(loginConfig).password,
+  });
 
-const handleSubmit = async ({
-                              errors,
-                              values,
-                            }: {
-  errors: Record<string, ValidatedError> | undefined;
-  values: LoginFormProps;
-}) => {
-  if (!errors) {
-    startLoading();
-    try {
-      await login(values.username, values.password);
-      // 如果选中记住密码，就默认保存下来
-      const {rememberPassword} = unref(loginConfig);
-      const {username, password} = values;
-      // 实际生产环境需要进行加密存储。
-      // The actual production environment requires encrypted storage.
-      if (rememberPassword) {
-        localStg.set(LOGIN_INFO, {
-          rememberPassword,
-          username,
-          password,
-        });
-      } else {
-        localStg.remove(LOGIN_INFO);
+  const handleSubmit = async ({
+    errors,
+    values,
+  }: {
+    errors: Record<string, ValidatedError> | undefined;
+    values: LoginFormProps;
+  }) => {
+    if (!errors) {
+      startLoading();
+      try {
+        await login(values.username, values.password);
+        // 如果选中记住密码，就默认保存下来
+        const { rememberPassword } = unref(loginConfig);
+        const { username, password } = values;
+        // 实际生产环境需要进行加密存储。
+        // The actual production environment requires encrypted storage.
+        if (rememberPassword) {
+          localStg.set(LOGIN_INFO, {
+            rememberPassword,
+            username,
+            password,
+          });
+        } else {
+          localStg.remove(LOGIN_INFO);
+        }
+      } catch (err) {
+        // 异常提示
+        errorMessage.value = (err as Error).message;
+      } finally {
+        endLoading();
       }
-    } catch (err) {
-      // 异常提示
-      errorMessage.value = (err as Error).message;
-    } finally {
-      endLoading();
     }
-  }
-};
-const setRememberPassword = (value: boolean) => {
-  // 是否记住密码
-  loginConfig.value.rememberPassword = value;
-};
+  };
+  const setRememberPassword = (value: boolean) => {
+    // 是否记住密码
+    loginConfig.value.rememberPassword = value;
+  };
 </script>
 
 <style lang="less" scoped>
-:deep(.arco-divider-text) {
-  background: transparent;
-}
+  :deep(.arco-divider-text) {
+    background: transparent;
+  }
 </style>

@@ -19,7 +19,6 @@ declare namespace PageRoute {
    */
   type RouteKey =
     | 'redirect-page'
-    | 'feta_:id_sub1'
     | '403'
     | '404'
     | '500'
@@ -35,12 +34,15 @@ declare namespace PageRoute {
     | 'dashboard_workbench'
     | 'comp'
     | 'comp_loading'
+    | 'comp_table'
+    | 'comp_table_basic'
     | 'user-center'
-    | 'feta'
-    | 'feta_sub1'
     | 'document'
     | 'document_vue3'
-    | 'document_github';
+    | 'document_github'
+    | 'func'
+    | 'func_:id_sub1'
+    | 'func_error-log';
 
   /**
    * last degree route key, which has the page file
@@ -121,10 +123,11 @@ declare namespace AuthRoute {
    * 路由的组件
    * - basic - 基础布局，具有公共部分的布局
    * - blank - 空白布局
+   * - flow - 流程布局(多级路由的第一级路由) 垂直布局
    * - multi - 多级路由布局(三级路由或三级以上时，除第一级路由和最后一级路由，其余的采用该布局)
    * - self - 作为子路由，使用自身的布局(作为最后一级路由，没有子路由)
    */
-  type RouteComponentType = 'basic' | 'blank' | 'multi' | 'self';
+  type RouteComponentType = 'basic' | 'blank' | 'flow' | 'multi' | 'self';
 
   /** 路由描述 */
   interface RouteMeta<K extends AuthRoute.RoutePath> {
@@ -135,7 +138,7 @@ declare namespace AuthRoute {
     /** 路由的动态路径(需要动态路径的页面需要将path添加进范型参数) */
     dynamicPath?: AuthRouteUtils.GetDynamicPath<K>;
     /** 作为单级路由的父级路由布局组件 */
-    singleLayout?: Extract<RouteComponentType, 'basic' | 'blank'>;
+    singleLayout?: Extract<RouteComponentType, 'basic' | 'blank' | 'flow'>;
     /** 需要登录权限 */
     ignoreAuth?: boolean;
     /**

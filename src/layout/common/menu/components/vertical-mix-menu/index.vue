@@ -8,18 +8,18 @@
       <slot />
     </FirstLevelMenu>
     <div
-      class="relative h-full transition-base"
       :style="{ width: getMixSideFixed ? `${getMixChildMenuWidth}px` : '0px' }"
+      class="relative h-full transition-base"
     >
       <div
-        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
         :style="{
           width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
         }"
+        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
       >
         <header
-          class="flex-y-center justify-between"
           :style="{ height: `${getHeaderHeight}px` }"
+          class="flex-y-center justify-between"
         >
           <h2 class="pl-8px text-16px text-primary font-bold">
             {{ VITE_GLOB_APP_TITLE }}
@@ -38,7 +38,7 @@
           </div>
         </header>
 
-        <LayoutMenu class="flex-1" :menus="childrenMenus" :collapsed="false" />
+        <LayoutMenu :collapsed="false" :menus="childrenMenus" class="flex-1" />
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
   import { useGo } from '@/hooks/web/usePage';
   import vClickOutside from '@/directives/clickOutside';
   import { SvgIcon } from '@/components/Icon';
-  import LayoutMenu from '@/layout/common/menu/components/base-menu/index.vue';
+  import LayoutMenu from '../base-menu/index.vue';
   import FirstLevelMenu from '../first-level-menu/index.vue';
 
   const { getMenus } = useRouteStore();

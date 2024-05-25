@@ -1,7 +1,7 @@
 {
   "settingButtonPosition": "auto",
   "permissionCacheType": 1,
-  "useErrorHandle": false,
+  "useErrorHandle": true,
   "showSettingButton": true,
   "showDarkModeToggle": true,
   "showLogo": true,
@@ -9,7 +9,7 @@
   "transitionSetting": {
     "enable": true,
     "basicTransition": "fade-slide",
-    "openPageLoading": false,
+    "openPageLoading": true,
     "openNProgress": true
   },
   "openKeepAlive": true,
@@ -25,7 +25,7 @@
   },
   "layoutSetting": {
     "mode": "vertical",
-    "scrollMode": "content"
+    "scrollMode": "wrapper"
   },
   "menuSetting": {
     "collapsed": false,

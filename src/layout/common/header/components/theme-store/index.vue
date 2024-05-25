@@ -1,31 +1,42 @@
 <template>
   <HoverContainer
-      :tooltip-content="$t('layout.themeStore.title')"
-      @click="toggleModal"
+    :tooltip-content="$t('layout.themeStore.title')"
+    @click="toggleModal"
   >
-    <AButton type="text" class="!text-[var(--color-text-1)] !h-40px">
-      <SvgIcon icon="la:themeco" size="20"></SvgIcon>
+    <AButton class="!text-[var(--color-text-1)] !h-40px" type="text">
+      <SvgIcon icon="gridicons:themes" size="20"></SvgIcon>
     </AButton>
   </HoverContainer>
 
   <AModal
-      v-model:visible="show"
-      :title="$t('layout.themeStore.title')"
-      width="55%"
-      draggable
-      @cancel="toggleModal"
+    v-model:visible="show"
+    :fullscreen="getIsMobile"
+    :title="$t('layout.themeStore.title')"
+    :width="getIsMobile ? '100%' : '55%'"
+    draggable
+    @cancel="toggleModal"
   >
-    <ThemeStore/>
+    <AScrollbar class="h-full overflow-y-auto" outer-class="h-full">
+      <ThemeStore />
+    </AScrollbar>
     <template #footer>
-      <div class="flex justify-between items-center">
-        <span
-        >{{ $t('layout.themeStore.currentTheme') }}：{{
+      <div
+        :class="getIsMobile ? 'flex-col' : ''"
+        class="flex justify-between items-center"
+      >
+        <span :class="[getIsMobile ? 'text-center w-full' : '']"
+          >{{ $t('layout.themeStore.currentTheme') }}：{{
             getThemePro?.themeName ?? '默认主题'
           }}</span
         >
-        <AButton type="primary" status="danger" @click="resetTheme">
+        <AButton
+          :class="[getIsMobile ? 'w-full mt-5px' : '']"
+          status="danger"
+          type="primary"
+          @click="resetTheme"
+        >
           <template #icon>
-            <IconClose/>
+            <IconClose />
           </template>
           {{ $t('layout.themeStore.restoreThemeDefault') }}
         </AButton>
@@ -35,31 +46,32 @@
 </template>
 
 <script lang="ts" setup>
-import {HoverContainer} from '@/components/HoverContainer';
-import {ThemeStore} from '@/components/ThemeStore';
-import {SvgIcon} from '@/components/Icon';
-import {ref} from 'vue';
-import {useRootSetting} from '@/hooks/setting';
-import {resetProTheme, setThemeColors} from '@/utils/common';
-import jsonSetting from '@/settings/projectSetting.json';
+  import { HoverContainer } from '@/components/HoverContainer';
+  import { ThemeStore } from '@/components/ThemeStore';
+  import { SvgIcon } from '@/components/Icon';
+  import { ref } from 'vue';
+  import { useRootSetting } from '@/hooks/setting';
+  import { resetProTheme, setThemeColors } from '@/utils/common';
+  import { defaultSetting } from '@/settings';
 
-const show = ref(false);
-const {getThemePro, setThemePro, setThemeAllColor} = useRootSetting();
+  const show = ref(false);
+  const { getThemePro, setThemePro, setThemeAllColor, getIsMobile } =
+    useRootSetting();
 
-// 打开/关闭主题商店
-const toggleModal = () => {
-  show.value = !show.value;
-};
+  // 打开/关闭主题商店
+  const toggleModal = () => {
+    show.value = !show.value;
+  };
 
-// 重置主题
-const resetTheme = async () => {
-  resetProTheme();
-  const {colors} = jsonSetting.themeSetting;
-  setThemePro(null);
+  // 重置主题
+  const resetTheme = async () => {
+    resetProTheme();
+    const { colors } = defaultSetting.themeSetting;
+    setThemePro(null);
 
-  setThemeColors(colors);
-  setThemeAllColor(colors);
-};
+    setThemeColors(colors);
+    setThemeAllColor(colors);
+  };
 </script>
 
 <style lang="less" scoped></style>

@@ -12,7 +12,10 @@ declare global {}
 
 declare type TimeoutHandle = ReturnType<typeof setTimeout>;
 declare type IntervalHandle = ReturnType<typeof setInterval>;
-
+export declare type ClassName =
+  | string
+  | Record<string, boolean>
+  | (string | Record<string, boolean>)[];
 // nullable type - [可以为空的类型]
 declare type Nullable<T> = T | null;
 declare type Recordable<T = any> = Record<string, T>;
@@ -47,3 +50,5 @@ declare interface ChangeEvent extends Event {
 
 /** Build time of the project */
 declare const BUILD_TIME: string;
+
+declare type EmitType = ReturnType<typeof defineEmits>;

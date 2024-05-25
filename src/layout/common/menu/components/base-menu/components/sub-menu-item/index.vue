@@ -8,21 +8,23 @@
     <template #title>
       {{ item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title }}
     </template>
-    <MenuItem
+    <SubMenuItem
       v-for="childrenItem in item.children || []"
       :key="childrenItem.routeName"
       :item="childrenItem"
-    ></MenuItem>
+    ></SubMenuItem>
   </ASubMenu>
 </template>
 
 <script lang="ts" setup>
   import type { App } from '~/types/app';
-  import MenuItem from '@/layout/common/menu/components/base-menu/components/menu-item/index.vue';
+  import MenuItem from '../menu-item/index.vue';
 
   interface Props {
     item: App.Menu;
   }
+
+  defineOptions({ name: 'SubMenuItem' });
 
   defineProps<Props>();
 

@@ -1,23 +1,31 @@
 <template>
-  <AModal :visible="show" :closable="false" :footer="false">
+  <AModal
+    :closable="false"
+    :footer="false"
+    :fullscreen="getIsMobile"
+    :visible="show"
+  >
     <template #title>
       <div class="w-full flex justify-between">
         <div class="model-title-left flex-center flex-auto">
           <SvgIcon
+            class="mr-8px"
+            color="rgba(var(--primary-6))"
             icon="ri:search-line"
             size="20"
-            color="rgba(var(--primary-6))"
-            class="mr-8px"
           />
           <input
             ref="inputRef"
             v-model="keyword"
-            class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
             :placeholder="$t('common.searchText')"
+            class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
           />
         </div>
 
-        <Tip />
+        <Tip v-if="!getIsMobile" />
+        <AButton v-else class="!p-0" type="text" @click="handleClose"
+          >{{ $t('common.cancelText') }}
+        </AButton>
       </div>
     </template>
 
@@ -26,42 +34,44 @@
       :description="$t('common.noDataText')"
     ></AEmpty>
     <div v-else class="pb-12px">
-      <ul class="max-h-472px m-a overscroll-auto">
-        <li
-          v-for="(item, index) in searchResult"
-          :key="item.path"
-          :ref="setRefs(index)"
-          :data-index="index"
-          class="flex-center w-full h-56px mt-8px mb-5px rounded-6px text-14px cursor-pointer relative shadow"
-          :class="{
-            'bg-[rgba(var(--primary-6))] text-[var(--color-white)]':
-              activeIndex === index,
-          }"
-          @mouseenter="handleMouseenter"
-          @click="handleEnter"
-        >
-          <div class="pl-10px pr-5px flex-center">
-            <SvgIcon
-              :icon="item.meta.icon || 'solar:document-broken'"
-              :local-icon="item.meta.localIcon"
-              size="24"
-            />
-          </div>
-          <div class="flex-auto leading-34px">
-            {{
-              item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
-            }}
-          </div>
-          <div
-            class="pr-10px flex-center"
-            :style="{
-              opacity: activeIndex === index ? 1 : 0,
+      <AScrollbar class="overflow-auto max-h-472px">
+        <ul>
+          <li
+            v-for="(item, index) in searchResult"
+            :key="item.path"
+            :ref="setRefs(index)"
+            :class="{
+              'bg-[rgba(var(--primary-6))] text-[var(--color-white)]':
+                activeIndex === index,
             }"
+            :data-index="index"
+            class="flex-center w-full h-56px mt-8px mb-5px rounded-6px text-14px cursor-pointer relative shadow"
+            @click="handleEnter"
+            @mouseenter="handleMouseenter"
           >
-            <SvgIcon icon="uil:enter" size="24" />
-          </div>
-        </li>
-      </ul>
+            <div class="pl-10px pr-5px flex-center">
+              <SvgIcon
+                :icon="item.meta.icon || 'solar:document-broken'"
+                :local-icon="item.meta.localIcon"
+                size="24"
+              />
+            </div>
+            <div class="flex-auto leading-34px">
+              {{
+                item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
+              }}
+            </div>
+            <div
+              :style="{
+                opacity: activeIndex === index ? 1 : 0,
+              }"
+              class="pr-10px flex-center"
+            >
+              <SvgIcon icon="uil:enter" size="24" />
+            </div>
+          </li>
+        </ul>
+      </AScrollbar>
     </div>
   </AModal>
 </template>
@@ -76,6 +86,7 @@
   import { transformRouteNameToOption } from '@/utils/router';
   import { useRefs } from '@/hooks/common/useRefs';
   import { useScrollTo } from '@/hooks/common/useScrollTo';
+  import { useRootSetting } from '@/hooks/setting';
   import { Tip } from './components';
 
   defineOptions({ name: 'AppSearch' });
@@ -103,6 +114,7 @@
   const routeStore = useRouteStoreWithOut();
   const { goKey } = useGo();
   const { refs, setRefs } = useRefs();
+  const { getIsMobile } = useRootSetting();
 
   // 转译特殊字符
   // Translate special characters
@@ -252,9 +264,11 @@
     (visible: boolean) => {
       if (visible) {
         nextTick(() => {
-          unref(inputRef)?.focus();
-          // 清空输入框
-          keyword.value = '';
+          setTimeout(() => {
+            unref(inputRef)?.focus();
+            // 清空输入框
+            keyword.value = '';
+          }, 200);
         });
       }
     },

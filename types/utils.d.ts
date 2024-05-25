@@ -1,3 +1,5 @@
+import { ComputedRef, Ref } from 'vue';
+
 declare namespace TypeUtil {
   interface DataType {
     boolean: boolean;
@@ -16,3 +18,7 @@ declare namespace TypeUtil {
   type TypeString<T extends TypeStringKey = TypeStringKey> =
     `[object ${Capitalize<T>}]`;
 }
+
+export type DynamicProps<T> = {
+  [P in keyof T]: Ref<T[P]> | T[P] | ComputedRef<T[P]>;
+};

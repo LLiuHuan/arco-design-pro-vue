@@ -9,7 +9,7 @@
     class="basic-title flex relative pl-7px text-16px font-medium leading-24px cursor-pointer select-none"
   >
     <slot></slot>
-    <BasicHelp v-if="helpMessage" :content="helpMessage" class="ml-10px" />
+    <BasicHelp v-if="helpMessage" :text="helpMessage" class="ml-10px" />
   </div>
 </template>
 

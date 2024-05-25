@@ -22,6 +22,7 @@ import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { Ref } from 'vue';
+import { DeepPartial, TimeoutHandle } from '~/types/global';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -217,6 +218,10 @@ export const useAppStore = defineStore({
       });
 
       this.reloadFlag = true;
+    },
+    setContentXScrollable(flag: boolean): void {
+      this.projectConfig!.contentXScrollable = flag;
+      localStg.set(PROJ_CFG_KEY, this.projectConfig);
     },
     // setApiAddress(config: ApiAddress): void {
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));

@@ -1,19 +1,19 @@
-import {useAuthStoreWithOut} from '@/store/modules/auth';
-import {fetchLogin, fetchUserInfo} from '@/api/auth/user';
-import {LoginModel, UserInfoModel} from '@/api/auth/model/userModel';
-import {isArray} from '@/utils/common';
-import {useRouteStoreWithOut} from '@/store/modules/route';
-import {useI18n} from '@/hooks/web/useI18n';
-import {Notification} from '@arco-design/web-vue';
-import {unref} from 'vue';
-import {router} from '@/router';
-import {useGo} from '@/hooks/web/usePage';
-import {useRoute} from '@/hooks/web/useRoute';
+import { useAuthStoreWithOut } from '@/store/modules/auth';
+import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
+import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
+import { isArray } from '@/utils/common';
+import { useRouteStoreWithOut } from '@/store/modules/route';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Notification } from '@arco-design/web-vue';
+import { unref } from 'vue';
+import { router } from '@/router';
+import { useGo } from '@/hooks/web/usePage';
+import { useRoute } from '@/hooks/web/useRoute';
 
 export const useAuth = () => {
   const authStore = useAuthStoreWithOut();
   const routeStore = useRouteStoreWithOut();
-  const {goKey} = useGo();
+  const { goKey } = useGo();
 
   const resetAuthStore = (goLogin: boolean = true) => {
     authStore.resetAuthStore();
@@ -30,7 +30,7 @@ export const useAuth = () => {
 
     // 获取用户信息
     const resp = await fetchUserInfo();
-    const {userRole} = resp;
+    const { userRole } = resp;
     if (isArray(userRole)) {
       const roleList = userRole.map((item) => item) as string[];
       authStore.setRoleList(roleList);
@@ -57,16 +57,16 @@ export const useAuth = () => {
     const userInfo = await loginByToken(backendToken);
     if (userInfo) {
       // 登录成功后重定向到登录后的地址
-      const {initAuthRoute} = useRoute();
+      const { initAuthRoute } = useRoute();
       await initAuthRoute();
 
-      const {toRedirect} = useGo(router);
+      const { toRedirect } = useGo(router);
 
       toRedirect();
 
       // 登录成功弹出欢迎提示
       if (routeStore.isInitAuthRoute) {
-        const {t} = useI18n();
+        const { t } = useI18n();
         Notification.success({
           title: t('sys.login.common.loginSuccess'),
           content: t(`sys.login.common.welcomeBack`, {
@@ -89,7 +89,7 @@ export const useAuth = () => {
    * @param password
    */
   const login = async (username: string, password: string) => {
-    const {setLoginLoading} = authStore;
+    const { setLoginLoading } = authStore;
     setLoginLoading(true);
     // Simulate login request - [模拟登录请求]
     const resp = await fetchLogin({

@@ -9,6 +9,7 @@ const functions: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '111aaa',
+        // dynamicPath: '/func/:id/sub1',
       },
     },
     {

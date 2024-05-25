@@ -12,6 +12,26 @@ const components: AuthRoute.Route = {
         ignoreAuth: true,
       },
     },
+    {
+      name: 'comp_table',
+      path: '/comp/table',
+      component: 'multi',
+      meta: {
+        title: '表格',
+        ignoreAuth: true,
+      },
+      children: [
+        {
+          name: 'comp_table_basic',
+          path: '/comp/table/basic',
+          component: 'self',
+          meta: {
+            title: '基础表格',
+            ignoreAuth: true,
+          },
+        },
+      ],
+    },
   ],
   meta: {
     title: '组件',

@@ -1,6 +1,9 @@
-import {Message} from "@arco-design/web-vue";
+import { Message } from '@arco-design/web-vue';
 
-export const copyText = (text: string, prompt: string | null = '已成功复制到剪切板!') => {
+export const copyText = (
+  text: string,
+  prompt: string | null = '已成功复制到剪切板!',
+) => {
   if (navigator.clipboard) {
     return navigator.clipboard
       .writeText(text)
@@ -8,7 +11,7 @@ export const copyText = (text: string, prompt: string | null = '已成功复制�
         prompt && Message.success(prompt);
       })
       .catch((error) => {
-        Message.error('复制失败!' + error.message);
+        Message.error(`复制失败!${error.message}`);
         return error;
       });
   }
@@ -34,10 +37,12 @@ export const copyText = (text: string, prompt: string | null = '已成功复制�
         prompt && Message.success(prompt);
         resolve();
       } catch (error) {
-        Message.error('复制失败!' + error);
+        Message.error(`复制失败!${error}`);
         reject(error);
       }
     });
   }
-  return Promise.reject(`"navigator.clipboard" 或 "document.execCommand" 中存在API错误, 拷贝失败!`);
-}
+  return Promise.reject(
+    `"navigator.clipboard" 或 "document.execCommand" 中存在API错误, 拷贝失败!`,
+  );
+};

@@ -57,6 +57,9 @@ export const useMultipleTabStore = defineStore({
     getTabList(state): App.Tab[] {
       return state.tabList;
     },
+    getTabNotHideList(state): App.Tab[] {
+      return state.tabList.filter((item) => !item.meta?.hideTab);
+    },
     // Get the cached tab list - [获取缓存的标签列表]
     getCachedTabList(state): string[] {
       return Array.from(state.cacheTabList);
@@ -304,15 +307,20 @@ export const useMultipleTabStore = defineStore({
     },
 
     /**
-     * @description Sort the tabs - [排序标签]
+     * @description Sort the tabs - [排序标签] 弃用
      * @param oldIndex
      * @param newIndex
      */
     async sortTabs(oldIndex: number, newIndex: number) {
+      console.log('oldIndex', oldIndex, 'newIndex', newIndex);
       const currentTab = this.tabList[oldIndex];
       this.tabList.splice(oldIndex, 1);
       this.tabList.splice(newIndex, 0, currentTab);
       this.lastDragEndIndex += 1;
+    },
+    async setTabList(tabList: App.Tab[]) {
+      this.tabList = tabList;
+      await this.updateCacheTab();
     },
 
     async addTab(tab: App.Tab) {

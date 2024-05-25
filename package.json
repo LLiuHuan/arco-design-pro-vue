@@ -55,9 +55,10 @@
     "pinia": "^2.1.7",
     "postcss": "^8.4.38",
     "vue": "^3.4.27",
+    "vue-draggable-plus": "^0.4.1",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.2",
-    "vuedraggable": "^4.1.0"
+    "vue-types": "^5.1.2"
   },
   "devDependencies": {
     "@iconify/vue": "^4.1.2",

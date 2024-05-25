@@ -13,6 +13,7 @@ export default {
 
   redo: '刷新',
   back: '返回',
+  resetText: '重置',
 
   lookForward: '正在开发中，尽请期待吧！',
 };

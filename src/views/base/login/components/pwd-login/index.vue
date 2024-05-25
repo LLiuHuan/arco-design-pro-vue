@@ -130,7 +130,7 @@
 
 <script lang="ts" setup>
   import { reactive, ref, unref } from 'vue';
-  import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
+  import { ValidatedError } from '@arco-design/web-vue';
   import {
     IconAlipayCircle,
     IconFaceBookCircleFill,

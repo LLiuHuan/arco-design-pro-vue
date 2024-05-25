@@ -19,7 +19,6 @@ declare namespace PageRoute {
    */
   type RouteKey =
     | 'redirect-page'
-    | 'feta_:id_sub1'
     | '403'
     | '404'
     | '500'
@@ -35,12 +34,14 @@ declare namespace PageRoute {
     | 'dashboard_workbench'
     | 'comp'
     | 'comp_loading'
+    | 'comp_table'
+    | 'comp_table_basic'
     | 'user-center'
     | 'document'
     | 'document_vue3'
     | 'document_github'
     | 'func'
-    | 'func_sub1'
+    | 'func_:id_sub1'
     | 'func_error-log';
 
   /**

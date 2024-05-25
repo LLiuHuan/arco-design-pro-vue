@@ -1,20 +1,20 @@
 <template>
   <div class="h-full flex-col-stretch flex-1-hidden">
     <AScrollbar
-      outer-class="h-full flex-1-hidden"
       class="h-full overflow-y-auto"
+      outer-class="h-full flex-1-hidden"
     >
       <AMenu
-        class="transition-base vertical-mix-menu"
-        :selected-keys="menuState.selectedKeys"
-        :open-keys="menuState.openKeys"
-        :theme="theme"
-        :mode="mode"
+        :accordion="getAccordion"
         :collapsed="collapsed"
         :collapsed-width="getCollapsedMenuWidth"
-        :accordion="getAccordion"
+        :mode="mode"
+        :open-keys="menuState.openKeys"
+        :selected-keys="menuState.selectedKeys"
+        :theme="theme"
         auto-open-selected
         auto-scroll-into-view
+        class="transition-base vertical-mix-menu"
         @menu-item-click="handleMenuItemClick"
         @sub-menu-click="handleSubMenuItemClick"
       >
@@ -24,8 +24,8 @@
 
     <LayoutTrigger
       v-if="isTrigger && getTrigger === 'FOOTER'"
-      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
       :style="{ height: `${getFooterHeight + 1}px` }"
+      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
     />
   </div>
 </template>
@@ -33,7 +33,6 @@
 <script lang="ts" setup>
   import { AppEnum, MenuModeEnum, PageEnum } from '@/enums';
   import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
-  import type { MenuMode } from '@arco-design/web-vue/es/menu/interface';
   import type { App } from '~/types/app';
   import { getActiveKeyPathsOfMenus, routeName } from '@/utils/router';
   import { computed, reactive, ref, unref, watch } from 'vue';
@@ -51,7 +50,7 @@
     /**
      * The mode of the menu - [菜单的模式]
      */
-    mode?: MenuMode;
+    mode?: 'vertical' | 'horizontal' | 'pop' | 'popButton';
     /**
      * Menu data -[菜单数据]
      */

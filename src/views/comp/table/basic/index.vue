@@ -35,6 +35,16 @@
             type="inputNumber"
           />
         </template>
+        <template #switch="{ record }">
+          <EditableCell v-model:value="record.switch" type="switch" />
+        </template>
+        <template #select="{ record }">
+          <EditableCell
+            v-model:value="record.select"
+            :select-props="{ options: selectOptions }"
+            type="select"
+          />
+        </template>
 
         <template #optional="{ record }">
           <a-button
@@ -106,12 +116,29 @@
       dataIndex: 'email',
     },
     {
+      title: 'Switch',
+      dataIndex: 'switch',
+      slotName: 'switch',
+    },
+    {
+      title: 'select',
+      dataIndex: 'select',
+      slotName: 'select',
+    },
+    {
       title: 'Optional',
       slotName: 'optional',
       fixed: 'right',
       width: 150,
     },
   ];
+
+  const selectOptions = [
+    { label: 'Jack', value: '1' },
+    { label: 'Lucy', value: '2' },
+    { label: 'disabled', value: '3', disabled: true },
+  ];
+
   const data = reactive([
     {
       key: '1',
@@ -119,67 +146,8 @@
       salary: 23000,
       address: '32 Park Road, London',
       email: 'jane.doe@example.com',
-      children: [
-        {
-          key: '2',
-          name: 'Alisa Ross',
-          salary: 25000,
-          address: '35 Park Road, London',
-          email: 'alisa.ross@example.com',
-          children: [
-            {
-              key: '3',
-              name: 'Ed Hellen',
-              salary: 17000,
-              address: '42 Park Road, London',
-              email: 'ed.hellen@example.com',
-            },
-            {
-              key: '4',
-              name: 'William Smith',
-              salary: 27000,
-              address: '62 Park Road, London',
-              email: 'william.smith@example.com',
-            },
-          ],
-        },
-        {
-          key: '5',
-          name: 'Alisa Ross',
-          salary: 25000,
-          address: '35 Park Road, London',
-          email: 'alisa.ross@example.com',
-        },
-      ],
-    },
-    {
-      key: '6',
-      name: 'Alisa Ross',
-      salary: 25000,
-      address: '35 Park Road, London',
-      email: 'alisa.ross@example.com',
-    },
-    {
-      key: '7',
-      name: 'Kevin Sandra',
-      salary: 22000,
-      address: '31 Park Road, London',
-      email: 'kevin.sandra@example.com',
-    },
-    {
-      key: '8',
-      name: 'Ed Hellen',
-      salary: 17000,
-      address: '42 Park Road, London',
-      email: 'ed.hellen@example.com',
-    },
-    {
-      key: '9',
-      name: 'William Smith',
-      salary: 27000,
-      address: '62 Park Road, London',
-      email: 'william.smith@example.com',
-      children: [],
+      switch: false,
+      select: '1',
     },
   ]);
 

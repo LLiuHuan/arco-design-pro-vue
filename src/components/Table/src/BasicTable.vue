@@ -41,10 +41,6 @@
   const attrs = useAttrs();
   // const slots = useSlots();
 
-  const cellMouseEnter = (record: any, column: any, event: Event) => {
-    console.log('cellMouseEnter', record, column, event);
-  };
-
   const getProps = computed(() => {
     return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
   });

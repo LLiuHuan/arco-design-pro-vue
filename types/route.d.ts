@@ -36,13 +36,20 @@ declare namespace PageRoute {
     | 'comp_loading'
     | 'comp_table'
     | 'comp_table_basic'
+    | 'comp_form'
+    | 'comp_form_basic'
     | 'user-center'
     | 'document'
     | 'document_vue3'
     | 'document_github'
     | 'func'
     | 'func_:id_sub1'
-    | 'func_error-log';
+    | 'func_error-log'
+    | 'permission'
+    | 'permission_front'
+    | 'permission_front_auth-page-a'
+    | 'permission_front_auth-page-b'
+    | 'permission_front_btn';
 
   /**
    * last degree route key, which has the page file

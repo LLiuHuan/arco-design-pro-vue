@@ -5,7 +5,7 @@ type ServiceEnv = Record<EnvType, EnvConfig[]>;
 const serviceEnvConfig: ServiceEnv = {
   dev: [
     {
-      url: 'https://mock.apifox.com/m1/3402401-0-default/api/v1',
+      url: 'https://mock.apifox.cn/m1/3402401-0-default/api/v1',
       proxy: '/mock',
     },
   ],
@@ -28,7 +28,7 @@ const serviceEnvConfig: ServiceEnv = {
  * @param env 环境描述
  */
 export const getEnvConfig = (env: ImportMetaEnv): EnvConfig[] => {
-  const { VITE_ENV_TYPE = 'dev' } = env;
+  const {VITE_ENV_TYPE = 'dev'} = env;
 
   switch (VITE_ENV_TYPE) {
     case 'dev':

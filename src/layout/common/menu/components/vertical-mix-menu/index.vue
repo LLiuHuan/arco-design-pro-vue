@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-click-outside="handleClickOutside"
-    class="h-full flex"
-    v-bind="getMenuEvents"
-  >
+  <div ref="mixMenuRef" class="h-full flex" v-bind="getMenuEvents">
     <FirstLevelMenu :active-menu-key="activeName" @select="handleSelectMixMenu">
       <slot />
     </FirstLevelMenu>
@@ -56,8 +52,8 @@
   import { getActiveKeyPathsOfMenus } from '@/utils/router';
   import { RouteLocationNormalized, useRoute } from 'vue-router';
   import { useGo } from '@/hooks/web/usePage';
-  import vClickOutside from '@/directives/clickOutside';
   import { SvgIcon } from '@/components/Icon';
+  import { onClickOutside } from '@vueuse/core';
   import LayoutMenu from '../base-menu/index.vue';
   import FirstLevelMenu from '../first-level-menu/index.vue';
 
@@ -73,6 +69,8 @@
   const { VITE_GLOB_APP_TITLE } = useGlobSetting();
 
   const route = useRoute();
+
+  const mixMenuRef = ref(null);
 
   const activeName = ref(''); // 当前活动菜单
   const openMenu = ref(false); // 是否打开子菜单
@@ -171,10 +169,10 @@
 
   // 点击外部
   // Click outside
-  const handleClickOutside = () => {
+  onClickOutside(mixMenuRef, () => {
     setActive(true);
     closeMenu();
-  };
+  });
 
   // 获取菜单事件
   // Get menu events

@@ -1,6 +1,6 @@
-import type {RouteRecordRaw} from 'vue-router';
-import {consoleError} from '@/utils/common';
-import {getLayoutComponent, getViewComponent} from './component';
+import type { RouteRecordRaw } from 'vue-router';
+import { consoleError } from '@/utils/common';
+import { getLayoutComponent, getViewComponent } from './component';
 
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
 
@@ -51,16 +51,16 @@ function isSingleRoute(item: AuthRoute.Route) {
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];
 
-  const itemRoute = {...item} as unknown as RouteRecordRaw;
+  const itemRoute = { ...item } as unknown as RouteRecordRaw;
 
   // 动态path
   if (hasDynamicPath(item)) {
-    Object.assign(itemRoute, {path: item.meta.dynamicPath});
+    Object.assign(itemRoute, { path: item.meta.dynamicPath });
   }
 
   // 外链路由
   if (hasHref(item)) {
-    Object.assign(itemRoute, {component: getViewComponent('not-found')});
+    Object.assign(itemRoute, { component: getViewComponent('not-found') });
   }
 
   // 路由组件
@@ -79,7 +79,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
         // 多级路由一定有子路由
         if (hasChildren(item)) {
           Object.assign(itemRoute, {
-            meta: {...itemRoute.meta, multi: true},
+            meta: { ...itemRoute.meta, multi: true },
           });
           delete itemRoute.component;
         } else {

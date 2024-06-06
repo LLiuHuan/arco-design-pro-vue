@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, h, ref, VNode } from 'vue';
+  import { computed, h, ref, unref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
   import { useAuthStoreWithOut } from '@/store/modules/auth';
@@ -102,7 +102,7 @@
           cancelButtonProps: { size: 'small' },
           closable: true,
           simple: true,
-          width: getIsMobile ? '90%' : 'auto',
+          width: unref(getIsMobile) ? '90%' : 'auto',
           onOk() {
             auth.logout();
           },

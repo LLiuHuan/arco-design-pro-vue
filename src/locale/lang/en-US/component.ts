@@ -20,4 +20,12 @@ export default {
     selectionBarEmpty: 'Please select',
     selectionBarClear: 'Clear',
   },
+
+  form: {
+    search: 'Search',
+    reset: 'Reset',
+    submit: 'Submit',
+    collapsed: 'Collapse',
+    expand: 'Expand',
+  },
 };

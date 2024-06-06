@@ -1,5 +1,3 @@
-import { RoleEnum } from '@/enums/authEnum';
-
 /**
  * 根据用户权限过滤单个路由
  * @param route - 单个权限路由
@@ -14,9 +12,9 @@ function filterAuthRouteByUserPermission(
 
     const { roles: ruleList } = meta || {};
     if (!ruleList) return true;
-    if (ruleList.includes(RoleEnum.SUPER)) return true;
-
-    return ruleList.some((role) => ruleList.includes(role));
+    // TODO: super 是否需要显示全部路由
+    // if (ruleList.includes(RoleEnum.SUPER)) return true;
+    return ruleList.some((role) => roles.includes(role));
   };
 
   const filterRoute = { ...route };
@@ -35,6 +33,7 @@ function filterAuthRouteByUserPermission(
  * 根据用户权限过滤路由
  * @param routes - 权限路由
  * @param permission - 权限
+ * TODO: 根据用户权限过滤路由
  */
 export function filterAuthRoutesByUserPermission(
   routes: AuthRoute.Route[],

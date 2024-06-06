@@ -19,4 +19,12 @@ export default {
     selectionBarEmpty: '请选择',
     selectionBarClear: '清空',
   },
+
+  form: {
+    search: '查询',
+    reset: '重置',
+    submit: '提交',
+    collapsed: '收起',
+    expand: '展开',
+  },
 };

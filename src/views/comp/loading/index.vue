@@ -4,7 +4,7 @@
     loading-tip="加载中..."
     title="Loading组件示例"
   >
-    <div ref="wrapEl">
+    <ACard ref="wrapEl" class="m-4">
       <AAlert :show-icon="false">组件方式</AAlert>
 
       <AButton class="my-4 mr-4" type="primary" @click="openCompFullLoading">
@@ -14,8 +14,8 @@
         容器内 Loading
       </AButton>
       <AppLoading
-        :loading="compState.loading"
         :absolute="compState.absolute"
+        :loading="compState.loading"
         :tip="compState.tip"
       />
 
@@ -33,7 +33,7 @@
       <AButton class="my-4 mr-4" type="primary" @click="openDirectiveLoading">
         打开指令Loading
       </AButton>
-    </div>
+    </ACard>
   </PageWrapper>
 </template>
 

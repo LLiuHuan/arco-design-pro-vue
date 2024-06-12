@@ -16,6 +16,7 @@ export default {
     tooltipLock: 'Lock screen',
     lockScreenPassword: 'Lock screen password',
     lockScreen: 'Lock screen',
+    lockPlaceholder: 'Please enter the lock screen password',
 
     logOut: 'Log out',
     logOutMessage: 'Are you sure you want to log out ?',

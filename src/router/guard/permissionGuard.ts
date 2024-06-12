@@ -33,13 +33,13 @@ export function createPermissionGuard(router: Router) {
 
     const isLogin = Boolean(token);
     const permissions = to.meta.roles || [];
-    console.log('permissions', permissions);
+    // console.log('permissions', permissions);
     const needLogin = !to.meta.ignoreAuth || Boolean(permissions.length);
-    console.log('needLogin', needLogin);
+    // console.log('needLogin', needLogin);
     const hasPermission =
       !permissions.length ||
       permissions.some((role) => authStore.getRoleList.includes(role));
-    console.log('hasPermission', hasPermission);
+    // console.log('hasPermission', hasPermission);
     // Dynamic route loading (first time)
     // 动态路由加载（首次）
     if (!route.isInitAuthRoute) {

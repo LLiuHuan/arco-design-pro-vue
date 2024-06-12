@@ -1,5 +1,5 @@
 <template>
-  <ASpin :loading="pageInfo.loading" class="w-full">
+  <ASpin :loading="pageInfo.loading" class="w-full h-full">
     <AGrid
       :col-gap="16"
       :cols="{ xxl: 3, xl: 3, lg: 2, md: 1, sm: 1, xs: 1 }"
@@ -26,8 +26,8 @@
               <ATag
                 v-if="getThemePro?.packageName === item.packageName"
                 color="rgba(var(--primary-3))"
-                >当前使用</ATag
-              >
+                >当前使用
+              </ATag>
               <AButton
                 v-else
                 :loading="installing"

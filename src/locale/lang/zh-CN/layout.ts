@@ -16,6 +16,7 @@ export default {
     tooltipLock: '锁定屏幕',
     lockScreenPassword: '锁屏密码',
     lockScreen: '锁定屏幕',
+    lockPlaceholder: '请输入锁屏密码',
 
     logOut: '退出系统',
     logOutMessage: '确定要退出系统吗？',

@@ -22,22 +22,23 @@
         ref="formRef"
         :layout="getIsMobile ? 'vertical' : 'horizontal'"
         :model="lockForm"
-        class="w-300px"
-        label-placement="top"
-        label-width="0"
+        auto-label-width
+        class="!w-300px"
         @submit="handleLockScreen"
       >
         <AFormItem
           :label="$t('layout.header.lockScreenPassword')"
-          :rules="[{ required: true, message: '请输入密码' }]"
+          :rules="[
+            { required: true, message: $t('layout.header.lockPlaceholder') },
+          ]"
           :validate-trigger="['change', 'input']"
           field="password"
         >
           <AInputPassword
             v-model="lockForm.password"
+            :placeholder="$t('layout.header.lockPlaceholder')"
             allow-clear
             autocomplete="off"
-            placeholder="请输入密码"
             size="large"
             type="password"
           />

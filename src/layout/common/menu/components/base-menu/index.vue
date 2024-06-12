@@ -1,5 +1,27 @@
 <template>
   <div class="h-full flex-col-stretch flex-1-hidden">
+    <DefineMenuItem v-slot="{ item }">
+      <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeName}_sub`">
+        <template v-if="item.icon" #icon>
+          <component :is="item.icon"></component>
+        </template>
+        <template #title>
+          {{ item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title }}
+        </template>
+        <MenuItem
+          v-for="childrenItem in item.children || []"
+          :key="childrenItem.routeName"
+          :item="childrenItem"
+        />
+      </ASubMenu>
+      <AMenuItem v-else :key="`${item.routeName}`">
+        <template v-if="item.icon" #icon>
+          <component :is="item.icon" />
+        </template>
+        {{ item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title }}
+      </AMenuItem>
+    </DefineMenuItem>
+
     <AScrollbar
       class="h-full overflow-y-auto"
       outer-class="h-full flex-1-hidden"
@@ -14,11 +36,13 @@
         :theme="theme"
         auto-open-selected
         auto-scroll-into-view
-        class="transition-base vertical-mix-menu"
+        class="transition-base vertical-mix-menu w-full box-border"
         @menu-item-click="handleMenuItemClick"
         @sub-menu-click="handleSubMenuItemClick"
       >
-        <SubMenuItem v-for="item in menus" :key="item.routeName" :item="item" />
+        <template v-for="item in menus" :key="item.routeName">
+          <MenuItem :item="item" />
+        </template>
       </AMenu>
     </AScrollbar>
 
@@ -40,7 +64,7 @@
   import { isBoolean } from '@/utils/common';
   import { useRoute } from 'vue-router';
   import { LayoutTrigger } from '@/layout/common';
-  import { SubMenuItem } from './components';
+  import { createReusableTemplate } from '@vueuse/core';
 
   interface Props {
     /**
@@ -78,6 +102,12 @@
     defaultSelectedKeys: [],
     openKeys: [],
   });
+
+  interface MenuItemProps {
+    item: App.Menu;
+  }
+
+  const [DefineMenuItem, MenuItem] = createReusableTemplate<MenuItemProps>();
 
   const route = useRoute();
 
@@ -122,6 +152,15 @@
 
   const handleSubMenuItemClick = (_: string, openKeys: string[]) => {
     menuState.openKeys = openKeys;
+  };
+
+  const menuHasChildren = (menuTreeItem: App.Menu): boolean => {
+    return (
+      !menuTreeItem.meta?.hideChildrenInMenu &&
+      Reflect.has(menuTreeItem, 'children') &&
+      !!menuTreeItem.children &&
+      menuTreeItem.children.length > 0
+    );
   };
 
   watch(

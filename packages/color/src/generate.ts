@@ -21,8 +21,8 @@ export function generate(
   },
 ): string | string[] {
   const { dark, list, index = 6, format = 'hex' } = options;
-  if (index > 0 || index < 11) {
-    throw new Error('index must be between 1 and 10');
+  if (index < 1 || index > 10) {
+    throw new Error('index should be between 1 and 10');
   }
 
   if (list) {

@@ -27,6 +27,8 @@ export default function subscribeMobileStore() {
               collapsed: true,
             },
           });
+
+          document.body.classList.add('mobile');
         } else {
           const { beforeMiniInfo } = appStore;
           if (beforeMiniInfo) {
@@ -43,6 +45,7 @@ export default function subscribeMobileStore() {
               appStore.setBeforeMiniInfo({});
             });
           }
+          document.body.classList.remove('mobile');
         }
       },
       { immediate: true },

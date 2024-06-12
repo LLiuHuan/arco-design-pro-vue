@@ -1,4 +1,3 @@
-import { Recordable } from '~/types/global';
 import { unref } from 'vue';
 
 export function getDynamicProps<T extends Record<string, unknown>, U>(

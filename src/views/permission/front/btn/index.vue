@@ -11,48 +11,74 @@
 
       <!--    <AAlert class="mt-4">点击后请查看按钮变化</AAlert>-->
 
-      <ADivider>组件方式判断权限(有需要可以自行全局注册)</ADivider>
-      <Authority :value="RoleEnum.SUPER">
-        <AButton class="mx-4" type="primary"> 拥有super角色权限可见</AButton>
-      </Authority>
-      <Authority :value="RoleEnum.USER">
-        <AButton class="mx-4" type="primary"> 拥有user角色权限可见</AButton>
-      </Authority>
-      <Authority :value="[RoleEnum.USER, RoleEnum.SUPER]">
-        <AButton class="mx-4" type="primary">
+      <ADivider
+        ><span class="ellipsis-text"
+          >组件方式判断权限(有需要可以自行全局注册)</span
+        ></ADivider
+      >
+      <ASpace size="mini" wrap>
+        <Authority :value="RoleEnum.SUPER">
+          <AButton class="mx-4" type="primary"> 拥有super角色权限可见</AButton>
+        </Authority>
+        <Authority :value="RoleEnum.USER">
+          <AButton class="mx-4" type="primary"> 拥有user角色权限可见</AButton>
+        </Authority>
+        <Authority :value="[RoleEnum.USER, RoleEnum.SUPER]">
+          <AButton class="mx-4" type="primary">
+            拥有[super,user]角色权限可见
+          </AButton>
+        </Authority>
+      </ASpace>
+
+      <ADivider
+        ><span class="ellipsis-text"
+          >函数方式方式判断权限(适用于函数内部过滤)</span
+        ></ADivider
+      >
+      <ASpace size="mini" wrap>
+        <AButton
+          v-if="hasPermission(RoleEnum.SUPER)"
+          class="mx-4"
+          type="primary"
+        >
+          拥有super角色权限可见
+        </AButton>
+        <AButton
+          v-if="hasPermission(RoleEnum.USER)"
+          class="mx-4"
+          type="primary"
+        >
+          拥有user角色权限可见
+        </AButton>
+        <AButton
+          v-if="hasPermission([RoleEnum.SUPER, RoleEnum.USER])"
+          class="mx-4"
+          type="primary"
+        >
           拥有[super,user]角色权限可见
         </AButton>
-      </Authority>
+      </ASpace>
 
-      <ADivider>函数方式方式判断权限(适用于函数内部过滤)</ADivider>
-      <AButton v-if="hasPermission(RoleEnum.SUPER)" class="mx-4" type="primary">
-        拥有super角色权限可见
-      </AButton>
-      <AButton v-if="hasPermission(RoleEnum.USER)" class="mx-4" type="primary">
-        拥有user角色权限可见
-      </AButton>
-      <AButton
-        v-if="hasPermission([RoleEnum.SUPER, RoleEnum.USER])"
-        class="mx-4"
-        type="primary"
+      <ADivider
+        ><span class="ellipsis-text"
+          >指令方式方式判断权限(该方式不能动态修改权限)</span
+        ></ADivider
       >
-        拥有[super,user]角色权限可见
-      </AButton>
-
-      <ADivider>指令方式方式判断权限(该方式不能动态修改权限.)</ADivider>
-      <AButton v-auth="RoleEnum.SUPER" class="mx-4" type="primary">
-        拥有super角色权限可见
-      </AButton>
-      <AButton v-auth="RoleEnum.USER" class="mx-4" type="primary">
-        拥有user角色权限可见
-      </AButton>
-      <AButton
-        v-auth="[RoleEnum.SUPER, RoleEnum.USER]"
-        class="mx-4"
-        type="primary"
-      >
-        拥有[super,user]角色权限可见
-      </AButton>
+      <ASpace size="mini" wrap>
+        <AButton v-auth="RoleEnum.SUPER" class="mx-4" type="primary">
+          拥有super角色权限可见
+        </AButton>
+        <AButton v-auth="RoleEnum.USER" class="mx-4" type="primary">
+          拥有user角色权限可见
+        </AButton>
+        <AButton
+          v-auth="[RoleEnum.SUPER, RoleEnum.USER]"
+          class="mx-4"
+          type="primary"
+        >
+          拥有[super,user]角色权限可见
+        </AButton>
+      </ASpace>
     </ACard>
   </PageWrapper>
 </template>

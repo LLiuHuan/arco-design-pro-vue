@@ -1,6 +1,5 @@
 import type { LocaleType } from '~/types/config';
 import { set } from 'lodash-es';
-import { Recordable } from '~/types/global';
 
 export const loadLocalePool: LocaleType[] = [];
 

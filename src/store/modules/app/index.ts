@@ -22,7 +22,6 @@ import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { Ref } from 'vue';
-import { DeepPartial, TimeoutHandle } from '~/types/global';
 import { initAppSetting } from './helpers';
 
 interface AppState {

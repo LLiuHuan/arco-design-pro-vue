@@ -1,7 +1,6 @@
 import type { Router } from 'vue-router';
 import { AxiosCanceler } from '@/utils/http/httpCancel';
 import { appSetting } from '@/settings/projectSetting';
-import { Nullable } from '~/types/global';
 
 /**
  * The interface used to close the current page to complete the request when the route is switched - [切换路由时关闭当前页面完成请求的接口]

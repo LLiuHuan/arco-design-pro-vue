@@ -5,7 +5,6 @@ import { ErrorTypeEnum } from '@/enums';
 import { appSetting } from '@/settings';
 import { formatToDateTime } from '@/utils/date';
 import { unref } from 'vue';
-import { Nullable } from '~/types/global';
 
 export interface ErrorLogState {
   errorLogInfoList: Nullable<ErrorLogInfo[]>;

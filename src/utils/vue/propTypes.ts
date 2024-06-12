@@ -6,7 +6,8 @@ import {
   VueTypeValidableDef,
 } from 'vue-types';
 
-export type VueNode = VNodeChild | JSX.Element;
+// export type VueNode = VNodeChild | JSX.Element;
+export type VueNode = VNodeChild;
 
 type PropTypes = VueTypesInterface & {
   readonly style: VueTypeValidableDef<CSSProperties>;

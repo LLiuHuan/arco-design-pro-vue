@@ -1,6 +1,5 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
 import { AppEnum } from '@/enums';
-import { setThemeColors } from '@/utils/common';
 import { useAppStore } from '../modules/app';
 
 /** 订阅theme store */
@@ -11,19 +10,12 @@ export default function subscribeThemeStore() {
     // 设置为暗黑主题
     document.body.setAttribute('arco-theme', AppEnum.DARK);
     document.documentElement.classList.add(AppEnum.DARK);
-    // Object.keys(theme.getThemeSetting.colors).forEach((key: ThemeColorEnum) => {
-    //   setBaseColor(theme.getThemeSetting.colors[key], key, true);
-    // });
-    // setThemeColor(theme.getThemeSetting.colors);
   };
 
   const setLightMode = () => {
     // 恢复亮色主题
     document.body.removeAttribute('arco-theme');
     document.documentElement.classList.remove(AppEnum.DARK, AppEnum.LIGHT);
-    // Object.keys(theme.getThemeSetting.colors).forEach((key: ThemeColorEnum) => {
-    //   setBaseColor(theme.getThemeSetting.colors[key], key);
-    // });
   };
 
   const scope = effectScope();
@@ -44,19 +36,10 @@ export default function subscribeThemeStore() {
           setLightMode();
         }
 
-        setThemeColors(theme.getThemeColors);
+        // setThemeColors(theme.getThemeColors);
       },
       { immediate: true },
     );
-
-    // watch(
-    //   () => theme.projectConfig?.themeSetting.colors,
-    //   (colors) => {
-    //     console.log(colors);
-    //     console.log('1231');
-    //     setThemeColors(<ThemeSettingColors>colors);
-    //   },
-    // );
 
     window
       .matchMedia('(prefers-color-scheme: dark)')

@@ -41,11 +41,11 @@
     ]
   },
   "dependencies": {
+    "@adp/color": "workspace:*",
     "@adp/hooks": "workspace:*",
     "@adp/materials": "workspace:*",
     "@adp/utils": "workspace:*",
     "@alova/scene-vue": "^1.5.0",
-    "@arco-design/color": "^0.4.0",
     "@arco-design/web-vue": "^2.55.2",
     "@arco-plugins/vite-vue": "^1.4.5",
     "@vueuse/core": "^10.9.0",

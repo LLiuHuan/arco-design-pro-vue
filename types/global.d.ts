@@ -12,7 +12,7 @@ declare global {}
 
 declare type TimeoutHandle = ReturnType<typeof setTimeout>;
 declare type IntervalHandle = ReturnType<typeof setInterval>;
-export declare type ClassName =
+declare type ClassName =
   | string
   | Record<string, boolean>
   | (string | Record<string, boolean>)[];
@@ -41,8 +41,6 @@ declare type ComponentRef<T extends HTMLElement = HTMLDivElement> =
   ComponentElRef<T> | null;
 
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
-
-declare module '@arco-design/color';
 
 declare interface ChangeEvent extends Event {
   target: HTMLInputElement;

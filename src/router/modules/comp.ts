@@ -32,6 +32,26 @@ const components: AuthRoute.Route = {
         },
       ],
     },
+    {
+      name: 'comp_form',
+      path: '/comp/form',
+      component: 'multi',
+      meta: {
+        title: '表格',
+        ignoreAuth: true,
+      },
+      children: [
+        {
+          name: 'comp_form_basic',
+          path: '/comp/form/basic',
+          component: 'self',
+          meta: {
+            title: '基础表单',
+            ignoreAuth: true,
+          },
+        },
+      ],
+    },
   ],
   meta: {
     title: '组件',

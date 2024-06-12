@@ -13,42 +13,42 @@
               <ATag color="arcoblue">{{ version }}</ATag>
             </ADescriptionsItem>
             <ADescriptionsItem
-                :label="$t('routes.about.projectInfo.latestBuildTime')"
+              :label="$t('routes.about.projectInfo.latestBuildTime')"
             >
               <ATag color="arcoblue">{{ latestBuildTime }}</ATag>
             </ADescriptionsItem>
             <ADescriptionsItem
-                :label="$t('routes.about.projectInfo.githubLink')"
+              :label="$t('routes.about.projectInfo.githubLink')"
             >
               <a
-                  :href="homepage"
-                  :rel="$t('routes.about.projectInfo.githubLink')"
-                  class="text-primary"
-                  target="_blank"
+                :href="homepage"
+                :rel="$t('routes.about.projectInfo.githubLink')"
+                class="text-primary"
+                target="_blank"
               >
                 {{ $t('routes.about.projectInfo.githubLink') }}
               </a>
             </ADescriptionsItem>
             <ADescriptionsItem
-                :label="$t('routes.about.projectInfo.documentLink')"
+              :label="$t('routes.about.projectInfo.documentLink')"
             >
               <a
-                  :href="documentation"
-                  :rel="$t('routes.about.projectInfo.documentLink')"
-                  class="text-primary"
-                  target="_blank"
+                :href="documentation"
+                :rel="$t('routes.about.projectInfo.documentLink')"
+                class="text-primary"
+                target="_blank"
               >
                 {{ $t('routes.about.projectInfo.documentLink') }}
               </a>
             </ADescriptionsItem>
             <ADescriptionsItem
-                :label="$t('routes.about.projectInfo.previewLink')"
+              :label="$t('routes.about.projectInfo.previewLink')"
             >
               <a
-                  :href="website"
-                  :rel="$t('routes.about.projectInfo.previewLink')"
-                  class="text-primary"
-                  target="_blank"
+                :href="website"
+                :rel="$t('routes.about.projectInfo.previewLink')"
+                class="text-primary"
+                target="_blank"
               >
                 {{ $t('routes.about.projectInfo.previewLink') }}
               </a>
@@ -58,14 +58,22 @@
       </AGridItem>
       <AGridItem>
         <ACard :title="$t('routes.about.proDep')">
-          <ADescriptions :column="getIsMobile ? 1 : 2" :data="dependencies"
-                         :layout="getIsMobile ? 'vertical' : 'horizontal'" bordered/>
+          <ADescriptions
+            :column="getIsMobile ? 1 : 2"
+            :data="dependencies"
+            :layout="getIsMobile ? 'vertical' : 'horizontal'"
+            bordered
+          />
         </ACard>
       </AGridItem>
       <AGridItem>
         <ACard :title="$t('routes.about.devDep')">
-          <ADescriptions :column="getIsMobile ? 1 : 2" :data="devDependencies"
-                         :layout="getIsMobile ? 'vertical' : 'horizontal'" bordered/>
+          <ADescriptions
+            :column="getIsMobile ? 1 : 2"
+            :data="devDependencies"
+            :layout="getIsMobile ? 'vertical' : 'horizontal'"
+            bordered
+          />
         </ACard>
       </AGridItem>
     </AGrid>
@@ -73,21 +81,21 @@
 </template>
 
 <script lang="ts" setup>
-import {pkgJson} from './model';
-import {useRootSetting} from "@/hooks/setting";
+  import { useRootSetting } from '@/hooks/setting';
+  import { pkgJson } from './model';
 
-const {
-  dependencies,
-  devDependencies,
-  version,
-  homepage,
-  website,
-  documentation,
-} = pkgJson;
+  const {
+    dependencies,
+    devDependencies,
+    version,
+    homepage,
+    website,
+    documentation,
+  } = pkgJson;
 
-const latestBuildTime = BUILD_TIME;
+  const latestBuildTime = BUILD_TIME;
 
-const {getIsMobile} = useRootSetting();
+  const { getIsMobile } = useRootSetting();
 </script>
 
 <style lang="less" scoped></style>

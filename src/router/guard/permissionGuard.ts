@@ -7,7 +7,6 @@ import { INVALID_ROUTE } from '@/router/routes';
 import { routeName } from '@/utils/router';
 import { useAuth } from '@/hooks/web/useAuth';
 import { useRoute } from '@/hooks/web/useRoute';
-import { StrategyAction } from '~/types/global';
 
 const { LOGIN: LOGIN_NAME, ROOT, INVALID, BASE } = PageEnum;
 

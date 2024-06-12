@@ -1,6 +1,6 @@
-import { generate, getRgbStr } from '@arco-design/color';
 import { ThemeColorEnum } from '@/enums';
 import { ThemeSettingColors } from '~/types/config';
+import { generate, getRgbStr } from '@adp/color';
 import { setCssVar } from './domUtils';
 
 const addThemeVarsToTtml = (cssVar: string, darkCssVar: string) => {

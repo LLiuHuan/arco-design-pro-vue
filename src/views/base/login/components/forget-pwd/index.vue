@@ -76,10 +76,59 @@
           <CountButton :value="formData.code" class="w-140px" type="primary" />
         </ASpace>
       </AFormItem>
+      <AFormItem
+        :rules="[
+          {
+            required: true,
+            message: $t('sys.login.common.passwordPlaceholder'),
+          },
+        ]"
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="password"
+        hide-label
+      >
+        <StrengthMeter
+          v-model:value="formData.password"
+          :placeholder="$t('sys.login.common.passwordPlaceholder')"
+        />
+      </AFormItem>
+      <AFormItem
+        :rules="[
+          {
+            required: true,
+            message: $t('sys.login.common.confirmPasswordPlaceholder'),
+          },
+          {
+            validator: (value: string, cb: any) => {
+              if (value !== formData.password) {
+                cb($t('sys.login.common.inconsistentPasswords'));
+              } else {
+                cb();
+              }
+            },
+          },
+        ]"
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="confirmPassword"
+        hide-label
+      >
+        <AInputPassword
+          v-model="formData.confirmPassword"
+          :placeholder="$t('sys.login.common.confirmPasswordPlaceholder')"
+          allow-clear
+          autocomplete="off"
+        >
+          <template #prefix>
+            <icon-lock />
+          </template>
+        </AInputPassword>
+      </AFormItem>
       <AFormItem hide-label>
         <ASpace class="w-full" direction="vertical" fill>
           <AButton :loading="loading" html-type="submit" long type="primary">
-            {{ $t('sys.login.forgetPwd.sendEmail') }}
+            {{ $t('sys.login.forgetPwd.reset') }}
           </AButton>
           <AButton long @click="toLoginModule('pwd-login')">
             {{ $t('sys.login.common.back') }}
@@ -96,8 +145,9 @@
   import { ValidatedError } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { CountButton } from '@/components/CountDown';
+  import { useLoading } from '@adp/hooks';
+  import { StrengthMeter } from '@/components/StrengthMeter';
   import LoginTitle from '../login-title/index.vue';
-  import { useLoading } from '~/packages/hooks';
 
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
@@ -107,12 +157,16 @@
     account: string;
     phone: string;
     code: string;
+    password: string;
+    confirmPassword: string;
   }
 
   const formData = reactive({
     account: '',
     phone: '',
     code: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const checkCode = async (code: string) => {

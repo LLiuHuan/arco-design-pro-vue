@@ -88,32 +88,10 @@
         field="password"
         hide-label
       >
-        <div class="w-full flex flex-col">
-          <AInputPassword
-            v-model="formData.password"
-            :placeholder="$t('sys.login.common.passwordPlaceholder')"
-            allow-clear
-            autocomplete="off"
-          >
-            <template #prefix>
-              <icon-lock />
-            </template>
-          </AInputPassword>
-          <AProgress
-            :animation="true"
-            :percent="getPasswordStrength"
-            :show-text="false"
-            :status="
-              getPasswordStrength <= 0.4
-                ? 'danger'
-                : getPasswordStrength <= 0.6
-                  ? 'warning'
-                  : 'success'
-            "
-            :steps="5"
-            class="mt-5px"
-          />
-        </div>
+        <StrengthMeter
+          v-model:value="formData.password"
+          :placeholder="$t('sys.login.common.passwordPlaceholder')"
+        />
       </AFormItem>
       <AFormItem
         :rules="[
@@ -173,6 +151,7 @@
   import { ValidatedError } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { CountButton } from '@/components/CountDown';
+  import { StrengthMeter } from '@/components/StrengthMeter';
   import { zxcvbn } from '@zxcvbn-ts/core';
   import { useI18n } from '@/hooks/web/useI18n';
   import LoginTitle from '../login-title/index.vue';

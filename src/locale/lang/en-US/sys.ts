@@ -80,6 +80,7 @@ export default {
     forgetPwd: {
       title: 'Forget Password',
       sendEmail: 'Send verification email',
+      reset: 'Reset password',
     },
   },
   lock: {

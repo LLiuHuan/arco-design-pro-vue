@@ -70,13 +70,7 @@
       </AFormItem>
       <AFormItem>
         <ASpace class="w-full" direction="vertical" fill>
-          <AButton
-            :disabled="formData.code.length < 6"
-            :loading="loading"
-            html-type="submit"
-            long
-            type="primary"
-          >
+          <AButton :loading="loading" html-type="submit" long type="primary">
             {{ $t('sys.login.common.login') }}
           </AButton>
           <AButton long @click="toLoginModule('pwd-login')">

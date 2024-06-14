@@ -7,7 +7,7 @@
     </div>
     <AForm
       ref="loginForm"
-      :model="userInfo"
+      :model="formData"
       class="-enter-x"
       layout="vertical"
       @submit="handleSubmit"
@@ -25,7 +25,7 @@
         hide-label
       >
         <AInput
-          v-model="userInfo.phone"
+          v-model="formData.phone"
           :placeholder="$t('sys.login.common.phonePlaceholder')"
         >
           <template #prefix>
@@ -45,27 +45,37 @@
         field="password"
         hide-label
       >
-        <div class="flex w-full">
-          <AInput
-            v-model="userInfo.code"
-            :placeholder="$t('sys.login.common.codePlaceholder')"
-            allow-clear
+        <ASpace class="flex w-full">
+          <!--          <AInput-->
+          <!--            v-model="formData.code"-->
+          <!--            :placeholder="$t('sys.login.common.codePlaceholder')"-->
+          <!--            allow-clear-->
+          <!--            class="flex-auto"-->
+          <!--          >-->
+          <!--            <template #prefix>-->
+          <!--              <SvgIcon-->
+          <!--                icon="material-symbols:verified-user-outline"-->
+          <!--                size="16"-->
+          <!--              />-->
+          <!--            </template>-->
+          <!--          </AInput>-->
+          <AVerificationCode
+            v-model="formData.code"
             class="flex-auto"
-          >
-            <template #prefix>
-              <SvgIcon
-                icon="material-symbols:verified-user-outline"
-                size="16"
-              />
-            </template>
-          </AInput>
+            @finish="checkCode"
+          />
 
-          <count-button :value="userInfo.code" type="primary" />
-        </div>
+          <CountButton :value="formData.code" class="w-140px" type="primary" />
+        </ASpace>
       </AFormItem>
       <AFormItem>
         <ASpace class="w-full" direction="vertical" fill>
-          <AButton :loading="loading" long type="primary">
+          <AButton
+            :disabled="formData.code.length < 6"
+            :loading="loading"
+            long
+            type="primary"
+          >
             {{ $t('sys.login.common.login') }}
           </AButton>
           <AButton long @click="toLoginModule('pwd-login')">
@@ -91,7 +101,7 @@
     code: string;
   }
 
-  const userInfo = reactive({
+  const formData = reactive({
     phone: '',
     code: '',
   });
@@ -99,6 +109,11 @@
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
   const { toLoginModule } = useGo();
+
+  const checkCode = async (code: string) => {
+    // 校验验证码
+    console.log(code);
+  };
 
   const handleSubmit = async ({
     errors,

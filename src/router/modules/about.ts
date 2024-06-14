@@ -6,8 +6,8 @@ const about: AuthRoute.Route = {
     title: '关于',
     icon: 'simple-icons:aboutdotme',
     order: 10,
-    // i18nTitle: 'routes.dashboard.title',
     singleLayout: 'basic',
+    ignoreAuth: true,
   },
 };
 

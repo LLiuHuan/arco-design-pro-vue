@@ -54,7 +54,7 @@
   }
 
   withDefaults(defineProps<Props>(), {
-    showPadding: false,
+    showPadding: true,
   });
 
   const tabStore = useMultipleTabWithOutStore();

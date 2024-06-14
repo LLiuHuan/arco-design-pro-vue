@@ -49,7 +49,7 @@ const permission: AuthRoute.Route = {
   meta: {
     title: '权限管理',
     icon: 'mdi:monitor-dashboard',
-    order: 2,
+    order: 3,
   },
 };
 

@@ -135,10 +135,11 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
             : getLayoutComponent('flow');
 
       const parentRoute: RouteRecordRaw = {
+        name: `${item.name}-parent`,
         path: parentPath,
+        children: [itemRoute],
         component: layout,
         redirect: item.path,
-        children: [itemRoute],
       };
 
       return [parentRoute];

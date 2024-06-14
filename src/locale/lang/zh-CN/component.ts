@@ -27,4 +27,9 @@ export default {
     collapsed: '收起',
     expand: '展开',
   },
+
+  countdown: {
+    normalText: '获取验证码',
+    sendText: '{0}秒后重新获取',
+  },
 };

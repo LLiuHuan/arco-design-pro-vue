@@ -155,7 +155,7 @@
       <AFormItem>
         <ASpace class="w-full" direction="vertical" fill>
           <AButton :loading="loading" html-type="submit" long type="primary">
-            {{ $t('sys.login.common.login') }}
+            {{ $t('sys.login.pwdLogin.register') }}
           </AButton>
           <AButton long @click="toLoginModule('pwd-login')">
             {{ $t('sys.login.common.back') }}

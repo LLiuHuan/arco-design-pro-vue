@@ -79,6 +79,7 @@ export default {
     },
     forgetPwd: {
       title: 'Forget Password',
+      sendEmail: 'Send verification email',
     },
   },
   lock: {

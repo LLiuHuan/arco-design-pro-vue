@@ -73,6 +73,7 @@ export default {
     },
     forgetPwd: {
       title: '忘记密码',
+      sendEmail: '发送验证邮箱',
     },
   },
   lock: {

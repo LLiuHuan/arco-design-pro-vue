@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapperRef">
+  <div ref="wrapperRef" class="mx-[-16px] mt-[-16px]">
     <APageHeader
       v-if="getShowHeader"
       ref="headerRef"

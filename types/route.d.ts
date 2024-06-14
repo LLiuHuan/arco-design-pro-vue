@@ -29,6 +29,7 @@ declare namespace PageRoute {
     | 'not-found-page'
     | 'not-found'
     | 'about'
+    | 'about-parent'
     | 'dashboard'
     | 'dashboard_analysis'
     | 'dashboard_workbench'

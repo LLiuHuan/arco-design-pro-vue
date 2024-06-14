@@ -5,7 +5,7 @@ const userCenter: AuthRoute.Route = {
   meta: {
     title: '用户中心',
     icon: 'mdi:user',
-    order: 11,
+    order: 8,
     singleLayout: 'basic',
   },
 };

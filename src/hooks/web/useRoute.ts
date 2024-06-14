@@ -21,7 +21,9 @@ export const useRoute = () => {
     const menus = transformAuthRouteToMenu(routes);
     const searchMenus = transformAuthRouteToSearchMenus(routes);
     const vueRoutes = transformAuthRouteToVueRoutes(routes);
+    console.log(vueRoutes);
     vueRoutes.forEach((route) => {
+      console.log(route);
       router.addRoute(route);
     });
     const cacheRoutes = getCacheRoutes(vueRoutes);

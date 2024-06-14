@@ -11,7 +11,7 @@
           <component
             :is="activeModule.component"
             :style="{
-              width: getIsMobile ? '290px' : '320px',
+              width: getIsMobile ? '290px' : '360px',
             }"
           />
         </transition>

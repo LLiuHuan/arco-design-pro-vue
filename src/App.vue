@@ -22,7 +22,7 @@
       :content="getShowWatermark ? getWatermarkText.split(/[,，]/) : ''"
       :grayscale="getGrayMode"
       :z-index="520"
-      class="wh-full bg-[var(--color-fill-1)]"
+      class="wh-full bg-[var(--color-bg-2)]"
     >
       <RouterView />
     </AWatermark>

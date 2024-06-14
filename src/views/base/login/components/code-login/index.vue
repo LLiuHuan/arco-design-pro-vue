@@ -21,7 +21,7 @@
         ]"
         :validate-trigger="['change', 'blur']"
         class="-enter-x"
-        field="username"
+        field="phone"
         hide-label
       >
         <AInput
@@ -42,7 +42,7 @@
         ]"
         :validate-trigger="['change', 'blur']"
         class="-enter-x"
-        field="password"
+        field="code"
         hide-label
       >
         <ASpace class="flex w-full">
@@ -73,6 +73,7 @@
           <AButton
             :disabled="formData.code.length < 6"
             :loading="loading"
+            html-type="submit"
             long
             type="primary"
           >

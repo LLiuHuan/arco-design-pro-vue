@@ -35,6 +35,7 @@ export default {
       codePlaceholder: '请输入验证码',
       passwordPlaceholder: '请输入密码',
       confirmPasswordPlaceholder: '请再次输入密码',
+      inconsistentPasswords: '两次输入密码不一致',
       validateSuccess: '验证成功',
       loginSuccess: '登录成功',
     },
@@ -61,6 +62,7 @@ export default {
     },
     register: {
       title: '注册',
+      policy: '我同意xxx隐私政策',
     },
     resetPwd: {
       title: '重置密码',

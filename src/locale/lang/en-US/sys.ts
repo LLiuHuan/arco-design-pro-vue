@@ -69,6 +69,7 @@ export default {
     register: {
       title: 'Register',
       policy: 'I agree to the xxx privacy policy',
+      policyTip: 'Please agree to the user agreement first',
     },
     resetPwd: {
       title: 'Reset Password',

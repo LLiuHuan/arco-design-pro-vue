@@ -63,6 +63,7 @@ export default {
     register: {
       title: '注册',
       policy: '我同意xxx隐私政策',
+      policyTip: '请先同意用户协议',
     },
     resetPwd: {
       title: '重置密码',

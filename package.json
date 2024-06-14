@@ -49,6 +49,7 @@
     "@arco-design/web-vue": "^2.55.3",
     "@arco-plugins/vite-vue": "^1.4.5",
     "@vueuse/core": "^10.10.1",
+    "@zxcvbn-ts/core": "^3.0.4",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
     "mozjpeg": "7.1.1",

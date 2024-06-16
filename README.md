@@ -103,7 +103,7 @@ Develop in the following order
 
 ##### 0x01.2 Dashboard
 
-- [ ] Analysis page
+- [x] Analysis page
 - [ ] Monitoring page
 - [ ] Workbench page
 
@@ -121,8 +121,8 @@ Develop in the following order
 - [ ] Card component
 - [ ] Table component
 - [ ] Form component
-- [ ] Chart component
-    - [ ] ECharts
+- [x] Chart component
+    - [x] ECharts
     - [ ] D3
 - [ ] Map component
 - [ ] Video component

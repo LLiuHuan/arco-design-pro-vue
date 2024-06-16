@@ -12,6 +12,7 @@ import type {
   PieSeriesOption,
   RadarSeriesOption,
   ScatterSeriesOption,
+  TreemapSeriesOption,
 } from 'echarts/charts';
 import {
   BarChart,
@@ -21,6 +22,7 @@ import {
   PieChart,
   RadarChart,
   ScatterChart,
+  TreemapChart,
 } from 'echarts/charts';
 import type {
   DatasetComponentOption,
@@ -59,6 +61,7 @@ export type ECOption = echarts.ComposeOption<
   | GridComponentOption
   | ToolboxComponentOption
   | DatasetComponentOption
+  | TreemapSeriesOption
 >;
 
 echarts.use([
@@ -79,6 +82,7 @@ echarts.use([
   LabelLayout,
   UniversalTransition,
   CanvasRenderer,
+  TreemapChart,
 ]);
 
 interface ChartHooks {

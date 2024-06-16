@@ -17,3 +17,7 @@ export function openWindow(
 
   window.open(url, opt?.target, feature.join(','));
 }
+
+export function open(url: string) {
+  window.location.href = url;
+}

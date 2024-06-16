@@ -103,6 +103,7 @@
           <IconGithub
             class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
             size="24"
+            @click="open(GITHUB_AUTHORIZE_URL)"
           />
           <IconWechat
             class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
@@ -146,7 +147,9 @@
   import { useGo } from '@/hooks/web/usePage';
   import { useAuth } from '@/hooks/web/useAuth';
   import { useLoading } from '@adp/hooks';
+  import { open } from '@/utils/common';
   import LoginTitle from '../login-title/index.vue';
+  import { GITHUB_AUTHORIZE_URL } from '../../enum';
 
   const { toLoginModule } = useGo();
 

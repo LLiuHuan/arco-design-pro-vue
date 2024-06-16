@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { consoleError } from '@/utils/common';
+import { useRouteStoreWithOut } from '@/store/modules/route';
 import { getLayoutComponent, getViewComponent } from './component';
 
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
@@ -50,6 +51,7 @@ function isSingleRoute(item: AuthRoute.Route) {
  */
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];
+  const routeStore = useRouteStoreWithOut();
 
   const itemRoute = { ...item } as unknown as RouteRecordRaw;
 
@@ -71,9 +73,6 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
       },
       blank() {
         itemRoute.component = getLayoutComponent('blank');
-      },
-      flow() {
-        itemRoute.component = getLayoutComponent('flow');
       },
       multi() {
         // 多级路由一定有子路由
@@ -123,6 +122,8 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
           component: getViewComponent('not-found'),
         },
       ];
+    } else if (routeStore.isConstantRoute(item.name)) {
+      return itemRoute;
     } else {
       const parentPath =
         `${itemRoute.path}-parent` as AuthRouteUtils.SingleRouteKey;
@@ -130,9 +131,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
       const layout =
         item.meta.singleLayout === 'basic'
           ? getLayoutComponent('basic')
-          : item.meta.singleLayout === 'blank'
-            ? getLayoutComponent('blank')
-            : getLayoutComponent('flow');
+          : getLayoutComponent('blank');
 
       const parentRoute: RouteRecordRaw = {
         name: `${item.name}-parent`,

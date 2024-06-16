@@ -44,7 +44,9 @@ export function createPermissionGuard(router: Router) {
     // 动态路由加载（首次）
     if (!route.isInitAuthRoute) {
       if (!isLogin) {
-        if (to.name === LOGIN_NAME) {
+        // 固定路由，无需权限
+        // if (to.name === LOGIN_NAME) {
+        if (route.isConstantRoute(to.name as AuthRoute.AllRouteKey)) {
           next();
           return;
         }

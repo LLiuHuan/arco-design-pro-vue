@@ -1,8 +1,12 @@
-import {defineConfig, loadEnv} from 'vite';
-import {fileURLToPath} from 'node:url';
+import { defineConfig, loadEnv } from 'vite';
+import { fileURLToPath } from 'node:url';
 import dayjs from 'dayjs';
-import {getEnvConfig} from './.env.config';
-import {createViteBuild, createVitePlugins, createViteProxy,} from './build/vite';
+import { getEnvConfig } from './.env.config';
+import {
+  createViteBuild,
+  createVitePlugins,
+  createViteProxy,
+} from './build/vite';
 
 // crypto-js 默认使用4.1.1，最新版打包以后报错
 // unocss默认使用0.58.5，最新版改成ejs了，需要手动改回0.58.5
@@ -11,7 +15,7 @@ import {createViteBuild, createVitePlugins, createViteProxy,} from './build/vite
 export default defineConfig((configEnv) => {
   const viteEnv = loadEnv(configEnv.mode, process.cwd()) as ImportMetaEnv;
 
-  const {VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT} = viteEnv;
+  const { VITE_HTTP_PROXY = false, VITE_BASE_URL, VITE_PORT } = viteEnv;
 
   const envConfig = getEnvConfig(viteEnv);
 

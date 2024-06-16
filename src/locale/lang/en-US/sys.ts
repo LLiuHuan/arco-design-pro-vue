@@ -39,6 +39,7 @@ export default {
       codePlaceholder: 'Please enter the verification code',
       passwordPlaceholder: 'Please enter your password',
       confirmPasswordPlaceholder: 'Please enter your password again',
+      inconsistentPasswords: 'The two passwords do not match',
       validateSuccess: 'Verification passed',
       loginSuccess: 'Login successful',
     },
@@ -67,6 +68,8 @@ export default {
     },
     register: {
       title: 'Register',
+      policy: 'I agree to the xxx privacy policy',
+      policyTip: 'Please agree to the user agreement first',
     },
     resetPwd: {
       title: 'Reset Password',
@@ -76,6 +79,8 @@ export default {
     },
     forgetPwd: {
       title: 'Forget Password',
+      sendEmail: 'Send verification email',
+      reset: 'Reset password',
     },
   },
   lock: {

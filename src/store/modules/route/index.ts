@@ -85,8 +85,10 @@ export const useRouteStore = defineStore({
      * @param name 路由名称
      */
     isConstantRoute(name: AuthRoute.AllRouteKey) {
+      const NOT_FOUND_PAGE_NAME: AuthRoute.NotFoundRouteKey = 'not-found';
+
       const constantRouteNames = getConstantRouteNames(CONSTANT_ROUTES);
-      return constantRouteNames.includes(name);
+      return constantRouteNames.includes(name) && name !== NOT_FOUND_PAGE_NAME;
     },
   },
 

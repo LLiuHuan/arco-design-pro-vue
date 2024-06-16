@@ -1,5 +1,5 @@
 import { AnyColor, Colord, colord } from 'colord';
-import { getColorString } from '~/packages/color/src/utils';
+import { getColorString } from './utils';
 
 // 色板
 

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="justify-start -enter-x text-[var(--color-text-1)] text-24px font-medium leading-8"
-      >{{ $t(loginModuleLabels['pwd-login']) }}
-    </div>
+    <LoginTitle login-mode="pwd-login" />
 
     <div class="h-32px leading-32px text-[rgba(var(--red-6))]"
       >{{ errorMessage }}
@@ -82,7 +79,12 @@
           {{ $t('sys.login.common.login') }}
         </AButton>
         <div class="flex w-full -enter-x">
-          <AButton class="!text-[var(--color-text-3)]" long type="text">
+          <AButton
+            class="!text-[var(--color-text-3)]"
+            long
+            type="text"
+            @click="toLoginModule('code-login')"
+          >
             {{ $t('sys.login.pwdLogin.mobileLogin') }}
           </AButton>
           <AButton
@@ -101,6 +103,7 @@
           <IconGithub
             class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
             size="24"
+            @click="open(GITHUB_AUTHORIZE_URL)"
           />
           <IconWechat
             class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
@@ -144,7 +147,9 @@
   import { useGo } from '@/hooks/web/usePage';
   import { useAuth } from '@/hooks/web/useAuth';
   import { useLoading } from '@adp/hooks';
-  import { loginModuleLabels } from '../../enum';
+  import { open } from '@/utils/common';
+  import LoginTitle from '../login-title/index.vue';
+  import { GITHUB_AUTHORIZE_URL } from '../../enum';
 
   const { toLoginModule } = useGo();
 

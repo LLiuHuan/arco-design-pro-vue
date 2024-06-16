@@ -1,5 +1,5 @@
-import { colorPaletteDark } from '~/packages/color/src/palette-dark';
-import { colorPalette } from '~/packages/color/src/palette';
+import { colorPaletteDark } from './palette-dark';
+import { colorPalette } from './palette';
 
 /**
  * @param {string} color

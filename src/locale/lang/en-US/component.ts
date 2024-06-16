@@ -28,4 +28,9 @@ export default {
     collapsed: 'Collapse',
     expand: 'Expand',
   },
+
+  countdown: {
+    normalText: 'Get verification code',
+    sendText: 'Resend after {0} seconds',
+  },
 };

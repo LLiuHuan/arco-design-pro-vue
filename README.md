@@ -93,13 +93,13 @@ Develop in the following order
 - [x] Internationalization (Chinese and English)
 - [x] Full screen
 - [x] Login page
-- [ ] Registration page
-- [ ] Forgot the password
+- [x] Registration page
+- [x] Forgot the password
 - [x] Search
-- [ ] Notification
-- [ ] Lock screen
+- [x] Notification
+- [x] Lock screen
 - [x] Project configuration
-- [ ] Cache page
+- [x] Cache page
 
 ##### 0x01.2 Dashboard
 
@@ -110,9 +110,9 @@ Develop in the following order
 ##### 0x01.3 Document
 
 - [ ] Vue documentation
-- [ ] Vue documentation (new version)
+- [x] Vue documentation (new version)
 - [ ] Vite Documentation
-- [ ] Baidu (external link)
+- [x] Baidu (external link)
 - [ ] Documentation (external link)
 
 ##### 0x01.4 Component example
@@ -160,10 +160,10 @@ Develop in the following order
 - [ ] Right click menu
 - [ ] File download
 - [ ] Picture Preview
-- [ ] Watermark
-- [ ] Full screen
+- [x] Watermark
+- [x] Full screen
 - [ ] QR code
-- [ ] Error log
+- [x] Error log
 - [ ] Tab with parameters
 - [ ] Third party login
 - [x] Dynamic skin exchange
@@ -171,10 +171,10 @@ Develop in the following order
 
 ##### 0x01.6 Permissions example
 
-- [ ] Based on front-end permissions
-    - [ ] Page level permissions
-    - [ ] Button level permissions
-    - [ ] Front-end permission test page
+- [x] Based on front-end permissions
+    - [x] Page level permissions
+    - [x] Button level permissions
+    - [x] Front-end permission test page
 - [ ] Based on backend permissions
     - [ ] Page level permissions
     - [ ] Button level permissions

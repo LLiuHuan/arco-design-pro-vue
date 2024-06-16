@@ -5,6 +5,7 @@
  * - register: 注册
  * - reset-pwd: 重置密码
  * - bind-wechat: 微信绑定
+ * - bind-github: Github绑定
  * - forget-pwd: 忘记密码
  */
 type LoginModuleType =
@@ -13,14 +14,15 @@ type LoginModuleType =
   | 'code-login'
   | 'register'
   | 'reset-pwd'
-  | 'bind-wechat';
+  | 'bind-wechat'
+  | 'bind-github';
 
 /**
  * 布局组件的名称
  * - basic 基础布局
  * - blank 空白布局
  */
-type LayoutComponentType = 'basic' | 'blank' | 'flow';
+type LayoutComponentType = 'basic' | 'blank';
 
 /**
  * The layout mode

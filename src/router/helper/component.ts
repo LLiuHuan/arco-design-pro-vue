@@ -1,7 +1,7 @@
 import { views } from '@/views';
 import { RouteComponent } from 'vue-router';
 import { isFunction } from '@/utils/common';
-import { BasicLayout, BlankLayout, FlowLayout } from '@/layout';
+import { BasicLayout, BlankLayout } from '@/layout';
 
 type Lazy<T> = () => Promise<T>;
 
@@ -19,7 +19,6 @@ export function getLayoutComponent(layoutType: LayoutComponentType) {
   const layoutComponent: LayoutComponent = {
     basic: BasicLayout,
     blank: BlankLayout,
-    flow: FlowLayout,
   };
   return layoutComponent[layoutType];
 }

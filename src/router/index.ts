@@ -10,7 +10,6 @@ import { CONSTANT_ROUTES } from './routes';
 const { VITE_HASH_ROUTE = 'N', VITE_GLOB_BASE_URL } = import.meta.env;
 
 const basicRoutes = transformAuthRouteToVueRoutes(CONSTANT_ROUTES);
-
 export const router = createRouter({
   history:
     VITE_HASH_ROUTE === 'Y'

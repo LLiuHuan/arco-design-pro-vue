@@ -1,5 +1,10 @@
 export default {
   title: 'Dashboard',
-  workbench: 'Workbench',
-  analysis: 'Analysis',
+  workbench: {
+    title: 'Workbench',
+  },
+  analysis: {
+    title: 'Analysis',
+    yesterday: 'Compared to yesterday',
+  },
 };

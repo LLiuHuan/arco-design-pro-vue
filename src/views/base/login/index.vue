@@ -1,5 +1,5 @@
 <template>
-  <div class="relative wh-full">
+  <div class="relative wh-full bg-[var(--color-bg-1)]">
     <header
       class="absolute-tl w-full flex justify-between items-center px-20px pt-20px"
     >

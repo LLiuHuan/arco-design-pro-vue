@@ -19,7 +19,7 @@ const prettyLog = () => {
   ) => {
     if (isProduction) return;
     console.log(
-      `%c ${title} %c ${sprintf(message, optionalParams)} %c`,
+      `%c ${title} %c ${sprintf(`${message}`, optionalParams)} %c`,
       `background:${color};border:1px solid ${color}; padding: 1px; border-radius: 2px 0 0 2px; color: #fff;`,
       `border:1px solid ${color}; padding: 1px; border-radius: 0 2px 2px 0; color: ${color};`,
       'background:transparent',

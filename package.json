@@ -52,6 +52,7 @@
     "@zxcvbn-ts/core": "^3.0.4",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
+    "echarts": "^5.5.0",
     "mozjpeg": "7.1.1",
     "pinia": "^2.1.7",
     "postcss": "^8.4.38",

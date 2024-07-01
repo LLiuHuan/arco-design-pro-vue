@@ -20,7 +20,7 @@
     </div>
     <Transition name="dark-menu">
       <SettingItem
-        v-if="!getIsDarkMode"
+        v-if="!getIsDarkMode && getLayoutMode.includes('vertical')"
         :label="$t(`layout.setting.themeSchema.darkMenu`)"
       >
         <SwitchItem
@@ -35,7 +35,11 @@
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { AppEnum } from '@/enums';
-  import { useMenuSetting, useRootSetting } from '@/hooks/setting';
+  import {
+    useLayoutSetting,
+    useMenuSetting,
+    useRootSetting,
+  } from '@/hooks/setting';
   import { HandlerEnum, SettingItem, SwitchItem } from '../common';
 
   defineOptions({
@@ -56,6 +60,7 @@
 
   const { setDarkMode, getDarkMode, getIsDarkMode } = useRootSetting();
   const { getIsMenuDark } = useMenuSetting();
+  const { getLayoutMode } = useLayoutSetting();
 </script>
 
 <style lang="less" scoped></style>

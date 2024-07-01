@@ -1,6 +1,5 @@
 import { ThemeColorEnum } from '@/enums';
-import { ThemeInfo, ThemeSettingColors } from '~/types/config';
-import { setProTheme, setThemeColors } from '@/utils/common';
+import { ThemeInfo } from '~/types/config';
 
 const themes: ThemeInfo[] = [
   {
@@ -112,11 +111,9 @@ export const getThemes = (
   };
 };
 
-export const setThemeInfo = async (
-  theme: string,
-  colors: ThemeSettingColors,
-) => {
-  await setProTheme(theme);
-
-  setThemeColors(colors);
-};
+// export const setThemeInfo = async (theme: ThemeInfo) => {
+//   const { setThemePro, setThemeAllColor } = useRootSetting();
+//   await setThemePro(theme);
+//
+//   setThemeAllColor(theme.colors);
+// };

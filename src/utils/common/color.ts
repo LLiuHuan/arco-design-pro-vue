@@ -43,13 +43,12 @@ export const setThemeColors = (colors: ThemeSettingColors) => {
       darkCssStr += `--${key}-${i}: ${getRgbStr(darkCssColors[i])};`;
     }
   });
-
   addThemeVarsToTtml(cssStr, darkCssStr);
 };
 
-export const setBaseColor = (
+export const setBaseColors = (
   val: string,
-  key: ThemeColorEnum,
+  key: string,
   dark: boolean = false,
 ) => {
   const colors = generate(val, { dark, list: true, format: 'hex' });
@@ -59,6 +58,12 @@ export const setBaseColor = (
   }
 };
 
+/**
+ * @description 设置主题
+ * @description Set pro theme
+ *
+ * @param theme
+ */
 export const setProTheme = (theme: string) => {
   return new Promise((resolve, reject) => {
     const linkId = 'pro-custom-theme';
@@ -92,9 +97,13 @@ export const setProTheme = (theme: string) => {
   });
 };
 
-export const resetProTheme = () => {
-  const proTheme = document.getElementById('pro-custom-theme');
-  if (proTheme) {
-    proTheme.setAttribute('href', '');
-  }
-};
+// /**
+//  * @description 还原主题
+//  * @description Reset pro theme
+//  */
+// export const resetProTheme = () => {
+//   const proTheme = document.getElementById('pro-custom-theme');
+//   if (proTheme) {
+//     proTheme.setAttribute('href', '');
+//   }
+// };

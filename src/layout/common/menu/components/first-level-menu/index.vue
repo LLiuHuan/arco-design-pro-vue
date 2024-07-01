@@ -2,10 +2,14 @@
   <DefineMixMenuItem v-slot="{ label, icon, active, isCollapsed }">
     <div
       :class="[
+        {
+          darkDefaultItem: dark,
+          darkActiveItem: active && dark,
+        },
         active ? 'activeItem' : 'defaultItem',
         isCollapsed ? 'py-8px' : 'py-10px',
       ]"
-      class="flex-col-center cursor-pointer bg-transparent px-4px hover:bg-[var(--color-neutral-2)]"
+      class="flex-col-center cursor-pointer bg-transparent px-4px"
     >
       <component
         :is="icon"
@@ -62,6 +66,11 @@
      * Active menu key
      */
     activeMenuKey: string;
+    /**
+     * 是否深色模式
+     * Whether dark mode
+     */
+    dark?: boolean;
   }
 
   defineProps<Props>();
@@ -137,10 +146,10 @@
 
 <style scoped>
   .activeItem {
-    background-color: var(--color-neutral-2);
     position: relative;
     font-weight: 700;
-    color: rgba(var(--primary-6), 1) !important;
+    color: rgba(var(--primary-6), 1);
+    background-color: var(--color-neutral-2);
   }
 
   .activeItem:before {
@@ -155,5 +164,14 @@
 
   .defaultItem {
     color: var(--color-text-1);
+  }
+
+  .darkActiveItem {
+    color: rgba(var(--primary-6), 1) !important;
+    background-color: var(--color-menu-dark-hover) !important;
+  }
+
+  .darkDefaultItem {
+    color: var(--color-text-4);
   }
 </style>

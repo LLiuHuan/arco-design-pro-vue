@@ -56,8 +56,6 @@ interface RouteState {
   removeRouteFns: (() => void)[];
 }
 
-const authStore = useAuthStore();
-
 export const useRouteStore = defineStore({
   id: 'route-store',
   state: (): RouteState => ({
@@ -337,6 +335,7 @@ export const useRouteStore = defineStore({
         this.isInitAuthRoute = true;
       } else {
         // if fetch user routes failed, reset store
+        const authStore = useAuthStore();
         authStore.resetStore();
       }
     },

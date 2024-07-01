@@ -6,9 +6,9 @@
       <ARadioGroup
         v-for="(_, key) in themeSchema"
         :key="key"
-        type="button"
-        size="large"
         :model-value="getDarkMode"
+        size="large"
+        type="button"
         @change="setDarkMode"
       >
         <ARadio :value="key">
@@ -24,8 +24,8 @@
         :label="$t(`layout.setting.themeSchema.darkMenu`)"
       >
         <SwitchItem
-          :event="HandlerEnum.MENU_THEME"
           :def="getIsMenuDark"
+          :event="HandlerEnum.MENU_THEME"
         ></SwitchItem>
       </SettingItem>
     </Transition>
@@ -36,7 +36,6 @@
   import { SvgIcon } from '@/components/Icon';
   import { AppEnum } from '@/enums';
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
-  import { computed } from 'vue';
   import { HandlerEnum, SettingItem, SwitchItem } from '../common';
 
   defineOptions({
@@ -56,9 +55,7 @@
   };
 
   const { setDarkMode, getDarkMode, getIsDarkMode } = useRootSetting();
-  const { getMenuTheme } = useMenuSetting();
-
-  const getIsMenuDark = computed(() => getMenuTheme.value === AppEnum.DARK);
+  const { getIsMenuDark } = useMenuSetting();
 </script>
 
 <style lang="less" scoped></style>

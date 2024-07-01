@@ -7,7 +7,6 @@ const about: AuthRoute.Route = {
     icon: 'simple-icons:aboutdotme',
     order: 10,
     singleLayout: 'basic',
-    ignoreAuth: true,
   },
 };
 

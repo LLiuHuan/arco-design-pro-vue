@@ -20,8 +20,10 @@ import type { BeforeMiniState } from '~/types/storage';
 import { darkMode } from '@/settings';
 import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core';
 import { Ref } from 'vue';
+import { router } from '@/router';
+import { useI18n } from '@/hooks/web/useI18n';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -221,6 +223,13 @@ export const useAppStore = defineStore({
     setContentXScrollable(flag: boolean): void {
       this.projectConfig!.contentXScrollable = flag;
       localStg.set(PROJ_CFG_KEY, this.projectConfig);
+    },
+
+    updateDocumentTitleByLocale(): void {
+      const { i18nKey, title } = router.currentRoute.value.meta;
+      const { t } = useI18n();
+      const documentTitle = i18nKey ? t(i18nKey) : title;
+      useTitle(documentTitle);
     },
     // setApiAddress(config: ApiAddress): void {
     //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));

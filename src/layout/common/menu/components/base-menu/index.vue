@@ -1,24 +1,22 @@
 <template>
   <div class="h-full flex-col-stretch flex-1-hidden">
     <DefineMenuItem v-slot="{ item }">
-      <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeName}_sub`">
+      <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeKey}_sub`">
         <template v-if="item.icon" #icon>
           <component :is="item.icon"></component>
         </template>
-        <template #title>
-          {{ item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title }}
-        </template>
+        <template #title>{{ item.label }}</template>
         <MenuItem
           v-for="childrenItem in item.children || []"
-          :key="childrenItem.routeName"
+          :key="childrenItem.routeKey"
           :item="childrenItem"
         />
       </ASubMenu>
-      <AMenuItem v-else :key="`${item.routeName}`">
+      <AMenuItem v-else :key="item.routeKey">
         <template v-if="item.icon" #icon>
           <component :is="item.icon" />
         </template>
-        {{ item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title }}
+        {{ item.label }}
       </AMenuItem>
     </DefineMenuItem>
 
@@ -55,61 +53,30 @@
 </template>
 
 <script lang="ts" setup>
-  import { AppEnum, MenuModeEnum, PageEnum } from '@/enums';
+  import { AppEnum, MenuModeEnum } from '@/enums';
   import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
-  import type { App } from '~/types/app';
-  import { getActiveKeyPathsOfMenus, routeName } from '@/utils/router';
-  import { computed, reactive, ref, unref, watch } from 'vue';
+  import { listenerRouteChange } from '@/utils/router';
+  import { computed, reactive, ref, unref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
   import { isBoolean } from '@/utils/common';
-  import { useRoute } from 'vue-router';
   import { LayoutTrigger } from '@/layout/common';
   import { createReusableTemplate } from '@vueuse/core';
-
-  interface Props {
-    /**
-     * The theme of the current parent component - [当前父组件的主题]
-     */
-    theme?: 'light' | 'dark';
-    /**
-     * The mode of the menu - [菜单的模式]
-     */
-    mode?: 'vertical' | 'horizontal' | 'pop' | 'popButton';
-    /**
-     * Menu data -[菜单数据]
-     */
-    menus: App.Menu[];
-
-    /**
-     * Whether the menu is collapsed - [菜单是否收起]
-     */
-    collapsed?: boolean;
-  }
+  import { useRouteStore } from '@/store/modules/route';
+  import { MenuItemProps, MenuState, Props } from './types';
 
   const props = withDefaults(defineProps<Props>(), {
     theme: AppEnum.LIGHT,
     mode: MenuModeEnum.VERTICAL,
   });
 
-  interface MenuState {
-    selectedKeys: string[];
-    defaultSelectedKeys: string[];
-    openKeys: string[];
-  }
-
   const menuState = reactive<MenuState>({
     selectedKeys: [],
-    defaultSelectedKeys: [],
     openKeys: [],
   });
 
-  interface MenuItemProps {
-    item: App.Menu;
-  }
-
   const [DefineMenuItem, MenuItem] = createReusableTemplate<MenuItemProps>();
 
-  const route = useRoute();
+  const routeStore = useRouteStore();
 
   const {
     getCollapsed,
@@ -125,6 +92,8 @@
 
   const { goKey } = useGo();
 
+  // 获取菜单折叠状态
+  // Get the menu collapse status
   const collapsed = computed(() => {
     if (isBoolean(props.collapsed)) {
       return props.collapsed;
@@ -132,7 +101,9 @@
     return unref(getCollapsed);
   });
 
-  const handleMenuClick = (key: any) => {
+  // 点击菜单
+  // Click menu
+  const handleMenuClick = (key: AuthRoute.AllRouteKey) => {
     const routeSplitMark = '_';
     const params: Record<string, string> = {};
     key
@@ -141,10 +112,10 @@
       .forEach((v: string) => {
         params[v.replaceAll(':', '')] = v;
       });
-    goKey(routeName(key), { params });
+    goKey(key, { params });
   };
 
-  const handleMenuItemClick = (key: string) => {
+  const handleMenuItemClick = (key: AuthRoute.AllRouteKey) => {
     handleMenuClick(key);
     isClickGo.value = true;
     menuState.selectedKeys = [key];
@@ -154,32 +125,29 @@
     menuState.openKeys = openKeys;
   };
 
+  // 是否有子菜单
+  // Whether there are submenus
   const menuHasChildren = (menuTreeItem: App.Menu): boolean => {
+    // !menuTreeItem.meta?.hideChildrenInMenu &&
     return (
-      !menuTreeItem.meta?.hideChildrenInMenu &&
       Reflect.has(menuTreeItem, 'children') &&
       !!menuTreeItem.children &&
       menuTreeItem.children.length > 0
     );
   };
 
-  watch(
-    () => route.name,
-    () => {
-      if (route.name === PageEnum.REDIRECT) {
-        return;
-      }
-      if (unref(isClickGo)) {
-        isClickGo.value = false;
-        return;
-      }
-      const activeKey = (route.meta?.currentActiveMenu || route.name) as string;
-      const activeKeys = getActiveKeyPathsOfMenus(activeKey, props.menus);
-      menuState.selectedKeys = activeKeys.slice(-1);
-      menuState.openKeys = activeKeys.slice(0, -1).map((key) => `${key}_sub`);
-    },
-    { immediate: true },
-  );
+  // 监听路由变化
+  // Listen for route changes
+  listenerRouteChange((route) => {
+    const { hideInMenu, activeMenu } = route.meta;
+    const name = route.name as string;
+    const activeKey = (hideInMenu ? activeMenu : name) || name;
+    menuState.selectedKeys = [activeKey];
+    const openKeys = routeStore.getSelectedMenuKeyPath(activeKey);
+    if (menuState.selectedKeys.length > 0 && openKeys.length > 1) {
+      menuState.openKeys = openKeys.map((key) => `${key}_sub`);
+    }
+  }, true);
 </script>
 
 <style lang="less" scoped></style>

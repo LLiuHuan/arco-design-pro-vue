@@ -1,19 +1,14 @@
 import { PageEnum } from '@/enums';
-import type { RouteLocationRaw, Router } from 'vue-router';
+import type { NavigationFailure, RouteLocationRaw } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { unref } from 'vue';
 import { isHttpUrl, openWindow } from '@/utils/common';
-import { routeName } from '@/utils/router';
 import { router } from '@/router';
 
 export type PathAsPageEnum<T> = T extends { path: string }
   ? T & { path: PageEnum }
   : T;
 export type RouteLocationRawEx = PathAsPageEnum<RouteLocationRaw>;
-
-function handleError(e: Error) {
-  console.error(e);
-}
 
 export enum GoType {
   'replace',
@@ -26,25 +21,33 @@ interface GoOption {
 }
 
 /**
- * @description: 页面跳转
- * @param _router - 路由 需要注意,在setup()外使用，需要传入_router
+ * @description 页面跳转
+ * @description Page jump
+ *
+ * @param isSetup
  */
-export function useGo(_router?: Router) {
+export function useGo(isSetup = true) {
   const {
     push,
+    back,
     replace,
     currentRoute,
     go: routerGo,
-  } = _router || useRouter() || router;
+  } = isSetup ? useRouter() : router;
 
-  function go(to?: RouteLocationRawEx): void;
-  function go(to: RouteLocationRawEx, isReplace: boolean): void;
+  function go(
+    to?: RouteLocationRawEx,
+  ): Promise<NavigationFailure | void | undefined>;
+  function go(
+    to: RouteLocationRawEx,
+    isReplace: boolean,
+  ): Promise<NavigationFailure | void | undefined>;
   function go(
     to: RouteLocationRawEx = PageEnum.BASE_HOME,
     isReplace: boolean = false,
-  ) {
+  ): Promise<NavigationFailure | void | undefined> {
     if (!to) {
-      return;
+      return Promise.resolve();
     }
     let path = unref(to) as string;
     if (path[0] === '/') {
@@ -52,18 +55,19 @@ export function useGo(_router?: Router) {
     }
     if (isHttpUrl(path)) {
       openWindow(path);
-      return;
+      return Promise.resolve();
     }
 
     if (isReplace) {
-      replace(to).catch(handleError);
-    } else {
-      push(to).catch(handleError);
+      return replace(to);
     }
+    return push(to);
   }
 
   /**
-   * @description: 路由跳转 - Route jump
+   * @description 路由跳转
+   * @description Route jump
+   *
    * @param key
    * @param options
    */
@@ -86,21 +90,25 @@ export function useGo(_router?: Router) {
   }
 
   /**
-   * @description: 返回上一页 - Return to the previous page
+   * @description 返回上一页
+   * @description Return to the previous page
    */
   function goBack() {
     routerGo(-1);
   }
 
   /**
-   * @description: 跳转首页 - Jump to the homepage
+   * @description 跳转首页
+   * @description Jump to the homepage
    */
   function goHome() {
-    return goKey(routeName('root'));
+    return goKey('root');
   }
 
   /**
-   * @description: 跳转登录页面 - Jump to the login page
+   * @description 跳转登录页面
+   * @description Jump to the login page
+   *
    * @param loginModule
    * @param redirectUrl
    */
@@ -123,7 +131,9 @@ export function useGo(_router?: Router) {
   }
 
   /**
-   * @description: 切换登录模块 - Toggle login module
+   * @description: 切换登录模块
+   * @description Toggle login module
+   *
    * @param loginModule
    */
   const toLoginModule = (loginModule?: LoginModuleType) => {
@@ -138,6 +148,10 @@ export function useGo(_router?: Router) {
     return go(routeLocation);
   };
 
+  /**
+   * @description: 跳转重定向页面
+   * @description Redirect to the redirect page
+   */
   const toRedirect = () => {
     const { query } = unref(currentRoute);
     if (query?.redirect) {
@@ -154,36 +168,40 @@ export function useGo(_router?: Router) {
     goLogin,
     toLoginModule,
     toRedirect,
+    routerPush: push,
+    routerBack: back,
   };
 }
 
-/**
- * @description 重新加载当前页面 弃用
- * @description: redo current page
- *
- * @param _router
- */
-export const useRedo = (_router?: Router) => {
-  const { replace, currentRoute } = _router || useRouter();
-  const { query, params = {}, name, fullPath } = unref(currentRoute.value);
-  function redo(): Promise<boolean> {
-    return new Promise((resolve) => {
-      if (name === PageEnum.REDIRECT) {
-        resolve(false);
-        return;
-      }
-      if (name && Object.keys(params).length > 0) {
-        params._originParams = JSON.stringify(params ?? {});
-        params._redirectType = 'name';
-        params.path = String(name);
-      } else {
-        params._redirectType = 'path';
-        params.path = fullPath;
-      }
-      replace({ name: PageEnum.REDIRECT, params, query }).then(() =>
-        resolve(true),
-      );
-    });
-  }
-  return redo;
-};
+// /**
+//  * @description 重新加载当前页面 弃用
+//  * @description: redo current page
+//  *
+//  * @param _router
+//  */
+// export const useRedo = (_router?: Router) => {
+//   const { replace, currentRoute } = _router || useRouter();
+//   const { query, params = {}, name, fullPath } = unref(currentRoute.value);
+//
+//   function redo(): Promise<boolean> {
+//     return new Promise((resolve) => {
+//       if (name === PageEnum.REDIRECT) {
+//         resolve(false);
+//         return;
+//       }
+//       if (name && Object.keys(params).length > 0) {
+//         params._originParams = JSON.stringify(params ?? {});
+//         params._redirectType = 'name';
+//         params.path = String(name);
+//       } else {
+//         params._redirectType = 'path';
+//         params.path = fullPath;
+//       }
+//       replace({ name: PageEnum.REDIRECT, params, query }).then(() =>
+//         resolve(true),
+//       );
+//     });
+//   }
+//
+//   return redo;
+// };

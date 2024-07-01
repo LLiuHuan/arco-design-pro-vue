@@ -38,7 +38,9 @@ export function listenerRouteChange(
   immediate = true,
 ) {
   emitter.on(key, callback);
-  if (immediate && lastChangeTab) callback(lastChangeTab);
+  if (immediate && lastChangeTab) {
+    callback(lastChangeTab);
+  }
 }
 
 export function removeTabChangeListener() {

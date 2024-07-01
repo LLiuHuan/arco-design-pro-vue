@@ -9,8 +9,10 @@ import { setThemeColors } from '@/utils/common';
 export const useRootSetting = () => {
   const appStore = useAppStore();
 
-  // 获取系统主题 Dark/Light/Auto
-  // Get system theme Dark/Light/Auto
+  /**
+   * @description 获取系统主题 Dark/Light/Auto
+   * @description Get system theme Dark/Light/Auto
+   */
   const osTheme = usePreferredColorScheme();
 
   /**

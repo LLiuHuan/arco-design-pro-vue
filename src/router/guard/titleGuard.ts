@@ -4,10 +4,10 @@ import { useTitle } from '@vueuse/core';
 
 export function createTitleGuard(router: Router) {
   router.afterEach((to) => {
-    const { i18nTitle, title } = to.meta;
+    const { i18nKey, title } = to.meta;
     const { t } = useI18n();
 
-    const documentTitle = i18nTitle ? t(i18nTitle as string) : title;
+    const documentTitle = i18nKey ? t(i18nKey as string) : title;
 
     useTitle(documentTitle);
   });

@@ -170,7 +170,6 @@
   };
   // 更新 rowSelection
   const showRowSelectionUpdate = (showRowSelection: boolean) => {
-    console.log('showRowSelectionUpdate', showRowSelection);
     table.setProps({
       rowSelection: showRowSelection
         ? {

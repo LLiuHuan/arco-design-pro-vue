@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { App } from '~/types/app';
   import { useGo } from '@/hooks/web/usePage';
   import { useMixMenuContext } from '@/layout/context';
   import FirstLevelMenu from '../first-level-menu/index.vue';
@@ -18,9 +17,9 @@
     useMixMenuContext();
 
   function handleSelectMixMenu(item: App.Menu) {
-    setActiveFirstLevelMenuKey(item.routeName);
+    setActiveFirstLevelMenuKey(item.key);
     if (!item.children?.length) {
-      goKey(item.routeName);
+      goKey(item.routeKey);
     }
   }
 </script>

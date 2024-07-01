@@ -1,9 +1,5 @@
 import { defHttp } from '@/utils/http';
-import {
-  LoginModel,
-  LoginParams,
-  UserInfoModel,
-} from '@/api/auth/model/userModel';
+import { LoginModel, LoginParams, UserInfoModel } from './model/userModel';
 
 enum Api {
   Login = '/login',

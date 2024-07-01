@@ -16,7 +16,6 @@ const permission: AuthRoute.Route = {
           component: 'self',
           meta: {
             title: '权限页面A',
-            ignoreAuth: true,
             roles: [RoleEnum.SUPER],
           },
         },
@@ -26,7 +25,6 @@ const permission: AuthRoute.Route = {
           component: 'self',
           meta: {
             title: '权限页面B',
-            ignoreAuth: true,
             roles: [RoleEnum.USER],
           },
         },
@@ -36,13 +34,11 @@ const permission: AuthRoute.Route = {
           component: 'self',
           meta: {
             title: '按钮权限',
-            ignoreAuth: true,
           },
         },
       ],
       meta: {
         title: '前端路由',
-        ignoreAuth: true,
       },
     },
   ],

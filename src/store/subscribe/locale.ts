@@ -1,24 +1,25 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
-import { router } from '@/router';
-import { useI18n } from '@/hooks/web/useI18n';
-import { useTitle } from '@vueuse/core';
 import { setDayjsLocale } from '@/locale/dayjs';
+import { useRouteStore } from '@/store/modules/route';
+import { useAppStore } from '@/store/modules/app';
+import { useMultipleTabStore } from '../modules/multipleTab';
 import { useLocaleStore } from '../modules/locale';
 
 /** 订阅locale store */
 export default function subscribeLocaleStore() {
   const locale = useLocaleStore();
+  const appStore = useAppStore();
+  const tabStore = useMultipleTabStore();
+  const routeStore = useRouteStore();
 
   const scope = effectScope();
   scope.run(() => {
     watch(
       () => locale.localInfo.locale,
       () => {
-        const { i18nTitle, title } = router.currentRoute.value.meta;
-        const { t } = useI18n();
-        const documentTitle = i18nTitle ? t(i18nTitle) : title;
-        useTitle(documentTitle);
-
+        appStore.updateDocumentTitleByLocale();
+        routeStore.updateGlobalMenusByLocale();
+        tabStore.updateTabsByLocale();
         setDayjsLocale(locale.localInfo.locale);
       },
       { immediate: true },

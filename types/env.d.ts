@@ -81,7 +81,7 @@ interface ImportMetaEnv {
    */
   readonly VITE_AUTH_ROUTE_MODE: 'static' | 'dynamic';
   /** 路由首页的路径 */
-  readonly VITE_ROUTE_HOME_PATH: AuthRoute.RoutePath;
+  readonly VITE_ROUTE_HOME_PATH: AuthRoute.AllRouteKey;
 }
 
 interface ImportMeta {

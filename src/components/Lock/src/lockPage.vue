@@ -123,13 +123,12 @@
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useLoading } from '@adp/hooks';
   import { useLockStore } from '@/store/modules/lock';
-  import { useAuth } from '@/hooks/web/useAuth';
   import { useNow } from './useNow';
 
   const authStore = useAuthStore();
   const lockStore = useLockStore();
 
-  const auth = useAuth();
+  // const auth = useAuth();
 
   const lockForm = reactive({
     password: '',
@@ -159,7 +158,7 @@
 
   function goLogin() {
     // 主动登出，不带redirect地址
-    auth.logout();
+    authStore.logout();
     lockStore.resetLockInfo();
   }
 

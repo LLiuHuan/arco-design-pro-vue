@@ -6,8 +6,8 @@
       <ADoption
         v-for="item in getOptions"
         :key="item.event"
-        :value="item.event"
         :disabled="item.disabled"
+        :value="item.event"
       >
         {{ item.label }}
         <template #icon>
@@ -26,7 +26,6 @@
   import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import { useTabs } from '@/hooks/web/useTabs';
   import { App } from '~/types/app';
-  import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
   import { DropOption, TabEventEnum } from './types';
 
   const { t } = useI18n();
@@ -74,10 +73,8 @@
     useTabs();
 
   // 获取当前要操作的tab
-  const getTargetTab = computed((): App.Tab => {
-    return unref(!props.isExtra)
-      ? unref(props.tabItem)
-      : getTabRouteByVueRoute(unref(currentRoute));
+  const getTargetTab = computed((): App.TabRoute => {
+    return unref(!props.isExtra) ? unref(props.tabItem) : unref(currentRoute);
   });
 
   const getOptions = computed(() => {
@@ -88,7 +85,7 @@
       : false;
 
     // Refresh button
-    const tabIndex = tabStore.getTabList.findIndex(
+    const tabIndex = tabStore.getTabs.findIndex(
       (tab) => tab.fullPath === props.tabItem.fullPath,
     );
 
@@ -96,13 +93,12 @@
 
     // Close left
     const closeLeftDisabled = unref(tabIndex) === 0 || !isCurItem;
-    const disabled = tabStore.getTabList.length === 1;
+    const disabled = tabStore.getTabs.length === 1;
 
     // Close right
     const closeRightDisabled =
-      !isCurItem ||
-      (unref(tabIndex) === tabStore.getTabList.length - 1 &&
-        tabStore.getLastDragEndIndex >= 0);
+      !isCurItem || unref(tabIndex) === tabStore.getTabs.length - 1;
+    // && tabStore.getLastDragEndIndex >= 0);
 
     const options: DropOption[] = [
       {
@@ -115,7 +111,7 @@
         icon: 'clarity:close-line',
         event: TabEventEnum.CLOSE_CURRENT,
         label: t('layout.multipleTab.close'),
-        disabled: !!meta?.affix || disabled,
+        disabled: !!meta?.constant || disabled,
         divider: true,
       },
       {

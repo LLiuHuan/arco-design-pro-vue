@@ -1,4 +1,4 @@
-import { handleModuleRoutes } from '@/utils/router';
+import { handleModuleRoutes } from '../helper/module';
 
 const modules = import.meta.glob('./**/*.ts', {
   eager: true,

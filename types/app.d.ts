@@ -1,7 +1,8 @@
-import { RouteMeta } from 'vue-router';
-
 declare namespace App {
-  import RoutePath = AuthRoute.RoutePath;
+  type RouteLocationNormalizedLoaded =
+    import('vue-router').RouteLocationNormalizedLoaded;
+  type RouteMeta = import('vue-router').RouteMeta;
+  type VNode = import('vue').VNode;
 
   /**
    * @description The global header props
@@ -18,72 +19,113 @@ declare namespace App {
 
   type Menu = {
     /**
-     * Menu icon
-     * 菜单图标
+     * 菜单Key
+     * The menu key
+     *
+     * 等于路由key
+     * Equal to the route key
      */
-    icon?: import('vue').VNode;
+    key: string;
     /**
-     * Menu route name, the unique identifier of the route
-     * 路由名称，路由的唯一标识
+     * 菜单标签
+     * The menu label
      */
-    routeName: AuthRoute.RouteKey;
+    label: string;
     /**
-     * Menu route path
+     * 菜单i18n key
+     * The menu i18n key
+     */
+    i18nKey?: string;
+    /**
+     * 路由key
+     * The route key
+     */
+    routeKey: AuthRoute.RouteKey;
+    /**
      * 路由路径 dashboard_analysis => /dashboard/analysis
+     * The route path
      */
     routePath: AuthRoute.RoutePath;
     /**
-     * Menu children
-     * 菜单子项
-     */
-    children?: Menu[];
-    /**
-     *
-     */
-    meta?: RouteMeta<RoutePath<K>>;
-  };
-
-  type Breadcrumb = {
-    /**
-     * Menu icon
      * 菜单图标
+     * The menu icon
      */
-    icon?: import('vue').VNode;
+    icon?: () => VNode;
     /**
-     * Menu route name, the unique identifier of the route
-     * 路由名称，路由的唯一标识
-     */
-    routeName: AuthRoute.RouteKey;
-    /**
-     * Menu route path
-     * 路由路径 dashboard_analysis => /dashboard/analysis
-     */
-    routePath: AuthRoute.RoutePath;
-    /**
-     * Whether to disable breadcrumbs
-     * 是否禁用面包屑
-     */
-    disabled?: boolean;
-    /**
-     * Menu children
      * 菜单子项
+     * The menu children
      */
     children?: Menu[];
-    /**
-     *
-     */
-    meta?: RouteMeta<RoutePath<K>>;
   };
 
-  interface Tab
-    extends Pick<
-      import('vue-router').RouteLocationNormalized,
-      'name' | 'meta' | 'fullPath' | 'query' | 'params'
-    > {
-    /** 滚动的位置 */
-    scrollPosition: {
-      left: number;
-      top: number;
-    };
-  }
+  type Breadcrumb = Omit<Menu, 'children'> & {
+    options?: Breadcrumb[];
+  };
+
+  type TabRoute = Pick<
+    RouteLocationNormalizedLoaded,
+    'name' | 'path' | 'meta'
+  > &
+    Partial<
+      Pick<RouteLocationNormalizedLoaded, 'fullPath' | 'query' | 'matched'>
+    >;
+
+  type Tab = {
+    /**
+     * @description id
+     * @description The tab id
+     */
+    id: string;
+    /**
+     * @description 标签名称
+     * @description The tab label
+     */
+    label: string;
+    /**
+     * The new tab label
+     *
+     * If set, the tab label will be replaced by this value
+     */
+    newLabel?: string;
+    /**
+     * The old tab label
+     *
+     * when reset the tab label, the tab label will be replaced by this value
+     */
+    oldLabel?: string;
+    /** The tab route key */
+    routeKey: LastLevelRouteKey;
+    /** The tab route path */
+    routePath: RouteMap[LastLevelRouteKey];
+    /** The tab route full path */
+    fullPath: string;
+    /** The tab fixed index */
+    fixedIndex?: number | null;
+    /**
+     * Tab icon
+     *
+     * Iconify icon
+     */
+    icon?: string;
+    /**
+     * Tab local icon
+     *
+     * Local icon
+     */
+    localIcon?: string;
+    /** I18n key */
+    i18nKey?: string;
+  };
+
+  // interface Tab
+  //   extends Pick<
+  //     import('vue-router').RouteLocationNormalized,
+  //     'name' | 'meta' | 'fullPath' | 'query' | 'params'
+  //   > {
+  //   /** 滚动的位置 */
+  //   scrollPosition?: {
+  //     left: number;
+  //     top: number;
+  //   };
+  // }
 }

@@ -1,93 +1,63 @@
 <template>
   <ABreadcrumb v-if="getHeaderShowBreadCrumb" class="cursor-pointer">
-    <template v-for="breadcrumb in breadcrumbs" :key="breadcrumb.key">
-      <ABreadcrumbItem>
-        <ADropdown
-          v-if="breadcrumb.children"
-          trigger="hover"
-          @select="dropdownSelect"
-        >
-          <template #content>
-            <ADoption
-              v-for="(item, itemIndex) in breadcrumb.children"
-              :key="itemIndex"
-              :value="item"
-            >
-              <component
-                :is="item.icon"
-                v-if="getHeaderShowBreadCrumbIcon"
-                class="inline-block align-text-bottom mr-10px text-16px"
-              />
-              <span>{{
-                item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
-              }}</span>
-            </ADoption>
-          </template>
-          <span class="link-text">
-            <component
-              :is="breadcrumb.icon"
-              v-if="getHeaderShowBreadCrumbIcon"
-              class="inline-block align-text-bottom mr-10px text-16px"
-            />
-            <span>{{
-              breadcrumb.meta.i18nTitle
-                ? $t(breadcrumb.meta.i18nTitle)
-                : breadcrumb.meta.title
-            }}</span>
-          </span>
-        </ADropdown>
-        <span v-else class="link-text">
-          <component
-            :is="breadcrumb.icon"
-            v-if="getHeaderShowBreadCrumbIcon"
-            class="inline-block align-text-bottom mr-10px text-16px"
-          />
-          <span>{{
-            breadcrumb.meta.i18nTitle
-              ? $t(breadcrumb.meta.i18nTitle)
-              : breadcrumb.meta.title
-          }}</span>
-        </span>
-      </ABreadcrumbItem>
-    </template>
+    <DefineBreadcrumbContent v-slot="{ breadcrumb }">
+      <div class="i-flex-y-center align-middle">
+        <component
+          :is="breadcrumb.icon"
+          v-if="getHeaderShowBreadCrumbIcon"
+          class="inline-block align-text-bottom mr-10px text-16px"
+        />
+        <span>{{ breadcrumb.label }}</span>
+      </div>
+    </DefineBreadcrumbContent>
+
+    <ABreadcrumbItem
+      v-for="breadcrumb in routeStore.getBreadcrumb"
+      :key="breadcrumb.key"
+    >
+      <ADropdown
+        v-if="breadcrumb.options"
+        trigger="hover"
+        @select="handleClickMenu"
+      >
+        <template #content>
+          <ADoption
+            v-for="item in breadcrumb.options"
+            :key="item.routeKey"
+            :value="item.routeKey"
+          >
+            <BreadcrumbContent :breadcrumb="item" />
+          </ADoption>
+        </template>
+        <BreadcrumbContent :breadcrumb="breadcrumb" />
+      </ADropdown>
+      <BreadcrumbContent v-else :breadcrumb="breadcrumb" />
+    </ABreadcrumbItem>
   </ABreadcrumb>
 </template>
 
 <script lang="ts" setup>
-  import { computed, unref } from 'vue';
-  import { getBreadcrumbByRouteKey, routePath } from '@/utils/router';
-  import { useRouter } from 'vue-router';
-  import { useRouteStoreWithOut } from '@/store/modules/route';
-  import { PageEnum } from '@/enums';
   import { useHeaderSetting } from '@/hooks/setting';
-  import { App } from '~/types/app';
   import { useGo } from '@/hooks/web/usePage';
+  import { useRouteStore } from '@/store/modules/route';
+  import { createReusableTemplate } from '@vueuse/core';
 
-  const { currentRoute } = useRouter();
-  const { getMenus } = useRouteStoreWithOut();
   const { getHeaderShowBreadCrumbIcon } = useHeaderSetting();
   const { goKey } = useGo();
 
   const { getHeaderShowBreadCrumb } = useHeaderSetting();
 
-  const pathSplitMark = '/';
-  const routeSplitMark = '_';
+  const routeStore = useRouteStore();
 
-  const breadcrumbs = computed(() =>
-    getBreadcrumbByRouteKey(
-      unref(currentRoute).name
-        ? String(unref(currentRoute).name)
-        : unref(currentRoute).fullPath.replaceAll(
-            pathSplitMark,
-            routeSplitMark,
-          ),
-      getMenus,
-      routePath(PageEnum.LOGIN),
-    ),
-  );
+  interface BreadcrumbContentProps {
+    breadcrumb: App.Menu;
+  }
 
-  function dropdownSelect(menuOption: App.Menu) {
-    goKey(menuOption.routeName);
+  const [DefineBreadcrumbContent, BreadcrumbContent] =
+    createReusableTemplate<BreadcrumbContentProps>();
+
+  function handleClickMenu(key: AuthRoute.RouteKey) {
+    goKey(key);
   }
 </script>
 

@@ -82,9 +82,7 @@
   };
 
   const exportAll = () => {
-    console.log('exportAll');
     if (unref(basicTableRef)) {
-      console.log(unref(basicTableRef));
       const { tableElRef } = unref(basicTableRef);
       tableElRef?.expandAll();
     }
@@ -152,7 +150,6 @@
   ]);
 
   const toggleLoading = () => {
-    console.log('loading');
     loading.value = true;
     setTimeout(() => {
       loading.value = false;

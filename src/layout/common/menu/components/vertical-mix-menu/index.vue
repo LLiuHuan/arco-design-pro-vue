@@ -42,22 +42,21 @@
 
 <script lang="ts" setup>
   import { useRouteStore } from '@/store/modules/route';
-  import { computed, ref, unref, watch } from 'vue';
-  import { App } from '~/types/app';
+  import { computed, ref, unref } from 'vue';
   import {
     useGlobSetting,
     useHeaderSetting,
     useMenuSetting,
   } from '@/hooks/setting';
-  import { getActiveKeyPathsOfMenus } from '@/utils/router';
-  import { RouteLocationNormalized, useRoute } from 'vue-router';
+  import { RouteLocationNormalized } from 'vue-router';
   import { useGo } from '@/hooks/web/usePage';
   import { SvgIcon } from '@/components/Icon';
   import { onClickOutside } from '@vueuse/core';
+  import { listenerRouteChange } from '@/utils/router';
   import LayoutMenu from '../base-menu/index.vue';
   import FirstLevelMenu from '../first-level-menu/index.vue';
 
-  const { getMenus } = useRouteStore();
+  const { getMenus, getSelectedMenuKeyPath } = useRouteStore();
   const {
     getMixSideFixed,
     isVerticalMix,
@@ -67,8 +66,6 @@
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { VITE_GLOB_APP_TITLE } = useGlobSetting();
-
-  const route = useRoute();
 
   const mixMenuRef = ref(null);
 
@@ -110,14 +107,14 @@
   // 设置当前活动菜单和子菜单
   // Set the currently active menu and submenu
   const setActive = async (setChildren = false) => {
-    const activeKey = (unref(currentRoute)?.meta?.currentActiveMenu ||
+    const activeKey = (unref(currentRoute)?.meta?.activeMenu ||
       unref(currentRoute)?.name) as string;
-    const activeKeys = getActiveKeyPathsOfMenus(activeKey, getMenus);
+    const activeKeys = getSelectedMenuKeyPath(activeKey);
     if (!activeKeys) return;
     activeName.value = activeKeys ? activeKeys[0] : '';
     if (unref(isVerticalMix)) {
       const activeMenu = unref(getMenus).find(
-        (item) => item.routeName === unref(activeName),
+        (item) => item.routeKey === unref(activeName),
       );
       if (activeMenu?.children) {
         if (setChildren) {
@@ -137,8 +134,8 @@
   // 点击菜单触发
   // Click the menu to trigger
   const handleSelectMixMenu = (item: App.Menu, hover: boolean) => {
-    const { routeName, children } = item;
-    if (unref(activeName) === routeName) {
+    const { routeKey, children } = item;
+    if (unref(activeName) === routeKey) {
       if (!hover) {
         if (!unref(openMenu)) {
           openMenu.value = true;
@@ -154,11 +151,11 @@
       }
     } else {
       openMenu.value = true;
-      activeName.value = routeName;
+      activeName.value = routeKey;
     }
 
     if (!children || children.length === 0) {
-      if (!hover) goKey(routeName);
+      if (!hover) goKey(routeKey);
       childrenMenus.value = [];
       closeMenu();
       return;
@@ -187,17 +184,13 @@
       : {};
   });
 
-  watch(
-    () => route.fullPath,
-    () => {
-      currentRoute.value = route;
-      setActive(true);
-      if (unref(getCloseMixSidebarOnChange)) {
-        closeMenu();
-      }
-    },
-    { immediate: true },
-  );
+  listenerRouteChange((route) => {
+    currentRoute.value = route;
+    setActive(true);
+    if (unref(getCloseMixSidebarOnChange)) {
+      closeMenu();
+    }
+  });
 </script>
 
 <style lang="less" scoped></style>

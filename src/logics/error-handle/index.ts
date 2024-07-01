@@ -60,7 +60,6 @@ function formatComponentName(vm: any) {
  * @description Configure Vue error handling function
  */
 function vueErrorHandler(err: unknown, vm: any, info: string) {
-  console.log('vueErrorHandler', err, vm, info);
   const errorLogStore = useErrorLogStoreWithOut();
   const { name, path } = formatComponentName(vm);
   errorLogStore.addErrorLogInfo({

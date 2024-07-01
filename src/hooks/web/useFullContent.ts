@@ -3,14 +3,18 @@ import { useRouter } from 'vue-router';
 import { computed, unref } from 'vue';
 
 /**
- * @description: Full screen display content
+ * @description 全屏显示内容
+ * @description Full screen display content
  */
 export const useFullContent = () => {
   const appStore = useAppStoreWithOut();
   const router = useRouter();
   const { currentRoute } = router;
 
-  // Whether to display the content in full screen without displaying the menu
+  /**
+   * @description 是否全屏显示内容，不显示菜单
+   * @description Whether to display the content in full screen without displaying the menu
+   */
   const getFullContent = computed(() => {
     // Query parameters, the full screen is displayed when the address bar has a full parameter
     const route = unref(currentRoute);
@@ -22,6 +26,12 @@ export const useFullContent = () => {
     return appStore.getProjectConfig.fullContent;
   });
 
+  /**
+   * @description 设置是否全屏显示内容
+   * @description Set whether to display the content in full screen
+   *
+   * @param fullContent 是否全屏显示内容
+   */
   const setFullContent = (fullContent: boolean) => {
     appStore.setProjectConfig({ fullContent });
   };

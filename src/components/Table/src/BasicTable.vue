@@ -138,8 +138,6 @@
   emit('register', tableAction);
 
   defineExpose({ tableElRef, ...tableAction });
-
-  console.log('123');
 </script>
 
 <style lang="less" scoped></style>

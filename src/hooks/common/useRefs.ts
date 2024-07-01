@@ -1,6 +1,7 @@
 import type { ComponentPublicInstance, Ref } from 'vue';
 import { onBeforeUpdate, shallowRef } from 'vue';
 
+// 处理多个 ref 的情况
 function useRefs<T = HTMLElement>(): {
   refs: Ref<T[]>;
   setRefs: (

@@ -8,21 +8,13 @@
   >
     <RouterView v-slot="{ Component, route }" class="h-full">
       <Transition
-        :name="
-          getTransitionName({
-            route,
-            openCache,
-            enableTransition: getEnableTransition,
-            cacheTabs: getCaches,
-            def: getBasicTransition,
-          })
-        "
+        :name="transitionName"
         appear
         mode="out-in"
         @before-leave="appStore.setContentXScrollable(true)"
         @after-enter="appStore.setContentXScrollable(false)"
       >
-        <KeepAlive v-if="openCache" :include="getCaches" :max="12">
+        <KeepAlive v-if="openCache" :include="routeStore.cacheRoutes" :max="12">
           <Component
             :is="Component"
             v-if="appStore.reloadFlag"
@@ -36,15 +28,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import {
     useMultipleTabSetting,
     useRootSetting,
     useTransitionSetting,
   } from '@/hooks/setting';
   import { computed, unref } from 'vue';
-  import { useAppStoreWithOut } from '@/store/modules/app';
-  import { getTransitionName } from './transition';
+  import { useAppStore } from '@/store/modules/app';
+  import { useRouteStore } from '@/store/modules/route';
 
   defineOptions({ name: 'LayoutContent' });
 
@@ -57,8 +48,8 @@
     showPadding: true,
   });
 
-  const tabStore = useMultipleTabWithOutStore();
-  const appStore = useAppStoreWithOut();
+  const appStore = useAppStore();
+  const routeStore = useRouteStore();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
   const { getOpenKeepAlive, getPageLoading } = useRootSetting();
@@ -69,12 +60,9 @@
     () => unref(getOpenKeepAlive) && unref(getShowMultipleTab),
   );
 
-  const getCaches = computed((): string[] => {
-    if (!unref(getOpenKeepAlive)) {
-      return [];
-    }
-    return tabStore.getCachedTabList;
-  });
+  const transitionName = computed(() =>
+    unref(getEnableTransition) ? unref(getBasicTransition) : '',
+  );
 </script>
 
 <style lang="less" scoped></style>

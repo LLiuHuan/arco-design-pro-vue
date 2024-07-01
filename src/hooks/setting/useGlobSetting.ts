@@ -13,7 +13,6 @@ export const useGlobSetting = (): Readonly<GlobEnvConfig> => {
     VITE_GLOB_UPLOAD_URL,
   } = getAppEnvConfig();
 
-  // Take global configuration
   const glob: Readonly<GlobEnvConfig> = {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,

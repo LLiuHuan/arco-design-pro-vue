@@ -18,7 +18,6 @@ const functions: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '错误日志',
-        ignoreAuth: true,
       },
     },
   ],

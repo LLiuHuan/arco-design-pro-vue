@@ -35,8 +35,12 @@ export const useHeaderSetting = () => {
     return appStore.getHeaderSetting.showBreadCrumbIcon;
   });
 
-  // 设置header配置
-  // Set header configuration
+  /**
+   * @description 设置header配置
+   * @description Set header configuration
+   *
+   * @param setting
+   */
   const setHeaderSetting = (setting: Partial<HeaderSetting>) => {
     appStore.setProjectConfig({ headerSetting: setting });
   };

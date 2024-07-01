@@ -29,10 +29,9 @@
   import { computed, h, ref, unref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
-  import { useAuthStoreWithOut } from '@/store/modules/auth';
+  import { useAuthStore, useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useGo } from '@/hooks/web/usePage';
-  import { useAuth } from '@/hooks/web/useAuth';
   import { Modal } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { useRootSetting } from '@/hooks/setting';
@@ -45,8 +44,9 @@
   }
 
   const { goKey } = useGo();
-  const auth = useAuth();
+  // const auth = useAuth();
   const { getIsMobile } = useRootSetting();
+  const { logout } = useAuthStore();
 
   const lockVisible = ref(false);
 
@@ -104,7 +104,7 @@
           simple: true,
           width: unref(getIsMobile) ? '90%' : 'auto',
           onOk() {
-            auth.logout();
+            logout();
           },
         });
         break;

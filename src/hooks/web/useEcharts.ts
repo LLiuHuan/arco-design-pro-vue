@@ -1,7 +1,3 @@
-/**
- * https://github.com/soybeanjs/soybean-admin/blob/main/src/hooks/common/echarts.ts
- */
-
 import { effectScope, nextTick, onScopeDispose, ref, unref, watch } from 'vue';
 import * as echarts from 'echarts/core';
 import type {
@@ -160,7 +156,6 @@ export function useEcharts<T extends ECOption>(
    * @param callback callback function
    */
   async function updateOptions(callback: (opts: T) => ECOption) {
-    console.log('updateOptions');
     if (!isRendered()) return;
     const updatedOpts = callback(options);
 
@@ -174,8 +169,8 @@ export function useEcharts<T extends ECOption>(
     await onUpdated?.(chart!);
   }
 
-  function setOptions(options: T) {
-    chart?.setOption(options);
+  function setOptions(opt: T) {
+    chart?.setOption(opt);
   }
 
   /**
@@ -183,7 +178,6 @@ export function useEcharts<T extends ECOption>(
    * @description render chart
    */
   async function render() {
-    console.log('render');
     if (!isRendered()) {
       const chartTheme = unref(getIsDarkMode) ? 'dark' : 'light';
 
@@ -202,7 +196,6 @@ export function useEcharts<T extends ECOption>(
    * @description resize chart
    */
   function resize() {
-    console.log('resize');
     chart?.resize();
   }
 
@@ -268,7 +261,6 @@ export function useEcharts<T extends ECOption>(
   });
 
   onScopeDispose(() => {
-    console.log('onScopeDispose');
     destroy();
     scope.stop();
   });

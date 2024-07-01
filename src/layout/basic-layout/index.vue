@@ -55,7 +55,6 @@
   import type { LayoutMode } from '@adp/materials';
   import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@adp/materials';
   import { MenuModeEnum } from '@/enums';
-  import { App } from '~/types/app';
   import { computed, unref } from 'vue';
   import { useLayoutSetting } from '@/hooks/setting/useLayoutSetting';
   import { useFullContent } from '@/hooks/web/useFullContent';

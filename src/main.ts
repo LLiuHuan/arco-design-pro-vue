@@ -40,9 +40,9 @@ const setupApp = async () => {
   await router.isReady();
 
   // 延迟挂载app 为了可以多看会加载动画
-  setTimeout(() => {
-    app.mount('#app');
-  }, 500);
+  // setTimeout(() => {
+  app.mount('#app');
+  // }, 500);
 };
 
 setupApp()

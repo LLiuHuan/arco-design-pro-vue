@@ -21,42 +21,16 @@
         @wheel="wheel"
       >
         <div ref="draggableRef" class="flex items-center">
-          <div v-for="element in getTabsState" :key="element.fullPath">
+          <div v-for="element in getTabs" :key="element.fullPath">
             <ContentMenu :active-key="activeKeyRef" :tab-item="element">
-              <div
-                :id="element.fullPath"
-                class="bg-[var(--color-fill-2)] flex-center px-10px py-4px mx-3px rounded-1 cursor-pointer layout-tab-scroll-item h-30px"
-                @click.stop="
-                  handleActive(element.fullPath, {
-                    params: element.params,
-                    query: element.query,
-                  })
-                "
+              <ButtonTab
+                :activate="activeKeyRef === element.fullPath"
+                :closable="!tabStore.isTabRetain(element.id)"
+                :tab="element"
+                @close="handleClose(element)"
+                @click.stop="tabStore.switchRouteByTab(element)"
               >
-                <span
-                  :class="{
-                    'text-[rgba(var(--primary-6))]':
-                      activeKeyRef === element.fullPath,
-                  }"
-                >
-                  {{
-                    element.meta?.i18nTitle
-                      ? $t(element.meta.i18nTitle)
-                      : element.meta?.title
-                  }}
-                </span>
-                <div
-                  v-if="!(element && element.meta && element.meta.affix)"
-                  class="flex-center py-2px"
-                  @click.stop="handleClose(element.fullPath)"
-                >
-                  <SvgIcon
-                    class="ml-6px"
-                    icon="mingcute:close-fill"
-                    size="12"
-                  />
-                </div>
-              </div>
+              </ButtonTab>
             </ContentMenu>
           </div>
         </div>
@@ -89,22 +63,24 @@
 
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
-  import { useDraggable } from 'vue-draggable-plus';
-  import { computed, nextTick, reactive, ref, unref } from 'vue';
+  import { computed, nextTick, reactive, ref } from 'vue';
   import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
-  import {
-    listenerRouteChange,
-    transformRoutePathToRouteName,
-  } from '@/utils/router';
+  import { listenerRouteChange } from '@/utils/router';
   import { PageEnum } from '@/enums';
   import { useAuthStoreWithOut } from '@/store/modules/auth';
-  import { RouteLocationNormalized, RouteMeta, useRouter } from 'vue-router';
-  import { useGo } from '@/hooks/web/usePage';
+  import { RouteMeta, useRoute, useRouter } from 'vue-router';
   import { useDebounceFn, useResizeObserver } from '@vueuse/core';
   import { useHeaderSetting, useMultipleTabSetting } from '@/hooks/setting';
-  import { getTabRouteByVueRoute } from '@/store/modules/multipleTab/helpers';
   import { useFullContent } from '@/hooks/web/useFullContent';
-  import { ContentMenu, Dropdown, Fold, Redo, Setting } from './components';
+  import { useDraggable } from 'vue-draggable-plus';
+  import {
+    ButtonTab,
+    ContentMenu,
+    Dropdown,
+    Fold,
+    Redo,
+    Setting,
+  } from './components';
 
   const activeKeyRef = ref('');
   const navScroll = ref();
@@ -117,33 +93,28 @@
 
   const tabStore = useMultipleTabWithOutStore();
   const userStore = useAuthStoreWithOut();
-  const { goKey } = useGo();
 
   const { getShowFold, getShowQuick, getShowRedo } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
   const { getFullContent } = useFullContent();
 
-  const getTabsState = computed({
-    get: () => {
-      return tabStore.getTabNotHideList;
-    },
+  const getTabs = computed({
+    get: () => tabStore.getTabs,
     set: (value) => {
-      tabStore.setTabList(value);
+      tabStore.setTabs(value);
     },
   });
 
-  const unClose = computed(() => unref(getTabsState).length === 1);
+  // const unClose = computed(() => unref(getTabsState).length === 1);
 
-  const handleActive = (activeKey: any, options: any) => {
-    activeKeyRef.value = activeKey;
-    goKey(transformRoutePathToRouteName(activeKey), options);
-  };
+  // const handleActive = (activeKey: any, options: any) => {
+  //   activeKeyRef.value = activeKey;
+  //   goKey(transformRoutePathToRouteName(activeKey), options);
+  // };
 
-  const handleClose = (targetKey: string) => {
-    if (unClose.value) {
-      return;
-    }
-    tabStore.closeTabByKey(targetKey, router);
+  const handleClose = (tab: App.Tab) => {
+    tabStore.removeTab(tab.id);
+    // await routeStore.reCacheRoutesByKey(tab.routeKey);
   };
 
   // region scroll
@@ -225,7 +196,7 @@
     }
   }
 
-  const { start } = useDraggable(draggableRef, getTabsState, {
+  const { start } = useDraggable(draggableRef, getTabs, {
     animation: 300,
   });
 
@@ -236,9 +207,9 @@
       return;
     }
     const { path, fullPath, meta = {} } = route;
-    const { currentActiveMenu, hideTab, href } = meta as RouteMeta;
+    const { activeMenu, hideTab, href } = meta as RouteMeta;
     if (href) return;
-    const isHide = !hideTab ? null : currentActiveMenu;
+    const isHide = !hideTab ? null : activeMenu;
     const p = isHide || fullPath || path;
     if (activeKeyRef.value !== p) {
       activeKeyRef.value = p as string;
@@ -247,21 +218,13 @@
     if (isHide) {
       const findParentRoute = router
         .getRoutes()
-        .find((item) => item.path === currentActiveMenu);
+        .find((item) => item.path === activeMenu);
 
       if (findParentRoute) {
-        tabStore.addTab(
-          getTabRouteByVueRoute(
-            findParentRoute as unknown as RouteLocationNormalized,
-          ),
-        );
+        tabStore.addTab(route);
       }
     } else {
-      tabStore.addTab(
-        getTabRouteByVueRoute(
-          unref(route) as unknown as RouteLocationNormalized,
-        ),
-      );
+      tabStore.addTab(route);
     }
 
     updateNavScroll();
@@ -280,6 +243,13 @@
   nextTick(() => {
     start();
   });
+
+  function init() {
+    const route = useRoute();
+    tabStore.initTabStore(route);
+  }
+
+  init();
 </script>
 
 <style lang="less" scoped></style>

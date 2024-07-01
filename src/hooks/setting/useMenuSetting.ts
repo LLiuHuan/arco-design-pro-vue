@@ -1,7 +1,7 @@
 import { useAppStore } from '@/store/modules/app';
 import { computed, unref } from 'vue';
 import type { MenuSetting } from '~/types/config';
-import { MenuModeEnum } from '@/enums';
+import { AppEnum, MenuModeEnum } from '@/enums';
 import { useLayoutSetting } from '@/hooks/setting/useLayoutSetting';
 
 export const useMenuSetting = () => {
@@ -36,6 +36,12 @@ export const useMenuSetting = () => {
    * @description Get menu theme
    */
   const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
+
+  /**
+   * @description 获取是否深色菜单
+   * @description Get dark menu
+   */
+  const getIsMenuDark = computed(() => getMenuTheme.value === AppEnum.DARK);
 
   /**
    * @description 获取手风琴模式
@@ -191,12 +197,14 @@ export const useMenuSetting = () => {
       collapsed: !unref(getCollapsed),
     });
   }
+
   return {
     getCollapsed,
     getMenuBgColor,
     getCanDrag,
     getTrigger,
     getMenuTheme,
+    getIsMenuDark,
     getAccordion,
     isSiderVisible,
     isVerticalMix,

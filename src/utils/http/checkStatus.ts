@@ -1,13 +1,10 @@
 import { Message, Modal } from '@arco-design/web-vue';
 import { useI18n } from '@/hooks/web/useI18n';
 import type { ErrorMessageMode } from '~/types/axios';
-import { useAuthStoreWithOut } from '@/store/modules/auth';
-import { SessionTimeoutProcessingEnum } from '@/enums';
-import { appSetting } from '@/settings';
-import {useAuth} from "@/hooks/web/useAuth";
 
 const error = Message.error!;
-const stp = appSetting.sessionTimeoutProcessing;
+
+// const stp = appSetting.sessionTimeoutProcessing;
 
 export function checkStatus(
   status: number,
@@ -15,8 +12,7 @@ export function checkStatus(
   errorMessageMode: ErrorMessageMode = 'message',
 ): void {
   const { t } = useI18n();
-  const authStore = useAuthStoreWithOut();
-  const auth = useAuth();
+  // const authStore = useAuthStoreWithOut();
   let errMessage = '';
 
   switch (status) {
@@ -27,14 +23,14 @@ export function checkStatus(
     // Jump to the login page if not logged in, and carry the path of the current page
     // Return to the current page after successful login. This step needs to be operated on the login page.
     case 401:
-      authStore.resetAuthStore();
+      // authStore.resetStore();
       errMessage = msg || t('sys.api.errMsg401');
-      if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
-        authStore.setSessionTimeout(true);
-      } else {
-        // 被动登出，带redirect地址
-        auth.logout();
-      }
+      // if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
+      //   authStore.setSessionTimeout(true);
+      // } else {
+      //   // 被动登出，带redirect地址
+      //   // TODO: 退出登录
+      // }
       break;
     case 403:
       errMessage = t('sys.api.errMsg403');

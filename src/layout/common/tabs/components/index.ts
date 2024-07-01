@@ -4,4 +4,6 @@ import ContentMenu from './content-menu/index.vue';
 import Fold from './fold/index.vue';
 import Setting from './setting/index.vue';
 
-export { Redo, Dropdown, ContentMenu, Fold, Setting };
+import ButtonTab from './button-tab/index.vue';
+
+export { Redo, Dropdown, ContentMenu, Fold, Setting, ButtonTab };

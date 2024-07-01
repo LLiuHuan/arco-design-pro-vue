@@ -1,5 +1,4 @@
 import { Router, useRouter } from 'vue-router';
-import { App } from '~/types/app';
 import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
 import { useAppStoreWithOut } from '@/store/modules/app';
 import { unref } from 'vue';
@@ -34,9 +33,7 @@ export const useTabs = (_router?: Router) => {
 
   const getCurrentTab = () => {
     const route = unref(currentRoute);
-    return tabStore.getTabList.find(
-      (item) => item.fullPath === route.fullPath,
-    )!;
+    return tabStore.getTabs.find((item) => item.fullPath === route.fullPath)!;
   };
 
   async function updateTabTitle(title: string, tab?: App.Tab) {
@@ -44,15 +41,7 @@ export const useTabs = (_router?: Router) => {
       return;
     }
     const targetTab = tab || getCurrentTab();
-    await tabStore.setTabTitle(title, targetTab);
-  }
-
-  async function updateTabPath(path: string, tab?: App.Tab) {
-    if (!canIUseTabs) {
-      return;
-    }
-    const targetTab = tab || getCurrentTab();
-    await tabStore.updateTabPath(path, targetTab);
+    tabStore.setTabLabel(title, targetTab.id);
   }
 
   const handleTabAction = async (action: TabActionEnum, tab?: App.Tab) => {
@@ -60,7 +49,7 @@ export const useTabs = (_router?: Router) => {
       return;
     }
 
-    const currentTab = getCurrentTab();
+    const currentTab = tab || getCurrentTab();
 
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
@@ -68,24 +57,24 @@ export const useTabs = (_router?: Router) => {
         break;
 
       case TabActionEnum.CLOSE_ALL:
-        await tabStore.closeAllTab(router);
+        await tabStore.clearTabs();
         break;
 
       case TabActionEnum.CLOSE_LEFT:
-        await tabStore.closeLeftTabs(currentTab, router);
+        await tabStore.clearLeftTabs(currentTab.id);
         break;
 
       case TabActionEnum.CLOSE_RIGHT:
-        await tabStore.closeRightTabs(currentTab, router);
+        await tabStore.clearRightTabs(currentTab.id);
         break;
 
       case TabActionEnum.CLOSE_OTHER:
-        await tabStore.closeOtherTabs(currentTab, router);
+        await tabStore.clearTabs([currentTab.id]);
         break;
 
       case TabActionEnum.CLOSE_CURRENT:
       case TabActionEnum.CLOSE:
-        await tabStore.closeTab(tab || currentTab, router);
+        await tabStore.removeTab(currentTab.id);
         break;
       default:
         break;
@@ -101,7 +90,5 @@ export const useTabs = (_router?: Router) => {
     closeCurrent: () => handleTabAction(TabActionEnum.CLOSE_CURRENT),
     close: (tab?: App.Tab) => handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: App.Tab) => updateTabTitle(title, tab),
-    updatePath: (fullPath: string, tab?: App.Tab) =>
-      updateTabPath(fullPath, tab),
   };
 };

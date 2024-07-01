@@ -44,7 +44,6 @@
   import { useRouteStoreWithOut } from '@/store/modules/route';
   import { MenuModeEnum } from '@/enums';
   import { AppLogo } from '@/components/AppLogo';
-  import { App } from '~/types/app';
   import { computed, unref } from 'vue';
   import { useLayoutSetting } from '@/hooks/setting/useLayoutSetting';
   import { useMixMenuContext } from '@/layout/context';

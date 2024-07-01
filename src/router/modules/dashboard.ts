@@ -9,9 +9,8 @@ const dashboard: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '分析页',
-        ignoreAuth: true,
-        i18nTitle: 'routes.dashboard.analysis.title',
-        affix: true,
+        i18nKey: 'routes.dashboard.analysis.title',
+        constant: true,
       },
     },
     {
@@ -20,8 +19,7 @@ const dashboard: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: '工作台',
-        ignoreAuth: true,
-        i18nTitle: 'routes.dashboard.workbench.title',
+        i18nKey: 'routes.dashboard.workbench.title',
       },
     },
   ],
@@ -29,7 +27,7 @@ const dashboard: AuthRoute.Route = {
     title: '仪表盘',
     icon: 'mdi:monitor-dashboard',
     order: 1,
-    i18nTitle: 'routes.dashboard.title',
+    i18nKey: 'routes.dashboard.title',
   },
 };
 

@@ -1,23 +1,24 @@
 import { useContext } from '@adp/hooks';
 import { useRoute } from 'vue-router';
 import { useRouteStoreWithOut } from '@/store/modules/route';
-import { computed, ref, Ref, unref, watch } from 'vue';
+import { computed, ref, unref } from 'vue';
+import { listenerRouteChange } from '@/utils/router';
 
 export function useMixMenu() {
   const route = useRoute();
   const { getMenus } = useRouteStoreWithOut();
 
-  const activeFirstLevelMenuKey: Ref<any> = ref('');
+  const activeFirstLevelMenuKey = ref('');
 
-  function setActiveFirstLevelMenuKey(key: AuthRoute.RouteKey) {
+  function setActiveFirstLevelMenuKey(key: string) {
     activeFirstLevelMenuKey.value = key;
   }
 
   function getActiveFirstLevelMenuKey() {
     const routeSplitMark = '_';
-    const { hideMenu, currentActiveMenu } = route.meta;
+    const { hideInMenu, activeMenu } = route.meta;
     const name = route.name as string;
-    const routeName = (hideMenu ? currentActiveMenu : name) || name;
+    const routeName = (hideInMenu ? activeMenu : name) || name;
 
     const [firstLevelRouteName] = routeName.split(routeSplitMark);
     setActiveFirstLevelMenuKey(firstLevelRouteName as PageRoute.RouteKey);
@@ -25,20 +26,16 @@ export function useMixMenu() {
 
   const menus = computed(() => {
     return (
-      getMenus.find((menu) => menu.routeName === unref(activeFirstLevelMenuKey))
+      getMenus.find((menu) => menu.key === unref(activeFirstLevelMenuKey))
         ?.children || []
     );
   });
 
   // 监听路由变化
   // Listen for route changes
-  watch(
-    () => route.fullPath,
-    () => {
-      getActiveFirstLevelMenuKey();
-    },
-    { immediate: true },
-  );
+  listenerRouteChange(() => {
+    getActiveFirstLevelMenuKey();
+  });
 
   return {
     activeFirstLevelMenuKey,

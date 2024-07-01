@@ -145,9 +145,9 @@
   import { localStg } from '@/utils/cache';
   import { LOGIN_INFO } from '@/enums';
   import { useGo } from '@/hooks/web/usePage';
-  import { useAuth } from '@/hooks/web/useAuth';
   import { useLoading } from '@adp/hooks';
   import { open } from '@/utils/common';
+  import { useAuthStore } from '@/store/modules/auth';
   import LoginTitle from '../login-title/index.vue';
   import { GITHUB_AUTHORIZE_URL } from '../../enum';
 
@@ -160,7 +160,7 @@
 
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
-  const { login } = useAuth();
+  const { login } = useAuthStore();
 
   // const loginConfig = {
   //   rememberPassword: true,

@@ -58,7 +58,7 @@ function useScrollTo({ el, to, duration = 500, callback }: UseScrollToOptions) {
   const increment = 20;
   let currentTime = 0;
 
-  const animateScroll = function () {
+  const animateScroll = () => {
     if (!unref(isActiveRef)) {
       return;
     }

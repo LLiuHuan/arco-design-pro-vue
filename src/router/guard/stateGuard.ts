@@ -16,9 +16,10 @@ export function createStateGuard(router: Router) {
     if (to.name === PageEnum.LOGIN) {
       const authStore = useAuthStoreWithOut();
 
-      authStore.resetAuthStore();
-    } else if (to.name === PageEnum.REDIRECT) {
+      authStore.resetStore();
       removeTabChangeListener();
     }
+    // else if (to.name === PageEnum.REDIRECT) {
+    // }
   });
 }

@@ -9,9 +9,8 @@ const document: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: 'Vue3文档',
-        ignoreAuth: true,
         icon: 'logos:vue',
-        i18nTitle: 'routes.document.vue3',
+        i18nKey: 'routes.document.vue3',
       },
     },
     {
@@ -19,9 +18,8 @@ const document: AuthRoute.Route = {
       path: '/document/github',
       meta: {
         title: 'Github（外链）',
-        ignoreAuth: true,
         icon: 'mdi:github',
-        i18nTitle: 'routes.document.github',
+        i18nKey: 'routes.document.github',
         href: 'https://github.com/LLiuHuan/arco-design-pro-vue',
       },
     },
@@ -30,7 +28,7 @@ const document: AuthRoute.Route = {
     title: '文档',
     icon: 'solar:document-broken',
     order: 2,
-    i18nTitle: 'routes.document.title',
+    i18nKey: 'routes.document.title',
   },
 };
 

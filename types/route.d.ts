@@ -139,44 +139,104 @@ declare namespace AuthRoute {
 
   /** 路由描述 */
   interface RouteMeta<K extends AuthRoute.RoutePath> {
-    /** 路由标题(可用来作document.title或者菜单的名称) */
+    /**
+     * 路由标题(可用来作document.title或者菜单的名称)
+     * Route name
+     */
     title: string;
-    /** 用来支持多国语言 如果i18nTitle和title同时存在优先使用i18nTitle */
-    i18nTitle?: string;
-    /** 路由的动态路径(需要动态路径的页面需要将path添加进范型参数) */
-    dynamicPath?: AuthRouteUtils.GetDynamicPath<K>;
-    /** 作为单级路由的父级路由布局组件 */
-    singleLayout?: Extract<RouteComponentType, 'basic' | 'blank' | 'flow'>;
-    /** 需要登录权限 */
-    ignoreAuth?: boolean;
+    /**
+     * 路由国际化名称(用来支持多国语言 如果i18nKey和title同时存在优先使用i18nKey)
+     * Route internationalized name
+     */
+    i18nKey?: string;
     /**
      * 哪些类型的用户有权限才能访问的路由(空的话则表示不需要权限)
      * 后端动态路由数据不需要该属性，直接由后端根据用户角色返回对应权限的路由数据
+     * Which types of users have permission to access the route
+     * If it is empty, it means that no permission is required
      */
     roles?: string[];
-    /** 缓存页面 */
-    keepAlive?: boolean;
-    /** 菜单和面包屑对应的图标 */
+    /**
+     * 是否缓存路由
+     * Whether to cache the route
+     */
+    keepAlive?: boolean | null;
+    /**
+     * 是否固定路由
+     * Is constant route
+     *
+     * 设置为true时，访问路由时不会进行登录验证，也不会进行权限验证
+     * when it is set to true, there will be no login verification and no permission verification to access the route
+     */
+    constant?: boolean | null;
+    /**
+     * 图标
+     * Iconify icon
+     *
+     * 它可以在菜单或面包屑中使用
+     * It can be used in the menu or breadcrumb
+     */
     icon?: string;
-    /** 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名) */
+    /**
+     * 本地图标
+     * Local icon
+     *
+     * 在"src/assets/svg-icon"中，如果设置了，将忽略图标
+     * In "src/assets/svg-icon", if it is set, the icon will be ignored
+     */
     localIcon?: string;
-    /** 是否在菜单中隐藏(一些列表、表格的详情页面需要通过参数跳转，所以不能显示在菜单中) */
-    hideMenu?: boolean;
-    /** 外链链接 */
+    /**
+     * @description 路由顺序
+     * @description Router order
+     */
+    order?: number | null;
+    /**
+     * 外链链接
+     * The outer link of the route
+     */
     href?: string;
-    /** 是否支持多个tab页签(默认一个，即相同name的路由会被替换) */
-    multiTab?: boolean;
-    /** 路由顺序，可用于菜单的排序 */
-    order?: number;
-    /** 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况) */
-    currentActiveMenu?: RouteKey;
+    /**
+     * 是否在菜单中隐藏(一些列表、表格的详情页面需要通过参数跳转，所以不能显示在菜单中)
+     * Whether to hide the route in the menu
+     */
+    hideInMenu?: boolean | null;
+    /**
+     * 进入路由时将激活菜单键
+     * The menu key will be activated when entering the route
+     *
+     * 路由不在菜单中
+     * The route is not in the menu
+     *
+     * @example
+     *  路由为"user_detail"，如果设置为"user_list"，菜单"user_list"将被激活
+     *  the route is "user_detail", if it is set to "user_list", the menu "user_list" will be activated
+     */
+    activeMenu?: PageRoute.RouteKey | null;
+    /**
+     * 默认情况下，相同的路由路径将使用一个选项卡，即使使用不同的查询，如果设置为 true，则路由
+     * 不同的查询将使用不同的选项卡
+     *
+     * By default, the same route path will use one tab, even with different query, if set true, the route with
+     * different query will use different tabs
+     */
+    multiTab?: boolean | null;
+    /**
+     * 如果设置，路由将在选项卡中固定，并且值是固定选项卡的顺序
+     * If set, the route will be fixed in tabs, and the value is the order of fixed tabs
+     */
+    fixedIndexInTab?: number | null;
+    /**
+     * 如果设置查询参数，进入路由时将自动携带
+     * if set query parameters, it will be automatically carried when entering the route
+     */
+    query?: { key: string; value: string }[] | null;
+
+    /** 路由的动态路径(需要动态路径的页面需要将path添加进范型参数) */
+    dynamicPath?: AuthRouteUtils.GetDynamicPath<K>;
+    /** 作为单级路由的父级路由布局组件 */
+    singleLayout?: Extract<AuthRoute.RouteComponentType, 'basic' | 'blank'>;
     /** 表示是否是多级路由的中间级路由(用于转换路由数据时筛选多级路由的标识，定义路由时不用填写) */
     multi?: boolean;
-    /** 是否固定在tab卡不可关闭  */
-    affix?: boolean;
-
-    hideTab?: boolean;
-    dynamicLevel?: number;
   }
 
   type Route<K extends AllRouteKey = AllRouteKey> = K extends AllRouteKey
@@ -205,6 +265,23 @@ declare namespace AuthRoute {
       >
     : never;
 
-  /** 前端导入的路由模块 */
-  type RouteModule = Record<string, { default: Route }>;
+  type _RouteRecordBase = import('vue-router')._RouteRecordBase;
+  type ConstRoute = Omit<_RouteRecordBase, 'name' | 'path' | 'children'> & {
+    name: string;
+    path: string;
+    component?: RouteComponentType;
+    children?: ConstRoute[];
+  };
+  /**
+   * @description 前端导入的路由模块
+   * @description Front-end imported route module
+   * - key: 路由名称
+   * - value: 路由模块
+   * @example
+   * Record<string, { default: ConstRoute }>
+   * {
+   *   './about.ts': () => import('./about.ts'),
+   * }
+   */
+  type RouteModule = Record<string, { default: ConstRoute }>;
 }

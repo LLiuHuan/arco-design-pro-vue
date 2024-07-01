@@ -38,7 +38,7 @@
         <ul>
           <li
             v-for="(item, index) in searchResult"
-            :key="item.path"
+            :key="item.key"
             :ref="setRefs(index)"
             :class="{
               'bg-[rgba(var(--primary-6))] text-[var(--color-white)]':
@@ -50,16 +50,10 @@
             @mouseenter="handleMouseenter"
           >
             <div class="pl-10px pr-5px flex-center">
-              <SvgIcon
-                :icon="item.meta.icon || 'solar:document-broken'"
-                :local-icon="item.meta.localIcon"
-                size="24"
-              />
+              <component :is="item.icon" />
             </div>
             <div class="flex-auto leading-34px">
-              {{
-                item.meta.i18nTitle ? $t(item.meta.i18nTitle) : item.meta.title
-              }}
+              {{ item.label }}
             </div>
             <div
               :style="{
@@ -81,12 +75,11 @@
   import { onKeyStroke, useDebounceFn } from '@vueuse/core';
   import { nextTick, ref, unref, watch } from 'vue';
   import { useRouteStoreWithOut } from '@/store/modules/route';
-  import { useI18n } from '@/hooks/web/useI18n';
   import { useGo } from '@/hooks/web/usePage';
-  import { transformRouteNameToOption } from '@/utils/router';
   import { useRefs } from '@/hooks/common/useRefs';
   import { useScrollTo } from '@/hooks/common/useScrollTo';
   import { useRootSetting } from '@/hooks/setting';
+  import { transformRouteNameToOption } from '@/router/helper/transform';
   import { Tip } from './components';
 
   defineOptions({ name: 'AppSearch' });
@@ -108,9 +101,8 @@
 
   const keyword = ref('');
   const activeIndex = ref(-1);
-  const searchResult = ref<AuthRoute.Route[]>([]);
+  const searchResult = ref<App.Menu[]>([]);
 
-  const { t } = useI18n();
   const routeStore = useRouteStoreWithOut();
   const { goKey } = useGo();
   const { refs, setRefs } = useRefs();
@@ -156,9 +148,7 @@
     const reg = createSearchReg(unref(keyword));
 
     searchResult.value = routeStore.getSearchMenus.filter((menu) => {
-      const title = (
-        menu.meta.i18nTitle ? t(menu.meta.i18nTitle) : menu.meta.title
-      ).toLocaleLowerCase();
+      const title = menu.label.toLocaleLowerCase();
 
       return reg.test(title);
     });
@@ -246,9 +236,9 @@
     handleClose();
     await nextTick();
 
-    const options = transformRouteNameToOption(item.name);
+    const options = transformRouteNameToOption(item.routeKey);
 
-    goKey(item.name, options);
+    goKey(item.routeKey, options);
   };
 
   // enter search

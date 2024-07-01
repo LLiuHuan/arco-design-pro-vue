@@ -1,6 +1,5 @@
 import { h, VNode } from 'vue';
 import { SvgIcon } from '@/components/Icon';
-import { consoleWarn } from '@/utils/common/console';
 
 interface IconConfig {
   /**
@@ -26,11 +25,12 @@ interface IconConfig {
  * @property color - 图标颜色
  * @property fontSize - 图标大小
  */
-export const iconRender = (config: IconConfig): (() => VNode) => {
+export const iconRender = (config: IconConfig): (() => VNode) | undefined => {
   const { color, fontSize, icon, localIcon } = config;
 
   if (!icon && !localIcon) {
-    consoleWarn('没有传递图标名称，请确保给icon或localIcon传递有效值!');
+    // consoleWarn('没有传递图标名称，请确保给icon或localIcon传递有效值!');
+    return undefined;
   }
 
   return () => h(SvgIcon, { icon, localIcon, color, size: fontSize });

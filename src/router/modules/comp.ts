@@ -10,7 +10,6 @@ const components: AuthRoute.Route = {
       component: 'self',
       meta: {
         title: 'Loading',
-        ignoreAuth: true,
       },
     },
   ],

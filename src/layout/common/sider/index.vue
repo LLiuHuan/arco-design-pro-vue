@@ -1,24 +1,28 @@
 <template>
-  <div class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]">
+  <div
+    :style="{ background: getIsMenuDark ? 'var(--color-menu-dark-bg)' : '' }"
+    class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]"
+  >
     <AppLogo
       v-if="showLogo"
-      class="text-16px font-bold"
       :show-title="!getCollapsed"
       :style="{ height: `${getHeaderHeight + 1}px` }"
+      class="text-16px font-bold"
     />
     <LayoutVerticalMixMenu v-if="isVerticalMix">
       <AppLogo
         v-if="getShowLogo"
-        class="text-16px font-bold"
         :show-title="false"
         :style="{ height: `${getHeaderHeight + 1}px` }"
+        class="text-16px font-bold"
       />
     </LayoutVerticalMixMenu>
     <LayoutHorizontalMixMenu v-else-if="isHorizontalMix" />
     <LayoutVerticalMenu
       v-else
-      :menus="getMenus"
       :collapsed="getCollapsed"
+      :menus="routeStoreWithOut.getMenus"
+      :theme="getMenuTheme"
     ></LayoutVerticalMenu>
   </div>
 </template>
@@ -38,10 +42,16 @@
     LayoutVerticalMixMenu,
   } from '../menu';
 
-  const { isVerticalMix, isHorizontalMix, getCollapsed } = useMenuSetting();
+  const {
+    isVerticalMix,
+    isHorizontalMix,
+    getCollapsed,
+    getIsMenuDark,
+    getMenuTheme,
+  } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { getShowLogo } = useRootSetting();
-  const { getMenus } = useRouteStoreWithOut();
+  const routeStoreWithOut = useRouteStoreWithOut();
 
   const showLogo = computed(
     () =>

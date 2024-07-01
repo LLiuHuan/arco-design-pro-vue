@@ -8,6 +8,13 @@ import {
 import { getAuthCache, setAuthCache } from '@/utils/auth';
 import { store } from '@/store';
 import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
+import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
+import { isArray } from '@/utils/common';
+import { useGo } from '@/hooks/web/usePage';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Notification } from '@arco-design/web-vue';
+import { useRoute } from 'vue-router';
+import { useRouteStoreWithOut } from '@/store/modules/route';
 
 interface AuthState {
   /**
@@ -32,6 +39,9 @@ interface AuthState {
    */
   sessionTimeout: boolean;
 }
+
+const route = useRoute();
+const routeStore = useRouteStoreWithOut();
 
 const emptyInfo: UserInfoModel = {
   user: '',
@@ -88,6 +98,13 @@ export const useAuthStore = defineStore({
     getLoginLoading(state) {
       return state.loginLoading;
     },
+    isStaticSuper(state) {
+      const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env;
+      return (
+        VITE_AUTH_ROUTE_MODE === 'static' &&
+        state.roleList.includes(VITE_STATIC_SUPER_ROLE ?? 'Super')
+      );
+    },
   },
   actions: {
     /**
@@ -126,15 +143,81 @@ export const useAuthStore = defineStore({
     /**
      * @description Reset auth status - [重置auth状态]
      */
-    resetAuthStore() {
+    resetStore() {
       setAuthCache(TOKEN_KEY, '');
       setAuthCache(REFRESH_TOKEN_KEY, '');
       setAuthCache(USER_INFO_KEY, {});
       setAuthCache(ROLES_KEY, []);
       this.$reset();
+
+      if (!route.meta.constant) {
+        const { goLogin } = useGo();
+        goLogin();
+      }
+      routeStore.resetStore();
     },
     setLoginLoading(loading: boolean) {
       this.loginLoading = loading;
+    },
+    async loginByToken(backendToken: LoginModel) {
+      // 先把token存储到缓存中(后面接口的请求头需要token)
+      this.setToken(backendToken);
+
+      // 获取用户信息
+      const resp = await fetchUserInfo();
+      const { userRole } = resp;
+      if (isArray(userRole)) {
+        const roleList = userRole.map((item) => item) as string[];
+        this.setRoleList(roleList);
+      } else {
+        resp.userRole = [];
+        this.setRoleList([]);
+      }
+
+      // 成功后把用户信息存储到缓存中
+      this.setUserInfo(resp);
+
+      return resp;
+    },
+    async login(username: string, password: string) {
+      this.setLoginLoading(true);
+      // Simulate login request - [模拟登录请求]
+      const resp = await fetchLogin({
+        username,
+        password,
+      });
+
+      if (!resp) {
+        this.setLoginLoading(false);
+        this.resetStore();
+        return;
+      }
+
+      const userInfo = await this.loginByToken(resp);
+
+      if (userInfo) {
+        // 登录成功后重定向到登录后的地址
+        await routeStore.initAuthRoute();
+
+        const { toRedirect } = useGo(false);
+
+        await toRedirect();
+
+        // 登录成功弹出欢迎提示
+        if (routeStore.isInitAuthRoute) {
+          const { t } = useI18n();
+          Notification.success({
+            title: t('sys.login.common.loginSuccess'),
+            content: t(`sys.login.common.welcomeBack`, {
+              userName: this.getUserInfo.userName,
+            }),
+            duration: 3000,
+          });
+        }
+      }
+    },
+    async logout() {
+      this.resetStore();
     },
   },
 

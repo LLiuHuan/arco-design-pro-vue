@@ -43,15 +43,17 @@ export default defineConfig((configEnv) => {
       exclude: ['crypto-js'],
     },
     build: createViteBuild(viteEnv),
-    css: {
-      preprocessorOptions: {
-        // less: {
-        //   modifyVars: {
-        //     hack: `true; @import (reference) "${resolve('src/styles/config.less')}";`,
-        //   },
-        //   javascriptEnabled: true,
-        // },
-      },
-    },
+    // 需要引入arco全局样式
+    // css: {
+    //   preprocessorOptions: {
+    //     less: {
+    //       modifyVars: {
+    //         'color-menu-dark-bg': '#001428',
+    //         // hack: `true; @import (reference) "${resolve('src/styles/config.less')}";`,
+    //       },
+    //       javascriptEnabled: true,
+    //     },
+    //   },
+    // },
   };
 });

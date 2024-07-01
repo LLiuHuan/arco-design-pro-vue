@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{ background: getIsMenuDark ? 'var(--color-menu-dark-bg)' : '' }"
+    :style="{ background: siderDark ? 'var(--color-menu-dark-bg)' : '' }"
     class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]"
   >
     <AppLogo
@@ -21,8 +21,8 @@
     <LayoutVerticalMenu
       v-else
       :collapsed="getCollapsed"
+      :dark="siderDark"
       :menus="routeStoreWithOut.getMenus"
-      :theme="getMenuTheme"
     ></LayoutVerticalMenu>
   </div>
 </template>
@@ -42,16 +42,17 @@
     LayoutVerticalMixMenu,
   } from '../menu';
 
-  const {
-    isVerticalMix,
-    isHorizontalMix,
-    getCollapsed,
-    getIsMenuDark,
-    getMenuTheme,
-  } = useMenuSetting();
+  const { isVerticalMix, isHorizontalMix, getCollapsed, getIsMenuDark } =
+    useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
-  const { getShowLogo } = useRootSetting();
+  const { getShowLogo, getIsDarkMode } = useRootSetting();
+
   const routeStoreWithOut = useRouteStoreWithOut();
+
+  const siderDark = computed(
+    () =>
+      !unref(getIsDarkMode) && unref(getIsMenuDark) && !unref(isHorizontalMix),
+  );
 
   const showLogo = computed(
     () =>

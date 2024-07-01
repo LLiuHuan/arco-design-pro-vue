@@ -31,7 +31,7 @@
         :mode="mode"
         :open-keys="menuState.openKeys"
         :selected-keys="menuState.selectedKeys"
-        :theme="theme"
+        :theme="dark ? AppEnum.DARK : AppEnum.LIGHT"
         auto-open-selected
         auto-scroll-into-view
         class="transition-base vertical-mix-menu w-full box-border"
@@ -65,7 +65,7 @@
   import { MenuItemProps, MenuState, Props } from './types';
 
   const props = withDefaults(defineProps<Props>(), {
-    theme: AppEnum.LIGHT,
+    dark: false,
     mode: MenuModeEnum.VERTICAL,
   });
 

@@ -41,7 +41,6 @@ interface AuthState {
 }
 
 const route = useRoute();
-const routeStore = useRouteStoreWithOut();
 
 const emptyInfo: UserInfoModel = {
   user: '',
@@ -154,6 +153,7 @@ export const useAuthStore = defineStore({
         const { goLogin } = useGo();
         goLogin();
       }
+      const routeStore = useRouteStoreWithOut();
       routeStore.resetStore();
     },
     setLoginLoading(loading: boolean) {
@@ -197,6 +197,7 @@ export const useAuthStore = defineStore({
 
       if (userInfo) {
         // 登录成功后重定向到登录后的地址
+        const routeStore = useRouteStoreWithOut();
         await routeStore.initAuthRoute();
 
         const { toRedirect } = useGo(false);

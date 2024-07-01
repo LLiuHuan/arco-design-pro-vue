@@ -4,7 +4,7 @@ import { AppEnum, ThemeColorEnum } from '@/enums';
 import type { ProjectConfig, ThemeSettingColors } from '~/types/config';
 import { ThemeInfo } from '~/types/config';
 import { usePreferredColorScheme } from '@vueuse/core';
-import { setThemeColors } from '@/utils/common';
+import { setProTheme, setThemeColors } from '@/utils/common';
 
 export const useRootSetting = () => {
   const appStore = useAppStore();
@@ -195,6 +195,7 @@ export const useRootSetting = () => {
         colors,
       },
     });
+    setThemeColors(appStore.getThemeColors);
   };
 
   /**
@@ -203,11 +204,21 @@ export const useRootSetting = () => {
    *
    * @param theme
    */
-  const setThemePro = (theme?: ThemeInfo | null) => {
+  const setThemePro = async (theme?: ThemeInfo | null) => {
     // 设置主题信息
     appStore.setProjectConfig({
       themeProSetting: theme,
     });
+
+    await setProTheme(theme?.packageName || '');
+
+    // 如果没有主题，移除主题
+    if (!theme) {
+      const proTheme = document.getElementById('pro-custom-theme');
+      if (proTheme) {
+        proTheme.setAttribute('href', '');
+      }
+    }
   };
 
   /**

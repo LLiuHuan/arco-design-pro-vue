@@ -1,9 +1,9 @@
 export interface Props {
   /**
-   * 当前父组件的主题
-   * The theme of the current parent component
+   * 是否深色模式
+   * Whether dark mode
    */
-  theme?: 'light' | 'dark';
+  dark?: boolean;
   /**
    * 菜单的模式
    * The mode of the menu

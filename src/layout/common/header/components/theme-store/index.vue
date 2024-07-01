@@ -51,7 +51,6 @@
   import { SvgIcon } from '@/components/Icon';
   import { ref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
-  import { resetProTheme, setThemeColors } from '@/utils/common';
   import { defaultSetting } from '@/settings';
 
   const show = ref(false);
@@ -65,11 +64,9 @@
 
   // 重置主题
   const resetTheme = async () => {
-    resetProTheme();
     const { colors } = defaultSetting.themeSetting;
-    setThemePro(null);
+    await setThemePro(null);
 
-    setThemeColors(colors);
     setThemeAllColor(colors);
   };
 </script>

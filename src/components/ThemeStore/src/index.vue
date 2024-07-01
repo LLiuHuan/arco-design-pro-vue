@@ -70,7 +70,7 @@
   import { reactive, ref } from 'vue';
   import { ThemeInfo } from '~/types/config';
   import { useRootSetting } from '@/hooks/setting';
-  import { getThemes, setThemeInfo } from './helpers';
+  import { getThemes } from './helpers';
 
   defineOptions({ name: 'ThemeStore' });
 
@@ -86,9 +86,8 @@
   const { setThemePro, setThemeAllColor, getThemePro } = useRootSetting();
   const setTheme = async (theme: ThemeInfo) => {
     installing.value = true;
-    await setThemeInfo(theme.packageName, theme.colors).then(() => {
+    setThemePro(theme).then(() => {
       installing.value = false;
-      setThemePro(theme);
       setThemeAllColor(theme.colors);
     });
   };

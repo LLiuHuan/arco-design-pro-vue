@@ -1,6 +1,10 @@
 <template>
   <div ref="mixMenuRef" class="h-full flex" v-bind="getMenuEvents">
-    <FirstLevelMenu :active-menu-key="activeName" @select="handleSelectMixMenu">
+    <FirstLevelMenu
+      :active-menu-key="activeName"
+      :dark="siderDark"
+      @select="handleSelectMixMenu"
+    >
       <slot />
     </FirstLevelMenu>
     <div
@@ -8,6 +12,9 @@
       class="relative h-full transition-base"
     >
       <div
+        :class="{
+          'bg-[var(--color-menu-dark-bg)]': siderDark,
+        }"
         :style="{
           width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
         }"
@@ -17,24 +24,33 @@
           :style="{ height: `${getHeaderHeight}px` }"
           class="flex-y-center justify-between"
         >
-          <h2 class="pl-8px text-16px text-primary font-bold">
+          <h2 class="pl-8px text-16px text-[rgba(var(--primary-6))] font-bold">
             {{ VITE_GLOB_APP_TITLE }}
           </h2>
-          <div class="cursor-pointer pr-10px" @click="handleFixedMenu">
+          <div
+            :class="{
+              '!text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]':
+                !siderDark,
+              '!text-white:88 hover:!text-white': siderDark,
+            }"
+            class="cursor-pointer pr-10px"
+            @click="handleFixedMenu"
+          >
             <SvgIcon
               v-if="getMixSideFixed"
-              class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
+              class="cursor-pointer"
               icon="ri:pushpin-2-fill"
             />
-            <SvgIcon
-              v-else
-              class="cursor-pointer !text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]"
-              icon="ri:pushpin-2-line"
-            />
+            <SvgIcon v-else class="cursor-pointer" icon="ri:pushpin-2-line" />
           </div>
         </header>
 
-        <LayoutMenu :collapsed="false" :menus="childrenMenus" class="flex-1" />
+        <LayoutMenu
+          :collapsed="false"
+          :dark="siderDark"
+          :menus="childrenMenus"
+          class="flex-1"
+        />
       </div>
     </div>
   </div>
@@ -47,6 +63,7 @@
     useGlobSetting,
     useHeaderSetting,
     useMenuSetting,
+    useRootSetting,
   } from '@/hooks/setting';
   import { RouteLocationNormalized } from 'vue-router';
   import { useGo } from '@/hooks/web/usePage';
@@ -63,8 +80,10 @@
     getCloseMixSidebarOnChange,
     getMixChildMenuWidth,
     setMenuSetting,
+    getIsMenuDark,
   } = useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
+  const { getIsDarkMode } = useRootSetting();
   const { VITE_GLOB_APP_TITLE } = useGlobSetting();
 
   const mixMenuRef = ref(null);
@@ -73,6 +92,9 @@
   const openMenu = ref(false); // 是否打开子菜单
   const childrenMenus = ref<App.Menu[]>([]); // 子菜单
   const currentRoute = ref<RouteLocationNormalized | null>(null); // 当前路由
+  const siderDark = computed(
+    () => !unref(getIsDarkMode) && unref(getIsMenuDark),
+  );
 
   // 是否显示子菜单
   // Whether to show the drawer

@@ -4,7 +4,6 @@ import {
   TableColumnData,
   TableRowSelection,
 } from '@arco-design/web-vue';
-import { EmitType } from '~/types/global';
 import { RoleEnum } from '@/enums/authEnum';
 
 export interface GetColumnsParams {

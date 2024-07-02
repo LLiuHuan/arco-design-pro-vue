@@ -23,7 +23,7 @@
               <a
                 :href="homepage"
                 :rel="$t('routes.about.projectInfo.githubLink')"
-                class="text-primary"
+                class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
                 {{ $t('routes.about.projectInfo.githubLink') }}
@@ -35,7 +35,7 @@
               <a
                 :href="documentation"
                 :rel="$t('routes.about.projectInfo.documentLink')"
-                class="text-primary"
+                class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
                 {{ $t('routes.about.projectInfo.documentLink') }}
@@ -47,7 +47,7 @@
               <a
                 :href="website"
                 :rel="$t('routes.about.projectInfo.previewLink')"
-                class="text-primary"
+                class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
                 {{ $t('routes.about.projectInfo.previewLink') }}

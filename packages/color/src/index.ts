@@ -1,4 +1,4 @@
-import { getRgbStr } from './utils';
+import { getRgbStr, mixColor } from './utils';
 
 export * from './generate';
-export { getRgbStr };
+export { getRgbStr, mixColor };

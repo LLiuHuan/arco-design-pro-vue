@@ -21,7 +21,6 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import { isString } from '@/utils/common';
-  import { ClassName } from '~/types/global';
 
   interface Props {
     /**
@@ -86,7 +85,7 @@
      * @description 弹出框的挂载容器
      * @description Pop-up box mounting container
      */
-    popupContainer?: string | HTMLElement | null | undefined;
+    popupContainer?: string | HTMLElement | undefined;
   }
 
   const props = withDefaults(defineProps<Props>(), {

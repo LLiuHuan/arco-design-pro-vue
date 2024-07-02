@@ -25,7 +25,6 @@
   import { useRouter } from 'vue-router';
   import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
   import { useTabs } from '@/hooks/web/useTabs';
-  import { App } from '~/types/app';
   import { DropOption, TabEventEnum } from './types';
 
   const { t } = useI18n();

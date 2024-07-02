@@ -1,20 +1,22 @@
 <template>
   <div class="flex-col-center gap-24px min-h-520px wh-full overflow-hidden">
-    <div class="flex text-400px text-primary text-[rgba(var(--primary-6))]">
+    <div
+      class="flex text-400px text-[rgba(var(--primary-6))] text-[rgba(var(--primary-6))]"
+    >
       <SvgIcon
         v-if="type === '403'"
-        local-icon="no-permission"
         class="w-full h-full"
+        local-icon="no-permission"
       />
       <SvgIcon
         v-if="type === '404'"
-        local-icon="not-found"
         class="w-full h-full"
+        local-icon="not-found"
       />
       <SvgIcon
         v-if="type === '500'"
-        local-icon="service-error"
         class="w-full h-full"
+        local-icon="service-error"
       />
     </div>
     <router-link :to="{ name: routeHomePath }">

@@ -28,8 +28,6 @@ export interface MultipleTabState {
 
 const cacheTab = appSetting.multiTabsSetting.cache;
 
-const { go } = useGo(false);
-
 export const useMultipleTabStore = defineStore({
   id: 'store-multiple-tab',
   state: (): MultipleTabState => ({
@@ -184,7 +182,8 @@ export const useMultipleTabStore = defineStore({
      * @param tab Tab
      */
     async switchRouteByTab(tab: App.Tab) {
-      const fail = await go(tab.fullPath);
+      const { goKey } = useGo(false);
+      const fail = await goKey(tab.routeKey);
       if (fail) {
         this.setActiveTabId(tab.id);
       }

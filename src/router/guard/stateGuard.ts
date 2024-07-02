@@ -16,7 +16,7 @@ export function createStateGuard(router: Router) {
     if (to.name === PageEnum.LOGIN) {
       const authStore = useAuthStoreWithOut();
 
-      authStore.resetStore();
+      authStore.resetStore(false);
       removeTabChangeListener();
     }
     // else if (to.name === PageEnum.REDIRECT) {

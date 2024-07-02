@@ -7,6 +7,7 @@ import BindGithub from './bind-github/index.vue';
 import ForgetPwd from './forget-pwd/index.vue';
 
 import LoginBg from './login-bg/index.vue';
+import LoginBgWave from './login-bg-wave/index.vue';
 
 export {
   PwdLogin,
@@ -17,4 +18,5 @@ export {
   BindGithub,
   ForgetPwd,
   LoginBg,
+  LoginBgWave,
 };

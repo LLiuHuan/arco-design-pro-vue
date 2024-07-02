@@ -5,13 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, reactive, ref, useAttrs } from 'vue';
+  import { computed, reactive, ref } from 'vue';
 
   const formElRef = ref();
   const formModel = reactive({});
 
-  const attrs = useAttrs();
-  const props = defineProps();
+  defineProps();
   const emit = defineEmits();
 
   const getBindValue = computed(() => ({}));

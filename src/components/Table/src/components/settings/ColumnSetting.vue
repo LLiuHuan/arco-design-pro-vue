@@ -98,7 +98,7 @@
 
 <script lang="ts" setup>
   import { useDraggable } from 'vue-draggable-plus';
-  import { computed, nextTick, ref, unref, useAttrs, watch } from 'vue';
+  import { computed, nextTick, ref, unref, watch } from 'vue';
   import { cloneDeep, omit } from 'lodash-es';
   import { SvgIcon } from '@/components/Icon';
   import { TableRowSelection } from '@arco-design/web-vue';
@@ -113,7 +113,6 @@
   defineOptions({ name: 'ColumnSetting' });
   const emit = defineEmits(['columnsChange']);
 
-  const attrs = useAttrs();
   const table = useTableContext();
 
   const draggableRef = ref(null);

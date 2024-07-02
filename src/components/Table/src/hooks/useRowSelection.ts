@@ -1,6 +1,5 @@
 import { computed, ComputedRef, Ref, ref, unref } from 'vue';
 import { TableRowSelection } from '@arco-design/web-vue';
-import { ComponentRef, EmitType } from '~/types/global';
 import { isFunction } from '@/utils/common';
 import { BasicTableProps } from '../types/table';
 

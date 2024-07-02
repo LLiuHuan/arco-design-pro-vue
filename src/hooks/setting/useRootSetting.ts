@@ -210,14 +210,14 @@ export const useRootSetting = () => {
       themeProSetting: theme,
     });
 
-    await setProTheme(theme?.packageName || '');
-
     // 如果没有主题，移除主题
     if (!theme) {
       const proTheme = document.getElementById('pro-custom-theme');
       if (proTheme) {
         proTheme.setAttribute('href', '');
       }
+    } else {
+      await setProTheme(theme?.packageName || '');
     }
   };
 

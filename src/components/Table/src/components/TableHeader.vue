@@ -42,7 +42,7 @@
 
   interface Props {
     // 标题
-    title?: string | ((data: any) => string);
+    title?: string;
     // 标题帮助信息
     titleHelpMessage?: string | string[];
     // 标题前是否显示块

@@ -10,7 +10,6 @@
     :header-height="getHeaderHeight"
     :is-mobile="getIsMobile"
     :mode="layoutMode"
-    :right-footer="true"
     :scroll-el-id="LAYOUT_SCROLL_EL_ID"
     :scroll-mode="getLayoutScrollMode"
     :sider-collapsed-width="getSiderCollapsedWidth"

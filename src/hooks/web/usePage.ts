@@ -127,6 +127,7 @@ export function useGo(isSetup = true) {
       redirect,
     };
 
+    console.log(options);
     return goKey(PageEnum.LOGIN, options);
   }
 

@@ -8,21 +8,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, unref } from 'vue';
+  import { computed } from 'vue';
   import ColumnSetting from './ColumnSetting.vue';
   import SizeSetting from './SizeSetting.vue';
   import FullScreenSetting from './FullScreenSetting.vue';
   import RedoSetting from './RedoSetting.vue';
   import { TableSetting } from '../../types/table';
-  import { useTableContext } from '../../hooks/useTableContext';
 
   interface Props {
-    setting: TableSetting;
+    setting?: TableSetting;
   }
 
   const props = defineProps<Props>();
   const emit = defineEmits(['columnsChange']);
-  const table = useTableContext();
+  // const table = useTableContext();
 
   const getSetting = computed((): TableSetting => {
     return {
@@ -35,9 +34,9 @@
     };
   });
 
-  const tableContainer = computed(() =>
-    table ? unref(table.wrapRef) : document.body,
-  );
+  // const tableContainer = computed(() =>
+  //   table ? unref(table.wrapRef) : document.body,
+  // );
 </script>
 
 <style lang="less" scoped></style>

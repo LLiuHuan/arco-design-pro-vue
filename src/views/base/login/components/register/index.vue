@@ -146,13 +146,12 @@
 
 <script lang="ts" setup>
   import { useGo } from '@/hooks/web/usePage';
-  import { computed, reactive, ref } from 'vue';
+  import { reactive, ref } from 'vue';
   import { useLoading } from '@adp/hooks';
   import { ValidatedError } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { CountButton } from '@/components/CountDown';
   import { StrengthMeter } from '@/components/StrengthMeter';
-  import { zxcvbn } from '@zxcvbn-ts/core';
   import { useI18n } from '@/hooks/web/useI18n';
   import LoginTitle from '../login-title/index.vue';
 
@@ -178,12 +177,6 @@
     phone: '',
     code: '',
     policy: false,
-  });
-
-  const getPasswordStrength = computed(() => {
-    const score = formData.password ? zxcvbn(formData.password).score : -1;
-    // 计算密码强度百分比
-    return score === -1 ? 0 : ((score + 1) * 20) / 100;
   });
 
   const checkCode = async (code: string) => {

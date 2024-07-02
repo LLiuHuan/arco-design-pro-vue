@@ -13,8 +13,9 @@ import { isArray } from '@/utils/common';
 import { useGo } from '@/hooks/web/usePage';
 import { useI18n } from '@/hooks/web/useI18n';
 import { Notification } from '@arco-design/web-vue';
-import { useRoute } from 'vue-router';
 import { useRouteStoreWithOut } from '@/store/modules/route';
+import { router } from '@/router';
+import { unref } from 'vue';
 
 interface AuthState {
   /**
@@ -40,8 +41,6 @@ interface AuthState {
   sessionTimeout: boolean;
 }
 
-const route = useRoute();
-
 const emptyInfo: UserInfoModel = {
   user: '',
   userId: '',
@@ -50,6 +49,8 @@ const emptyInfo: UserInfoModel = {
   userRole: [],
   homeName: 'dashboard',
 };
+
+const { goLogin } = useGo(false);
 
 export const useAuthStore = defineStore({
   id: 'store-auth',
@@ -142,15 +143,16 @@ export const useAuthStore = defineStore({
     /**
      * @description Reset auth status - [重置auth状态]
      */
-    resetStore() {
+    resetStore(isGoLogin = true) {
       setAuthCache(TOKEN_KEY, '');
       setAuthCache(REFRESH_TOKEN_KEY, '');
       setAuthCache(USER_INFO_KEY, {});
       setAuthCache(ROLES_KEY, []);
       this.$reset();
 
-      if (!route.meta.constant) {
-        const { goLogin } = useGo();
+      console.log(unref(router.currentRoute));
+
+      if (isGoLogin || !unref(router.currentRoute).meta.constant) {
         goLogin();
       }
       const routeStore = useRouteStoreWithOut();
@@ -218,6 +220,7 @@ export const useAuthStore = defineStore({
       }
     },
     async logout() {
+      // 退出登录
       this.resetStore();
     },
   },

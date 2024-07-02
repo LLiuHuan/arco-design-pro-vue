@@ -128,7 +128,7 @@
   const isEdit = ref(false);
   const showEdit = ref(false);
 
-  const tmpValue = ref(props.value);
+  const tmpValue = ref<any>(props.value);
 
   const getSelectProps = computed(() => {
     return { ...omit(props.selectProps, ['modelValue']) };

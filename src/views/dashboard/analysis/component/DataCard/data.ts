@@ -1,4 +1,6 @@
-const line1Option = {
+import { ECOption } from '@/hooks/web/useEcharts';
+
+const line1Option: ECOption = {
   grid: {
     left: 0,
     right: 0,
@@ -43,7 +45,7 @@ const line1Option = {
   ],
 };
 
-const line2Option = {
+const line2Option: ECOption = {
   grid: {
     left: 0,
     right: 0,
@@ -88,7 +90,7 @@ const line2Option = {
   ],
 };
 
-const barOption = {
+const barOption: ECOption = {
   grid: {
     left: 0,
     right: 0,
@@ -166,7 +168,7 @@ const barOption = {
   },
 };
 
-const pieOption = {
+const pieOption: ECOption = {
   grid: {
     left: 0,
     right: 0,

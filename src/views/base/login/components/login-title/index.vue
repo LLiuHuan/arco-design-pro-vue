@@ -22,6 +22,7 @@
       'register': 'sys.login.register.title',
       'reset-pwd': 'sys.login.resetPwd.title',
       'bind-wechat': 'sys.login.bindWeChat.title',
+      'bind-github': '',
       'forget-pwd': 'sys.login.forgetPwd.title',
     };
 

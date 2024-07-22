@@ -1,7 +1,16 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-07-18 16:53:02
+ * @LastEditors: LLiuHuan
+ */
 import { views } from '@/views';
 import { RouteComponent } from 'vue-router';
 import { isFunction } from '@/utils/common';
 import { BasicLayout, BlankLayout } from '@/layout';
+// import BasicLayout from '@/layout/basic-layout/index.vue';
+// import BlankLayout from '@/layout/blank-layout/index.vue';
 
 type Lazy<T> = () => Promise<T>;
 
@@ -51,7 +60,7 @@ function setViewComponentName(
  * 获取页面导入的vue文件
  * @param routeKey - 路由key
  */
-export function getViewComponent(routeKey: AuthRoute.RouteKey) {
+export function getViewComponent(routeKey: string) {
   if (!views[routeKey]) {
     throw new Error(`路由“${routeKey}”没有对应的组件文件！`);
   }

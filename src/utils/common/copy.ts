@@ -1,5 +1,7 @@
 import { Message } from '@arco-design/web-vue';
 
+// TODO: 没啥用
+
 export const copyText = (
   text: string,
   prompt: string | null = '已成功复制到剪切板!',
@@ -8,7 +10,9 @@ export const copyText = (
     return navigator.clipboard
       .writeText(text)
       .then(() => {
-        prompt && Message.success(prompt);
+        if (prompt) {
+          Message.success(prompt);
+        }
       })
       .catch((error) => {
         Message.error(`复制失败!${error.message}`);
@@ -34,7 +38,9 @@ export const copyText = (
         document.execCommand('copy');
         document.body.removeChild(textArea);
 
-        prompt && Message.success(prompt);
+        if (prompt) {
+          Message.success(prompt);
+        }
         resolve();
       } catch (error) {
         Message.error(`复制失败!${error}`);

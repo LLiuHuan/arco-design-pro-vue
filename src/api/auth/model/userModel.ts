@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-07-18 00:13:03
+ * @LastEditors: LLiuHuan
+ */
 import { BasicFetchResult } from '@/api/model/baseModel';
 
 export interface LoginParams {

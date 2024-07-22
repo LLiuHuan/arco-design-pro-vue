@@ -20,6 +20,14 @@ const functions: AuthRoute.Route = {
         title: '错误日志',
       },
     },
+    {
+      name: 'func_upload-chunk',
+      path: '/func/upload-chunk',
+      component: 'self',
+      meta: {
+        title: '分片上传',
+      },
+    },
   ],
   meta: {
     title: '功能',

@@ -8,6 +8,10 @@ const serviceEnvConfig: ServiceEnv = {
       url: 'https://mock.apifox.cn/m1/3402401-0-default/api/v1',
       proxy: '/mock',
     },
+    {
+      url: 'http://127.0.0.1:8087',
+      proxy: '/go',
+    }
   ],
   test: [
     {

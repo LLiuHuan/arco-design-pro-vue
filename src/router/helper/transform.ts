@@ -100,6 +100,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.ConstRoute) {
           .split(routeSplitMark)
           .filter((v) => !v.startsWith(':'))
           .join(routeSplitMark) as AuthRoute.RouteKey;
+        console.log(name);
         itemRoute.component = getViewComponent(name as AuthRoute.RouteKey);
       },
     };

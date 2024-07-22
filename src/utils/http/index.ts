@@ -11,6 +11,7 @@ import type { RequestOptions, Result } from '~/types/axios';
 import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 import { useGlobSetting } from '@/hooks/setting';
 import {
+  consoleLog,
   deepMerge,
   isEmpty,
   isNull,
@@ -138,6 +139,7 @@ const transform: AxiosTransform = {
     if (joinPrefix) {
       config.url = `${urlPrefix ?? ''}${config.url}`;
     }
+    consoleLog(`config.url: ${config.url}`);
 
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`;
@@ -260,6 +262,7 @@ const transform: AxiosTransform = {
 };
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
+  console.log(opt?.requestOptions?.urlPrefix);
   return new HTTP(
     // 深度合并
     deepMerge(
@@ -269,7 +272,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // authenticationScheme: 'Bearer',
         authenticationScheme: '',
         timeout: 60 * 1000,
-        // TODO: 基础接口地址
         // baseURL: globSetting.apiUrl,
         // 接口前缀
         prefixUrl:
@@ -320,6 +322,14 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 }
 
 export const defHttp = createAxios();
+
+export const goHttp = createAxios({
+  requestOptions: {
+    // apiUrl: '127.0.0.1:8087',
+    urlPrefix: '/go',
+    joinPrefix: true,
+  },
+});
 
 // other api url
 // export const otherHttp = createAxios({

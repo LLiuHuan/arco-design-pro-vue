@@ -46,11 +46,13 @@ declare namespace PageRoute {
     | 'func'
     | 'func_:id_sub1'
     | 'func_error-log'
+    | 'func_upload-chunk'
     | 'permission'
     | 'permission_front'
     | 'permission_front_auth-page-a'
     | 'permission_front_auth-page-b'
-    | 'permission_front_btn';
+    | 'permission_front_btn'
+    | 'exception_403';
 
   /**
    * last degree route key, which has the page file

@@ -1,8 +1,8 @@
 import type {
-  AxiosRequestConfig,
-  AxiosInstance,
-  AxiosResponse,
   AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
 import axios from 'axios';
@@ -34,22 +34,6 @@ export class HTTP {
   }
 
   /**
-   * @description:  Create axios instance - [创建axios实例]
-   */
-  private createAxios(config: CreateAxiosOptions): void {
-    this.axiosInstance = axios.create(config);
-  }
-
-  /**
-   * @description:  Get transform - [获取 transform]
-   * @private
-   */
-  private getTransform() {
-    const { transform } = this.options;
-    return transform;
-  }
-
-  /**
    * @description:  Get axios instance - [获取axios实例]
    */
   getAxios(): AxiosInstance {
@@ -74,91 +58,6 @@ export class HTTP {
       return;
     }
     Object.assign(this.axiosInstance.defaults.headers, headers);
-  }
-
-  /**
-   * @description: Interceptor configuration - [拦截器配置]
-   */
-  private setupInterceptors() {
-    // const transform = this.getTransform();
-    const {
-      axiosInstance,
-      options: { transform },
-    } = this;
-    if (!transform) {
-      return;
-    }
-    const {
-      requestInterceptors, // 请求拦截器
-      requestInterceptorsCatch, // 请求拦截器错误捕获
-      responseInterceptors, // 响应拦截器
-      responseInterceptorsCatch, // 响应拦截器错误捕获
-    } = transform;
-
-    const axiosCanceler = new AxiosCanceler();
-
-    // Request interceptor configuration processing - [请求拦截器配置处理]
-    this.axiosInstance.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        // If cancel repeat request is turned on, then cancel repeat request is prohibited - [如果开启了取消重复请求，则禁止取消重复请求]
-        const requestOptions =
-          (config as unknown as any).requestOptions ??
-          this.options.requestOptions;
-        const ignoreCancelToken = requestOptions?.ignoreCancelToken ?? true;
-
-        if (!ignoreCancelToken) {
-          axiosCanceler.addPending(config);
-        }
-
-        if (requestInterceptors && isFunction(requestInterceptors)) {
-          config = requestInterceptors(config, this.options);
-        }
-        return config;
-      },
-      (error: AxiosError) => {
-        if (requestInterceptorsCatch && isFunction(requestInterceptorsCatch)) {
-          return requestInterceptorsCatch(error);
-        }
-        return Promise.reject(error);
-      },
-    );
-
-    // Request interceptor error capture - [请求拦截器错误捕获]
-    // requestInterceptorsCatch &&
-    //   isFunction(requestInterceptorsCatch) &&
-    //   this.axiosInstance.interceptors.request.use(
-    //     undefined,
-    //     requestInterceptorsCatch,
-    //   );
-
-    // Response result interceptor processing - [响应结果拦截器处理]
-    this.axiosInstance.interceptors.response.use(
-      (res: AxiosResponse<any>) => {
-        if (res) {
-          axiosCanceler.removePending(res.config);
-        }
-        if (responseInterceptors && isFunction(responseInterceptors)) {
-          res = responseInterceptors(res);
-        }
-        return res;
-      },
-      (error: AxiosError) => {
-        if (
-          responseInterceptorsCatch &&
-          isFunction(responseInterceptorsCatch)
-        ) {
-          return responseInterceptorsCatch(axiosInstance, error);
-        }
-        return Promise.reject(error);
-      },
-    );
-
-    // Response result interceptor error capture - [响应结果拦截器错误捕获]
-    // responseInterceptorsCatch &&
-    //   isFunction(responseInterceptorsCatch) &&
-    //   this.axiosInstance.interceptors.response.use(undefined, (error) => {
-    //     return responseInterceptorsCatch(axiosInstance, error);
-    //   });
   }
 
   /**
@@ -188,16 +87,25 @@ export class HTTP {
       });
     }
 
-    return this.axiosInstance.request<T>({
+    return this.request<T>({
       ...config,
       method: RequestEnum.POST,
       data: formData,
       headers: {
-        'Content-type': ContentTypeEnum.FORM_DATA,
-        // @ts-ignore
+        'Content-Type': ContentTypeEnum.FORM_DATA,
         'ignoreCancelToken': true,
       },
     });
+    // return this.axiosInstance.request<T>({
+    //   ...config,
+    //   method: RequestEnum.POST,
+    //   data: formData,
+    //   headers: {
+    //     'Content-type': ContentTypeEnum.FORM_DATA,
+    //     // @ts-ignore
+    //     'ignoreCancelToken': true,
+    //   },
+    // });
   }
 
   /**
@@ -328,5 +236,106 @@ export class HTTP {
           reject(e);
         });
     });
+  }
+
+  /**
+   * @description:  Create axios instance - [创建axios实例]
+   */
+  private createAxios(config: CreateAxiosOptions): void {
+    this.axiosInstance = axios.create(config);
+  }
+
+  /**
+   * @description:  Get transform - [获取 transform]
+   * @private
+   */
+  private getTransform() {
+    const { transform } = this.options;
+    return transform;
+  }
+
+  /**
+   * @description: Interceptor configuration - [拦截器配置]
+   */
+  private setupInterceptors() {
+    // const transform = this.getTransform();
+    const {
+      axiosInstance,
+      options: { transform },
+    } = this;
+    if (!transform) {
+      return;
+    }
+    const {
+      requestInterceptors, // 请求拦截器
+      requestInterceptorsCatch, // 请求拦截器错误捕获
+      responseInterceptors, // 响应拦截器
+      responseInterceptorsCatch, // 响应拦截器错误捕获
+    } = transform;
+
+    const axiosCanceler = new AxiosCanceler();
+
+    // Request interceptor configuration processing - [请求拦截器配置处理]
+    this.axiosInstance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        // If cancel repeat request is turned on, then cancel repeat request is prohibited - [如果开启了取消重复请求，则禁止取消重复请求]
+        const requestOptions =
+          (config as unknown as any).requestOptions ??
+          this.options.requestOptions;
+        const ignoreCancelToken = requestOptions?.ignoreCancelToken ?? true;
+
+        if (!ignoreCancelToken) {
+          axiosCanceler.addPending(config);
+        }
+
+        if (requestInterceptors && isFunction(requestInterceptors)) {
+          config = requestInterceptors(config, this.options);
+        }
+        return config;
+      },
+      (error: AxiosError) => {
+        if (requestInterceptorsCatch && isFunction(requestInterceptorsCatch)) {
+          return requestInterceptorsCatch(error);
+        }
+        return Promise.reject(error);
+      },
+    );
+
+    // Request interceptor error capture - [请求拦截器错误捕获]
+    // requestInterceptorsCatch &&
+    //   isFunction(requestInterceptorsCatch) &&
+    //   this.axiosInstance.interceptors.request.use(
+    //     undefined,
+    //     requestInterceptorsCatch,
+    //   );
+
+    // Response result interceptor processing - [响应结果拦截器处理]
+    this.axiosInstance.interceptors.response.use(
+      (res: AxiosResponse<any>) => {
+        if (res) {
+          axiosCanceler.removePending(res.config);
+        }
+        if (responseInterceptors && isFunction(responseInterceptors)) {
+          res = responseInterceptors(res);
+        }
+        return res;
+      },
+      (error: AxiosError) => {
+        if (
+          responseInterceptorsCatch &&
+          isFunction(responseInterceptorsCatch)
+        ) {
+          return responseInterceptorsCatch(axiosInstance, error);
+        }
+        return Promise.reject(error);
+      },
+    );
+
+    // Response result interceptor error capture - [响应结果拦截器错误捕获]
+    // responseInterceptorsCatch &&
+    //   isFunction(responseInterceptorsCatch) &&
+    //   this.axiosInstance.interceptors.response.use(undefined, (error) => {
+    //     return responseInterceptorsCatch(axiosInstance, error);
+    //   });
   }
 }

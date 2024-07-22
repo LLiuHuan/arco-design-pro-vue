@@ -1,3 +1,10 @@
+/*
+ * @Description:liuhuan
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-07-19 10:48:16
+ * @LastEditors: LLiuHuan
+ */
 import { createApp } from 'vue';
 // import './style.css';
 import { setupStore } from '@/store';

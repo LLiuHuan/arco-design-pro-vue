@@ -1,6 +1,12 @@
 import { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router';
 import { useI18n } from '@/hooks/web/useI18n';
 import { iconRender } from '@/utils/common';
+import type {
+  ElegantConstRoute,
+  LastLevelRouteKey,
+  RouteKey,
+  RoutePath,
+} from '@elegant-router/types';
 
 /**
  * @description 按角色过滤身份验证路由
@@ -9,7 +15,7 @@ import { iconRender } from '@/utils/common';
  * @param route Auth route
  * @param roles Roles
  */
-function filterAuthRouteByRoles(route: AuthRoute.ConstRoute, roles: string[]) {
+function filterAuthRouteByRoles(route: ElegantConstRoute, roles: string[]) {
   const routeRoles = (route.meta && route.meta.roles) || [];
 
   // 如果路由的"roles"为空，则允许访问
@@ -39,7 +45,7 @@ function filterAuthRouteByRoles(route: AuthRoute.ConstRoute, roles: string[]) {
  * @param roles Roles
  */
 export function filterAuthRoutesByRoles(
-  routes: AuthRoute.ConstRoute[],
+  routes: ElegantConstRoute[],
   roles: string[],
 ) {
   return routes.flatMap((route) => filterAuthRouteByRoles(route, roles));
@@ -52,7 +58,7 @@ export function filterAuthRoutesByRoles(
  * @param route
  */
 function getGlobalMenuByBaseRoute(
-  route: RouteLocationNormalizedLoaded | AuthRoute.ConstRoute,
+  route: RouteLocationNormalizedLoaded | ElegantConstRoute,
 ) {
   const { name, path } = route;
   const {
@@ -69,8 +75,8 @@ function getGlobalMenuByBaseRoute(
     key: name as string,
     label,
     i18nKey,
-    routeKey: name as AuthRoute.RouteKey,
-    routePath: path as AuthRoute.RoutePath,
+    routeKey: name as RouteKey,
+    routePath: path as RoutePath,
     icon: iconRender({ icon, localIcon, fontSize: 20 }),
   };
 
@@ -83,7 +89,7 @@ function getGlobalMenuByBaseRoute(
  *
  * @param routes Auth routes - [权限路由]
  */
-export function getGlobalMenusByAuthRoutes(routes: AuthRoute.ConstRoute[]) {
+export function getGlobalMenusByAuthRoutes(routes: ElegantConstRoute[]) {
   const menus: App.Menu[] = [];
 
   routes.forEach((route) => {
@@ -138,13 +144,13 @@ export function updateLocaleOfGlobalMenus(menus: App.Menu[]) {
  * @param routes Vue routes (two levels) - [Vue 路由]
  */
 export function getCacheRouteNames(routes: RouteRecordRaw[]) {
-  const cacheNames: PageRoute.LastDegreeRouteKey[] = [];
+  const cacheNames: LastLevelRouteKey[] = [];
 
   routes.forEach((route) => {
     // only get last two level route, which has component
     route.children?.forEach((child) => {
       if (child.component && child.meta?.keepAlive) {
-        cacheNames.push(child.name as PageRoute.LastDegreeRouteKey);
+        cacheNames.push(child.name as LastLevelRouteKey);
       }
     });
   });
@@ -158,7 +164,7 @@ export function getCacheRouteNames(routes: RouteRecordRaw[]) {
  *
  * @param route route
  */
-function sortRouteByOrder(route: AuthRoute.ConstRoute) {
+function sortRouteByOrder(route: ElegantConstRoute) {
   if (route.children?.length) {
     route.children.sort(
       (next, prev) =>
@@ -176,7 +182,7 @@ function sortRouteByOrder(route: AuthRoute.ConstRoute) {
  *
  * @param routes routes
  */
-export function sortRoutesByOrder(routes: AuthRoute.ConstRoute[]) {
+export function sortRoutesByOrder(routes: ElegantConstRoute[]) {
   routes.sort(
     (next, prev) =>
       (Number(next.meta?.order) || 0) - (Number(prev.meta?.order) || 0),
@@ -259,8 +265,8 @@ export function getSelectedMenuKeyPathByKey(
  * @param routeName
  */
 function recursiveGetIsRouteExistByRouteName(
-  route: AuthRoute.ConstRoute,
-  routeName: AuthRoute.AllRouteKey,
+  route: ElegantConstRoute,
+  routeName: RouteKey,
 ) {
   let isExist = route.name === routeName;
 
@@ -285,8 +291,8 @@ function recursiveGetIsRouteExistByRouteName(
  * @param routes
  */
 export function isRouteExistByRouteName(
-  routeName: AuthRoute.AllRouteKey,
-  routes: AuthRoute.ConstRoute[],
+  routeName: RouteKey,
+  routes: ElegantConstRoute[],
 ) {
   return routes.some((route) =>
     recursiveGetIsRouteExistByRouteName(route, routeName),
@@ -324,6 +330,7 @@ export function getBreadcrumbsByRoute(
   route: RouteLocationNormalizedLoaded,
   menus: App.Menu[],
 ): App.Breadcrumb[] {
+  console.log(route);
   const key = route.name as string;
   const activeKey = route.meta?.activeMenu;
 
@@ -338,6 +345,7 @@ export function getBreadcrumbsByRoute(
     }
 
     if (menu.children?.length) {
+      console.log('11222', route);
       const result = getBreadcrumbsByRoute(route, menu.children);
       if (result.length > 0) {
         return [transformMenuToBreadcrumb(menu), ...result];

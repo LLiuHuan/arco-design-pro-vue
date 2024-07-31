@@ -13,11 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-  import DataCard from './component/DataCard/index.vue';
-  import SiteAnalysis from './component/SiteAnalysis/index.vue';
-  import VisitRadar from './component/VisitRadar/index.vue';
-  import VisitSource from './component/VisitSource/index.vue';
-  import SalesProductPie from './component/SalesProductPie/index.vue';
+  import DataCard from './components/DataCard/index.vue';
+  import SiteAnalysis from './components/SiteAnalysis/index.vue';
+  import VisitRadar from './components/VisitRadar/index.vue';
+  import VisitSource from './components/VisitSource/index.vue';
+  import SalesProductPie from './components/SalesProductPie/index.vue';
 </script>
 
 <style lang="less" scoped></style>

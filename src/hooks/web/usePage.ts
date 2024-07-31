@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { unref } from 'vue';
 import { isHttpUrl, openWindow } from '@/utils/common';
 import { router } from '@/router';
+import type { RouteKey } from '@elegant-router/types';
 
 export type PathAsPageEnum<T> = T extends { path: string }
   ? T & { path: PageEnum }
@@ -61,6 +62,7 @@ export function useGo(isSetup = true) {
     if (isReplace) {
       return replace(to);
     }
+    console.log(to);
     return push(to);
   }
 
@@ -71,7 +73,7 @@ export function useGo(isSetup = true) {
    * @param key
    * @param options
    */
-  function goKey(key: AuthRoute.AllRouteKey, options?: GoOption) {
+  function goKey(key: RouteKey, options?: GoOption) {
     const { query, params } = options || {};
 
     const routeLocation: RouteLocationRaw = {
@@ -127,7 +129,7 @@ export function useGo(isSetup = true) {
       redirect,
     };
 
-    console.log(options);
+    console.log('GOLOGIN', PageEnum.LOGIN, options);
     return goKey(PageEnum.LOGIN, options);
   }
 

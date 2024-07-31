@@ -41,6 +41,7 @@
   import { useGo } from '@/hooks/web/usePage';
   import { useRouteStore } from '@/store/modules/route';
   import { createReusableTemplate } from '@vueuse/core';
+  import type { RouteKey } from '@elegant-router/types';
 
   const { getHeaderShowBreadCrumbIcon } = useHeaderSetting();
   const { goKey } = useGo();
@@ -56,7 +57,7 @@
   const [DefineBreadcrumbContent, BreadcrumbContent] =
     createReusableTemplate<BreadcrumbContentProps>();
 
-  function handleClickMenu(key: AuthRoute.RouteKey) {
+  function handleClickMenu(key: RouteKey) {
     goKey(key);
   }
 </script>

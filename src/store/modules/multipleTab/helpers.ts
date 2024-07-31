@@ -1,6 +1,7 @@
 import { Router } from 'vue-router';
 import { useI18n } from '@/hooks/web/useI18n';
-import { transformRouteNameToRoutePath } from '@/router/helper/transform';
+import { getRoutePath } from '@/router/elegant/transform';
+import type { LastLevelRouteKey, RouteKey } from '@elegant-router/types';
 
 /**
  * Is fixed tab
@@ -151,11 +152,8 @@ export function filterTabsByIds(tabIds: string[], tabs: App.Tab[]) {
  * @param name
  * @param tabs
  */
-export function findTabByRouteName(
-  name: AuthRoute.AllRouteKey,
-  tabs: App.Tab[],
-) {
-  const routePath = transformRouteNameToRoutePath(name);
+export function findTabByRouteName(name: RouteKey, tabs: App.Tab[]) {
+  const routePath = getRoutePath(name);
 
   const tabId = routePath;
   const multiTabId = `${routePath}?`;
@@ -248,14 +246,14 @@ export function getTabByRoute(route: App.TabRoute) {
  */
 export function getDefaultHomeTab(
   router: Router,
-  homeRouteName: AuthRoute.AllRouteKey,
+  homeRouteName: LastLevelRouteKey,
 ) {
   const { t } = useI18n();
-  const homeRoutePath = transformRouteNameToRoutePath(homeRouteName);
+  const homeRoutePath = getRoutePath(homeRouteName);
   const i18nLabel = t(`route.${homeRouteName}`);
 
   let homeTab: App.Tab = {
-    id: transformRouteNameToRoutePath(homeRouteName),
+    id: getRoutePath(homeRouteName),
     label: i18nLabel || homeRouteName,
     routeKey: homeRouteName,
     routePath: homeRoutePath,

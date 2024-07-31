@@ -1,5 +1,5 @@
 import { defHttp } from '@/utils/http';
-import { MenuRouteModel, UserRouteModel } from './model/routeModel';
+import { MenuRoute, UserRouteModel } from './model/routeModel';
 
 enum Api {
   ConstantRoute = '/getConstantRoutes',
@@ -12,7 +12,7 @@ enum Api {
  * @description get constant routes
  */
 export function fetchGetConstantRoutes() {
-  return defHttp.get<MenuRouteModel[]>({
+  return defHttp.get<MenuRoute[]>({
     url: Api.ConstantRoute,
   });
 }

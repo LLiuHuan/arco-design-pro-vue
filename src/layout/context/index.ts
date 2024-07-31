@@ -21,7 +21,7 @@ export function useMixMenu() {
     const routeName = (hideInMenu ? activeMenu : name) || name;
 
     const [firstLevelRouteName] = routeName.split(routeSplitMark);
-    setActiveFirstLevelMenuKey(firstLevelRouteName as PageRoute.RouteKey);
+    setActiveFirstLevelMenuKey(firstLevelRouteName);
   }
 
   const menus = computed(() => {

@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
-import { fileURLToPath } from 'node:url';
+import process from 'node:process';
+import { fileURLToPath, URL } from 'node:url';
 import dayjs from 'dayjs';
 import { getEnvConfig } from './.env.config';
 import {

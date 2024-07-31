@@ -22,8 +22,8 @@ import { localStg } from '@/utils/cache';
 import { deepMerge } from '@/utils/common';
 import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core';
 import { Ref } from 'vue';
-import { router } from '@/router';
 import { useI18n } from '@/hooks/web/useI18n';
+import { useRoute } from 'vue-router';
 import { initAppSetting } from './helpers';
 
 interface AppState {
@@ -226,7 +226,8 @@ export const useAppStore = defineStore({
     },
 
     updateDocumentTitleByLocale(): void {
-      const { i18nKey, title } = router.currentRoute.value.meta;
+      const route = useRoute();
+      const { i18nKey, title } = route.meta;
       const { t } = useI18n();
       const documentTitle = i18nKey ? t(i18nKey) : title;
       useTitle(documentTitle);

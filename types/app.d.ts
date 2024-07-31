@@ -40,12 +40,12 @@ declare namespace App {
      * 路由key
      * The route key
      */
-    routeKey: AuthRoute.RouteKey;
+    routeKey: RouteKey;
     /**
      * 路由路径 dashboard_analysis => /dashboard/analysis
      * The route path
      */
-    routePath: AuthRoute.RoutePath;
+    routePath: RoutePath;
     /**
      * 菜单图标
      * The menu icon

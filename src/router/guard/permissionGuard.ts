@@ -6,9 +6,10 @@ import type {
   Router,
 } from 'vue-router';
 import { PageEnum } from '@/enums';
-import { useRouteStoreWithOut } from '@/store/modules/route';
-import { useAuthStoreWithOut } from '@/store/modules/auth';
-import { transformRoutePathToRouteName } from '@/router/helper/transform';
+import { useRouteStore } from '@/store/modules/route';
+import { useAuthStore } from '@/store/modules/auth';
+import type { RoutePath } from '@elegant-router/types';
+import { getRouteName } from '../elegant/transform';
 
 function getRouteQueryOfLoginRoute(
   to: RouteLocationNormalized,
@@ -16,9 +17,7 @@ function getRouteQueryOfLoginRoute(
 ) {
   const redirect = to.fullPath;
   const [redirectPath, redirectQuery] = redirect.split('?');
-  const redirectName = transformRoutePathToRouteName(
-    redirectPath as AuthRoute.RoutePath,
-  );
+  const redirectName = getRouteName(redirectPath as RoutePath);
 
   const isRedirectHome = routeHome === redirectName;
 
@@ -36,13 +35,13 @@ function getRouteQueryOfLoginRoute(
 async function initRoute(
   to: RouteLocationNormalized,
 ): Promise<RouteLocationRaw | null> {
-  const authStore = useAuthStoreWithOut();
-  const routeStore = useRouteStoreWithOut();
+  const authStore = useAuthStore();
+  const routeStore = useRouteStore();
 
   const isNotFoundRoute = to.name === PageEnum.INVALID;
-
   // 1. 如果常量路由没有初始化，则初始化常量路由
   if (!routeStore.isInitConstantRoute) {
+    console.log('initConstantRoute');
     await routeStore.initConstantRoute();
 
     // 1.1 该路由被"not-found"路由捕获，因为常量路由未初始化
@@ -71,9 +70,7 @@ async function initRoute(
 
   // 1.4 被"not-found"路由捕获，然后检查该路由是否存在
   if (routeStore.isInitAuthRoute && isNotFoundRoute) {
-    const exist = await routeStore.getIsAuthRouteExist(
-      to.path as AuthRoute.RoutePath,
-    );
+    const exist = await routeStore.getIsAuthRouteExist(to.path as RoutePath);
 
     if (exist) {
       return {
@@ -148,7 +145,7 @@ export function createPermissionGuard(router: Router) {
       return;
     }
 
-    const authStore = useAuthStoreWithOut();
+    const authStore = useAuthStore();
 
     const isLogin = Boolean(authStore.getToken);
     const needLogin = !to.meta.constant;

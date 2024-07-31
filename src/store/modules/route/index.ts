@@ -1,20 +1,23 @@
 import { defineStore } from 'pinia';
-import { createStaticRoutes, ROOT_ROUTE } from '@/router/routes';
 import { store } from '@/store';
-import { RouteRecordRaw } from 'vue-router';
-import { router } from '@/router';
+import { RouteRecordRaw, useRoute } from 'vue-router';
 import {
   fetchGetConstantRoutes,
   fetchGetUserRoutes,
   fetchIsRouteExist,
 } from '@/api/auth/route';
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
-import { useAuthStore } from '@/store/modules/auth';
-import {
-  transformAuthRouteToVueRoutes,
-  transformRouteNameToRoutePath,
-  transformRoutePathToRouteName,
-} from '@/router/helper/transform';
+import { createStaticRoutes, getAuthVueRoutes } from '@/router/routes';
+import type {
+  ElegantConstRoute,
+  LastLevelRouteKey,
+  RouteKey,
+  RouteMap,
+} from '@elegant-router/types';
+import { getRouteName, getRoutePath } from '@/router/elegant/transform';
+import { ROOT_ROUTE } from '@/router/routes/builtin';
+import { router } from '@/router';
+import { useAuthStore } from '../auth';
 import {
   filterAuthRoutesByRoles,
   getBreadcrumbsByRoute,
@@ -43,18 +46,20 @@ interface RouteState {
   /** 是否初始化了权限路由 */
   isInitAuthRoute: boolean;
   /** 路由首页 */
-  routeHome: string;
+  routeHome: LastLevelRouteKey;
   /** 常量路由 */
-  constantRoutes: AuthRoute.ConstRoute[];
+  constantRoutes: ElegantConstRoute[];
   /** 权限路由 */
-  authRoutes: AuthRoute.ConstRoute[];
+  authRoutes: ElegantConstRoute[];
   /** 缓存路由 */
-  cacheRoutes: PageRoute.RouteKey[];
+  cacheRoutes: RouteKey[];
   /** 所有缓存路由 */
-  allCacheRoutes: PageRoute.RouteKey[];
+  allCacheRoutes: RouteKey[];
   /** 移除路由函数 */
   removeRouteFns: (() => void)[];
 }
+
+const route = useRoute();
 
 export const useRouteStore = defineStore({
   id: 'route-store',
@@ -95,7 +100,7 @@ export const useRouteStore = defineStore({
       return transformMenuToSearchMenus(state.menus);
     },
     getBreadcrumb(state) {
-      return getBreadcrumbsByRoute(router.currentRoute.value, state.menus);
+      return getBreadcrumbsByRoute(route, state.menus);
     },
   },
   actions: {
@@ -105,7 +110,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKey Route key - [路由key]
      */
-    setRouteHome(routeKey: PageRoute.LastDegreeRouteKey) {
+    setRouteHome(routeKey: LastLevelRouteKey) {
       this.routeHome = routeKey;
     },
     /**
@@ -114,17 +119,19 @@ export const useRouteStore = defineStore({
      *
      * @param routes - [路由]
      */
-    addConstantRoutes(routes: AuthRoute.ConstRoute[]) {
-      const constantRoutesMap = new Map<string, AuthRoute.ConstRoute>([]);
+    addConstantRoutes(routes: ElegantConstRoute[]) {
+      const constantRoutesMap = new Map<string, ElegantConstRoute>([]);
 
-      routes.forEach((route) => {
-        constantRoutesMap.set(route.name, route);
+      routes.forEach((routeItem) => {
+        constantRoutesMap.set(routeItem.name, routeItem);
       });
 
       this.constantRoutes = Array.from(constantRoutesMap.values());
     },
     isConstantRoute(routeName: string) {
-      return this.constantRoutes.some((route) => route.name === routeName);
+      return this.constantRoutes.some(
+        (routeItem) => routeItem.name === routeName,
+      );
     },
     /**
      * @description 添加权限路由
@@ -132,11 +139,11 @@ export const useRouteStore = defineStore({
      *
      * @param routes - [路由]
      */
-    addAuthRoutes(routes: AuthRoute.ConstRoute[]) {
-      const authRoutesMap = new Map<string, AuthRoute.ConstRoute>([]);
+    addAuthRoutes(routes: ElegantConstRoute[]) {
+      const authRoutesMap = new Map<string, ElegantConstRoute>([]);
 
-      routes.forEach((route) => {
-        authRoutesMap.set(route.name, route);
+      routes.forEach((routeItem) => {
+        authRoutesMap.set(routeItem.name, routeItem);
       });
 
       this.authRoutes = Array.from(authRoutesMap.values());
@@ -148,7 +155,7 @@ export const useRouteStore = defineStore({
      *
      * @param routes
      */
-    getGlobalMenus(routes: AuthRoute.ConstRoute[]) {
+    getGlobalMenus(routes: ElegantConstRoute[]) {
       this.menus = getGlobalMenusByAuthRoutes(routes);
     },
     /**
@@ -176,7 +183,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKey - [路由key]
      */
-    addCacheRoutes(routeKey: PageRoute.RouteKey) {
+    addCacheRoutes(routeKey: RouteKey) {
       if (this.cacheRoutes.includes(routeKey)) return;
 
       this.cacheRoutes.push(routeKey);
@@ -187,7 +194,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKey - [路由key]
      */
-    removeCacheRoutes(routeKey: PageRoute.RouteKey) {
+    removeCacheRoutes(routeKey: RouteKey) {
       const index = this.cacheRoutes.findIndex((item) => item === routeKey);
 
       if (index === -1) return;
@@ -200,7 +207,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKey - [路由key]
      */
-    isCachedRoute(routeKey: PageRoute.RouteKey) {
+    isCachedRoute(routeKey: RouteKey) {
       return this.allCacheRoutes.includes(routeKey);
     },
     /**
@@ -209,7 +216,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKey - [路由key]
      */
-    async reCacheRoutesByKey(routeKey: PageRoute.RouteKey) {
+    async reCacheRoutesByKey(routeKey: RouteKey) {
       if (!this.isCachedRoute(routeKey)) return;
 
       this.removeCacheRoutes(routeKey);
@@ -224,7 +231,7 @@ export const useRouteStore = defineStore({
      *
      * @param routeKeys - [路由keys]
      */
-    async reCacheRoutesByKeys(routeKeys: PageRoute.RouteKey[]) {
+    async reCacheRoutesByKeys(routeKeys: RouteKey[]) {
       for await (const key of routeKeys) {
         await this.reCacheRoutesByKey(key);
       }
@@ -300,6 +307,7 @@ export const useRouteStore = defineStore({
       const { authRoutes: staticAuthRoutes } = createStaticRoutes();
 
       if (authStore.isStaticSuper) {
+        console.log(staticAuthRoutes);
         this.addAuthRoutes(staticAuthRoutes);
       } else {
         const filteredAuthRoutes = filterAuthRoutesByRoles(
@@ -349,7 +357,7 @@ export const useRouteStore = defineStore({
       const sortRoutes = sortRoutesByOrder(allRoutes);
 
       // const vueRoutes = getAuthVueRoutes(sortRoutes);
-      const vueRoutes = transformAuthRouteToVueRoutes(sortRoutes);
+      const vueRoutes = getAuthVueRoutes(sortRoutes);
 
       // 重置Vue路由
       this.resetVueRoutes();
@@ -370,8 +378,8 @@ export const useRouteStore = defineStore({
      * @param routes Vue routes
      */
     addRoutesToVueRouter(routes: RouteRecordRaw[]) {
-      routes.forEach((route) => {
-        const removeFn = router.addRoute(route);
+      routes.forEach((routeItem) => {
+        const removeFn = router.addRoute(routeItem);
         this.addRemoveRouteFn(removeFn);
       });
     },
@@ -390,16 +398,15 @@ export const useRouteStore = defineStore({
      *
      * @param redirectKey Redirect route key - [重定向路由key]
      */
-    handleUpdateRootRouteRedirect(redirectKey: PageRoute.LastDegreeRouteKey) {
-      const redirect = transformRouteNameToRoutePath(redirectKey);
+    handleUpdateRootRouteRedirect(redirectKey: LastLevelRouteKey) {
+      const redirect = getRoutePath(redirectKey);
 
       if (redirect) {
-        const rootRoute: AuthRoute.ConstRoute = { ...ROOT_ROUTE, redirect };
+        const rootRoute: ElegantConstRoute = { ...ROOT_ROUTE, redirect };
 
         router.removeRoute(rootRoute.name);
 
-        const [rootVueRoute] = transformAuthRouteToVueRoutes([rootRoute]);
-
+        const [rootVueRoute] = getAuthVueRoutes([rootRoute]);
         router.addRoute(rootVueRoute);
       }
     },
@@ -409,8 +416,8 @@ export const useRouteStore = defineStore({
      *
      * @param routePath Route path - [路由路径]
      */
-    async getIsAuthRouteExist(routePath: AuthRoute.RoutePath) {
-      const routeName = transformRoutePathToRouteName(routePath);
+    async getIsAuthRouteExist(routePath: RouteMap[RouteKey]) {
+      const routeName = getRouteName(routePath);
 
       if (!routeName) {
         return false;
@@ -443,7 +450,9 @@ export const useRouteStore = defineStore({
     getRouteMetaByKey(key: string) {
       const allRoutes = router.getRoutes();
 
-      return allRoutes.find((route) => route.name === key)?.meta || null;
+      return (
+        allRoutes.find((routeItem) => routeItem.name === key)?.meta || null
+      );
     },
 
     /**

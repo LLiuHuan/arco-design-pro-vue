@@ -62,6 +62,7 @@
   import { LayoutTrigger } from '@/layout/common';
   import { createReusableTemplate } from '@vueuse/core';
   import { useRouteStore } from '@/store/modules/route';
+  import type { RouteKey } from '@elegant-router/types';
   import { MenuItemProps, MenuState, Props } from './types';
 
   const props = withDefaults(defineProps<Props>(), {
@@ -103,7 +104,7 @@
 
   // 点击菜单
   // Click menu
-  const handleMenuClick = (key: AuthRoute.AllRouteKey) => {
+  const handleMenuClick = (key: RouteKey) => {
     const routeSplitMark = '_';
     const params: Record<string, string> = {};
     key
@@ -115,7 +116,7 @@
     goKey(key, { params });
   };
 
-  const handleMenuItemClick = (key: AuthRoute.AllRouteKey) => {
+  const handleMenuItemClick = (key: RouteKey) => {
     handleMenuClick(key);
     isClickGo.value = true;
     menuState.selectedKeys = [key];
@@ -148,6 +149,8 @@
       menuState.openKeys = openKeys.map((key) => `${key}_sub`);
     }
   }, true);
+
+  console.log('menus: ', props.menus);
 </script>
 
 <style lang="less" scoped></style>

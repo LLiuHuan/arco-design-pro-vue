@@ -48,6 +48,7 @@
     "@alova/scene-vue": "^1.6.0",
     "@arco-design/web-vue": "^2.55.3",
     "@arco-plugins/vite-vue": "^1.4.5",
+    "@elegant-router/vue": "^0.3.7",
     "@vueuse/core": "^10.10.1",
     "@zxcvbn-ts/core": "^3.0.4",
     "axios": "^1.7.2",

@@ -13,9 +13,8 @@ import { isArray } from '@/utils/common';
 import { useGo } from '@/hooks/web/usePage';
 import { useI18n } from '@/hooks/web/useI18n';
 import { Notification } from '@arco-design/web-vue';
-import { useRouteStoreWithOut } from '@/store/modules/route';
-import { router } from '@/router';
-import { unref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useRouteStore } from '../route';
 
 interface AuthState {
   /**
@@ -49,8 +48,6 @@ const emptyInfo: UserInfoModel = {
   userRole: [],
   homeName: 'dashboard',
 };
-
-const { goLogin } = useGo(false);
 
 export const useAuthStore = defineStore({
   id: 'store-auth',
@@ -150,12 +147,12 @@ export const useAuthStore = defineStore({
       setAuthCache(ROLES_KEY, []);
       this.$reset();
 
-      console.log(unref(router.currentRoute));
-
-      if (isGoLogin || !unref(router.currentRoute).meta.constant) {
+      const route = useRoute();
+      if (isGoLogin || !route.meta.constant) {
+        const { goLogin } = useGo(false);
         goLogin();
       }
-      const routeStore = useRouteStoreWithOut();
+      const routeStore = useRouteStore();
       routeStore.resetStore();
     },
     setLoginLoading(loading: boolean) {
@@ -199,9 +196,10 @@ export const useAuthStore = defineStore({
 
       if (userInfo) {
         // 登录成功后重定向到登录后的地址
-        const routeStore = useRouteStoreWithOut();
+        const routeStore = useRouteStore();
         await routeStore.initAuthRoute();
 
+        console.log('toRedirect1111');
         const { toRedirect } = useGo(false);
 
         await toRedirect();

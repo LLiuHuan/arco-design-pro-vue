@@ -10,17 +10,16 @@ import { createApp } from 'vue';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
-import { consoleLog } from '@/utils/common';
 import { initProjectSetting } from '@/settings/initProjectSetting';
 import { setupGlobDirectives } from '@/directives';
 import { AppLoading } from '@/components/AppLoading';
-import { setupRouterGuard } from '@/router/guard';
 import { setupErrorHandle } from '@/logics/error-handle';
+import { consoleLog } from '@/utils/common';
+import { setupRouterGuard } from '@/router/guard';
 import App from './App.vue';
 
 const setupApp = async () => {
   const app = createApp(App);
-
   const appLoading = createApp(AppLoading);
   appLoading.mount('#appLoading');
 
@@ -36,15 +35,13 @@ const setupApp = async () => {
 
   const router = await setupRouter(app);
 
-  setupRouterGuard(router);
+  await setupRouterGuard(router);
 
   // 注册全局指令
   setupGlobDirectives(app);
 
   // 配置全局错误处理
   setupErrorHandle(app);
-
-  await router.isReady();
 
   // 延迟挂载app 为了可以多看会加载动画
   // setTimeout(() => {

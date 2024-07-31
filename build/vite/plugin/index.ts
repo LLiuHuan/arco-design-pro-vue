@@ -1,5 +1,6 @@
 import { PluginOption } from 'vite';
 
+import { configElegantRouterPlugin } from './elegant-router';
 import { configProgressPlugin } from './progress';
 import { configHtmlPlugin } from './html';
 import { configArcoPlugin } from './arco';
@@ -23,6 +24,7 @@ export function createVitePlugins(
 ): (PluginOption | PluginOption[])[] {
   const plugins: (PluginOption | PluginOption[])[] = [
     ...configVuePlugin(), // vue基础插件
+    configElegantRouterPlugin(), // elegant-router
     configUnocssPlugin(), // unocss
     configProgressPlugin(), // 打包进度条
     configSvgIconsPlugin(viteEnv), // svg图标

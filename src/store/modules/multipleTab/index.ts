@@ -5,6 +5,7 @@ import { store } from '@/store';
 import { localStg } from '@/utils/cache';
 import { useGo } from '@/hooks/web/usePage';
 import { router } from '@/router';
+import type { RouteKey } from '@elegant-router/types';
 import {
   extractTabsByAllRoutes,
   filterTabsById,
@@ -18,7 +19,6 @@ import {
   updateTabByI18nKey,
   updateTabsByI18nKey,
 } from './helpers';
-import AllRouteKey = AuthRoute.AllRouteKey;
 
 export interface MultipleTabState {
   tabs: App.Tab[];
@@ -142,7 +142,7 @@ export const useMultipleTabStore = defineStore({
      *
      * @param routeName route name
      */
-    async removeTabByRouteName(routeName: AllRouteKey) {
+    async removeTabByRouteName(routeName: RouteKey) {
       const tab = findTabByRouteName(routeName, this.tabs);
       if (!tab) return;
 
@@ -182,6 +182,7 @@ export const useMultipleTabStore = defineStore({
      * @param tab Tab
      */
     async switchRouteByTab(tab: App.Tab) {
+      console.log('goKey1111');
       const { goKey } = useGo(false);
       const fail = await goKey(tab.routeKey);
       if (fail) {

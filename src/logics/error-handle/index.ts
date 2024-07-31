@@ -167,6 +167,7 @@ function registerResourceErrorHandler() {
  * @param app
  */
 export function setupErrorHandle(app: App) {
+  console.log('setupErrorHandle', '111');
   const { useErrorHandle } = appSetting;
   if (!useErrorHandle) {
     return;

@@ -79,7 +79,7 @@
   import { useRefs } from '@/hooks/common/useRefs';
   import { useScrollTo } from '@/hooks/common/useScrollTo';
   import { useRootSetting } from '@/hooks/setting';
-  import { transformRouteNameToOption } from '@/router/helper/transform';
+  import { getRoutePath } from '@/router/elegant/transform';
   import { Tip } from './components';
 
   defineOptions({ name: 'AppSearch' });
@@ -236,7 +236,8 @@
     handleClose();
     await nextTick();
 
-    const options = transformRouteNameToOption(item.routeKey);
+    // TODO: 好像不对
+    const options = getRoutePath(item.routeKey);
 
     goKey(item.routeKey, options);
   };

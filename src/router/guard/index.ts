@@ -12,7 +12,7 @@ import { createStateGuard } from './stateGuard';
  * 路由守卫函数
  * @param router - 路由实例
  */
-export function setupRouterGuard(router: Router) {
+export async function setupRouterGuard(router: Router) {
   createPageGuard(router);
   createPageLoadingGuard(router);
   createHttpGuard(router);
@@ -21,4 +21,6 @@ export function setupRouterGuard(router: Router) {
   createTitleGuard(router);
   createPermissionGuard(router);
   createStateGuard(router);
+
+  await router.isReady();
 }

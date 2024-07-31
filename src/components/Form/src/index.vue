@@ -10,8 +10,8 @@
   const formElRef = ref();
   const formModel = reactive({});
 
-  defineProps();
-  const emit = defineEmits();
+  // defineProps();
+  // const emit = defineEmits();
 
   const getBindValue = computed(() => ({}));
 </script>

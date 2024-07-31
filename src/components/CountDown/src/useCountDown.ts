@@ -9,7 +9,7 @@ export function useCountdown(count: number) {
   let timerId: ReturnType<typeof setInterval> | null;
 
   function clear() {
-    timerId && window.clearInterval(timerId);
+    if (timerId) window.clearInterval(timerId);
   }
 
   function stop() {

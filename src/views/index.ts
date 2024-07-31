@@ -15,7 +15,7 @@ const PATH_SPLIT_MARK = '/';
 // 路由分隔符
 const ROUTE_KEY_SPLIT_MARK = '_';
 // 系统的内置路由，该文件夹名称不作为RouteKey
-const SYSTEM_VIEW = 'base_';
+const SYSTEM_VIEW = '_builtin';
 
 // 过滤掉组件文件
 const viewKeys = Object.keys(importViews).filter(
@@ -38,3 +38,4 @@ function getViewComponent() {
 
 // 导出组件对象
 export const views = getViewComponent();
+console.log(views);

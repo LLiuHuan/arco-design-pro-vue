@@ -106,6 +106,7 @@
   const SimpleUpload = async () => {};
 
   const onBeforeUpload = (file: File) => {
+    console.log(file);
     return true;
   };
 

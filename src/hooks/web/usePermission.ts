@@ -25,15 +25,16 @@ export function usePermission() {
     }
 
     // 看一下是前端权限还是后端权限
-    const permMode = appStore.getProjectConfig.permissionMode;
+    const permMode = appStore.setting.permissionMode;
 
     // 前端权限
     if ([PermissionModeEnum.ROLE].includes(permMode)) {
       if (!isArray(value)) {
-        return authStore.getRoleList?.includes(value as RoleEnum);
+        return authStore.userInfo.userRole?.includes(value as RoleEnum);
       }
       return (
-        (intersection(value, authStore.getRoleList) as RoleEnum[]).length > 0
+        (intersection(value, authStore.userInfo.userRole) as RoleEnum[])
+          .length > 0
       );
     }
 

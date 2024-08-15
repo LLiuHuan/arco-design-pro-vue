@@ -2,9 +2,9 @@
   <ADivider>{{ $t('layout.setting.layoutMode.title') }}</ADivider>
 
   <LayoutModeCard
-    :event="HandlerEnum.LAYOUT_MODE"
     :def="menuMode"
     :disabled="getIsMobile"
+    :event="HandlerEnum.LAYOUT_MODE"
   >
     <template #vertical>
       <div class="layout-sider h-full w-18px"></div>
@@ -55,15 +55,15 @@
 
 <style scoped>
   .layout-header {
-    --uno: h-16px bg-[rgba(var(--primary-5))] rd-4px;
+    --uno: h-16px 'bg-[rgba(var(--primary-5))]' rd-4px;
   }
 
   .layout-sider {
-    --uno: bg-[rgba(var(--primary-4))] rd-4px;
+    --uno: 'bg-[rgba(var(--primary-4))]' rd-4px;
   }
 
   .layout-main {
-    --uno: flex-1 bg-[rgba(var(--primary-3))] rd-4px;
+    --uno: flex-1 'bg-[rgba(var(--primary-3))]' rd-4px;
   }
 
   .vertical-wrapper {

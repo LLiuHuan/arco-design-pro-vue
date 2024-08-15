@@ -1,8 +1,8 @@
 <template>
   <HoverContainer :tooltip-content="$t(tooltipContent)">
     <AButton
-      type="text"
       class="!text-[var(--color-text-1)] !h-40px"
+      type="text"
       @click="toggleDarkMode"
     >
       <DarkModeSwitch auto></DarkModeSwitch>
@@ -19,7 +19,7 @@
 
   const { toggleDarkMode, getNextDarkMode } = useRootSetting();
 
-  const tooltips = {
+  const tooltips: any = {
     [AppEnum.LIGHT]: 'layout.header.themeLight',
     [AppEnum.DARK]: 'layout.header.themeDark',
     [AppEnum.AUTO]: 'layout.header.themeSystem',

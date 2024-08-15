@@ -2,62 +2,54 @@
   <div>
     <AGrid :col-gap="12" :cols="1" :row-gap="12">
       <AGridItem>
-        <ACard :title="$t('routes.about.title')">
-          {{ $t('routes.about.introduction') }}
+        <ACard :title="$t('about.title')">
+          {{ $t('about.introduction') }}
         </ACard>
       </AGridItem>
       <AGridItem>
-        <ACard :title="$t('routes.about.projectInfo.title')">
+        <ACard :title="$t('about.projectInfo.title')">
           <ADescriptions :column="getIsMobile ? 1 : 3" bordered>
-            <ADescriptionsItem :label="$t('routes.about.projectInfo.version')">
+            <ADescriptionsItem :label="$t('about.projectInfo.version')">
               <ATag color="arcoblue">{{ version }}</ATag>
             </ADescriptionsItem>
-            <ADescriptionsItem
-              :label="$t('routes.about.projectInfo.latestBuildTime')"
-            >
+            <ADescriptionsItem :label="$t('about.projectInfo.latestBuildTime')">
               <ATag color="arcoblue">{{ latestBuildTime }}</ATag>
             </ADescriptionsItem>
-            <ADescriptionsItem
-              :label="$t('routes.about.projectInfo.githubLink')"
-            >
+            <ADescriptionsItem :label="$t('about.projectInfo.githubLink')">
               <a
                 :href="homepage"
-                :rel="$t('routes.about.projectInfo.githubLink')"
+                :rel="$t('about.projectInfo.githubLink')"
                 class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
-                {{ $t('routes.about.projectInfo.githubLink') }}
+                {{ $t('about.projectInfo.githubLink') }}
               </a>
             </ADescriptionsItem>
-            <ADescriptionsItem
-              :label="$t('routes.about.projectInfo.documentLink')"
-            >
+            <ADescriptionsItem :label="$t('about.projectInfo.documentLink')">
               <a
                 :href="documentation"
-                :rel="$t('routes.about.projectInfo.documentLink')"
+                :rel="$t('about.projectInfo.documentLink')"
                 class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
-                {{ $t('routes.about.projectInfo.documentLink') }}
+                {{ $t('about.projectInfo.documentLink') }}
               </a>
             </ADescriptionsItem>
-            <ADescriptionsItem
-              :label="$t('routes.about.projectInfo.previewLink')"
-            >
+            <ADescriptionsItem :label="$t('about.projectInfo.previewLink')">
               <a
                 :href="website"
-                :rel="$t('routes.about.projectInfo.previewLink')"
+                :rel="$t('about.projectInfo.previewLink')"
                 class="text-[rgba(var(--primary-6))]"
                 target="_blank"
               >
-                {{ $t('routes.about.projectInfo.previewLink') }}
+                {{ $t('about.projectInfo.previewLink') }}
               </a>
             </ADescriptionsItem>
           </ADescriptions>
         </ACard>
       </AGridItem>
       <AGridItem>
-        <ACard :title="$t('routes.about.proDep')">
+        <ACard :title="$t('about.proDep')">
           <ADescriptions
             :column="getIsMobile ? 1 : 2"
             :data="dependencies"
@@ -67,7 +59,7 @@
         </ACard>
       </AGridItem>
       <AGridItem>
-        <ACard :title="$t('routes.about.devDep')">
+        <ACard :title="$t('about.devDep')">
           <ADescriptions
             :column="getIsMobile ? 1 : 2"
             :data="devDependencies"

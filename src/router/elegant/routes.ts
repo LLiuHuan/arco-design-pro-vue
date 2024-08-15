@@ -107,7 +107,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'dashboard',
       icon: 'mdi:monitor-dashboard',
-      i18nKey: 'route.dashboard',
+      i18nKey: 'routes.dashboard.title',
       order: 1
     },
     children: [

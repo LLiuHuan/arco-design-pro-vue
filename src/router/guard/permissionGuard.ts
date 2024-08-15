@@ -5,11 +5,11 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router';
-import { PageEnum } from '@/enums';
-import { useRouteStore } from '@/store/modules/route';
-import { useAuthStore } from '@/store/modules/auth';
-import type { RoutePath } from '@elegant-router/types';
-import { getRouteName } from '../elegant/transform';
+import {PageEnum} from '@/enums';
+import {useRouteStore} from '@/store/modules/route';
+import type {RoutePath} from '@elegant-router/types';
+import {useAuthStore} from '@/store/modules/auth';
+import {getRouteName} from '../elegant/transform';
 
 function getRouteQueryOfLoginRoute(
   to: RouteLocationNormalized,
@@ -22,7 +22,7 @@ function getRouteQueryOfLoginRoute(
   const isRedirectHome = routeHome === redirectName;
 
   const query: LocationQueryRaw =
-    to.name !== PageEnum.LOGIN && !isRedirectHome ? { redirect } : {};
+    to.name !== PageEnum.LOGIN && !isRedirectHome ? {redirect} : {};
 
   if (isRedirectHome && redirectQuery) {
     query.redirect = `/?${redirectQuery}`;
@@ -35,8 +35,8 @@ function getRouteQueryOfLoginRoute(
 async function initRoute(
   to: RouteLocationNormalized,
 ): Promise<RouteLocationRaw | null> {
-  const authStore = useAuthStore();
   const routeStore = useRouteStore();
+  const authStore = useAuthStore();
 
   const isNotFoundRoute = to.name === PageEnum.INVALID;
   // 1. 如果常量路由没有初始化，则初始化常量路由
@@ -82,9 +82,8 @@ async function initRoute(
   }
 
   // 1.5 如果权限路由没有初始化，则初始化权限路由
-  const isLogin = Boolean(authStore.getToken);
   // 初始化auth路由需要用户登录，如果没有，重定向到登录页面
-  if (!isLogin) {
+  if (!authStore.isLogin) {
     const query = getRouteQueryOfLoginRoute(to, routeStore.routeHome);
 
     return {
@@ -93,7 +92,7 @@ async function initRoute(
     };
   }
 
-  // await authStore.initUserInfo();
+  await authStore.initUserInfo();
 
   // 1.6 初始化auth路由
   await routeStore.initAuthRoute();
@@ -136,7 +135,6 @@ function handleRouteSwitch(
 }
 
 export function createPermissionGuard(router: Router) {
-  // const { handleActionAfterLogin } = useAuth();
   router.beforeEach(async (to, from, next) => {
     const location = await initRoute(to);
 
@@ -147,22 +145,21 @@ export function createPermissionGuard(router: Router) {
 
     const authStore = useAuthStore();
 
-    const isLogin = Boolean(authStore.getToken);
     const needLogin = !to.meta.constant;
     const routeRoles = to.meta.roles || [];
 
     const hasRole =
       !routeRoles.length ||
-      authStore.roleList.some((role) => routeRoles.includes(role));
+      authStore.userInfo.userRole.some((role) => routeRoles.includes(role));
 
     const hasAuth = authStore.isStaticSuper || !routeRoles.length || hasRole;
 
     const actions: StrategyAction[] = [
       // 登录时如果是login路由则切换到根页面
       [
-        isLogin && to.name === PageEnum.LOGIN,
+        authStore.isLogin && to.name === PageEnum.LOGIN,
         () => {
-          next({ name: PageEnum.ROOT });
+          next({name: PageEnum.ROOT});
         },
       ],
       // 如果是常量路由，则允许直接访问
@@ -174,23 +171,23 @@ export function createPermissionGuard(router: Router) {
       ],
       // 如果路由需要登录但用户未登录，则切换到登录页面
       [
-        !isLogin && needLogin,
+        !authStore.isLogin && needLogin,
         () => {
-          next({ name: PageEnum.LOGIN, query: { redirect: to.fullPath } });
+          next({name: PageEnum.LOGIN, query: {redirect: to.fullPath}});
         },
       ],
       // 如果用户已登录并有授权，则允许访问
       [
-        isLogin && needLogin && hasAuth,
+        authStore.isLogin && needLogin && hasAuth,
         () => {
           handleRouteSwitch(to, from, next);
         },
       ],
       [
         // 如果用户已登录但没有授权，则切换到403页面
-        isLogin && needLogin && !hasAuth,
+        authStore.isLogin && needLogin && !hasAuth,
         () => {
-          next({ name: PageEnum.NO_AUTH });
+          next({name: PageEnum.NO_AUTH});
         },
       ],
     ];

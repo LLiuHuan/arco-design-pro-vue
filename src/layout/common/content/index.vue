@@ -11,13 +11,13 @@
         :name="transitionName"
         appear
         mode="out-in"
-        @before-leave="appStore.setContentXScrollable(true)"
-        @after-enter="appStore.setContentXScrollable(false)"
+        @before-leave="setContentXScrollable(true)"
+        @after-enter="setContentXScrollable(false)"
       >
         <KeepAlive v-if="openCache" :include="routeStore.cacheRoutes" :max="12">
           <Component
             :is="Component"
-            v-if="appStore.reloadFlag"
+            v-if="getReloadFlag"
             :key="route.fullPath"
           />
         </KeepAlive>
@@ -34,7 +34,6 @@
     useTransitionSetting,
   } from '@/hooks/setting';
   import { computed, unref } from 'vue';
-  import { useAppStore } from '@/store/modules/app';
   import { useRouteStore } from '@/store/modules/route';
 
   defineOptions({ name: 'LayoutContent' });
@@ -48,11 +47,15 @@
     showPadding: true,
   });
 
-  const appStore = useAppStore();
   const routeStore = useRouteStore();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
-  const { getOpenKeepAlive, getPageLoading } = useRootSetting();
+  const {
+    getOpenKeepAlive,
+    getPageLoading,
+    setContentXScrollable,
+    getReloadFlag,
+  } = useRootSetting();
   const { getBasicTransition, getEnableTransition, getOpenPageLoading } =
     useTransitionSetting();
   // 是否开启缓存

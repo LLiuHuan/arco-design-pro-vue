@@ -1,5 +1,7 @@
 import {
   APP_DARK_MODE_IS_AUTO_KEY,
+  APP_DARK_MODE_KEY,
+  AppEnum,
   LOCALE_KEY,
   LOCK_INFO_KEY,
   LOGIN_INFO,
@@ -11,7 +13,7 @@ import {
   TOKEN_KEY,
   USER_INFO_KEY,
 } from '@/enums';
-import type { LocaleSetting, ProjectConfig } from '~/types/config';
+import type { LocaleType, ProjectConfig } from '~/types/config';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { LoginParams, UserInfoModel } from '@/api/auth/model/userModel';
 import { App } from '~/types/app';
@@ -37,7 +39,7 @@ export interface LockInfo {
 declare namespace StorageInterface {
   interface BasicStore {
     /** 本地语言缓存 */
-    [LOCALE_KEY]: LocaleSetting;
+    [LOCALE_KEY]: LocaleType;
     /** 用户token */
     [TOKEN_KEY]: string;
     [REFRESH_TOKEN_KEY]: string;
@@ -55,6 +57,8 @@ declare namespace StorageInterface {
     [ROLES_KEY]: string[];
     /** 锁屏信息 */
     [LOCK_INFO_KEY]: LockInfo;
+    /** 主题模式 */
+    [APP_DARK_MODE_KEY]: AppEnum;
   }
 
   /** The type of data stored in session Storage - [sessionStorage的存储数据的类型] */

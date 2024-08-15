@@ -2,9 +2,9 @@
   <ADivider>{{ $t('layout.setting.interfaceDisplay.title') }}</ADivider>
 
   <TransitionGroup
-    tag="div"
-    name="interface-function"
     class="flex-col-stretch gap-12px"
+    name="interface-function"
+    tag="div"
   >
     <SettingItem
       key="1"
@@ -60,9 +60,9 @@
     >
       <SelectItem
         :def="getBasicTransition"
+        :disabled="!getEnableTransition"
         :event="HandlerEnum.TRANSITION_ROUTER"
         :options="routerAnimationOptions"
-        :disabled="!getEnableTransition"
       ></SelectItem>
     </SettingItem>
     <SettingItem
@@ -129,7 +129,6 @@
   } = useTransitionSetting();
   const { getHeaderShowBreadCrumb, getHeaderShowBreadCrumbIcon } =
     useHeaderSetting();
-
   const { getShowFooter } = useFooterSetting();
   const { getWeakMode, getGrayMode, getShowLogo } = useRootSetting();
   const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } =

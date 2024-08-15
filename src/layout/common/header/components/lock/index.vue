@@ -12,11 +12,13 @@
     <div class="flex-col-center h-full px-20px">
       <div>
         <AAvatar
-          :image-url="getUserInfo.avatar"
+          :image-url="authStore.userInfo?.avatar"
           :size="80"
           class="mb-4"
         ></AAvatar>
-        <p class="text-center m-0 pb-20px">{{ getUserInfo.userName }}</p>
+        <p class="text-center m-0 pb-20px">{{
+          authStore.userInfo?.userName
+        }}</p>
       </div>
       <AForm
         ref="formRef"
@@ -60,9 +62,9 @@
 <script lang="ts" setup>
   import { useLoading } from '@adp/hooks';
   import { reactive } from 'vue';
-  import { useAuthStoreWithOut } from '@/store/modules/auth';
   import { useLockStore } from '@/store/modules/lock';
   import { useRootSetting } from '@/hooks/setting';
+  import { useAuthStore } from '@/store/modules/auth';
 
   interface Props {
     visible: boolean;
@@ -76,7 +78,7 @@
   const emit = defineEmits<Emits>();
   const lockStore = useLockStore();
 
-  const { getUserInfo } = useAuthStoreWithOut();
+  const authStore = useAuthStore();
   const { loading, startLoading, endLoading } = useLoading();
   const { getIsMobile } = useRootSetting();
 

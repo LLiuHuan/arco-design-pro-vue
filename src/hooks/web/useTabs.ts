@@ -1,6 +1,6 @@
 import { Router, useRouter } from 'vue-router';
-import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
-import { useAppStoreWithOut } from '@/store/modules/app';
+import { useMultipleTabStore } from '@/store/modules/multipleTab';
+import { useAppStore } from '@/store/modules/app';
 import { unref } from 'vue';
 
 enum TabActionEnum {
@@ -15,12 +15,12 @@ enum TabActionEnum {
 }
 
 export const useTabs = (_router?: Router) => {
-  const appStore = useAppStoreWithOut();
-  const tabStore = useMultipleTabWithOutStore();
+  const appStore = useAppStore();
+  const tabStore = useMultipleTabStore();
   const router = _router || useRouter();
 
   const canIUseTabs = (): boolean => {
-    const { show } = appStore.getMultiTabsSetting;
+    const { show } = appStore.setting.multiTabsSetting;
     if (!show) {
       throw new Error(
         'The multi-tab page is currently not open, please open it in the settings！',
@@ -33,7 +33,7 @@ export const useTabs = (_router?: Router) => {
 
   const getCurrentTab = () => {
     const route = unref(currentRoute);
-    return tabStore.getTabs.find((item) => item.fullPath === route.fullPath)!;
+    return tabStore.tabs.find((item) => item.fullPath === route.fullPath)!;
   };
 
   async function updateTabTitle(title: string, tab?: App.Tab) {

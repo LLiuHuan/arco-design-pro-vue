@@ -1,12 +1,12 @@
 import { useContext } from '@adp/hooks';
 import { useRoute } from 'vue-router';
-import { useRouteStoreWithOut } from '@/store/modules/route';
+import { useRouteStore } from '@/store/modules/route';
 import { computed, ref, unref } from 'vue';
 import { listenerRouteChange } from '@/utils/router';
 
 export function useMixMenu() {
   const route = useRoute();
-  const { getMenus } = useRouteStoreWithOut();
+  const { menus: getMenus } = useRouteStore();
 
   const activeFirstLevelMenuKey = ref('');
 

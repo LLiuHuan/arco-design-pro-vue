@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade-bottom" mode="out-in">
+  <transition mode="out-in" name="fade-bottom">
     <LockPage v-if="getIsLock" />
   </transition>
 </template>
@@ -10,7 +10,7 @@
   import LockPage from './lockPage.vue';
 
   const lockStore = useLockStore();
-  const getIsLock = computed(() => lockStore?.getLockInfo?.isLock ?? false);
+  const getIsLock = computed(() => lockStore?.lockInfo?.isLock ?? false);
 </script>
 
 <style lang="less" scoped></style>

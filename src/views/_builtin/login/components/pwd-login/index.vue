@@ -160,7 +160,7 @@
 
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
-  const { login } = useAuthStore();
+  const authStore = useAuthStore();
 
   // const loginConfig = {
   //   rememberPassword: true,
@@ -191,7 +191,7 @@
     if (!errors) {
       startLoading();
       try {
-        await login(values.username, values.password);
+        await authStore.login(values.username, values.password);
         // 如果选中记住密码，就默认保存下来
         const { rememberPassword } = unref(loginConfig);
         const { username, password } = values;

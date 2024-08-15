@@ -1,5 +1,6 @@
 import type { LocaleType } from '~/types/config';
 import { set } from 'lodash-es';
+import { LocaleEnum } from '@/enums';
 
 export const loadLocalePool: LocaleType[] = [];
 
@@ -11,14 +12,17 @@ export function setLoadLocalePool(cb: (loadLocalePool: LocaleType[]) => void) {
   cb(loadLocalePool);
 }
 
-export function genMessage(
-  langs: Record<string, Record<string, any>>,
-  prefix = 'lang',
-) {
+export function genMessage(locale: LocaleType = LocaleEnum.zh_CN) {
+  const modules: Recordable<Recordable> = import.meta.glob(
+    './**/*.{json,ts,js}',
+    { eager: true },
+  );
+
   const obj: Recordable = {};
-  Object.keys(langs).forEach((key) => {
-    const langFileModule = langs[key].default;
-    let fileName = key.replace(`./${prefix}/`, '').replace(/^\.\//, '');
+  Object.keys(modules).forEach((key) => {
+    if (key.indexOf(`./${locale}/`) === -1) return;
+    const langFileModule = modules[key].default;
+    let fileName = key.replace(`./${locale}/`, '').replace(/^\.\//, '');
     const lastIndex = fileName.lastIndexOf('.');
     fileName = fileName.substring(0, lastIndex);
     const keyList = fileName.split('/');

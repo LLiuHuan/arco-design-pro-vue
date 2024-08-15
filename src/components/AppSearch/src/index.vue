@@ -74,7 +74,7 @@
   import { SvgIcon } from '@/components/Icon';
   import { onKeyStroke, useDebounceFn } from '@vueuse/core';
   import { nextTick, ref, unref, watch } from 'vue';
-  import { useRouteStoreWithOut } from '@/store/modules/route';
+  import { useRouteStore } from '@/store/modules/route';
   import { useGo } from '@/hooks/web/usePage';
   import { useRefs } from '@/hooks/common/useRefs';
   import { useScrollTo } from '@/hooks/common/useScrollTo';
@@ -103,7 +103,7 @@
   const activeIndex = ref(-1);
   const searchResult = ref<App.Menu[]>([]);
 
-  const routeStore = useRouteStoreWithOut();
+  const routeStore = useRouteStore();
   const { goKey } = useGo();
   const { refs, setRefs } = useRefs();
   const { getIsMobile } = useRootSetting();
@@ -147,7 +147,7 @@
     }
     const reg = createSearchReg(unref(keyword));
 
-    searchResult.value = routeStore.getSearchMenus.filter((menu) => {
+    searchResult.value = routeStore.searchMenus.filter((menu) => {
       const title = menu.label.toLocaleLowerCase();
 
       return reg.test(title);

@@ -12,30 +12,30 @@ export const useMenuSetting = () => {
    * @description 是否折叠左侧菜单
    * @description Whether to collapse the left menu
    */
-  const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
+  const getCollapsed = computed(() => appStore.setting.menuSetting.collapsed);
 
   /**
    * @description 获取菜单背景颜色
    * @description Get menu background color
    */
-  const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor);
+  const getMenuBgColor = computed(() => appStore.setting.menuSetting.bgColor);
 
   /**
    * @description 获取是否可以拖拽侧边栏
    * @description Get whether the sidebar can be dragged
    */
-  const getCanDrag = computed(() => appStore.getMenuSetting.canDrag);
+  const getCanDrag = computed(() => appStore.setting.menuSetting.canDrag);
 
   /**
    * @description 获取菜单触发方式位置
    */
-  const getTrigger = computed(() => appStore.getMenuSetting.trigger);
+  const getTrigger = computed(() => appStore.setting.menuSetting.trigger);
 
   /**
    * @description 获取菜单主题
    * @description Get menu theme
    */
-  const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
+  const getMenuTheme = computed(() => appStore.setting.menuSetting.theme);
 
   /**
    * @description 获取是否深色菜单
@@ -47,7 +47,7 @@ export const useMenuSetting = () => {
    * @description 获取手风琴模式
    * @description Get accordion mode
    */
-  const getAccordion = computed(() => appStore.getMenuSetting.accordion);
+  const getAccordion = computed(() => appStore.setting.menuSetting.accordion);
 
   // region 混合菜单
 
@@ -55,14 +55,16 @@ export const useMenuSetting = () => {
    * @description 混合菜单是否固定
    * @description Is the mixed menu fixed?
    */
-  const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
+  const getMixSideFixed = computed(
+    () => appStore.setting.menuSetting.mixSideFixed,
+  );
 
   /**
    * @description 混合菜单触发器位置
    * @description Mixed menu trigger position
    */
   const getMixSideTrigger = computed(
-    () => appStore.getMenuSetting.mixSideTrigger,
+    () => appStore.setting.menuSetting.mixSideTrigger,
   );
 
   /**
@@ -70,7 +72,7 @@ export const useMenuSetting = () => {
    * @description Whether to close the mixed menu after selecting the menu
    */
   const getCloseMixSidebarOnChange = computed(
-    () => appStore.getMenuSetting.closeMixSidebarOnChange,
+    () => appStore.setting.menuSetting.closeMixSidebarOnChange,
   );
   // endregion
 
@@ -115,28 +117,30 @@ export const useMenuSetting = () => {
    * @description 获取菜单宽度 展开时的宽度
    * @description Get menu width width when expanded
    */
-  const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
+  const getMenuWidth = computed(() => appStore.setting.menuSetting.menuWidth);
 
   /**
    * @description 获取折叠菜单宽度
    * @description Get collapsed menu width
    */
   const getCollapsedMenuWidth = computed(
-    () => appStore.getMenuSetting.collapsedMenuWidth,
+    () => appStore.setting.menuSetting.collapsedMenuWidth,
   );
 
   /**
    * @description 获取混合菜单宽度
    * @description Get mixed menu width
    */
-  const getMixMenuWidth = computed(() => appStore.getMenuSetting.mixMenuWidth);
+  const getMixMenuWidth = computed(
+    () => appStore.setting.menuSetting.mixMenuWidth,
+  );
 
   /**
    * @description 获取混合折叠菜单宽度
    * @description Get mixed collapsed menu width
    */
   const getMixCollapsedMenuWidth = computed(
-    () => appStore.getMenuSetting.mixCollapsedMenuWidth,
+    () => appStore.setting.menuSetting.mixCollapsedMenuWidth,
   );
 
   /**
@@ -144,7 +148,7 @@ export const useMenuSetting = () => {
    * @description Get mixed child menu width
    */
   const getMixChildMenuWidth = computed(
-    () => appStore.getMenuSetting.mixChildMenuWidth,
+    () => appStore.setting.menuSetting.mixChildMenuWidth,
   );
 
   /**

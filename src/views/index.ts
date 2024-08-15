@@ -1,41 +1,54 @@
-import type { Component } from 'vue';
-
-// ViewComponent 是一个对象，key 是文件路径，value 是一个函数，函数返回 import.meta.globEager 导入的对象
-type ViewComponent = Record<string, () => Promise<Component>>;
-const importViews = import.meta.glob('./**/index.vue') as ViewComponent;
+import { LocaleEnum } from '@/enums';
+import { deepMerge } from '@/utils/common';
 
 // 组件文件夹，过滤使用
 const COMPONENTS_KEY = 'components';
-// 文件路径前缀
-const PREFIX = './';
-// 文件路径后缀
-const SUFFIX = '/index.vue';
-// 路径分隔符
-const PATH_SPLIT_MARK = '/';
-// 路由分隔符
-const ROUTE_KEY_SPLIT_MARK = '_';
-// 系统的内置路由，该文件夹名称不作为RouteKey
-const SYSTEM_VIEW = '_builtin';
+// 国际化文件夹
+const LANG = 'lang';
 
-// 过滤掉组件文件
-const viewKeys = Object.keys(importViews).filter(
-  (key) => !key.includes(COMPONENTS_KEY),
-);
+const modules: Recordable<Recordable> = import.meta.glob('./**', {
+  eager: true,
+});
 
-// 获取组件对象
-function getViewComponent() {
-  const components: ViewComponent = {};
-  viewKeys.forEach((key) => {
-    const routeKey = key
-      .replace(PREFIX, '')
-      .replace(SUFFIX, '')
-      .replace(new RegExp(PATH_SPLIT_MARK, 'g'), ROUTE_KEY_SPLIT_MARK)
-      .replace(SYSTEM_VIEW, '');
-    components[routeKey] = importViews[key];
+// 循环数组，将数组转换为多级对象, 例如：['dashboard', 'analysis'] => { dashboard: { analysis: value } }
+function listToMultilevelObject(list: string[], value: any) {
+  // function camelToUnderscore(str: string) {
+  //   const newStr = str.replace(/([A-Z])/g, '_$1').toLowerCase();
+  //
+  //   return (newStr[0] === '_' && newStr.slice(1)) || newStr;
+  // }
+
+  list.reverse();
+  let obj: Recordable = {};
+  list.forEach((key: string, index: number) => {
+    // const lowerKey = camelToUnderscore(key);
+    if (index === 0) {
+      obj = { [key]: value };
+    } else {
+      obj = { [key]: obj };
+    }
   });
-  return components;
+  return obj;
 }
 
-// 导出组件对象
-export const views = getViewComponent();
-console.log(views);
+export function genLocaleMessage(locale = LocaleEnum.zh_CN) {
+  let obj: Recordable = {};
+  Object.keys(modules).forEach((key) => {
+    if (key.indexOf(LANG) === -1 || key.indexOf(`${locale}`) === -1) {
+      return;
+    }
+    const langFileModule = modules[key].default;
+    let fileName = key
+      .replace(`/${locale}`, '')
+      .replace(`/${LANG}`, '')
+      .replace(`/${COMPONENTS_KEY}`, '')
+      .replace(/^\.\//, '');
+    const lastIndex = fileName.lastIndexOf('.');
+    fileName = fileName.substring(0, lastIndex);
+    const keyList = fileName.split('/');
+    const listObject = listToMultilevelObject(keyList, langFileModule);
+    obj = deepMerge(obj, listObject);
+  });
+
+  return obj;
+}

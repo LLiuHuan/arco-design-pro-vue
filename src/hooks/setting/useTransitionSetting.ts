@@ -10,7 +10,7 @@ export const useTransitionSetting = () => {
    * @description: Get whether switching animation is enabled
    */
   const getEnableTransition = computed(
-    () => appStore.getTransitionSetting?.enable,
+    () => appStore.setting.transitionSetting?.enable,
   );
 
   /**
@@ -18,7 +18,7 @@ export const useTransitionSetting = () => {
    * @description: Get whether to open the top progress bar
    */
   const getOpenNProgress = computed(
-    () => appStore.getTransitionSetting?.openNProgress,
+    () => appStore.setting.transitionSetting?.openNProgress,
   );
 
   /**
@@ -26,7 +26,7 @@ export const useTransitionSetting = () => {
    * @description: Get whether to open page switching loading
    */
   const getOpenPageLoading = computed((): boolean => {
-    return !!appStore.getTransitionSetting?.openPageLoading;
+    return !!appStore.setting.transitionSetting?.openPageLoading;
   });
 
   /**
@@ -34,7 +34,7 @@ export const useTransitionSetting = () => {
    * @description: Get basic transition
    */
   const getBasicTransition = computed(
-    () => appStore.getTransitionSetting?.basicTransition,
+    () => appStore.setting.transitionSetting?.basicTransition,
   );
 
   /**
@@ -46,6 +46,7 @@ export const useTransitionSetting = () => {
   function setTransitionSetting(transitionSetting: Partial<TransitionSetting>) {
     appStore.setProjectConfig({ transitionSetting });
   }
+
   return {
     getEnableTransition,
     getOpenNProgress,

@@ -1,9 +1,9 @@
 <template>
   <ASelect
-    v-bind="getBindValue"
-    class="!w-126px"
     :disabled="disabled"
     :options="options"
+    class="!w-126px"
+    v-bind="getBindValue"
     @change="handleChange"
   >
   </ASelect>

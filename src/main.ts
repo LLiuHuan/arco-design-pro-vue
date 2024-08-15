@@ -16,6 +16,7 @@ import { AppLoading } from '@/components/AppLoading';
 import { setupErrorHandle } from '@/logics/error-handle';
 import { consoleLog } from '@/utils/common';
 import { setupRouterGuard } from '@/router/guard';
+import '@/views';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -54,5 +55,6 @@ setupApp()
     consoleLog('app init success');
   })
   .catch((err) => {
+    console.log(err);
     consoleLog('app init fail', err);
   });

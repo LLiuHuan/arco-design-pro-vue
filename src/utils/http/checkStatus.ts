@@ -12,7 +12,7 @@ export function checkStatus(
   errorMessageMode: ErrorMessageMode = 'message',
 ): void {
   const { t } = useI18n();
-  // const authStore = useAuthStoreWithOut();
+  // const authStore = useAuthStore();
   let errMessage = '';
 
   switch (status) {

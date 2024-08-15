@@ -6,7 +6,7 @@
   >
     <ACard class="mt-4">
       <p>
-        当前角色: <a> {{ authStore.getRoleList }} </a>
+        当前角色: <a> {{ authStore.userInfo?.userRole }} </a>
       </p>
 
       <!--    <AAlert class="mt-4">点击后请查看按钮变化</AAlert>-->
@@ -91,7 +91,6 @@
   import { useAuthStore } from '@/store/modules/auth';
 
   const { hasPermission } = usePermission();
-
   const authStore = useAuthStore();
 </script>
 

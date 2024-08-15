@@ -25,6 +25,9 @@ const setupApp = async () => {
   const appLoading = createApp(AppLoading);
   appLoading.mount('#appLoading');
 
+  // 初始化插件
+  await setupPlugin(app);
+
   // 进行一些初始化操作，比如：路由、状态管理、插件、指令等
   // 初始化vue状态管理：pinia
   setupStore(app);
@@ -35,9 +38,6 @@ const setupApp = async () => {
   const router = await setupRouter(app);
 
   await setupRouterGuard(router);
-
-  // 初始化插件
-  await setupPlugin(app);
 
   // 注册全局指令
   setupGlobDirectives(app);

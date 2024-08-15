@@ -363,7 +363,6 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
   window
     .matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', (e) => {
-      console.log('dark mode change');
       if (darkMode.value === AppEnum.AUTO) {
         if (e.matches) {
           setDark();

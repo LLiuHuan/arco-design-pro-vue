@@ -1,7 +1,7 @@
 <template>
   <ACard :bordered="false">
     <div class="whitespace-nowrap w-full p-16px">
-      <div class="float-left h-100px w-100px">
+      <div class="float-left h-100px w-120px">
         <AStatistic
           :title="title"
           :value="1024"
@@ -22,7 +22,7 @@
       <div
         ref="domRef"
         class="float-right h-90px vertical-bottom"
-        style="width: calc(100% - 100px)"
+        style="width: calc(100% - 120px)"
       ></div>
     </div>
   </ACard>

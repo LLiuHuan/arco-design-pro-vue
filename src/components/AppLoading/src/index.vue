@@ -30,8 +30,6 @@
   import { AppLogo } from '@/components/AppLogo';
   import { LoadingBasic } from './components';
 
-  console.log('loading');
-
   interface Props {
     isShowTitle?: boolean;
     isShowLogo?: boolean;

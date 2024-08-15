@@ -149,8 +149,6 @@
       menuState.openKeys = openKeys.map((key) => `${key}_sub`);
     }
   }, true);
-
-  console.log('menus: ', props.menus);
 </script>
 
 <style lang="less" scoped></style>

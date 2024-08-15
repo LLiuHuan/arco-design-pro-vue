@@ -330,7 +330,6 @@ export function getBreadcrumbsByRoute(
   route: RouteLocationNormalizedLoaded,
   menus: App.Menu[],
 ): App.Breadcrumb[] {
-  console.log(route);
   const key = route.name as string;
   const activeKey = route.meta?.activeMenu;
 
@@ -345,7 +344,6 @@ export function getBreadcrumbsByRoute(
     }
 
     if (menu.children?.length) {
-      console.log('11222', route);
       const result = getBreadcrumbsByRoute(route, menu.children);
       if (result.length > 0) {
         return [transformMenuToBreadcrumb(menu), ...result];

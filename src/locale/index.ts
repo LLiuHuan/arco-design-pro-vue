@@ -20,6 +20,7 @@ export async function getLocaleMessages(locale: LocaleType) {
 async function createI18nOptions(): Promise<I18nOptions> {
   const locale = localStg.get(LOCALE_KEY) ?? local;
   const message = await getLocaleMessages(locale);
+  console.log(message);
   setHtmlPageLang(locale);
   setLoadLocalePool((loadLocalePool) => {
     loadLocalePool.push(locale);
@@ -43,7 +44,6 @@ async function createI18nOptions(): Promise<I18nOptions> {
 // setup i18n instance with glob - [使用glob设置i18n实例]
 export async function setupI18n(app: App) {
   const options = await createI18nOptions();
-  console.log('options################', options);
   i18n = createI18n(options);
   app.use(i18n);
 }

@@ -94,7 +94,9 @@
     module: LoginModuleType;
   }
 
-  const props = defineProps<Props>();
+  const props = withDefaults(defineProps<Props>(), {
+    module: 'pwd-login',
+  });
 
   const year = dateUtil().year();
   const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();

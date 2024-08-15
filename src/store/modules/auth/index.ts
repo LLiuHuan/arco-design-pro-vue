@@ -133,6 +133,7 @@ export const useAuthStore = defineStore(StoreEnum.Auth, () => {
 
         // 登录成功弹出欢迎提示
         if (routeStore.isInitAuthRoute) {
+          console.log(t('sys.login.common.loginSuccess'));
           Notification.success({
             title: t('sys.login.common.loginSuccess'),
             content: t(`sys.login.common.welcomeBack`, {

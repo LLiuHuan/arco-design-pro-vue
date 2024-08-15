@@ -12,16 +12,14 @@ export function setLoadLocalePool(cb: (loadLocalePool: LocaleType[]) => void) {
   cb(loadLocalePool);
 }
 
-export function genMessage(locale: LocaleType = LocaleEnum.zh_CN) {
-  const modules: Recordable<Recordable> = import.meta.glob(
-    './**/*.{json,ts,js}',
-    { eager: true },
-  );
-
+export function genMessage(
+  langs: Record<string, Record<string, any>>,
+  locale: LocaleType = LocaleEnum.zh_CN,
+) {
   const obj: Recordable = {};
-  Object.keys(modules).forEach((key) => {
+  Object.keys(langs).forEach((key) => {
     if (key.indexOf(`./${locale}/`) === -1) return;
-    const langFileModule = modules[key].default;
+    const langFileModule = langs[key].default;
     let fileName = key.replace(`./${locale}/`, '').replace(/^\.\//, '');
     const lastIndex = fileName.lastIndexOf('.');
     fileName = fileName.substring(0, lastIndex);

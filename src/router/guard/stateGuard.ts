@@ -15,7 +15,7 @@ export function createStateGuard(router: Router) {
     // 只需进入登录页面并清除认证信息即可
     if (to.name === PageEnum.LOGIN) {
       const authStore = useAuthStore();
-      authStore.resetStore(true);
+      authStore.resetStore();
       removeTabChangeListener();
     }
     // else if (to.name === PageEnum.REDIRECT) {

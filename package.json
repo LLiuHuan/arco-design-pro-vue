@@ -23,6 +23,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
+    "build:ob": "vue-tsc --noEmit --skipLibCheck && vite build && javascript-obfuscator ./dist --output ./dist",
     "preview": "vite preview"
   },
   "lint-staged": {

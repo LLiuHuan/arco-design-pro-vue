@@ -1,13 +1,13 @@
 import { defineConfig, loadEnv } from 'vite';
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
-import dayjs from 'dayjs';
 import { getEnvConfig } from './.env.config';
 import {
   createViteBuild,
   createVitePlugins,
   createViteProxy,
 } from './build/vite';
+import { getBuildTime } from './build/utils';
 
 // crypto-js 默认使用4.1.1，最新版打包以后报错
 // unocss默认使用0.58.5，最新版改成ejs了，需要手动改回0.58.5
@@ -20,7 +20,7 @@ export default defineConfig((configEnv) => {
 
   const envConfig = getEnvConfig(viteEnv);
 
-  const buildTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+  const buildTime = getBuildTime();
 
   return {
     base: VITE_BASE_URL,
@@ -30,7 +30,11 @@ export default defineConfig((configEnv) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    plugins: createVitePlugins(viteEnv, configEnv.command === 'build'),
+    plugins: createVitePlugins(
+      viteEnv,
+      configEnv.command === 'build',
+      buildTime,
+    ),
     define: {
       BUILD_TIME: JSON.stringify(buildTime),
     },

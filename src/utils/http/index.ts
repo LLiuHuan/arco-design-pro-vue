@@ -99,7 +99,6 @@ const transform: AxiosTransform = {
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
-    console.log('goKey2222');
     const { goKey } = useGo(false);
     let timeoutMsg = '';
     switch (code) {
@@ -264,7 +263,6 @@ const transform: AxiosTransform = {
 };
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
-  console.log(opt?.requestOptions?.urlPrefix);
   return new HTTP(
     // 深度合并
     deepMerge(

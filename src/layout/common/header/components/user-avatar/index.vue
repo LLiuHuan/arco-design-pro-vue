@@ -100,7 +100,7 @@
           cancelButtonProps: { size: 'small' },
           closable: true,
           simple: true,
-          width: unref(getIsMobile) ? '90%' : 'auto',
+          width: unref(getIsMobile) ? '90%' : '20%',
           onOk() {
             authStore.logout();
           },

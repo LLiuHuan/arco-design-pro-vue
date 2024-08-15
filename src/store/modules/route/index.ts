@@ -50,16 +50,8 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
    * @description Reset Vue routes
    */
   function resetVueRoutes() {
-    console.log(
-      'resetVueRoutes',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
     removeRouteFns.forEach((fn) => fn());
     removeRouteFns.length = 0;
-    console.log(
-      'resetVueRoutes',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
   }
 
   // region 路由首页相关
@@ -305,7 +297,6 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
    * @param fn
    */
   function addRemoveRouteFn(fn: () => void) {
-    console.log('addRemoveRouteFn', removeRouteFns, fn);
     removeRouteFns.push(fn);
   }
 
@@ -316,19 +307,9 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
    * @param routes Vue routes
    */
   function addRoutesToVueRouter(routes: RouteRecordRaw[]) {
-    console.log('addRoutesToVueRouter', routes);
     routes.forEach((routeItem) => {
-      console.log('addRoutesToVueRouter11111111111', routeItem);
-      console.log(
-        'router.getRoutes()444444444',
-        JSON.parse(JSON.stringify(router.getRoutes())),
-      );
       const removeFn = router.addRoute(routeItem);
       addRemoveRouteFn(removeFn);
-      console.log(
-        'router.getRoutes()444444444',
-        JSON.parse(JSON.stringify(router.getRoutes())),
-      );
     });
   }
 
@@ -337,35 +318,17 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
    * @description Handle constant and auth routes
    */
   function handleConstantAndAuthRoutes() {
-    console.log(
-      'router.getRoutes()11111111111',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
     const allRoutes = [...constantRoutes.value, ...authRoutes.value];
 
     const sortRoutes = sortRoutesByOrder(allRoutes);
 
     // const vueRoutes = getAuthVueRoutes(sortRoutes);
     const vueRoutes = getAuthVueRoutes(sortRoutes);
-    console.log(
-      'router.getRoutes()22222',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
     // 重置Vue路由
     resetVueRoutes();
-    console.log(
-      'router.getRoutes()999999',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
 
     // 设置vueRoutes
     addRoutesToVueRouter(vueRoutes);
-    console.log('allRoutes', allRoutes);
-    console.log('vueRoutes', vueRoutes);
-    console.log(
-      'router.getRoutes()',
-      JSON.parse(JSON.stringify(router.getRoutes())),
-    );
     // 设置menus
     getGlobalMenus(sortRoutes);
 
@@ -388,7 +351,6 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
       router.removeRoute(rootRoute.name);
 
       const [rootVueRoute] = getAuthVueRoutes([rootRoute]);
-      console.log('rootVueRoute', rootVueRoute);
       router.addRoute(rootVueRoute);
     }
   }
@@ -398,11 +360,9 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
    * @description Initialize constant route
    */
   async function initConstantRoute() {
-    console.log('initConstantRoute', isInitConstantRoute.value);
     if (isInitConstantRoute.value) return;
 
     const staticRoute = createStaticRoutes();
-    console.log(staticRoute, authRouteMode.value);
     if (authRouteMode.value === 'static') {
       addConstantRoutes(staticRoute.constantRoutes);
     } else {
@@ -415,7 +375,6 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
         addConstantRoutes(staticRoute.constantRoutes);
       }
     }
-    console.log(constantRoutes.value);
     handleConstantAndAuthRoutes();
 
     setIsInitConstantRoute(true);

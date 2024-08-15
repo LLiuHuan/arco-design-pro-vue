@@ -5,11 +5,11 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router';
-import {PageEnum} from '@/enums';
-import {useRouteStore} from '@/store/modules/route';
-import type {RoutePath} from '@elegant-router/types';
-import {useAuthStore} from '@/store/modules/auth';
-import {getRouteName} from '../elegant/transform';
+import { PageEnum } from '@/enums';
+import { useRouteStore } from '@/store/modules/route';
+import type { RoutePath } from '@elegant-router/types';
+import { useAuthStore } from '@/store/modules/auth';
+import { getRouteName } from '../elegant/transform';
 
 function getRouteQueryOfLoginRoute(
   to: RouteLocationNormalized,
@@ -22,7 +22,7 @@ function getRouteQueryOfLoginRoute(
   const isRedirectHome = routeHome === redirectName;
 
   const query: LocationQueryRaw =
-    to.name !== PageEnum.LOGIN && !isRedirectHome ? {redirect} : {};
+    to.name !== PageEnum.LOGIN && !isRedirectHome ? { redirect } : {};
 
   if (isRedirectHome && redirectQuery) {
     query.redirect = `/?${redirectQuery}`;
@@ -41,7 +41,6 @@ async function initRoute(
   const isNotFoundRoute = to.name === PageEnum.INVALID;
   // 1. 如果常量路由没有初始化，则初始化常量路由
   if (!routeStore.isInitConstantRoute) {
-    console.log('initConstantRoute');
     await routeStore.initConstantRoute();
 
     // 1.1 该路由被"not-found"路由捕获，因为常量路由未初始化
@@ -159,7 +158,7 @@ export function createPermissionGuard(router: Router) {
       [
         authStore.isLogin && to.name === PageEnum.LOGIN,
         () => {
-          next({name: PageEnum.ROOT});
+          next({ name: PageEnum.ROOT });
         },
       ],
       // 如果是常量路由，则允许直接访问
@@ -173,7 +172,7 @@ export function createPermissionGuard(router: Router) {
       [
         !authStore.isLogin && needLogin,
         () => {
-          next({name: PageEnum.LOGIN, query: {redirect: to.fullPath}});
+          next({ name: PageEnum.LOGIN, query: { redirect: to.fullPath } });
         },
       ],
       // 如果用户已登录并有授权，则允许访问
@@ -187,7 +186,7 @@ export function createPermissionGuard(router: Router) {
         // 如果用户已登录但没有授权，则切换到403页面
         authStore.isLogin && needLogin && !hasAuth,
         () => {
-          next({name: PageEnum.NO_AUTH});
+          next({ name: PageEnum.NO_AUTH });
         },
       ],
     ];

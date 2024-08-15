@@ -5,6 +5,6 @@ export default {
   },
   analysis: {
     title: 'Analysis',
-    yesterday: 'Compared to yesterday',
+    yesterday: 'Yesterday',
   },
 };

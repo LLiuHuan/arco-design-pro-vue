@@ -62,7 +62,6 @@ export function useGo(isSetup = true) {
     if (isReplace) {
       return replace(to);
     }
-    console.log(to);
     return push(to);
   }
 
@@ -129,7 +128,6 @@ export function useGo(isSetup = true) {
       redirect,
     };
 
-    console.log('GOLOGIN', PageEnum.LOGIN, options);
     return goKey(PageEnum.LOGIN, options);
   }
 

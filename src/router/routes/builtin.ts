@@ -8,7 +8,9 @@ import {
 export const ROOT_ROUTE: CustomRoute = {
   name: 'root',
   path: '/',
-  redirect: getRoutePath(import.meta.env.VITE_ROUTE_HOME) || 'dashboard',
+  redirect:
+    getRoutePath(import.meta.env.VITE_ROUTE_HOME_PATH) ||
+    getRoutePath('dashboard'),
   meta: {
     title: 'root',
     constant: true,

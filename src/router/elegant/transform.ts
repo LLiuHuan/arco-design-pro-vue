@@ -192,7 +192,6 @@ const routeMap: RouteMap = {
   "plugin": "/plugin",
   "plugin_charts": "/plugin/charts",
   "plugin_charts_echarts": "/plugin/charts/echarts",
-  "redirect": "/redirect",
   "user-center": "/user-center"
 };
 

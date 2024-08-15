@@ -19,7 +19,7 @@ export default {
     lockPlaceholder: '请输入锁屏密码',
 
     logOut: '退出系统',
-    logOutMessage: '确定要退出系统吗？',
+    logOutMessage: '是否确认退出系统？',
     userCenter: '个人中心',
 
     tooltipNotify: '消息通知',

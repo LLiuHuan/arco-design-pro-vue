@@ -16,4 +16,6 @@ export default {
   resetText: '重置',
 
   lookForward: '正在开发中，尽请期待吧！',
+
+  kindTips: '温馨提示',
 };

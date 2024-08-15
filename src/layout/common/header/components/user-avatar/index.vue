@@ -35,6 +35,7 @@
   import { SvgIcon } from '@/components/Icon';
   import { useRootSetting } from '@/hooks/setting';
   import { useAuthStore } from '@/store/modules/auth';
+  import { useI18n } from '@/hooks/web/useI18n';
   import Lock from '../lock/index.vue';
 
   interface DropdownOption {
@@ -46,6 +47,7 @@
   const { goKey } = useGo();
   const { getIsMobile } = useRootSetting();
   const authStore = useAuthStore();
+  const { t } = useI18n();
 
   const lockVisible = ref(false);
 
@@ -91,12 +93,12 @@
                 size: 24,
                 color: '#faad14',
               }),
-              h('span', { style: 'margin-left: 8px' }, ['温馨提示']),
+              h('span', { style: 'margin-left: 8px' }, [t('common.kindTips')]),
             ]),
-          content: '是否确认退出系统？',
-          okText: '确认',
+          content: t('layout.header.logOutMessage'),
+          okText: t('common.okText'),
           okButtonProps: { size: 'small' },
-          cancelText: '取消',
+          cancelText: t('common.cancelText'),
           cancelButtonProps: { size: 'small' },
           closable: true,
           simple: true,

@@ -20,7 +20,6 @@ export async function getLocaleMessages(locale: LocaleType) {
 async function createI18nOptions(): Promise<I18nOptions> {
   const locale = localStg.get(LOCALE_KEY) ?? local;
   const message = await getLocaleMessages(locale);
-  console.log(message);
   setHtmlPageLang(locale);
   setLoadLocalePool((loadLocalePool) => {
     loadLocalePool.push(locale);

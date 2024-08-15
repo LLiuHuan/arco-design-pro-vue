@@ -82,8 +82,11 @@ echarts.use([
 ]);
 
 interface ChartHooks {
+  // 图表渲染前
   onRender?: (chart: echarts.ECharts) => void | Promise<void>;
+  // 图表更新后
   onUpdated?: (chart: echarts.ECharts) => void | Promise<void>;
+  // 图表销毁
   onDestroy?: (chart: echarts.ECharts) => void | Promise<void>;
 }
 
@@ -91,11 +94,11 @@ interface ChartHooks {
  * @description Echarts hooks函数
  * @description use echarts
  *
- * @param options echarts选项 - [echarts options]
+ * @param optionsFactory echarts选项 - [echarts options]
  * @param hooks hooks函数 - [hooks function]
  */
 export function useEcharts<T extends ECOption>(
-  options: T,
+  optionsFactory: () => T,
   hooks: ChartHooks = {},
 ) {
   const scope = effectScope();
@@ -107,6 +110,7 @@ export function useEcharts<T extends ECOption>(
   const { width, height } = useElementSize(domRef, initialSize);
 
   let chart: echarts.ECharts | null = null;
+  const chartOptions: T = optionsFactory();
 
   const {
     onRender = (instance) => {
@@ -155,11 +159,13 @@ export function useEcharts<T extends ECOption>(
    *
    * @param callback callback function
    */
-  async function updateOptions(callback: (opts: T) => ECOption) {
+  async function updateOptions(
+    callback: (opts: T, optsFactory: () => T) => ECOption = () => chartOptions,
+  ) {
     if (!isRendered()) return;
-    const updatedOpts = callback(options);
+    const updatedOpts = callback(chartOptions, optionsFactory);
 
-    Object.assign(options, updatedOpts);
+    Object.assign(chartOptions, updatedOpts);
 
     if (isRendered()) {
       chart?.clear();
@@ -185,7 +191,7 @@ export function useEcharts<T extends ECOption>(
 
       chart = echarts.init(domRef.value, chartTheme);
 
-      chart.setOption({ ...options, backgroundColor: 'transparent' });
+      chart.setOption({ ...chartOptions, backgroundColor: 'transparent' });
 
       await onRender?.(chart);
     }

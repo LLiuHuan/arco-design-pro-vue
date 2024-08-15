@@ -107,7 +107,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'dashboard',
       icon: 'mdi:monitor-dashboard',
-      i18nKey: 'routes.dashboard.title',
+      i18nKey: 'route.dashboard',
       order: 1
     },
     children: [
@@ -117,7 +117,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         component: 'view.dashboard_analysis',
         meta: {
           title: 'dashboard_analysis',
-          i18nKey: 'routes.dashboard.analysis.title'
+          i18nKey: 'route.dashboard_analysis'
         }
       },
       {
@@ -126,7 +126,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         component: 'view.dashboard_workbench',
         meta: {
           title: 'dashboard_workbench',
-          i18nKey: 'routes.dashboard.workbench.title'
+          i18nKey: 'route.dashboard_workbench'
         }
       }
     ]
@@ -286,17 +286,6 @@ export const generatedRoutes: GeneratedRoute[] = [
         ]
       }
     ]
-  },
-  {
-    name: 'redirect',
-    path: '/redirect',
-    component: 'layout.blank$view.redirect',
-    meta: {
-      title: 'redirect',
-      i18nKey: 'route.redirect',
-      constant: true,
-      hideInMenu: true
-    }
   },
   {
     name: 'user-center',

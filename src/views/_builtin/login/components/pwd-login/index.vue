@@ -173,8 +173,8 @@
   const loginConfig = ref(
     localStg.get(LOGIN_INFO) || {
       rememberPassword: true,
-      username: 'admin', // 演示默认值
-      password: 'admin', // demo default value
+      username: 'super', // 演示默认值
+      password: 'super', // demo default value
     },
   );
 

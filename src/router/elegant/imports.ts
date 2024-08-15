@@ -33,6 +33,5 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   "permission_front_auth-page-b": () => import("@/views/permission/front/auth-page-b/index.vue"),
   permission_front_btn: () => import("@/views/permission/front/btn/index.vue"),
   plugin_charts_echarts: () => import("@/views/plugin/charts/echarts/index.vue"),
-  redirect: () => import("@/views/redirect/index.vue"),
   "user-center": () => import("@/views/user-center/index.vue"),
 };

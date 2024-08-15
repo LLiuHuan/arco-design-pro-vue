@@ -230,7 +230,8 @@ export const generatedRoutes: GeneratedRoute[] = [
             component: 'view.permission_front_auth-page-a',
             meta: {
               title: 'permission_front_auth-page-a',
-              i18nKey: 'route.permission_front_auth-page-a'
+              i18nKey: 'route.permission_front_auth-page-a',
+              roles: ['super']
             }
           },
           {
@@ -239,7 +240,8 @@ export const generatedRoutes: GeneratedRoute[] = [
             component: 'view.permission_front_auth-page-b',
             meta: {
               title: 'permission_front_auth-page-b',
-              i18nKey: 'route.permission_front_auth-page-b'
+              i18nKey: 'route.permission_front_auth-page-b',
+              roles: ['super', 'user']
             }
           },
           {

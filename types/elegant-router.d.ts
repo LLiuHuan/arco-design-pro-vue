@@ -48,7 +48,6 @@ declare module "@elegant-router/types" {
     "plugin": "/plugin";
     "plugin_charts": "/plugin/charts";
     "plugin_charts_echarts": "/plugin/charts/echarts";
-    "redirect": "/redirect";
     "user-center": "/user-center";
   };
 
@@ -96,7 +95,6 @@ declare module "@elegant-router/types" {
     | "login"
     | "permission"
     | "plugin"
-    | "redirect"
     | "user-center"
   >;
 
@@ -133,7 +131,6 @@ declare module "@elegant-router/types" {
     | "permission_front_auth-page-b"
     | "permission_front_btn"
     | "plugin_charts_echarts"
-    | "redirect"
     | "user-center"
   >;
 

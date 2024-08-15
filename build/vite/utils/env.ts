@@ -18,7 +18,7 @@ function getConfFiles() {
 }
 
 /**
- * Get the environment variables starting with the specified prefix
+ * 获取以指定前缀开头的环境变量
  * @param match prefix
  * @param confFiles ext
  */

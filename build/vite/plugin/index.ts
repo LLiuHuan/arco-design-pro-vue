@@ -1,5 +1,6 @@
 import { PluginOption } from 'vite';
 
+import { setupHtmlPlugin } from './appBuildTime';
 import { configElegantRouterPlugin } from './elegant-router';
 import { configProgressPlugin } from './progress';
 import { configHtmlPlugin } from './html';
@@ -21,6 +22,7 @@ import { createAppConfigPlugin } from './appConfig';
 export function createVitePlugins(
   viteEnv: ImportMetaEnv,
   isBuild: boolean,
+  buildTime: string,
 ): (PluginOption | PluginOption[])[] {
   const plugins: (PluginOption | PluginOption[])[] = [
     ...configVuePlugin(), // vue基础插件
@@ -62,6 +64,8 @@ export function createVitePlugins(
     // vite-plugin-pwa
     plugins.push(configPWAPlugin(viteEnv));
   }
+
+  plugins.push(setupHtmlPlugin(buildTime));
 
   return plugins;
 }

@@ -17,6 +17,7 @@ import { setupErrorHandle } from '@/logics/error-handle';
 import { consoleLog } from '@/utils/common';
 import { setupRouterGuard } from '@/router/guard';
 import '@/views';
+import { setupAppVersionNotification } from '@/plugins/app';
 import App from './App.vue';
 
 const setupApp = async () => {
@@ -43,6 +44,8 @@ const setupApp = async () => {
 
   // 配置全局错误处理
   setupErrorHandle(app);
+
+  setupAppVersionNotification();
 
   // 延迟挂载app 为了可以多看会加载动画
   // setTimeout(() => {

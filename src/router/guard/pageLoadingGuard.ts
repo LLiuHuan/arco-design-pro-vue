@@ -1,16 +1,15 @@
 import type { Router } from 'vue-router';
 import { unref } from 'vue';
-import { useTransitionSetting } from '@/hooks/setting';
-import { useAppStoreWithOut } from '@/store/modules/app';
-import { useAuthStoreWithOut } from '@/store/modules/auth';
+import { useRootSetting, useTransitionSetting } from '@/hooks/setting';
+import { useAuthStore } from '@/store/modules/auth';
 
 // Used to handle page loading status
 export function createPageLoadingGuard(router: Router) {
-  const userStore = useAuthStoreWithOut();
-  const appStore = useAppStoreWithOut();
+  const authStore = useAuthStore();
+  const { setPageLoading, setPageLoadingAction } = useRootSetting();
   const { getOpenPageLoading } = useTransitionSetting();
   router.beforeEach(async (to) => {
-    if (!userStore.getToken) {
+    if (!authStore.isLogin) {
       return true;
     }
     if (to.meta.loaded) {
@@ -18,7 +17,7 @@ export function createPageLoadingGuard(router: Router) {
     }
 
     if (unref(getOpenPageLoading)) {
-      await appStore.setPageLoadingAction(true);
+      await setPageLoadingAction(true);
       return true;
     }
 
@@ -28,7 +27,7 @@ export function createPageLoadingGuard(router: Router) {
     if (unref(getOpenPageLoading)) {
       // The timer simulates the loading time to prevent flashing too fast,
       setTimeout(() => {
-        appStore.setPageLoading(false);
+        setPageLoading(false);
       }, 220);
     }
     return true;

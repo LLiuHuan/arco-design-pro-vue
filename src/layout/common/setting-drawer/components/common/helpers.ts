@@ -61,10 +61,6 @@ const handler = (
       return {
         menuSetting: { theme: value ? AppEnum.DARK : AppEnum.LIGHT },
       };
-    case HandlerEnum.MENU_COLLAPSE:
-      return {
-        menuSetting: { collapsed: value },
-      };
     case HandlerEnum.MENU_COLLAPSE_BTN:
       return {
         menuSetting: { trigger: value },

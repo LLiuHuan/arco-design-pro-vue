@@ -57,3 +57,8 @@ export enum PermissionModeEnum {
   // 后端
   BACK = 'BACK',
 }
+
+export enum LocaleEnum {
+  zh_CN = 'zh-CN',
+  en_US = 'en-US',
+}

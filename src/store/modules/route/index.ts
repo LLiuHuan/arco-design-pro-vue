@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import { store } from '@/store';
-import { RouteRecordRaw, useRoute } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 import {
   fetchGetConstantRoutes,
   fetchGetUserRoutes,
@@ -17,7 +16,9 @@ import type {
 import { getRouteName, getRoutePath } from '@/router/elegant/transform';
 import { ROOT_ROUTE } from '@/router/routes/builtin';
 import { router } from '@/router';
-import { useAuthStore } from '../auth';
+import { StoreEnum } from '@/enums';
+import { useBoolean } from '@adp/hooks';
+import { computed, ref, shallowRef } from 'vue';
 import {
   filterAuthRoutesByRoles,
   getBreadcrumbsByRoute,
@@ -29,460 +30,498 @@ import {
   transformMenuToSearchMenus,
   updateLocaleOfGlobalMenus,
 } from './helpers';
+// eslint-disable-next-line import/no-cycle
+import { useAuthStore } from '../auth';
 
-interface RouteState {
+export const useRouteStore = defineStore(StoreEnum.Route, () => {
+  const authStore = useAuthStore();
+
+  const { bool: isInitConstantRoute, setBool: setIsInitConstantRoute } =
+    useBoolean();
+  const { bool: isInitAuthRoute, setBool: setIsInitAuthRoute } = useBoolean();
+
+  // 权限路由模式
+  const authRouteMode = ref(import.meta.env.VITE_AUTH_ROUTE_MODE);
+
+  const removeRouteFns: (() => void)[] = [];
+
   /**
-   * 权限路由模式:
-   * - static - 前端声明的静态
-   * - dynamic - 后端返回的动态
+   * @description 重置Vue路由
+   * @description Reset Vue routes
    */
-  authRouteMode: ImportMetaEnv['VITE_AUTH_ROUTE_MODE'];
-  /** 菜单列表 */
-  menus: App.Menu[];
-  /** 搜索的菜单 */
-  searchMenus?: App.Menu[];
-  /** 是否初始化了常量路由 */
-  isInitConstantRoute: boolean;
-  /** 是否初始化了权限路由 */
-  isInitAuthRoute: boolean;
-  /** 路由首页 */
-  routeHome: LastLevelRouteKey;
-  /** 常量路由 */
-  constantRoutes: ElegantConstRoute[];
-  /** 权限路由 */
-  authRoutes: ElegantConstRoute[];
-  /** 缓存路由 */
-  cacheRoutes: RouteKey[];
-  /** 所有缓存路由 */
-  allCacheRoutes: RouteKey[];
-  /** 移除路由函数 */
-  removeRouteFns: (() => void)[];
-}
+  function resetVueRoutes() {
+    console.log(
+      'resetVueRoutes',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+    removeRouteFns.forEach((fn) => fn());
+    removeRouteFns.length = 0;
+    console.log(
+      'resetVueRoutes',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+  }
 
-const route = useRoute();
+  // region 路由首页相关
 
-export const useRouteStore = defineStore({
-  id: 'route-store',
-  state: (): RouteState => ({
-    authRouteMode: import.meta.env.VITE_AUTH_ROUTE_MODE,
-    isInitAuthRoute: false,
-    menus: [],
-    isInitConstantRoute: false,
-    routeHome: import.meta.env.VITE_ROUTE_HOME_PATH,
-    constantRoutes: [],
-    authRoutes: [],
-    cacheRoutes: [],
-    allCacheRoutes: [],
-    removeRouteFns: [],
-  }),
-  getters: {
-    /**
-     * @description Get the menu - [获取菜单]
-     * @param state
-     */
-    getMenus(state) {
-      return state.menus;
-    },
-    /**
-     * @description Get isInitAuthRoute - [获取isInitAuthRoute]
-     * @param state
-     */
-    getIsInitAuthRoute(state) {
-      return state.isInitAuthRoute;
-    },
-    /**
-     * @description 获取searchMenus
-     * @description Get the searchMenus
-     *
-     * @param state
-     */
-    getSearchMenus(state) {
-      return transformMenuToSearchMenus(state.menus);
-    },
-    getBreadcrumb(state) {
-      return getBreadcrumbsByRoute(route, state.menus);
-    },
-  },
-  actions: {
-    /**
-     * @description 设置路由首页
-     * @description Set route home
-     *
-     * @param routeKey Route key - [路由key]
-     */
-    setRouteHome(routeKey: LastLevelRouteKey) {
-      this.routeHome = routeKey;
-    },
-    /**
-     * @description 添加固定路由
-     * @description Add constant routes
-     *
-     * @param routes - [路由]
-     */
-    addConstantRoutes(routes: ElegantConstRoute[]) {
-      const constantRoutesMap = new Map<string, ElegantConstRoute>([]);
+  // 路由首页
+  const routeHome = ref(import.meta.env.VITE_ROUTE_HOME_PATH);
 
-      routes.forEach((routeItem) => {
-        constantRoutesMap.set(routeItem.name, routeItem);
-      });
+  /**
+   * @description 设置路由首页
+   * @description Set route home
+   *
+   * @param routeKey Route key - [路由key]
+   */
+  function setRouteHome(routeKey: LastLevelRouteKey) {
+    routeHome.value = routeKey;
+  }
 
-      this.constantRoutes = Array.from(constantRoutesMap.values());
-    },
-    isConstantRoute(routeName: string) {
-      return this.constantRoutes.some(
-        (routeItem) => routeItem.name === routeName,
-      );
-    },
-    /**
-     * @description 添加权限路由
-     * @description Add auth routes
-     *
-     * @param routes - [路由]
-     */
-    addAuthRoutes(routes: ElegantConstRoute[]) {
-      const authRoutesMap = new Map<string, ElegantConstRoute>([]);
+  // endregion
 
-      routes.forEach((routeItem) => {
-        authRoutesMap.set(routeItem.name, routeItem);
-      });
+  // region 固定路由/权限路由相关
+  const constantRoutes = shallowRef<ElegantConstRoute[]>([]);
+  const authRoutes = shallowRef<ElegantConstRoute[]>([]);
 
-      this.authRoutes = Array.from(authRoutesMap.values());
-    },
+  /**
+   * @description 添加固定路由
+   * @description Add constant routes
+   *
+   * @param routes - [路由]
+   */
+  function addConstantRoutes(routes: ElegantConstRoute[]) {
+    const constantRoutesMap = new Map<string, ElegantConstRoute>([]);
 
-    /**
-     * @description 获取全局菜单
-     * @description  Get global menus
-     *
-     * @param routes
-     */
-    getGlobalMenus(routes: ElegantConstRoute[]) {
-      this.menus = getGlobalMenusByAuthRoutes(routes);
-    },
-    /**
-     * @description 更新全局菜单的国际化
-     * @description Update locale of global menus
-     */
-    updateGlobalMenusByLocale() {
-      this.menus = updateLocaleOfGlobalMenus(this.menus);
-    },
-    /**
-     * @description 获取缓存路由
-     * @description Get cache routes
-     *
-     * @param routes Vue routes - [Vue 路由]
-     */
-    getCacheRoutes(routes: RouteRecordRaw[]) {
-      const all = getCacheRouteNames(routes);
+    routes.forEach((routeItem) => {
+      constantRoutesMap.set(routeItem.name, routeItem);
+    });
 
-      this.cacheRoutes = all;
-      this.allCacheRoutes = [...all];
-    },
-    /**
-     * @description 添加缓存路由
-     * @description Add cache routes
-     *
-     * @param routeKey - [路由key]
-     */
-    addCacheRoutes(routeKey: RouteKey) {
-      if (this.cacheRoutes.includes(routeKey)) return;
+    constantRoutes.value = Array.from(constantRoutesMap.values());
+  }
 
-      this.cacheRoutes.push(routeKey);
-    },
-    /**
-     * @description 移除缓存路由
-     * @description Remove cache routes
-     *
-     * @param routeKey - [路由key]
-     */
-    removeCacheRoutes(routeKey: RouteKey) {
-      const index = this.cacheRoutes.findIndex((item) => item === routeKey);
+  /**
+   * @description 添加权限路由
+   * @description Add auth routes
+   *
+   * @param routes - [路由]
+   */
+  function addAuthRoutes(routes: ElegantConstRoute[]) {
+    const authRoutesMap = new Map<string, ElegantConstRoute>([]);
 
-      if (index === -1) return;
+    routes.forEach((routeItem) => {
+      authRoutesMap.set(routeItem.name, routeItem);
+    });
 
-      this.cacheRoutes.splice(index, 1);
-    },
-    /**
-     * @description 是否是缓存路由
-     * @description Is cached route
-     *
-     * @param routeKey - [路由key]
-     */
-    isCachedRoute(routeKey: RouteKey) {
-      return this.allCacheRoutes.includes(routeKey);
-    },
-    /**
-     * @description 重置路由缓存
-     * @description Re cache routes by route key
-     *
-     * @param routeKey - [路由key]
-     */
-    async reCacheRoutesByKey(routeKey: RouteKey) {
-      if (!this.isCachedRoute(routeKey)) return;
+    authRoutes.value = Array.from(authRoutesMap.values());
+  }
 
-      this.removeCacheRoutes(routeKey);
+  // endregion
 
-      // await appStore.reloadPage();
+  // region 菜单相关
+  const menus = ref<App.Menu[]>([]);
+  const searchMenus = computed(() => transformMenuToSearchMenus(menus.value));
 
-      this.addCacheRoutes(routeKey);
-    },
-    /**
-     * @description 重置路由缓存
-     * @description Re cache routes by route keys
-     *
-     * @param routeKeys - [路由keys]
-     */
-    async reCacheRoutesByKeys(routeKeys: RouteKey[]) {
-      for await (const key of routeKeys) {
-        await this.reCacheRoutesByKey(key);
-      }
-    },
-    /**
-     * @description 重置
-     * @description Reset store
-     */
-    async resetStore() {
-      const routeStore = useRouteStore();
+  const breadcrumbs = computed(() =>
+    getBreadcrumbsByRoute(router.currentRoute.value, menus.value),
+  );
 
-      routeStore.$reset();
+  /**
+   * @description 获取全局菜单
+   * @description  Get global menus
+   *
+   * @param routes
+   */
+  function getGlobalMenus(routes: ElegantConstRoute[]) {
+    menus.value = getGlobalMenusByAuthRoutes(routes);
+  }
 
-      this.resetVueRoutes();
+  /**
+   * @description 更新全局菜单的国际化
+   * @description Update locale of global menus
+   */
+  function updateGlobalMenusByLocale() {
+    menus.value = updateLocaleOfGlobalMenus(menus.value);
+  }
 
-      // after reset store, need to re-init constant route
-      await this.initConstantRoute();
-    },
-    /**
-     * @description 重置Vue路由
-     * @description Reset Vue routes
-     */
-    resetVueRoutes() {
-      this.removeRouteFns.forEach((fn) => fn());
-      this.removeRouteFns.length = 0;
-    },
-    /**
-     * @description 初始化常量路由
-     * @description Initialize constant route
-     */
-    async initConstantRoute() {
-      if (this.isInitConstantRoute) return;
+  // endregion
 
-      const staticRoute = createStaticRoutes();
+  // region 缓存路由相关
+  // 缓存路由
+  const cacheRoutes = ref<RouteKey[]>([]);
+  // 所有缓存路由
+  const allCacheRoutes = shallowRef<RouteKey[]>([]);
 
-      if (this.authRouteMode === 'static') {
-        this.addConstantRoutes(staticRoute.constantRoutes);
-      } else {
-        const data = await fetchGetConstantRoutes();
+  /**
+   * @description 获取缓存路由
+   * @description Get cache routes
+   *
+   * @param routes Vue routes - [Vue 路由]
+   */
+  function getCacheRoutes(routes: RouteRecordRaw[]) {
+    const all = getCacheRouteNames(routes);
 
-        if (data) {
-          this.addConstantRoutes(data);
-        } else {
-          // if fetch constant routes failed, use static constant routes
-          this.addConstantRoutes(staticRoute.constantRoutes);
-        }
-      }
+    cacheRoutes.value = all;
+    allCacheRoutes.value = [...all];
+  }
 
-      this.handleConstantAndAuthRoutes();
+  /**
+   * @description 添加缓存路由
+   * @description Add cache routes
+   *
+   * @param routeKey - [路由key]
+   */
+  function addCacheRoutes(routeKey: RouteKey) {
+    if (cacheRoutes.value.includes(routeKey)) return;
 
-      this.isInitConstantRoute = true;
-    },
-    /**
-     * @description 初始化权限路由
-     * @description Initialize auth route
-     */
-    async initAuthRoute() {
-      const tabStore = useMultipleTabStore();
-      if (this.authRouteMode === 'static') {
-        this.initStaticAuthRoute();
-      } else {
-        await this.initDynamicAuthRoute();
-      }
+    cacheRoutes.value.push(routeKey);
+  }
 
-      tabStore.initHomeTab();
-    },
-    /**
-     * @description 初始化静态权限路由
-     * @description Initialize static auth route
-     */
-    initStaticAuthRoute() {
-      const authStore = useAuthStore();
+  /**
+   * @description 移除缓存路由
+   * @description Remove cache routes
+   *
+   * @param routeKey - [路由key]
+   */
+  function removeCacheRoutes(routeKey: RouteKey) {
+    const index = cacheRoutes.value.findIndex((item) => item === routeKey);
+
+    if (index === -1) return;
+
+    cacheRoutes.value.splice(index, 1);
+  }
+
+  /**
+   * @description 是否是缓存路由
+   * @description Is cached route
+   *
+   * @param routeKey - [路由key]
+   */
+  function isCachedRoute(routeKey: RouteKey) {
+    return allCacheRoutes.value.includes(routeKey);
+  }
+
+  /**
+   * @description 重置路由缓存
+   * @description Re cache routes by route key
+   *
+   * @param routeKey - [路由key]
+   */
+  async function reCacheRoutesByKey(routeKey: RouteKey) {
+    if (!isCachedRoute(routeKey)) return;
+
+    removeCacheRoutes(routeKey);
+
+    // await appStore.reloadPage();
+
+    addCacheRoutes(routeKey);
+  }
+
+  /**
+   * @description 重置路由缓存
+   * @description Re cache routes by route keys
+   *
+   * @param routeKeys - [路由keys]
+   */
+  async function reCacheRoutesByKeys(routeKeys: RouteKey[]) {
+    for await (const key of routeKeys) {
+      await reCacheRoutesByKey(key);
+    }
+  }
+
+  // endregion
+
+  // region 其他
+
+  /**
+   * @description 获取 auth 路由是否存在
+   * @description Get is auth route exist
+   *
+   * @param routePath Route path - [路由路径]
+   */
+  async function getIsAuthRouteExist(routePath: RouteMap[RouteKey]) {
+    const routeName = getRouteName(routePath);
+
+    if (!routeName) {
+      return false;
+    }
+
+    if (authRouteMode.value === 'static') {
       const { authRoutes: staticAuthRoutes } = createStaticRoutes();
+      return isRouteExistByRouteName(routeName, staticAuthRoutes);
+    }
 
-      if (authStore.isStaticSuper) {
-        console.log(staticAuthRoutes);
-        this.addAuthRoutes(staticAuthRoutes);
-      } else {
-        const filteredAuthRoutes = filterAuthRoutesByRoles(
-          staticAuthRoutes,
-          authStore.roleList,
-        );
+    const data = fetchIsRouteExist(routeName);
+    return data;
+  }
 
-        this.addAuthRoutes(filteredAuthRoutes);
-      }
+  /**
+   * @description 获取选中菜单的key路径
+   * @description Get selected menu key path
+   *
+   * @param selectedKey Selected menu key - [选中的菜单key]
+   */
+  function getSelectedMenuKeyPath(selectedKey: string) {
+    return getSelectedMenuKeyPathByKey(selectedKey, menus.value);
+  }
 
-      this.handleConstantAndAuthRoutes();
+  /**
+   * @description 获取路由meta
+   * @description Get route meta by key
+   *
+   * @param key Route key
+   */
+  function getRouteMetaByKey(key: string) {
+    const allRoutes = router.getRoutes();
 
-      this.isInitAuthRoute = true;
-    },
-    /**
-     * @description 初始化动态权限路由
-     * @description Initialize dynamic auth route
-     */
-    async initDynamicAuthRoute() {
-      const data = await fetchGetUserRoutes();
+    return allRoutes.find((routeItem) => routeItem.name === key)?.meta || null;
+  }
+
+  /**
+   * @description 获取路由meta的query
+   * @description Get route query of meta by key
+   *
+   * @param key
+   */
+  function getRouteQueryOfMetaByKey(key: string) {
+    const meta = getRouteMetaByKey(key);
+
+    const query: Record<string, string> = {};
+
+    meta?.query?.forEach((item) => {
+      query[item.key] = item.value;
+    });
+
+    return query;
+  }
+
+  // endregion
+
+  // region 初始化相关
+
+  /**
+   * @description 添加移除路由函数
+   * @description Add remove route fn
+   *
+   * @param fn
+   */
+  function addRemoveRouteFn(fn: () => void) {
+    console.log('addRemoveRouteFn', removeRouteFns, fn);
+    removeRouteFns.push(fn);
+  }
+
+  /**
+   * @description 添加路由到vue router
+   * @description Add routes to vue router
+   *
+   * @param routes Vue routes
+   */
+  function addRoutesToVueRouter(routes: RouteRecordRaw[]) {
+    console.log('addRoutesToVueRouter', routes);
+    routes.forEach((routeItem) => {
+      console.log('addRoutesToVueRouter11111111111', routeItem);
+      console.log(
+        'router.getRoutes()444444444',
+        JSON.parse(JSON.stringify(router.getRoutes())),
+      );
+      const removeFn = router.addRoute(routeItem);
+      addRemoveRouteFn(removeFn);
+      console.log(
+        'router.getRoutes()444444444',
+        JSON.parse(JSON.stringify(router.getRoutes())),
+      );
+    });
+  }
+
+  /**
+   * @description 处理常量和权限路由
+   * @description Handle constant and auth routes
+   */
+  function handleConstantAndAuthRoutes() {
+    console.log(
+      'router.getRoutes()11111111111',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+    const allRoutes = [...constantRoutes.value, ...authRoutes.value];
+
+    const sortRoutes = sortRoutesByOrder(allRoutes);
+
+    // const vueRoutes = getAuthVueRoutes(sortRoutes);
+    const vueRoutes = getAuthVueRoutes(sortRoutes);
+    console.log(
+      'router.getRoutes()22222',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+    // 重置Vue路由
+    resetVueRoutes();
+    console.log(
+      'router.getRoutes()999999',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+
+    // 设置vueRoutes
+    addRoutesToVueRouter(vueRoutes);
+    console.log('allRoutes', allRoutes);
+    console.log('vueRoutes', vueRoutes);
+    console.log(
+      'router.getRoutes()',
+      JSON.parse(JSON.stringify(router.getRoutes())),
+    );
+    // 设置menus
+    getGlobalMenus(sortRoutes);
+
+    // 设置缓存路由
+    getCacheRoutes(vueRoutes);
+  }
+
+  /**
+   * @description 当身份验证路由模式为动态时更新根路由重定向
+   * @description Update root route redirect when auth route mode is dynamic
+   *
+   * @param redirectKey Redirect route key - [重定向路由key]
+   */
+  function handleUpdateRootRouteRedirect(redirectKey: LastLevelRouteKey) {
+    const redirect = getRoutePath(redirectKey);
+
+    if (redirect) {
+      const rootRoute: ElegantConstRoute = { ...ROOT_ROUTE, redirect };
+
+      router.removeRoute(rootRoute.name);
+
+      const [rootVueRoute] = getAuthVueRoutes([rootRoute]);
+      console.log('rootVueRoute', rootVueRoute);
+      router.addRoute(rootVueRoute);
+    }
+  }
+
+  /**
+   * @description 初始化常量路由
+   * @description Initialize constant route
+   */
+  async function initConstantRoute() {
+    console.log('initConstantRoute', isInitConstantRoute.value);
+    if (isInitConstantRoute.value) return;
+
+    const staticRoute = createStaticRoutes();
+    console.log(staticRoute, authRouteMode.value);
+    if (authRouteMode.value === 'static') {
+      addConstantRoutes(staticRoute.constantRoutes);
+    } else {
+      const data = await fetchGetConstantRoutes();
 
       if (data) {
-        const { routes, home } = data;
-
-        this.addAuthRoutes(routes);
-
-        this.handleConstantAndAuthRoutes();
-
-        this.setRouteHome(home);
-
-        this.handleUpdateRootRouteRedirect(home);
-
-        this.isInitAuthRoute = true;
+        addConstantRoutes(data);
       } else {
-        // if fetch user routes failed, reset store
-        const authStore = useAuthStore();
-        authStore.resetStore();
+        // if fetch constant routes failed, use static constant routes
+        addConstantRoutes(staticRoute.constantRoutes);
       }
-    },
-    /**
-     * @description 处理常量和权限路由
-     * @description Handle constant and auth routes
-     */
-    handleConstantAndAuthRoutes() {
-      const allRoutes = [...this.constantRoutes, ...this.authRoutes];
+    }
+    console.log(constantRoutes.value);
+    handleConstantAndAuthRoutes();
 
-      const sortRoutes = sortRoutesByOrder(allRoutes);
+    setIsInitConstantRoute(true);
+  }
 
-      // const vueRoutes = getAuthVueRoutes(sortRoutes);
-      const vueRoutes = getAuthVueRoutes(sortRoutes);
+  /**
+   * @description 初始化静态权限路由
+   * @description Initialize static auth route
+   */
+  function initStaticAuthRoute() {
+    const { authRoutes: staticAuthRoutes } = createStaticRoutes();
 
-      // 重置Vue路由
-      this.resetVueRoutes();
-
-      // 设置vueRoutes
-      this.addRoutesToVueRouter(vueRoutes);
-
-      // 设置menus
-      this.getGlobalMenus(sortRoutes);
-
-      // 设置缓存路由
-      this.getCacheRoutes(vueRoutes);
-    },
-    /**
-     * @description 添加路由到vue router
-     * @description Add routes to vue router
-     *
-     * @param routes Vue routes
-     */
-    addRoutesToVueRouter(routes: RouteRecordRaw[]) {
-      routes.forEach((routeItem) => {
-        const removeFn = router.addRoute(routeItem);
-        this.addRemoveRouteFn(removeFn);
-      });
-    },
-    /**
-     * @description 添加移除路由函数
-     * @description Add remove route fn
-     *
-     * @param fn
-     */
-    addRemoveRouteFn(fn: () => void) {
-      this.removeRouteFns.push(fn);
-    },
-    /**
-     * @description 当身份验证路由模式为动态时更新根路由重定向
-     * @description Update root route redirect when auth route mode is dynamic
-     *
-     * @param redirectKey Redirect route key - [重定向路由key]
-     */
-    handleUpdateRootRouteRedirect(redirectKey: LastLevelRouteKey) {
-      const redirect = getRoutePath(redirectKey);
-
-      if (redirect) {
-        const rootRoute: ElegantConstRoute = { ...ROOT_ROUTE, redirect };
-
-        router.removeRoute(rootRoute.name);
-
-        const [rootVueRoute] = getAuthVueRoutes([rootRoute]);
-        router.addRoute(rootVueRoute);
-      }
-    },
-    /**
-     * @description 获取 auth 路由是否存在
-     * @description Get is auth route exist
-     *
-     * @param routePath Route path - [路由路径]
-     */
-    async getIsAuthRouteExist(routePath: RouteMap[RouteKey]) {
-      const routeName = getRouteName(routePath);
-
-      if (!routeName) {
-        return false;
-      }
-
-      if (this.authRouteMode === 'static') {
-        const { authRoutes: staticAuthRoutes } = createStaticRoutes();
-        return isRouteExistByRouteName(routeName, staticAuthRoutes);
-      }
-
-      const data = await fetchIsRouteExist(routeName);
-
-      return data;
-    },
-    /**
-     * @description 获取选中菜单的key路径
-     * @description Get selected menu key path
-     *
-     * @param selectedKey Selected menu key - [选中的菜单key]
-     */
-    getSelectedMenuKeyPath(selectedKey: string) {
-      return getSelectedMenuKeyPathByKey(selectedKey, this.menus);
-    },
-    /**
-     * @description 获取路由meta
-     * @description Get route meta by key
-     *
-     * @param key Route key
-     */
-    getRouteMetaByKey(key: string) {
-      const allRoutes = router.getRoutes();
-
-      return (
-        allRoutes.find((routeItem) => routeItem.name === key)?.meta || null
+    if (authStore.isStaticSuper) {
+      addAuthRoutes(staticAuthRoutes);
+    } else {
+      const filteredAuthRoutes = filterAuthRoutesByRoles(
+        staticAuthRoutes,
+        authStore.userInfo.userRole,
       );
-    },
 
-    /**
-     * @description 获取路由meta的query
-     * @description Get route query of meta by key
-     *
-     * @param key
-     */
-    getRouteQueryOfMetaByKey(key: string) {
-      const meta = this.getRouteMetaByKey(key);
+      addAuthRoutes(filteredAuthRoutes);
+    }
 
-      const query: Record<string, string> = {};
+    handleConstantAndAuthRoutes();
 
-      meta?.query?.forEach((item) => {
-        query[item.key] = item.value;
-      });
+    setIsInitAuthRoute(true);
+  }
 
-      return query;
-    },
-  },
+  /**
+   * @description 初始化动态权限路由
+   * @description Initialize dynamic auth route
+   */
+  async function initDynamicAuthRoute() {
+    const data = await fetchGetUserRoutes();
 
-  // persist: {
-  //   key: 'pinia-route-store',
-  //   storage: localStorage,
-  //   // paths: ['menus', 'searchMenus', 'cacheRoutes'],
-  //   debug: true,
-  // },
+    if (data) {
+      const { routes, home } = data;
+
+      addAuthRoutes(routes);
+
+      handleConstantAndAuthRoutes();
+
+      setRouteHome(home);
+
+      handleUpdateRootRouteRedirect(home);
+
+      setIsInitAuthRoute(true);
+    } else {
+      // if fetch user routes failed, reset store
+      authStore.resetStore();
+    }
+  }
+
+  /**
+   * @description 初始化权限路由
+   * @description Initialize auth route
+   */
+  async function initAuthRoute() {
+    const tabStore = useMultipleTabStore();
+    if (authRouteMode.value === 'static') {
+      initStaticAuthRoute();
+    } else {
+      await initDynamicAuthRoute();
+    }
+
+    tabStore.initHomeTab();
+  }
+
+  // endregion
+
+  // region 重置相关
+
+  /**
+   * @description 重置
+   * @description Reset store
+   */
+  async function resetStore() {
+    const routeStore = useRouteStore();
+
+    routeStore.$reset();
+
+    resetVueRoutes();
+
+    // after reset store, need to re-init constant route
+    await initConstantRoute();
+  }
+
+  // endregion
+
+  return {
+    resetStore,
+    routeHome,
+    menus,
+    searchMenus,
+    updateGlobalMenusByLocale,
+    cacheRoutes,
+    reCacheRoutesByKey,
+    reCacheRoutesByKeys,
+    breadcrumbs,
+    initConstantRoute,
+    isInitConstantRoute,
+    initAuthRoute,
+    isInitAuthRoute,
+    setIsInitAuthRoute,
+    getIsAuthRouteExist,
+    getSelectedMenuKeyPath,
+    getRouteQueryOfMetaByKey,
+  };
 });
-
-// // Need to be used outside the setup - [需要在设置之外使用]
-export function useRouteStoreWithOut() {
-  return useRouteStore(store);
-}

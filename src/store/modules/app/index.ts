@@ -1,241 +1,398 @@
-import { store } from '@/store';
 import { defineStore } from 'pinia';
 import {
-  APP_DARK_MODE_IS_AUTO_KEY,
   APP_DARK_MODE_KEY,
   AppEnum,
+  MenuModeEnum,
   PROJ_CFG_KEY,
+  StoreEnum,
+  ThemeColorEnum,
 } from '@/enums';
-import type {
-  HeaderSetting,
-  LayoutSetting,
+import {
   MenuSetting,
-  MultiTabsSetting,
   ProjectConfig,
-  ThemeSetting,
-  ThemeSettingColors,
-  TransitionSetting,
+  ThemeInfo,
+  type ThemeSettingColors,
 } from '~/types/config';
 import type { BeforeMiniState } from '~/types/storage';
-import { darkMode } from '@/settings';
+import {
+  breakpointsTailwind,
+  useBreakpoints,
+  usePreferredColorScheme,
+} from '@vueuse/core';
+import { computed, effectScope, onScopeDispose, ref, unref, watch } from 'vue';
+import { useBoolean } from '@adp/hooks';
+import {
+  deepMerge,
+  setProTheme,
+  setThemeColors,
+  toggleClass,
+} from '@/utils/common';
 import { localStg } from '@/utils/cache';
-import { deepMerge } from '@/utils/common';
-import { breakpointsTailwind, useBreakpoints, useTitle } from '@vueuse/core';
-import { Ref } from 'vue';
-import { useI18n } from '@/hooks/web/useI18n';
-import { useRoute } from 'vue-router';
-import { initAppSetting } from './helpers';
+import { router } from '@/router';
+import { initAppSetting } from '@/store/modules/app/helpers';
 
-interface AppState {
+export const useAppStore = defineStore(StoreEnum.App, () => {
+  const breakpoints = useBreakpoints(breakpointsTailwind);
+  const scope = effectScope();
+
+  const { bool: pageLoading, setBool: setPageLoading } = useBoolean();
+  const { bool: reloadFlag, setBool: setReloadFlag } = useBoolean(true);
+  const { bool: settingDrawerState, setBool: setSettingDrawerState } =
+    useBoolean();
+  const {
+    bool: siderCollapse,
+    setBool: setSiderCollapse,
+    toggle: toggleSiderCollapse,
+  } = useBoolean();
   /**
-   * @description 主题枚举
-   * @description Theme enum
+   * @description 获取系统主题 Dark/Light/Auto
+   * @description Get system theme Dark/Light/Auto
    */
-  darkMode?: AppEnum;
-  /**
-   * @description 设置抽屉状态
-   * @description setting drawer status
-   */
-  settingDrawerState?: boolean;
-  /**
-   * @description 页面加载状态
-   * @description page loading status
-   */
-  pageLoading: boolean;
+  const osTheme = usePreferredColorScheme();
+
   /**
    * @description 项目配置信息
    * @description project config
    */
-  projectConfig: ProjectConfig | null;
+  const projectConfig = ref<ProjectConfig>(initAppSetting());
+
+  const isMobile = breakpoints.smaller('sm');
+
+  // region 主题相关
+  const darkMode = ref(localStg.get(APP_DARK_MODE_KEY) || AppEnum.LIGHT);
+
+  /**
+   * @description 获取下一个主题
+   * @description Get the next theme
+   */
+  function getNextDarkMode() {
+    const themeSchemes: AppEnum[] = [AppEnum.LIGHT, AppEnum.DARK];
+    if (localStg.get(APP_DARK_MODE_KEY)) themeSchemes.push(AppEnum.AUTO);
+    const index = themeSchemes.findIndex((item) => item === darkMode.value);
+    const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
+    return themeSchemes[nextIndex];
+  }
+
+  /**
+   * @description 设置主题
+   * @description Set the theme
+   *
+   * @param mode 主题
+   */
+  function setDarkMode(mode: AppEnum) {
+    darkMode.value = mode;
+    localStg.set(APP_DARK_MODE_KEY, mode);
+  }
+
+  /**
+   * @description 切换主题
+   * @description Toggle theme
+   */
+  function toggleDarkMode() {
+    setDarkMode(getNextDarkMode());
+  }
+
+  /**
+   * @description 获取主题颜色
+   * @description Get theme color
+   */
+  function getThemeColors(): ThemeSettingColors {
+    return (
+      projectConfig.value.themeSetting.colors ?? {
+        // 信息色
+        // Primary color
+        [ThemeColorEnum.PRIMARY]: '#165DFF',
+        // 成功色
+        // Success color
+        [ThemeColorEnum.SUCCESS]: '#00B42A',
+        // 警告色
+        // Warning color
+        [ThemeColorEnum.WARNING]: '#FF7D00',
+        // 错误色
+        // Error color
+        [ThemeColorEnum.ERROR]: '#F53F3F',
+      }
+    );
+  }
+
+  const getThemePro = computed(() => projectConfig.value.themeProSetting);
+
+  /**
+   * @description: 设置主题配置
+   * @description: Set theme configuration
+   *
+   * @param theme
+   */
+  async function setThemePro(theme?: ThemeInfo | null) {
+    projectConfig.value.themeProSetting = theme;
+    // 如果没有主题，移除主题
+    if (!theme) {
+      const proTheme = document.getElementById('pro-custom-theme');
+      if (proTheme) {
+        proTheme.setAttribute('href', '');
+      }
+    } else {
+      await setProTheme(theme?.packageName || '');
+    }
+  }
+
+  /**
+   * @description 修改全部主题颜色
+   * @param colors
+   */
+  function setThemeAllColor(colors: ThemeSettingColors) {
+    projectConfig.value.themeSetting.colors = colors;
+    setThemeColors(getThemeColors());
+  }
+
+  /**
+   * @description: 获取是否是暗黑模式
+   * @description: Get whether it is dark mode
+   */
+  const isDarkMode = computed(() => {
+    if (unref(darkMode) === AppEnum.AUTO) {
+      return unref(osTheme) === AppEnum.DARK;
+    }
+    return unref(darkMode) === AppEnum.DARK;
+  });
+
+  // endregion
+
+  // region 窗口相关
   /**
    * @description 当窗口缩小时，记住一些状态，当窗口恢复时恢复这些状态
    * @description When the window shrinks, remember some states, and restore these states when the window is restored
    */
-  beforeMiniInfo: BeforeMiniState;
+  const beforeMiniInfo = ref<BeforeMiniState>({});
 
   /**
-   * @description 是否为移动端
-   * @description Whether it is a mobile end
+   * @description 设置窗口信息
+   * @description Set window information
+   *
+   * @param state
    */
-  isMobile: Ref<boolean>;
+  function setBeforeMiniInfo(state: BeforeMiniState) {
+    beforeMiniInfo.value = state;
+  }
+
+  // endregion
+
+  // region 项目设置相关
+  /**
+   * @description 设置项目配置
+   * @description Set project configuration
+   *
+   * @param config
+   */
+  function setProjectConfig(config: DeepPartial<ProjectConfig>) {
+    projectConfig.value = deepMerge(projectConfig.value, config);
+    localStg.set(PROJ_CFG_KEY, projectConfig.value);
+  }
 
   /**
-   * @description 刷新页面状态
-   * @description Refresh page status
+   * @description 设置菜单配置
+   * @description Set menu configuration
+   *
+   * @param setting
    */
-  reloadFlag: boolean;
-}
+  function setMenuSetting(setting: Partial<MenuSetting>) {
+    projectConfig.value!.menuSetting = deepMerge(
+      projectConfig.value!.menuSetting,
+      setting,
+    );
+    localStg.set(PROJ_CFG_KEY, projectConfig.value);
+  }
 
-let timeId: TimeoutHandle;
+  // endregion
 
-const breakpoints = useBreakpoints(breakpointsTailwind);
+  // region 设置相关
+  const grayMode = computed(() => projectConfig.value.grayMode);
+  const colorWeak = computed(() => projectConfig.value.colorWeak);
+  // endregion
 
-export const useAppStore = defineStore({
-  id: 'store-app',
-  state: (): AppState => ({
-    pageLoading: false,
-    projectConfig: initAppSetting(),
-    beforeMiniInfo: {},
-    isMobile: breakpoints.smaller('sm'),
-    reloadFlag: true,
-  }),
-  getters: {
-    // 获取页面加载状态
-    getPageLoading(state): boolean {
-      return state.pageLoading;
-    },
-    // 获取主题
-    getDarkMode(state): AppEnum {
-      return (
-        state.darkMode ||
-        (localStorage.getItem(APP_DARK_MODE_KEY) as AppEnum) ||
-        darkMode
-      );
-    },
-    // 获取下一个主题
-    getNextDarkMode(): AppEnum {
-      const themeSchemes: AppEnum[] = [AppEnum.LIGHT, AppEnum.DARK];
-      if (localStg.get(APP_DARK_MODE_IS_AUTO_KEY))
-        themeSchemes.push(AppEnum.AUTO);
-      const index = themeSchemes.findIndex((item) => item === this.getDarkMode);
-      const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
-      return themeSchemes[nextIndex];
-    },
-    /**
-     * @description Get the setting drawer status - [获取设置抽屉状态]
-     * @param state
-     */
-    getSettingDrawerState(state): boolean {
-      return state.settingDrawerState || false;
-    },
-    // 获取窗口状态
-    getBeforeMiniInfo(state): BeforeMiniState {
-      return state.beforeMiniInfo;
-    },
-    // 获取项目信息
-    getProjectConfig(state): ProjectConfig {
-      return state.projectConfig || ({} as ProjectConfig);
-    },
-    getMenuSetting(): MenuSetting {
-      return this.getProjectConfig.menuSetting;
-    },
-    getTransitionSetting(): TransitionSetting {
-      return this.getProjectConfig.transitionSetting;
-    },
-    getMultiTabsSetting(): MultiTabsSetting {
-      return this.getProjectConfig.multiTabsSetting;
-    },
-    getThemeSetting(): ThemeSetting {
-      return this.getProjectConfig.themeSetting;
-    },
-    getHeaderSetting(): HeaderSetting {
-      return this.getProjectConfig.headerSetting;
-    },
-    getLayoutSetting(): LayoutSetting {
-      return this.getProjectConfig.layoutSetting;
-    },
-    getThemeColors(): ThemeSettingColors {
-      const { colors } = this.getProjectConfig.themeSetting;
-      return {
-        ...colors,
-      };
-    },
-  },
-  actions: {
-    /**
-     * @description Set the page loading status - [设置页面加载状态]
-     * @param loading loading - [加载状态]
-     */
-    setPageLoading(loading: boolean): void {
-      this.pageLoading = loading;
-    },
-    /**
-     * @description Set the theme - [设置主题]
-     * @param mode mode - [主题]
-     */
-    setDarkMode(mode: AppEnum): void {
-      this.darkMode = mode;
-      localStorage.setItem(APP_DARK_MODE_KEY, mode);
-    },
-    /**
-     * @description Toggle the theme - [切换主题]
-     */
-    toggleDarkMode(): void {
-      this.setDarkMode(this.getNextDarkMode);
-    },
-    /**
-     * @description Set the setting drawer status - [设置设置抽屉状态]
-     * @param state
-     */
-    setSettingDrawerState(state: boolean): void {
-      this.settingDrawerState = state;
-    },
-    // 设置窗口信息
-    setBeforeMiniInfo(state: BeforeMiniState): void {
-      this.beforeMiniInfo = state;
-    },
+  /**
+   * @description 是否全屏显示内容，不显示菜单
+   * @description Whether to display the content in full screen without displaying the menu
+   */
+  const getFullContent = computed(() => {
+    // Query parameters, the full screen is displayed when the address bar has a full paramete
+    const { query } = router.currentRoute.value;
+    if (query && Reflect.has(query, '__full__')) {
+      return true;
+    }
+    // Return to the configuration in the configuration file
+    return projectConfig.value.fullContent;
+  });
 
-    // 设置项目配置
-    setProjectConfig(config: DeepPartial<ProjectConfig>): void {
-      this.projectConfig = deepMerge(
-        this.projectConfig || {},
-        config,
-      ) as ProjectConfig;
-      localStg.set(PROJ_CFG_KEY, this.projectConfig);
-    },
-    setMenuSetting(setting: Partial<MenuSetting>): void {
-      this.projectConfig!.menuSetting = deepMerge(
-        this.projectConfig!.menuSetting,
-        setting,
-      );
-      localStg.set(PROJ_CFG_KEY, this.projectConfig);
-    },
-    // async resetAllState() {
-    //   localStg.clear();
-    //   sessionStg.clear();
-    // },
-    async setPageLoadingAction(loading: boolean): Promise<void> {
-      if (loading) {
-        clearTimeout(timeId);
-        // Prevent flicker
-        timeId = setTimeout(() => {
-          this.setPageLoading(loading);
-        }, 50);
-      } else {
-        this.setPageLoading(loading);
-        clearTimeout(timeId);
-      }
-    },
-    /**
-     * Refresh tabs - [刷新标签]
-     */
-    async refreshPage(duration = 300) {
-      this.reloadFlag = false;
+  /**
+   * @description 设置是否全屏显示内容
+   * @description Set whether to display the content in full screen
+   *
+   * @param fullContent 是否全屏显示内容
+   */
+  const setFullContent = (fullContent: boolean) => {
+    projectConfig.value.fullContent = fullContent;
+  };
 
-      const d = this.getProjectConfig.transitionSetting.enable ? duration : 40;
+  const setDark = () => {
+    // 设置为暗黑主题
+    document.body.setAttribute('arco-theme', AppEnum.DARK);
+    document.documentElement.classList.add(AppEnum.DARK);
+  };
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, d);
+  const setLight = () => {
+    // 恢复亮色主题
+    document.body.removeAttribute('arco-theme');
+    document.documentElement.classList.remove(AppEnum.DARK, AppEnum.LIGHT);
+  };
+
+  const init = () => {
+    // 如果初始化有主题，就设置主题
+    if (projectConfig.value.themeProSetting) {
+      setProTheme(projectConfig.value.themeProSetting.packageName).then(() => {
+        setThemeColors(getThemeColors());
       });
+    }
 
-      this.reloadFlag = true;
-    },
-    setContentXScrollable(flag: boolean): void {
-      this.projectConfig!.contentXScrollable = flag;
-      localStg.set(PROJ_CFG_KEY, this.projectConfig);
-    },
+    if (darkMode.value === AppEnum.DARK) {
+      setDark();
+    } else if (darkMode.value === AppEnum.AUTO) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setDark();
+      } else {
+        setLight();
+      }
+    } else {
+      setLight();
+    }
+  };
 
-    updateDocumentTitleByLocale(): void {
-      const route = useRoute();
-      const { i18nKey, title } = route.meta;
-      const { t } = useI18n();
-      const documentTitle = i18nKey ? t(i18nKey) : title;
-      useTitle(documentTitle);
-    },
-    // setApiAddress(config: ApiAddress): void {
-    //   localStorage.setItem(API_ADDRESS, JSON.stringify(config));
-    // },
-  },
+  scope.run(() => {
+    // 监听灰色模式
+    watch(
+      grayMode,
+      (value) => {
+        toggleClass(value, 'gray-mode', document.documentElement);
+      },
+      { immediate: true },
+    );
+
+    // 监听弱色模式
+    watch(colorWeak, (value) => {
+      toggleClass(value, 'color-weak', document.documentElement);
+    });
+
+    watch(
+      () => isMobile.value,
+      (newValue) => {
+        if (newValue) {
+          setBeforeMiniInfo({
+            layoutMode: projectConfig.value.layoutSetting.mode,
+            siderCollapsed: projectConfig.value.menuSetting.collapsed,
+          });
+
+          setProjectConfig({
+            layoutSetting: {
+              mode: MenuModeEnum.VERTICAL,
+            },
+            menuSetting: {
+              collapsed: true,
+            },
+          });
+
+          document.body.classList.add('mobile');
+        } else {
+          if (beforeMiniInfo.value) {
+            setProjectConfig({
+              layoutSetting: {
+                mode: beforeMiniInfo.value.layoutMode,
+              },
+              menuSetting: {
+                collapsed: beforeMiniInfo.value.siderCollapsed,
+              },
+            });
+
+            setBeforeMiniInfo({});
+          }
+          document.body.classList.remove('mobile');
+        }
+      },
+      { immediate: true },
+    );
+
+    watch(
+      () => darkMode.value,
+      (newValue) => {
+        if (newValue === AppEnum.DARK) {
+          setDark();
+        } else if (newValue === AppEnum.AUTO) {
+          // 自动模式
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setDark();
+          } else {
+            setLight();
+          }
+        } else {
+          setLight();
+        }
+
+        setThemeColors(getThemeColors());
+      },
+    );
+  });
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => {
+      console.log('dark mode change');
+      if (darkMode.value === AppEnum.AUTO) {
+        if (e.matches) {
+          setDark();
+        } else {
+          setLight();
+        }
+      }
+    });
+
+  init();
+
+  onScopeDispose(() => {
+    scope.stop();
+  });
+
+  return {
+    // ...toRefs(projectConfig.value),
+    isMobile,
+    isDarkMode,
+    darkMode,
+    beforeMiniInfo,
+    setting: projectConfig,
+
+    pageLoading,
+    reloadFlag,
+    settingDrawerState,
+    setSettingDrawerState,
+    setReloadFlag,
+    setPageLoading,
+
+    getFullContent,
+    setFullContent,
+
+    siderCollapse,
+    setSiderCollapse,
+    toggleSiderCollapse,
+
+    getNextDarkMode,
+    setDarkMode,
+    toggleDarkMode,
+    getThemePro,
+    setThemePro,
+    setThemeAllColor,
+    setProjectConfig,
+    setMenuSetting,
+    getThemeColors,
+  };
+
   // persist: {
   //   key: PINIA_CACHE.PINIA_APP_STORE,
   //   storage: localStorage,
@@ -243,8 +400,3 @@ export const useAppStore = defineStore({
   //   paths: ['beforeMiniInfo'],
   // },
 });
-
-// Need to be used outside the setup - [需要在设置外部使用]
-export function useAppStoreWithOut() {
-  return useAppStore(store);
-}

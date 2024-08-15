@@ -73,7 +73,7 @@
   import LayoutMenu from '../base-menu/index.vue';
   import FirstLevelMenu from '../first-level-menu/index.vue';
 
-  const { getMenus, getSelectedMenuKeyPath } = useRouteStore();
+  const { menus: routeMenus, getSelectedMenuKeyPath } = useRouteStore();
   const {
     getMixSideFixed,
     isVerticalMix,
@@ -135,7 +135,7 @@
     if (!activeKeys) return;
     activeName.value = activeKeys ? activeKeys[0] : '';
     if (unref(isVerticalMix)) {
-      const activeMenu = unref(getMenus).find(
+      const activeMenu = unref(routeMenus).find(
         (item) => item.routeKey === unref(activeName),
       );
       if (activeMenu?.children) {

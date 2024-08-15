@@ -66,6 +66,15 @@ export const setBaseColors = (
  */
 export const setProTheme = (theme: string) => {
   return new Promise((resolve, reject) => {
+    // 如果没有主题，移除主题
+    if (!theme) {
+      const proTheme = document.getElementById('pro-custom-theme');
+      if (proTheme) {
+        proTheme.setAttribute('href', '');
+      }
+      resolve('loaded');
+    }
+
     const linkId = 'pro-custom-theme';
     const styleList = (document.body.getAttribute('style') || '')
       .split(';')

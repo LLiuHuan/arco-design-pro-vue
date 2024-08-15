@@ -1,227 +1,182 @@
 import { defineStore } from 'pinia';
-import {
-  REFRESH_TOKEN_KEY,
-  ROLES_KEY,
-  TOKEN_KEY,
-  USER_INFO_KEY,
-} from '@/enums';
-import { getAuthCache, setAuthCache } from '@/utils/auth';
-import { store } from '@/store';
+import { REFRESH_TOKEN_KEY, StoreEnum, TOKEN_KEY } from '@/enums';
 import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
-import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
-import { isArray } from '@/utils/common';
+import { computed, reactive, Ref, ref } from 'vue';
 import { useGo } from '@/hooks/web/usePage';
 import { useI18n } from '@/hooks/web/useI18n';
+import { useLoading } from '@adp/hooks';
+// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import/no-cycle
+import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
 import { Notification } from '@arco-design/web-vue';
+import { localStg } from '@/utils/cache';
 import { useRoute } from 'vue-router';
 import { useRouteStore } from '../route';
+import { useMultipleTabStore } from '../multipleTab';
 
-interface AuthState {
+export const useAuthStore = defineStore(StoreEnum.Auth, () => {
+  const { t } = useI18n();
+  const route = useRoute();
+  const routeStore = useRouteStore();
+  const tabStore = useMultipleTabStore();
+
+  const { loading: loginLoading, startLoading, endLoading } = useLoading();
+
+  const token: Ref<string> = ref(localStg.get(TOKEN_KEY) || '');
+
+  const userInfo: UserInfoModel = reactive({
+    user: '',
+    userId: '',
+    userName: '',
+    avatar: '',
+    userRole: [],
+    homeName: '',
+  });
+
   /**
-   * User information - [用户信息]
+   * @description 是否是超级管理员
+   * @description Whether it is a super administrator
    */
-  userInfo: UserInfoModel;
-  /**
-   * User token - [用户token]
-   */
-  token: string;
-  /**
-   * Login loading status - [登录加载状态]
-   */
-  loginLoading: boolean;
-  /**
-   * Role list - [角色列表]
-   */
-  roleList: string[];
+  const isStaticSuper = computed(() => {
+    const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env;
+
+    return (
+      VITE_AUTH_ROUTE_MODE === 'static' &&
+      userInfo.userRole.includes(VITE_STATIC_SUPER_ROLE)
+    );
+  });
 
   /**
-   * Whether the session has timed out - [会话是否已超时]
+   * @description 用户是否登录
+   * @description Whether the user is logged in
    */
-  sessionTimeout: boolean;
-}
+  const isLogin = computed(() => Boolean(token.value));
 
-const emptyInfo: UserInfoModel = {
-  user: '',
-  userId: '',
-  userName: '',
-  avatar: '',
-  userRole: [],
-  homeName: 'dashboard',
-};
+  /**
+   * @description 重置store
+   * @description Reset store
+   *
+   * @param isGoLogin
+   */
+  function resetStore() {
+    localStg.remove(TOKEN_KEY);
+    localStg.remove(REFRESH_TOKEN_KEY);
 
-export const useAuthStore = defineStore({
-  id: 'store-auth',
-  state: (): AuthState => ({
-    userInfo: getAuthCache<UserInfoModel>(USER_INFO_KEY) || emptyInfo,
-    token: getAuthCache(TOKEN_KEY) || '',
-    loginLoading: false,
-    roleList: [],
-    sessionTimeout: false,
-  }),
-  getters: {
-    /**
-     * @description Whether logged in - [是否登录]
-     * @param state
-     */
-    isLogin(state) {
-      return Boolean(state.token);
-    },
-    /**
-     * @description Get user information - [获取用户信息]
-     * @param state
-     */
-    getToken(state) {
-      return state.token || getAuthCache<string>(TOKEN_KEY);
-    },
-    /**
-     * @description Get role list - [获取角色列表]
-     * @param state
-     */
-    getRoleList(state) {
-      return state.roleList.length > 0
-        ? state.roleList
-        : getAuthCache<string[]>(ROLES_KEY);
-    },
-    getUserInfo(state) {
-      return (
-        state.userInfo ||
-        getAuthCache<UserInfoModel>(USER_INFO_KEY) ||
-        emptyInfo
-      );
-    },
-    getSessionTimeout(state) {
-      return state.sessionTimeout;
-    },
-    getLoginLoading(state) {
-      return state.loginLoading;
-    },
-    isStaticSuper(state) {
-      const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env;
-      return (
-        VITE_AUTH_ROUTE_MODE === 'static' &&
-        state.roleList.includes(VITE_STATIC_SUPER_ROLE ?? 'Super')
-      );
-    },
-  },
-  actions: {
-    /**
-     * @description Set token - [设置token]
-     * @param {LoginModel} backendToken
-     */
-    setToken(backendToken: LoginModel) {
-      const { token, refreshToken } = backendToken;
-      this.token = token ?? '';
-      setAuthCache(TOKEN_KEY, token ?? '');
-      setAuthCache(REFRESH_TOKEN_KEY, refreshToken ?? '');
-    },
-    /**
-     * @description Set user information - [设置用户信息]
-     * @param userInfo
-     */
-    setUserInfo(userInfo: UserInfoModel) {
-      this.userInfo = userInfo;
-      setAuthCache(USER_INFO_KEY, userInfo);
-    },
-    /**
-     * @description Set role list - [设置角色列表]
-     * @param roleList
-     */
-    setRoleList(roleList: string[]) {
-      this.roleList = roleList;
-      setAuthCache(ROLES_KEY, roleList);
-    },
-    /**
-     * @description Set session timeout - [设置会话超时]
-     * @param flag
-     */
-    setSessionTimeout(flag: boolean) {
-      this.sessionTimeout = flag;
-    },
-    /**
-     * @description Reset auth status - [重置auth状态]
-     */
-    resetStore(isGoLogin = true) {
-      setAuthCache(TOKEN_KEY, '');
-      setAuthCache(REFRESH_TOKEN_KEY, '');
-      setAuthCache(USER_INFO_KEY, {});
-      setAuthCache(ROLES_KEY, []);
-      this.$reset();
+    const authStore = useAuthStore();
+    authStore.$reset();
 
-      const route = useRoute();
-      if (isGoLogin || !route.meta.constant) {
-        const { goLogin } = useGo(false);
-        goLogin();
-      }
-      const routeStore = useRouteStore();
-      routeStore.resetStore();
-    },
-    setLoginLoading(loading: boolean) {
-      this.loginLoading = loading;
-    },
-    async loginByToken(backendToken: LoginModel) {
-      // 先把token存储到缓存中(后面接口的请求头需要token)
-      this.setToken(backendToken);
+    if (!route.meta.constant) {
+      const { goLogin } = useGo(false);
+      goLogin();
+    }
+    tabStore.setCacheTabs();
+    routeStore.resetStore();
+  }
 
-      // 获取用户信息
-      const resp = await fetchUserInfo();
-      const { userRole } = resp;
-      if (isArray(userRole)) {
-        const roleList = userRole.map((item) => item) as string[];
-        this.setRoleList(roleList);
-      } else {
-        resp.userRole = [];
-        this.setRoleList([]);
-      }
+  async function getUserInfoByToken() {
+    // 获取用户信息
+    const resp = await fetchUserInfo();
 
-      // 成功后把用户信息存储到缓存中
-      this.setUserInfo(resp);
+    // 成功后把用户信息存储到缓存中
+    if (resp) {
+      Object.assign(userInfo, resp);
 
-      return resp;
-    },
-    async login(username: string, password: string) {
-      this.setLoginLoading(true);
-      // Simulate login request - [模拟登录请求]
-      const resp = await fetchLogin({
-        username,
-        password,
-      });
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @description 登录
+   * @description login
+   *
+   * @param backendToken
+   */
+  async function loginByToken(backendToken: LoginModel) {
+    // 先把token存储到缓存中(后面接口的请求头需要token)
+    localStg.set(TOKEN_KEY, backendToken.token ?? '');
+    localStg.set(REFRESH_TOKEN_KEY, backendToken?.refreshToken ?? '');
+
+    // 获取用户信息
+    const pass = await getUserInfoByToken();
+
+    if (pass) {
+      token.value = backendToken.token;
+
+      return true;
+    }
+    return false;
+  }
+
+  async function login(username: string, password: string) {
+    startLoading();
+
+    try {
+      const resp = await fetchLogin({ username, password });
 
       if (!resp) {
-        this.setLoginLoading(false);
-        this.resetStore();
+        endLoading();
+        resetStore();
         return;
       }
 
-      const userInfo = await this.loginByToken(resp);
+      const pass = await loginByToken(resp);
 
-      if (userInfo) {
+      if (pass) {
         // 登录成功后重定向到登录后的地址
-        const routeStore = useRouteStore();
         await routeStore.initAuthRoute();
 
-        console.log('toRedirect1111');
         const { toRedirect } = useGo(false);
 
         await toRedirect();
 
         // 登录成功弹出欢迎提示
         if (routeStore.isInitAuthRoute) {
-          const { t } = useI18n();
           Notification.success({
             title: t('sys.login.common.loginSuccess'),
             content: t(`sys.login.common.welcomeBack`, {
-              userName: this.getUserInfo.userName,
+              userName: userInfo.userName,
             }),
             duration: 3000,
           });
         }
       }
-    },
-    async logout() {
-      // 退出登录
-      this.resetStore();
-    },
-  },
+    } finally {
+      endLoading();
+    }
+  }
+
+  async function logout() {
+    resetStore();
+  }
+
+  async function initUserInfo() {
+    const hasToken = localStg.get(TOKEN_KEY);
+
+    if (hasToken) {
+      const resp = await getUserInfoByToken();
+
+      if (!resp) {
+        resetStore();
+      }
+    }
+  }
+
+  return {
+    token,
+    userInfo,
+
+    isStaticSuper,
+    isLogin,
+
+    loginLoading,
+    initUserInfo,
+
+    login,
+    logout,
+    resetStore,
+  };
 
   // persist: {
   //   key: PINIA_CACHE.PINIA_AUTH_STORE,
@@ -229,8 +184,3 @@ export const useAuthStore = defineStore({
   //   debug: true,
   // },
 });
-
-// // Need to be used outside the setup - [需要在设置之外使用]
-export function useAuthStoreWithOut() {
-  return useAuthStore(store);
-}

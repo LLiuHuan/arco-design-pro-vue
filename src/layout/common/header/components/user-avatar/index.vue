@@ -29,12 +29,12 @@
   import { computed, h, ref, unref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
   import { HoverContainer } from '@/components/HoverContainer';
-  import { useAuthStore, useAuthStoreWithOut } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useGo } from '@/hooks/web/usePage';
   import { Modal } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { useRootSetting } from '@/hooks/setting';
+  import { useAuthStore } from '@/store/modules/auth';
   import Lock from '../lock/index.vue';
 
   interface DropdownOption {
@@ -44,9 +44,8 @@
   }
 
   const { goKey } = useGo();
-  // const auth = useAuth();
   const { getIsMobile } = useRootSetting();
-  const { logout } = useAuthStore();
+  const authStore = useAuthStore();
 
   const lockVisible = ref(false);
 
@@ -72,8 +71,7 @@
   ];
 
   const getUser = computed(() => {
-    const { getUserInfo } = useAuthStoreWithOut();
-    const { userName, avatar } = getUserInfo;
+    const { userName, avatar } = unref(authStore).userInfo;
 
     return {
       userName: userName || '用户',
@@ -104,7 +102,7 @@
           simple: true,
           width: unref(getIsMobile) ? '90%' : 'auto',
           onOk() {
-            logout();
+            authStore.logout();
           },
         });
         break;

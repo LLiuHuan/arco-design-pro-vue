@@ -6,7 +6,7 @@ import { useAppStore } from '@/store/modules/app';
 export const initProjectSetting = () => {
   const appStore = useAppStore();
 
-  const darkMode = appStore.getDarkMode;
+  const { darkMode } = appStore;
 
   appStore.setDarkMode(darkMode);
 };

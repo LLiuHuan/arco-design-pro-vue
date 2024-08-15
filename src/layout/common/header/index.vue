@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
-  import { useRouteStoreWithOut } from '@/store/modules/route';
+  import { useRouteStore } from '@/store/modules/route';
   import { MenuModeEnum } from '@/enums';
   import { AppLogo } from '@/components/AppLogo';
   import { computed, unref } from 'vue';
@@ -75,12 +75,12 @@
   const { getIsMobile } = useRootSetting();
   const { getMenuWidth, isTrigger, getTrigger } = useMenuSetting();
   const { getLayoutMode } = useLayoutSetting();
-  const { getMenus } = useRouteStoreWithOut();
+  const { menus: routeMenu } = useRouteStore();
   const { menus } = useMixMenuContext();
 
   const headerMenus = computed(() => {
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL) {
-      return getMenus;
+      return routeMenu;
     }
 
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX) {

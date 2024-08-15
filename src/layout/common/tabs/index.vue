@@ -64,15 +64,15 @@
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { computed, nextTick, reactive, ref } from 'vue';
-  import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
+  import { useMultipleTabStore } from '@/store/modules/multipleTab';
   import { listenerRouteChange } from '@/utils/router';
   import { PageEnum } from '@/enums';
-  import { useAuthStoreWithOut } from '@/store/modules/auth';
   import { RouteMeta, useRoute, useRouter } from 'vue-router';
   import { useDebounceFn, useResizeObserver } from '@vueuse/core';
   import { useHeaderSetting, useMultipleTabSetting } from '@/hooks/setting';
   import { useFullContent } from '@/hooks/web/useFullContent';
   import { useDraggable } from 'vue-draggable-plus';
+  import { useAuthStore } from '@/store/modules/auth';
   import {
     ButtonTab,
     ContentMenu,
@@ -91,15 +91,15 @@
 
   const router = useRouter();
 
-  const tabStore = useMultipleTabWithOutStore();
-  const userStore = useAuthStoreWithOut();
+  const tabStore = useMultipleTabStore();
 
   const { getShowFold, getShowQuick, getShowRedo } = useMultipleTabSetting();
   const { getShowHeader } = useHeaderSetting();
   const { getFullContent } = useFullContent();
+  const authStore = useAuthStore();
 
   const getTabs = computed({
-    get: () => tabStore.getTabs,
+    get: () => tabStore.tabs,
     set: (value) => {
       tabStore.setTabs(value);
     },
@@ -203,7 +203,7 @@
   // endregion scroll
   listenerRouteChange((route) => {
     const { name } = route;
-    if (name === PageEnum.REDIRECT || !route || !userStore.getToken) {
+    if (name === PageEnum.REDIRECT || !route || !authStore.token) {
       return;
     }
     const { path, fullPath, meta = {} } = route;
@@ -246,7 +246,7 @@
 
   function init() {
     const route = useRoute();
-    tabStore.initTabStore(route);
+    tabStore.initTabs(route);
   }
 
   init();

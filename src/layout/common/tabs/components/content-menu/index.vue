@@ -23,7 +23,7 @@
   import { useI18n } from '@/hooks/web/useI18n';
   import { SvgIcon } from '@/components/Icon';
   import { useRouter } from 'vue-router';
-  import { useMultipleTabWithOutStore } from '@/store/modules/multipleTab';
+  import { useMultipleTabStore } from '@/store/modules/multipleTab';
   import { useTabs } from '@/hooks/web/useTabs';
   import { DropOption, TabEventEnum } from './types';
 
@@ -66,7 +66,7 @@
   });
 
   const { currentRoute } = useRouter();
-  const tabStore = useMultipleTabWithOutStore();
+  const tabStore = useMultipleTabStore();
 
   const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } =
     useTabs();
@@ -84,7 +84,7 @@
       : false;
 
     // Refresh button
-    const tabIndex = tabStore.getTabs.findIndex(
+    const tabIndex = tabStore.tabs.findIndex(
       (tab) => tab.fullPath === props.tabItem.fullPath,
     );
 
@@ -92,11 +92,11 @@
 
     // Close left
     const closeLeftDisabled = unref(tabIndex) === 0 || !isCurItem;
-    const disabled = tabStore.getTabs.length === 1;
+    const disabled = tabStore.tabs.length === 1;
 
     // Close right
     const closeRightDisabled =
-      !isCurItem || unref(tabIndex) === tabStore.getTabs.length - 1;
+      !isCurItem || unref(tabIndex) === tabStore.tabs.length - 1;
     // && tabStore.getLastDragEndIndex >= 0);
 
     const options: DropOption[] = [

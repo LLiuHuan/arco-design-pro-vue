@@ -9,14 +9,14 @@ export const useLayoutSetting = () => {
    * @description 获取布局模式
    * @description Get layout mode
    */
-  const getLayoutMode = computed(() => appStore.getLayoutSetting.mode);
+  const getLayoutMode = computed(() => appStore.setting.layoutSetting.mode);
 
   /**
    * @description 获取布局滚动模式
    * @description Get layout scroll mode
    */
   const getLayoutScrollMode = computed(
-    () => appStore.getLayoutSetting.scrollMode,
+    () => appStore.setting.layoutSetting.scrollMode,
   );
 
   /**

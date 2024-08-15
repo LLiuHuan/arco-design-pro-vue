@@ -33,7 +33,7 @@
       outer-class="h-full flex-1-hidden"
     >
       <MixMenuItem
-        v-for="item in getMenus"
+        v-for="item in menus"
         :key="item.key"
         :active="item.key === activeMenuKey"
         :icon="item.icon"
@@ -107,7 +107,7 @@
   const [DefineMixMenuItem, MixMenuItem] =
     createReusableTemplate<MixMenuItemProps>();
 
-  const { getMenus } = useRouteStore();
+  const { menus } = useRouteStore();
   const { goKey } = useGo();
   const {
     getCollapsed,

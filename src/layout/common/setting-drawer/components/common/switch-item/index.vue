@@ -1,5 +1,5 @@
 <template>
-  <ASwitch v-bind="getBindValue" :disabled="disabled" @change="handleChange">
+  <ASwitch :disabled="disabled" v-bind="getBindValue" @change="handleChange">
     <template #checked-icon>
       <icon-check />
     </template>

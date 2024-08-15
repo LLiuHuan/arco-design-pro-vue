@@ -1,63 +1,77 @@
 import { defineStore } from 'pinia';
-import type { LocaleSetting, LocaleType } from '~/types/config';
-import { LOCALE_KEY } from '@/enums';
+import type { LocaleSetting } from '~/types/config';
+import { LOCALE_KEY, StoreEnum } from '@/enums';
 import { localeSetting } from '@/settings';
 import { localStg } from '@/utils/cache';
-import { store } from '@/store';
+import { effectScope, onScopeDispose, ref, watch } from 'vue';
+import { setDayjsLocale } from '@/locale/dayjs';
+import { router } from '@/router';
+import { useTitle } from '@vueuse/core';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useRouteStore } from '../route';
+import { useMultipleTabStore } from '../multipleTab';
 
-/**
- * @description Locale store - [多语言 store]
- */
-const lsLocaleSetting = (localStg.get(LOCALE_KEY) ||
-  localeSetting) as LocaleSetting;
+export const useLocaleStore = defineStore(StoreEnum.Locale, () => {
+  const tabStore = useMultipleTabStore();
+  const routeStore = useRouteStore();
+  const scope = effectScope();
+  const { t } = useI18n();
 
-interface LocaleState {
-  localInfo: LocaleSetting;
-}
+  const localeInfo = ref(localeSetting);
 
-export const useLocaleStore = defineStore({
-  id: 'store-locale',
-  state: (): LocaleState => ({
-    localInfo: lsLocaleSetting,
-  }),
-  getters: {
-    /**
-     * @description Get whether to display the language selection drop-down - [获取是否显示语言选择器]
-     * @param state
-     */
-    getShowPicker(state): boolean {
-      return !!state.localInfo?.showPicker;
-    },
-    /**
-     * @description Get the current language - [获取当前语言]
-     * @param state
-     */
-    getLocale(state): LocaleType {
-      return state.localInfo?.locale ?? 'zh-CN';
-    },
-  },
-  actions: {
-    /**
-     * @description Set up multilingual information and cache - [设置多语言信息和缓存]
-     * @param info multilingual info
-     */
-    setLocaleInfo(info: Partial<LocaleSetting>) {
-      this.localInfo = { ...this.localInfo, ...info };
-      localStg.set(LOCALE_KEY, this.localInfo);
-    },
-    /**
-     * @description Initialize multilingual information and load the existing configuration from the local cache - [初始化多语言信息并加载本地缓存中的现有配置]
-     */
-    initLocale() {
-      this.setLocaleInfo({
-        ...localeSetting,
-        ...this.localInfo,
-      });
-    },
-  },
+  function setLocaleInfo(info: Partial<LocaleSetting>) {
+    localeInfo.value = { ...localeInfo.value, ...info };
+    localStg.set(LOCALE_KEY, localeInfo.value.locale);
+  }
+
+  /**
+   * @description 更新标题
+   * @description Update document title by locale
+   */
+  function updateDocumentTitleByLocale() {
+    const { i18nKey, title } = router.currentRoute.value.meta;
+
+    const documentTitle = i18nKey ? t(i18nKey) : title;
+
+    useTitle(documentTitle);
+  }
+
+  /**
+   * @description 初始化
+   * @description Init
+   */
+  function init() {
+    setLocaleInfo({
+      locale: localStg.get(LOCALE_KEY) ?? localeSetting.locale,
+    });
+  }
+
+  scope.run(() => {
+    // watch locale
+    watch(localeInfo, () => {
+      // update document title by locale
+      updateDocumentTitleByLocale();
+
+      // update global menus by locale
+      routeStore.updateGlobalMenusByLocale();
+
+      // update tabs by locale
+      tabStore.updateTabsByLocale();
+
+      // set dayjs locale
+      setDayjsLocale(localeInfo.value.locale);
+    });
+  });
+
+  onScopeDispose(() => {
+    scope.stop();
+  });
+
+  init();
+
+  return {
+    localeInfo,
+
+    setLocaleInfo,
+  };
 });
-
-// // Need to be used outside the setup - [需要在设置之外使用]
-export function useLocaleStoreWithOut() {
-  return useLocaleStore(store);
-}

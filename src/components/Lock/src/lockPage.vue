@@ -47,12 +47,12 @@
           <div class="w-260px">
             <div class="text-center enter-x flex-col-center pb-10px">
               <img
-                :src="authStore.getUserInfo.avatar || userAvatar"
+                :src="authStore.userInfo?.avatar || userAvatar"
                 alt=""
                 class="w-70px m-0 rounded-50%"
               />
               <p class="mt-2 text-[#bababa]">
-                {{ authStore.getUserInfo.userName }}
+                {{ authStore.userInfo?.userName }}
               </p>
             </div>
             <AForm :model="lockForm" class="mt-2">
@@ -119,14 +119,14 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   import { SvgIcon } from '@/components/Icon';
-  import { useAuthStore } from '@/store/modules/auth';
   import userAvatar from '@/assets/images/userAvatar.jpg';
   import { useLoading } from '@adp/hooks';
   import { useLockStore } from '@/store/modules/lock';
+  import { useAuthStore } from '@/store/modules/auth';
   import { useNow } from './useNow';
 
-  const authStore = useAuthStore();
   const lockStore = useLockStore();
+  const authStore = useAuthStore();
 
   // const auth = useAuth();
 

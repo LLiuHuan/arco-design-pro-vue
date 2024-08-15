@@ -1,6 +1,6 @@
 import { App } from 'vue';
 import { appSetting } from '@/settings';
-import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
+import { useErrorLogStore } from '@/store/modules/errorLog';
 import { ErrorTypeEnum } from '@/enums';
 import { ErrorLogInfo } from '~/types/storage';
 
@@ -60,7 +60,7 @@ function formatComponentName(vm: any) {
  * @description Configure Vue error handling function
  */
 function vueErrorHandler(err: unknown, vm: any, info: string) {
-  const errorLogStore = useErrorLogStoreWithOut();
+  const errorLogStore = useErrorLogStore();
   const { name, path } = formatComponentName(vm);
   errorLogStore.addErrorLogInfo({
     type: ErrorTypeEnum.VUE,
@@ -96,7 +96,7 @@ export function scriptErrorHandler(
     errorInfo.stack = '';
   }
   const name = source ? source.substr(source.lastIndexOf('/') + 1) : 'script';
-  const errorLogStore = useErrorLogStoreWithOut();
+  const errorLogStore = useErrorLogStore();
   errorLogStore.addErrorLogInfo({
     type: ErrorTypeEnum.SCRIPT,
     name,
@@ -117,7 +117,7 @@ function registerPromiseErrorHandler() {
   window.addEventListener(
     'unhandledrejection',
     function (event) {
-      const errorLogStore = useErrorLogStoreWithOut();
+      const errorLogStore = useErrorLogStore();
       errorLogStore.addErrorLogInfo({
         type: ErrorTypeEnum.PROMISE,
         name: 'Promise Error!',
@@ -142,7 +142,7 @@ function registerResourceErrorHandler() {
     'error',
     function (e: Event) {
       const target = e.target ? e.target : (e.srcElement as any);
-      const errorLogStore = useErrorLogStoreWithOut();
+      const errorLogStore = useErrorLogStore();
       errorLogStore.addErrorLogInfo({
         type: ErrorTypeEnum.RESOURCE,
         name: 'Resource Error!',

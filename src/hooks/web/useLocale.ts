@@ -1,17 +1,8 @@
-/**
- * Multi-language related operations - [多语言相关操作]
- */
-import { useLocaleStore } from '@/store/modules/locale';
-import { computed, unref } from 'vue';
 import type { LocaleType } from '~/types/config';
-import { consoleError } from '@/utils/common';
-import { i18n } from './index';
-import { loadLocalePool, setHtmlPageLang } from './lang/helper';
-
-interface LangModule {
-  message: Recordable;
-  arcoLocale: Recordable;
-}
+import { useLocaleStore } from '@/store/modules/locale';
+import { getLocaleMessages, i18n } from '@/locale';
+import { loadLocalePool, setHtmlPageLang } from '@/locale/lang/helper';
+import { computed, unref } from 'vue';
 
 function setI18nLanguage(locale: LocaleType) {
   const localeStore = useLocaleStore();
@@ -51,14 +42,7 @@ export function useLocale() {
       return locale;
     }
 
-    const langModule = ((await import(`./lang/${locale}.ts`)) as any)
-      .default as LangModule;
-    if (!langModule) {
-      consoleError('langModule is not found');
-      return locale;
-    }
-
-    const { message } = langModule;
+    const message = await getLocaleMessages(locale);
 
     globalI18n.setLocaleMessage(locale, message);
     loadLocalePool.push(locale);

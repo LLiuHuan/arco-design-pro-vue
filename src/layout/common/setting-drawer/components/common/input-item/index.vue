@@ -1,11 +1,11 @@
 <template>
   <AInput
+    :disabled="disabled"
+    :max-length="maxLength"
+    :placeholder="placeholder"
+    :readonly="readonly"
     class="!w-126px"
     v-bind="getBindValue"
-    :disabled="disabled"
-    :placeholder="placeholder"
-    :max-length="maxLength"
-    :readonly="readonly"
     @change="handleChange"
   />
 </template>

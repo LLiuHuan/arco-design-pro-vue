@@ -3,10 +3,10 @@
     <AListItem
       v-for="item in renderList"
       :key="item.id"
-      action-layout="vertical"
       :style="{
         opacity: item.status ? 0.5 : 1,
       }"
+      action-layout="vertical"
     >
       <template #extra>
         <ATag v-if="item.messageType === 0" color="gray">未开始</ATag>
@@ -18,7 +18,7 @@
         <AListItemMeta>
           <template v-if="item.avatar" #avatar>
             <AAvatar shape="circle">
-              <img v-if="item.avatar" :src="item.avatar" />
+              <img v-if="item.avatar" :src="item.avatar" alt="" />
               <icon-desktop v-else />
             </AAvatar>
           </template>
@@ -48,9 +48,9 @@
     </AListItem>
     <template #footer>
       <ASpace
-        fill
-        :size="0"
         :class="{ 'add-border-top': renderList.length < showMax }"
+        :size="0"
+        fill
       >
         <div class="footer-wrap">
           <ALink @click="allRead">{{ $t('layout.header.msgAllRead') }}</ALink>
@@ -94,7 +94,7 @@
   const showMax = 3;
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
   :deep(.arco-list) {
     .arco-list-item {
       min-height: 86px;

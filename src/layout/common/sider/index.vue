@@ -22,7 +22,7 @@
       v-else
       :collapsed="getCollapsed"
       :dark="siderDark"
-      :menus="routeStoreWithOut.getMenus"
+      :menus="routeStore.menus"
     ></LayoutVerticalMenu>
   </div>
 </template>
@@ -35,7 +35,7 @@
   } from '@/hooks/setting';
   import { AppLogo } from '@/components/AppLogo';
   import { computed, unref } from 'vue';
-  import { useRouteStoreWithOut } from '@/store/modules/route';
+  import { useRouteStore } from '@/store/modules/route';
   import {
     LayoutHorizontalMixMenu,
     LayoutVerticalMenu,
@@ -47,7 +47,7 @@
   const { getHeaderHeight } = useHeaderSetting();
   const { getShowLogo, getIsDarkMode } = useRootSetting();
 
-  const routeStoreWithOut = useRouteStoreWithOut();
+  const routeStore = useRouteStore();
 
   const siderDark = computed(
     () =>

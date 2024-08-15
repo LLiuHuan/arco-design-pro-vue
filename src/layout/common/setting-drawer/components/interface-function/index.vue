@@ -2,18 +2,18 @@
   <ADivider>{{ $t('layout.setting.interfaceFunction.title') }}</ADivider>
 
   <TransitionGroup
-    tag="div"
-    name="interface-function"
     class="flex-col-stretch gap-12px"
+    name="interface-function"
+    tag="div"
   >
     <SettingItem
       key="12"
       :label="$t('layout.setting.interfaceFunction.scrollMode.title')"
     >
       <SelectItem
-        :options="scrollModeOptions"
-        :event="HandlerEnum.LAYOUT_SCROLL_MODE"
         :def="getLayoutScrollMode"
+        :event="HandlerEnum.LAYOUT_SCROLL_MODE"
+        :options="scrollModeOptions"
       />
     </SettingItem>
     <SettingItem
@@ -60,9 +60,9 @@
       :label="$t('layout.setting.interfaceFunction.mixSidebarTrigger')"
     >
       <SelectItem
-        :options="mixSidebarTriggerOptions"
-        :event="HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR"
         :def="getMixSideTrigger"
+        :event="HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR"
+        :options="mixSidebarTriggerOptions"
       />
     </SettingItem>
     <SettingItem
@@ -94,8 +94,8 @@
       <InputNumberItem
         :def="getMenuWidth"
         :event="HandlerEnum.MENU_EXPANDED_MENU_WIDTH"
-        :min="100"
         :max="600"
+        :min="100"
         :step="10"
       ></InputNumberItem>
     </SettingItem>
@@ -107,8 +107,8 @@
       <InputNumberItem
         :def="getCollapsedMenuWidth"
         :event="HandlerEnum.MENU_COLLAPSED_MENU_WIDTH"
-        :min="48"
         :max="200"
+        :min="48"
         :step="1"
       ></InputNumberItem>
     </SettingItem>
@@ -120,8 +120,8 @@
       <InputNumberItem
         :def="getMixMenuWidth"
         :event="HandlerEnum.MIX_MENU_EXPANDED_MENU_WIDTH"
-        :min="80"
         :max="200"
+        :min="80"
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
@@ -132,8 +132,8 @@
       <InputNumberItem
         :def="getMixCollapsedMenuWidth"
         :event="HandlerEnum.MIX_MENU_COLLAPSED_MENU_WIDTH"
-        :min="48"
         :max="200"
+        :min="48"
       ></InputNumberItem>
     </SettingItem>
     <SettingItem
@@ -164,8 +164,8 @@
       <InputNumberItem
         :def="getFooterHeight"
         :event="HandlerEnum.FOOTER_HEIGHT"
-        :min="30"
         :max="100"
+        :min="30"
       ></InputNumberItem>
     </SettingItem>
     <SettingItem

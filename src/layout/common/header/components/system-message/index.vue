@@ -1,13 +1,13 @@
 <template>
   <APopover
-    class="!p-0"
-    trigger="click"
-    position="bottom"
     :content-style="{ padding: 0 }"
+    class="!p-0"
+    position="bottom"
+    trigger="click"
   >
     <HoverContainer :tooltip-content="$t('layout.header.tooltipNotify')">
       <ABadge :count="unreadAllCount">
-        <AButton type="text" class="!text-[var(--color-text-1)] !h-40px">
+        <AButton class="!text-[var(--color-text-1)] !h-40px" type="text">
           <SvgIcon icon="carbon:notification" size="20" />
         </AButton>
       </ABadge>
@@ -16,8 +16,8 @@
       <ASpin :loading="loading">
         <ATabs
           v-model:active-key="messageType"
-          default-active-key="2"
           :class="[getIsMobile ? 'w-276px' : 'w-360px']"
+          default-active-key="2"
         >
           <template #extra>
             <AButton type="text" @click="emptyList">

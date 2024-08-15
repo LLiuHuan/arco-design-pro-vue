@@ -9,14 +9,14 @@ export const useHeaderSetting = () => {
    * @description 获取是否显示顶部
    * @description Get whether to display the top
    */
-  const getShowHeader = computed(() => appStore.getHeaderSetting.show);
+  const getShowHeader = computed(() => appStore.setting.headerSetting.show);
 
   /**
    * @description 获取顶部高度
    * @description Get top height
    */
   const getHeaderHeight = computed((): number => {
-    return appStore.getHeaderSetting.height;
+    return appStore.setting.headerSetting.height;
   });
 
   /**
@@ -24,7 +24,7 @@ export const useHeaderSetting = () => {
    * @description Get whether the header displays breadcrumbs
    */
   const getHeaderShowBreadCrumb = computed((): boolean => {
-    return appStore.getHeaderSetting.showBreadCrumb;
+    return appStore.setting.headerSetting.showBreadCrumb;
   });
 
   /**
@@ -32,7 +32,7 @@ export const useHeaderSetting = () => {
    * @description Get whether the header displays the breadcrumb icon
    */
   const getHeaderShowBreadCrumbIcon = computed((): boolean => {
-    return appStore.getHeaderSetting.showBreadCrumbIcon;
+    return appStore.setting.headerSetting.showBreadCrumbIcon;
   });
 
   /**

@@ -22,8 +22,8 @@
             <SvgIcon icon="heroicons:language-16-solid" size="20"></SvgIcon>
           </AButton>
           <template #content>
-            <ADoption :value="LOCALE.ZH_CN">中文</ADoption>
-            <ADoption :value="LOCALE.EN_US">English</ADoption>
+            <ADoption :value="LocaleEnum.zh_CN">中文</ADoption>
+            <ADoption :value="LocaleEnum.en_US">English</ADoption>
           </template>
         </ADropdown>
       </div>
@@ -69,12 +69,12 @@
   import { useRootSetting } from '@/hooks/setting';
   import { dateUtil } from '@/utils/date';
   import { getAppEnvConfig } from '@/utils/envs';
-  import { useLocale } from '@/locale/useLocale';
   import { LocaleType } from '~/types/config';
   import { DarkModeSwitch } from '@/components/DarkModeSwitch';
   import { SvgIcon } from '@/components/Icon';
   import { AppLogo } from '@/components/AppLogo';
-  import { LOCALE } from '@/settings';
+  import { LocaleEnum } from '@/enums';
+  import { useLocale } from '@/hooks/web/useLocale';
   import {
     BindGithub,
     BindWechat,

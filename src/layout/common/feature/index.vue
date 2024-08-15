@@ -36,12 +36,11 @@
     if (!unref(getShowSettingButton)) {
       return false;
     }
-    const settingButtonPosition = unref(getSettingButtonPosition);
 
-    if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+    if (unref(getSettingButtonPosition) === SettingButtonPositionEnum.AUTO) {
       return !unref(getShowHeader) || unref(getFullContent);
     }
-    return settingButtonPosition === SettingButtonPositionEnum.FIXED;
+    return unref(getSettingButtonPosition) === SettingButtonPositionEnum.FIXED;
   });
 </script>
 

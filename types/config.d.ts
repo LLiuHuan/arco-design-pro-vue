@@ -1,6 +1,7 @@
 import {
   AppEnum,
   CacheTypeEnum,
+  LocaleEnum,
   MenuModeEnum,
   MixSidebarTriggerEnum,
   PermissionModeEnum,
@@ -11,7 +12,7 @@ import {
   TriggerEnum,
 } from '@/enums';
 
-export type LocaleType = 'zh-CN' | 'en-US'; // | 'ja-JP' | 'ko-KR'
+export type LocaleType = LocaleEnum.zh_CN | LocaleEnum.en_US; // | 'ja-JP' | 'ko-KR'
 
 // TODO: 可能需要修改
 export interface GlobEnvConfig {
@@ -259,7 +260,7 @@ export interface ProjectConfig {
   themeSetting: ThemeSetting;
   // 换肤设置
   // Skin setting
-  themeProSetting: ThemeInfo | null;
+  themeProSetting?: ThemeInfo | null;
   // 灰色模式
   // Gray mode
   grayMode: boolean;

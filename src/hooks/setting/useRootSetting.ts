@@ -6,6 +6,8 @@ import { ThemeInfo } from '~/types/config';
 import { usePreferredColorScheme } from '@vueuse/core';
 import { setProTheme, setThemeColors } from '@/utils/common';
 
+let timeId: TimeoutHandle;
+
 export const useRootSetting = () => {
   const appStore = useAppStore();
 
@@ -19,19 +21,19 @@ export const useRootSetting = () => {
    * @description: 获取页面加载状态
    * @description: Get page loading status
    */
-  const getPageLoading = computed(() => appStore.getPageLoading);
+  const getPageLoading = computed(() => appStore.pageLoading);
 
   /**
    * @description: 获取项目配置
    */
-  const getRootSetting = computed(() => appStore.getProjectConfig);
+  const getRootSetting = computed(() => appStore.setting);
 
   /**
    * @description: 获取固定头部和选项卡
    * @description: Get fixed header and tab
    */
   const getFixedHeaderAndTab = computed(
-    () => appStore.getProjectConfig.fixedHeaderAndTab,
+    () => appStore.setting.fixedHeaderAndTab,
   );
 
   /**
@@ -39,28 +41,26 @@ export const useRootSetting = () => {
    * @description: Get whether the content area can scroll on the x-axis
    */
   const getContentXScrollable = computed(
-    () => appStore.getProjectConfig.contentXScrollable,
+    () => appStore.setting.contentXScrollable,
   );
 
   /**
    * @description: 获取是否开启页面缓存
    * @description: Get whether to enable page caching
    */
-  const getOpenKeepAlive = computed(
-    () => appStore.getProjectConfig.openKeepAlive,
-  );
+  const getOpenKeepAlive = computed(() => appStore.setting.openKeepAlive);
 
   /**
    * @description: 获取主题模式
    * @description: Get theme mode
    */
-  const getDarkMode = computed(() => appStore.getDarkMode);
+  const getDarkMode = computed(() => appStore.darkMode);
 
   /**
    * @description: 获取下一个获取下一个主题模式
    * @description: Get the next theme mode
    */
-  const getNextDarkMode = computed(() => appStore.getNextDarkMode);
+  const getNextDarkMode = computed(() => appStore.getNextDarkMode());
 
   /**
    * @description: 获取是否是暗黑模式
@@ -77,28 +77,26 @@ export const useRootSetting = () => {
    * @description: 获取主题颜色
    * @description: Get theme color
    */
-  const getThemeColor = computed(
-    () => appStore.getProjectConfig.themeSetting.colors,
-  );
+  const getThemeColor = computed(() => appStore.setting.themeSetting.colors);
 
   /**
    * @description: 获取设置抽屉状态
    * @description: Get the setting drawer status
    */
-  const getSettingDrawerState = computed(() => appStore.getSettingDrawerState);
+  const getSettingDrawerState = computed(() => appStore.settingDrawerState);
 
   /**
    * @description: 获取是否显示logo
    * @description: Get whether to display the logo
    */
-  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
+  const getShowLogo = computed(() => appStore.setting.showLogo);
 
   /**
    * @description: 获取是否显示设置按钮
    * @description: Get whether to display the setting button
    */
   const getShowSettingButton = computed(
-    () => appStore.getProjectConfig.showSettingButton,
+    () => appStore.setting.showSettingButton,
   );
 
   /**
@@ -106,7 +104,7 @@ export const useRootSetting = () => {
    * @description: Get the position of the setting button
    */
   const getSettingButtonPosition = computed(
-    () => appStore.getProjectConfig.settingButtonPosition,
+    () => appStore.setting.settingButtonPosition,
   );
 
   /**
@@ -119,32 +117,36 @@ export const useRootSetting = () => {
    * @description: 获取是否开启色弱模式
    * @description: Get whether to enable color weak mode
    */
-  const getWeakMode = computed(() => appStore.getProjectConfig.colorWeak);
+  const getWeakMode = computed(() => appStore.setting.colorWeak);
   /**
    * @description: 获取是否开启灰色模式
    * @description: Get whether to enable gray mode
    */
-  const getGrayMode = computed(() => appStore.getProjectConfig.grayMode);
+  const getGrayMode = computed(() => appStore.setting.grayMode);
 
   /**
    * @description: 获取主题配置
    * @description: Get theme configuration
    */
-  const getThemePro = computed(() => appStore.getProjectConfig.themeProSetting);
+  const getThemePro = computed(() => appStore.setting?.themeProSetting);
 
   /**
    * @description: 获取是否开启水印
    * @description: Get whether to enable watermark
    */
-  const getShowWatermark = computed(() => appStore.getProjectConfig.watermark);
+  const getShowWatermark = computed(() => appStore.setting.watermark);
 
   /**
    * @description: 获取水印文本
    * @description: Get watermark text
    */
-  const getWatermarkText = computed(
-    () => appStore.getProjectConfig.watermarkText,
-  );
+  const getWatermarkText = computed(() => appStore.setting.watermarkText);
+
+  /**
+   * @description: 获取刷新标记
+   * @description: Get refresh flag
+   */
+  const getReloadFlag = computed(() => appStore.reloadFlag);
 
   /**
    * @description: 设置项目配置
@@ -182,7 +184,7 @@ export const useRootSetting = () => {
       },
     });
 
-    setThemeColors(appStore.getThemeColors);
+    setThemeColors(appStore.getThemeColors());
   };
 
   /**
@@ -195,7 +197,7 @@ export const useRootSetting = () => {
         colors,
       },
     });
-    setThemeColors(appStore.getThemeColors);
+    setThemeColors(appStore.getThemeColors());
   };
 
   /**
@@ -210,15 +212,7 @@ export const useRootSetting = () => {
       themeProSetting: theme,
     });
 
-    // 如果没有主题，移除主题
-    if (!theme) {
-      const proTheme = document.getElementById('pro-custom-theme');
-      if (proTheme) {
-        proTheme.setAttribute('href', '');
-      }
-    } else {
-      await setProTheme(theme?.packageName || '');
-    }
+    await setProTheme(theme?.packageName || '');
   };
 
   /**
@@ -237,6 +231,65 @@ export const useRootSetting = () => {
    */
   const setSettingDrawerState = (state: boolean) => {
     appStore.setSettingDrawerState(state);
+  };
+
+  /**
+   * @description: 设置页面加载状态
+   * @description: Set page loading status
+   *
+   * @param loading
+   */
+  const setPageLoading = (loading: boolean): void => {
+    appStore.setPageLoading(loading);
+  };
+
+  /**
+   * @description: 设置页面加载状态
+   * @description: Set page loading status
+   *
+   * @param loading
+   */
+  const setPageLoadingAction = async (loading: boolean): Promise<void> => {
+    if (loading) {
+      clearTimeout(timeId);
+      // Prevent flicker
+      timeId = setTimeout(() => {
+        setPageLoading(loading);
+      }, 50);
+    } else {
+      setPageLoading(loading);
+      clearTimeout(timeId);
+    }
+  };
+
+  /**
+   * @description: 刷新页面
+   * @description: Reload page
+   *
+   * @param duration
+   */
+  const refreshPage = async (duration = 300) => {
+    appStore.setReloadFlag(false);
+
+    const d = appStore.setting?.transitionSetting.enable ? duration : 40;
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, d);
+    });
+
+    appStore.setReloadFlag(true);
+  };
+
+  /**
+   * @description 设置内容页面是否可以滚动
+   * @description Set whether the content page can scroll
+   *
+   * @param flag
+   */
+  const setContentXScrollable = (flag: boolean) => {
+    appStore.setProjectConfig({
+      contentXScrollable: flag,
+    });
   };
 
   return {
@@ -259,6 +312,7 @@ export const useRootSetting = () => {
     getThemePro,
     getShowWatermark,
     getWatermarkText,
+    getReloadFlag,
 
     setRootSetting,
     setDarkMode,
@@ -267,5 +321,9 @@ export const useRootSetting = () => {
     setThemeColor,
     setThemeAllColor,
     setThemePro,
+    setPageLoading,
+    setPageLoadingAction,
+    refreshPage,
+    setContentXScrollable,
   };
 };

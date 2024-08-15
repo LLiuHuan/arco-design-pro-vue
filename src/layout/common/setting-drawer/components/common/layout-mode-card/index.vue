@@ -3,20 +3,20 @@
     <div
       v-for="item in menuTypeListEnum"
       :key="item.mode"
-      class="flex cursor-pointer border-2px border-solid rounded-6px hover:border-[rgba(var(--primary-6))]"
       :class="[
         def === item.mode
           ? 'border-[rgba(var(--primary-6))]'
           : 'border-transparent',
       ]"
+      class="flex cursor-pointer border-2px border-solid rounded-6px hover:border-[rgba(var(--primary-6))]"
       @click="handleChangeMode(item)"
     >
-      <ATooltip :position="item.position" :content="$t(item.title)">
+      <ATooltip :content="$t(item.title)" :position="item.position">
         <div
-          class="h-64px w-96px gap-6px rd-4px p-6px shadow dark:shadow-coolGray-5"
           :class="[
             item.mode.includes(MenuModeEnum.VERTICAL) ? 'flex' : 'flex-col',
           ]"
+          class="h-64px w-96px gap-6px rd-4px p-6px shadow dark:shadow-coolGray-5"
         >
           <slot :name="item.mode"></slot>
         </div>

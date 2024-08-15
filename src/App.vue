@@ -1,19 +1,16 @@
 <script lang="ts" setup>
-  import { subscribeStore } from '@/store/subscribe';
   import { computed } from 'vue';
   import { arcoLocales } from '@/locale/arco';
-  import { useLocaleStoreWithOut } from '@/store/modules/locale';
+  import { useLocaleStore } from '@/store/modules/locale';
   import { useRootSetting } from '@/hooks/setting';
 
-  const localeStore = useLocaleStoreWithOut();
+  const localeStore = useLocaleStore();
 
   const { getShowWatermark, getWatermarkText, getGrayMode } = useRootSetting();
 
   const arcoLocale = computed(() => {
-    return arcoLocales[localeStore.getLocale];
+    return arcoLocales[localeStore.localeInfo.locale];
   });
-
-  subscribeStore();
 </script>
 
 <template>

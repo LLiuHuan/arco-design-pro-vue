@@ -1,16 +1,16 @@
 <template>
   <AInputNumber
-    class="!w-126px"
-    v-bind="getBindValue"
-    mode="button"
     :disabled="disabled"
-    :step="step"
-    :precision="precision"
-    :min="min"
-    :max="max"
     :formatter="formatter"
+    :max="max"
+    :min="min"
     :parser="parser"
+    :precision="precision"
     :read-only="readonly"
+    :step="step"
+    class="!w-126px"
+    mode="button"
+    v-bind="getBindValue"
     @change="handleChange"
   >
   </AInputNumber>
@@ -36,9 +36,9 @@
     // 数字最大值
     max?: number;
     // 定义输入框展示值
-    formatter?: Function;
+    formatter?: any;
     // 从 formatter 转换为数字，和 formatter 搭配使用
-    parser?: Function;
+    parser?: any;
     // 只读
     readonly?: boolean;
   }

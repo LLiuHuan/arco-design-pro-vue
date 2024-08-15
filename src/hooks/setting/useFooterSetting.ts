@@ -9,33 +9,25 @@ export const useFooterSetting = () => {
    * @description 获取菜单配置
    * @description Get menu configuration
    */
-  const getFooterSetting = computed(
-    () => appStore.getProjectConfig.footerSetting,
-  );
+  const getFooterSetting = computed(() => appStore.setting.footerSetting);
 
   /**
    * @description 获取是否显示底部
    * @description Get whether to display the bottom
    */
-  const getShowFooter = computed(
-    () => appStore.getProjectConfig.footerSetting.show,
-  );
+  const getShowFooter = computed(() => appStore.setting.footerSetting.show);
 
   /**
    * @description 获取底部高度
    * @description Get footer height
    */
-  const getFooterHeight = computed(
-    () => appStore.getProjectConfig.footerSetting.height,
-  );
+  const getFooterHeight = computed(() => appStore.setting.footerSetting.height);
 
   /**
    * @description 获取底部固定
    * @description Get footer fixed
    */
-  const getFooterFixed = computed(
-    () => appStore.getProjectConfig.footerSetting.fixed,
-  );
+  const getFooterFixed = computed(() => appStore.setting.footerSetting.fixed);
 
   /**
    * @description 设置底部配置

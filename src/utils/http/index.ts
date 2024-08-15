@@ -8,7 +8,7 @@ import { ContentTypeEnum, RequestEnum, ResultEnum } from '@/enums/httpEnum';
 import { useI18n } from '@/hooks/web/useI18n';
 import { Message, Modal } from '@arco-design/web-vue';
 import type { RequestOptions, Result } from '~/types/axios';
-import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
+import { useErrorLogStore } from '@/store/modules/errorLog';
 import { useGlobSetting } from '@/hooks/setting';
 import {
   consoleLog,
@@ -19,10 +19,10 @@ import {
   isUndefined,
   setObjToUrlParams,
 } from '@/utils/common';
-import { getToken } from '@/utils/auth';
 import { useGo } from '@/hooks/web/usePage';
 import { router } from '@/router';
-import { PageEnum } from '@/enums';
+import { PageEnum, TOKEN_KEY } from '@/enums';
+import { localStg } from '@/utils/cache';
 import { formatRequestDate, joinTimestamp } from './helper';
 import { checkStatus } from './checkStatus';
 import { AxiosTransform, CreateAxiosOptions } from './httpTransform';
@@ -193,7 +193,8 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = getToken();
+    // TODO: token
+    const token = localStg.get(TOKEN_KEY);
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       (config as Recordable).headers.Authorization =
@@ -216,7 +217,7 @@ const transform: AxiosTransform = {
    */
   responseInterceptorsCatch: (axiosInstance: AxiosInstance, error: any) => {
     const { t } = useI18n();
-    const errorLogStore = useErrorLogStoreWithOut();
+    const errorLogStore = useErrorLogStore();
     errorLogStore.addAjaxErrorInfo(error);
     const { response, code, message, config } = error || {};
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none';

@@ -133,7 +133,7 @@
 
 <script lang="ts" setup>
   import { reactive, ref, unref } from 'vue';
-  import { ValidatedError } from '@arco-design/web-vue';
+  import { Notification, ValidatedError } from '@arco-design/web-vue';
   import {
     IconAlipayCircle,
     IconFaceBookCircleFill,
@@ -148,6 +148,7 @@
   import { useLoading } from '@adp/hooks';
   import { open } from '@/utils/common';
   import { useAuthStore } from '@/store/modules/auth';
+  import { useI18n } from '@/hooks/web/useI18n';
   import LoginTitle from '../login-title/index.vue';
   import { GITHUB_AUTHORIZE_URL } from '../../enum';
 
@@ -160,6 +161,7 @@
 
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
+  const { t } = useI18n();
   const authStore = useAuthStore();
 
   // const loginConfig = {
@@ -210,6 +212,16 @@
         // 异常提示
         errorMessage.value = (err as Error).message;
       } finally {
+        // 登录成功弹出欢迎提示
+        console.log(t('sys.login.common.loginSuccess'));
+        Notification.success({
+          title: t('sys.login.common.loginSuccess'),
+          content: t(`sys.login.common.welcomeBack`, {
+            userName: authStore.userInfo.userName,
+          }),
+          duration: 3000,
+        });
+
         endLoading();
       }
     }

@@ -2,7 +2,6 @@ import type { Router } from 'vue-router';
 import { createPermissionGuard } from './permissionGuard';
 import { createProgressGuard } from './progressGuard';
 import { createScrollGuard } from './scrollGuard';
-import { createTitleGuard } from './titleGuard';
 import { createHttpGuard } from './httpGuard';
 import { createPageGuard } from './pageGuard';
 import { createPageLoadingGuard } from './pageLoadingGuard';
@@ -18,7 +17,6 @@ export async function setupRouterGuard(router: Router) {
   createHttpGuard(router);
   createScrollGuard(router);
   createProgressGuard(router);
-  createTitleGuard(router);
   createPermissionGuard(router);
   createStateGuard(router);
 

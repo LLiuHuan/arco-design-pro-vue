@@ -38,7 +38,7 @@
 
   const props = defineProps<Props>();
 
-  const { domRef } = useEcharts(props.chartOption, {
+  const { domRef } = useEcharts(() => props.chartOption, {
     onRender() {},
   });
 </script>

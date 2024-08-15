@@ -3,19 +3,16 @@ import { REFRESH_TOKEN_KEY, StoreEnum, TOKEN_KEY } from '@/enums';
 import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
 import { computed, reactive, Ref, ref } from 'vue';
 import { useGo } from '@/hooks/web/usePage';
-import { useI18n } from '@/hooks/web/useI18n';
 import { useLoading } from '@adp/hooks';
 // eslint-disable-next-line import/no-cycle
 // eslint-disable-next-line import/no-cycle
 import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
-import { Notification } from '@arco-design/web-vue';
 import { localStg } from '@/utils/cache';
 import { useRoute } from 'vue-router';
 import { useRouteStore } from '../route';
 import { useMultipleTabStore } from '../multipleTab';
 
 export const useAuthStore = defineStore(StoreEnum.Auth, () => {
-  const { t } = useI18n();
   const route = useRoute();
   const routeStore = useRouteStore();
   const tabStore = useMultipleTabStore();
@@ -59,10 +56,11 @@ export const useAuthStore = defineStore(StoreEnum.Auth, () => {
    * @param isGoLogin
    */
   function resetStore() {
+    const authStore = useAuthStore();
+
     localStg.remove(TOKEN_KEY);
     localStg.remove(REFRESH_TOKEN_KEY);
 
-    const authStore = useAuthStore();
     authStore.$reset();
 
     if (!route.meta.constant) {
@@ -130,18 +128,6 @@ export const useAuthStore = defineStore(StoreEnum.Auth, () => {
         const { toRedirect } = useGo(false);
 
         await toRedirect();
-
-        // 登录成功弹出欢迎提示
-        if (routeStore.isInitAuthRoute) {
-          console.log(t('sys.login.common.loginSuccess'));
-          Notification.success({
-            title: t('sys.login.common.loginSuccess'),
-            content: t(`sys.login.common.welcomeBack`, {
-              userName: userInfo.userName,
-            }),
-            duration: 3000,
-          });
-        }
       }
     } finally {
       endLoading();

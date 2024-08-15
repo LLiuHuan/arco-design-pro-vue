@@ -16,4 +16,6 @@ export default {
   resetText: 'Reset',
 
   lookForward: 'Under development, please stay tuned!',
+
+  kindTips: 'Kind Tips',
 };

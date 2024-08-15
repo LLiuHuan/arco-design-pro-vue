@@ -5,10 +5,11 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router';
-import { PageEnum } from '@/enums';
+import { PageEnum, TOKEN_KEY } from '@/enums';
 import { useRouteStore } from '@/store/modules/route';
 import type { RoutePath } from '@elegant-router/types';
 import { useAuthStore } from '@/store/modules/auth';
+import { localStg } from '@/utils/cache';
 import { getRouteName } from '../elegant/transform';
 
 function getRouteQueryOfLoginRoute(
@@ -80,9 +81,10 @@ async function initRoute(
     return null;
   }
 
+  const isLogin = Boolean(localStg.get(TOKEN_KEY));
   // 1.5 如果权限路由没有初始化，则初始化权限路由
   // 初始化auth路由需要用户登录，如果没有，重定向到登录页面
-  if (!authStore.isLogin) {
+  if (!isLogin) {
     const query = getRouteQueryOfLoginRoute(to, routeStore.routeHome);
 
     return {
@@ -144,6 +146,7 @@ export function createPermissionGuard(router: Router) {
 
     const authStore = useAuthStore();
 
+    const isLogin = Boolean(localStg.get(TOKEN_KEY));
     const needLogin = !to.meta.constant;
     const routeRoles = to.meta.roles || [];
 
@@ -156,7 +159,7 @@ export function createPermissionGuard(router: Router) {
     const actions: StrategyAction[] = [
       // 登录时如果是login路由则切换到根页面
       [
-        authStore.isLogin && to.name === PageEnum.LOGIN,
+        isLogin && to.name === PageEnum.LOGIN,
         () => {
           next({ name: PageEnum.ROOT });
         },
@@ -170,21 +173,21 @@ export function createPermissionGuard(router: Router) {
       ],
       // 如果路由需要登录但用户未登录，则切换到登录页面
       [
-        !authStore.isLogin && needLogin,
+        !isLogin && needLogin,
         () => {
           next({ name: PageEnum.LOGIN, query: { redirect: to.fullPath } });
         },
       ],
       // 如果用户已登录并有授权，则允许访问
       [
-        authStore.isLogin && needLogin && hasAuth,
+        isLogin && needLogin && hasAuth,
         () => {
           handleRouteSwitch(to, from, next);
         },
       ],
       [
         // 如果用户已登录但没有授权，则切换到403页面
-        authStore.isLogin && needLogin && !hasAuth,
+        isLogin && needLogin && !hasAuth,
         () => {
           next({ name: PageEnum.NO_AUTH });
         },

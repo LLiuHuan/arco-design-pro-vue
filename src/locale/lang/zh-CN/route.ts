@@ -9,6 +9,8 @@ export default {
   'comp': '组件',
   'comp_loading': '加载中',
   'comp_table': '表格',
+  'comp_table_basic': '基础表格',
+  'comp_table_use-table': '使用表格',
   'dashboard': '仪表盘',
   'dashboard_analysis': '分析页',
   'dashboard_workbench': '工作台',
@@ -22,6 +24,9 @@ export default {
   'func_upload-chunk': '分片上传',
   'permission': '权限管理',
   'permission_front': '前端权限',
+  'permission_front_auth-page-a': '权限页A',
+  'permission_front_auth-page-b': '权限页B',
+  'permission_front_btn': '按钮权限',
   'permission_menu': '菜单权限',
 
   'plugin': '插件',

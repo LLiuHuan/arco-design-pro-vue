@@ -7,32 +7,44 @@
       class="grid"
     >
       <AGridItem class="grid-item">
-        <ACard class="shadow-sm" title="折线图">
+        <ACard :title="$t('plugin.charts.echarts.LineChart')" class="shadow-sm">
           <div ref="lineRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard class="shadow-sm" title="柱状图">
+        <ACard :title="$t('plugin.charts.echarts.BarChart')" class="shadow-sm">
           <div ref="barRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard class="rounded-16px shadow-sm" title="饼图">
+        <ACard
+          :title="$t('plugin.charts.echarts.PieChart')"
+          class="rounded-16px shadow-sm"
+        >
           <div ref="pieRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard class="shadow-sm" title="散点图">
+        <ACard
+          :title="$t('plugin.charts.echarts.ScatterChart')"
+          class="shadow-sm"
+        >
           <div ref="scatterRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard class="shadow-sm" title="矩形树图">
+        <ACard
+          :title="$t('plugin.charts.echarts.TreemapChart')"
+          class="shadow-sm"
+        >
           <div ref="treeRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard class="shadow-sm" title="时钟">
+        <ACard
+          :title="$t('plugin.charts.echarts.ClockChart')"
+          class="shadow-sm"
+        >
           <div ref="gaugeRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
@@ -60,7 +72,7 @@
       },
     ],
   });
-  const { domRef: lineRef } = useEcharts(unref(lineOptions), {
+  const { domRef: lineRef } = useEcharts(() => unref(lineOptions), {
     onRender() {},
   });
 
@@ -79,7 +91,7 @@
       },
     ],
   });
-  const { domRef: barRef } = useEcharts(unref(barOptions), {
+  const { domRef: barRef } = useEcharts(() => unref(barOptions), {
     onRender() {},
   });
 
@@ -116,7 +128,7 @@
       },
     ],
   });
-  const { domRef: pieRef } = useEcharts(unref(pieOptions), {
+  const { domRef: pieRef } = useEcharts(() => unref(pieOptions), {
     onRender() {},
   });
 
@@ -154,7 +166,7 @@
       },
     ],
   });
-  const { domRef: scatterRef } = useEcharts(unref(scatterOptions), {
+  const { domRef: scatterRef } = useEcharts(() => unref(scatterOptions), {
     onRender() {},
   });
 
@@ -197,7 +209,7 @@
       },
     ],
   });
-  const { domRef: treeRef } = useEcharts(unref(treeOptions), {
+  const { domRef: treeRef } = useEcharts(() => unref(treeOptions), {
     onRender() {},
   });
 
@@ -394,7 +406,7 @@
   });
   let intervalId: NodeJS.Timeout;
 
-  const { domRef: gaugeRef } = useEcharts(unref(gaugeOptions), {
+  const { domRef: gaugeRef } = useEcharts(() => unref(gaugeOptions), {
     onRender(chart) {
       intervalId = setInterval(() => {
         const date = new Date();

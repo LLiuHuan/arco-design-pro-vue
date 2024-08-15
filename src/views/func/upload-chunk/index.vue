@@ -27,72 +27,11 @@
   import { consoleLog } from '@/utils/common';
   import { fragmentFile } from '@/utils/upload/file';
   import { hashByWebWorker } from '@/utils/upload/hash';
-  import { RequestOption } from '@arco-design/web-vue';
+  import { RequestOption, UploadRequest } from '@arco-design/web-vue';
   import { ref } from 'vue';
   import { bigFileUpload } from '@/api/func/upload';
 
   const data = ref([]);
-
-  const sendRequest = (taskPool: Array<() => Promise<any>>, max: number) => {
-    return new Promise((resolve) => {
-      if (taskPool.length === 0) {
-        resolve([]);
-        return;
-      }
-
-      let index = 0;
-      let count = 0;
-
-      const request = async () => {
-        if (index === taskPool.length) return;
-        const task = taskPool[index];
-        index += 1;
-        try {
-          const result = await task();
-          data.value.push(result);
-        } catch (err) {
-          data.value.push(err);
-        } finally {
-          count += 1;
-          if (count === taskPool.length) {
-            resolve(data.value);
-          }
-          request();
-        }
-      };
-
-      const times = Math.min(max, taskPool.length);
-      for (let i = 0; i < times; i += 1) {
-        request();
-      }
-      //
-      // const results: Array<Response | unknown> = [];
-
-      //
-      // const request = async () => {
-      //   if (index === taskPool.length) return;
-      //   const i = index;
-      //   const task = taskPool[index];
-      //   index++;
-      //   try {
-      //     results[i] = await task();
-      //   } catch (err) {
-      //     results[i] = err;
-      //   } finally {
-      //     count++;
-      //     if (count === taskPool.length) {
-      //       resolve(results);
-      //     }
-      //     request();
-      //   }
-      // };
-      //
-      // const times = Math.min(max, taskPool.length);
-      // for (let i = 0; i < times; i++) {
-      //   request();
-      // }
-    });
-  };
 
   /**
    * @description: 上传切片
@@ -150,12 +89,8 @@
    * @description: 分片上传
    *
    * @param file 上传的文件
-   * @param setProgress 通知上传进度
    */
-  const ChunkUpload = async (
-    file: File,
-    setProgress: (value: number) => void,
-  ) => {
+  const ChunkUpload = async (file: File) => {
     // 默认 分块大小
     const chunkSize = 1024 * 1024 * 5;
     const chunks: ChunkItem[] = await fragmentFile(file, 'sha256', chunkSize);
@@ -167,21 +102,16 @@
 
   /**
    * @description: 普通上传
-   * @param file 上传的文件
-   * @param setProgress 通知上传进度
    */
-  const SimpleUpload = async (
-    file: File,
-    setProgress: (value: number) => void,
-  ) => {};
+  const SimpleUpload = async () => {};
 
   const onBeforeUpload = (file: File) => {
     console.log('file111111', file);
     return true;
   };
 
-  const customRequest = async (option: RequestOption) => {
-    const { onProgress, onError, onSuccess, fileItem, name } = option;
+  const customRequest = (option: RequestOption): UploadRequest => {
+    const { onProgress, onError, onSuccess, fileItem } = option;
     // 重置进度
     onProgress(0);
 
@@ -189,13 +119,14 @@
       // 根据文件大小判断是否需要分段上传, 大于30M的文件使用分片上传
       if (fileItem.file.size > 30 * 1024 * 1024) {
         // 切片上传
-        await ChunkUpload(fileItem.file, onProgress).then(() => {
+        ChunkUpload(fileItem.file).then(() => {
           onSuccess();
         });
       } else {
         // 普通上传
-        await SimpleUpload(fileItem.file, onProgress);
-        onSuccess();
+        SimpleUpload().then(() => {
+          onSuccess();
+        });
       }
     } else {
       onError();

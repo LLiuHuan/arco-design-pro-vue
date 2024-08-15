@@ -269,15 +269,7 @@ export const useRootSetting = () => {
    * @param duration
    */
   const refreshPage = async (duration = 300) => {
-    appStore.setReloadFlag(false);
-
-    const d = appStore.setting?.transitionSetting.enable ? duration : 40;
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, d);
-    });
-
-    appStore.setReloadFlag(true);
+    await appStore.refreshPage(duration);
   };
 
   /**

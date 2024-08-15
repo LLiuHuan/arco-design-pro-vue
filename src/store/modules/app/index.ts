@@ -208,7 +208,26 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
   // region 设置相关
   const grayMode = computed(() => projectConfig.value.grayMode);
   const colorWeak = computed(() => projectConfig.value.colorWeak);
+
   // endregion
+
+  /**
+   * @description: 刷新页面
+   * @description: Reload page
+   *
+   * @param duration
+   */
+  async function refreshPage(duration = 300) {
+    setReloadFlag(false);
+
+    const d = projectConfig.value?.transitionSetting.enable ? duration : 40;
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, d);
+    });
+
+    setReloadFlag(true);
+  }
 
   /**
    * @description 是否全屏显示内容，不显示菜单
@@ -381,6 +400,7 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
     siderCollapse,
     setSiderCollapse,
     toggleSiderCollapse,
+    refreshPage,
 
     getNextDarkMode,
     setDarkMode,

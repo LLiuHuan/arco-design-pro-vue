@@ -1,5 +1,5 @@
 import { consoleLog } from '@/utils/common';
-import { Algo } from './hash';
+import { Algo } from '@/utils/common/hash';
 import Worker from './chunk.work?worker';
 
 const THREAD_COUNT = navigator.hardwareConcurrency || 4; // 表示可用的硬件线程数，如果浏览器不支持 navigator.hardwareConcurrency 属性，将默认值设为 4

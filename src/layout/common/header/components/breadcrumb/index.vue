@@ -12,7 +12,7 @@
     </DefineBreadcrumbContent>
 
     <ABreadcrumbItem
-      v-for="breadcrumb in routeStore.getBreadcrumb"
+      v-for="breadcrumb in routeStore.breadcrumbs"
       :key="breadcrumb.key"
     >
       <ADropdown

@@ -67,8 +67,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-  const name = '';
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less" scoped></style>

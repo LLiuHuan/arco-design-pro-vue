@@ -1,3 +1,13 @@
-/*.json
-/*.js
+node_modules
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
 dist
+/public
+/docs
+.local
+/bin
+Dockerfile
+package.json

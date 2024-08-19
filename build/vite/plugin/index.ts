@@ -9,7 +9,7 @@ import { configVuePlugin } from './vue';
 import { configVisualizerPlugin } from './visualizer';
 import { configCompressPlugin } from './compress';
 import { configPWAPlugin } from './pwa';
-import { configImageminPlugin } from './imagemin';
+// import { configImageminPlugin } from './imagemin';
 import { configUnocssPlugin } from './unocss';
 import { configSvgIconsPlugin } from './svgIcons';
 import { createAppConfigPlugin } from './appConfig';
@@ -53,11 +53,11 @@ export function createVitePlugins(
     plugins.push(configCompressPlugin(viteEnv));
   }
 
-  // 开启图片压缩
-  if (viteEnv.VITE_IMAGEMIN === 'Y') {
-    // vite-plugin-imagemin
-    plugins.push(configImageminPlugin());
-  }
+  // // 开启图片压缩
+  // if (viteEnv.VITE_IMAGEMIN === 'Y') {
+  //   // vite-plugin-imagemin
+  //   plugins.push(configImageminPlugin());
+  // }
 
   // 开启PWA
   if (viteEnv.VITE_PWA === 'Y' || viteEnv.VITE_VERCEL === 'Y') {

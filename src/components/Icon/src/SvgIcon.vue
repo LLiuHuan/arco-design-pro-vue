@@ -1,35 +1,7 @@
-<template>
-  <template v-if="renderLocalIcon">
-    <svg
-      aria-hidden="true"
-      v-bind="bindAttrs"
-      class="svg-icon"
-      :class="[spin && 'svg-icon-spin']"
-      :style="getStyle"
-      width="1em"
-      height="1em"
-    >
-      <use :xlink:href="symbolId" fill="currentColor" />
-    </svg>
-  </template>
-  <template v-else>
-    <Icon
-      v-if="icon"
-      :icon="icon"
-      v-bind="bindAttrs"
-      class="svg-icon"
-      :class="[spin && 'svg-icon-spin']"
-      :style="getStyle"
-    />
-  </template>
-</template>
-
 <script setup lang="ts">
   import type { CSSProperties } from 'vue';
   import { computed, useAttrs } from 'vue';
   import { Icon } from '@iconify/vue';
-
-  defineOptions({ name: 'SvgIcon' });
 
   /**
    * 图标组件
@@ -51,7 +23,13 @@
     rotate?: number;
   }
 
+  defineOptions({ name: 'SvgIcon' });
+
   const props = withDefaults(defineProps<Props>(), {
+    icon: '',
+    localIcon: '',
+    size: '1em',
+    color: '',
     spin: false,
     rotate: 0,
   });
@@ -88,6 +66,32 @@
   /** 渲染本地icon */
   const renderLocalIcon = computed(() => props.localIcon || !props.icon);
 </script>
+
+<template>
+  <template v-if="renderLocalIcon">
+    <svg
+      aria-hidden="true"
+      v-bind="bindAttrs"
+      class="svg-icon"
+      :class="[spin && 'svg-icon-spin']"
+      :style="getStyle"
+      width="1em"
+      height="1em"
+    >
+      <use :xlink:href="symbolId" fill="currentColor" />
+    </svg>
+  </template>
+  <template v-else>
+    <Icon
+      v-if="icon"
+      :icon="icon"
+      v-bind="bindAttrs"
+      class="svg-icon"
+      :class="[spin && 'svg-icon-spin']"
+      :style="getStyle"
+    />
+  </template>
+</template>
 
 <style lang="less" scoped>
   .svg-icon {

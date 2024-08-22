@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-22 12:19:02
+ * @LastEditTime: 2024-08-22 16:56:51
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -40,7 +40,7 @@
   >
     <ADropdown trigger="click" @select="handleSelect">
       <AButton class="!text-[var(--color-text-1)] !h-40px" type="text">
-        <SvgIcon icon="heroicons:language-16-solid" size="20" />
+        <SvgIcon icon="heroicons:language-16-solid" size="18" />
       </AButton>
       <template #content>
         <ADoption

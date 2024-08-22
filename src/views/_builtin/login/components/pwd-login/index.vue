@@ -1,136 +1,3 @@
-<template>
-  <div>
-    <LoginTitle login-mode="pwd-login" />
-
-    <div class="h-32px leading-32px text-[rgba(var(--red-6))]"
-      >{{ errorMessage }}
-    </div>
-    <AForm
-      ref="loginForm"
-      :model="userInfo"
-      class="-enter-x"
-      layout="vertical"
-      @submit="handleSubmit"
-    >
-      <AFormItem
-        :rules="[
-          {
-            required: true,
-            message: $t('sys.login.common.userNamePlaceholder'),
-          },
-        ]"
-        :validate-trigger="['change', 'blur']"
-        class="-enter-x"
-        field="username"
-        hide-label
-      >
-        <AInput
-          v-model="userInfo.username"
-          :placeholder="$t('sys.login.common.userNamePlaceholder')"
-        >
-          <template #prefix>
-            <icon-user />
-          </template>
-        </AInput>
-      </AFormItem>
-      <AFormItem
-        :rules="[
-          {
-            required: true,
-            message: $t('sys.login.common.passwordPlaceholder'),
-          },
-        ]"
-        :validate-trigger="['change', 'blur']"
-        class="-enter-x"
-        field="password"
-        hide-label
-      >
-        <AInputPassword
-          v-model="userInfo.password"
-          :placeholder="$t('sys.login.common.passwordPlaceholder')"
-          allow-clear
-          autocomplete="off"
-        >
-          <template #prefix>
-            <icon-lock />
-          </template>
-        </AInputPassword>
-      </AFormItem>
-      <ASpace :size="16" class="-enter-x" direction="vertical">
-        <div class="flex justify-between -enter-x">
-          <ACheckbox
-            :model-value="loginConfig.rememberPassword"
-            checked="rememberPassword"
-            @change="setRememberPassword"
-          >
-            {{ $t('sys.login.pwdLogin.rememberMe') }}
-          </ACheckbox>
-          <ALink @click="toLoginModule('forget-pwd')"
-            >{{ $t('sys.login.pwdLogin.forgetPwd') }}
-          </ALink>
-        </div>
-        <AButton
-          :loading="loading"
-          class="-enter-x"
-          html-type="submit"
-          long
-          type="primary"
-        >
-          {{ $t('sys.login.common.login') }}
-        </AButton>
-        <div class="flex w-full -enter-x">
-          <AButton
-            class="!text-[var(--color-text-3)]"
-            long
-            type="text"
-            @click="toLoginModule('code-login')"
-          >
-            {{ $t('sys.login.pwdLogin.mobileLogin') }}
-          </AButton>
-          <AButton
-            class="!text-[var(--color-text-3)]"
-            long
-            type="text"
-            @click="toLoginModule('register')"
-          >
-            {{ $t('sys.login.pwdLogin.register') }}
-          </AButton>
-        </div>
-        <ADivider class="-enter-x" orientation="center"
-          >{{ $t('sys.login.pwdLogin.otherLoginMode') }}
-        </ADivider>
-        <div class="w-full flex justify-evenly -enter-x">
-          <IconGithub
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-            @click="open(GITHUB_AUTHORIZE_URL)"
-          />
-          <IconWechat
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-          />
-          <IconQqCircleFill
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-          />
-          <IconAlipayCircle
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-          />
-          <IconGoogleCircleFill
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-          />
-          <IconFaceBookCircleFill
-            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-            size="24"
-          />
-        </div>
-      </ASpace>
-    </AForm>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { reactive, ref, unref } from 'vue';
   import { Notification, ValidatedError } from '@arco-design/web-vue';
@@ -231,6 +98,138 @@
     loginConfig.value.rememberPassword = value;
   };
 </script>
+
+<template>
+  <div>
+    <LoginTitle login-mode="pwd-login" />
+
+    <div class="h-32px leading-32px text-[rgba(var(--red-6))]">
+      {{ errorMessage }}
+    </div>
+    <AForm
+      :model="userInfo"
+      class="-enter-x"
+      layout="vertical"
+      @submit="handleSubmit"
+    >
+      <AFormItem
+        :rules="[
+          {
+            required: true,
+            message: t('sys.login.common.userNamePlaceholder'),
+          },
+        ]"
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="username"
+        hide-label
+      >
+        <AInput
+          v-model="userInfo.username"
+          :placeholder="t('sys.login.common.userNamePlaceholder')"
+        >
+          <template #prefix>
+            <icon-user />
+          </template>
+        </AInput>
+      </AFormItem>
+      <AFormItem
+        :rules="[
+          {
+            required: true,
+            message: t('sys.login.common.passwordPlaceholder'),
+          },
+        ]"
+        :validate-trigger="['change', 'blur']"
+        class="-enter-x"
+        field="password"
+        hide-label
+      >
+        <AInputPassword
+          v-model="userInfo.password"
+          :placeholder="t('sys.login.common.passwordPlaceholder')"
+          allow-clear
+          autocomplete="off"
+        >
+          <template #prefix>
+            <icon-lock />
+          </template>
+        </AInputPassword>
+      </AFormItem>
+      <ASpace :size="16" class="-enter-x" direction="vertical">
+        <div class="flex justify-between -enter-x">
+          <ACheckbox
+            :model-value="loginConfig.rememberPassword"
+            checked="rememberPassword"
+            @change="setRememberPassword"
+          >
+            {{ t('sys.login.pwdLogin.rememberMe') }}
+          </ACheckbox>
+          <ALink @click="toLoginModule('forget-pwd')">
+            {{ t('sys.login.pwdLogin.forgetPwd') }}
+          </ALink>
+        </div>
+        <AButton
+          :loading="loading"
+          class="-enter-x"
+          html-type="submit"
+          long
+          type="primary"
+        >
+          {{ t('sys.login.common.login') }}
+        </AButton>
+        <div class="flex w-full -enter-x">
+          <AButton
+            class="!text-[var(--color-text-3)]"
+            long
+            type="text"
+            @click="toLoginModule('code-login')"
+          >
+            {{ t('sys.login.pwdLogin.mobileLogin') }}
+          </AButton>
+          <AButton
+            class="!text-[var(--color-text-3)]"
+            long
+            type="text"
+            @click="toLoginModule('register')"
+          >
+            {{ t('sys.login.pwdLogin.register') }}
+          </AButton>
+        </div>
+        <ADivider class="-enter-x" orientation="center">
+          {{ t('sys.login.pwdLogin.otherLoginMode') }}
+        </ADivider>
+        <div class="w-full flex justify-evenly -enter-x">
+          <IconGithub
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+            @click="open(GITHUB_AUTHORIZE_URL)"
+          />
+          <IconWechat
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+          />
+          <IconQqCircleFill
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+          />
+          <IconAlipayCircle
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+          />
+          <IconGoogleCircleFill
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+          />
+          <IconFaceBookCircleFill
+            class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+            size="24"
+          />
+        </div>
+      </ASpace>
+    </AForm>
+  </div>
+</template>
 
 <style lang="less" scoped>
   :deep(.arco-divider-text) {

@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-08-22 14:35:27
+ * @LastEditors: LLiuHuan
+ */
 import { Router, useRouter } from 'vue-router';
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
 import { useAppStore } from '@/store/modules/app';
@@ -31,17 +38,17 @@ export const useTabs = (_router?: Router) => {
 
   const { currentRoute } = router;
 
-  const getCurrentTab = () => {
+  const getCurrentTab = (): App.Tab | undefined => {
     const route = unref(currentRoute);
-    return tabStore.tabs.find((item) => item.fullPath === route.fullPath)!;
+    return tabStore.tabs.find((item) => item.fullPath === route.fullPath);
   };
 
   async function updateTabTitle(title: string, tab?: App.Tab) {
     if (!canIUseTabs) {
       return;
     }
-    const targetTab = tab || getCurrentTab();
-    tabStore.setTabLabel(title, targetTab.id);
+    const targetTab = tab ?? getCurrentTab();
+    tabStore.setTabLabel(title, targetTab?.id);
   }
 
   const handleTabAction = async (action: TabActionEnum, tab?: App.Tab) => {
@@ -49,7 +56,11 @@ export const useTabs = (_router?: Router) => {
       return;
     }
 
-    const currentTab = tab || getCurrentTab();
+    let currentTab: App.Tab = getCurrentTab() as App.Tab;
+
+    if (tab) {
+      currentTab = tab;
+    }
 
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
@@ -65,16 +76,16 @@ export const useTabs = (_router?: Router) => {
         break;
 
       case TabActionEnum.CLOSE_RIGHT:
-        await tabStore.clearRightTabs(currentTab.id);
+        await tabStore.clearRightTabs(currentTab?.id);
         break;
 
       case TabActionEnum.CLOSE_OTHER:
-        await tabStore.clearTabs([currentTab.id]);
+        await tabStore.clearTabs([currentTab?.id]);
         break;
 
       case TabActionEnum.CLOSE_CURRENT:
       case TabActionEnum.CLOSE:
-        await tabStore.removeTab(currentTab.id);
+        await tabStore.removeTab(currentTab?.id);
         break;
       default:
         break;

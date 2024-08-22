@@ -1,7 +1,17 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-22 13:17:40
+ * @LastEditTime: 2024-08-22 14:18:55
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { useRootSetting } from '@/hooks/setting';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { barOption, line1Option, line2Option, pieOption } from './data';
   import DataItem from './DataItem.vue';
+
+  const { t } = useI18n();
 
   const { getIsDarkMode } = useRootSetting();
 </script>
@@ -17,7 +27,7 @@
               ? 'linear-gradient(180deg, #284991 0%, #122B62 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)',
           }"
-          :title="$t('dashboard.analysis.visits')"
+          :title="t('dashboard.analysis.visits')"
           class="!rounded-4px"
         />
       </AGridItem>
@@ -29,7 +39,7 @@
               ? 'linear-gradient(180deg, #3D492E 0%, #263827 100%)'
               : 'linear-gradient(180deg, #F5FEF2 0%, #E6FEEE 100%)',
           }"
-          :title="$t('dashboard.analysis.visits')"
+          :title="t('dashboard.analysis.visits')"
           class="!rounded-4px"
         />
       </AGridItem>
@@ -41,7 +51,7 @@
               ? 'linear-gradient(180deg, #312565 0%, #201936 100%)'
               : 'linear-gradient(180deg, #F7F7FF 0%, #ECECFF 100%)',
           }"
-          :title="$t('dashboard.analysis.visits')"
+          :title="t('dashboard.analysis.visits')"
           class="!rounded-4px"
         />
       </AGridItem>
@@ -53,7 +63,7 @@
               ? 'linear-gradient(180deg, #284991 0%, #122B62 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)',
           }"
-          :title="$t('dashboard.analysis.visits')"
+          :title="t('dashboard.analysis.visits')"
           class="!rounded-4px"
         />
       </AGridItem>

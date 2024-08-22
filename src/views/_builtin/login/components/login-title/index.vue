@@ -1,12 +1,12 @@
-<template>
-  <div
-    class="justify-start -enter-x text-[var(--color-text-1)] text-24px font-medium leading-8"
-  >
-    {{ $t(getTitle) }}
-  </div>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-06-14 14:59:44
+ * @LastEditTime: 2024-08-22 14:15:09
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
+  import { useI18n } from '@/hooks/web/useI18n';
   import { computed } from 'vue';
 
   interface Props {
@@ -14,6 +14,8 @@
   }
 
   const props = defineProps<Props>();
+
+  const { t } = useI18n();
 
   const getTitle = computed(() => {
     const loginModuleLabels = {
@@ -29,5 +31,13 @@
     return loginModuleLabels[props.loginMode];
   });
 </script>
+
+<template>
+  <div
+    class="justify-start -enter-x text-[var(--color-text-1)] text-24px font-medium leading-8"
+  >
+    {{ t(getTitle) }}
+  </div>
+</template>
 
 <style lang="less" scoped></style>

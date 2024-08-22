@@ -70,6 +70,11 @@ const handler = (
       return {
         menuSetting: { theme: value ? AppEnum.DARK : AppEnum.LIGHT },
       };
+    case HandlerEnum.MENU_COLLAPSE:
+      return {
+        menuSetting: { collapsed: value },
+      };
+
     case HandlerEnum.MENU_COLLAPSE_BTN:
       return {
         menuSetting: { trigger: value },
@@ -270,9 +275,6 @@ const handler = (
 };
 
 function baseHandler(event: HandlerEnum, value: any) {
-  if (!value) {
-    return;
-  }
   const appStore = useAppStore();
   const config = handler(event, value);
   appStore.setProjectConfig(config);

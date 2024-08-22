@@ -1,3 +1,34 @@
+<script lang="ts" setup>
+  import { PropType } from 'vue';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { MessageListType, MessageRecord } from './types';
+
+  const props = defineProps({
+    renderList: {
+      type: Array as PropType<MessageListType>,
+      required: true,
+    },
+    // unreadCount: {
+    //   type: Number,
+    //   default: 0,
+    // },
+  });
+  const emit = defineEmits(['itemClick']);
+
+  const { t } = useI18n();
+
+  const allRead = () => {
+    emit('itemClick', [...props.renderList]);
+  };
+
+  const onItemClick = (item: MessageRecord) => {
+    if (!item.status) {
+      emit('itemClick', [item]);
+    }
+  };
+  const showMax = 3;
+</script>
+
 <template>
   <AList :bordered="false">
     <AListItem
@@ -36,7 +67,8 @@
                 :ellipsis="{
                   rows: 1,
                 }"
-                >{{ item.content }}
+              >
+                {{ item.content }}
               </ATypographyParagraph>
               <ATypographyText v-if="item.type === 'message'" class="time-text">
                 {{ item.time }}
@@ -53,46 +85,19 @@
         fill
       >
         <div class="footer-wrap">
-          <ALink @click="allRead">{{ $t('layout.header.msgAllRead') }}</ALink>
+          <ALink @click="allRead">{{ t('layout.header.msgAllRead') }}</ALink>
         </div>
         <div class="footer-wrap">
-          <ALink>{{ $t('layout.header.msgViewMore') }}</ALink>
+          <ALink>{{ t('layout.header.msgViewMore') }}</ALink>
         </div>
       </ASpace>
     </template>
     <div
       v-if="renderList.length && renderList.length < 3"
-      :style="{ height: (showMax - renderList.length) * 86 + 'px' }"
+      :style="{ height: `${(showMax - renderList.length) * 86}px` }"
     ></div>
   </AList>
 </template>
-
-<script lang="ts" setup>
-  import { PropType } from 'vue';
-  import { MessageListType, MessageRecord } from './types';
-
-  const props = defineProps({
-    renderList: {
-      type: Array as PropType<MessageListType>,
-      required: true,
-    },
-    unreadCount: {
-      type: Number,
-      default: 0,
-    },
-  });
-  const emit = defineEmits(['itemClick']);
-  const allRead = () => {
-    emit('itemClick', [...props.renderList]);
-  };
-
-  const onItemClick = (item: MessageRecord) => {
-    if (!item.status) {
-      emit('itemClick', [item]);
-    }
-  };
-  const showMax = 3;
-</script>
 
 <style lang="less" scoped>
   :deep(.arco-list) {

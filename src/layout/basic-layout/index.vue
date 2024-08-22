@@ -1,48 +1,3 @@
-<template>
-  <AdminLayout
-    v-model:sider-collapse="siderCollapse"
-    :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
-    :fixed-footer="getFooterFixed"
-    :fixed-top="getFixedHeaderAndTab"
-    :footer-height="getFooterHeight"
-    :footer-visible="getShowFooter"
-    :full-content="getFullContent"
-    :header-height="getHeaderHeight"
-    :is-mobile="getIsMobile"
-    :mode="layoutMode"
-    :scroll-el-id="LAYOUT_SCROLL_EL_ID"
-    :scroll-mode="getLayoutScrollMode"
-    :sider-collapsed-width="getSiderCollapsedWidth"
-    :sider-visible="isSiderVisible"
-    :sider-width="getSiderWidth"
-    :tab-auto-collapse="getFoldAutoCollapse"
-    :tab-height="getTabHeight"
-    :tab-visible="getShowMultipleTab"
-  >
-    <template #header>
-      <LayoutHeader
-        :show-logo="headerProps.showLogo && getShowLogo"
-        v-bind="headerProps"
-      />
-    </template>
-    <template #tab>
-      <LayoutTabs />
-    </template>
-    <template #sider>
-      <LayoutSider />
-    </template>
-    <LayoutContent />
-    <SettingDrawer />
-    <LayoutFeature />
-    <template #footer>
-      <LayoutFooter />
-    </template>
-    <template #backTop>
-      <ABackTop :target-container="`#${LAYOUT_SCROLL_EL_ID}`" />
-    </template>
-  </AdminLayout>
-</template>
-
 <script lang="ts" setup>
   import {
     useFooterSetting,
@@ -138,6 +93,51 @@
 
   setupMixMenuContext();
 </script>
+
+<template>
+  <AdminLayout
+    v-model:sider-collapse="siderCollapse"
+    :content-class="getContentXScrollable ? 'overflow-x-hidden' : ''"
+    :fixed-footer="getFooterFixed"
+    :fixed-top="getFixedHeaderAndTab"
+    :footer-height="getFooterHeight"
+    :footer-visible="getShowFooter"
+    :full-content="getFullContent"
+    :header-height="getHeaderHeight"
+    :is-mobile="getIsMobile"
+    :mode="layoutMode"
+    :scroll-el-id="LAYOUT_SCROLL_EL_ID"
+    :scroll-mode="getLayoutScrollMode"
+    :sider-collapsed-width="getSiderCollapsedWidth"
+    :sider-visible="isSiderVisible"
+    :sider-width="getSiderWidth"
+    :tab-auto-collapse="getFoldAutoCollapse"
+    :tab-height="getTabHeight"
+    :tab-visible="getShowMultipleTab"
+  >
+    <template #header>
+      <LayoutHeader
+        :show-logo="headerProps.showLogo && getShowLogo"
+        v-bind="headerProps"
+      />
+    </template>
+    <template #tab>
+      <LayoutTabs />
+    </template>
+    <template #sider>
+      <LayoutSider />
+    </template>
+    <LayoutContent />
+    <SettingDrawer />
+    <LayoutFeature />
+    <template #footer>
+      <LayoutFooter />
+    </template>
+    <template #backTop>
+      <ABackTop :target-container="`#${LAYOUT_SCROLL_EL_ID}`" />
+    </template>
+  </AdminLayout>
+</template>
 
 <style lang="less">
   @import '@/styles/scrollbar.less';

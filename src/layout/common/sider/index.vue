@@ -1,32 +1,3 @@
-<template>
-  <div
-    :style="{ background: siderDark ? 'var(--color-menu-dark-bg)' : '' }"
-    class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]"
-  >
-    <AppLogo
-      v-if="showLogo"
-      :show-title="!getCollapsed"
-      :style="{ height: `${getHeaderHeight + 1}px` }"
-      class="text-16px font-bold"
-    />
-    <LayoutVerticalMixMenu v-if="isVerticalMix">
-      <AppLogo
-        v-if="getShowLogo"
-        :show-title="false"
-        :style="{ height: `${getHeaderHeight + 1}px` }"
-        class="text-16px font-bold"
-      />
-    </LayoutVerticalMixMenu>
-    <LayoutHorizontalMixMenu v-else-if="isHorizontalMix" />
-    <LayoutVerticalMenu
-      v-else
-      :collapsed="getCollapsed"
-      :dark="siderDark"
-      :menus="routeStore.menus"
-    ></LayoutVerticalMenu>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import {
     useHeaderSetting,
@@ -59,5 +30,34 @@
       unref(getShowLogo) && !unref(isVerticalMix) && !unref(isHorizontalMix),
   );
 </script>
+
+<template>
+  <div
+    :style="{ background: siderDark ? 'var(--color-menu-dark-bg)' : '' }"
+    class="flex-col-stretch wh-full shadow-sider bg-[var(--color-bg-2)]"
+  >
+    <AppLogo
+      v-if="showLogo"
+      :show-title="!getCollapsed"
+      :style="{ height: `${getHeaderHeight + 1}px` }"
+      class="text-16px font-bold"
+    />
+    <LayoutVerticalMixMenu v-if="isVerticalMix">
+      <AppLogo
+        v-if="getShowLogo"
+        :show-title="false"
+        :style="{ height: `${getHeaderHeight + 1}px` }"
+        class="text-16px font-bold"
+      />
+    </LayoutVerticalMixMenu>
+    <LayoutHorizontalMixMenu v-else-if="isHorizontalMix" />
+    <LayoutVerticalMenu
+      v-else
+      :collapsed="getCollapsed"
+      :dark="siderDark"
+      :menus="routeStore.menus"
+    />
+  </div>
+</template>
 
 <style lang="less" scoped></style>

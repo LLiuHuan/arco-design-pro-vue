@@ -220,6 +220,30 @@ export interface ThemeInfo {
   colors: ThemeSettingColors;
 }
 
+export interface Copyright {
+  // 是否启用版权
+  // Whether to start the copyright
+  show?: boolean;
+  // 公司
+  // Company
+  company?: string;
+  // 主页
+  // Home page
+  companyHref?: string;
+  // 备案号
+  // Record number
+  record?: string;
+  // 备案网站链接
+  // Record website link
+  recordHref?: string;
+  // 公安备案号
+  // Public security record number
+  police?: string;
+  // 公安备案网站链接
+  // Public security record website link
+  policeHref?: string;
+}
+
 export interface ProjectConfig {
   // TODO: 感觉没有必要，用户信息不大可能会存储在sessionStorage，不过还是暂时保留
   // 权限相关信息的存储位置
@@ -311,4 +335,7 @@ export interface ProjectConfig {
   // 水印文本
   // Watermark text
   watermarkText: string;
+
+  // 版权信息
+  copyrightSetting: Copyright;
 }

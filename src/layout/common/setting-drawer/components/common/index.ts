@@ -4,6 +4,7 @@ import SelectItem from './select-item/index.vue';
 import InputNumberItem from './input-number-item/index.vue';
 import InputItem from './input-item/index.vue';
 import LayoutModeCard from './layout-mode-card/index.vue';
+import TitleItem from './title-item/index.vue';
 import { HandlerEnum } from './helpers';
 
 export {
@@ -13,5 +14,6 @@ export {
   InputItem,
   InputNumberItem,
   LayoutModeCard,
+  TitleItem,
   HandlerEnum,
 };

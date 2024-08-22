@@ -195,6 +195,12 @@ export const defaultSetting: ProjectConfig = {
   // 水印文本
   // Watermark text
   watermarkText: 'Arco Vue3',
+  // 版权信息
+  // Copyright
+  copyrightSetting: {
+    show: false,
+    company: 'Arco Vue3',
+  },
 };
 
 export const appSetting: ProjectConfig = {

@@ -1,56 +1,3 @@
-<template>
-  <DefineMixMenuItem v-slot="{ label, icon, active, isCollapsed }">
-    <div
-      :class="[
-        {
-          darkDefaultItem: dark,
-          darkActiveItem: active && dark,
-        },
-        active ? 'activeItem' : 'defaultItem',
-        isCollapsed ? 'py-8px' : 'py-10px',
-      ]"
-      class="flex-col-center cursor-pointer bg-transparent px-4px"
-    >
-      <component
-        :is="icon"
-        :class="[isCollapsed ? 'text-16px mb-0' : 'text-20px mb-8px']"
-        class="h-20px transition-base"
-      />
-      <p
-        :class="[isCollapsed ? 'h-0 pt-0 hidden' : 'h-24px pt-4px']"
-        class="m-0 text-12px"
-      >
-        {{ label }}
-      </p>
-    </div>
-  </DefineMixMenuItem>
-
-  <div class="h-full flex-col-stretch flex-1-hidden">
-    <slot />
-
-    <AScrollbar
-      class="h-full overflow-y-auto"
-      outer-class="h-full flex-1-hidden"
-    >
-      <MixMenuItem
-        v-for="item in menus"
-        :key="item.key"
-        :active="item.key === activeMenuKey"
-        :icon="item.icon"
-        :is-collapsed="getCollapsed"
-        :label="item.label"
-        v-bind="getItemEvents(item)"
-      />
-    </AScrollbar>
-
-    <LayoutTrigger
-      v-if="isTrigger && getTrigger === 'FOOTER'"
-      :style="{ height: `${getFooterHeight + 1}px` }"
-      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
-    />
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { createReusableTemplate } from '@vueuse/core';
   import { LayoutTrigger } from '@/layout/common';
@@ -73,13 +20,9 @@
     dark?: boolean;
   }
 
-  defineProps<Props>();
-
   interface Emits {
     (e: 'select', menu: App.Menu, hover: boolean): boolean;
   }
-
-  const emit = defineEmits<Emits>();
 
   interface MixMenuItemProps {
     /**
@@ -104,10 +47,14 @@
     isCollapsed?: boolean;
   }
 
+  defineProps<Props>();
+
+  const emit = defineEmits<Emits>();
+
   const [DefineMixMenuItem, MixMenuItem] =
     createReusableTemplate<MixMenuItemProps>();
 
-  const { menus } = useRouteStore();
+  const routeStore = useRouteStore();
   const { goKey } = useGo();
   const {
     getCollapsed,
@@ -143,6 +90,59 @@
     };
   };
 </script>
+
+<template>
+  <DefineMixMenuItem v-slot="{ label, icon, active, isCollapsed }">
+    <div
+      :class="[
+        {
+          darkDefaultItem: dark,
+          darkActiveItem: active && dark,
+        },
+        active ? 'activeItem' : 'defaultItem',
+        isCollapsed ? 'py-8px' : 'py-10px',
+      ]"
+      class="flex-col-center cursor-pointer bg-transparent px-4px"
+    >
+      <component
+        :is="icon"
+        :class="[isCollapsed ? 'text-16px mb-0' : 'text-20px mb-8px']"
+        class="h-20px transition-base"
+      />
+      <p
+        :class="[isCollapsed ? 'h-0 pt-0 hidden' : 'h-24px pt-4px']"
+        class="m-0 text-12px"
+      >
+        {{ label }}
+      </p>
+    </div>
+  </DefineMixMenuItem>
+
+  <div class="h-full flex-col-stretch flex-1-hidden">
+    <slot></slot>
+
+    <AScrollbar
+      class="h-full overflow-y-auto"
+      outer-class="h-full flex-1-hidden"
+    >
+      <MixMenuItem
+        v-for="item in routeStore.menus"
+        :key="item.key"
+        :active="item.key === activeMenuKey"
+        :icon="item.icon"
+        :is-collapsed="getCollapsed"
+        :label="item.label"
+        v-bind="getItemEvents(item)"
+      />
+    </AScrollbar>
+
+    <LayoutTrigger
+      v-if="isTrigger && getTrigger === 'FOOTER'"
+      :style="{ height: `${getFooterHeight + 1}px` }"
+      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
+    />
+  </div>
+</template>
 
 <style scoped>
   .activeItem {

@@ -1,14 +1,10 @@
-<template>
-  <ASwitch :disabled="disabled" v-bind="getBindValue" @change="handleChange">
-    <template #checked-icon>
-      <icon-check />
-    </template>
-    <template #unchecked-icon>
-      <icon-close />
-    </template>
-  </ASwitch>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-21 10:53:49
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed } from 'vue';
   import { baseHandler, HandlerEnum } from '../helpers';
@@ -34,5 +30,16 @@
     }
   };
 </script>
+
+<template>
+  <ASwitch :disabled="disabled" v-bind="getBindValue" @change="handleChange">
+    <template #checked-icon>
+      <icon-check />
+    </template>
+    <template #unchecked-icon>
+      <icon-close />
+    </template>
+  </ASwitch>
+</template>
 
 <style lang="less" scoped></style>

@@ -6,7 +6,7 @@ import { listenerRouteChange } from '@/utils/router';
 
 export function useMixMenu() {
   const route = useRoute();
-  const { menus: getMenus } = useRouteStore();
+  const routeStore = useRouteStore();
 
   const activeFirstLevelMenuKey = ref('');
 
@@ -25,10 +25,9 @@ export function useMixMenu() {
   }
 
   const menus = computed(() => {
-    return (
-      getMenus.find((menu) => menu.key === unref(activeFirstLevelMenuKey))
-        ?.children || []
-    );
+    return (routeStore.menus.find(
+      (menu) => menu.key === unref(activeFirstLevelMenuKey),
+    )?.children || []) as App.Menu[];
   });
 
   // 监听路由变化

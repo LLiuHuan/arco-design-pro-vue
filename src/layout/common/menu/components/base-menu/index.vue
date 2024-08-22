@@ -1,57 +1,3 @@
-<template>
-  <div class="h-full flex-col-stretch flex-1-hidden">
-    <DefineMenuItem v-slot="{ item }">
-      <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeKey}_sub`">
-        <template v-if="item.icon" #icon>
-          <component :is="item.icon"></component>
-        </template>
-        <template #title>{{ item.label }}</template>
-        <MenuItem
-          v-for="childrenItem in item.children || []"
-          :key="childrenItem.routeKey"
-          :item="childrenItem"
-        />
-      </ASubMenu>
-      <AMenuItem v-else :key="item.routeKey">
-        <template v-if="item.icon" #icon>
-          <component :is="item.icon" />
-        </template>
-        {{ item.label }}
-      </AMenuItem>
-    </DefineMenuItem>
-
-    <AScrollbar
-      class="h-full overflow-y-auto"
-      outer-class="h-full flex-1-hidden"
-    >
-      <AMenu
-        :accordion="getAccordion"
-        :collapsed="collapsed"
-        :collapsed-width="getCollapsedMenuWidth"
-        :mode="mode"
-        :open-keys="menuState.openKeys"
-        :selected-keys="menuState.selectedKeys"
-        :theme="dark ? AppEnum.DARK : AppEnum.LIGHT"
-        auto-open-selected
-        auto-scroll-into-view
-        class="transition-base vertical-mix-menu w-full box-border"
-        @menu-item-click="handleMenuItemClick"
-        @sub-menu-click="handleSubMenuItemClick"
-      >
-        <template v-for="item in menus" :key="item.routeName">
-          <MenuItem :item="item" />
-        </template>
-      </AMenu>
-    </AScrollbar>
-
-    <LayoutTrigger
-      v-if="isTrigger && getTrigger === 'FOOTER'"
-      :style="{ height: `${getFooterHeight + 1}px` }"
-      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
-    />
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { AppEnum, MenuModeEnum } from '@/enums';
   import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
@@ -150,5 +96,59 @@
     }
   }, true);
 </script>
+
+<template>
+  <div class="h-full flex-col-stretch flex-1-hidden">
+    <DefineMenuItem v-slot="{ item }">
+      <ASubMenu v-if="menuHasChildren(item)" :key="`${item.routeKey}_sub`">
+        <template v-if="item.icon" #icon>
+          <component :is="item.icon" />
+        </template>
+        <template #title>{{ item.label }}</template>
+        <MenuItem
+          v-for="childrenItem in item.children || []"
+          :key="childrenItem.routeKey"
+          :item="childrenItem"
+        />
+      </ASubMenu>
+      <AMenuItem v-else :key="item.routeKey">
+        <template v-if="item.icon" #icon>
+          <component :is="item.icon" />
+        </template>
+        {{ item.label }}
+      </AMenuItem>
+    </DefineMenuItem>
+
+    <AScrollbar
+      class="h-full overflow-y-auto"
+      outer-class="h-full flex-1-hidden"
+    >
+      <AMenu
+        :accordion="getAccordion"
+        :collapsed="collapsed"
+        :collapsed-width="getCollapsedMenuWidth"
+        :mode="mode"
+        :open-keys="menuState.openKeys"
+        :selected-keys="menuState.selectedKeys"
+        :theme="dark ? AppEnum.DARK : AppEnum.LIGHT"
+        auto-open-selected
+        auto-scroll-into-view
+        class="transition-base vertical-mix-menu w-full box-border"
+        @menu-item-click="handleMenuItemClick"
+        @sub-menu-click="handleSubMenuItemClick"
+      >
+        <template v-for="item in menus" :key="item.routeKey">
+          <MenuItem :item="item" />
+        </template>
+      </AMenu>
+    </AScrollbar>
+
+    <LayoutTrigger
+      v-if="isTrigger && getTrigger === 'FOOTER'"
+      :style="{ height: `${getFooterHeight + 1}px` }"
+      class="cursor-pointer bg-[var(--color-bg-2)] border-t-1 border-t-solid border-t-[var(--color-fill-2)]"
+    />
+  </div>
+</template>
 
 <style lang="less" scoped></style>

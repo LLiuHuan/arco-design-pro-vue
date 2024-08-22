@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+  import DataCard from './components/DataCard/index.vue';
+  import SiteAnalysis from './components/SiteAnalysis/index.vue';
+  import VisitRadar from './components/VisitRadar/index.vue';
+  import VisitSource from './components/VisitSource/index.vue';
+  import SalesProductPie from './components/SalesProductPie/index.vue';
+</script>
+
 <template>
   <div>
     <DataCard />
@@ -11,13 +19,5 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-  import DataCard from './components/DataCard/index.vue';
-  import SiteAnalysis from './components/SiteAnalysis/index.vue';
-  import VisitRadar from './components/VisitRadar/index.vue';
-  import VisitSource from './components/VisitSource/index.vue';
-  import SalesProductPie from './components/SalesProductPie/index.vue';
-</script>
 
 <style lang="less" scoped></style>

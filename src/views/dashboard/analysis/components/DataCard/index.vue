@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+  import { useRootSetting } from '@/hooks/setting';
+  import { barOption, line1Option, line2Option, pieOption } from './data';
+  import DataItem from './DataItem.vue';
+
+  const { getIsDarkMode } = useRootSetting();
+</script>
+
 <template>
   <ACard :bordered="false" class="">
     <AGrid :col-gap="12" :cols="24" :row-gap="12">
@@ -52,13 +60,5 @@
     </AGrid>
   </ACard>
 </template>
-
-<script lang="ts" setup>
-  import { useRootSetting } from '@/hooks/setting';
-  import { barOption, line1Option, line2Option, pieOption } from './data';
-  import DataItem from './DataItem.vue';
-
-  const { getIsDarkMode } = useRootSetting();
-</script>
 
 <style lang="less" scoped></style>

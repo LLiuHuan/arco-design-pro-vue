@@ -1,14 +1,3 @@
-<template>
-  <ASelect
-    :disabled="disabled"
-    :options="options"
-    class="!w-126px"
-    v-bind="getBindValue"
-    @change="handleChange"
-  >
-  </ASelect>
-</template>
-
 <script lang="ts" setup>
   import { computed } from 'vue';
   import { SelectOptionData, SelectOptionGroup } from '@arco-design/web-vue';
@@ -62,5 +51,15 @@
     if (props.event) baseHandler(props.event, value);
   }
 </script>
+
+<template>
+  <ASelect
+    :disabled="disabled"
+    :options="options"
+    class="!w-126px"
+    v-bind="getBindValue"
+    @change="handleChange"
+  />
+</template>
 
 <style lang="less" scoped></style>

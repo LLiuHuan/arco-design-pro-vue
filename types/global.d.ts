@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-21 15:55:29
+ * @LastEditors: LLiuHuan
+ */
 declare global {}
 
 // const __APP_INFO__: {
@@ -50,3 +57,9 @@ declare interface ChangeEvent extends Event {
 declare const BUILD_TIME: string;
 
 declare type EmitType = ReturnType<typeof defineEmits>;
+
+declare module '*.vue' {
+  import Vue from 'vue';
+
+  export default Vue;
+}

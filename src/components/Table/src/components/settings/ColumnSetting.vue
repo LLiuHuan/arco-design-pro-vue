@@ -1,107 +1,10 @@
-<template>
-  <APopover
-    content-class=""
-    position="bl"
-    trigger="click"
-    @popup-visible-change="onOpenChange"
-  >
-    <template #title>
-      <div class="flex justify-between items-center">
-        <ASpace class="pr-10px nowrap-hidden">
-          <ACheckbox
-            v-model:model-value="isColumnAllSelected"
-            :indeterminate="indeterminate"
-            @change="onColumnAllSelectChange"
-          >
-            {{ $t('component.table.settingColumnShow') }}
-          </ACheckbox>
-          <ACheckbox
-            v-model:model-value="isIndexColumnShow"
-            @change="onIndexColumnShowChange"
-          >
-            {{ $t('component.table.settingIndexColumnShow') }}
-          </ACheckbox>
-          <ACheckbox
-            v-if="defaultRowSelection"
-            v-model:model-value="isRowSelectionShow"
-            @change="onRowSelectionShowChange"
-          >
-            {{ $t('component.table.settingSelectColumnShow') }}
-          </ACheckbox>
-        </ASpace>
-
-        <!--        <AButton class="neutral-btn" size="mini" type="outline">-->
-        <!--          {{ $t('common.resetText') }}-->
-        <!--        </AButton>-->
-      </div>
-    </template>
-
-    <template #content>
-      <AScrollbar>
-        <ACheckboxGroup
-          v-model:model-value="columnCheckedOptions"
-          class="w-full"
-        >
-          <div ref="draggableRef">
-            <div
-              v-for="item in columnOptions"
-              :key="item.value"
-              :data-no="item.value"
-              class="cursor-pointer h-36px flex-y-center px-6px rd-4px hover:(bg-[rgba(var(--primary-6))] bg-opacity-20) flex justify-between items-center"
-            >
-              <div>
-                <IconDragDotVertical />
-                <ACheckbox :value="item.value">
-                  {{ item.label }}
-                </ACheckbox>
-              </div>
-
-              <div>
-                <ATooltip :content="$t('component.table.settingFixedLeft')">
-                  <IconToLeft
-                    :class="[
-                      item.fixed === 'left'
-                        ? '!text-[rgba(var(--primary-6))]'
-                        : '',
-                    ]"
-                    @click="onColumnFixedChange(item, 'left')"
-                  />
-                </ATooltip>
-                <ADivider direction="vertical" />
-                <ATooltip :content="$t('component.table.settingFixedRight')">
-                  <IconToRight
-                    :class="[
-                      item.fixed === 'right'
-                        ? '!text-[rgba(var(--primary-6))]'
-                        : '',
-                    ]"
-                    @click="onColumnFixedChange(item, 'right')"
-                  />
-                </ATooltip>
-              </div>
-            </div>
-          </div>
-        </ACheckboxGroup>
-      </AScrollbar>
-    </template>
-    <ATooltip :content="$t('component.table.settingColumn')" position="top">
-      <div>
-        <SvgIcon
-          class="cursor-pointer"
-          icon="lets-icons:setting-line"
-          size="20"
-        />
-      </div>
-    </ATooltip>
-  </APopover>
-</template>
-
 <script lang="ts" setup>
   import { useDraggable } from 'vue-draggable-plus';
   import { computed, nextTick, ref, unref, watch } from 'vue';
   import { cloneDeep, omit } from 'lodash-es';
   import { SvgIcon } from '@/components/Icon';
   import { TableRowSelection } from '@arco-design/web-vue';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { useTableContext } from '../../hooks/useTableContext';
   import {
     BasicColumn,
@@ -112,6 +15,8 @@
 
   defineOptions({ name: 'ColumnSetting' });
   const emit = defineEmits(['columnsChange']);
+
+  const { t } = useI18n();
 
   const table = useTableContext();
 
@@ -416,5 +321,103 @@
 
   init();
 </script>
+
+<template>
+  <APopover
+    content-class=""
+    position="bl"
+    trigger="click"
+    @popup-visible-change="onOpenChange"
+  >
+    <template #title>
+      <div class="flex justify-between items-center">
+        <ASpace class="pr-10px nowrap-hidden">
+          <ACheckbox
+            v-model:model-value="isColumnAllSelected"
+            :indeterminate="indeterminate"
+            @change="onColumnAllSelectChange"
+          >
+            {{ t('component.table.settingColumnShow') }}
+          </ACheckbox>
+          <ACheckbox
+            v-model:model-value="isIndexColumnShow"
+            @change="onIndexColumnShowChange"
+          >
+            {{ t('component.table.settingIndexColumnShow') }}
+          </ACheckbox>
+          <ACheckbox
+            v-if="defaultRowSelection"
+            v-model:model-value="isRowSelectionShow"
+            @change="onRowSelectionShowChange"
+          >
+            {{ t('component.table.settingSelectColumnShow') }}
+          </ACheckbox>
+        </ASpace>
+
+        <!--        <AButton class="neutral-btn" size="mini" type="outline">-->
+        <!--          {{ t('common.resetText') }}-->
+        <!--        </AButton>-->
+      </div>
+    </template>
+
+    <template #content>
+      <AScrollbar>
+        <ACheckboxGroup
+          v-model:model-value="columnCheckedOptions"
+          class="w-full"
+        >
+          <div ref="draggableRef">
+            <div
+              v-for="item in columnOptions"
+              :key="item.value"
+              :data-no="item.value"
+              class="cursor-pointer h-36px flex-y-center px-6px rd-4px hover:(bg-[rgba(var(--primary-6))] bg-opacity-20) flex justify-between items-center"
+            >
+              <div>
+                <IconDragDotVertical />
+                <ACheckbox :value="item.value">
+                  {{ item.label }}
+                </ACheckbox>
+              </div>
+
+              <div>
+                <ATooltip :content="t('component.table.settingFixedLeft')">
+                  <IconToLeft
+                    :class="[
+                      item.fixed === 'left'
+                        ? '!text-[rgba(var(--primary-6))]'
+                        : '',
+                    ]"
+                    @click="onColumnFixedChange(item, 'left')"
+                  />
+                </ATooltip>
+                <ADivider direction="vertical" />
+                <ATooltip :content="t('component.table.settingFixedRight')">
+                  <IconToRight
+                    :class="[
+                      item.fixed === 'right'
+                        ? '!text-[rgba(var(--primary-6))]'
+                        : '',
+                    ]"
+                    @click="onColumnFixedChange(item, 'right')"
+                  />
+                </ATooltip>
+              </div>
+            </div>
+          </div>
+        </ACheckboxGroup>
+      </AScrollbar>
+    </template>
+    <ATooltip :content="t('component.table.settingColumn')" position="top">
+      <div>
+        <SvgIcon
+          class="cursor-pointer"
+          icon="lets-icons:setting-line"
+          size="20"
+        />
+      </div>
+    </ATooltip>
+  </APopover>
+</template>
 
 <style lang="less" scoped></style>

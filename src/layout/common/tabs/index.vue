@@ -1,66 +1,3 @@
-<template>
-  <div
-    class="flex items-center relative bg-[var(--color-bg-2)] h-full shadow-tab text-[var(--color-text-1)]"
-  >
-    <div class="flex-auto flex items-center h-full relative nowrap-hidden">
-      <span
-        v-if="tabState.scrollable"
-        class="tabs-prev flex-center w-32px h-full bg-[var(--color-bg-2)] hover:bg-[var(--color-fill-1)] cursor-pointer absolute-lt"
-        @click="scrollPrev"
-      >
-        <SvgIcon icon="mingcute:left-fill" size="16" />
-      </span>
-
-      <div
-        ref="navScroll"
-        :class="{
-          'mx-36px': tabState.scrollable,
-          'mx-6px': !tabState.scrollable,
-        }"
-        class="flex-auto navScroll nowrap-hidden"
-        @wheel="wheel"
-      >
-        <div ref="draggableRef" class="flex items-center">
-          <div v-for="element in getTabs" :key="element.fullPath">
-            <ContentMenu :active-key="activeKeyRef" :tab-item="element">
-              <ButtonTab
-                :activate="activeKeyRef === element.fullPath"
-                :closable="!tabStore.isTabRetain(element.id)"
-                :tab="element"
-                @close="handleClose(element)"
-                @click.stop="tabStore.switchRouteByTab(element)"
-              >
-              </ButtonTab>
-            </ContentMenu>
-          </div>
-        </div>
-      </div>
-
-      <span
-        v-if="tabState.scrollable"
-        class="tabs-next flex-center w-32px h-full bg-[var(--color-bg-2)] hover:bg-[var(--color-fill-1)] cursor-pointer absolute-rt"
-        @click="scrollNext"
-      >
-        <SvgIcon icon="mingcute:right-fill" />
-      </span>
-    </div>
-    <div v-if="getShowRedo || getShowQuick" class="flex-center h-full">
-      <Setting v-if="(getShowFold && getFullContent) || !getShowHeader" />
-      <Redo v-if="getShowRedo" />
-      <ContentMenu
-        v-if="getShowQuick"
-        :active-key="activeKeyRef"
-        :tab-item="$route"
-        position="br"
-        trigger="click"
-      >
-        <Dropdown />
-      </ContentMenu>
-      <Fold v-if="getShowFold" />
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { computed, nextTick, reactive, ref } from 'vue';
@@ -89,6 +26,7 @@
   });
   const draggableRef = ref();
 
+  const route = useRoute();
   const router = useRouter();
 
   const tabStore = useMultipleTabStore();
@@ -201,12 +139,12 @@
   });
 
   // endregion scroll
-  listenerRouteChange((route) => {
-    const { name } = route;
-    if (name === PageEnum.REDIRECT || !route || !authStore.token) {
+  listenerRouteChange((routeItem) => {
+    const { name } = routeItem;
+    if (name === PageEnum.REDIRECT || !routeItem || !authStore.token) {
       return;
     }
-    const { path, fullPath, meta = {} } = route;
+    const { path, fullPath, meta = {} } = routeItem;
     const { activeMenu, hideTab, href } = meta as RouteMeta;
     if (href) return;
     const isHide = !hideTab ? null : activeMenu;
@@ -221,10 +159,10 @@
         .find((item) => item.path === activeMenu);
 
       if (findParentRoute) {
-        tabStore.addTab(route);
+        tabStore.addTab(routeItem);
       }
     } else {
-      tabStore.addTab(route);
+      tabStore.addTab(routeItem);
     }
 
     updateNavScroll();
@@ -245,11 +183,72 @@
   });
 
   function init() {
-    const route = useRoute();
     tabStore.initTabs(route);
   }
 
   init();
 </script>
+
+<template>
+  <div
+    class="flex items-center relative bg-[var(--color-bg-2)] h-full shadow-tab text-[var(--color-text-1)]"
+  >
+    <div class="flex-auto flex items-center h-full relative nowrap-hidden">
+      <span
+        v-if="tabState.scrollable"
+        class="tabs-prev flex-center w-32px h-full bg-[var(--color-bg-2)] hover:bg-[var(--color-fill-1)] cursor-pointer absolute-lt"
+        @click="scrollPrev"
+      >
+        <SvgIcon icon="mingcute:left-fill" size="16" />
+      </span>
+
+      <div
+        ref="navScroll"
+        :class="{
+          'mx-36px': tabState.scrollable,
+          'mx-6px': !tabState.scrollable,
+        }"
+        class="flex-auto navScroll nowrap-hidden"
+        @wheel="wheel"
+      >
+        <div ref="draggableRef" class="flex items-center">
+          <div v-for="element in getTabs" :key="element.fullPath">
+            <ContentMenu :active-key="activeKeyRef" :tab-item="element">
+              <ButtonTab
+                :activate="activeKeyRef === element.fullPath"
+                :closable="!tabStore.isTabRetain(element.id)"
+                :tab="element"
+                @close="handleClose(element)"
+                @click.stop="tabStore.switchRouteByTab(element)"
+              />
+            </ContentMenu>
+          </div>
+        </div>
+      </div>
+
+      <span
+        v-if="tabState.scrollable"
+        class="tabs-next flex-center w-32px h-full bg-[var(--color-bg-2)] hover:bg-[var(--color-fill-1)] cursor-pointer absolute-rt"
+        @click="scrollNext"
+      >
+        <SvgIcon icon="mingcute:right-fill" />
+      </span>
+    </div>
+    <div v-if="getShowRedo || getShowQuick" class="flex-center h-full">
+      <Setting v-if="(getShowFold && getFullContent) || !getShowHeader" />
+      <Redo v-if="getShowRedo" />
+      <ContentMenu
+        v-if="getShowQuick"
+        :active-key="activeKeyRef"
+        :tab-item="tabStore.activeTab"
+        position="br"
+        trigger="click"
+      >
+        <Dropdown />
+      </ContentMenu>
+      <Fold v-if="getShowFold" />
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped></style>

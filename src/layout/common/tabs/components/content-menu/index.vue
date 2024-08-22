@@ -1,23 +1,3 @@
-<template>
-  <ADropdown :position="position" :trigger="trigger" @select="handleDropdown">
-    <slot />
-
-    <template #content>
-      <ADoption
-        v-for="item in getOptions"
-        :key="item.event"
-        :disabled="item.disabled"
-        :value="item.event"
-      >
-        {{ item.label }}
-        <template #icon>
-          <SvgIcon :icon="item.icon" />
-        </template>
-      </ADoption>
-    </template>
-  </ADropdown>
-</template>
-
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
   import { useI18n } from '@/hooks/web/useI18n';
@@ -26,8 +6,6 @@
   import { useMultipleTabStore } from '@/store/modules/multipleTab';
   import { useTabs } from '@/hooks/web/useTabs';
   import { DropOption, TabEventEnum } from './types';
-
-  const { t } = useI18n();
 
   interface Props {
     /**
@@ -60,10 +38,14 @@
     trigger?: 'click' | 'contextMenu';
   }
 
+  defineOptions({ name: 'ContentMenu' });
+
   const props = withDefaults(defineProps<Props>(), {
     position: 'bl',
     trigger: 'contextMenu',
   });
+
+  const { t } = useI18n();
 
   const { currentRoute } = useRouter();
   const tabStore = useMultipleTabStore();
@@ -174,5 +156,25 @@
     }
   };
 </script>
+
+<template>
+  <ADropdown :position="position" :trigger="trigger" @select="handleDropdown">
+    <slot></slot>
+
+    <template #content>
+      <ADoption
+        v-for="item in getOptions"
+        :key="item.event"
+        :disabled="item.disabled"
+        :value="item.event"
+      >
+        {{ item.label }}
+        <template #icon>
+          <SvgIcon :icon="item.icon" />
+        </template>
+      </ADoption>
+    </template>
+  </ADropdown>
+</template>
 
 <style lang="less" scoped></style>

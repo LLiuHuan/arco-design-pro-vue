@@ -2,11 +2,12 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-08-16 01:32:01
- * @LastEditTime: 2024-08-20 00:29:47
+ * @LastEditTime: 2024-08-22 14:20:11
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
   import { ECOption, useEcharts } from '@/hooks/web/useEcharts';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   interface Props {
     title: string;
@@ -14,6 +15,8 @@
   }
 
   const props = defineProps<Props>();
+
+  const { t } = useI18n();
 
   const { domRef } = useEcharts(() => props.chartOption, {
     onRender() {},
@@ -33,7 +36,7 @@
         />
         <div class="desc">
           <ATypographyText class="pr-8px text-12px" type="secondary">
-            {{ $t('dashboard.analysis.yesterday') }}
+            {{ t('dashboard.analysis.yesterday') }}
           </ATypographyText>
           <ATypographyText type="danger">
             1024
@@ -43,8 +46,7 @@
       </div>
       <div
         ref="domRef"
-        class="float-right h-90px vertical-bottom"
-        style="width: calc(100% - 120px)"
+        class="float-right h-90px vertical-bottom w-[calc(100%-120px)]"
       ></div>
     </div>
   </ACard>

@@ -1,50 +1,3 @@
-<template>
-  <APopover
-    :content-style="{ padding: 0 }"
-    class="!p-0"
-    position="bottom"
-    trigger="click"
-  >
-    <HoverContainer :tooltip-content="$t('layout.header.tooltipNotify')">
-      <ABadge :count="unreadAllCount">
-        <AButton class="!text-[var(--color-text-1)] !h-40px" type="text">
-          <SvgIcon icon="carbon:notification" size="20" />
-        </AButton>
-      </ABadge>
-    </HoverContainer>
-    <template #content>
-      <ASpin :loading="loading">
-        <ATabs
-          v-model:active-key="messageType"
-          :class="[getIsMobile ? 'w-276px' : 'w-360px']"
-          default-active-key="2"
-        >
-          <template #extra>
-            <AButton type="text" @click="emptyList">
-              {{ $t('layout.header.msgTabBtn') }}
-            </AButton>
-          </template>
-          <ATabPane v-for="item in tabList" :key="item.key">
-            <template #title>
-              <span>{{ item.title }} {{ formatUnreadLength(item.key) }}</span>
-            </template>
-            <a-result v-if="!renderList.length" status="404">
-              <template #subtitle>
-                {{ $t('layout.header.msgNoContent') }}
-              </template>
-            </a-result>
-            <List
-              :render-list="renderList"
-              :unread-count="unreadCount"
-              @item-click="handleItemClick"
-            />
-          </ATabPane>
-        </ATabs>
-      </ASpin>
-    </template>
-  </APopover>
-</template>
-
 <script lang="ts" setup>
   import { HoverContainer } from '@/components/HoverContainer';
   import { SvgIcon } from '@/components/Icon';
@@ -52,6 +5,7 @@
   import { computed, reactive, ref, toRefs } from 'vue';
   import { useI18n } from '@/hooks/web/useI18n';
   import { useLoading } from '@adp/hooks';
+  import { consoleError } from '@/utils/common';
   import { MessageListType, MessageRecord, TabItem } from './types';
   import List from './list.vue';
 
@@ -72,15 +26,15 @@
   const tabList: TabItem[] = [
     {
       key: 'message',
-      title: t('layout.header.msgTabMessage'),
+      title: 'layout.header.msgTabMessage',
     },
     {
       key: 'notice',
-      title: t('layout.header.msgTabNotice'),
+      title: 'layout.header.msgTabNotice',
     },
     {
       key: 'todo',
-      title: t('layout.header.msgTabTodo'),
+      title: 'layout.header.msgTabTodo',
     },
   ];
 
@@ -158,6 +112,7 @@
       messageData.messageList = getMessageList();
     } catch (err) {
       // you can report use errorHandler or other
+      consoleError(err);
     } finally {
       endLoading();
     }
@@ -205,6 +160,58 @@
   fetchSourceData();
 </script>
 
+<template>
+  <APopover
+    :content-style="{ padding: 0 }"
+    class="!p-0"
+    position="bottom"
+    trigger="click"
+  >
+    <HoverContainer :tooltip-content="t('layout.header.tooltipNotify')">
+      <ABadge :count="unreadAllCount">
+        <AButton
+          class="bell-button !text-[var(--color-text-1)] !h-40px"
+          type="text"
+        >
+          <SvgIcon local-icon="notification" size="18" />
+        </AButton>
+      </ABadge>
+    </HoverContainer>
+    <template #content>
+      <a-spin :loading="loading">
+        <a-tabs
+          v-model:active-key="messageType"
+          :class="[getIsMobile ? 'w-276px' : 'w-360px']"
+          default-active-key="2"
+        >
+          <template #extra>
+            <a-button type="text" @click="emptyList">
+              {{ t('layout.header.msgTabBtn') }}
+            </a-button>
+          </template>
+          <a-tab-pane v-for="item in tabList" :key="item.key">
+            <template #title>
+              <span>
+                {{ t(item.title) }} {{ formatUnreadLength(item.key) }}
+              </span>
+            </template>
+            <a-result v-if="!renderList.length" status="404">
+              <template #subtitle>
+                {{ t('layout.header.msgNoContent') }}
+              </template>
+            </a-result>
+            <List
+              :render-list="renderList"
+              :unread-count="unreadCount"
+              @item-click="handleItemClick"
+            />
+          </a-tab-pane>
+        </a-tabs>
+      </a-spin>
+    </template>
+  </APopover>
+</template>
+
 <style lang="less" scoped>
   :deep(.arco-popover-popup-content) {
     padding: 0;
@@ -224,6 +231,41 @@
 
     .arco-result-subtitle {
       color: rgb(var(--gray-6));
+    }
+  }
+
+  :deep(.bell-button) {
+    &:hover {
+      svg {
+        animation: bell-ring 1s both;
+      }
+    }
+  }
+
+  @keyframes bell-ring {
+    0%,
+    100% {
+      transform-origin: top;
+    }
+
+    15% {
+      transform: rotateZ(10deg);
+    }
+
+    30% {
+      transform: rotateZ(-10deg);
+    }
+
+    45% {
+      transform: rotateZ(5deg);
+    }
+
+    60% {
+      transform: rotateZ(-5deg);
+    }
+
+    75% {
+      transform: rotateZ(2deg);
     }
   }
 </style>

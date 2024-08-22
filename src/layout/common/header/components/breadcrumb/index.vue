@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+  import { useHeaderSetting } from '@/hooks/setting';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useRouteStore } from '@/store/modules/route';
+  import { createReusableTemplate } from '@vueuse/core';
+  import type { RouteKey } from '@elegant-router/types';
+
+  const { getHeaderShowBreadCrumbIcon } = useHeaderSetting();
+  const { goKey } = useGo();
+
+  const { getHeaderShowBreadCrumb } = useHeaderSetting();
+
+  const routeStore = useRouteStore();
+
+  interface BreadcrumbContentProps {
+    breadcrumb: App.Menu;
+  }
+
+  const [DefineBreadcrumbContent, BreadcrumbContent] =
+    createReusableTemplate<BreadcrumbContentProps>();
+
+  function handleClickMenu(key: RouteKey) {
+    goKey(key);
+  }
+</script>
+
 <template>
   <ABreadcrumb v-if="getHeaderShowBreadCrumb" class="cursor-pointer">
     <DefineBreadcrumbContent v-slot="{ breadcrumb }">
@@ -35,31 +61,5 @@
     </ABreadcrumbItem>
   </ABreadcrumb>
 </template>
-
-<script lang="ts" setup>
-  import { useHeaderSetting } from '@/hooks/setting';
-  import { useGo } from '@/hooks/web/usePage';
-  import { useRouteStore } from '@/store/modules/route';
-  import { createReusableTemplate } from '@vueuse/core';
-  import type { RouteKey } from '@elegant-router/types';
-
-  const { getHeaderShowBreadCrumbIcon } = useHeaderSetting();
-  const { goKey } = useGo();
-
-  const { getHeaderShowBreadCrumb } = useHeaderSetting();
-
-  const routeStore = useRouteStore();
-
-  interface BreadcrumbContentProps {
-    breadcrumb: App.Menu;
-  }
-
-  const [DefineBreadcrumbContent, BreadcrumbContent] =
-    createReusableTemplate<BreadcrumbContentProps>();
-
-  function handleClickMenu(key: RouteKey) {
-    goKey(key);
-  }
-</script>
 
 <style lang="less" scoped></style>

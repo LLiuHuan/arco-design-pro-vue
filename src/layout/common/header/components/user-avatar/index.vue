@@ -1,30 +1,3 @@
-<template>
-  <ADropdown @select="handleDropdown">
-    <HoverContainer class="px-10px">
-      <div class="!h-40px flex-center">
-        <AAvatar :image-url="getUser.avatar" :size="24"></AAvatar>
-        <span class="pl-8px text-16px text-[var(--color-text-2)]">
-          {{ getUser.userName }}
-        </span>
-      </div>
-    </HoverContainer>
-
-    <template #content>
-      <template v-for="item in options" :key="item.key">
-        <ADivider v-if="item.key === 'divider'" class="!m-0"></ADivider>
-        <ADoption v-else :value="item.key">
-          <template v-if="item.icon" #icon>
-            <component :is="item.icon" />
-          </template>
-          {{ $t(`${item.label}`) }}
-        </ADoption>
-      </template>
-    </template>
-  </ADropdown>
-
-  <Lock :visible="lockVisible" @cancel="lockVisible = false" />
-</template>
-
 <script lang="ts" setup>
   import { computed, h, ref, unref, VNode } from 'vue';
   import { iconRender } from '@/utils/common';
@@ -117,6 +90,33 @@
     }
   };
 </script>
+
+<template>
+  <ADropdown @select="handleDropdown">
+    <HoverContainer class="px-10px">
+      <div class="!h-40px flex-center">
+        <AAvatar :image-url="getUser.avatar" :size="24" />
+        <span class="pl-8px text-16px text-[var(--color-text-2)]">
+          {{ getUser.userName }}
+        </span>
+      </div>
+    </HoverContainer>
+
+    <template #content>
+      <template v-for="item in options" :key="item.key">
+        <ADivider v-if="item.key === 'divider'" class="!m-0" />
+        <ADoption v-else :value="item.key">
+          <template v-if="item.icon" #icon>
+            <component :is="item.icon" />
+          </template>
+          {{ t(`${item.label}`) }}
+        </ADoption>
+      </template>
+    </template>
+  </ADropdown>
+
+  <Lock :visible="lockVisible" @cancel="lockVisible = false" />
+</template>
 
 <style lang="less">
   :deep(.arco-trigger-popup .arco-divider-horizontal) {

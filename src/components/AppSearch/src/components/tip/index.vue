@@ -1,26 +1,36 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-22 13:42:52
+ * @LastEditors: LLiuHuan
+-->
+<script lang="ts" setup>
+  import { SvgIcon } from '@/components/Icon';
+  import { useI18n } from '@/hooks/web/useI18n';
+
+  const { t } = useI18n();
+</script>
+
 <template>
   <div class="flex-center model-title-right">
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:enter" size="16" />
     </div>
-    <div class="key-word">{{ $t('common.okText') }}</div>
+    <div class="key-word">{{ t('common.okText') }}</div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:arrow-up" size="16" />
     </div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="uil:arrow-down" size="16" />
     </div>
-    <div class="key-word">{{ $t('common.toggleText') }}</div>
+    <div class="key-word">{{ t('common.toggleText') }}</div>
     <div class="ac-navbar-search-input-key">
       <SvgIcon icon="mdi:keyboard-esc" size="16" />
     </div>
-    <div class="key-word">{{ $t('common.closeText') }}</div>
+    <div class="key-word">{{ t('common.closeText') }}</div>
   </div>
 </template>
-
-<script lang="ts" setup>
-  import { SvgIcon } from '@/components/Icon';
-</script>
 
 <style scoped>
   .key-word {

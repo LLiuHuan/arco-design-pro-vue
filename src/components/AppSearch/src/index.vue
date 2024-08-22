@@ -1,75 +1,3 @@
-<template>
-  <AModal
-    :closable="false"
-    :footer="false"
-    :fullscreen="getIsMobile"
-    :visible="show"
-  >
-    <template #title>
-      <div class="w-full flex justify-between">
-        <div class="model-title-left flex-center flex-auto">
-          <SvgIcon
-            class="mr-8px"
-            color="rgba(var(--primary-6))"
-            icon="ri:search-line"
-            size="20"
-          />
-          <input
-            ref="inputRef"
-            v-model="keyword"
-            :placeholder="$t('common.searchText')"
-            class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
-          />
-        </div>
-
-        <Tip v-if="!getIsMobile" />
-        <AButton v-else class="!p-0" type="text" @click="handleClose"
-          >{{ $t('common.cancelText') }}
-        </AButton>
-      </div>
-    </template>
-
-    <AEmpty
-      v-if="searchResult.length === 0"
-      :description="$t('common.noDataText')"
-    ></AEmpty>
-    <div v-else class="pb-12px">
-      <AScrollbar class="overflow-auto max-h-472px">
-        <ul>
-          <li
-            v-for="(item, index) in searchResult"
-            :key="item.key"
-            :ref="setRefs(index)"
-            :class="{
-              'bg-[rgba(var(--primary-6))] text-[var(--color-white)]':
-                activeIndex === index,
-            }"
-            :data-index="index"
-            class="flex-center w-full h-56px mt-8px mb-5px rounded-6px text-14px cursor-pointer relative shadow"
-            @click="handleEnter"
-            @mouseenter="handleMouseenter"
-          >
-            <div class="pl-10px pr-5px flex-center">
-              <component :is="item.icon" />
-            </div>
-            <div class="flex-auto leading-34px">
-              {{ item.label }}
-            </div>
-            <div
-              :style="{
-                opacity: activeIndex === index ? 1 : 0,
-              }"
-              class="pr-10px flex-center"
-            >
-              <SvgIcon icon="uil:enter" size="24" />
-            </div>
-          </li>
-        </ul>
-      </AScrollbar>
-    </div>
-  </AModal>
-</template>
-
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { onKeyStroke, useDebounceFn } from '@vueuse/core';
@@ -80,9 +8,8 @@
   import { useScrollTo } from '@/hooks/common/useScrollTo';
   import { useRootSetting } from '@/hooks/setting';
   import { getRoutePath } from '@/router/elegant/transform';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { Tip } from './components';
-
-  defineOptions({ name: 'AppSearch' });
 
   interface Props {
     /**
@@ -92,9 +19,13 @@
     show: boolean;
   }
 
+  defineOptions({ name: 'AppSearch' });
+
   const props = defineProps<Props>();
 
   const emit = defineEmits(['close']);
+
+  const { t } = useI18n();
 
   const scrollWrap = ref<HTMLElement | null>(null);
   const inputRef = ref<HTMLElement | null>(null);
@@ -272,5 +203,77 @@
     },
   );
 </script>
+
+<template>
+  <AModal
+    :closable="false"
+    :footer="false"
+    :fullscreen="getIsMobile"
+    :visible="show"
+  >
+    <template #title>
+      <div class="w-full flex justify-between">
+        <div class="model-title-left flex-center flex-auto">
+          <SvgIcon
+            class="mr-8px"
+            color="rgba(var(--primary-6))"
+            icon="ri:search-line"
+            size="20"
+          />
+          <input
+            ref="inputRef"
+            v-model="keyword"
+            :placeholder="t('common.searchText')"
+            class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
+          />
+        </div>
+
+        <Tip v-if="!getIsMobile" />
+        <AButton v-else class="!p-0" type="text" @click="handleClose">
+          {{ t('common.cancelText') }}
+        </AButton>
+      </div>
+    </template>
+
+    <AEmpty
+      v-if="searchResult.length === 0"
+      :description="t('common.noDataText')"
+    />
+    <div v-else class="pb-12px">
+      <AScrollbar class="overflow-auto max-h-472px">
+        <ul>
+          <li
+            v-for="(item, index) in searchResult"
+            :key="item.key"
+            :ref="setRefs(index)"
+            :class="{
+              'bg-[rgba(var(--primary-6))] text-[var(--color-white)]':
+                activeIndex === index,
+            }"
+            :data-index="index"
+            class="flex-center w-full h-56px mt-8px mb-5px rounded-6px text-14px cursor-pointer relative shadow"
+            @click="handleEnter"
+            @mouseenter="handleMouseenter"
+          >
+            <div class="pl-10px pr-5px flex-center">
+              <component :is="item.icon" />
+            </div>
+            <div class="flex-auto leading-34px">
+              {{ item.label }}
+            </div>
+            <div
+              :style="{
+                opacity: activeIndex === index ? 1 : 0,
+              }"
+              class="pr-10px flex-center"
+            >
+              <SvgIcon icon="uil:enter" size="24" />
+            </div>
+          </li>
+        </ul>
+      </AScrollbar>
+    </div>
+  </AModal>
+</template>
 
 <style lang="less" scoped></style>

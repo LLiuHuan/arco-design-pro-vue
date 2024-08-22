@@ -193,16 +193,16 @@ export function extractTabsByAllRoutes(router: Router, tabs: App.Tab[]) {
  * @param tabs Tabs
  * @param homeTab Home tab
  */
-export function getAllTabs(tabs: App.Tab[], homeTab?: App.Tab) {
+export function getAllTabs(tabs: App.Tab[], homeTab?: App.Tab): App.Tab[] {
   if (!homeTab) {
     return [];
   }
 
   const filterHomeTabs = tabs.filter((tab) => tab.id !== homeTab.id);
 
-  const fixedTabs = filterHomeTabs
-    .filter(isFixedTab)
-    .sort((a, b) => a.fixedIndex! - b.fixedIndex!);
+  const fixedTabs = filterHomeTabs.filter(isFixedTab).sort((a, b) => {
+    return (a.fixedIndex || 0) - (b.fixedIndex || 0);
+  });
 
   const remainTabs = filterHomeTabs.filter((tab) => !isFixedTab(tab));
 

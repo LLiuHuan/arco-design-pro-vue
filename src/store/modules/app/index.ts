@@ -196,8 +196,8 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
    * @param setting
    */
   function setMenuSetting(setting: Partial<MenuSetting>) {
-    projectConfig.value!.menuSetting = deepMerge(
-      projectConfig.value!.menuSetting,
+    projectConfig.value.menuSetting = deepMerge(
+      projectConfig.value.menuSetting,
       setting,
     );
     localStg.set(PROJ_CFG_KEY, projectConfig.value);

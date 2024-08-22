@@ -1,30 +1,15 @@
-<template>
-  <ADivider>{{ $t('layout.setting.themeColor.title') }}</ADivider>
-
-  <div class="flex-col-stretch gap-12px">
-    <SettingItem
-      v-for="(_, key) in getThemeColor"
-      :key="key"
-      :label="$t(`layout.setting.themeColor.${key}`)"
-    >
-      <AColorPicker
-        :model-value="getThemeColor[key]"
-        :history-colors="historyColors"
-        show-preset
-        show-history
-        show-text
-        disabled-alpha
-        @popup-visible-change="addHistoryColor"
-        @change="setThemeColor(key, $event)"
-      />
-    </SettingItem>
-  </div>
-</template>
-
+<!--
+ * @Description: 项目配置-外观-主题颜色
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-21 16:40:10
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
-  import { SettingItem } from '../common';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { SettingItem, TitleItem } from '../common';
 
   defineOptions({
     name: 'ThemeColor',
@@ -32,6 +17,8 @@
 
   const historyColors = ref<string[]>([]);
   const { getThemeColor, setThemeColor } = useRootSetting();
+
+  const { t } = useI18n();
 
   const addHistoryColor = (visible: boolean, color: string) => {
     if (!visible) {
@@ -43,5 +30,30 @@
     }
   };
 </script>
+
+<template>
+  <div class="flex flex-col py-4">
+    <TitleItem>{{ t('layout.setting.exterior.color.title') }}</TitleItem>
+
+    <div class="flex-col-stretch">
+      <SettingItem
+        v-for="(_, key) in getThemeColor"
+        :key="key"
+        :label="t(`layout.setting.exterior.color.${key}`)"
+      >
+        <AColorPicker
+          :history-colors="historyColors"
+          :model-value="getThemeColor[key]"
+          disabled-alpha
+          show-history
+          show-preset
+          show-text
+          @change="setThemeColor(key, $event)"
+          @popup-visible-change="addHistoryColor"
+        />
+      </SettingItem>
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped></style>

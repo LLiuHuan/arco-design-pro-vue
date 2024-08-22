@@ -1,12 +1,3 @@
-<template>
-  <FirstLevelMenu
-    :active-menu-key="activeFirstLevelMenuKey"
-    @select="handleSelectMixMenu"
-  >
-    <slot></slot>
-  </FirstLevelMenu>
-</template>
-
 <script lang="ts" setup>
   import { useGo } from '@/hooks/web/usePage';
   import { useMixMenuContext } from '@/layout/context';
@@ -23,5 +14,14 @@
     }
   }
 </script>
+
+<template>
+  <FirstLevelMenu
+    :active-menu-key="activeFirstLevelMenuKey"
+    @select="handleSelectMixMenu"
+  >
+    <slot></slot>
+  </FirstLevelMenu>
+</template>
 
 <style lang="less" scoped></style>

@@ -41,6 +41,15 @@ enum HandlerEnum {
   SHOW_TABS_REDO_BTN,
   SHOW_TABS_FOLD_BTN,
 
+  // copyright
+  COPYRIGHT_SHOW,
+  COPYRIGHT_COMPANY,
+  COPYRIGHT_COMPANY_LINK,
+  COPYRIGHT_RECORD,
+  COPYRIGHT_RECORD_LINK,
+  COPYRIGHT_POLICE,
+  COPYRIGHT_POLICE_LINK,
+
   LAYOUT_MODE,
   LAYOUT_SCROLL_MODE,
   GRAY_MODE,
@@ -212,12 +221,58 @@ const handler = (
       return {
         watermarkText: value,
       };
+
+    case HandlerEnum.COPYRIGHT_SHOW:
+      return {
+        copyrightSetting: {
+          show: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_COMPANY:
+      return {
+        copyrightSetting: {
+          company: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_COMPANY_LINK:
+      return {
+        copyrightSetting: {
+          companyHref: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_RECORD:
+      return {
+        copyrightSetting: {
+          record: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_RECORD_LINK:
+      return {
+        copyrightSetting: {
+          recordHref: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_POLICE:
+      return {
+        copyrightSetting: {
+          police: value,
+        },
+      };
+    case HandlerEnum.COPYRIGHT_POLICE_LINK:
+      return {
+        copyrightSetting: {
+          policeHref: value,
+        },
+      };
     default:
       return {};
   }
 };
 
 function baseHandler(event: HandlerEnum, value: any) {
+  if (!value) {
+    return;
+  }
   const appStore = useAppStore();
   const config = handler(event, value);
   appStore.setProjectConfig(config);

@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-08-21 10:18:22
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed } from 'vue';
   import { arcoLocales } from '@/locale/arco';
@@ -21,7 +28,7 @@
     <AWatermark
       :content="getShowWatermark ? getWatermarkText.split(/[,，]/) : ''"
       :grayscale="getGrayMode"
-      :z-index="520"
+      :z-index="5200"
       class="wh-full bg-[var(--color-fill-1)]"
     >
       <RouterView />

@@ -41,6 +41,7 @@ export default {
   },
   setting: {
     drawerTitle: '项目配置',
+    drawerDesc: '自定义项目配置 & 实时预览',
 
     copyBtn: '拷贝',
     resetBtn: '重置',
@@ -49,96 +50,140 @@ export default {
     copySettingMsg:
       '复制成功，请到 src/settings/projectSetting.json 中修改配置！',
 
-    themeSchema: {
-      title: '主题模式',
-      light: '亮色模式',
-      dark: '暗黑模式',
-      system: '跟随系统',
-      darkMenu: '深色侧边栏',
-    },
-    themeColor: {
-      title: '主题颜色',
-      arcoblue: '主色',
-      primary: '主色',
-      green: '成功色',
-      orange: '警告色',
-      red: '错误色',
-    },
-    interfaceFunction: {
-      title: '界面功能',
-      menuCollapse: '折叠菜单',
-      menuCollapseButton: '菜单折叠按钮',
-      menuAccordion: '侧边菜单手风琴模式',
-      expandedMenuWidth: '菜单展开宽度',
-      collapsedMenuWidth: '菜单折叠宽度',
-      mixExpandMenuWidth: '混合菜单展开宽度',
-      mixCollapsedMenuWidth: '混合菜单折叠宽度',
-      mixChildMenuWidth: '混合菜单折叠子菜单',
+    exterior: {
+      title: '外观',
 
-      // menu mix
-      mixSidebarTrigger: '混合菜单触发方式',
-      triggerHover: '悬停',
-      triggerClick: '点击',
-      mixSidebarFixed: '固定展开菜单',
-
-      // menu trigger
-      menuTriggerNone: '不显示',
-      menuTriggerBottom: '底部',
-      menuTriggerTop: '顶部',
-
-      // height
-      headerHeight: '头部高度',
-      fixedHeaderAndTab: '固定头部和标签',
-
-      // footer
-      footerHeight: '页脚高度',
-      footerFixed: '固定页脚',
-
-      scrollMode: {
-        title: '滚动模式',
-        wrapper: '外层滚动',
-        content: '主体滚动',
+      schema: {
+        title: '主题模式',
+        light: '亮色模式',
+        dark: '暗黑模式',
+        system: '跟随系统',
+        darkMenu: '深色侧边栏',
       },
 
-      watermark: '水印',
-      watermarkText: '水印文本',
+      color: {
+        title: '主题颜色',
+        arcoblue: '主色',
+        primary: '主色',
+        green: '成功色',
+        orange: '警告色',
+        red: '错误色',
+      },
+
+      other: {
+        title: '其他',
+        grayMode: '灰色模式',
+        colorWeak: '色弱模式',
+      },
     },
-    interfaceDisplay: {
-      title: '界面显示',
-      routerAnimation: '路由动画',
-      routerAnimationZoomFade: '渐变',
-      routerAnimationZoomOut: '闪现',
-      routerAnimationFadeSlide: '滑动',
-      routerAnimationFade: '消退',
-      routerAnimationFadeBottom: '底部消退',
-      routerAnimationFadeScale: '缩放消退',
+    layout: {
+      title: '布局',
 
-      transitionEnable: '切换动画',
-      transitionLoading: '切换loading',
-      transitionNGprogress: '顶部进度条',
+      mode: {
+        title: '布局模式',
+        menuTypeSidebar: '侧边菜单',
+        menuTypeMixSidebar: '混合侧边菜单',
+        menuTypeTopMenu: '顶部菜单',
+        menuTypeMixTopMenu: '混合顶部菜单',
+      },
 
-      headerBreadcrumb: '面包屑',
-      headerBreadcrumbIcon: '面包屑图标',
+      sider: {
+        title: '侧边栏',
 
-      footer: '页脚',
+        triggerHover: '悬停',
+        triggerClick: '点击',
+        menuCollapse: '折叠菜单',
+        mixSidebarFixed: '固定展开菜单',
+        menuAccordion: '侧边菜单手风琴模式',
+        mixSidebarTrigger: '混合菜单触发方式',
+        menuCollapseButton: '菜单折叠按钮',
+        expandedMenuWidth: '菜单展开宽度',
+        collapsedMenuWidth: '菜单折叠宽度',
+        mixExpandMenuWidth: '混合菜单展开宽度',
+        mixCollapsedMenuWidth: '混合菜单折叠宽度',
+        mixChildMenuWidth: '混合菜单折叠子菜单',
 
-      grayMode: '灰色模式',
-      colorWeak: '色弱模式',
+        menuTriggerNone: '不显示',
+        menuTriggerBottom: '底部',
+        menuTriggerTop: '顶部',
+      },
 
-      showLogo: 'Logo',
+      breadcrumb: {
+        title: '面包屑导航',
+        headerBreadcrumb: '面包屑',
+        headerBreadcrumbIcon: '面包屑图标',
+      },
 
-      tabs: '标签页',
-      tabsQuickBtn: '标签页快捷按钮',
-      tabsRedoBtn: '标签页刷新按钮',
-      tabsFoldBtn: '标签页折叠按钮',
+      header: {
+        title: '页头',
+
+        height: '页头高度',
+        fixed: '固定页头和标签',
+      },
+
+      footer: {
+        title: '页脚',
+
+        height: '页脚高度',
+        fixed: '固定页脚',
+        show: '显示页脚',
+      },
+
+      tabs: {
+        title: '标签页',
+
+        show: '显示标签页',
+        showQuick: '显示快捷按钮',
+        showRedo: '显示刷新按钮',
+        showFold: '显示折叠按钮',
+      },
+
+      copyright: {
+        title: '版权/备案信息',
+
+        show: '启用版权/备案',
+        record: '备案号',
+        recordLink: '备案链接',
+        policeRecord: '公安备案号',
+        policeRecordLink: '公安备案链接',
+        company: '公司名称',
+        companyLink: '公司链接',
+      },
+
+      other: {
+        title: '其他',
+
+        showLogo: 'Logo',
+
+        scrollMode: {
+          title: '滚动模式',
+          wrapper: '外层滚动',
+          content: '主体滚动',
+        },
+      },
     },
+    universal: {
+      title: '通用',
+      setting: {
+        title: '通用设置',
+        watermark: '水印',
+        watermarkText: '水印文本',
+      },
 
-    layoutMode: {
-      title: '布局模式',
-      menuTypeSidebar: '侧边菜单',
-      menuTypeMixSidebar: '混合侧边菜单',
-      menuTypeTopMenu: '顶部菜单',
-      menuTypeMixTopMenu: '混合顶部菜单',
+      animation: {
+        title: '动画',
+        transitionEnable: '切换动画',
+        transitionLoading: '切换loading',
+        transitionNGprogress: '顶部进度条',
+
+        routerAnimation: '路由动画',
+        routerAnimationZoomFade: '渐变',
+        routerAnimationZoomOut: '闪现',
+        routerAnimationFadeSlide: '滑动',
+        routerAnimationFade: '消退',
+        routerAnimationFadeBottom: '底部消退',
+        routerAnimationFadeScale: '缩放消退',
+      },
     },
   },
 

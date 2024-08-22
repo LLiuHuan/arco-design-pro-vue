@@ -1,10 +1,5 @@
-<template>
-  <SiderTrigger v-if="sider"></SiderTrigger>
-  <HeaderTrigger v-else></HeaderTrigger>
-</template>
-
 <script lang="ts" setup>
-  import { SiderTrigger, HeaderTrigger } from './components';
+  import { HeaderTrigger, SiderTrigger } from './components';
 
   interface Props {
     sider?: boolean;
@@ -14,5 +9,10 @@
     sider: true,
   });
 </script>
+
+<template>
+  <SiderTrigger v-if="sider" />
+  <HeaderTrigger v-else />
+</template>
 
 <style lang="less" scoped></style>

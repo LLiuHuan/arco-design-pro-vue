@@ -1,61 +1,3 @@
-<template>
-  <div ref="mixMenuRef" class="h-full flex" v-bind="getMenuEvents">
-    <FirstLevelMenu
-      :active-menu-key="activeName"
-      :dark="siderDark"
-      @select="handleSelectMixMenu"
-    >
-      <slot />
-    </FirstLevelMenu>
-    <div
-      :style="{ width: getMixSideFixed ? `${getMixChildMenuWidth}px` : '0px' }"
-      class="relative h-full transition-base"
-    >
-      <div
-        :class="{
-          'bg-[var(--color-menu-dark-bg)]': siderDark,
-        }"
-        :style="{
-          width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
-        }"
-        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
-      >
-        <header
-          :style="{ height: `${getHeaderHeight}px` }"
-          class="flex-y-center justify-between"
-        >
-          <h2 class="pl-8px text-16px text-[rgba(var(--primary-6))] font-bold">
-            {{ VITE_GLOB_APP_TITLE }}
-          </h2>
-          <div
-            :class="{
-              '!text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]':
-                !siderDark,
-              '!text-white:88 hover:!text-white': siderDark,
-            }"
-            class="cursor-pointer pr-10px"
-            @click="handleFixedMenu"
-          >
-            <SvgIcon
-              v-if="getMixSideFixed"
-              class="cursor-pointer"
-              icon="ri:pushpin-2-fill"
-            />
-            <SvgIcon v-else class="cursor-pointer" icon="ri:pushpin-2-line" />
-          </div>
-        </header>
-
-        <LayoutMenu
-          :collapsed="false"
-          :dark="siderDark"
-          :menus="childrenMenus"
-          class="flex-1"
-        />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { useRouteStore } from '@/store/modules/route';
   import { computed, ref, unref } from 'vue';
@@ -214,5 +156,63 @@
     }
   });
 </script>
+
+<template>
+  <div ref="mixMenuRef" class="h-full flex" v-bind="getMenuEvents">
+    <FirstLevelMenu
+      :active-menu-key="activeName"
+      :dark="siderDark"
+      @select="handleSelectMixMenu"
+    >
+      <slot></slot>
+    </FirstLevelMenu>
+    <div
+      :style="{ width: getMixSideFixed ? `${getMixChildMenuWidth}px` : '0px' }"
+      class="relative h-full transition-base"
+    >
+      <div
+        :class="{
+          'bg-[var(--color-menu-dark-bg)]': siderDark,
+        }"
+        :style="{
+          width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
+        }"
+        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
+      >
+        <header
+          :style="{ height: `${getHeaderHeight}px` }"
+          class="flex-y-center justify-between"
+        >
+          <h2 class="pl-8px text-16px text-[rgba(var(--primary-6))] font-bold">
+            {{ VITE_GLOB_APP_TITLE }}
+          </h2>
+          <div
+            :class="{
+              '!text-[var(--color-text-3)] hover:!text-[var(--color-text-1)]':
+                !siderDark,
+              '!text-white:88 hover:!text-white': siderDark,
+            }"
+            class="cursor-pointer pr-10px"
+            @click="handleFixedMenu"
+          >
+            <SvgIcon
+              v-if="getMixSideFixed"
+              class="cursor-pointer"
+              icon="ri:pushpin-2-fill"
+            />
+            <SvgIcon v-else class="cursor-pointer" icon="ri:pushpin-2-line" />
+          </div>
+        </header>
+
+        <LayoutMenu
+          :collapsed="false"
+          :dark="siderDark"
+          :menus="childrenMenus"
+          class="flex-1"
+        />
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped></style>

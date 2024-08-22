@@ -1,44 +1,3 @@
-<template>
-  <div class="h-full flex-y-center bg-[--color-bg-2] w-full shadow-header">
-    <!--  left start  -->
-    <AppLogo
-      v-if="showLogo"
-      :style="{ width: `${getMenuWidth}px` }"
-      class="h-full text-16px font-bold pl-20px pr-10px justify-start"
-    />
-    <LayoutVerticalMenu
-      v-if="showMenu"
-      :menus="headerMenus"
-      :mode="MenuModeEnum.HORIZONTAL"
-      class="px-12px"
-    />
-    <div v-else class="h-full flex-y-center flex-1-hidden">
-      <LayoutTrigger
-        v-if="showMenuToggle && isTrigger && getTrigger === 'HEADER'"
-        :sider="false"
-      ></LayoutTrigger>
-      <Breadcrumb v-if="!getIsMobile" class="pl-5px" />
-    </div>
-    <!--  left end  -->
-
-    <!--  right start  -->
-    <div
-      :class="[getIsMobile ? 'mobile' : '']"
-      class="flex-center h-40px mr-10px"
-    >
-      <Search />
-      <ThemeBtn v-if="!getIsMobile" />
-      <LanguageBtn />
-      <FullScreenBtn v-if="!getIsMobile" />
-      <SystemMessage v-if="!getIsMobile" />
-      <SettingBtn />
-      <ThemeStore />
-      <UserAvatar />
-    </div>
-    <!--  right end  -->
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { useMenuSetting, useRootSetting } from '@/hooks/setting';
   import { useRouteStore } from '@/store/modules/route';
@@ -75,12 +34,12 @@
   const { getIsMobile } = useRootSetting();
   const { getMenuWidth, isTrigger, getTrigger } = useMenuSetting();
   const { getLayoutMode } = useLayoutSetting();
-  const { menus: routeMenu } = useRouteStore();
+  const routeStore = useRouteStore();
   const { menus } = useMixMenuContext();
 
   const headerMenus = computed(() => {
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL) {
-      return routeMenu;
+      return unref(routeStore.menus);
     }
 
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX) {
@@ -90,6 +49,47 @@
     return [];
   });
 </script>
+
+<template>
+  <div class="h-full flex-y-center bg-[--color-bg-2] w-full shadow-header">
+    <!--  left start  -->
+    <AppLogo
+      v-if="showLogo"
+      :style="{ width: `${getMenuWidth}px` }"
+      class="h-full text-16px font-bold pl-20px pr-10px justify-start"
+    />
+    <LayoutVerticalMenu
+      v-if="showMenu"
+      :menus="headerMenus"
+      :mode="MenuModeEnum.HORIZONTAL"
+      class="px-12px"
+    />
+    <div v-else class="h-full flex-y-center flex-1-hidden">
+      <LayoutTrigger
+        v-if="showMenuToggle && isTrigger && getTrigger === 'HEADER'"
+        :sider="false"
+      />
+      <Breadcrumb v-if="!getIsMobile" class="pl-5px" />
+    </div>
+    <!--  left end  -->
+
+    <!--  right start  -->
+    <div
+      :class="[getIsMobile ? 'mobile' : '']"
+      class="flex-center h-40px mr-10px"
+    >
+      <Search />
+      <ThemeBtn v-if="!getIsMobile" />
+      <LanguageBtn />
+      <FullScreenBtn v-if="!getIsMobile" />
+      <SystemMessage v-if="!getIsMobile" />
+      <SettingBtn />
+      <ThemeStore />
+      <UserAvatar />
+    </div>
+    <!--  right end  -->
+  </div>
+</template>
 
 <style lang="less" scoped>
   .mobile :deep(.arco-btn-size-medium) {

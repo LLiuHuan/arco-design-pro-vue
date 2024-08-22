@@ -1,3 +1,25 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-16 01:32:01
+ * @LastEditTime: 2024-08-20 00:29:47
+ * @LastEditors: LLiuHuan
+-->
+<script lang="ts" setup>
+  import { ECOption, useEcharts } from '@/hooks/web/useEcharts';
+
+  interface Props {
+    title: string;
+    chartOption: ECOption;
+  }
+
+  const props = defineProps<Props>();
+
+  const { domRef } = useEcharts(() => props.chartOption, {
+    onRender() {},
+  });
+</script>
+
 <template>
   <ACard :bordered="false">
     <div class="whitespace-nowrap w-full p-16px">
@@ -11,7 +33,7 @@
         />
         <div class="desc">
           <ATypographyText class="pr-8px text-12px" type="secondary">
-            {{ $t('routes.dashboard.analysis.yesterday') }}
+            {{ $t('dashboard.analysis.yesterday') }}
           </ATypographyText>
           <ATypographyText type="danger">
             1024
@@ -27,21 +49,6 @@
     </div>
   </ACard>
 </template>
-
-<script lang="ts" setup>
-  import { ECOption, useEcharts } from '@/hooks/web/useEcharts';
-
-  interface Props {
-    title: string;
-    chartOption: ECOption;
-  }
-
-  const props = defineProps<Props>();
-
-  const { domRef } = useEcharts(() => props.chartOption, {
-    onRender() {},
-  });
-</script>
 
 <style lang="less" scoped>
   :deep(.arco-card) {

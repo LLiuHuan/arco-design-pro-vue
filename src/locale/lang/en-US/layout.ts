@@ -41,6 +41,7 @@ export default {
   },
   setting: {
     drawerTitle: 'Project configuration',
+    drawerDesc: 'Custom project configuration & real-time preview',
 
     copyBtn: 'Copy',
     resetBtn: 'Reset',
@@ -49,96 +50,141 @@ export default {
     copySettingMsg:
       'Copy successful, please modify the configuration in src/settings/projectSetting.json!',
 
-    themeSchema: {
-      title: 'Theme mode',
-      light: 'Light mode',
-      dark: 'Dark mode',
-      system: 'Follow system',
-      darkMenu: 'Dark side menu',
-    },
-    themeColor: {
-      title: 'Theme color',
-      arcoblue: 'Main color',
-      primary: 'Primary color',
-      green: 'Success color',
-      orange: 'Warning color',
-      red: 'Error color',
-    },
-    interfaceFunction: {
-      title: 'Interface function',
-      menuCollapse: 'Collapse menu',
-      menuCollapseButton: 'Menu collapse button',
-      menuAccordion: 'Side menu accordion mode',
-      expandedMenuWidth: 'Menu expand width',
-      collapsedMenuWidth: 'Menu collapse width',
-      mixExpandMenuWidth: 'Mixed menu expand width',
-      mixCollapsedMenuWidth: 'Mixed menu collapse width',
-      mixChildMenuWidth: 'Mixed menu collapse child menu',
+    exterior: {
+      title: 'Exterior',
 
-      // menu mix
-      mixSidebarTrigger: 'Mixed menu trigger method',
-      triggerHover: 'Hover',
-      triggerClick: 'Click',
-      mixSidebarFixed: 'Fixed expanded menu',
-
-      // menu trigger
-      menuTriggerNone: 'Do not show',
-      menuTriggerBottom: 'Bottom',
-      menuTriggerTop: 'Top',
-
-      // height
-      headerHeight: 'Header height',
-      fixedHeaderAndTab: 'Fixed header and tab',
-
-      // footer
-      footerHeight: 'Footer height',
-      footerFixed: 'Footer fixed',
-
-      scrollMode: {
-        title: 'Scroll mode',
-        wrapper: 'Outer scroll',
-        content: 'Main scroll',
+      schema: {
+        title: 'Theme mode',
+        light: 'Light mode',
+        dark: 'Dark mode',
+        system: 'Follow system',
+        darkMenu: 'Dark side menu',
+      },
+      color: {
+        title: 'Theme color',
+        arcoblue: 'Main color',
+        primary: 'Primary color',
+        green: 'Success color',
+        orange: 'Warning color',
+        red: 'Error color',
       },
 
-      watermark: 'Watermark',
-      watermarkText: 'Watermark text',
+      other: {
+        title: 'Other',
+        grayMode: 'Gray mode',
+        colorWeak: 'Color weak mode',
+      },
     },
-    interfaceDisplay: {
-      title: 'Interface display',
-      routerAnimation: 'Route animation',
-      routerAnimationZoomFade: 'Zoom fade',
-      routerAnimationZoomOut: 'Zoom out',
-      routerAnimationFadeSlide: 'Fade slide',
-      routerAnimationFade: 'Fade',
-      routerAnimationFadeBottom: 'Fade bottom',
-      routerAnimationFadeScale: 'Fade scale',
+    layout: {
+      title: 'Layout',
 
-      transitionEnable: 'Switch animation',
-      transitionLoading: 'Switch loading',
-      transitionNGprogress: 'Top progress bar',
+      mode: {
+        title: 'Layout mode',
+        menuTypeSidebar: 'Sidebar menu',
+        menuTypeMixSidebar: 'Mix sidebar menu',
+        menuTypeTopMenu: 'Top menu',
+        menuTypeMixTopMenu: 'Mix top menu',
+      },
 
-      headerBreadcrumb: 'Breadcrumb',
-      headerBreadcrumbIcon: 'Breadcrumb icon',
+      sider: {
+        title: 'Sidebar',
 
-      footer: 'Footer',
+        triggerHover: 'Hover',
+        triggerClick: 'Click',
+        menuCollapse: 'Collapse menu',
+        mixSidebarFixed: 'Fixed expanded menu',
+        menuAccordion: 'Side menu accordion mode',
+        mixSidebarTrigger: 'Mixed menu trigger method',
+        menuCollapseButton: 'Menu collapse button',
+        expandedMenuWidth: 'Menu expand width',
+        collapsedMenuWidth: 'Menu collapse width',
+        mixExpandMenuWidth: 'Mixed menu expand width',
+        mixCollapsedMenuWidth: 'Mixed menu collapse width',
+        mixChildMenuWidth: 'Mixed menu collapse child menu',
 
-      grayMode: 'Gray mode',
-      colorWeak: 'Color weak mode',
+        menuTriggerNone: 'Do not show',
+        menuTriggerBottom: 'Bottom',
+        menuTriggerTop: 'Top',
+      },
 
-      showLogo: 'Logo',
+      breadcrumb: {
+        title: 'Breadcrumb',
 
-      tabs: 'Tabs',
-      tabsQuickBtn: 'Tabs quick button',
-      tabsRedoBtn: 'Tabs refresh button',
-      tabsFoldBtn: 'Tabs fold button',
+        headerBreadcrumb: 'Breadcrumb',
+        headerBreadcrumbIcon: 'Breadcrumb icon',
+      },
+
+      header: {
+        title: 'Header',
+
+        height: 'Header height',
+        fixed: 'Fixed header and tab',
+      },
+
+      footer: {
+        title: 'Footer',
+
+        height: 'Footer height',
+        fixed: 'Footer fixed',
+        show: 'Show footer',
+      },
+
+      tabs: {
+        title: 'Tabs',
+
+        show: 'Show tabs',
+        showQuick: 'Tabs quick button',
+        showRedo: 'Tabs refresh button',
+        showFold: 'Tabs fold button',
+      },
+
+      copyright: {
+        title: 'Copyright/Record',
+
+        show: 'Show',
+        record: 'Record number',
+        recordLink: 'Record link',
+        policeRecord: 'Police record number',
+        policeRecordLink: 'Police record link',
+        company: 'Company name',
+        companyLink: 'Company link',
+      },
+
+      other: {
+        title: 'Other',
+
+        showLogo: 'Logo',
+
+        scrollMode: {
+          title: 'Scroll mode',
+          wrapper: 'Outer scroll',
+          content: 'Main scroll',
+        },
+      },
     },
+    universal: {
+      title: 'Universal',
 
-    layoutMode: {
-      title: 'Layout mode',
-      menuTypeSidebar: 'Sidebar menu',
-      menuTypeMixSidebar: 'Mix sidebar menu',
-      menuTypeTopMenu: 'Top menu',
-      menuTypeMixTopMenu: 'Mix top menu',
+      setting: {
+        title: 'Universal settings',
+        watermark: 'Watermark',
+        watermarkText: 'Watermark text',
+      },
+
+      animation: {
+        title: 'Animation',
+        transitionEnable: 'Switch animation',
+        transitionLoading: 'Switch loading',
+        transitionNGprogress: 'Top progress bar',
+
+        routerAnimation: 'Route animation',
+        routerAnimationZoomFade: 'Zoom fade',
+        routerAnimationZoomOut: 'Zoom out',
+        routerAnimationFadeSlide: 'Fade slide',
+        routerAnimationFade: 'Fade',
+        routerAnimationFadeBottom: 'Fade bottom',
+        routerAnimationFadeScale: 'Fade scale',
+      },
     },
   },
 

@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-08-21 17:59:55
+ * @LastEditors: LLiuHuan
+ */
 import { useAppStore } from '@/store/modules/app';
 import type { FooterSetting } from '~/types/config';
 import { computed } from 'vue';
@@ -30,6 +37,12 @@ export const useFooterSetting = () => {
   const getFooterFixed = computed(() => appStore.setting.footerSetting.fixed);
 
   /**
+   * @description 获取底部版权
+   * @description Get footer copyright
+   */
+  const getFooterCopyright = computed(() => appStore.setting.copyrightSetting);
+
+  /**
    * @description 设置底部配置
    * @description Set footer configuration
    *
@@ -44,6 +57,7 @@ export const useFooterSetting = () => {
     getShowFooter,
     getFooterHeight,
     getFooterFixed,
+    getFooterCopyright,
 
     setFooterSetting,
   };

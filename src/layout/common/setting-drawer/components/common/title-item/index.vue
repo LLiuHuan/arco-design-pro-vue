@@ -1,11 +1,22 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+  interface Props {
+    /**
+     * @description Name
+     */
+    title?: string;
+  }
 
+  defineOptions({
+    name: 'TitleItem',
+  });
+
+  defineProps<Props>();
 </script>
 
 <template>
-  $END$
+  <h2 class="mb-3 font-semibold leading-none tracking-tight">
+    <slot>{{ title }}</slot>
+  </h2>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style lang="less" scoped></style>

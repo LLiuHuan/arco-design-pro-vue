@@ -2,7 +2,7 @@
  * @Description:liuhuan
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-22 14:44:26
+ * @LastEditTime: 2024-08-23 09:36:28
  * @LastEditors: LLiuHuan
  */
 import { createApp } from 'vue';
@@ -10,7 +10,7 @@ import { createApp } from 'vue';
 import { setupStore } from '@/store';
 import { setupPlugin } from '@/plugins';
 import { setupRouter } from '@/router';
-import { initProjectSetting } from '@/settings/initProjectSetting';
+// import { initProjectSetting } from '@/settings/initProjectSetting';
 import { setupGlobDirectives } from '@/directives';
 import { AppLoading } from '@/components/AppLoading';
 import { setupErrorHandle } from '@/logics/error-handle';
@@ -30,7 +30,7 @@ const setupApp = async () => {
   setupStore(app);
 
   // Initialize internal system configuration - [初始化项目配置]
-  initProjectSetting();
+  // initProjectSetting();
 
   const router = await setupRouter(app);
 

@@ -151,4 +151,25 @@
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+  :deep(.arco-menu-item),
+  :deep(.arco-menu-inline-header) {
+    .svg-icon {
+      transition: transform 0.25s !important;
+    }
+
+    &:hover {
+      color: rgb(var(--primary-6)) !important;
+
+      // .arco-menu-title,
+      .svg-icon,
+      .arco-icon,
+      .arco-menu-icon-suffix {
+        color: rgb(var(--primary-6)) !important;
+      }
+      .svg-icon {
+        transform: scale(1.2) !important;
+      }
+    }
+  }
+</style>

@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-23 09:56:22
+ * @LastEditors: LLiuHuan
+ */
 import type { ProjectConfig } from '~/types/config';
 import { localStg } from '@/utils/cache';
 import { PROJ_CFG_KEY } from '@/enums';

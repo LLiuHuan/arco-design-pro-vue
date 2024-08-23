@@ -80,13 +80,13 @@
         errorMessage.value = (err as Error).message;
       } finally {
         // 登录成功弹出欢迎提示
-        console.log(t('sys.login.common.loginSuccess'));
         Notification.success({
           title: t('sys.login.common.loginSuccess'),
           content: t(`sys.login.common.welcomeBack`, {
             userName: authStore.userInfo.userName,
           }),
           duration: 3000,
+          closable: true,
         });
 
         endLoading();

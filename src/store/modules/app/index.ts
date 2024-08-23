@@ -273,17 +273,17 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
       });
     }
 
-    if (darkMode.value === AppEnum.DARK) {
-      setDark();
-    } else if (darkMode.value === AppEnum.AUTO) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setDark();
-      } else {
-        setLight();
-      }
-    } else {
-      setLight();
-    }
+    // if (darkMode.value === AppEnum.DARK) {
+    //   setDark();
+    // } else if (darkMode.value === AppEnum.AUTO) {
+    //   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    //     setDark();
+    //   } else {
+    //     setLight();
+    //   }
+    // } else {
+    //   setLight();
+    // }
   };
 
   scope.run(() => {
@@ -357,6 +357,7 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
 
         setThemeColors(getThemeColors());
       },
+      { immediate: true },
     );
   });
 

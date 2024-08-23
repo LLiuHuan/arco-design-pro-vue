@@ -2,7 +2,7 @@
  * @Description: 项目配置-外观-主题模式
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-21 16:40:24
+ * @LastEditTime: 2024-08-22 18:06:46
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -51,7 +51,7 @@
           @change="setDarkMode"
         >
           <template v-for="(item, key) in themeSchema" :key="key">
-            <a-radio :value="key">
+            <a-radio class="!mr-10px !p-0" :value="key">
               <template #radio="{ checked }">
                 <div class="flex flex-col items-center">
                   <div

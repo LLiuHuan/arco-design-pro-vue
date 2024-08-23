@@ -61,7 +61,7 @@
     "mock/**/*.ts",
     "vite.config.ts",
     "types/**/*.d.ts",
-    "types/*.d.ts",
+    "types/*.d.ts", "src/views/_builtin/login/index.vue.1",
 
   ],
   // 用于指定要编译的路径列表，但是和files的区别在于，这里的路径可以是文件夹，也可以是文件，可以使用相对和绝对路径，而且可以使用通配符。

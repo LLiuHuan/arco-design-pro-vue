@@ -37,6 +37,7 @@ enum HandlerEnum {
 
   // tabs
   SHOW_TABS,
+  TAB_OPEN_CACHE,
   SHOW_TABS_QUICK_BTN,
   SHOW_TABS_REDO_BTN,
   SHOW_TABS_FOLD_BTN,
@@ -176,6 +177,10 @@ const handler = (
     case HandlerEnum.SHOW_TABS:
       return {
         multiTabsSetting: { show: value },
+      };
+    case HandlerEnum.TAB_OPEN_CACHE:
+      return {
+        multiTabsSetting: { cache: value },
       };
     case HandlerEnum.SHOW_TABS_QUICK_BTN:
       return {

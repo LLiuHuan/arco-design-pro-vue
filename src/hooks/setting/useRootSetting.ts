@@ -219,8 +219,8 @@ export const useRootSetting = () => {
    * @description: 切换暗黑模式
    * @description: Toggle dark mode
    */
-  const toggleDarkMode = () => {
-    appStore.toggleDarkMode();
+  const toggleDarkMode = (isNotAuto?: boolean) => {
+    appStore.toggleDarkMode(isNotAuto);
   };
 
   /**

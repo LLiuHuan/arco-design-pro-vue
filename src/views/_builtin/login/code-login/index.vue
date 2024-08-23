@@ -6,7 +6,7 @@
   import { CountButton } from '@/components/CountDown';
   import { SvgIcon } from '@/components/Icon';
   import { useI18n } from '@/hooks/web/useI18n';
-  import LoginTitle from '../login-title/index.vue';
+  import { LoginTitle } from '../components';
 
   interface LoginFormProps {
     phone: string;
@@ -20,7 +20,7 @@
 
   const errorMessage = ref('');
   const { loading, startLoading, endLoading } = useLoading();
-  const { toLoginModule } = useGo();
+  const { goKey } = useGo();
 
   const { t } = useI18n();
 
@@ -126,7 +126,7 @@
           <AButton :loading="loading" html-type="submit" long type="primary">
             {{ t('sys.login.common.login') }}
           </AButton>
-          <AButton long @click="toLoginModule('pwd-login')">
+          <AButton long @click="goKey('login')">
             {{ t('sys.login.common.back') }}
           </AButton>
         </ASpace>

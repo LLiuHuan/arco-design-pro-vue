@@ -1,5 +1,7 @@
 <!--https://codepen.io/afgprogrammer/pen/mYQQJV-->
 
+<script lang="ts" setup></script>
+
 <template>
   <div class="absolute-lt z-1 size-full overflow-hidden">
     <div
@@ -66,7 +68,5 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup></script>
 
 <style lang="less" scoped></style>

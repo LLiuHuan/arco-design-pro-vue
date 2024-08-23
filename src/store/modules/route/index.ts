@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw, useRouter } from 'vue-router';
 import {
   fetchGetConstantRoutes,
   fetchGetUserRoutes,
@@ -15,7 +15,7 @@ import type {
 } from '@elegant-router/types';
 import { getRouteName, getRoutePath } from '@/router/elegant/transform';
 import { ROOT_ROUTE } from '@/router/routes/builtin';
-import { router } from '@/router';
+// import { router } from '@/router';
 import { StoreEnum } from '@/enums';
 import { useBoolean } from '@adp/hooks';
 import { computed, ref, shallowRef } from 'vue';
@@ -35,6 +35,7 @@ import { useAuthStore } from '../auth';
 
 export const useRouteStore = defineStore(StoreEnum.Route, () => {
   const authStore = useAuthStore();
+  const router = useRouter();
 
   const { bool: isInitConstantRoute, setBool: setIsInitConstantRoute } =
     useBoolean();

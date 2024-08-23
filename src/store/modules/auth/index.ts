@@ -4,11 +4,10 @@ import { LoginModel, UserInfoModel } from '@/api/auth/model/userModel';
 import { computed, reactive, Ref, ref } from 'vue';
 import { useGo } from '@/hooks/web/usePage';
 import { useLoading } from '@adp/hooks';
-// eslint-disable-next-line import/no-cycle
-// eslint-disable-next-line import/no-cycle
 import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
 import { localStg } from '@/utils/cache';
 import { useRoute } from 'vue-router';
+// eslint-disable-next-line import/no-cycle
 import { useRouteStore } from '../route';
 import { useMultipleTabStore } from '../multipleTab';
 

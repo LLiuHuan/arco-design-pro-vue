@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-07-22 11:31:45
+ * @LastEditTime: 2024-08-23 16:02:18
+ * @LastEditors: LLiuHuan
+ */
 /**
  * @description vue-router 自动生成插件
  * @description vue-router auto generate plugin
@@ -14,30 +21,31 @@ export function configElegantRouterPlugin() {
     layouts: {
       basic: 'src/layout/basic-layout/index.vue',
       blank: 'src/layout/blank-layout/index.vue',
+      auth: 'src/layout/auth-layout/index.vue',
     },
     defaultLayout: 'basic',
     customRoutes: {
       names: ['exception_403', 'exception_404', 'exception_500'],
     },
-    routePathTransformer(routeName, routePath) {
-      const key = routeName as RouteKey;
+    // routePathTransformer(routeName, routePath) {
+    //   // const key = routeName as RouteKey;
 
-      if (key === 'login') {
-        const modules: LoginModuleType[] = [
-          'pwd-login',
-          'code-login',
-          'register',
-          'reset-pwd',
-          'bind-wechat',
-        ];
+    //   // if (key === 'login') {
+    //   //   const modules: LoginModuleType[] = [
+    //   //     'pwd-login',
+    //   //     'code-login',
+    //   //     'register',
+    //   //     'reset-pwd',
+    //   //     'bind-wechat',
+    //   //   ];
 
-        const moduleReg = modules.join('|');
+    //   //   const moduleReg = modules.join('|');
 
-        return `/login/:module(${moduleReg})?`;
-      }
+    //   //   return `/login/:module(${moduleReg})?`;
+    //   // }
 
-      return routePath;
-    },
+    //   return routePath;
+    // },
     onRouteMetaGen(routeName) {
       const key = routeName as RouteKey;
 

@@ -1,3 +1,51 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-08-23 15:15:45
+ * @LastEditors: LLiuHuan
+-->
+<script lang="ts" setup>
+  import {
+    useMultipleTabSetting,
+    useRootSetting,
+    useTransitionSetting,
+  } from '@/hooks/setting';
+  import { computed, unref } from 'vue';
+  import { useRouteStore } from '@/store/modules/route';
+
+  interface Props {
+    /** 显示padding */
+    showPadding?: boolean;
+  }
+
+  defineOptions({ name: 'LayoutContent' });
+
+  withDefaults(defineProps<Props>(), {
+    showPadding: true,
+  });
+
+  const routeStore = useRouteStore();
+
+  const { getShowMultipleTab } = useMultipleTabSetting();
+  const {
+    getOpenKeepAlive,
+    getPageLoading,
+    setContentXScrollable,
+    getReloadFlag,
+  } = useRootSetting();
+  const { getBasicTransition, getEnableTransition, getOpenPageLoading } =
+    useTransitionSetting();
+  // 是否开启缓存
+  const openCache = computed(
+    () => unref(getOpenKeepAlive) && unref(getShowMultipleTab),
+  );
+
+  const transitionName = computed(() =>
+    unref(getEnableTransition) ? unref(getBasicTransition) : '',
+  );
+</script>
+
 <template>
   <div
     v-loading="getOpenPageLoading && getPageLoading"
@@ -26,46 +74,5 @@
     </RouterView>
   </div>
 </template>
-
-<script lang="ts" setup>
-  import {
-    useMultipleTabSetting,
-    useRootSetting,
-    useTransitionSetting,
-  } from '@/hooks/setting';
-  import { computed, unref } from 'vue';
-  import { useRouteStore } from '@/store/modules/route';
-
-  defineOptions({ name: 'LayoutContent' });
-
-  interface Props {
-    /** 显示padding */
-    showPadding?: boolean;
-  }
-
-  withDefaults(defineProps<Props>(), {
-    showPadding: true,
-  });
-
-  const routeStore = useRouteStore();
-
-  const { getShowMultipleTab } = useMultipleTabSetting();
-  const {
-    getOpenKeepAlive,
-    getPageLoading,
-    setContentXScrollable,
-    getReloadFlag,
-  } = useRootSetting();
-  const { getBasicTransition, getEnableTransition, getOpenPageLoading } =
-    useTransitionSetting();
-  // 是否开启缓存
-  const openCache = computed(
-    () => unref(getOpenKeepAlive) && unref(getShowMultipleTab),
-  );
-
-  const transitionName = computed(() =>
-    unref(getEnableTransition) ? unref(getBasicTransition) : '',
-  );
-</script>
 
 <style lang="less" scoped></style>

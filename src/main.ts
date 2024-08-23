@@ -2,7 +2,7 @@
  * @Description:liuhuan
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-23 09:36:28
+ * @LastEditTime: 2024-08-23 17:56:39
  * @LastEditors: LLiuHuan
  */
 import { createApp } from 'vue';
@@ -21,8 +21,8 @@ import { setupAppVersionNotification } from '@/plugins/app';
 import App from './App.vue';
 
 const setupApp = async () => {
-  const app = createApp(App);
-  const appLoading = createApp(AppLoading);
+  const app = createApp(App as any);
+  const appLoading = createApp(AppLoading as any);
   appLoading.mount('#appLoading');
 
   // 进行一些初始化操作，比如：路由、状态管理、插件、指令等

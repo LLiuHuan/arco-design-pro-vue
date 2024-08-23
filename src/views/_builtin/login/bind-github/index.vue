@@ -1,19 +1,17 @@
-<template>
-  <ASpace direction="vertical" fill>
-    <IconGithub
-      class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
-      size="120"
-    />
-  </ASpace>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-06-15 01:05:23
+ * @LastEditTime: 2024-08-23 16:12:02
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { useRoute } from 'vue-router';
   import axios from 'axios';
   import { reactive } from 'vue';
   import { consoleError } from '@/utils/common';
   import { IconGithub } from '@arco-design/web-vue/es/icon';
-  import { GITHUB, GITHUB_TOKEN_URL, GITHUB_USER_INFO_URL } from '../../enum';
+  import { GITHUB, GITHUB_TOKEN_URL, GITHUB_USER_INFO_URL } from '../enum';
 
   const state = reactive({
     access_token: '',
@@ -70,5 +68,14 @@
 
   fetchAccessToken();
 </script>
+
+<template>
+  <ASpace direction="vertical" fill>
+    <IconGithub
+      class="!text-#888 hover:!text-[rgba(var(--primary-5))] cursor-pointer"
+      size="120"
+    />
+  </ASpace>
+</template>
 
 <style lang="less" scoped></style>

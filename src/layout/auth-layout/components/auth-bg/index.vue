@@ -1,19 +1,10 @@
-<template>
-  <div class="banner">
-    <div class="banner-inner">
-      <ACarousel class="carousel" animation-name="fade">
-        <ACarouselItem v-for="item in carouselItem" :key="item.slogan">
-          <div :key="item.slogan" class="carousel-item">
-            <div class="carousel-title">{{ item.slogan }}</div>
-            <div class="carousel-sub-title">{{ item.subSlogan }}</div>
-            <img class="carousel-image" :src="item.image" alt="" />
-          </div>
-        </ACarouselItem>
-      </ACarousel>
-    </div>
-  </div>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-23 15:40:26
+ * @LastEditTime: 2024-08-23 15:40:47
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed } from 'vue';
   import bannerImage from '@/assets/images/login-banner.png';
@@ -38,6 +29,22 @@
     },
   ]);
 </script>
+
+<template>
+  <div class="banner">
+    <div class="banner-inner">
+      <ACarousel class="carousel" animation-name="fade">
+        <ACarouselItem v-for="item in carouselItem" :key="item.slogan">
+          <div :key="item.slogan" class="carousel-item">
+            <div class="carousel-title">{{ item.slogan }}</div>
+            <div class="carousel-sub-title">{{ item.subSlogan }}</div>
+            <img class="carousel-image" :src="item.image" alt="" />
+          </div>
+        </ACarouselItem>
+      </ACarousel>
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped>
   .banner {

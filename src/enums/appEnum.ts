@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-05-13 22:31:00
+ * @LastEditTime: 2024-08-23 10:40:39
+ * @LastEditors: LLiuHuan
+ */
 /**
  * @description: Menu blend mode width - [菜单混合模式宽度]
  */
@@ -11,6 +18,12 @@ export enum AppEnum {
   DARK = 'dark',
   LIGHT = 'light',
   AUTO = 'auto',
+}
+
+export interface AppEnumType {
+  [AppEnum.DARK]: string;
+  [AppEnum.LIGHT]: string;
+  [AppEnum.AUTO]?: string;
 }
 
 // Route switching animation

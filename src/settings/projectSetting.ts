@@ -52,7 +52,7 @@ export const defaultSetting: ProjectConfig = {
   // canEmbedIFramePage: true,
   // Multi-tab settings - [多标签页设置]
   multiTabsSetting: {
-    cache: false,
+    cache: true,
     // Turn on - [是否开启]
     show: true,
     // Is it possible to drag and drop sorting tabs - [是否可以拖拽排序tab]

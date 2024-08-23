@@ -2,18 +2,18 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-22 14:12:37
+ * @LastEditTime: 2024-08-23 12:42:57
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
   import { HoverContainer } from '@/components/HoverContainer';
-  import { DarkModeSwitch } from '@/components/DarkModeSwitch';
+  import { ThemeModeBtn } from '@/components/ThemeMode';
   import { AppEnum } from '@/enums';
   import { computed, unref } from 'vue';
   import { useRootSetting } from '@/hooks/setting';
   import { useI18n } from '@/hooks/web/useI18n';
 
-  const { toggleDarkMode, getNextDarkMode } = useRootSetting();
+  const { getNextDarkMode } = useRootSetting();
 
   const { t } = useI18n();
 
@@ -28,13 +28,7 @@
 
 <template>
   <HoverContainer :tooltip-content="t(tooltipContent)">
-    <AButton
-      class="!text-[var(--color-text-1)] !h-40px"
-      type="text"
-      @click="toggleDarkMode"
-    >
-      <DarkModeSwitch auto />
-    </AButton>
+    <ThemeModeBtn />
   </HoverContainer>
 </template>
 

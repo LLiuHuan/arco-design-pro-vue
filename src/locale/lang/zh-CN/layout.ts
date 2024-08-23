@@ -133,6 +133,7 @@ export default {
         title: '标签页',
 
         show: '显示标签页',
+        openCache: '开启缓存',
         showQuick: '显示快捷按钮',
         showRedo: '显示刷新按钮',
         showFold: '显示折叠按钮',

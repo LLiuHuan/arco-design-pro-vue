@@ -14,7 +14,7 @@
   },
   "openKeepAlive": true,
   "multiTabsSetting": {
-    "cache": false,
+    "cache": true,
     "show": true,
     "canDrag": true,
     "showQuick": true,

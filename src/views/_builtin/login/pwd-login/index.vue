@@ -16,10 +16,10 @@
   import { open } from '@/utils/common';
   import { useAuthStore } from '@/store/modules/auth';
   import { useI18n } from '@/hooks/web/useI18n';
-  import LoginTitle from '../login-title/index.vue';
-  import { GITHUB_AUTHORIZE_URL } from '../../enum';
+  import { LoginTitle } from '../components';
+  import { GITHUB_AUTHORIZE_URL } from '../enum';
 
-  const { toLoginModule } = useGo();
+  const { goKey } = useGo();
 
   interface LoginFormProps {
     username: string;
@@ -165,7 +165,7 @@
           >
             {{ t('sys.login.pwdLogin.rememberMe') }}
           </ACheckbox>
-          <ALink @click="toLoginModule('forget-pwd')">
+          <ALink @click="goKey('login_forget-pwd')">
             {{ t('sys.login.pwdLogin.forgetPwd') }}
           </ALink>
         </div>
@@ -183,7 +183,7 @@
             class="!text-[var(--color-text-3)]"
             long
             type="text"
-            @click="toLoginModule('code-login')"
+            @click="goKey('login_code-login')"
           >
             {{ t('sys.login.pwdLogin.mobileLogin') }}
           </AButton>
@@ -191,7 +191,7 @@
             class="!text-[var(--color-text-3)]"
             long
             type="text"
-            @click="toLoginModule('register')"
+            @click="goKey('login_register')"
           >
             {{ t('sys.login.pwdLogin.register') }}
           </AButton>

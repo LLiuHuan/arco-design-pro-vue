@@ -195,15 +195,83 @@ export const generatedRoutes: GeneratedRoute[] = [
   },
   {
     name: 'login',
-    path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
-    component: 'layout.blank$view.login',
-    props: true,
+    path: '/login',
+    component: 'layout.auth',
     meta: {
       title: 'login',
       i18nKey: 'route.login',
       constant: true,
       hideInMenu: true
-    }
+    },
+    redirect: {
+      name: 'login_pwd-login'
+    },
+    children: [
+      {
+        name: 'login_bind-github',
+        path: '/login/bind-github',
+        component: 'view.login_bind-github',
+        meta: {
+          title: 'login_bind-github',
+          i18nKey: 'route.login_bind-github.title'
+        }
+      },
+      {
+        name: 'login_bind-wechat',
+        path: '/login/bind-wechat',
+        component: 'view.login_bind-wechat',
+        meta: {
+          title: 'login_bind-wechat',
+          i18nKey: 'route.login_bind-wechat.title'
+        }
+      },
+      {
+        name: 'login_code-login',
+        path: '/login/code-login',
+        component: 'view.login_code-login',
+        meta: {
+          title: 'login_code-login',
+          i18nKey: 'route.login_code-login.title'
+        }
+      },
+      {
+        name: 'login_forget-pwd',
+        path: '/login/forget-pwd',
+        component: 'view.login_forget-pwd',
+        meta: {
+          title: 'login_forget-pwd',
+          i18nKey: 'route.login_forget-pwd.title'
+        }
+      },
+      {
+        name: 'login_pwd-login',
+        path: '/login/pwd-login',
+        component: 'view.login_pwd-login',
+        meta: {
+          title: 'login_pwd-login',
+          i18nKey: 'route.login_pwd-login.title'
+        }
+      },
+      {
+        name: 'login_register',
+        path: '/login/register',
+        component: 'view.login_register',
+        meta: {
+          title: 'login_register',
+          i18nKey: 'route.login_register.title'
+        }
+      },
+      {
+        name: 'login_reset-pwd',
+        path: '/login/reset-pwd',
+        component: 'view.login_reset-pwd',
+        meta: {
+          title: 'login_reset-pwd',
+          i18nKey: 'route.login_reset-pwd.title'
+        }
+      }
+    ],
+    props: true
   },
   {
     name: 'permission',

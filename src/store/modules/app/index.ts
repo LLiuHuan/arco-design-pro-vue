@@ -28,11 +28,12 @@ import {
   toggleClass,
 } from '@/utils/common';
 import { localStg } from '@/utils/cache';
-import { router } from '@/router';
 import { initAppSetting } from '@/store/modules/app/helpers';
+import { useRouter } from 'vue-router';
 
 export const useAppStore = defineStore(StoreEnum.App, () => {
   const breakpoints = useBreakpoints(breakpointsTailwind);
+  const router = useRouter();
   const scope = effectScope();
 
   const { bool: pageLoading, setBool: setPageLoading } = useBoolean();
@@ -65,9 +66,11 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
    * @description 获取下一个主题
    * @description Get the next theme
    */
-  function getNextDarkMode() {
+  function getNextDarkMode(isNotAuto?: boolean) {
     const themeSchemes: AppEnum[] = [AppEnum.LIGHT, AppEnum.DARK];
-    if (localStg.get(APP_DARK_MODE_KEY)) themeSchemes.push(AppEnum.AUTO);
+    if (!isNotAuto) {
+      themeSchemes.push(AppEnum.AUTO);
+    }
     const index = themeSchemes.findIndex((item) => item === darkMode.value);
     const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
     return themeSchemes[nextIndex];
@@ -88,8 +91,8 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
    * @description 切换主题
    * @description Toggle theme
    */
-  function toggleDarkMode() {
-    setDarkMode(getNextDarkMode());
+  function toggleDarkMode(isNotAuto?: boolean) {
+    setDarkMode(getNextDarkMode(isNotAuto));
   }
 
   /**

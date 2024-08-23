@@ -8,17 +8,25 @@ import type { LastLevelRouteKey, RouteLayout } from "@elegant-router/types";
 
 import BasicLayout from "@/layout/basic-layout/index.vue";
 import BlankLayout from "@/layout/blank-layout/index.vue";
+import AuthLayout from "@/layout/auth-layout/index.vue";
 
 export const layouts: Record<RouteLayout, RouteComponent | (() => Promise<RouteComponent>)> = {
   basic: BasicLayout,
   blank: BlankLayout,
+  auth: AuthLayout,
 };
 
 export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<RouteComponent>)> = {
   403: () => import("@/views/_builtin/403/index.vue"),
   404: () => import("@/views/_builtin/404/index.vue"),
   500: () => import("@/views/_builtin/500/index.vue"),
-  login: () => import("@/views/_builtin/login/index.vue"),
+  "login_bind-github": () => import("@/views/_builtin/login/bind-github/index.vue"),
+  "login_bind-wechat": () => import("@/views/_builtin/login/bind-wechat/index.vue"),
+  "login_code-login": () => import("@/views/_builtin/login/code-login/index.vue"),
+  "login_forget-pwd": () => import("@/views/_builtin/login/forget-pwd/index.vue"),
+  "login_pwd-login": () => import("@/views/_builtin/login/pwd-login/index.vue"),
+  login_register: () => import("@/views/_builtin/login/register/index.vue"),
+  "login_reset-pwd": () => import("@/views/_builtin/login/reset-pwd/index.vue"),
   about: () => import("@/views/about/index.vue"),
   comp_loading: () => import("@/views/comp/loading/index.vue"),
   comp_table_basic: () => import("@/views/comp/table/basic/index.vue"),

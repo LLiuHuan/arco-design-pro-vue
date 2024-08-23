@@ -133,6 +133,7 @@ export default {
         title: 'Tabs',
 
         show: 'Show tabs',
+        openCache: 'Open cache',
         showQuick: 'Tabs quick button',
         showRedo: 'Tabs refresh button',
         showFold: 'Tabs fold button',

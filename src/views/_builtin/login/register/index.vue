@@ -1,34 +1,36 @@
 <script lang="ts" setup>
-  import { reactive, ref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
+  import { reactive, ref } from 'vue';
+  import { useLoading } from '@adp/hooks';
   import { ValidatedError } from '@arco-design/web-vue';
   import { SvgIcon } from '@/components/Icon';
   import { CountButton } from '@/components/CountDown';
-  import { useLoading } from '@adp/hooks';
   import { StrengthMeter } from '@/components/StrengthMeter';
   import { useI18n } from '@/hooks/web/useI18n';
-  import LoginTitle from '../login-title/index.vue';
+  import { LoginTitle } from '../components';
 
   const errorMessage = ref('');
+
+  const { goKey } = useGo();
   const { loading, startLoading, endLoading } = useLoading();
-  const { toLoginModule } = useGo();
+  const { t } = useI18n();
 
   interface LoginFormProps {
     account: string;
-    phone: string;
-    code: string;
     password: string;
     confirmPassword: string;
+    phone: string;
+    code: string;
+    policy: boolean;
   }
-
-  const { t } = useI18n();
 
   const formData = reactive({
     account: '',
-    phone: '',
-    code: '',
     password: '',
     confirmPassword: '',
+    phone: '',
+    code: '',
+    policy: false,
   });
 
   const checkCode = async (code: string) => {
@@ -44,15 +46,17 @@
     values: LoginFormProps;
   }) => {
     if (!errors) {
+      if (!formData.policy) {
+        errorMessage.value = t('sys.login.register.policyTip');
+        return;
+      }
       startLoading();
-
       try {
         console.log(values);
-        // 找回密码逻辑
+        // 登录逻辑
       } catch (err) {
         // 异常提示
         errorMessage.value = (err as Error).message;
-      } finally {
         endLoading();
       }
     }
@@ -61,7 +65,7 @@
 
 <template>
   <div>
-    <LoginTitle login-mode="forget-pwd" />
+    <LoginTitle login-mode="register" />
 
     <div class="h-32px leading-32px text-[rgba(var(--red-6))]">
       {{ errorMessage }}
@@ -185,12 +189,17 @@
           </template>
         </AInputPassword>
       </AFormItem>
-      <AFormItem hide-label>
+      <AFormItem class="-enter-x !m-0" field="policy" hide-label>
+        <ACheckbox v-model="formData.policy">
+          {{ t('sys.login.register.policy') }}
+        </ACheckbox>
+      </AFormItem>
+      <AFormItem>
         <ASpace class="w-full" direction="vertical" fill>
           <AButton :loading="loading" html-type="submit" long type="primary">
-            {{ t('sys.login.forgetPwd.reset') }}
+            {{ t('sys.login.pwdLogin.register') }}
           </AButton>
-          <AButton long @click="toLoginModule('pwd-login')">
+          <AButton long @click="goKey('login')">
             {{ t('sys.login.common.back') }}
           </AButton>
         </ASpace>

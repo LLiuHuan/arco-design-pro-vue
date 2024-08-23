@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
+// const path = require('path');
+import path from 'path';
 
 module.exports = {
   root: true,
@@ -57,16 +58,11 @@ module.exports = {
     'vue/define-macros-order': [
       'error',
       {
-        order: [
-          'defineOptions',
-          'defineProps',
-          'defineEmits',
-          'defineSlots',
-        ],
+        order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
       },
     ], // 强制宏定义的顺序
     'vue/dot-location': ['error', 'property'], // 强制点号的位置
-    'vue/dot-notation': ['error', {allowKeywords: true}], // 强制点号和属性访问的一致性
+    'vue/dot-notation': ['error', { allowKeywords: true }], // 强制点号和属性访问的一致性
     'vue/eqeqeq': ['error', 'smart'], // 强制使用 === 和 !==
     'vue/html-closing-bracket-newline': 'error', // 强制在标签的右括号换行
     // 'vue/html-indent': 'off', // 强制缩进
@@ -88,12 +84,12 @@ module.exports = {
     'vue/next-tick-style': ['warn', 'promise'], // 强制nextTick使用promise
     'vue/max-attributes-per-line': 'off', // 强制多行元素的属性放在新行
     'vue/multi-word-component-names': 'off', // 强制组件名称为多个单词
-    'vue/multiline-html-element-content-newline': 'error',// 强制多行元素的内容放在新行
+    'vue/multiline-html-element-content-newline': 'error', // 强制多行元素的内容放在新行
     'vue/no-duplicate-attr-inheritance': 'warn', // 禁止重复的属性继承
     'vue/no-empty-pattern': 'error', // 禁止空解构模式
     'vue/no-extra-parens': ['error', 'functions'], // 禁止不必要的括号
     'vue/no-required-prop-with-default': 'warn', // 禁止在props中定义有默认值的必填属性
-    'vue/no-static-inline-styles': 'warn', // 禁止静态内联样式
+    // 'vue/no-static-inline-styles': 'warn', // 禁止静态内联样式
     'vue/no-template-target-blank': 'error', // 禁止在模板中target="_blank"不带rel="noopener noreferrer"
     'vue/no-this-in-before-route-enter': 'error', // 禁止在beforeRouteEnter中使用this
     'vue/no-undef-properties': 'warn', // 禁止未定义的属性
@@ -137,7 +133,7 @@ module.exports = {
     'vue/require-prop-types': 'off', // 强制prop类型
     'vue/singleline-html-element-content-newline': 'off', // 强制单行元素的内容放在新行
     'vue/space-infix-ops': 'error', // 强制中缀操作符周围有空格
-    'vue/space-unary-ops': ['error', {nonwords: false, words: true}], // 强制一元操作符周围有空格
+    'vue/space-unary-ops': ['error', { nonwords: false, words: true }], // 强制一元操作符周围有空格
     'vue/v-on-event-hyphenation': [
       'error',
       'always',
@@ -153,8 +149,8 @@ module.exports = {
         defineEmits: 'emit',
         defineSlots: 'slots',
         useSlots: 'slots',
-        useAttrs: 'attrs'
-      }
+        useAttrs: 'attrs',
+      },
     ], // 强制宏变量的命名
     'vue/valid-define-options': 'warn', // 有效的defineOptions
     // 'prettier/prettier': 1,

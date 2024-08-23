@@ -9,7 +9,7 @@ declare module "@elegant-router/types" {
   /**
    * route layout
    */
-  export type RouteLayout = "basic" | "blank";
+  export type RouteLayout = "basic" | "blank" | "auth";
 
   /**
    * route map
@@ -39,7 +39,14 @@ declare module "@elegant-router/types" {
     "func_error-log": "/func/error-log";
     "func_sub1": "/func/sub1";
     "func_upload-chunk": "/func/upload-chunk";
-    "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
+    "login": "/login";
+    "login_bind-github": "/login/bind-github";
+    "login_bind-wechat": "/login/bind-wechat";
+    "login_code-login": "/login/code-login";
+    "login_forget-pwd": "/login/forget-pwd";
+    "login_pwd-login": "/login/pwd-login";
+    "login_register": "/login/register";
+    "login_reset-pwd": "/login/reset-pwd";
     "permission": "/permission";
     "permission_front": "/permission/front";
     "permission_front_auth-page-a": "/permission/front/auth-page-a";
@@ -116,7 +123,13 @@ declare module "@elegant-router/types" {
     | "403"
     | "404"
     | "500"
-    | "login"
+    | "login_bind-github"
+    | "login_bind-wechat"
+    | "login_code-login"
+    | "login_forget-pwd"
+    | "login_pwd-login"
+    | "login_register"
+    | "login_reset-pwd"
     | "about"
     | "comp_loading"
     | "comp_table_basic"

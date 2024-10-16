@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-08-16 01:32:01
+ * @LastEditTime: 2024-08-27 15:47:02
+ * @LastEditors: LLiuHuan
+ */
 import type { CustomRoute } from '@elegant-router/types';
 import { layouts, views } from '../elegant/imports';
 import {

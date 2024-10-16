@@ -99,10 +99,7 @@ declare module 'vue-router' {
     /**
      * 作为单级路由的父级路由布局组件
      */
-    singleLayout?: Extract<
-      AuthRoute.RouteComponentType,
-      'basic' | 'blank' | 'flow'
-    >;
+    singleLayout?: Extract<AuthRoute.RouteComponentType, 'basic' | 'blank'>;
     /**
      * 表示是否是多级路由的中间级路由(用于转换路由数据时筛选多级路由的标识，定义路由时不用填写)
      */

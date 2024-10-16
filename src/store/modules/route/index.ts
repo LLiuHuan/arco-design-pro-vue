@@ -30,7 +30,6 @@ import {
   transformMenuToSearchMenus,
   updateLocaleOfGlobalMenus,
 } from './helpers';
-// eslint-disable-next-line import/no-cycle
 import { useAuthStore } from '../auth';
 
 export const useRouteStore = defineStore(StoreEnum.Route, () => {

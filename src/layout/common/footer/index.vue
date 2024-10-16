@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-22 12:17:17
+ * @LastEditTime: 2024-08-23 19:15:40
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -28,7 +28,7 @@
 </script>
 
 <template>
-  <ALayoutFooter
+  <a-layout-footer
     class="h-full text-[var(--color-text-3)] flex-col flex-center text-center bg-[var(--color-bg-2)]"
   >
     <div v-if="getFooterHeight >= 48" class="my-8px">
@@ -46,7 +46,7 @@
 
       <Record :name="getRecord" :href="getRecordLink" />
     </a-space>
-  </ALayoutFooter>
+  </a-layout-footer>
 </template>
 
 <style lang="less" scoped></style>

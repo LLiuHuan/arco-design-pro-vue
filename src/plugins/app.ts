@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2024-08-16 01:32:01
- * @LastEditTime: 2024-08-23 09:43:10
+ * @LastEditTime: 2024-08-23 19:22:37
  * @LastEditors: LLiuHuan
  */
 import { Button, Notification, Space } from '@arco-design/web-vue';
@@ -17,7 +17,7 @@ async function getHtmlBuildTime() {
   const html = await res.text();
 
   const match = html.match(
-    /<meta name="buildTime" content="\d{4}[-/]\d{2}[-/]\d{2} \d{2}:\d{2}:\d{2}">/,
+    /<meta name="buildTime" content="(\d{4}[-/]\d{2}[-/]\d{2} \d{2}:\d{2}:\d{2})">/,
   );
 
   const buildTime = match?.[1] || '';

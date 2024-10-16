@@ -7,7 +7,6 @@ import { useLoading } from '@adp/hooks';
 import { fetchLogin, fetchUserInfo } from '@/api/auth/user';
 import { localStg } from '@/utils/cache';
 import { useRoute } from 'vue-router';
-// eslint-disable-next-line import/no-cycle
 import { useRouteStore } from '../route';
 import { useMultipleTabStore } from '../multipleTab';
 

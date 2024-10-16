@@ -16,6 +16,7 @@
 </script>
 
 <template>
+  {{ activeFirstLevelMenuKey }}
   <FirstLevelMenu
     :active-menu-key="activeFirstLevelMenuKey"
     @select="handleSelectMixMenu"

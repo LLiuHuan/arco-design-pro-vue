@@ -1,20 +1,18 @@
 import { useContext } from '@adp/hooks';
-import { useRoute } from 'vue-router';
 import { useRouteStore } from '@/store/modules/route';
 import { computed, ref, unref } from 'vue';
 import { listenerRouteChange } from '@/utils/router';
 
 export function useMixMenu() {
-  const route = useRoute();
   const routeStore = useRouteStore();
 
-  const activeFirstLevelMenuKey = ref('');
+  const activeFirstLevelMenuKey = ref<string>('');
 
   function setActiveFirstLevelMenuKey(key: string) {
     activeFirstLevelMenuKey.value = key;
   }
 
-  function getActiveFirstLevelMenuKey() {
+  function getActiveFirstLevelMenuKey(route: RouteLocationNormalized) {
     const routeSplitMark = '_';
     const { hideInMenu, activeMenu } = route.meta;
     const name = route.name as string;
@@ -32,8 +30,8 @@ export function useMixMenu() {
 
   // 监听路由变化
   // Listen for route changes
-  listenerRouteChange(() => {
-    getActiveFirstLevelMenuKey();
+  listenerRouteChange((route) => {
+    getActiveFirstLevelMenuKey(route);
   });
 
   return {

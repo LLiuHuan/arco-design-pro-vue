@@ -81,6 +81,10 @@ export const useMenuSetting = () => {
     () => unref(getLayoutMode) !== MenuModeEnum.HORIZONTAL,
   );
 
+  const isHorizontal = computed(
+    () => unref(getLayoutMode) === MenuModeEnum.HORIZONTAL,
+  );
+
   /**
    * @description 获取是否是垂直混合模式
    * @description Get whether it is vertical mixed mode
@@ -211,6 +215,7 @@ export const useMenuSetting = () => {
     getIsMenuDark,
     getAccordion,
     isSiderVisible,
+    isHorizontal,
     isVerticalMix,
     isHorizontalMix,
     isMixMenu,

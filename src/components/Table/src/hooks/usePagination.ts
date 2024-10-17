@@ -1,8 +1,20 @@
-import {computed, ComputedRef, ref, unref, watch} from 'vue';
-import {BasicTableProps} from '@/components/Table/src/types/table';
-import {isBoolean} from '@/utils/common';
-import {PaginationProps} from '@arco-design/web-vue';
-import {DEFAULT_CURRENT, DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZE_OPTIONS, DEFAULT_SIZE,} from '../const';
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-10-16 17:51:49
+ * @LastEditors: LLiuHuan
+ */
+import { computed, ComputedRef, ref, unref, watch } from 'vue';
+import { BasicTableProps } from '@/components/Table/src/types/table';
+import { isBoolean } from '@/utils/common';
+import { PaginationProps } from '@arco-design/web-vue';
+import {
+  DEFAULT_CURRENT,
+  DEFAULT_PAGE_SIZE,
+  DEFAULT_PAGE_SIZE_OPTIONS,
+  DEFAULT_SIZE,
+} from '../const';
 
 export function usePagination(refProps: ComputedRef<BasicTableProps>) {
   const configRef = ref<PaginationProps>({});
@@ -25,7 +37,7 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
    * @description Get pagination information
    */
   const getPaginationInfo = computed((): PaginationProps | boolean => {
-    const {pagination} = unref(refProps);
+    const { pagination } = unref(refProps);
 
     if (!unref(show) || (isBoolean(pagination) && !pagination)) {
       return false;

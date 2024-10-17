@@ -2,16 +2,28 @@
  * @Description: 项目配置-布局-布局模式
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-21 16:26:35
+ * @LastEditTime: 2024-10-17 11:37:27
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { useLayoutSetting, useRootSetting } from '@/hooks/setting';
+  import {
+    useLayoutSetting,
+    useMenuSetting,
+    useRootSetting,
+  } from '@/hooks/setting';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { HandlerEnum, LayoutModeCard, TitleItem } from '../common';
+  import {
+    HandlerEnum,
+    LayoutModeCard,
+    SettingItem,
+    SwitchItem,
+    TitleItem,
+  } from '../common';
 
-  const { getLayoutMode, setLayoutSetting } = useLayoutSetting();
+  const { getLayoutMode, getLayoutReverse, setLayoutSetting } =
+    useLayoutSetting();
+  const { isHorizontalMix } = useMenuSetting();
   const { getIsMobile } = useRootSetting();
   const { t } = useI18n();
 
@@ -61,6 +73,20 @@
         </div>
       </template>
     </LayoutModeCard>
+
+    <TransitionGroup
+      class="flex-col-stretch mt-4"
+      name="interface-function"
+      tag="div"
+    >
+      <SettingItem
+        v-if="isHorizontalMix"
+        key="1"
+        :label="t('layout.setting.layout.mode.layoutReverse')"
+      >
+        <SwitchItem :def="getLayoutReverse" :event="HandlerEnum.MENU_REVERSE" />
+      </SettingItem>
+    </TransitionGroup>
   </div>
 </template>
 

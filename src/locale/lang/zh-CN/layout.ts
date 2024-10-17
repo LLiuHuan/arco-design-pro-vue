@@ -85,6 +85,7 @@ export default {
         menuTypeMixSidebar: '混合侧边菜单',
         menuTypeTopMenu: '顶部菜单',
         menuTypeMixTopMenu: '混合顶部菜单',
+        layoutReverse: '反转菜单数据',
       },
 
       sider: {

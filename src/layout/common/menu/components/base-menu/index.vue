@@ -1,6 +1,10 @@
 <script lang="ts" setup>
   import { AppEnum, MenuModeEnum } from '@/enums';
-  import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
+  import {
+    useFooterSetting,
+    useLayoutSetting,
+    useMenuSetting,
+  } from '@/hooks/setting';
   import { listenerRouteChange } from '@/utils/router';
   import { computed, reactive, ref, unref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
@@ -16,14 +20,15 @@
     mode: MenuModeEnum.VERTICAL,
   });
 
+  const routeStore = useRouteStore();
+  const { isHorizontalMix } = useMenuSetting();
+
   const menuState = reactive<MenuState>({
-    selectedKeys: [],
-    openKeys: [],
+    selectedKeys: [routeStore.activeFirstLevelMenuKey],
+    openKeys: [routeStore.activeFirstLevelMenuKey],
   });
 
   const [DefineMenuItem, MenuItem] = createReusableTemplate<MenuItemProps>();
-
-  const routeStore = useRouteStore();
 
   const {
     getCollapsed,
@@ -33,6 +38,7 @@
     getTrigger,
   } = useMenuSetting();
   const { getFooterHeight } = useFooterSetting();
+  const { getLayoutReverse } = useLayoutSetting();
 
   // 判断一下是否点击了菜单
   const isClickGo = ref(false);
@@ -59,7 +65,15 @@
       .forEach((v: string) => {
         params[v.replaceAll(':', '')] = v;
       });
-    goKey(key, { params });
+    if (unref(isHorizontalMix) && unref(getLayoutReverse)) {
+      routeStore.setActiveFirstLevelMenuKey(key);
+      // 如果是一级菜单，则跳转
+      if (unref(routeStore.activeFirstLevelMenus).length === 0) {
+        goKey(key, { params });
+      }
+    } else {
+      goKey(key, { params });
+    }
   };
 
   const handleMenuItemClick = (key: RouteKey) => {
@@ -75,6 +89,9 @@
   // 是否有子菜单
   // Whether there are submenus
   const menuHasChildren = (menuTreeItem: App.Menu): boolean => {
+    if (unref(isHorizontalMix) && unref(getLayoutReverse)) {
+      return false;
+    }
     // !menuTreeItem.meta?.hideChildrenInMenu &&
     return (
       Reflect.has(menuTreeItem, 'children') &&
@@ -89,6 +106,11 @@
     const { hideInMenu, activeMenu } = route.meta;
     const name = route.name as string;
     const activeKey = (hideInMenu ? activeMenu : name) || name;
+    if (unref(isHorizontalMix) && unref(getLayoutReverse)) {
+      menuState.selectedKeys = [activeKey.split('_')[0]];
+      menuState.openKeys = [];
+      return;
+    }
     menuState.selectedKeys = [activeKey];
     const openKeys = routeStore.getSelectedMenuKeyPath(activeKey);
     if (menuState.selectedKeys.length > 0 && openKeys.length > 1) {
@@ -119,10 +141,7 @@
       </AMenuItem>
     </DefineMenuItem>
 
-    <AScrollbar
-      class="h-full overflow-y-auto"
-      outer-class="h-full flex-1-hidden"
-    >
+    <div class="h-full overflow-y-auto" outer-class="h-full flex-1-hidden">
       <AMenu
         :accordion="getAccordion"
         :collapsed="collapsed"
@@ -141,7 +160,7 @@
           <MenuItem :item="item" />
         </template>
       </AMenu>
-    </AScrollbar>
+    </div>
 
     <LayoutTrigger
       v-if="isTrigger && getTrigger === 'FOOTER'"
@@ -167,6 +186,7 @@
       .arco-menu-icon-suffix {
         color: rgb(var(--primary-6)) !important;
       }
+
       .svg-icon {
         transform: scale(1.2) !important;
       }

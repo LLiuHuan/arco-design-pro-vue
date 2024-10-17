@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia';
-import { RouteRecordRaw, useRouter } from 'vue-router';
+import {
+  RouteLocationNormalizedLoadedGeneric,
+  RouteRecordRaw,
+  useRoute,
+  useRouter,
+} from 'vue-router';
 import {
   fetchGetConstantRoutes,
   fetchGetUserRoutes,
@@ -35,6 +40,7 @@ import { useAuthStore } from '../auth';
 export const useRouteStore = defineStore(StoreEnum.Route, () => {
   const authStore = useAuthStore();
   const router = useRouter();
+  const route = useRoute();
 
   const { bool: isInitConstantRoute, setBool: setIsInitConstantRoute } =
     useBoolean();
@@ -134,6 +140,49 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
   function updateGlobalMenusByLocale() {
     menus.value = updateLocaleOfGlobalMenus(menus.value);
   }
+
+  /**
+   * @description 激活一级菜单的key
+   * @description Set active first level menu key
+   */
+  const activeFirstLevelMenuKey = ref<string>('');
+
+  /**
+   * @description 设置激活一级菜单的key
+   * @description Set active first level menu key
+   * @param key
+   */
+  function setActiveFirstLevelMenuKey(key: string) {
+    activeFirstLevelMenuKey.value = key;
+  }
+
+  /**
+   * @description 通过当前路由设置激活的一级菜单的key
+   * @description Set active first level menu key by route
+   * @param routeItem
+   */
+  function setActiveFirstLevelMenuKeyByRoute(
+    routeItem: RouteLocationNormalizedLoadedGeneric,
+  ) {
+    if (!routeItem) return;
+    const routeSplitMark = '_';
+    const { hideInMenu, activeMenu } = route.meta;
+    const name = route.name as string;
+    const routeName = (hideInMenu ? activeMenu : name) || name;
+
+    const [firstLevelRouteName] = routeName.split(routeSplitMark);
+    setActiveFirstLevelMenuKey(firstLevelRouteName);
+  }
+
+  /**
+   * @description 激活的一级菜单下的子菜单
+   * @description Sub-menus under the activated first level menu
+   */
+  const activeFirstLevelMenus = computed(() => {
+    return (menus.value.find(
+      (menu) => menu.key === activeFirstLevelMenuKey.value,
+    )?.children || []) as App.Menu[];
+  });
 
   // endregion
 
@@ -242,8 +291,7 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
       return isRouteExistByRouteName(routeName, staticAuthRoutes);
     }
 
-    const data = fetchIsRouteExist(routeName);
-    return data;
+    return fetchIsRouteExist(routeName);
   }
 
   /**
@@ -482,5 +530,10 @@ export const useRouteStore = defineStore(StoreEnum.Route, () => {
     getIsAuthRouteExist,
     getSelectedMenuKeyPath,
     getRouteQueryOfMetaByKey,
+
+    activeFirstLevelMenuKey,
+    activeFirstLevelMenus,
+    setActiveFirstLevelMenuKey,
+    setActiveFirstLevelMenuKeyByRoute,
   };
 });

@@ -17,7 +17,7 @@ declare namespace App {
     showMenu?: boolean;
   }
 
-  type Menu = {
+  interface Menu {
     /**
      * 菜单Key
      * The menu key
@@ -56,7 +56,7 @@ declare namespace App {
      * The menu children
      */
     children?: Menu[];
-  };
+  }
 
   type Breadcrumb = Omit<Menu, 'children'> & {
     options?: Breadcrumb[];
@@ -70,7 +70,7 @@ declare namespace App {
       Pick<RouteLocationNormalizedLoaded, 'fullPath' | 'query' | 'matched'>
     >;
 
-  type Tab = {
+  interface Tab {
     /**
      * @description id
      * @description The tab id
@@ -115,7 +115,7 @@ declare namespace App {
     localIcon?: string;
     /** I18n key */
     i18nKey?: string;
-  };
+  }
 
   // interface Tab
   //   extends Pick<

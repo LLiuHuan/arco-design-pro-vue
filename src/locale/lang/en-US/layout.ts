@@ -84,6 +84,7 @@ export default {
         menuTypeMixSidebar: 'Mix sidebar menu',
         menuTypeTopMenu: 'Top menu',
         menuTypeMixTopMenu: 'Mix top menu',
+        layoutReverse: 'Reverse data',
       },
 
       sider: {

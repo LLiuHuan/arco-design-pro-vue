@@ -69,7 +69,7 @@ function getGlobalMenuByBaseRoute(
   } = route.meta ?? {};
   const { t } = useI18n();
 
-  const label = i18nKey ? t(i18nKey) : title!;
+  const label = i18nKey ? t(i18nKey) : (title ?? '');
 
   const menu: App.Menu = {
     key: name as string,
@@ -248,7 +248,7 @@ export function getSelectedMenuKeyPathByKey(
     const find = Boolean(path?.length);
 
     if (find) {
-      keyPath.push(...path!);
+      keyPath.push(...(path ?? []));
     }
 
     return find;

@@ -1,83 +1,3 @@
-<template>
-  <div>
-    <div
-      v-if="!isEdit"
-      class="flex-center"
-      @mouseleave="showEdit = false"
-      @mouseover="showEdit = true"
-    >
-      <slot>
-        <span
-          v-if="['input', 'inputNumber'].indexOf(type) >= 0"
-          class="flex-auto"
-          >{{ tmpValue }}</span
-        >
-        <div v-else-if="type === 'switch'" class="flex-auto">
-          <ASwitch v-model="tmpValue" disabled />
-        </div>
-        <span v-else-if="type === 'select'" class="flex-auto">
-          {{ getSelectLabel }}
-        </span>
-      </slot>
-      <div
-        class="cursor-pointer w-14px hover:text-[rgba(var(--primary-6))]"
-        @click="isEdit = true"
-      >
-        <SvgIcon v-if="showEdit" icon="uil:edit" size="14" />
-      </div>
-    </div>
-
-    <div v-else class="flex justify-between items-center">
-      <div v-if="type === 'input'">
-        <slot name="input">
-          <AInput
-            v-model="tmpValue"
-            :placeholder="placeholder"
-            class="text-center"
-            @keydown.enter="saveValue"
-          />
-        </slot>
-      </div>
-
-      <div v-else-if="type === 'inputNumber'">
-        <slot name="inputNumber">
-          <AInputNumber
-            v-model="tmpValue"
-            :placeholder="placeholder"
-            class="text-center"
-            v-bind="numberProps"
-            @keydown.enter="saveValue"
-          />
-        </slot>
-      </div>
-      <div v-else-if="type === 'switch'" class="flex-auto">
-        <slot name="switch">
-          <ASwitch v-model="tmpValue" v-bind="switchProps" />
-        </slot>
-      </div>
-      <div v-else-if="type === 'select'" class="flex-auto">
-        <slot name="select">
-          <ASelect v-model="tmpValue" v-bind="getSelectProps" />
-        </slot>
-      </div>
-      <ASpace class="pl-5px">
-        <div
-          class="cursor-pointer hover:text-[rgba(var(--primary-6))]"
-          @click="saveValue"
-        >
-          <SvgIcon icon="mingcute:check-fill" size="14" />
-        </div>
-        <div
-          class="cursor-pointer hover:text-[rgba(var(--primary-6))]"
-          @click="closeValue"
-        >
-          <SvgIcon icon="mingcute:close-fill" size="14" />
-        </div>
-      </ASpace>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { SvgIcon } from '@/components/Icon';
   import { computed, ref, unref } from 'vue';
@@ -159,6 +79,87 @@
     isEdit.value = false;
   };
 </script>
+
+<template>
+  <div>
+    <div
+      v-if="!isEdit"
+      class="flex-center"
+      @mouseleave="showEdit = false"
+      @mouseover="showEdit = true"
+    >
+      <slot>
+        <span
+          v-if="['input', 'inputNumber'].indexOf(type) >= 0"
+          class="flex-auto"
+        >
+          {{ tmpValue }}
+        </span>
+        <div v-else-if="type === 'switch'" class="flex-auto">
+          <ASwitch v-model="tmpValue" disabled />
+        </div>
+        <span v-else-if="type === 'select'" class="flex-auto">
+          {{ getSelectLabel }}
+        </span>
+      </slot>
+      <div
+        class="cursor-pointer w-14px hover:text-[rgba(var(--primary-6))]"
+        @click="isEdit = true"
+      >
+        <SvgIcon v-if="showEdit" icon="uil:edit" size="14" />
+      </div>
+    </div>
+
+    <div v-else class="flex justify-between items-center">
+      <div v-if="type === 'input'">
+        <slot name="input">
+          <AInput
+            v-model="tmpValue"
+            :placeholder="placeholder"
+            class="text-center"
+            @keydown.enter="saveValue"
+          />
+        </slot>
+      </div>
+
+      <div v-else-if="type === 'inputNumber'">
+        <slot name="inputNumber">
+          <AInputNumber
+            v-model="tmpValue"
+            :placeholder="placeholder"
+            class="text-center"
+            v-bind="numberProps"
+            @keydown.enter="saveValue"
+          />
+        </slot>
+      </div>
+      <div v-else-if="type === 'switch'" class="flex-auto">
+        <slot name="switch">
+          <ASwitch v-model="tmpValue" v-bind="switchProps" />
+        </slot>
+      </div>
+      <div v-else-if="type === 'select'" class="flex-auto">
+        <slot name="select">
+          <ASelect v-model="tmpValue" v-bind="getSelectProps" />
+        </slot>
+      </div>
+      <ASpace class="pl-5px">
+        <div
+          class="cursor-pointer hover:text-[rgba(var(--primary-6))]"
+          @click="saveValue"
+        >
+          <SvgIcon icon="mingcute:check-fill" size="14" />
+        </div>
+        <div
+          class="cursor-pointer hover:text-[rgba(var(--primary-6))]"
+          @click="closeValue"
+        >
+          <SvgIcon icon="mingcute:close-fill" size="14" />
+        </div>
+      </ASpace>
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped>
   :deep(.arco-input) {

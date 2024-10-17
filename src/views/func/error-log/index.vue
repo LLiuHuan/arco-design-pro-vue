@@ -1,15 +1,3 @@
-<template>
-  <div>
-    <ACard>
-      <div>
-        <AButton @click="fireVueError">点击出发Vue错误</AButton>
-      </div>
-    </ACard>
-
-    <ATable :columns="columns" :data="getErrorLogList" />
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { useErrorLog } from '@/hooks/web/useErrorLog';
 
@@ -66,5 +54,17 @@
     throw new Error('fire vue error!');
   }
 </script>
+
+<template>
+  <div>
+    <ACard>
+      <div>
+        <AButton @click="fireVueError">点击出发Vue错误</AButton>
+      </div>
+    </ACard>
+
+    <ATable :columns="columns" :data="getErrorLogList" />
+  </div>
+</template>
 
 <style lang="less" scoped></style>

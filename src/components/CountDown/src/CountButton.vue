@@ -1,14 +1,10 @@
-<template>
-  <AButton
-    :disabled="isStart"
-    :loading="loading"
-    v-bind="$attrs"
-    @click="handleStart"
-  >
-    {{ getButtonText }}
-  </AButton>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-10-16 17:51:22
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed, unref, watchEffect } from 'vue';
   import { useLoading } from '@adp/hooks';
@@ -18,6 +14,10 @@
 
   defineOptions({ name: 'CountButton' });
 
+  const props = withDefaults(defineProps<Props>(), {
+    count: 60,
+  });
+
   interface Props {
     value?: object | number | string | undefined;
     count?: number;
@@ -26,9 +26,6 @@
 
   const { t } = useI18n();
   const { loading, startLoading, endLoading } = useLoading();
-  const props = withDefaults(defineProps<Props>(), {
-    count: 60,
-  });
   const { currentCount, isStart, start, reset } = useCountdown(props.count);
 
   const getButtonText = computed(() => {
@@ -56,5 +53,16 @@
     }
   }
 </script>
+
+<template>
+  <AButton
+    :disabled="isStart"
+    :loading="loading"
+    v-bind="$attrs"
+    @click="handleStart"
+  >
+    {{ getButtonText }}
+  </AButton>
+</template>
 
 <style lang="less" scoped></style>

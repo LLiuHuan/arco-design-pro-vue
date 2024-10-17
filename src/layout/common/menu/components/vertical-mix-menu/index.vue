@@ -190,6 +190,7 @@
         <header
           :style="{ height: `${getHeaderHeight}px` }"
           class="flex-y-center justify-between"
+          v-if="!isHorizontalMix && !getLayoutReverse"
         >
           <h2 class="pl-8px text-16px text-[rgba(var(--primary-6))] font-bold">
             {{ VITE_GLOB_APP_TITLE }}

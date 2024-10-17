@@ -121,7 +121,7 @@
       <component
         :is="icon"
         :class="[isCollapsed ? 'text-16px mb-0' : 'text-20px mb-8px']"
-        class="h-20px transition-base"
+        class="h-20px"
       />
       <p
         :class="[isCollapsed ? 'h-0 pt-0 hidden' : 'h-24px pt-4px']"
@@ -182,9 +182,5 @@
   .darkActiveItem {
     color: rgba(var(--primary-6), 1) !important;
     background-color: var(--color-menu-dark-hover) !important;
-  }
-
-  .darkDefaultItem {
-    color: var(--color-text-4);
   }
 </style>

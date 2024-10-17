@@ -117,6 +117,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         component: 'view.dashboard_analysis',
         meta: {
           title: 'dashboard_analysis',
+          icon: 'mdi:monitor-dashboard',
           i18nKey: 'route.dashboard_analysis'
         }
       },
@@ -126,6 +127,7 @@ export const generatedRoutes: GeneratedRoute[] = [
         component: 'view.dashboard_workbench',
         meta: {
           title: 'dashboard_workbench',
+          icon: 'mdi:monitor-dashboard',
           i18nKey: 'route.dashboard_workbench'
         }
       }

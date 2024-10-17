@@ -2,8 +2,12 @@
   import { createReusableTemplate } from '@vueuse/core';
   import { LayoutTrigger } from '@/layout/common';
   import { MixSidebarTriggerEnum } from '@/enums';
-  import { useFooterSetting, useMenuSetting } from '@/hooks/setting';
-  import { unref } from 'vue';
+  import {
+    useFooterSetting,
+    useLayoutSetting,
+    useMenuSetting,
+  } from '@/hooks/setting';
+  import { computed, unref } from 'vue';
   import { useGo } from '@/hooks/web/usePage';
   import { useRouteStore } from '@/store/modules/route';
 
@@ -56,14 +60,11 @@
 
   const routeStore = useRouteStore();
   const { goKey } = useGo();
-  const {
-    getCollapsed,
-    getMixSideTrigger,
-    isVerticalMix,
-    getTrigger,
-    isTrigger,
-  } = useMenuSetting();
+  const { getCollapsed, getMixSideTrigger, getTrigger, isTrigger } =
+    useMenuSetting();
   const { getFooterHeight } = useFooterSetting();
+  const { getLayoutReverse } = useLayoutSetting();
+  const { isHorizontalMix, isHorizontal } = useMenuSetting();
 
   const handleMixMenuClick = (item: App.Menu, hover: boolean = false) => {
     emit('select', item, hover);
@@ -73,7 +74,7 @@
   // Get menu item events
   const getItemEvents = (item: App.Menu) => {
     if (
-      unref(isVerticalMix) &&
+      // unref(isVerticalMix) &&
       unref(getMixSideTrigger) === MixSidebarTriggerEnum.HOVER
     ) {
       return {
@@ -89,6 +90,19 @@
       onClick: () => handleMixMenuClick(item),
     };
   };
+
+  const headerMenus = computed(() => {
+    if (unref(isHorizontal)) {
+      return unref(routeStore.menus);
+    }
+
+    if (unref(isHorizontalMix) && unref(getLayoutReverse)) {
+      return routeStore.activeFirstLevelMenus;
+    }
+    return unref(routeStore.menus);
+
+    // return [];
+  });
 </script>
 
 <template>
@@ -120,13 +134,12 @@
 
   <div class="h-full flex-col-stretch flex-1-hidden">
     <slot></slot>
-
     <AScrollbar
       class="h-full overflow-y-auto"
       outer-class="h-full flex-1-hidden"
     >
       <MixMenuItem
-        v-for="item in routeStore.menus"
+        v-for="item in headerMenus"
         :key="item.key"
         :active="item.key === activeMenuKey"
         :icon="item.icon"

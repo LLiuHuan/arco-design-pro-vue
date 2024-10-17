@@ -5,7 +5,6 @@
   import { AppLogo } from '@/components/AppLogo';
   import { computed, unref } from 'vue';
   import { useLayoutSetting } from '@/hooks/setting/useLayoutSetting';
-  import { useMixMenuContext } from '@/layout/context';
   import LayoutTrigger from '../trigger/index.vue';
   import {
     Breadcrumb,
@@ -33,9 +32,8 @@
 
   const { getIsMobile } = useRootSetting();
   const { getMenuWidth, isTrigger, getTrigger } = useMenuSetting();
-  const { getLayoutMode } = useLayoutSetting();
+  const { getLayoutMode, getLayoutReverse } = useLayoutSetting();
   const routeStore = useRouteStore();
-  const { menus } = useMixMenuContext();
 
   const headerMenus = computed(() => {
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL) {
@@ -43,7 +41,10 @@
     }
 
     if (unref(getLayoutMode) === MenuModeEnum.HORIZONTAL_MIX) {
-      return unref(menus);
+      if (unref(getLayoutReverse)) {
+        return unref(routeStore.menus);
+      }
+      return unref(routeStore.activeFirstLevelMenus);
     }
 
     return [];

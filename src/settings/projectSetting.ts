@@ -77,6 +77,11 @@ export const defaultSetting: ProjectConfig = {
     // Scroll mode
     // scrollMode: 'content',
     scrollMode: 'wrapper',
+    // 反转数据
+    // 为HORIZONTAL_MIX提供，在HORIZONTAL_MIX的时候可以顶部一级菜单，子菜单显示在左侧
+    // Reverse data
+    // Provided for HORIZONTAL_MIX, in HORIZONTAL_MIX can be the top level menu, submenu is displayed on the left side of the
+    reverse: false,
   },
   // Menu settings - [菜单设置]
   menuSetting: {

@@ -91,6 +91,12 @@ export interface LayoutSetting {
   // 滚动模式
   // Scroll mode
   scrollMode: ThemeScrollMode;
+
+  // 反转数据
+  // 为HORIZONTAL_MIX提供，在HORIZONTAL_MIX的时候可以顶部一级菜单，子菜单显示在左侧
+  // Reverse data
+  // Provided for HORIZONTAL_MIX, in HORIZONTAL_MIX can be the top level menu, submenu is displayed on the left side of the
+  reverse: boolean;
 }
 
 export interface MenuSetting {

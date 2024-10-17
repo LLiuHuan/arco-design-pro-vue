@@ -25,7 +25,8 @@
   },
   "layoutSetting": {
     "mode": "vertical",
-    "scrollMode": "wrapper"
+    "scrollMode": "wrapper",
+    "reverse": false
   },
   "menuSetting": {
     "collapsed": false,

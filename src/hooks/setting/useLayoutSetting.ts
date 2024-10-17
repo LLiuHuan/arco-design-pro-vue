@@ -20,6 +20,14 @@ export const useLayoutSetting = () => {
   );
 
   /**
+   * @description 获取布局是否反转
+   * @description Get layout reverse
+   */
+  const getLayoutReverse = computed(
+    () => appStore.setting.layoutSetting.reverse,
+  );
+
+  /**
    * @description 设置布局配置
    * @description Set layout configuration
    *
@@ -31,6 +39,7 @@ export const useLayoutSetting = () => {
   return {
     getLayoutMode,
     getLayoutScrollMode,
+    getLayoutReverse,
 
     setLayoutSetting,
   };

@@ -1,6 +1,14 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-22 13:17:40
+ * @LastEditTime: 2024-10-17 11:39:05
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import {
     useHeaderSetting,
+    useLayoutSetting,
     useMenuSetting,
     useRootSetting,
   } from '@/hooks/setting';
@@ -17,6 +25,7 @@
     useMenuSetting();
   const { getHeaderHeight } = useHeaderSetting();
   const { getShowLogo, getIsDarkMode } = useRootSetting();
+  const { getLayoutReverse } = useLayoutSetting();
 
   const routeStore = useRouteStore();
 
@@ -42,9 +51,11 @@
       :style="{ height: `${getHeaderHeight + 1}px` }"
       class="text-16px font-bold"
     />
-    <LayoutVerticalMixMenu v-if="isVerticalMix">
+    <LayoutVerticalMixMenu
+      v-if="isVerticalMix || (isHorizontalMix && getLayoutReverse)"
+    >
       <AppLogo
-        v-if="getShowLogo"
+        v-if="getShowLogo && !isHorizontalMix"
         :show-title="false"
         :style="{ height: `${getHeaderHeight + 1}px` }"
         class="text-16px font-bold"

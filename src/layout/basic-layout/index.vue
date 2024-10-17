@@ -22,7 +22,6 @@
     SettingDrawer,
   } from '../common';
   // eslint-disable-next-line import/no-cycle
-  import { setupMixMenuContext } from '../context';
 
   defineOptions({
     name: 'BasicLayout',
@@ -90,8 +89,6 @@
       setMenuSetting({ collapsed: val });
     },
   });
-
-  setupMixMenuContext();
 </script>
 
 <template>

@@ -1,35 +1,10 @@
-<template>
-  <div class="w-full flex flex-col">
-    <AInputPassword
-      v-if="showInput"
-      v-model:model-value="innerValueRef"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      allow-clear
-      autocomplete="off"
-      @change="handleChange"
-    >
-      <template #prefix>
-        <icon-lock />
-      </template>
-    </AInputPassword>
-    <AProgress
-      :animation="true"
-      :percent="getPasswordStrength"
-      :show-text="false"
-      :status="
-        getPasswordStrength <= 0.4
-          ? 'danger'
-          : getPasswordStrength <= 0.6
-            ? 'warning'
-            : 'success'
-      "
-      :steps="5"
-      class="mt-5px"
-    />
-  </div>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-06-15 00:37:18
+ * @LastEditTime: 2024-10-16 17:51:27
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed, ref, unref, watch, watchEffect } from 'vue';
   import { zxcvbn } from '@zxcvbn-ts/core';
@@ -76,5 +51,37 @@
     },
   );
 </script>
+
+<template>
+  <div class="w-full flex flex-col">
+    <AInputPassword
+      v-if="showInput"
+      v-model:model-value="innerValueRef"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      allow-clear
+      autocomplete="off"
+      @change="handleChange"
+    >
+      <template #prefix>
+        <icon-lock />
+      </template>
+    </AInputPassword>
+    <AProgress
+      :animation="true"
+      :percent="getPasswordStrength"
+      :show-text="false"
+      :status="
+        getPasswordStrength <= 0.4
+          ? 'danger'
+          : getPasswordStrength <= 0.6
+            ? 'warning'
+            : 'success'
+      "
+      :steps="5"
+      class="mt-5px"
+    />
+  </div>
+</template>
 
 <style lang="less" scoped></style>

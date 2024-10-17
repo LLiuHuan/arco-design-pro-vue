@@ -9,6 +9,7 @@ enum HandlerEnum {
   MENU_COLLAPSE,
   MENU_COLLAPSE_BTN,
   MENU_ACCORDION,
+  MENU_REVERSE,
 
   MENU_TRIGGER_MIX_SIDEBAR,
   MENU_FIXED_MIX_SIDEBAR,
@@ -83,6 +84,10 @@ const handler = (
     case HandlerEnum.MENU_ACCORDION:
       return {
         menuSetting: { accordion: value },
+      };
+    case HandlerEnum.MENU_REVERSE:
+      return {
+        layoutSetting: { reverse: value },
       };
     case HandlerEnum.MENU_FIXED_MIX_SIDEBAR:
       return {

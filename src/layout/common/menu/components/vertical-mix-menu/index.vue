@@ -4,6 +4,7 @@
   import {
     useGlobSetting,
     useHeaderSetting,
+    useLayoutSetting,
     useMenuSetting,
     useRootSetting,
   } from '@/hooks/setting';
@@ -19,6 +20,7 @@
   const {
     getMixSideFixed,
     isVerticalMix,
+    isHorizontalMix,
     getCloseMixSidebarOnChange,
     getMixChildMenuWidth,
     setMenuSetting,
@@ -27,6 +29,7 @@
   const { getHeaderHeight } = useHeaderSetting();
   const { getIsDarkMode } = useRootSetting();
   const { VITE_GLOB_APP_TITLE } = useGlobSetting();
+  const { getLayoutReverse } = useLayoutSetting();
 
   const mixMenuRef = ref(null);
 
@@ -75,7 +78,12 @@
       unref(currentRoute)?.name) as string;
     const activeKeys = getSelectedMenuKeyPath(activeKey);
     if (!activeKeys) return;
-    activeName.value = activeKeys ? activeKeys[0] : '';
+    if (unref(isHorizontalMix) && unref(getLayoutReverse)) {
+      activeName.value = activeKeys ? activeKeys[1] : '';
+    } else {
+      activeName.value = activeKeys ? activeKeys[0] : '';
+    }
+
     if (unref(isVerticalMix)) {
       const activeMenu = unref(routeMenus).find(
         (item) => item.routeKey === unref(activeName),

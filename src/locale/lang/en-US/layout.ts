@@ -171,6 +171,7 @@ export default {
         title: 'Universal settings',
         watermark: 'Watermark',
         watermarkText: 'Watermark text',
+        borderRadius: 'Default Border Radius',
       },
 
       animation: {

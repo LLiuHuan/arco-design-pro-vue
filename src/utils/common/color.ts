@@ -3,7 +3,11 @@ import { ThemeSettingColors } from '~/types/config';
 import { generate, getRgbStr } from '@adp/color';
 import { setCssVar } from './domUtils';
 
-const addThemeVarsToTtml = (cssVar: string, darkCssVar: string) => {
+export const addThemeVarsToTtml = (
+  cssVar: string,
+  darkCssVar: string,
+  styleId: string = 'theme-vars',
+) => {
   const css = `
   body {
   ${cssVar}
@@ -15,7 +19,6 @@ const addThemeVarsToTtml = (cssVar: string, darkCssVar: string) => {
   ${darkCssVar}
   }
   `;
-  const styleId = 'theme-vars';
 
   const style =
     document.querySelector(`#${styleId}`) || document.createElement('style');

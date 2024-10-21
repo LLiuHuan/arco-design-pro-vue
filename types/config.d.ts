@@ -273,6 +273,10 @@ export interface ProjectConfig {
   // Whether the content page can scroll
   contentXScrollable: boolean;
 
+  // 卡片圆角
+  // Card radius
+  borderRadius: number;
+
   // 布局设置
   // Layout settings
   layoutSetting: LayoutSetting;

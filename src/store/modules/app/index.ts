@@ -22,6 +22,7 @@ import {
 import { computed, effectScope, onScopeDispose, ref, unref, watch } from 'vue';
 import { useBoolean } from '@adp/hooks';
 import {
+  addThemeVarsToTtml,
   deepMerge,
   setProTheme,
   setThemeColors,
@@ -361,6 +362,17 @@ export const useAppStore = defineStore(StoreEnum.App, () => {
         setThemeColors(getThemeColors());
       },
       { immediate: true },
+    );
+
+    watch(
+      () => projectConfig.value.borderRadius,
+      (value: number) => {
+        // 设置圆角
+        // 将html中的--border-radius-none设置为配置的圆角值
+        const cssVar = `--border-radius-none: ${value}px;`;
+        addThemeVarsToTtml(cssVar, cssVar, 'rounded-vars');
+        // document.body.style.setProperty('--border-radius-none', `${value}px`);
+      },
     );
   });
 

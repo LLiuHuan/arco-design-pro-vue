@@ -19,12 +19,12 @@ export function colorPalette(
   const maxValue = 100;
   const minValue = 30;
 
-  const getNewHue = (isLight: boolean, i: number) => {
+  const getNewHue = (isLight: boolean, index: number) => {
     let hue;
     if (h >= 60 && h <= 240) {
-      hue = isLight ? h - hueStep * i : h + hueStep * i;
+      hue = isLight ? h - hueStep * index : h + hueStep * index;
     } else {
-      hue = isLight ? h + hueStep * i : h - hueStep * i;
+      hue = isLight ? h + hueStep * index : h - hueStep * index;
     }
     if (hue < 0) {
       hue += 360;
@@ -34,24 +34,23 @@ export function colorPalette(
     return Math.round(hue);
   };
 
-  const getNewSaturation = (isLight: boolean, i: number) => {
+  const getNewSaturation = (isLight: boolean, index: number) => {
     let newSaturation;
 
     if (isLight) {
       newSaturation =
-        s <= minSaturationStep ? s : s - ((s - minSaturationStep) / 5) * i;
+        s <= minSaturationStep ? s : s - ((s - minSaturationStep) / 5) * index;
     } else {
-      newSaturation = s + ((maxSaturationStep - s) / 4) * i;
+      newSaturation = s + ((maxSaturationStep - s) / 4) * index;
     }
     return newSaturation;
   };
 
-  const getNewValue = (isLight: boolean, i: number) => {
-    return isLight
-      ? v + ((maxValue - v) / 5) * i
-      : v <= minValue
-        ? v
-        : v - ((v - minValue) / 4) * i;
+  const getNewValue = (isLight: boolean, index: number) => {
+    if (isLight) {
+      return v + ((maxValue - v) / 5) * index;
+    }
+    return v <= minValue ? v : v - ((v - minValue) / 4) * index;
   };
 
   const isLight = i < 6;

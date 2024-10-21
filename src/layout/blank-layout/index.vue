@@ -14,7 +14,6 @@
 </script>
 
 <template>
-  BasicLayout
   <LayoutContent :show-padding="false" class="wh-full" />
 </template>
 

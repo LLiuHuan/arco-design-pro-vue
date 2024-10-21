@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-08-20 17:04:10
- * @LastEditTime: 2024-08-22 12:36:25
+ * @LastEditTime: 2024-10-18 12:47:37
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -14,13 +14,15 @@
     SettingItem,
     SwitchItem,
     InputItem,
+    InputNumberItem,
   } from '../common';
 
   defineOptions({
     name: 'Universal',
   });
 
-  const { getShowWatermark, getWatermarkText } = useRootSetting();
+  const { getShowWatermark, getWatermarkText, getBorderRadius } =
+    useRootSetting();
 
   const { t } = useI18n();
 </script>
@@ -47,6 +49,16 @@
         <InputItem
           :def="getWatermarkText"
           :event="HandlerEnum.WATERMARK_TEXT"
+        />
+      </SettingItem>
+      <SettingItem
+        key="universal-3"
+        :label="t('layout.setting.universal.setting.borderRadius')"
+      >
+        <InputNumberItem
+          :def="getBorderRadius"
+          :event="HandlerEnum.BORDER_RADIUS"
+          :min="0"
         />
       </SettingItem>
     </TransitionGroup>

@@ -143,6 +143,12 @@ export const useRootSetting = () => {
   const getWatermarkText = computed(() => appStore.setting.watermarkText);
 
   /**
+   * @description: 获取圆角
+   * @description: Get border radius
+   */
+  const getBorderRadius = computed(() => appStore.setting.borderRadius);
+
+  /**
    * @description: 获取刷新标记
    * @description: Get refresh flag
    */
@@ -304,6 +310,7 @@ export const useRootSetting = () => {
     getThemePro,
     getShowWatermark,
     getWatermarkText,
+    getBorderRadius,
     getReloadFlag,
 
     setRootSetting,

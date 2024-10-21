@@ -6,6 +6,7 @@
   "showDarkModeToggle": true,
   "showLogo": true,
   "fixedHeaderAndTab": true,
+  "borderRadius": 0,
   "transitionSetting": {
     "enable": true,
     "basicTransition": "fade-slide",

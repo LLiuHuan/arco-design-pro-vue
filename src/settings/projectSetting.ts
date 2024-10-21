@@ -30,6 +30,9 @@ export const defaultSetting: ProjectConfig = {
   // 是否固定头部和标签
   // Whether to fix the header and tab
   fixedHeaderAndTab: true,
+  // 卡片圆角
+  // Card radius
+  borderRadius: 0,
   // Animation configuration - [动画配置]
   transitionSetting: {
     // Whether to open the page switching animation - [是否开启页面切换动画]

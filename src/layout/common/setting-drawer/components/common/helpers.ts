@@ -60,6 +60,7 @@ enum HandlerEnum {
 
   WATERMARK,
   WATERMARK_TEXT,
+  BORDER_RADIUS,
 }
 
 const handler = (
@@ -236,7 +237,10 @@ const handler = (
       return {
         watermarkText: value,
       };
-
+    case HandlerEnum.BORDER_RADIUS:
+      return {
+        borderRadius: value,
+      };
     case HandlerEnum.COPYRIGHT_SHOW:
       return {
         copyrightSetting: {

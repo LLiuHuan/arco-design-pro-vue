@@ -170,6 +170,7 @@ export default {
         title: '通用设置',
         watermark: '水印',
         watermarkText: '水印文本',
+        borderRadius: '默认圆角',
       },
 
       animation: {

@@ -1,23 +1,13 @@
-<template>
-  <AInputNumber
-    :disabled="disabled"
-    :formatter="formatter"
-    :max="max"
-    :min="min"
-    :parser="parser"
-    :precision="precision"
-    :read-only="readonly"
-    :step="step"
-    class="!w-126px"
-    mode="button"
-    v-bind="getBindValue"
-    @change="handleChange"
-  >
-  </AInputNumber>
-</template>
-
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2024-08-07 18:52:02
+ * @LastEditTime: 2024-10-18 12:47:17
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
   import { computed } from 'vue';
+  import { isNumber } from '@/utils/common';
   import { baseHandler, HandlerEnum } from '../helpers';
 
   interface Props {
@@ -48,7 +38,7 @@
   });
 
   const getBindValue = computed(() => {
-    return props.def ? { 'model-value': props.def } : {};
+    return isNumber(props.def) ? { 'model-value': props.def } : {};
   });
 
   const handleChange = (value: boolean | string | number | undefined) => {
@@ -57,5 +47,22 @@
     }
   };
 </script>
+
+<template>
+  <AInputNumber
+    :disabled="disabled"
+    :formatter="formatter"
+    :max="max"
+    :min="min"
+    :parser="parser"
+    :precision="precision"
+    :read-only="readonly"
+    :step="step"
+    class="!w-126px"
+    mode="button"
+    v-bind="getBindValue"
+    @change="handleChange"
+  />
+</template>
 
 <style lang="less" scoped></style>

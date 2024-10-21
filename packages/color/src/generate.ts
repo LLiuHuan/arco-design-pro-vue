@@ -26,12 +26,12 @@ export function generate(
   }
 
   if (list) {
-    const list = [];
+    const listItem = [];
     const func = dark ? colorPaletteDark : colorPalette;
-    for (let i = 1; i <= 10; i++) {
-      list.push(func(color, i, format));
+    for (let i = 1; i <= 10; i += 1) {
+      listItem.push(func(color, i, format));
     }
-    return list;
+    return listItem;
   }
   return dark
     ? colorPaletteDark(color, index, format)

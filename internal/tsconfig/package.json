@@ -2,11 +2,11 @@
   "name": "@arco/tsconfig",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
     "directory": "internal/tsconfig"
   },
   "license": "MIT",

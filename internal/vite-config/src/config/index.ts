@@ -1,3 +1,10 @@
+/*
+ * @Description: vite 配置文件
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-07 16:05:56
+ * @LastEditors: LLiuHuan
+ */
 import type { DefineConfig } from '../typing';
 
 import { existsSync } from 'node:fs';

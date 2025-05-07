@@ -1,3 +1,11 @@
+/*
+ * @Description: 应用程序配置
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-07 16:07:31
+ * @LastEditors: LLiuHuan
+ */
+
 import type { CSSOptions, UserConfig } from 'vite';
 
 import type { DefineApplicationOptions } from '../typing';
@@ -44,7 +52,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
       nitroMockOptions: {},
       print: !isBuild,
       printInfoMap: {
-        'Vben Admin Docs': 'https://doc.vben.pro',
+        'Arco Design Pro Docs': 'https://desc.0x3.cn',
       },
       pwa: true,
       pwaOptions: getDefaultPwaOptions(appTitle),

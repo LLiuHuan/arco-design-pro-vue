@@ -71,6 +71,8 @@
     ]
   },
   "devDependencies": {
+    "@arco/tsconfig": "workspace:*",
+    "@arco/vite-config": "workspace:*",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
     "@playwright/test": "catalog:",

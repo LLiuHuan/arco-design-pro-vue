@@ -1,0 +1,43 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "pnpm-lock.yaml",
+    "**/.env.*local",
+    "**/tsconfig*.json",
+    "internal/node-utils/*.json"
+  ],
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "dist/**",
+        "dist.zip",
+        ".vitepress/dist.zip",
+        ".vitepress/dist/**"
+      ]
+    },
+    "preview": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "build:analyze": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@arco/backend-mock#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".nitro/**", ".output/**"]
+    },
+    "test:e2e": {},
+    "dev": {
+      "dependsOn": [],
+      "outputs": [],
+      "cache": false,
+      "persistent": true
+    },
+    "typecheck": {
+      "outputs": []
+    }
+  }
+}

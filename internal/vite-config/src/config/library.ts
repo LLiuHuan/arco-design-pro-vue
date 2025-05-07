@@ -1,3 +1,4 @@
+
 import type { ConfigEnv, UserConfig } from 'vite';
 
 import type { DefineLibraryOptions } from '../typing';

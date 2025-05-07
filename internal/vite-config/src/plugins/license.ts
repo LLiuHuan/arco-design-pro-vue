@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-07 16:04:33
+ * @LastEditors: LLiuHuan
+ */
 import type {
   NormalizedOutputOptions,
   OutputBundle,
@@ -30,15 +37,15 @@ async function viteLicensePlugin(
       handler: (_options: NormalizedOutputOptions, bundle: OutputBundle) => {
         const date = dateUtil().format('YYYY-MM-DD ');
         const copyrightText = `/*!
-  * Vben Admin
+  * Arco Design Pro
   * Version: ${version}
-  * Author: vben
-  * Copyright (C) 2024 Vben
+  * Author: arco
+  * Copyright (C) 2024 Arco
   * License: MIT License
   * Description: ${description}
   * Date Created: ${date}
   * Homepage: ${homepage}
-  * Contact: ann.vben@gmail.com
+  * Contact: arco.0x3.cn
 */
               `.trim();
 

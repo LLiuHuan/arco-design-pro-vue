@@ -1,0 +1,44 @@
+{
+  "name": "@arco-core/typings",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "packages/@arco-core/base/typings"
+  },
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm unbuild"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./vue-router": {
+      "types": "./vue-router.d.ts"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "dependencies": {
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  }
+}

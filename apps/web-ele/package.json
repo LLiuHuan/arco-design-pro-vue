@@ -1,0 +1,42 @@
+{
+  "name": "@arco/web-ele",
+  "version": "1.0.0",
+  "homepage": "https://arco.0x3.cn",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "apps/web-ele"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "arco",
+    "email": "184555556@qq.com",
+    "url": "https://github.com/anncwb"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@arco/styles": "workspace:*",
+    "@arco/utils": "workspace:*",
+    "@iconify-json/logos": "catalog:",
+    "@vueuse/core": "catalog:",
+    "dayjs": "catalog:",
+    "element-plus": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "unplugin-element-plus": "catalog:"
+  }
+}

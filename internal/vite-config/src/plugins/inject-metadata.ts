@@ -1,3 +1,10 @@
+/*
+ * @Description: 将依赖和项目信息注入到项目中
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-16 11:25:07
+ * @LastEditors: LLiuHuan
+ */
 import type { PluginOption } from 'vite';
 
 import {
@@ -45,7 +52,7 @@ async function resolveMonorepoDependencies() {
       resultDependencies[key] = resolvePackageVersion(
         pkgsMeta,
         key,
-        value,
+        value as string,
         catalog,
       );
     }
@@ -53,7 +60,7 @@ async function resolveMonorepoDependencies() {
       resultDevDependencies[key] = resolvePackageVersion(
         pkgsMeta,
         key,
-        value,
+        value as string,
         catalog,
       );
     }

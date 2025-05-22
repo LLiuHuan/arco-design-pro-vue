@@ -1,3 +1,10 @@
+/*
+ * @Description: 压缩插件
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-16 11:24:12
+ * @LastEditors: LLiuHuan
+ */
 import type { PluginOption } from 'vite';
 
 import type { ArchiverPluginOptions } from '../typing';

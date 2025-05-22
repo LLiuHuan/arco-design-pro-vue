@@ -1,0 +1,33 @@
+{
+  "name": "@arco/commitlint-config",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "internal/lint-configs/commitlint-config"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "default": "./index.mjs"
+    }
+  },
+  "dependencies": {
+    "@arco/node-utils": "workspace:*",
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "commitlint-plugin-function-rules": "catalog:",
+    "cz-git": "catalog:",
+    "czg": "catalog:"
+  }
+}

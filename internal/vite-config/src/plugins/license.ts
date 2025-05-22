@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: 将版权信息注入到项目中
  * @Author: LLiuHuan
  * @Date: 2025-05-07 15:52:54
- * @LastEditTime: 2025-05-07 16:04:33
+ * @LastEditTime: 2025-05-16 11:28:44
  * @LastEditors: LLiuHuan
  */
 import type {
@@ -39,13 +39,13 @@ async function viteLicensePlugin(
         const copyrightText = `/*!
   * Arco Design Pro
   * Version: ${version}
-  * Author: arco
+  * Author: LLiuHuan
   * Copyright (C) 2024 Arco
   * License: MIT License
   * Description: ${description}
   * Date Created: ${date}
   * Homepage: ${homepage}
-  * Contact: arco.0x3.cn
+  * Contact: https://arco.0x3.cn
 */
               `.trim();
 

@@ -1,0 +1,27 @@
+{
+  "name": "@arco/utils",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "packages/utils"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@arco-core/shared": "workspace:*",
+    "@arco-core/typings": "workspace:*",
+    "vue-router": "catalog:"
+  }
+}

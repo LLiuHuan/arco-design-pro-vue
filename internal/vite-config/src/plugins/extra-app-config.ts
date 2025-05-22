@@ -1,3 +1,10 @@
+/*
+ * @Description: 将配置文件抽离出来并注入到项目中
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-16 11:25:07
+ * @LastEditors: LLiuHuan
+ */
 import type { PluginOption } from 'vite';
 
 import {

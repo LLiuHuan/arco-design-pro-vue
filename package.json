@@ -1,13 +1,19 @@
 {
   "name": "arco-design-pro-vue-monorepo",
   "version": "1.0.0",
-  "license": "MIT",
-  "type": "module",
-  "author": {
-    "name": "LLiuHuan",
-    "email": "184555556@qq.com",
-    "url": "https://github.com/LLiuHuan/arco-design-pro-vue"
-  },
+  "description": "🚀 Arco Design Pro Vue is a production-ready front-end solution for admin interfaces. Based on Vue 3, TypeScript, Vite, and Arco Design.",
+  "keywords": [
+    "vue",
+    "typescript",
+    "vue3",
+    "ts",
+    "tsx",
+    "admin",
+    "arco-design",
+    "arco-design-pro-vue",
+    "arco-design-pro"
+  ],
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
   "bugs": {
     "url": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
     "email": "184555556@qq.com"
@@ -16,9 +22,14 @@
     "type": "git",
     "url": "https://github.com/LLiuHuan/arco-design-pro-vue.git"
   },
-  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "license": "MIT",
+  "author": {
+    "name": "LLiuHuan",
+    "email": "184555556@qq.com",
+    "url": "https://github.com/LLiuHuan/arco-design-pro-vue"
+  },
+  "type": "module",
   "website": "https://lliuhuan.github.io/arco-design-pro-vue",
-  "description": "🚀 Arco Design Pro Vue is a production-ready front-end solution for admin interfaces. Based on Vue 3, TypeScript, Vite, and Arco Design.",
   "documentation": "https://github.com/LLiuHuan/arco-design-pro-vue",
   "scripts": {
     "build:analyze": "turbo build:analyze",
@@ -55,28 +66,20 @@
     "update:deps": "npx taze -r -w",
     "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile"
   },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.vue": [
-      "stylelint --fix",
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.{less,css}": [
-      "stylelint --fix",
-      "prettier --write"
-    ]
-  },
   "devDependencies": {
+    "@arco/commitlint-config": "workspace:*",
+    "@arco/eslint-config": "workspace:*",
+    "@arco/prettier-config": "workspace:*",
+    "@arco/stylelint-config": "workspace:*",
     "@arco/tsconfig": "workspace:*",
+    "@arco/unocss-config": "workspace:*",
     "@arco/vite-config": "workspace:*",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
     "@playwright/test": "catalog:",
     "@types/node": "catalog:",
+    "@unocss/postcss": "catalog:",
+    "@unocss/preset-wind4": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "@vue/test-utils": "catalog:",
@@ -93,6 +96,7 @@
     "turbo": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
+    "unocss": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
     "vue": "catalog:",
@@ -115,15 +119,19 @@
       "node-gyp"
     ]
   },
-  "keywords": [
-    "vue",
-    "typescript",
-    "vue3",
-    "ts",
-    "tsx",
-    "admin",
-    "arco-design",
-    "arco-design-pro-vue",
-    "arco-design-pro"
-  ]
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "stylelint --fix",
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{less,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ]
+  }
 }

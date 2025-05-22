@@ -1,3 +1,10 @@
+/*
+ * @Description: 运行时打印信息
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-16 11:30:32
+ * @LastEditors: LLiuHuan
+ */
 import type { PluginOption } from 'vite';
 
 import type { PrintPluginOptions } from '../typing';

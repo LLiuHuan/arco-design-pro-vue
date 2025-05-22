@@ -1,3 +1,10 @@
+/*
+ * @Description: mock server
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-16 11:29:29
+ * @LastEditors: LLiuHuan
+ */
 import type { PluginOption } from 'vite';
 
 import type { NitroMockPluginOptions } from '../typing';
@@ -71,10 +78,10 @@ async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
             verbose &&
               consola.info(
                 `Nitro config updated:\n${diff
-                  .map((entry) => `  ${entry.toString()}`)
+                  .map((entry: any) => `  ${entry.toString()}`)
                   .join('\n')}`,
               );
-            await (diff.every((e) => hmrKeyRe.test(e.key))
+            await (diff.every((e: any) => hmrKeyRe.test(e.key))
               ? nitro.updateConfig(newConfig.config)
               : reload());
           },

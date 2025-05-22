@@ -26,6 +26,7 @@ import { viteLicensePlugin } from './license';
 import { viteNitroMockPlugin } from './nitro-mock';
 import { vitePrintPlugin } from './print';
 import { viteVxeTableImportsPlugin } from './vxe-table';
+// import { viteUnocssPlugin } from './unocss';
 
 /**
  * 获取条件成立的 vite 插件
@@ -60,6 +61,7 @@ async function loadCommonPlugins(
           },
         }),
         viteVueJsx(),
+        // viteUnocssPlugin(),
       ],
     },
 

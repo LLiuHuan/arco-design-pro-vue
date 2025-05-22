@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: 生成基于内容的 hash，可自定义长度
  * @Author: LLiuHuan
  * @Date: 2025-05-07 15:34:47
- * @LastEditTime: 2025-05-07 15:48:56
+ * @LastEditTime: 2025-05-16 11:14:48
  * @LastEditors: LLiuHuan
  */
 import { createHash } from 'node:crypto';

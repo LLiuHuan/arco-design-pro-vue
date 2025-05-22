@@ -1,5 +1,6 @@
 {
-  "tailwindCSS.experimental.configFile": "internal/tailwind-config/src/index.ts",
+  // TODO: tailwindcss
+  // "tailwindCSS.experimental.configFile": "internal/unocss-config/src/index.ts",
   // workbench
   "workbench.list.smoothScrolling": true,
   "workbench.startupEditor": "newUntitledFile",

@@ -1,0 +1,63 @@
+{
+  "name": "@arco/unocss-config",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "internal/unocss-config"
+  },
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "stub": "pnpm unbuild"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./postcss": {
+      "types": "./src/postcss.config.ts",
+      "import": "./dist/postcss.config.mjs",
+      "require": "./dist/postcss.config.cjs",
+      "default": "./dist/postcss.config.mjs"
+    },
+    "./*": "./*"
+  },
+  "peerDependencies": {
+    "unocss": "catalog:"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "catalog:",
+    "@unocss/postcss": "catalog:",
+    "autoprefixer": "catalog:",
+    "cssnano": "catalog:",
+    "postcss": "catalog:",
+    "postcss-antd-fixes": "catalog:",
+    "postcss-import": "catalog:",
+    "postcss-preset-env": "catalog:",
+    "postcss-pxtorem": "catalog:",
+    "unocss": "catalog:"
+  },
+  "devDependencies": {
+    "@types/postcss-import": "catalog:"
+  }
+}

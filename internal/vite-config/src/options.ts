@@ -1,3 +1,10 @@
+/*
+ * @Description: 公共配置
+ * @Author: LLiuHuan
+ * @Date: 2025-05-07 15:52:54
+ * @LastEditTime: 2025-05-22 16:33:17
+ * @LastEditors: LLiuHuan
+ */
 import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 
 import type { ImportmapPluginOptions } from './typing';
@@ -11,12 +18,12 @@ const getDefaultPwaOptions = (name: string): Partial<PwaPluginOptions> => ({
     icons: [
       {
         sizes: '192x192',
-        src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-192.png',
+        src: 'https://unpkg.com/arco-static@0.0.1/source/logo@192.png',
         type: 'image/png',
       },
       {
         sizes: '512x512',
-        src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-512.png',
+        src: 'https://unpkg.com/arco-static@0.0.1/source/logo@512.png',
         type: 'image/png',
       },
     ],

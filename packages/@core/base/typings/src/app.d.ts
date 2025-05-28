@@ -66,7 +66,7 @@ type AccessModeType = 'backend' | 'frontend';
 /**
  * 导航风格
  * plain 朴素
- * rounded 圆润
+ * rounded-sm 圆润
  */
 type NavigationStyleType = 'plain' | 'rounded';
 

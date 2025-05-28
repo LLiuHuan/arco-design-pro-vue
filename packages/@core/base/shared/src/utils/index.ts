@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-05-16 16:37:12
+ * @LastEditTime: 2025-05-23 11:22:00
+ * @LastEditors: LLiuHuan
+ */
 export * from './cn';
 export * from './date';
 export * from './diff';
@@ -15,6 +22,6 @@ export * from './update-css-variables';
 export * from './util';
 export * from './window';
 export { default as cloneDeep } from 'lodash.clonedeep';
-// export { default as get } from 'lodash.get';
-// export { default as isEqual } from 'lodash.isequal';
+export { default as get } from 'lodash.get';
+export { default as isEqual } from 'lodash.isequal';
 export { default as set } from 'lodash.set';

@@ -1,0 +1,52 @@
+{
+  "name": "@arco-core/form-ui",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "packages/@arco-core/uikit/form-ui"
+  },
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm unbuild",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "dependencies": {
+    "@arco-core/composables": "workspace:*",
+    "@arco-core/icons": "workspace:*",
+    "@arco-core/shadcn-ui": "workspace:*",
+    "@arco-core/shared": "workspace:*",
+    "@arco-core/typings": "workspace:*",
+    "@vee-validate/zod": "catalog:",
+    "@vueuse/core": "catalog:",
+    "vee-validate": "catalog:",
+    "vue": "catalog:",
+    "zod": "catalog:",
+    "zod-defaults": "catalog:"
+  }
+}

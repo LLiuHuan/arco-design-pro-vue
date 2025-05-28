@@ -7,7 +7,7 @@
   @apply bg-primary fixed left-0 top-0 z-[1031] h-[2px] w-full;
 }
 
-/* Fancy blur effect */
+/* Fancy blur-smeffect */
 #nprogress .peg {
   @apply absolute right-0 block h-full w-[100px];
 

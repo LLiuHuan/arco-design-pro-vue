@@ -185,7 +185,7 @@
         :style="{
           width: showDrawer ? `${getMixChildMenuWidth}px` : '0px',
         }"
-        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-base bg-[var(--color-bg-2)]"
+        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-xs transition-base bg-[var(--color-bg-2)]"
       >
         <header
           :style="{ height: `${getHeaderHeight}px` }"

@@ -100,11 +100,11 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      @apply bg-border rounded-sm border-none;
+      @apply bg-border rounded-xs border-none;
     }
 
     ::-webkit-scrollbar-track {
-      @apply rounded-sm border-none bg-transparent shadow-none;
+      @apply rounded-xs border-none bg-transparent shadow-none;
     }
 
     ::-webkit-scrollbar-button {
@@ -127,7 +127,7 @@
   }
 
   .outline-box::after {
-    @apply absolute left-1/2 top-1/2 z-20 h-0 w-[1px] rounded-sm opacity-0 outline outline-2 outline-transparent transition-all duration-300 content-[""];
+    @apply absolute left-1/2 top-1/2 z-20 h-0 w-[1px] rounded-xs opacity-0 outline outline-2 outline-transparent transition-all duration-300 content-[""];
   }
 
   .outline-box.outline-box-active {

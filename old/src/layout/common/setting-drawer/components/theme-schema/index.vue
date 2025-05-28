@@ -56,7 +56,7 @@
                 <div class="flex flex-col items-center">
                   <div
                     :class="{ 'radio-card-checked': checked }"
-                    class="radio-card shadow dark:shadow-coolGray-5"
+                    class="radio-card shadow-sm dark:shadow-coolGray-5"
                   >
                     <div class="h-30px flex justify-center items-center">
                       <SvgIcon :icon="icons[key]" size="20" />

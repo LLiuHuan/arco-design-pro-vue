@@ -2,7 +2,9 @@ import type { Linter } from 'eslint';
 
 const restrictedImportIgnores = [
   '**/vite.config.mts',
+  '**/tailwind.config.mjs',
   '**/unocss.config.mjs',
+  '**/uno.config.mjs',
   '**/postcss.config.mjs',
 ];
 

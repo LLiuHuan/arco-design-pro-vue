@@ -405,19 +405,19 @@
       class="grid"
     >
       <AGridItem class="grid-item">
-        <ACard :title="t('plugin.charts.echarts.LineChart')" class="shadow-sm">
+        <ACard :title="t('plugin.charts.echarts.LineChart')" class="shadow-xs">
           <div ref="lineRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard :title="t('plugin.charts.echarts.BarChart')" class="shadow-sm">
+        <ACard :title="t('plugin.charts.echarts.BarChart')" class="shadow-xs">
           <div ref="barRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
         <ACard
           :title="t('plugin.charts.echarts.PieChart')"
-          class="rounded-16px shadow-sm"
+          class="rounded-16px shadow-xs"
         >
           <div ref="pieRef" class="h-300px"></div>
         </ACard>
@@ -425,7 +425,7 @@
       <AGridItem class="grid-item">
         <ACard
           :title="t('plugin.charts.echarts.ScatterChart')"
-          class="shadow-sm"
+          class="shadow-xs"
         >
           <div ref="scatterRef" class="h-300px"></div>
         </ACard>
@@ -433,13 +433,13 @@
       <AGridItem class="grid-item">
         <ACard
           :title="t('plugin.charts.echarts.TreemapChart')"
-          class="shadow-sm"
+          class="shadow-xs"
         >
           <div ref="treeRef" class="h-300px"></div>
         </ACard>
       </AGridItem>
       <AGridItem class="grid-item">
-        <ACard :title="t('plugin.charts.echarts.ClockChart')" class="shadow-sm">
+        <ACard :title="t('plugin.charts.echarts.ClockChart')" class="shadow-xs">
           <div ref="gaugeRef" class="h-300px"></div>
         </ACard>
       </AGridItem>

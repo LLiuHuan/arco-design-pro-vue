@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
- * @Date: 2025-05-08 09:46:45
- * @LastEditTime: 2025-05-08 09:49:42
+ * @Date: 2025-05-27 15:35:10
+ * @LastEditTime: 2025-05-27 15:36:37
  * @LastEditors: LLiuHuan
  */
 import {
@@ -10,6 +10,11 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router';
+
+import { resetStaticRoutes } from '@arco/utils';
+
+import { createRouterGuard } from './guard';
+import { routes } from './routes';
 
 /**
  *  @zh_CN 创建vue-router实例
@@ -20,17 +25,20 @@ const router = createRouter({
       ? createWebHashHistory(import.meta.env.VITE_BASE)
       : createWebHistory(import.meta.env.VITE_BASE),
   // 应该添加到路由的初始路由列表。
-  routes: [
-    {
-      component: () => import('#/views/t1/index.vue'),
-      name: 't1',
-      path: '/',
-      children: [],
+  routes,
+  scrollBehavior: (to, _from, savedPosition) => {
+    if (savedPosition) {
+      return savedPosition;
     }
-  ],
+    return to.hash ? { behavior: 'smooth', el: to.hash } : { left: 0, top: 0 };
+  },
   // 是否应该禁止尾部斜杠。
   // strict: true,
 });
 
+const resetRoutes = () => resetStaticRoutes(router, routes);
 
-export { router };
+// 创建路由守卫
+createRouterGuard(router);
+
+export { resetRoutes, router };

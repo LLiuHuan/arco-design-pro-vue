@@ -1,0 +1,47 @@
+{
+  "name": "@arco/plugins",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "packages/effects/plugins"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    "./echarts": {
+      "types": "./src/echarts/index.ts",
+      "default": "./src/echarts/index.ts"
+    },
+    "./vxe-table": {
+      "types": "./src/vxe-table/index.ts",
+      "default": "./src/vxe-table/index.ts"
+    },
+    "./motion": {
+      "types": "./src/motion/index.ts",
+      "default": "./src/motion/index.ts"
+    }
+  },
+  "dependencies": {
+    "@arco-core/form-ui": "workspace:*",
+    "@arco-core/shadcn-ui": "workspace:*",
+    "@arco-core/shared": "workspace:*",
+    "@arco/hooks": "workspace:*",
+    "@arco/icons": "workspace:*",
+    "@arco/locales": "workspace:*",
+    "@arco/preferences": "workspace:*",
+    "@arco/types": "workspace:*",
+    "@arco/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "@vueuse/motion": "catalog:",
+    "echarts": "catalog:",
+    "vue": "catalog:",
+    "vxe-pc-ui": "catalog:",
+    "vxe-table": "catalog:"
+  }
+}

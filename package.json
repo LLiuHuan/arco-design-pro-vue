@@ -72,7 +72,7 @@
     "@arco/prettier-config": "workspace:*",
     "@arco/stylelint-config": "workspace:*",
     "@arco/tsconfig": "workspace:*",
-    "@arco/unocss-config": "workspace:*",
+    "@arco/uno-config": "workspace:*",
     "@arco/vite-config": "workspace:*",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",

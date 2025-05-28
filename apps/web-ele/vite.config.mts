@@ -1,12 +1,11 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-08 09:38:40
- * @LastEditTime: 2025-05-08 16:20:55
+ * @LastEditTime: 2025-05-23 17:19:45
  * @LastEditors: LLiuHuan
  */
 import { defineConfig } from '@arco/vite-config';
-// import UnoCSS from 'unocss/vite'
 
 import ElementPlus from 'unplugin-element-plus/vite';
 

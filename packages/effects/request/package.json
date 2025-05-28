@@ -1,0 +1,32 @@
+{
+  "name": "@arco/request",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "packages/effects/request"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@arco/locales": "workspace:*",
+    "@arco/utils": "workspace:*",
+    "axios": "catalog:",
+    "qs": "catalog:"
+  },
+  "devDependencies": {
+    "@types/qs": "catalog:",
+    "axios-mock-adapter": "catalog:"
+  }
+}

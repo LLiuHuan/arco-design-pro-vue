@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-16 10:24:21
- * @LastEditTime: 2025-05-16 14:12:06
+ * @LastEditTime: 2025-05-27 10:32:45
  * @LastEditors: LLiuHuan
  */
 import type { Linter } from 'eslint';
@@ -30,7 +30,7 @@ export async function node(): Promise<Linter.Config[]> {
               'vitest',
               'vite',
               '@vue/test-utils',
-              '@arco/unocss-config',
+              '@arco/uno-config',
               '@playwright/test',
             ],
           },

@@ -86,7 +86,7 @@
           :class="[
             item.mode.includes(MenuModeEnum.VERTICAL) ? 'flex' : 'flex-col',
           ]"
-          class="h-64px w-96px gap-6px rd-4px p-6px shadow dark:shadow-coolGray-5"
+          class="h-64px w-96px gap-6px rd-4px p-6px shadow-sm dark:shadow-coolGray-5"
         >
           <slot :name="item.mode"></slot>
         </div>

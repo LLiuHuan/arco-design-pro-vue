@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-  import { SvgIcon } from '@/components/Icon';
-  import { onKeyStroke, useDebounceFn } from '@vueuse/core';
   import { nextTick, ref, unref, watch } from 'vue';
-  import { useRouteStore } from '@/store/modules/route';
-  import { useGo } from '@/hooks/web/usePage';
+
+  import { SvgIcon } from '@/components/Icon';
   import { useRefs } from '@/hooks/common/useRefs';
   import { useScrollTo } from '@/hooks/common/useScrollTo';
   import { useRootSetting } from '@/hooks/setting';
-  import { getRoutePath } from '@/router/elegant/transform';
   import { useI18n } from '@/hooks/web/useI18n';
+  import { useGo } from '@/hooks/web/usePage';
+  import { getRoutePath } from '@/router/elegant/transform';
+  import { useRouteStore } from '@/store/modules/route';
+  import { onKeyStroke, useDebounceFn } from '@vueuse/core';
+
   import { Tip } from './components';
 
   interface Props {
@@ -132,7 +134,7 @@
   // 处理上下键
   // Handle up and down keys
   const handleUp = () => {
-    if (!searchResult.value.length) return;
+    if (searchResult.value.length === 0) return;
     activeIndex.value -= 1;
     if (activeIndex.value < 0) {
       activeIndex.value = searchResult.value.length - 1;
@@ -141,7 +143,7 @@
     handleScroll();
   };
   const handleDown = () => {
-    if (!searchResult.value.length) return;
+    if (searchResult.value.length === 0) return;
     activeIndex.value += 1;
     if (activeIndex.value > searchResult.value.length - 1) {
       activeIndex.value = 0;
@@ -160,7 +162,7 @@
   // 处理回车事件
   // Handle enter event
   const handleEnter = async () => {
-    if (!searchResult.value.length || activeIndex.value < 0) {
+    if (searchResult.value.length === 0 || activeIndex.value < 0) {
       return;
     }
     const item = searchResult.value[activeIndex.value];
@@ -224,7 +226,7 @@
             ref="inputRef"
             v-model="keyword"
             :placeholder="t('common.searchText')"
-            class="flex-auto border-0 outline-none text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
+            class="flex-auto border-0 outline-hidden text-16px bg-transparent text-[var(--color-text-1)] leading-32px"
           />
         </div>
 

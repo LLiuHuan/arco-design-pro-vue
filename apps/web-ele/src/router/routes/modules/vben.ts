@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-05-27 15:56:32
+ * @LastEditTime: 2025-05-28 11:35:15
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';

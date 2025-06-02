@@ -2,7 +2,7 @@
  * @Description: dialog 内容
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 09:47:21
+ * @LastEditTime: 2025-06-03 02:13:41
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -84,7 +84,7 @@ defineExpose({
       v-bind="forwarded"
       :class="
         cn(
-          'z-popup bg-background w-full p-6 shadow-lg outline-hidden sm:rounded-xl',
+          'z-popup bg-background p-6 shadow-lg outline-hidden sm:rounded-xl',
           'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
           'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
           {

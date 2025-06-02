@@ -52,6 +52,7 @@
     "dev:docs": "pnpm -F @arco/docs run dev",
     "dev:ele": "pnpm -F @arco/web-ele run dev",
     "dev:naive": "pnpm -F @arco/web-naive run dev",
+    "dev:arco": "pnpm -F @arco/web-arco run dev",
     "dev:play": "pnpm -F @arco/playground run dev",
     "format": "vsh lint --format",
     "lint": "vsh lint",

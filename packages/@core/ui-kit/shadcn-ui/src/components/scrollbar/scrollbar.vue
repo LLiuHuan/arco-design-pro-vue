@@ -47,10 +47,10 @@ const isAtLeft = ref(true);
  */
 const ARRIVED_STATE_THRESHOLD_PIXELS = 1;
 
-const showShadowTop = computed(() => props.shadow-sm && props.shadowTop);
-const showShadowBottom = computed(() => props.shadow-sm && props.shadowBottom);
-const showShadowLeft = computed(() => props.shadow-sm && props.shadowLeft);
-const showShadowRight = computed(() => props.shadow-sm && props.shadowRight);
+const showShadowTop = computed(() => props.shadow && props.shadowTop);
+const showShadowBottom = computed(() => props.shadow && props.shadowBottom);
+const showShadowLeft = computed(() => props.shadow && props.shadowLeft);
+const showShadowRight = computed(() => props.shadow && props.shadowRight);
 
 const computedShadowClasses = computed(() => {
   return {

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-05-27 10:20:47
+ * @LastEditTime: 2025-06-04 00:52:26
  * @LastEditors: LLiuHuan
  */
 import type { AsTag } from 'reka-ui';
@@ -36,14 +36,25 @@ export type ValueType = boolean | number | string;
 
 export interface ArcoButtonGroupProps
   extends Pick<ArcoButtonProps, 'disabled'> {
+  /** 单选模式下允许清除选中 */
+  allowClear?: boolean;
+  /** 值改变前的回调 */
   beforeChange?: (
     value: ValueType,
     isChecked: boolean,
   ) => boolean | PromiseLike<boolean | undefined> | undefined;
+  /** 按钮样式 */
   btnClass?: any;
+  /** 按钮间隔距离 */
   gap?: number;
+  /** 多选模式下限制最多选择的数量。0表示不限制 */
+  maxCount?: number;
+  /** 是否允许多选 */
   multiple?: boolean;
+  /** 选项 */
   options?: { [key: string]: any; label: CustomRenderType; value: ValueType }[];
+  /** 显示图标 */
   showIcon?: boolean;
+  /** 尺寸 */
   size?: 'large' | 'middle' | 'small';
 }

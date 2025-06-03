@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-05-28 12:45:29
+ * @LastEditTime: 2025-06-03 03:41:52
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -25,7 +25,7 @@ const authStore = useAuthStore();
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
     label: 'Super',
-    value: 'vben',
+    value: 'super',
   },
   {
     label: 'Admin',
@@ -51,7 +51,7 @@ const formSchema = computed((): ArcoFormSchema[] => {
         .string()
         .min(1, { message: $t('authentication.selectAccount') })
         .optional()
-        .default('vben'),
+        .default('super'),
     },
     {
       component: 'ArcoInput',

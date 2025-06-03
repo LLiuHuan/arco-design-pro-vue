@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-08 09:38:40
- * @LastEditTime: 2025-05-28 11:46:32
+ * @LastEditTime: 2025-06-03 03:41:09
  * @LastEditors: LLiuHuan
  */
 import { defineConfig } from '@arco/vite-config';
@@ -17,7 +17,7 @@ export default defineConfig(async () => {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, ''),
             // mock代理目标地址
-            target: 'http://localhost:5320/api',
+            target: 'https://m1.apifoxmock.com/m1/3402401-1018037-default',
             ws: true,
           },
         },

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-05-27 12:18:12
+ * @LastEditTime: 2025-06-04 01:08:47
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -66,7 +66,7 @@ function nameView(name: string) {
       >
         <div
           :class="activeClass(theme.name)"
-          class="outline-box flex-center py-4"
+          class="outline-primary outline-box flex-center py-4"
         >
           <component :is="theme.icon" class="mx-9 size-5" />
         </div>

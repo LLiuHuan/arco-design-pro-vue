@@ -264,7 +264,7 @@ function handleMouseleave() {
       theme,
       {
         'bg-sidebar-deep': isSidebarMixed,
-        'bg-sidebar border-border border-r': !isSidebarMixed,
+        'bg-sidebar border-r': !isSidebarMixed,
       },
     ]"
     :style="style"
@@ -279,7 +279,7 @@ function handleMouseleave() {
     <div v-if="slots.logo" :style="headerStyle">
       <slot name="logo"></slot>
     </div>
-    <ArcoScrollbar :style="contentStyle" shadow-sm shadow-border>
+    <ArcoScrollbar :style="contentStyle" shadow shadow-border>
       <slot></slot>
     </ArcoScrollbar>
 
@@ -295,7 +295,7 @@ function handleMouseleave() {
         'border-l': extraVisible,
       }"
       :style="extraStyle"
-      class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
+      class="fixed top-0 h-full overflow-hidden border-r border-[hsl(var(--border))] bg-[hsl(var(--sidebar))] transition-all duration-200"
     >
       <SidebarCollapseButton
         v-if="isSidebarMixed && expandOnHover"

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-05-27 10:24:13
+ * @LastEditTime: 2025-06-04 16:21:24
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -70,7 +70,7 @@ withDefaults(defineProps<Props>(), {
       />
       <template v-if="!collapsed">
         <slot name="text">
-          <span class="text-foreground truncate font-semibold text-nowrap">
+          <span class="truncate font-semibold text-nowrap">
             {{ text }}
           </span>
         </slot>

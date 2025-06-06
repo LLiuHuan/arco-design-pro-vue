@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:28:55
- * @LastEditTime: 2025-05-27 10:37:49
+ * @LastEditTime: 2025-06-04 23:44:00
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -17,7 +17,7 @@ function handleCollapsed() {
 
 <template>
   <div
-    class="flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover bg-accent absolute bottom-2 left-3 z-10 cursor-pointer rounded-xs p-1"
+    class="flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover absolute bottom-2 left-3 z-10 cursor-pointer rounded-xs bg-[hsl(var(--accent))] p-1"
     @click.stop="handleCollapsed"
   >
     <ChevronsRight v-if="collapsed" class="size-4" />

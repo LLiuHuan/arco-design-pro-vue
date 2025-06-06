@@ -2,7 +2,7 @@
  * @Description: unocss配置
  * @Author: LLiuHuan
  * @Date: 2025-05-07 16:16:41
- * @LastEditTime: 2025-06-03 04:44:33
+ * @LastEditTime: 2025-06-05 00:30:00
  * @LastEditors: LLiuHuan
  */
 
@@ -21,7 +21,7 @@ import {
   transformerVariantGroup,
 } from 'unocss';
 import { presetAnimations } from 'unocss-preset-animations';
-import { presetShadcn } from 'unocss-preset-shadcn';
+// import { presetShadcn } from 'unocss-preset-shadcn';
 
 // const BASE_FONT_SIZE = 4;
 
@@ -193,20 +193,22 @@ const customColors = {
 export default defineConfig({
   presets: [
     presetWind4({
+      dark: 'class',
       preflights: {
         // reset: true,
+        // theme: true,
         // theme: {
         //   process: createRemToPxProcessor(BASE_FONT_SIZE),
         // },
       },
     }),
     presetAnimations(),
-    presetShadcn(
-      {},
-      {
-        componentLibrary: 'reka',
-      },
-    ),
+    // presetShadcn(
+    //   {},
+    //   {
+    //     componentLibrary: 'reka',
+    //   },
+    // ),
     presetAttributify(),
     presetIcons({
       // prefix: 'i-',
@@ -331,4 +333,5 @@ export default defineConfig({
     },
   },
   safelist: ['dark'],
+  // darkMode: 'class',
 });

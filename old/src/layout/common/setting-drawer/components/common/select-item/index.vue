@@ -1,34 +1,36 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
+
   import { SelectOptionData, SelectOptionGroup } from '@arco-design/web-vue';
+
   import { baseHandler, HandlerEnum } from '../helpers';
 
   interface Props {
-    // 调用的修改事件
-    event: HandlerEnum;
-    // 是否禁用
-    disabled?: boolean;
     // 是否绑定值
     def?:
-      | string
-      | number
+      | (boolean | number | Record<string, any> | string)[]
       | boolean
+      | number
       | Record<string, any>
-      | (string | number | boolean | Record<string, any>)[];
+      | string;
+    // 是否禁用
+    disabled?: boolean;
+    // 调用的修改事件
+    event: HandlerEnum;
     // 初始值
     initValue?:
-      | string
-      | number
+      | (boolean | number | Record<string, any> | string)[]
       | boolean
+      | number
       | Record<string, any>
-      | (string | number | boolean | Record<string, any>)[];
+      | string;
     // 选项值
     options: (
-      | string
-      | number
       | boolean
+      | number
       | SelectOptionData
       | SelectOptionGroup
+      | string
     )[];
   }
 
@@ -42,11 +44,11 @@
 
   function handleChange(
     value:
-      | string
-      | number
+      | (boolean | number | Record<string, any> | string)[]
       | boolean
+      | number
       | Record<string, any>
-      | (string | number | boolean | Record<string, any>)[],
+      | string,
   ) {
     if (props.event) baseHandler(props.event, value);
   }

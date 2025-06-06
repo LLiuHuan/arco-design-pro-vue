@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2025-05-27 12:13:55
+ * @LastEditTime: 2025-06-04 02:31:39
+ * @LastEditors: LLiuHuan
+-->
 <script setup lang="ts">
 import { useSlots } from 'vue';
 
@@ -14,12 +21,12 @@ withDefaults(defineProps<{ disabled?: boolean; tip?: string }>(), {
   tip: '',
 });
 
-const checked = defineModel<boolean>();
+const modelValue = defineModel<boolean>();
 
 const slots = useSlots();
 
 function handleClick() {
-  checked.value = !checked.value;
+  modelValue.value = !modelValue.value;
 }
 </script>
 
@@ -50,6 +57,6 @@ function handleClick() {
     <span v-if="$slots.shortcut" class="mr-2 ml-auto text-xs opacity-60">
       <slot name="shortcut"></slot>
     </span>
-    <Switch v-model:checked="checked" @click.stop />
+    <Switch v-model="modelValue" @click.stop />
   </div>
 </template>

@@ -6,14 +6,15 @@
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
+  import { SvgIcon } from '@/components/Icon';
   import { AppEnum } from '@/enums';
   import {
     useLayoutSetting,
     useMenuSetting,
     useRootSetting,
   } from '@/hooks/setting';
-  import { SvgIcon } from '@/components/Icon';
   import { useI18n } from '@/hooks/web/useI18n';
+
   import { HandlerEnum, SettingItem, SwitchItem, TitleItem } from '../common';
 
   defineOptions({

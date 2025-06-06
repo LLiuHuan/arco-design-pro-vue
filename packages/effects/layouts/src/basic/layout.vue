@@ -74,6 +74,10 @@ const logoClass = computed(() => {
     classes.push('flex-center');
   }
 
+  if (sidebarTheme.value === 'dark') {
+    classes.push('text-[hsl(var(--foreground))]');
+  }
+
   return classes.join(' ');
 });
 

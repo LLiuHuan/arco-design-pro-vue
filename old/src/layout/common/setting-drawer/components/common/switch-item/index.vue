@@ -2,20 +2,21 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2024-05-13 22:31:00
- * @LastEditTime: 2024-08-21 10:53:49
+ * @LastEditTime: 2025-06-04 02:19:14
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
   import { computed } from 'vue';
+
   import { baseHandler, HandlerEnum } from '../helpers';
 
   interface Props {
-    // 调用的修改事件
-    event: HandlerEnum;
-    // 是否禁用
-    disabled?: boolean;
     // 是否绑定值
     def?: boolean;
+    // 是否禁用
+    disabled?: boolean;
+    // 调用的修改事件
+    event: HandlerEnum;
   }
 
   const props = defineProps<Props>();
@@ -24,7 +25,8 @@
     return props.def ? { 'model-value': props.def } : {};
   });
 
-  const handleChange = (value: boolean | string | number) => {
+  const handleChange = (value: boolean | number | string) => {
+    console.log(props.event, value);
     if (props.event) {
       baseHandler(props.event, value);
     }

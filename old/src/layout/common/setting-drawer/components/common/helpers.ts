@@ -1,6 +1,7 @@
 import type { ProjectConfig } from '~/types/config';
-import { useAppStore } from '@/store/modules/app';
+
 import { AppEnum } from '@/enums';
+import { useAppStore } from '@/store/modules/app';
 import { toggleClass } from '@/utils/common';
 
 enum HandlerEnum {
@@ -68,223 +69,268 @@ const handler = (
   value: any,
 ): DeepPartial<ProjectConfig> => {
   switch (event) {
-    // region menu
-    case HandlerEnum.MENU_THEME:
+    case HandlerEnum.BORDER_RADIUS: {
       return {
-        menuSetting: { theme: value ? AppEnum.DARK : AppEnum.LIGHT },
+        borderRadius: value,
       };
-    case HandlerEnum.MENU_COLLAPSE:
+    }
+    case HandlerEnum.COPYRIGHT_COMPANY: {
       return {
-        menuSetting: { collapsed: value },
+        copyrightSetting: {
+          company: value,
+        },
       };
+    }
 
-    case HandlerEnum.MENU_COLLAPSE_BTN:
+    case HandlerEnum.COPYRIGHT_COMPANY_LINK: {
       return {
-        menuSetting: { trigger: value },
+        copyrightSetting: {
+          companyHref: value,
+        },
       };
-    case HandlerEnum.MENU_ACCORDION:
+    }
+    case HandlerEnum.COPYRIGHT_POLICE: {
       return {
-        menuSetting: { accordion: value },
+        copyrightSetting: {
+          police: value,
+        },
       };
-    case HandlerEnum.MENU_REVERSE:
+    }
+    case HandlerEnum.COPYRIGHT_POLICE_LINK: {
       return {
-        layoutSetting: { reverse: value },
+        copyrightSetting: {
+          policeHref: value,
+        },
       };
-    case HandlerEnum.MENU_FIXED_MIX_SIDEBAR:
+    }
+    case HandlerEnum.COPYRIGHT_RECORD: {
       return {
-        menuSetting: { mixSideFixed: value },
+        copyrightSetting: {
+          record: value,
+        },
       };
-    case HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR:
+    }
+    case HandlerEnum.COPYRIGHT_RECORD_LINK: {
       return {
-        menuSetting: { mixSideTrigger: value },
+        copyrightSetting: {
+          recordHref: value,
+        },
       };
-    case HandlerEnum.MENU_EXPANDED_MENU_WIDTH:
+    }
+    case HandlerEnum.COPYRIGHT_SHOW: {
       return {
-        menuSetting: { menuWidth: value },
+        copyrightSetting: {
+          show: value,
+        },
       };
-    case HandlerEnum.MENU_COLLAPSED_MENU_WIDTH:
+    }
+    case HandlerEnum.FOOTER_FIXED: {
       return {
-        menuSetting: { collapsedMenuWidth: value },
+        footerSetting: { fixed: value },
       };
-    case HandlerEnum.MIX_MENU_EXPANDED_MENU_WIDTH:
+    }
+    case HandlerEnum.FOOTER_HEIGHT: {
       return {
-        menuSetting: { mixMenuWidth: value },
+        footerSetting: { height: value },
       };
-    case HandlerEnum.MIX_MENU_COLLAPSED_MENU_WIDTH:
+    }
+    case HandlerEnum.GRAY_MODE: {
+      toggleClass(value, 'gray-mode', document.documentElement);
       return {
-        menuSetting: { mixCollapsedMenuWidth: value },
+        grayMode: value,
       };
-    case HandlerEnum.MIX_MENU_CHILD_MENU_WIDTH:
+    }
+    case HandlerEnum.HEADER_BREADCRUMB: {
       return {
-        menuSetting: { mixChildMenuWidth: value },
+        headerSetting: { showBreadCrumb: value },
       };
+    }
 
     // endregion
 
+    case HandlerEnum.HEADER_BREADCRUMB_ICON: {
+      return {
+        headerSetting: { showBreadCrumbIcon: value },
+      };
+    }
+    case HandlerEnum.HEADER_FIXED: {
+      return {
+        fixedHeaderAndTab: value,
+      };
+    }
     // region header
-    case HandlerEnum.HEADER_HEIGHT:
+    case HandlerEnum.HEADER_HEIGHT: {
       if (value < 48) {
         value = 48;
       }
       return {
         headerSetting: { height: value },
       };
-    case HandlerEnum.HEADER_BREADCRUMB:
-      return {
-        headerSetting: { showBreadCrumb: value },
-      };
-    case HandlerEnum.HEADER_BREADCRUMB_ICON:
-      return {
-        headerSetting: { showBreadCrumbIcon: value },
-      };
-    case HandlerEnum.HEADER_FIXED:
-      return {
-        fixedHeaderAndTab: value,
-      };
-
-    // endregion
-
-    // region transition
-    case HandlerEnum.TRANSITION_ENABLE:
-      return {
-        transitionSetting: { enable: value },
-      };
-    case HandlerEnum.TRANSITION_ROUTER:
-      return {
-        transitionSetting: { basicTransition: value },
-      };
-    case HandlerEnum.TRANSITION_LOADING:
-      return {
-        transitionSetting: { openPageLoading: value },
-      };
-    case HandlerEnum.TRANSITION_NPROGRESS:
-      return {
-        transitionSetting: { openNProgress: value },
-      };
-    // endregion
-
-    // region footer
-    case HandlerEnum.SHOW_FOOTER:
-      return {
-        footerSetting: { show: value },
-      };
-
-    case HandlerEnum.FOOTER_HEIGHT:
-      return {
-        footerSetting: { height: value },
-      };
-    case HandlerEnum.FOOTER_FIXED:
-      return {
-        footerSetting: { fixed: value },
-      };
-    // endregion
-
-    // region tabs
-    case HandlerEnum.SHOW_TABS:
-      return {
-        multiTabsSetting: { show: value },
-      };
-    case HandlerEnum.TAB_OPEN_CACHE:
-      return {
-        multiTabsSetting: { cache: value },
-      };
-    case HandlerEnum.SHOW_TABS_QUICK_BTN:
-      return {
-        multiTabsSetting: { showQuick: value },
-      };
-    case HandlerEnum.SHOW_TABS_REDO_BTN:
-      return {
-        multiTabsSetting: { showRedo: value },
-      };
-    case HandlerEnum.SHOW_TABS_FOLD_BTN:
-      return {
-        multiTabsSetting: { showFold: value },
-      };
-    // endregion
-
-    case HandlerEnum.LAYOUT_MODE:
+    }
+    case HandlerEnum.LAYOUT_MODE: {
       return {
         layoutSetting: {
           mode: value,
         },
       };
-    case HandlerEnum.LAYOUT_SCROLL_MODE:
+    }
+
+    // endregion
+
+    case HandlerEnum.LAYOUT_SCROLL_MODE: {
       return {
         layoutSetting: {
           scrollMode: value,
         },
       };
-    case HandlerEnum.GRAY_MODE:
-      toggleClass(value, 'gray-mode', document.documentElement);
+    }
+    case HandlerEnum.MENU_ACCORDION: {
       return {
-        grayMode: value,
+        menuSetting: { accordion: value },
       };
-    case HandlerEnum.WEAK_MODE:
+    }
+    case HandlerEnum.MENU_COLLAPSE: {
+      return {
+        menuSetting: { collapsed: value },
+      };
+    }
+    case HandlerEnum.MENU_COLLAPSE_BTN: {
+      return {
+        menuSetting: { trigger: value },
+      };
+    }
+    // endregion
+
+    case HandlerEnum.MENU_COLLAPSED_MENU_WIDTH: {
+      return {
+        menuSetting: { collapsedMenuWidth: value },
+      };
+    }
+
+    case HandlerEnum.MENU_EXPANDED_MENU_WIDTH: {
+      return {
+        menuSetting: { menuWidth: value },
+      };
+    }
+    case HandlerEnum.MENU_FIXED_MIX_SIDEBAR: {
+      return {
+        menuSetting: { mixSideFixed: value },
+      };
+    }
+    // endregion
+
+    case HandlerEnum.MENU_REVERSE: {
+      return {
+        layoutSetting: { reverse: value },
+      };
+    }
+    // region menu
+    case HandlerEnum.MENU_THEME: {
+      console.log(value);
+      return {
+        menuSetting: { theme: value ? AppEnum.DARK : AppEnum.LIGHT },
+      };
+    }
+    case HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR: {
+      return {
+        menuSetting: { mixSideTrigger: value },
+      };
+    }
+    case HandlerEnum.MIX_MENU_CHILD_MENU_WIDTH: {
+      return {
+        menuSetting: { mixChildMenuWidth: value },
+      };
+    }
+    case HandlerEnum.MIX_MENU_COLLAPSED_MENU_WIDTH: {
+      return {
+        menuSetting: { mixCollapsedMenuWidth: value },
+      };
+    }
+    // endregion
+
+    case HandlerEnum.MIX_MENU_EXPANDED_MENU_WIDTH: {
+      return {
+        menuSetting: { mixMenuWidth: value },
+      };
+    }
+    // region footer
+    case HandlerEnum.SHOW_FOOTER: {
+      return {
+        footerSetting: { show: value },
+      };
+    }
+    case HandlerEnum.SHOW_LOGO: {
+      return {
+        showLogo: value,
+      };
+    }
+    // region tabs
+    case HandlerEnum.SHOW_TABS: {
+      return {
+        multiTabsSetting: { show: value },
+      };
+    }
+    case HandlerEnum.SHOW_TABS_FOLD_BTN: {
+      return {
+        multiTabsSetting: { showFold: value },
+      };
+    }
+
+    case HandlerEnum.SHOW_TABS_QUICK_BTN: {
+      return {
+        multiTabsSetting: { showQuick: value },
+      };
+    }
+    case HandlerEnum.SHOW_TABS_REDO_BTN: {
+      return {
+        multiTabsSetting: { showRedo: value },
+      };
+    }
+    case HandlerEnum.TAB_OPEN_CACHE: {
+      return {
+        multiTabsSetting: { cache: value },
+      };
+    }
+    // region transition
+    case HandlerEnum.TRANSITION_ENABLE: {
+      return {
+        transitionSetting: { enable: value },
+      };
+    }
+    case HandlerEnum.TRANSITION_LOADING: {
+      return {
+        transitionSetting: { openPageLoading: value },
+      };
+    }
+    case HandlerEnum.TRANSITION_NPROGRESS: {
+      return {
+        transitionSetting: { openNProgress: value },
+      };
+    }
+    case HandlerEnum.TRANSITION_ROUTER: {
+      return {
+        transitionSetting: { basicTransition: value },
+      };
+    }
+    case HandlerEnum.WATERMARK: {
+      return {
+        watermark: value,
+      };
+    }
+    case HandlerEnum.WATERMARK_TEXT: {
+      return {
+        watermarkText: value,
+      };
+    }
+    case HandlerEnum.WEAK_MODE: {
       toggleClass(value, 'color-weak', document.documentElement);
       return {
         colorWeak: value,
       };
-    case HandlerEnum.SHOW_LOGO:
-      return {
-        showLogo: value,
-      };
-
-    case HandlerEnum.WATERMARK:
-      return {
-        watermark: value,
-      };
-    case HandlerEnum.WATERMARK_TEXT:
-      return {
-        watermarkText: value,
-      };
-    case HandlerEnum.BORDER_RADIUS:
-      return {
-        borderRadius: value,
-      };
-    case HandlerEnum.COPYRIGHT_SHOW:
-      return {
-        copyrightSetting: {
-          show: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_COMPANY:
-      return {
-        copyrightSetting: {
-          company: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_COMPANY_LINK:
-      return {
-        copyrightSetting: {
-          companyHref: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_RECORD:
-      return {
-        copyrightSetting: {
-          record: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_RECORD_LINK:
-      return {
-        copyrightSetting: {
-          recordHref: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_POLICE:
-      return {
-        copyrightSetting: {
-          police: value,
-        },
-      };
-    case HandlerEnum.COPYRIGHT_POLICE_LINK:
-      return {
-        copyrightSetting: {
-          policeHref: value,
-        },
-      };
-    default:
+    }
+    default: {
       return {};
+    }
   }
 };
 
@@ -294,4 +340,4 @@ function baseHandler(event: HandlerEnum, value: any) {
   appStore.setProjectConfig(config);
 }
 
-export { HandlerEnum, baseHandler, handler };
+export { baseHandler, handler, HandlerEnum };

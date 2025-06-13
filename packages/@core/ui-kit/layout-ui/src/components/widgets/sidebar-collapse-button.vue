@@ -17,7 +17,7 @@ function handleCollapsed() {
 
 <template>
   <div
-    class="flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover absolute bottom-2 left-3 z-10 cursor-pointer rounded-xs bg-[hsl(var(--accent))] p-1"
+    class="flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover absolute bottom-2 left-3 z-10 cursor-pointer rounded-sm bg-[hsl(var(--accent))] p-1"
     @click.stop="handleCollapsed"
   >
     <ChevronsRight v-if="collapsed" class="size-4" />

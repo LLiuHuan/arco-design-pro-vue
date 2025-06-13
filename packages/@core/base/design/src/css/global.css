@@ -95,11 +95,11 @@ html:not([data-platform='macOs']) {
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-xs border-none;
+    @apply bg-border rounded-sm border-none;
   }
 
   ::-webkit-scrollbar-track {
-    @apply rounded-xs border-none bg-transparent shadow-none;
+    @apply rounded-sm border-none bg-transparent shadow-none;
   }
 
   ::-webkit-scrollbar-button {
@@ -116,15 +116,15 @@ html:not([data-platform='macOs']) {
 }
 
 .outline-box {
-  @apply outline-solid outline-border outline-1 relative cursor-pointer rounded-md p-1;
+  @apply outline-border relative cursor-pointer rounded-md p-1 outline outline-1;
 }
 
 .outline-box::after {
-  @apply absolute left-1/2 top-1/2 z-20 h-0 w-[1px] rounded-md opacity-0 outline-2 outline-transparent transition-all duration-300 content-[""];
+  @apply absolute left-1/2 top-1/2 z-20 h-0 w-[1px] rounded-sm opacity-0 outline outline-2 outline-transparent transition-all duration-300 content-[""];
 }
 
 .outline-box.outline-box-active {
-  @apply outline-primary outline-2;
+  @apply outline-primary outline outline-2;
 }
 
 .outline-box.outline-box-active::after {
@@ -149,6 +149,27 @@ html.invert-mode {
 
 html.grayscale-mode {
   @apply grayscale;
+}
+
+button {
+  background-color: transparent;
+}
+p,
+ol,
+button {
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit
 }
 
 @unocss;

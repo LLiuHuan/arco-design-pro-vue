@@ -15,7 +15,7 @@ import type {
 
 import type { Ref } from 'vue';
 
-import type { ArcoFormProps } from '@arco-core/form-ui';
+import type { ArcoFormProps, BaseFormComponentType } from '@arco-core/form-ui';
 
 import type { VxeGridApi } from './api';
 
@@ -41,7 +41,10 @@ export interface SeparatorOptions {
   show?: boolean;
   backgroundColor?: string;
 }
-export interface VxeGridProps {
+export interface VxeGridProps<
+  T extends Record<string, any> = any,
+  D extends BaseFormComponentType = BaseFormComponentType,
+> {
   /**
    * 标题
    */
@@ -61,15 +64,15 @@ export interface VxeGridProps {
   /**
    * vxe-grid 配置
    */
-  gridOptions?: DeepPartial<VxeTableGridOptions>;
+  gridOptions?: DeepPartial<VxeTableGridOptions<T>>;
   /**
    * vxe-grid 事件
    */
-  gridEvents?: DeepPartial<VxeGridListeners>;
+  gridEvents?: DeepPartial<VxeGridListeners<T>>;
   /**
    * 表单配置
    */
-  formOptions?: ArcoFormProps;
+  formOptions?: ArcoFormProps<D>;
   /**
    * 显示搜索表单
    */
@@ -80,9 +83,12 @@ export interface VxeGridProps {
   separator?: boolean | SeparatorOptions;
 }
 
-export type ExtendedVxeGridApi = VxeGridApi & {
-  useStore: <T = NoInfer<VxeGridProps>>(
-    selector?: (state: NoInfer<VxeGridProps>) => T,
+export type ExtendedVxeGridApi<
+  D extends Record<string, any> = any,
+  F extends BaseFormComponentType = BaseFormComponentType,
+> = VxeGridApi<D> & {
+  useStore: <T = NoInfer<VxeGridProps<D, F>>>(
+    selector?: (state: NoInfer<VxeGridProps<any, any>>) => T,
   ) => Readonly<Ref<T>>;
 };
 

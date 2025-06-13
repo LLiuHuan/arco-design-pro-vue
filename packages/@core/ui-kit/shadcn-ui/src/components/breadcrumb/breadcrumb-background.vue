@@ -84,7 +84,7 @@ li:last-child a::after {
 
 li a::before,
 li a::after {
-  @apply border-accent absolute top-0 h-0 w-0 border-[.875rem] border-solid content-[''];
+  @apply border-accent content-empty absolute top-0 h-0 w-0 border-[.875rem] border-solid;
 }
 
 li a::before {

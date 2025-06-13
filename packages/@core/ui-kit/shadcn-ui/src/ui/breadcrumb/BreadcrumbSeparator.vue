@@ -2,7 +2,7 @@
  * @Description: 面包屑折叠
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 09:56:11
+ * @LastEditTime: 2025-06-13 15:15:58
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -17,7 +17,7 @@ const props = defineProps<{
 
 <template>
   <li
-    :class="cn('[&>svg]:size-3.5', props.class)"
+    :class="cn('h-14px [&>svg]:size-3.5', props.class)"
     aria-hidden="true"
     role="presentation"
   >

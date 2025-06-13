@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:13:00
+ * @LastEditTime: 2025-06-06 10:57:07
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -22,14 +22,14 @@ type ToggleGroupVariants = VariantProps<typeof toggleVariants>;
 const props = defineProps<
   ToggleGroupRootProps & {
     class?: any;
-    size?: ToggleGroupVariants['size'];
+    sizeVar?: ToggleGroupVariants['size'];
     variant?: ToggleGroupVariants['variant'];
   }
 >();
 const emits = defineEmits<ToggleGroupRootEmits>();
 
 provide('toggleGroup', {
-  size: props.size,
+  size: props.sizeVar,
   variant: props.variant,
 });
 

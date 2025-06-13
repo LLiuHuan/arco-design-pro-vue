@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-05-27 12:18:31
+ * @LastEditTime: 2025-06-13 16:44:46
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -36,14 +36,14 @@ const modelValue = defineModel<string>();
     <ToggleGroup
       v-model="modelValue"
       class="gap-2"
-      size="sm"
+      size-var="sm"
       type="single"
       variant="outline"
     >
       <template v-for="item in items" :key="item.value">
         <ToggleGroupItem
           :value="item.value"
-          class="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground h-7 rounded-xs"
+          class="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground h-7 rounded-sm"
         >
           {{ item.label }}
         </ToggleGroupItem>

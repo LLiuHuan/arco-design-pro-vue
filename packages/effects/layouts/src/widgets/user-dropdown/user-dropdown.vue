@@ -227,7 +227,7 @@ if (enableShortcutKey.value) {
         <DropdownMenuItem
           v-for="menu in menus"
           :key="menu.text"
-          class="mx-1 flex cursor-pointer items-center rounded-xs py-1 leading-8"
+          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
           @click="menu.handler"
         >
           <ArcoIcon :icon="menu.icon" class="mr-2 size-4" />
@@ -236,7 +236,7 @@ if (enableShortcutKey.value) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           v-if="preferences.widget.lockScreen"
-          class="mx-1 flex cursor-pointer items-center rounded-xs py-1 leading-8"
+          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
           @click="handleOpenLock"
         >
           <LockKeyhole class="mr-2 size-4" />
@@ -247,7 +247,7 @@ if (enableShortcutKey.value) {
         </DropdownMenuItem>
         <DropdownMenuSeparator v-if="preferences.widget.lockScreen" />
         <DropdownMenuItem
-          class="mx-1 flex cursor-pointer items-center rounded-xs py-1 leading-8"
+          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
           @click="handleLogout"
         >
           <LogOut class="mr-2 size-4" />

@@ -2,7 +2,7 @@
  * @Description: unocss配置
  * @Author: LLiuHuan
  * @Date: 2025-05-07 16:16:41
- * @LastEditTime: 2025-06-05 00:30:00
+ * @LastEditTime: 2025-06-13 17:22:14
  * @LastEditors: LLiuHuan
  */
 
@@ -16,7 +16,7 @@ import {
   presetIcons,
   presetTypography,
   presetWebFonts,
-  presetWind4,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss';
@@ -94,6 +94,7 @@ function createColorsPalette(name: string) {
     'text-active': `hsl(var(--${name}-700))`,
     // 主色文本悬浮态
     'text-hover': `hsl(var(--${name}-600))`,
+    outline: `hsl(var(--${name}-300))`,
   };
 }
 
@@ -192,8 +193,9 @@ const customColors = {
 
 export default defineConfig({
   presets: [
-    presetWind4({
+    presetWind3({
       dark: 'class',
+      respectPrefix: true,
       preflights: {
         // reset: true,
         // theme: true,
@@ -331,7 +333,15 @@ export default defineConfig({
       '100': '100',
       '1000': '1000',
     },
+    // },
   },
+  // rules: [
+  //   [/^bg-sidebar$/, () => ({ 'background-color': 'hsl(var(--sidebar))' })],
+  //   [
+  //     /^bg-sidebar-deep$/,
+  //     () => ({ 'background-color': 'hsl(var(--sidebar-deep))' }),
+  //   ],
+  // ],
   safelist: ['dark'],
   // darkMode: 'class',
 });

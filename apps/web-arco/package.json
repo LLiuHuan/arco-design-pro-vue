@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "catalog:",
+    "@arco-plugins/vite-vue": "catalog:",
     "@arco/access": "workspace:*",
     "@arco/common-ui": "workspace:*",
     "@arco/constants": "workspace:*",

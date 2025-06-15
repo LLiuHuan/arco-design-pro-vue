@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-05-27 10:20:04
+ * @LastEditTime: 2025-06-15 17:16:45
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -27,17 +27,17 @@ const forward = useForwardPropsEmits(props, emit);
   <Breadcrumb
     v-if="styleType === 'normal'"
     v-bind="forward"
-    class="arco-breadcrumb"
+    class="arco-shadcn-breadcrumb"
   />
   <BreadcrumbBackground
     v-if="styleType === 'background'"
     v-bind="forward"
-    class="arco-breadcrumb"
+    class="arco-shadcn-breadcrumb"
   />
 </template>
 <style lang="scss" scoped>
 /** 修复全局引入Antd时，ol和ul的默认样式会被修改的问题 */
-.arco-breadcrumb {
+.arco-shadcn-breadcrumb {
   :deep(ol),
   :deep(ul) {
     margin-bottom: 0;

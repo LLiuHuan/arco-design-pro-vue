@@ -94,7 +94,7 @@ function handleScroll(event: Event) {
   <ScrollArea
     :class="[cn(props.class), computedShadowClasses]"
     :on-scroll="handleScroll"
-    class="arco-scrollbar relative"
+    class="arco-shadcn-scrollbar relative"
   >
     <div
       v-if="showShadowTop"
@@ -122,7 +122,7 @@ function handleScroll(event: Event) {
 </template>
 
 <style scoped>
-.arco-scrollbar {
+.arco-shadcn-scrollbar {
   &:not(.both-shadow).left-shadow-sm {
     mask-image: linear-gradient(90deg, transparent, #000 16px);
   }

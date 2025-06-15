@@ -45,7 +45,7 @@ declare global {
 const renderLink = (href: string, text: string) =>
   h(
     'a',
-    { href, target: '_blank', class: 'arco-link' },
+    { href, target: '_blank', class: 'arcoc-link' },
     { default: () => text },
   );
 
@@ -115,7 +115,7 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
   <Page :title="title">
     <template #description>
       <p class="text-foreground mt-3 text-sm leading-6">
-        <a :href="ARCO_GITHUB_URL" class="arco-link" target="_blank">
+        <a :href="ARCO_GITHUB_URL" class="arco-shadcn-link" target="_blank">
           {{ name }}
         </a>
         {{ description }}

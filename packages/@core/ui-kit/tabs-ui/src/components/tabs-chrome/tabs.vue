@@ -16,7 +16,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'arco-tabs-content',
+  contentClass: 'arco-shadcn-tabs-content',
   contextMenus: () => [],
   gap: 7,
   tabs: () => [],

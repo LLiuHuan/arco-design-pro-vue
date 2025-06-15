@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-05-27 10:20:35
+ * @LastEditTime: 2025-06-15 17:19:27
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -23,7 +23,7 @@ withDefaults(
   <div
     :class="
       cn(
-        'arco-button-group rounded-md',
+        'arco-shadcn-button-group rounded-md',
         `size-${size}`,
         gap ? 'with-gap' : 'no-gap',
         $attrs.class as string,
@@ -36,7 +36,7 @@ withDefaults(
 </template>
 
 <style lang="scss" scoped>
-.arco-button-group {
+.arco-shadcn-button-group {
   display: inline-flex;
 
   &.size-large :deep(button) {

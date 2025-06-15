@@ -1,18 +1,29 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-05-28 11:47:26
+ * @LastEditTime: 2025-06-15 18:14:29
+ * @LastEditors: LLiuHuan
+ */
 import { createApp, watchEffect } from 'vue';
 
 import { registerAccessDirective } from '@arco/access';
-import { registerLoadingDirective } from '@arco/common-ui';
+import {
+  registerLoadingDirective,
+  setDefaultDrawerProps,
+  setDefaultModalProps,
+} from '@arco/common-ui';
 import { preferences } from '@arco/preferences';
 import { initStores } from '@arco/stores';
 import '@arco/styles';
-import '@arco/styles/naive';
+import '@arco/styles/arco';
 
 import { useTitle } from '@vueuse/core';
 
 import { $t, setupI18n } from '#/locales';
 
 import { initComponentAdapter } from './adapter/component';
-// import { initSetupVbenForm } from './adapter/form';
+import { initSetupArcoForm } from './adapter/form';
 import App from './app.vue';
 import { router } from './router';
 
@@ -21,16 +32,16 @@ async function bootstrap(namespace: string) {
   await initComponentAdapter();
 
   // 初始化表单组件
-  // await initSetupVbenForm();
+  await initSetupArcoForm();
 
-  // // 设置弹窗的默认配置
-  // setDefaultModalProps({
-  //   fullscreenButton: false,
-  // });
-  // // 设置抽屉的默认配置
-  // setDefaultDrawerProps({
-  //   // zIndex: 2000,
-  // });
+  // 设置弹窗的默认配置
+  setDefaultModalProps({
+    fullscreenButton: false,
+  });
+  // 设置抽屉的默认配置
+  setDefaultDrawerProps({
+    // zIndex: 2000,
+  });
 
   const app = createApp(App);
 

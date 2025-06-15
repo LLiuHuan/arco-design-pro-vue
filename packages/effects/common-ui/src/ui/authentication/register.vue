@@ -113,7 +113,7 @@ defineExpose({
     </ArcoButton>
     <div class="mt-4 text-center text-sm">
       {{ $t('authentication.alreadyHaveAccount') }}
-      <span class="arco-link text-sm font-normal" @click="goToLogin()">
+      <span class="arco-shadcn-link text-sm font-normal" @click="goToLogin()">
         {{ $t('authentication.goToLogin') }}
       </span>
     </div>

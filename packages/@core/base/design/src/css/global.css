@@ -135,7 +135,7 @@ html:not([data-platform='macOs']) {
   @apply outline-primary left-0 top-0 h-full w-full p-1 opacity-100;
 }
 
-.arco-link {
+.arco-shadcn-link {
   @apply text-primary hover:text-primary-hover active:text-primary-active cursor-pointer;
 }
 
@@ -153,7 +153,9 @@ html.grayscale-mode {
 
 button {
   background-color: transparent;
+  cursor: pointer;
 }
+
 p,
 ol,
 button {

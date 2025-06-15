@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-05-27 10:23:25
+ * @LastEditTime: 2025-06-15 17:14:49
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -19,7 +19,7 @@ const collapsed = defineModel({ default: false });
 
 <template>
   <div
-    :class="cn('arco-link inline-flex items-center', props.class)"
+    :class="cn('arco-shadcn-link inline-flex items-center', props.class)"
     @click="collapsed = !collapsed"
   >
     <slot :is-expanded="collapsed">

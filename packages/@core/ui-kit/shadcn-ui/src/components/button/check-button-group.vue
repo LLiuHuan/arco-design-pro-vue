@@ -108,7 +108,7 @@ async function onBtnClick(value: ValueType) {
   <ArcoButtonGroup
     :size="props.size"
     :gap="props.gap"
-    class="arco-check-button-group"
+    class="arco-shadcn-check-button-group"
   >
     <Button
       v-for="(btn, index) in props.options"
@@ -145,7 +145,7 @@ async function onBtnClick(value: ValueType) {
   </ArcoButtonGroup>
 </template>
 <style lang="scss" scoped>
-.arco-check-button-group {
+.arco-shadcn-check-button-group {
   display: flex;
   flex-wrap: wrap;
 

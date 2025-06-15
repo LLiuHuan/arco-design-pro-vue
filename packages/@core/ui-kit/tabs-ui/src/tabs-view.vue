@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:47:21
- * @LastEditTime: 2025-05-27 10:50:44
+ * @LastEditTime: 2025-06-15 17:15:38
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -23,7 +23,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'arco-tabs-content',
+  contentClass: 'arco-shadcn-tabs-content',
   draggable: true,
   styleType: 'chrome',
   wheelable: true,

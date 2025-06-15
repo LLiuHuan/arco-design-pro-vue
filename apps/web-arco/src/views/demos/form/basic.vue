@@ -3,8 +3,9 @@ import { h } from 'vue';
 
 import { Page, useArcoDrawer } from '@arco/common-ui';
 
-import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
+import { Checkbox, Message } from '@arco-design/web-vue';
 
+// import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
 import { useArcoForm } from '#/adapter/form';
 import { getAllMenusApi } from '#/api';
 
@@ -19,7 +20,7 @@ const [Form, formApi] = useArcoForm({
   // 大屏一行显示3个，中屏一行显示2个，小屏一行显示1个
   // wrapperClass: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
   handleSubmit: (values) => {
-    ElMessage.success(`表单数据：${JSON.stringify(values)}`);
+    Message.success(`表单数据：${JSON.stringify(values)}`);
   },
   schema: [
     {
@@ -97,6 +98,7 @@ const [Form, formApi] = useArcoForm({
           value: v,
           label: `选项${v}`,
         })),
+        type: 'button',
       },
     },
     {
@@ -115,7 +117,7 @@ const [Form, formApi] = useArcoForm({
         return {
           default: () => {
             return ['A', 'B', 'C', 'D'].map((v) =>
-              h(ElCheckbox, { label: v, value: v }),
+              h(Checkbox, { label: v, value: v }),
             );
           },
         };
@@ -171,6 +173,7 @@ function setFormValues() {
 }
 </script>
 <template>
+  <!-- <ASelect></ASelect> -->
   <Page
     description="我们重新包装了CheckboxGroup、RadioGroup、Select，可以通过options属性传入选项属性数组以自动生成选项"
     title="表单演示"
@@ -178,14 +181,14 @@ function setFormValues() {
     <Drawer class="w-[600px]" title="基础表单示例">
       <Form />
     </Drawer>
-    <ElCard>
+    <ACard>
       <template #header>
         <div class="flex items-center">
           <span class="flex-auto">基础表单演示</span>
-          <ElButton type="primary" @click="setFormValues">设置表单值</ElButton>
+          <AButton type="primary" @click="setFormValues">设置表单值</AButton>
         </div>
       </template>
-      <ElButton type="primary" @click="drawerApi.open"> 打开抽屉 </ElButton>
-    </ElCard>
+      <a-button type="primary" @click="drawerApi.open"> 打开抽屉 </a-button>
+    </ACard>
   </Page>
 </template>

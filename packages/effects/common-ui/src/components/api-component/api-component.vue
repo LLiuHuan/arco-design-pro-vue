@@ -32,10 +32,14 @@ interface Props {
   resultField?: string;
   /** label字段名 */
   labelField?: string;
+  /** label使用的key */
+  labelKey?: string;
   /** children字段名，需要层级数据的组件可用 */
   childrenField?: string;
   /** value字段名 */
   valueField?: string;
+  /** value使用的key */
+  valueKey?: string;
   /** 组件接收options数据的属性名 */
   optionsPropName?: string;
   /** 是否立即调用api */
@@ -74,7 +78,9 @@ defineOptions({ name: 'ApiComponent', inheritAttrs: false });
 
 const props = withDefaults(defineProps<Props>(), {
   labelField: 'label',
+  labelKey: 'label',
   valueField: 'value',
+  valueKey: 'value',
   childrenField: '',
   optionsPropName: 'options',
   resultField: '',
@@ -115,8 +121,8 @@ const getOptions = computed(() => {
       const value = get(item, valueField);
       return {
         ...objectOmit(item, [labelField, valueField, childrenField]),
-        label: get(item, labelField),
-        value: numberToString ? `${value}` : value,
+        [props.labelKey]: get(item, labelField),
+        [props.valueKey]: numberToString ? `${value}` : value,
         ...(childrenField && item[childrenField]
           ? { children: transformData(item[childrenField]) }
           : {}),

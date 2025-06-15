@@ -1,44 +1,45 @@
 <script lang="ts" setup>
-  import { SvgIcon } from '@/components/Icon';
   import { computed, ref, unref } from 'vue';
+
+  import { SvgIcon } from '@/components/Icon';
+  import { isNumber, isString } from '@/utils/common';
   import { SelectOptionData, SelectProps } from '@arco-design/web-vue';
   import { cloneDeep, omit } from 'lodash-es';
-  import { isNumber, isString } from '@/utils/common';
 
   interface NumberProps {
-    mode?: 'embed' | 'button';
-    step?: number;
-    min?: number;
-    max?: number;
     formatter?: (value: number) => string;
+    max?: number;
+    min?: number;
+    mode?: 'button' | 'embed';
     parser?: (value: string) => number;
     readOnly?: boolean;
+    step?: number;
   }
 
   interface SwitchProps {
+    beforeChange?: (
+      newValue: boolean | number | string,
+    ) => boolean | Promise<boolean | void> | void;
+    checkedColor?: string;
+    checkedText?: string;
+    checkedValue?: boolean | number | string;
     disabled?: boolean;
     loading?: boolean;
-    type?: 'circle' | 'round' | 'line';
-    size?: 'small' | 'medium';
-    checkedValue?: string | number | boolean;
-    unCheckedValue?: string | number | boolean;
-    checkedColor?: string;
+    size?: 'medium' | 'small';
+    type?: 'circle' | 'line' | 'round';
     unCheckedColor?: string;
-    beforeChange?: (
-      newValue: string | number | boolean,
-    ) => Promise<boolean | void> | boolean | void;
-    checkedText?: string;
     unCheckedText?: string;
+    unCheckedValue?: boolean | number | string;
   }
 
   interface Props {
-    value?: string | number | boolean;
-    type?: 'input' | 'inputNumber' | 'select' | 'switch';
-
     numberProps?: NumberProps;
+    placeholder?: string;
+
     selectProps?: SelectProps;
     switchProps?: SwitchProps;
-    placeholder?: string;
+    type?: 'input' | 'inputNumber' | 'select' | 'switch';
+    value?: boolean | number | string;
   }
 
   const props = withDefaults(defineProps<Props>(), {

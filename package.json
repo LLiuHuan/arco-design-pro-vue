@@ -32,6 +32,7 @@
   "website": "https://lliuhuan.github.io/arco-design-pro-vue",
   "documentation": "https://github.com/LLiuHuan/arco-design-pro-vue",
   "scripts": {
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
     "build:antd": "pnpm run build --filter=@arco/web-antd",
     "build:docker": "./scripts/deploy/build-local-docker-image.sh",

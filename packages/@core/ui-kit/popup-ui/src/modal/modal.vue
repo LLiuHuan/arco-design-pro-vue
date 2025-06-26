@@ -105,10 +105,17 @@ const shouldDraggable = computed(
   () => draggable.value && !shouldFullscreen.value && header.value,
 );
 
+const getAppendTo = computed(() => {
+  return appendToMain.value
+    ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div`
+    : undefined;
+});
+
 const { dragging, transform } = useModalDraggable(
   dialogRef,
   headerRef,
   shouldDraggable,
+  getAppendTo,
 );
 
 const firstOpened = ref(false);
@@ -174,7 +181,7 @@ function escapeKeyDown(e: KeyboardEvent) {
   }
 }
 
-function handerOpenAutoFocus(e: Event) {
+function handlerOpenAutoFocus(e: Event) {
   if (!openAutoFocus.value) {
     e?.preventDefault();
   }
@@ -198,11 +205,6 @@ function handleFocusOutside(e: Event) {
   e.preventDefault();
   e.stopPropagation();
 }
-const getAppendTo = computed(() => {
-  return appendToMain.value
-    ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div`
-    : undefined;
-});
 
 const getForceMount = computed(() => {
   return !unref(destroyOnClose) && unref(firstOpened);
@@ -250,7 +252,7 @@ function handleClosed() {
       @escape-key-down="escapeKeyDown"
       @focus-outside="handleFocusOutside"
       @interact-outside="interactOutside"
-      @open-auto-focus="handerOpenAutoFocus"
+      @open-auto-focus="handlerOpenAutoFocus"
       @opened="() => modalApi?.onOpened()"
       @pointer-down-outside="pointerDownOutside"
     >

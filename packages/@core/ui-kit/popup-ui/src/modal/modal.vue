@@ -226,7 +226,8 @@ function handleClosed() {
       :append-to="getAppendTo"
       :class="
         cn(
-          'top-[10vh] right-0 left-0 mx-auto flex max-h-[80%] w-[520px] flex-col p-0 sm:rounded-[var(--radius)]',
+          'top-[10vh] right-0 left-0 mx-auto flex max-h-[80%] w-[520px] flex-col p-0',
+          shouldFullscreen ? 'sm:rounded-none' : 'sm:rounded-[var(--radius)]',
           modalClass,
           {
             'border-border border': bordered,

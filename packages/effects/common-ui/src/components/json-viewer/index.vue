@@ -83,11 +83,25 @@ const jsonData = computed<Record<string, any>>(() => {
     return props.value || {};
   }
 
+  // Handle empty strings
+  if (!props.value.trim()) {
+    return {};
+  }
+
   try {
     return JsonBigint({ storeAsString: true }).parse(props.value);
   } catch (error) {
-    console.error('JSON parse error:', error);
-    return {};
+    console.warn(
+      'Failed to parse JSON with bigint support, falling back to standard JSON.parse:',
+      error,
+    );
+    // Fallback to standard JSON parsing
+    try {
+      return JSON.parse(props.value);
+    } catch (fallbackError) {
+      console.error('JSON parse error:', fallbackError);
+      return {};
+    }
   }
 });
 

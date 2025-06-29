@@ -63,20 +63,22 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } =
     </AuthenticationFormView>
 
     <!-- 头部 Logo 和应用名称 -->
-    <div
-      v-if="logo || appName"
-      class="absolute top-0 left-0 z-10 flex flex-1"
-      @click="clickLogo"
-    >
+    <slot name="log">
       <div
-        class="text-foreground lg:text-foreground mt-4 ml-4 flex flex-1 items-center sm:top-6 sm:left-6"
+        v-if="logo || appName"
+        class="absolute top-0 left-0 z-10 flex flex-1"
+        @click="clickLogo"
       >
-        <img v-if="logo" :alt="appName" :src="logo" class="mr-2" width="42" />
-        <p v-if="appName" class="m-0 text-xl font-medium">
-          {{ appName }}
-        </p>
+        <div
+          class="text-foreground lg:text-foreground mt-4 ml-4 flex flex-1 items-center sm:top-6 sm:left-6"
+        >
+          <img v-if="logo" :alt="appName" :src="logo" class="mr-2" width="42" />
+          <p v-if="appName" class="m-0 text-xl font-medium">
+            {{ appName }}
+          </p>
+        </div>
       </div>
-    </div>
+    </slot>
 
     <!-- 系统介绍 -->
     <div v-if="!authPanelCenter" class="relative hidden w-0 flex-1 lg:block">

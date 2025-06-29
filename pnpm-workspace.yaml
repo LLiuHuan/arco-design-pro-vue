@@ -44,6 +44,7 @@ catalog:
   '@types/archiver': ^6.0.3
   '@types/eslint': ^9.6.1
   '@types/html-minifier-terser': ^7.0.2
+  '@types/json-bigint': ^1.0.4
   '@types/jsonwebtoken': ^9.0.9
   '@types/lodash.clonedeep': ^4.5.9
   '@types/lodash.get': ^4.4.9
@@ -118,6 +119,7 @@ catalog:
   html-minifier-terser: ^7.2.0
   husky: ^9.1.7
   is-ci: ^4.1.0
+  json-bigint: ^1.0.0
   jsonc-eslint-parser: ^2.4.0
   jsonwebtoken: ^9.0.2
   lint-staged: ^16.0.0

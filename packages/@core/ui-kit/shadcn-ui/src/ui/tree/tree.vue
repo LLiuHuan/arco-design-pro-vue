@@ -175,6 +175,19 @@ function isNodeDisabled(item: FlattenedItem<Recordable<any>>) {
   return props.disabled || get(item.value, props.disabledField);
 }
 
+function handleNodeInteraction(
+  item: FlattenedItem<Recordable<any>>,
+  callback: () => void,
+  event?: Event,
+) {
+  if (isNodeDisabled(item)) {
+    event?.preventDefault();
+    event?.stopPropagation();
+    return;
+  }
+  callback();
+}
+
 function onToggle(item: FlattenedItem<Recordable<any>>) {
   emits('expand', item);
 }
@@ -266,15 +279,16 @@ defineExpose({
         "
         @select="
           (event: any) => {
-            if (isNodeDisabled(item)) {
-              event.preventDefault();
-              event.stopPropagation();
-              return;
-            }
-            if (event.detail.originalEvent.type === 'click') {
-              event.preventDefault();
-            }
-            onSelect(item, event.detail.isSelected);
+            handleNodeInteraction(
+              item,
+              () => {
+                if (event.detail.originalEvent.type === 'click') {
+                  event.preventDefault();
+                }
+                onSelect(item, event.detail.isSelected);
+              },
+              event,
+            );
           }
         "
         @toggle="
@@ -308,12 +322,13 @@ defineExpose({
           :indeterminate="isIndeterminate && !isNodeDisabled(item)"
           @click="
             (event: MouseEvent) => {
-              if (isNodeDisabled(item)) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-              }
-              handleSelect();
+              handleNodeInteraction(
+                item,
+                () => {
+                  handleSelect();
+                },
+                event,
+              );
             }
           "
         />
@@ -321,14 +336,15 @@ defineExpose({
           class="flex items-center gap-1 pl-2"
           @click="
             (event: MouseEvent) => {
-              if (isNodeDisabled(item)) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-              }
-              event.stopPropagation();
-              event.preventDefault();
-              handleSelect();
+              handleNodeInteraction(
+                item,
+                () => {
+                  event.stopPropagation();
+                  event.preventDefault();
+                  handleSelect();
+                },
+                event,
+              );
             }
           "
         >

@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-05-27 11:51:46
@@ -9,6 +9,8 @@
 import type { AuthenticationProps } from './types';
 
 import { computed, watch } from 'vue';
+
+import { $t } from '@arco/locales';
 
 import { useArcoModal } from '@arco-core/popup-ui';
 import { ArcoAvatar, Slot } from '@arco-core/shadcn-ui';

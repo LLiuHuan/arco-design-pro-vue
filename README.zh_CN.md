@@ -240,12 +240,6 @@ pnpm dev
 后续添加吧，还没确定好，主要依据功能来弄
 ```
 
-## 致谢
-
-<a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
-  <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">
-</a>
-
 ## License
 
 Ths project is [MIT licensed](https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE).

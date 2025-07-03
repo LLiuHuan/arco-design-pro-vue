@@ -241,12 +241,6 @@ Develop in the following order
 I’ll add it later, it’s not decided yet, it will mainly be based on function.
 ```
 
-## Thank you
-
-<a title="jetbrains" href="https://www.jetbrains.com/" target="_blank">
-  <img style="width: 50px" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo.">
-</a>
-
 ## License
 
 Ths project is [MIT licensed](https://github.com/LLiuHuan/arco-design-pro-vue/blob/master/LICENSE).

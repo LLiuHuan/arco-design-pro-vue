@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="100" src="./public/logo.png" alt="LOGO" />
+    <img width="100" src="https://unpkg.com/arco-static@0.0.3/source/logo.png" alt="LOGO" />
 </div>
 
 <div align="center">

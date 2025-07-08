@@ -20,6 +20,8 @@
 > It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be
 > developed.
 
+> In view of time constraints, after comprehensive consideration and analysis, this project has decided to make adjustments to the infrastructure and select vue-vben-admin as the basic framework. During the refactoring process, the latest technologies will be fully adopted to ensure that the project can keep up with the industry's forefront in terms of functionality implementation, performance optimization, and technical architecture, meeting the diverse needs of the project in different scenarios and improving the overall quality and maintainability of the project.
+
 ## 1. Basic introduction
 
 ### 1.1 Project Introduction

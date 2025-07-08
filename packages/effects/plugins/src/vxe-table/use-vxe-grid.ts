@@ -5,6 +5,11 @@
  * @LastEditTime: 2025-05-27 15:06:57
  * @LastEditors: LLiuHuan
  */
+
+import type { VxeGridSlots, VxeGridSlotTypes } from 'vxe-table';
+
+import type { SlotsType } from 'vue';
+
 import type { BaseFormComponentType } from '@arco-core/form-ui';
 
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
@@ -15,6 +20,12 @@ import { useStore } from '@arco-core/shared/store';
 
 import { VxeGridApi } from './api';
 import VxeGrid from './use-vxe-grid.vue';
+
+type FilteredSlots<T> = {
+  [K in keyof VxeGridSlots<T> as K extends 'form'
+    ? never
+    : K]: VxeGridSlots<T>[K];
+};
 
 export function useArcoVxeGrid<
   T extends Record<string, any> = any,
@@ -38,6 +49,16 @@ export function useArcoVxeGrid<
     {
       name: 'ArcoVxeGrid',
       inheritAttrs: false,
+      slots: Object as SlotsType<
+        {
+          // 表格标题
+          'table-title': undefined;
+          // 工具栏左侧部分
+          'toolbar-actions': VxeGridSlotTypes.DefaultSlotParams<T>;
+          // 工具栏右侧部分
+          'toolbar-tools': VxeGridSlotTypes.DefaultSlotParams<T>;
+        } & FilteredSlots<T>
+      >,
     },
   );
   // Add reactivity support

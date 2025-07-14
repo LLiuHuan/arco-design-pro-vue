@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:09:36
+ * @LastEditTime: 2025-07-02 10:44:57
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -28,7 +28,7 @@ const delegatedProps = computed(() => {
     v-bind="delegatedProps"
     :class="
       cn(
-        'text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
         props.class,
       )
     "

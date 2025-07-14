@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:08:49
+ * @LastEditTime: 2025-07-02 10:43:23
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -31,7 +31,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     v-bind="forwardedProps"
     :class="
       cn(
-        'focus:bg-accent data-[state=open]:bg-accent flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+        'focus:bg-accent data-[state=open]:bg-accent outline-hidden flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm',
         props.class,
       )
     "

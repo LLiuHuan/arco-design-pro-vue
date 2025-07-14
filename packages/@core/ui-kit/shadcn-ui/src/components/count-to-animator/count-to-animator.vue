@@ -1,15 +1,21 @@
 <script lang="ts" setup>
+import type { Component } from 'vue';
+
 import { computed, onMounted, ref, unref, watch, watchEffect } from 'vue';
 
 import { isNumber } from '@arco-core/shared/utils';
 
 import { TransitionPresets, useTransition } from '@vueuse/core';
 
+import { ArcoIcon } from '../icon';
+
 interface Props {
   autoplay?: boolean;
   color?: string;
   decimal?: string;
   decimals?: number;
+  direction?: 'down' | 'up';
+  downIcon?: Component | string;
   duration?: number;
   endVal?: number;
   prefix?: string;
@@ -17,6 +23,7 @@ interface Props {
   startVal?: number;
   suffix?: string;
   transition?: keyof typeof TransitionPresets;
+  upIcon?: Component | string;
   useEasing?: boolean;
 }
 
@@ -119,10 +126,27 @@ function formatNumber(num: number | string) {
   return prefix + x1 + x2 + suffix;
 }
 
+function directionIcon(direction: 'down' | 'up' | undefined) {
+  return direction === 'up'
+    ? (props.upIcon ?? 'line-md:upload-outline-loop')
+    : (props.downIcon ?? 'line-md:download-outline-loop');
+}
+
 defineExpose({ reset });
 </script>
 <template>
-  <span :style="{ color }">
+  <span
+    class="flex items-center justify-center"
+    :class="
+      direction === 'up' ? 'text-red' : direction === 'down' ? 'text-green' : ''
+    "
+    :style="{ color }"
+  >
     {{ value }}
+    <ArcoIcon
+      v-if="direction"
+      :icon="directionIcon(direction)"
+      class="size-6 flex-shrink-0"
+    />
   </span>
 </template>

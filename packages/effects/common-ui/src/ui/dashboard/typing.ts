@@ -8,6 +8,15 @@ interface AnalysisOverviewItem {
   value: number;
 }
 
+interface AnalysisChartOverviewItem {
+  name: string;
+  title: string;
+  totalTitle: string;
+  totalValue: number;
+  value: number;
+  style: object;
+}
+
 interface WorkbenchProjectItem {
   color?: string;
   content: string;
@@ -40,6 +49,7 @@ interface WorkbenchQuickNavItem {
 }
 
 export type {
+  AnalysisChartOverviewItem,
   AnalysisOverviewItem,
   WorkbenchProjectItem,
   WorkbenchQuickNavItem,

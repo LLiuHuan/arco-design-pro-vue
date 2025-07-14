@@ -58,7 +58,7 @@
     "offline": "离线页面",
     "offlineError": "哎呀！网络错误",
     "offlineErrorDesc": "抱歉，无法连接到互联网，请检查您的网络连接并重试。",
-    "comingSoon": "即将推出",
+    "comingSoon": "正在开发中，尽请期待吧！",
     "http": {
       "requestTimeout": "请求超时，请稍后再试。",
       "networkError": "网络异常，请检查您的网络连接后重试。",

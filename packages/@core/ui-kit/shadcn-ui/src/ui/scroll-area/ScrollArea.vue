@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:11:01
+ * @LastEditTime: 2025-07-02 10:46:40
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -42,7 +42,7 @@ const delegatedProps = computed(() => {
   >
     <ScrollAreaViewport
       as-child
-      class="h-full w-full rounded-[inherit] focus:outline-hidden"
+      class="focus:outline-hidden h-full w-full rounded-[inherit]"
       @scroll="onScroll"
     >
       <slot></slot>

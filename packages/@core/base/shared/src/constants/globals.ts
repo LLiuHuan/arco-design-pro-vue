@@ -7,18 +7,18 @@
  */
 
 /** layout content 组件的高度 */
-export const CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT = `--arco-content-height`;
+export const CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT = `--adp-content-height`;
 /** layout content 组件的宽度 */
-export const CSS_VARIABLE_LAYOUT_CONTENT_WIDTH = `--arco-content-width`;
+export const CSS_VARIABLE_LAYOUT_CONTENT_WIDTH = `--adp-content-width`;
 /** layout header 组件的高度 */
-export const CSS_VARIABLE_LAYOUT_HEADER_HEIGHT = `--arco-header-height`;
+export const CSS_VARIABLE_LAYOUT_HEADER_HEIGHT = `--adp-header-height`;
 /** layout footer 组件的高度 */
-export const CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT = `--arco-footer-height`;
+export const CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT = `--adp-footer-height`;
 
 /** 内容区域的组件ID */
-export const ELEMENT_ID_MAIN_CONTENT = `__arco_main_content`;
+export const ELEMENT_ID_MAIN_CONTENT = `__adp_main_content`;
 
 /**
  * @zh_CN 默认命名空间
  */
-export const DEFAULT_NAMESPACE = 'arco';
+export const DEFAULT_NAMESPACE = 'adp';

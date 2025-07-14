@@ -2,14 +2,14 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:04:14
- * @LastEditTime: 2025-06-15 19:26:58
+ * @LastEditTime: 2025-07-03 10:21:04
  * @LastEditors: LLiuHuan
  */
 
 import type { BaseFormComponentType } from '@arco/common-ui';
 import type { Recordable } from '@arco/types';
 
-import type { Component } from 'vue';
+import type { Component, VNode } from 'vue';
 
 import { defineComponent, getCurrentInstance, h, ref } from 'vue';
 
@@ -29,7 +29,6 @@ import {
   Select as ASelect,
   Space as ASpace,
   Switch as ASwitch,
-  Tag as ATag,
   TimePicker as ATimePicker,
   TreeSelect as ATreeSelect,
   Upload as AUpload,
@@ -77,6 +76,8 @@ const withDefaultPlaceholder = <T extends Component>(
       expose(publicApi);
       const instance = getCurrentInstance();
       instance?.proxy?.$nextTick(() => {
+        // TODO: [Vue warn]: Avoid app logic that relies on enumerating keys on a component instance. The keys will be empty in production mode to avoid performance overhead.
+        // TODO: 暂时没想到怎么解决
         for (const key in innerRef.value) {
           if (typeof innerRef.value[key] === 'function') {
             publicApi[key] = innerRef.value[key];
@@ -132,41 +133,49 @@ async function initComponentAdapter() {
     CheckboxGroup: (props, { attrs, slots }) => {
       let defaultSlot;
       if (Reflect.has(slots, 'default')) {
-        defaultSlot = slots.default;
+        defaultSlot = slots.default as () => VNode[];
       } else {
-        const { options, isButton } = attrs;
+        const { options } = attrs;
         if (Array.isArray(options)) {
-          defaultSlot = () =>
-            options.map((option) =>
-              h(
-                isButton
-                  ? h(ACheckbox, option, {
-                      checkbox: ({ checked }) =>
+          defaultSlot = attrs.isButton
+            ? () =>
+                options.map((option) =>
+                  h(
+                    ACheckbox,
+                    {
+                      class: `arco-checkbox-button`,
+                      value: option.value,
+                    },
+                    {
+                      checkbox: ({ checked }: { checked: boolean }) =>
                         h(
-                          ATag,
+                          'span',
                           {
-                            checked,
-                            checkable: true,
+                            class: `arco-checkbox-button-content   ${
+                              checked ? 'arco-checkbox-button-checked' : ''
+                            }`,
                           },
                           option.label,
                         ),
-                    })
-                  : ACheckbox,
-                option,
-              ),
-            );
+                    },
+                  ),
+                )
+            : () => options.map((option) => h(ACheckbox, option));
         }
       }
+
       return h(
         ACheckboxGroup,
-        { ...props, ...attrs },
+        attrs.isButton
+          ? {
+              ...props,
+              ...attrs,
+              options: [],
+              class: `arco-checkbox-group-button`,
+            }
+          : { ...props, ...attrs },
         { default: defaultSlot },
       );
-      // return h(
-      //   ACheckboxGroup,
-      //   { ...props, ...attrs },
-      //   { default: () => options.map((option) => h(AButton)) },
-      // );
     },
     DatePicker: ADatePicker,
     // 自定义默认按钮
@@ -190,7 +199,7 @@ async function initComponentAdapter() {
     RadioGroup: (props, { attrs, slots }) => {
       let defaultSlot;
       if (Reflect.has(slots, 'default')) {
-        defaultSlot = slots.default;
+        defaultSlot = () => slots.default;
       } else {
         const { options } = attrs;
         if (Array.isArray(options)) {
@@ -202,10 +211,10 @@ async function initComponentAdapter() {
         { ...props, ...attrs },
         { default: defaultSlot },
       );
-      return groupRender;
-      // return attrs.isButton
-      //   ? h(ASpace, { direction: 'vertical' }, () => groupRender)
-      //   : groupRender;
+      // return groupRender;
+      return attrs.isButton
+        ? h(ASpace, { direction: 'vertical' }, () => groupRender)
+        : groupRender;
     },
     Select: withDefaultPlaceholder(ASelect, 'select'),
     Space: ASpace,

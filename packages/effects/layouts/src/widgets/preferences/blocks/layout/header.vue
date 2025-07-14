@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
  * @LastEditTime: 2025-05-27 12:17:42
@@ -9,6 +9,7 @@
 import type {
   LayoutHeaderMenuAlignType,
   LayoutHeaderModeType,
+  LayoutType,
   SelectOption,
 } from '@arco/types';
 
@@ -18,7 +19,7 @@ import SelectItem from '../select-item.vue';
 import SwitchItem from '../switch-item.vue';
 import ToggleItem from '../toggle-item.vue';
 
-defineProps<{ disabled: boolean }>();
+defineProps<{ currentLayout?: LayoutType; disabled: boolean }>();
 
 const headerEnable = defineModel<boolean>('headerEnable');
 const headerMode = defineModel<LayoutHeaderModeType>('headerMode');
@@ -71,9 +72,24 @@ const headerMenuAlignItems: SelectOption[] = [
   >
     {{ $t('preferences.mode') }}
   </SelectItem>
+  <!--
+布局方式
+sidebar-nav 侧边菜单布局
+header-nav 顶部菜单布局
+mixed-nav 侧边&顶部菜单布局
+sidebar-mixed-nav 侧边混合菜单布局
+full-content 全屏内容布局
+@default sidebar-nav
+
+-->
   <ToggleItem
     v-model="headerMenuAlign"
-    :disabled="!headerEnable"
+    :disabled="
+      !headerEnable ||
+      !['mixed-nav', 'header-mixed-nav', 'header-nav'].includes(
+        currentLayout as string,
+      )
+    "
     :items="headerMenuAlignItems"
   >
     {{ $t('preferences.header.menuAlign') }}

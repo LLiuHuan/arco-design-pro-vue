@@ -100,30 +100,24 @@ function transformComponent(
   <div class="relative h-full">
     <IFrameRouterView />
     <RouterView v-slot="{ Component, route }">
-      <Transition
-        v-if="getEnabledTransition"
-        :name="getTransitionName(route)"
-        appear
-        mode="out-in"
+      <KeepAlive
+        v-if="keepAlive"
+        :exclude="getExcludeCachedTabs"
+        :include="getCachedTabs"
       >
-        <KeepAlive
-          v-if="keepAlive"
-          :exclude="getExcludeCachedTabs"
-          :include="getCachedTabs"
-        >
-          <component
-            :is="transformComponent(Component, route)"
-            v-if="renderRouteView"
-            v-show="!route.meta.iframeSrc"
-            :key="getTabKey(route)"
-          />
-        </KeepAlive>
         <component
-          :is="Component"
-          v-else-if="renderRouteView"
+          :is="transformComponent(Component, route)"
+          v-if="renderRouteView"
+          v-show="!route.meta.iframeSrc"
           :key="getTabKey(route)"
         />
-      </Transition>
+      </KeepAlive>
+      <component
+        :is="Component"
+        v-else-if="renderRouteView"
+        :key="getTabKey(route)"
+      />
+
       <template v-else>
         <KeepAlive
           v-if="keepAlive"

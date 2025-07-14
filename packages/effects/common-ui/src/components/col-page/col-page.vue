@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<ColPageProps>(), {
 
 const delegatedProps = computed(() => {
   const { leftWidth: _, ...delegated } = props;
-  return delegated;
+  return reactive(delegated);
 });
 
 const slots = useSlots();

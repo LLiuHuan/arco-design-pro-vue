@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 11:47:26
  * @LastEditTime: 2025-05-28 12:02:01
@@ -16,8 +16,6 @@ import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
 
 defineOptions({ name: 'App' });
 
-// const { commonTokens } = useNaiveDesignTokens();
-
 const tokenLocale = computed(() =>
   preferences.app.locale === 'zh-CN' ? zhCN : enUS,
 );
@@ -31,11 +29,12 @@ watch(
       document.body.removeAttribute('arco-theme');
     }
   },
+  { immediate: true },
 );
 </script>
 
 <template>
-  <ConfigProvider :locale="tokenLocale" class="h-full">
+  <ConfigProvider :locale="tokenLocale">
     <RouterView />
   </ConfigProvider>
 </template>

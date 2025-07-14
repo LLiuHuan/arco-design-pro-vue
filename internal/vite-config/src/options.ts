@@ -18,12 +18,12 @@ const getDefaultPwaOptions = (name: string): Partial<PwaPluginOptions> => ({
     icons: [
       {
         sizes: '192x192',
-        src: 'https://unpkg.com/arco-static@0.0.1/source/logo@192.png',
+        src: 'https://unpkg.com/arco-static@0.0.3/source/logo@192.png',
         type: 'image/png',
       },
       {
         sizes: '512x512',
-        src: 'https://unpkg.com/arco-static@0.0.1/source/logo@512.png',
+        src: 'https://unpkg.com/arco-static@0.0.3/source/logo@512.png',
         type: 'image/png',
       },
     ],

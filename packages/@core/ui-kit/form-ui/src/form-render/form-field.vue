@@ -245,7 +245,7 @@ function fieldBindEvent(slotProps: Record<string, any>) {
 function createComponentProps(slotProps: Record<string, any>) {
   const bindEvents = fieldBindEvent(slotProps);
 
-  const binds = {
+  return {
     ...slotProps.componentField,
     ...computedProps.value,
     ...bindEvents,
@@ -256,8 +256,6 @@ function createComponentProps(slotProps: Record<string, any>) {
       ? { onInput: computedProps.value.onInput }
       : {}),
   };
-
-  return binds;
 }
 
 function autofocus() {

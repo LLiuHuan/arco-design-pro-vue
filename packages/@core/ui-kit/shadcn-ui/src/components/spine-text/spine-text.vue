@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
  * @LastEditTime: 2025-06-15 17:18:03
@@ -23,15 +23,12 @@ const style = computed(() => {
 });
 </script>
 <template>
-  <div
-    :style="style"
-    class="arco-shadcn-spine-text !bg-clip-text text-transparent"
-  >
+  <div :style="style" class="adp-spine-text !bg-clip-text text-transparent">
     <slot></slot>
   </div>
 </template>
 <style>
-.arco-shadcn-spine-text {
+.adp-spine-text {
   background:
     radial-gradient(circle at center, rgb(255 255 255 / 80%), #f000) -200% 50% /
       200% 100% no-repeat,
@@ -40,7 +37,7 @@ const style = computed(() => {
   /* animation: shine 3s linear infinite; */
 }
 
-.dark .arco-shadcn-spine-text {
+.dark .adp-spine-text {
   background:
     radial-gradient(circle at center, rgb(24 24 26 / 80%), transparent) -200%
       50% / 200% 100% no-repeat,

@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-06-17 00:55:16
+ * @LastEditTime: 2025-07-02 10:45:08
+ * @LastEditors: LLiuHuan
+-->
 <script setup lang="ts">
 import type { NumberFieldDecrementProps } from 'reka-ui';
 
@@ -25,7 +32,7 @@ const forwarded = useForwardProps(delegatedProps);
     v-bind="forwarded"
     :class="
       cn(
-        'absolute top-1/2 left-0 -translate-y-1/2 p-3 disabled:cursor-not-allowed disabled:opacity-20',
+        'absolute left-0 top-1/2 -translate-y-1/2 p-3 disabled:cursor-not-allowed disabled:opacity-20',
         props.class,
       )
     "

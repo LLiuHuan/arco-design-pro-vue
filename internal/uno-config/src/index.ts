@@ -127,7 +127,7 @@ const shadcnUiColors = {
 
   input: {
     background: 'hsl(var(--input-background))',
-    DEFAULT: 'hsl(var(--input))',
+    DEFAULT: 'hsl(var(--input))/10',
   },
   muted: {
     DEFAULT: 'hsl(var(--muted))',

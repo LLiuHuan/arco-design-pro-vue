@@ -31,7 +31,7 @@ const userStore = useUserStore();
 const projectItems: WorkbenchProjectItem[] = [
   {
     color: '',
-    content: '不要等待机会，而要创造机会。',
+    content: '开源连接世界，代码改变未来。',
     date: '2021-04-01',
     group: '开源组',
     icon: 'carbon:logo-github',
@@ -40,48 +40,48 @@ const projectItems: WorkbenchProjectItem[] = [
   },
   {
     color: '#3fb27f',
-    content: '现在的你决定将来的你。',
+    content: '组件化世界，响应式未来。',
     date: '2021-04-01',
-    group: '算法组',
-    icon: 'ion:logo-vue',
+    group: '前端体验组',
+    icon: 'logos:vue',
     title: 'Vue',
     url: 'https://vuejs.org',
   },
   {
-    color: '#e18525',
-    content: '没有什么才能比努力更重要。',
+    color: '#007d9c',
+    content: '简洁高效，并发为王，代码即诗。',
     date: '2021-04-01',
     group: '上班摸鱼',
-    icon: 'ion:logo-html5',
-    title: 'Html5',
-    url: 'https://developer.mozilla.org/zh-CN/docs/Web/HTML',
+    icon: 'devicon:go',
+    title: 'Go',
+    url: 'https://go.dev/',
   },
   {
     color: '#bf0c2c',
-    content: '热情和欲望可以突破一切难关。',
+    content: '安全无虞，性能卓越，系统编程新境界。',
     date: '2021-04-01',
-    group: 'UI',
-    icon: 'ion:logo-angular',
-    title: 'Angular',
-    url: 'https://angular.io',
+    group: '基础设施组',
+    icon: 'catppuccin:rust',
+    title: 'Rust',
+    url: 'https://www.rust-lang.org/',
   },
   {
     color: '#00d8ff',
-    content: '健康的身体是实现目标的基石。',
+    content: '稳如磐石，行以致远。',
     date: '2021-04-01',
-    group: '技术牛',
-    icon: 'bx:bxl-react',
-    title: 'React',
-    url: 'https://reactjs.org',
+    group: '后端架构组',
+    icon: 'devicon:java',
+    title: 'Java',
+    url: 'https://www.java.com/',
   },
   {
-    color: '#EBD94E',
-    content: '路是走出来的，而不是空想出来的。',
+    color: '',
+    content: '每一次提交，都是进步的足迹。',
     date: '2021-04-01',
-    group: '架构组',
-    icon: 'ion:logo-javascript',
-    title: 'Js',
-    url: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
+    group: '协作组',
+    icon: 'devicon:git',
+    title: 'Git',
+    url: 'https://developer.mozilla.org/zh-CN/docs/Glossary/Git',
   },
 ];
 
@@ -159,58 +159,58 @@ const todoItems = ref<WorkbenchTodoItem[]>([
 ]);
 const trendItems: WorkbenchTrendItem[] = [
   {
-    avatar: 'svg:avatar-1',
+    avatar: 'svg:avatar-2',
     content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
     date: '刚刚',
-    title: '威廉',
+    title: '乔布斯',
   },
   {
     avatar: 'svg:avatar-2',
-    content: `关注了 <a>威廉</a> `,
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
     date: '1个小时前',
-    title: '艾文',
-  },
-  {
-    avatar: 'svg:avatar-3',
-    content: `发布了 <a>个人动态</a> `,
-    date: '1天前',
-    title: '克里斯',
-  },
-  {
-    avatar: 'svg:avatar-4',
-    content: `发表文章 <a>如何编写一个Vite插件</a> `,
-    date: '2天前',
-    title: 'Arco',
-  },
-  {
-    avatar: 'svg:avatar-1',
-    content: `回复了 <a>杰克</a> 的问题 <a>如何进行项目优化？</a>`,
-    date: '3天前',
-    title: '皮特',
+    title: '乔布斯',
   },
   {
     avatar: 'svg:avatar-2',
-    content: `关闭了问题 <a>如何运行项目</a> `,
-    date: '1周前',
-    title: '杰克',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
+    date: '1天前',
+    title: '乔布斯',
   },
   {
-    avatar: 'svg:avatar-3',
-    content: `发布了 <a>个人动态</a> `,
-    date: '1周前',
-    title: '威廉',
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
+    date: '2天前',
+    title: '乔布斯',
   },
   {
-    avatar: 'svg:avatar-4',
-    content: `推送了代码到 <a>Github</a>`,
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
+    date: '3天前',
+    title: '乔布斯',
+  },
+  {
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
+    date: '1周前',
+    title: '乔布斯',
+  },
+  {
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
+    date: '1周前',
+    title: '乔布斯',
+  },
+  {
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
     date: '2021-04-01 20:00',
-    title: '威廉',
+    title: '乔布斯',
   },
   {
-    avatar: 'svg:avatar-4',
-    content: `发表文章 <a>如何编写使用 Admin Arco</a> `,
+    avatar: 'svg:avatar-2',
+    content: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`,
     date: '2021-03-01 20:00',
-    title: 'Arco',
+    title: '乔布斯',
   },
 ];
 
@@ -231,6 +231,24 @@ function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
     console.warn(`Unknown URL for navigation item: ${nav.title} -> ${nav.url}`);
   }
 }
+
+function getGreeting() {
+  const now = new Date();
+  const hour = now.getHours();
+
+  if (hour >= 5 && hour < 12) {
+    return ['早上好', '美好的一天开始了！'];
+  } else if (hour >= 12 && hour < 18) {
+    return ['下午好', '工作学习顺利！'];
+  } else if (hour >= 18 && hour < 24) {
+    return ['晚上好', '放松身心，享受夜晚！'];
+  } else {
+    return ['凌晨好', '注意休息，不要熬夜！']; // 0-5点
+  }
+}
+
+// 提示词
+const greeting = getGreeting();
 </script>
 
 <template>
@@ -239,7 +257,7 @@ function navTo(nav: WorkbenchProjectItem | WorkbenchQuickNavItem) {
       :avatar="userStore.userInfo?.avatar || preferences.app.defaultAvatar"
     >
       <template #title>
-        早安, {{ userStore.userInfo?.realName }}, 开始您一天的工作吧！
+        {{ greeting[0] }} {{ userStore.userInfo?.realName }}，{{ greeting[1] }}
       </template>
       <template #description> 今日晴，20℃ - 32℃！ </template>
     </WorkbenchHeader>

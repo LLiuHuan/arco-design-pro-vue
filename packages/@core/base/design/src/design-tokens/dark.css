@@ -76,9 +76,9 @@
   --border: 240 3.7% 22%;
 
   /* Border color for inputs such as <Input />, <Select />, <Textarea /> */
-  --input: 0deg 0% 100% / 10%;
+  --input: 240 3.7% 22%;
   --input-placeholder: 218deg 11% 65%;
-  --input-background: 0deg 0% 100% / 5%;
+  --input-background: 240deg 3.7% 22%;
 
   /* Used for focus ring */
   --ring: 222.2 84% 4.9%;

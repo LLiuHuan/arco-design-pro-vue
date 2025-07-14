@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-05-27 11:52:59
@@ -7,7 +7,6 @@
 -->
 <script setup lang="ts">
 import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@arco/icons';
-import { $t } from '@arco/locales';
 
 import { ArcoIconButton } from '@arco-core/shadcn-ui';
 

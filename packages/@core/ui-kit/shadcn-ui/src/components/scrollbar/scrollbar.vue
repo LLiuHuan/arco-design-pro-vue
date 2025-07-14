@@ -94,7 +94,7 @@ function handleScroll(event: Event) {
   <ScrollArea
     :class="[cn(props.class), computedShadowClasses]"
     :on-scroll="handleScroll"
-    class="arco-shadcn-scrollbar relative"
+    class="adp-scrollbar relative"
   >
     <div
       v-if="showShadowTop"
@@ -102,7 +102,7 @@ function handleScroll(event: Event) {
         'opacity-100': !isAtTop,
         'border-border border-t': shadowBorder && !isAtTop,
       }"
-      class="scrollbar-top-shadow-sm pointer-events-none absolute top-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
+      class="scrollbar-top-shadow pointer-events-none absolute top-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
     ></div>
     <slot></slot>
     <div
@@ -111,7 +111,7 @@ function handleScroll(event: Event) {
         'opacity-100': !isAtTop && !isAtBottom,
         'border-border border-b': shadowBorder && !isAtTop && !isAtBottom,
       }"
-      class="scrollbar-bottom-shadow-sm pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
+      class="scrollbar-bottom-shadow pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
     ></div>
     <ScrollBar
       v-if="horizontal"
@@ -122,12 +122,12 @@ function handleScroll(event: Event) {
 </template>
 
 <style scoped>
-.arco-shadcn-scrollbar {
-  &:not(.both-shadow).left-shadow-sm {
+.adp-scrollbar {
+  &:not(.both-shadow).left-shadow {
     mask-image: linear-gradient(90deg, transparent, #000 16px);
   }
 
-  &:not(.both-shadow).right-shadow-sm {
+  &:not(.both-shadow).right-shadow {
     mask-image: linear-gradient(
       90deg,
       #000 0%,
@@ -136,7 +136,7 @@ function handleScroll(event: Event) {
     );
   }
 
-  &.both-shadow-sm {
+  &.both-shadow {
     mask-image: linear-gradient(
       90deg,
       transparent,
@@ -147,7 +147,7 @@ function handleScroll(event: Event) {
   }
 }
 
-.scrollbar-top-shadow-sm {
+.scrollbar-top-shadow {
   background: linear-gradient(
     to bottom,
     hsl(var(--scroll-shadow, var(--background))),
@@ -155,7 +155,7 @@ function handleScroll(event: Event) {
   );
 }
 
-.scrollbar-bottom-shadow-sm {
+.scrollbar-bottom-shadow {
   background: linear-gradient(
     to top,
     hsl(var(--scroll-shadow, var(--background))),

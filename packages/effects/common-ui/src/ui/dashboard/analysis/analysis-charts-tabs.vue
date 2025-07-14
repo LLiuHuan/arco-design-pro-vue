@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-05-27 11:55:03
@@ -30,7 +30,7 @@ const defaultValue = computed(() => {
 </script>
 
 <template>
-  <div class="card-box w-full px-4 pt-3 pb-5">
+  <div class="card-box w-full px-4 pb-5 pt-3">
     <Tabs :default-value="defaultValue">
       <TabsList>
         <template v-for="tab in tabs" :key="tab.label">

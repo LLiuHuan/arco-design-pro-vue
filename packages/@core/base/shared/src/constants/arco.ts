@@ -20,7 +20,7 @@ export const ARCO_DOC_URL = 'https://doc.arco.0x3.cn';
  * @zh_CN Arco Logo
  */
 export const ARCO_LOGO_URL =
-  'https://unpkg.com/arco-static@0.0.1/source/logo.png';
+  'https://unpkg.com/arco-static@0.0.3/source/logo.png';
 
 /**
  * @zh_CN Arco Admin 首页地址

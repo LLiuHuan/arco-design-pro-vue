@@ -6,8 +6,6 @@ import type { ArcoFormSchema } from '@arco-core/form-ui';
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { $t } from '@arco/locales';
-
 import { useArcoForm } from '@arco-core/form-ui';
 import { ArcoButton } from '@arco-core/shadcn-ui';
 
@@ -113,7 +111,7 @@ defineExpose({
     </ArcoButton>
     <div class="mt-4 text-center text-sm">
       {{ $t('authentication.alreadyHaveAccount') }}
-      <span class="arco-shadcn-link text-sm font-normal" @click="goToLogin()">
+      <span class="adp-link text-sm font-normal" @click="goToLogin()">
         {{ $t('authentication.goToLogin') }}
       </span>
     </div>

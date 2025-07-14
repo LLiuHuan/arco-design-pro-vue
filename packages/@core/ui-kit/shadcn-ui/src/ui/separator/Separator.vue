@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:11:53
+ * @LastEditTime: 2025-07-02 10:54:25
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -38,7 +38,7 @@ const delegatedProps = computed(() => {
       v-if="props.label"
       :class="
         cn(
-          'text-muted-foreground bg-background absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-xs',
+          'text-muted-foreground bg-background absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-xs',
           props.orientation === 'vertical'
             ? 'w-[1px] px-1 py-2'
             : 'h-[1px] px-2 py-1',

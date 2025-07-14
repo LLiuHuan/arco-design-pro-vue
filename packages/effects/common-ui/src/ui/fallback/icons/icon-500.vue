@@ -4,7 +4,6 @@
     viewBox="0 0 1119 699"
     width="1119"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <title>server down</title>
     <circle cx="292.60911" cy="213" fill="#f2f2f2" r="213" />
@@ -128,7 +127,7 @@
     <rect fill="#3f3d56" height="86" width="250" x="87.60911" y="237" />
     <rect fill="#3f3d56" height="86" width="250" x="87.60911" y="339" />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.4"
       width="16"
@@ -136,16 +135,22 @@
       y="150"
     />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.8"
       width="16"
       x="294.60911"
       y="150"
     />
-    <rect fill="#6c63ff" height="16" width="16" x="317.60911" y="150" />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
+      height="16"
+      width="16"
+      x="317.60911"
+      y="150"
+    />
+    <rect
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.4"
       width="16"
@@ -153,16 +158,22 @@
       y="251"
     />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.8"
       width="16"
       x="294.60911"
       y="251"
     />
-    <rect fill="#6c63ff" height="16" width="16" x="317.60911" y="251" />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
+      height="16"
+      width="16"
+      x="317.60911"
+      y="251"
+    />
+    <rect
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.4"
       width="16"
@@ -170,14 +181,20 @@
       y="352"
     />
     <rect
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
       height="16"
       opacity="0.8"
       width="16"
       x="294.60911"
       y="352"
     />
-    <rect fill="#6c63ff" height="16" width="16" x="317.60911" y="352" />
+    <rect
+      fill="hsl(var(--primary))"
+      height="16"
+      width="16"
+      x="317.60911"
+      y="352"
+    />
     <circle cx="316.60911" cy="538" fill="#2f2e41" r="79" />
     <rect fill="#2f2e41" height="43" width="24" x="280.60911" y="600" />
     <rect fill="#2f2e41" height="43" width="24" x="328.60911" y="600" />
@@ -187,7 +204,7 @@
     <circle cx="318.60911" cy="518" fill="#3f3d56" r="9" />
     <path
       d="M271.36733,565.03228c-6.37889-28.56758,14.01185-57.43392,45.544-64.47477s62.2651,10.41,68.644,38.9776-14.51861,39.10379-46.05075,46.14464S277.74622,593.59986,271.36733,565.03228Z"
-      fill="#6c63ff"
+      fill="hsl(var(--primary))"
       transform="translate(-31.39089 -100.5)"
     />
     <ellipse

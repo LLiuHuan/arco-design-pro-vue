@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:47:21
  * @LastEditTime: 2025-06-15 17:15:38
@@ -23,7 +23,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'arco-shadcn-tabs-content',
+  contentClass: 'adp-tabs-content',
   draggable: true,
   styleType: 'chrome',
   wheelable: true,
@@ -86,7 +86,7 @@ useTabsDrag(props, emit);
         shadow-left
         shadow-right
         @scroll-at="handleScrollAt"
-        @wheel="onWheel"
+        @wheel.passive="onWheel"
       >
         <TabsChrome
           v-if="styleType === 'chrome'"

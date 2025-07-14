@@ -1,4 +1,3 @@
-
 import { execSync } from 'node:child_process';
 
 import { getPackagesSync } from '@arco/node-utils';
@@ -69,18 +68,48 @@ const userConfig = {
     types: [
       { value: 'feat', name: 'feat:     新增功能 | A new feature' },
       { value: 'fix', name: 'fix:      修复缺陷 | A bug fix' },
-      { value: 'docs', name: 'docs:     文档变更 | Documentation only changes' },
-      { value: 'style', name: 'style:    代码格式 | Changes that do not affect the meaning of the code' },
-      { value: 'refactor', name: 'refactor: 代码重构 | A code change that neither fixes a bug nor adds a feature' },
-      { value: 'perf', name: 'perf:     性能优化 | A code change that improves performance' },
-      { value: 'test', name: 'test:     添加疏漏测试或已有测试改动 | Adding missing tests or correcting existing tests' },
-      { value: 'build', name: 'build:    构建流程、外部依赖变更 (如升级 npm 包、修改打包配置等) | Changes that affect the build system or external dependencies' },
-      { value: 'ci', name: 'ci:       修改 CI 配置、脚本 | Changes to our CI configuration files and scripts | Revert to a commit' },
+      {
+        value: 'docs',
+        name: 'docs:     文档变更 | Documentation only changes',
+      },
+      {
+        value: 'style',
+        name: 'style:    代码格式 | Changes that do not affect the meaning of the code',
+      },
+      {
+        value: 'refactor',
+        name: 'refactor: 代码重构 | A code change that neither fixes a bug nor adds a feature',
+      },
+      {
+        value: 'perf',
+        name: 'perf:     性能优化 | A code change that improves performance',
+      },
+      {
+        value: 'test',
+        name: 'test:     添加疏漏测试或已有测试改动 | Adding missing tests or correcting existing tests',
+      },
+      {
+        value: 'build',
+        name: 'build:    构建流程、外部依赖变更 (如升级 npm 包、修改打包配置等) | Changes that affect the build system or external dependencies',
+      },
+      {
+        value: 'ci',
+        name: 'ci:       修改 CI 配置、脚本 | Changes to our CI configuration files and scripts | Revert to a commit',
+      },
       { value: 'revert', name: 'revert:   回滚 commit | Revert to a commit' },
-      { value: 'chore', name: 'chore:    对构建过程或辅助工具和库的更改 (不影响源文件、测试用例) | Other changes that do not modify src or test files' },
+      {
+        value: 'chore',
+        name: 'chore:    对构建过程或辅助工具和库的更改 (不影响源文件、测试用例) | Other changes that do not modify src or test files',
+      },
       { value: 'wip', name: 'wip:      正在开发中 | Under development' },
-      { value: 'workflow', name: 'workflow: 工作流程改进 | Workflow improvement' },
-      { value: 'types', name: 'types:    类型定义文件修改 | Type definition file modification' },
+      {
+        value: 'workflow',
+        name: 'workflow: 工作流程改进 | Workflow improvement',
+      },
+      {
+        value: 'types',
+        name: 'types:    类型定义文件修改 | Type definition file modification',
+      },
     ],
     emptyScopesAlias: 'empty:      不填写',
     customScopesAlias: 'custom:     自定义',

@@ -58,7 +58,7 @@
     "offline": "Offline Page",
     "offlineError": "Oops! Network Error",
     "offlineErrorDesc": "Sorry, can't connect to the internet. Check your connection.",
-    "comingSoon": "Coming Soon",
+    "comingSoon": "Under development, please look forward to it!",
     "http": {
       "requestTimeout": "The request timed out. Please try again later.",
       "networkError": "A network error occurred. Please check your internet connection and try again.",

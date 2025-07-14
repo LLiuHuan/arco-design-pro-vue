@@ -33,6 +33,7 @@ html {
 
 body {
   min-height: 100vh;
+  margin: 0;
 
   /* pointer-events: auto !important; */
 
@@ -135,7 +136,7 @@ html:not([data-platform='macOs']) {
   @apply outline-primary left-0 top-0 h-full w-full p-1 opacity-100;
 }
 
-.arco-shadcn-link {
+.adp-link {
   @apply text-primary hover:text-primary-hover active:text-primary-active cursor-pointer;
 }
 
@@ -152,15 +153,14 @@ html.grayscale-mode {
 }
 
 button {
-  background-color: transparent;
   cursor: pointer;
+  background-color: transparent;
 }
 
 p,
 ol,
+ul,
 button {
-  padding: 0;
-  margin: 0;
   padding: 0;
   margin: 0;
 }
@@ -170,8 +170,26 @@ li {
 }
 
 a {
-    color: inherit;
-    text-decoration: inherit
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* 去除系统代理样式表样式 */
+dd {
+  margin-inline-start: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+input {
+  outline: none;
 }
 
 @unocss;

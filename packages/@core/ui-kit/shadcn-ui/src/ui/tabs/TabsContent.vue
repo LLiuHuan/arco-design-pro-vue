@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:12:34
+ * @LastEditTime: 2025-07-02 11:09:48
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -27,7 +27,7 @@ const delegatedProps = computed(() => {
   <TabsContent
     :class="
       cn(
-        'ring-offset-background focus-visible:ring-ring mt-2 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden',
+        'ring-offset-background focus-visible:ring-ring focus-visible:outline-hidden mt-2 focus-visible:ring-2 focus-visible:ring-offset-2',
         props.class,
       )
     "

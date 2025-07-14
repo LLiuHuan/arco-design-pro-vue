@@ -16,7 +16,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'arco-shadcn-tabs-content',
+  contentClass: 'adp-tabs-content',
   contextMenus: () => [],
   gap: 7,
   tabs: () => [],
@@ -92,7 +92,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
         ]"
         :data-active-tab="active"
         :data-index="i"
-        class="tabs-chrome__item draggable translate-all group relative -mr-3 flex h-full items-center select-none"
+        class="tabs-chrome__item draggable translate-all group relative -mr-3 flex h-full select-none items-center"
         data-tab-item="true"
         @click="active = tab.key"
         @mousedown="onMouseDown($event, tab)"
@@ -107,11 +107,11 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
             <!-- divider -->
             <div
               v-if="i !== 0 && tab.key !== active"
-              class="tabs-chrome__divider bg-border absolute top-1/2 left-[var(--gap)] z-0 h-4 w-[1px] translate-y-[-50%] transition-all"
+              class="tabs-chrome__divider bg-border absolute left-[var(--gap)] top-1/2 z-0 h-4 w-[1px] translate-y-[-50%] transition-all"
             ></div>
             <!-- background -->
             <div
-              class="tabs-chrome__background absolute z-[-1] size-full px-[calc(var(--gap)-1px)] py-0 transition-opacity duration-150"
+              class="tabs-chrome__background absolute z-[1] size-full px-[calc(var(--gap)-1px)] py-0 transition-opacity duration-150"
             >
               <div
                 class="tabs-chrome__background-content group-[.is-active]:bg-primary/15 dark:group-[.is-active]:bg-accent h-full rounded-tl-[var(--gap)] rounded-tr-[var(--gap)] duration-150"
@@ -124,7 +124,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
                 <path d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z" />
               </svg>
               <svg
-                class="tabs-chrome__background-after group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute right-[-1px] bottom-0 fill-transparent transition-all duration-150"
+                class="tabs-chrome__background-after group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute bottom-0 right-[-1px] fill-transparent transition-all duration-150"
                 height="7"
                 width="7"
               >
@@ -134,7 +134,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
 
             <!-- extra -->
             <div
-              class="tabs-chrome__extra absolute top-1/2 right-[var(--gap)] z-[3] size-4 translate-y-[-50%]"
+              class="tabs-chrome__extra absolute right-[var(--gap)] top-1/2 z-[3] size-4 translate-y-[-50%]"
             >
               <!-- close-icon -->
               <X
@@ -151,7 +151,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
 
             <!-- tab-item-main -->
             <div
-              class="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pr-4 pl-2 duration-150"
+              class="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground relative z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150"
             >
               <ArcoIcon
                 v-if="showIcon"
@@ -159,7 +159,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
                 class="mr-1 flex size-4 items-center overflow-hidden"
               />
 
-              <span class="flex-1 overflow-hidden text-sm whitespace-nowrap">
+              <span class="flex-1 overflow-hidden whitespace-nowrap text-sm">
                 {{ tab.title }}
               </span>
             </div>
@@ -170,7 +170,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .tabs-chrome {
   &__item:not(.dragging) {
     @apply cursor-pointer;

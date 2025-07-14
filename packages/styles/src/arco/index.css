@@ -1,3 +1,60 @@
+/* 仅为消除工具报错，运行时会被动态变量覆盖 */
+:root {
+  --color-fill-2: transparent; /* 临时定义，不影响运行时 */
+  --border-radius-small: transparent; /* 临时定义，不影响运行时 */
+  --color-text-2: transparent; /* 临时定义，不影响运行时 */
+  --color-neutral-3: transparent; /* 临时定义，不影响运行时 */
+  --primary-6: transparent; /* 临时定义，不影响运行时 */
+  --color-bg-5: transparent; /* 临时定义，不影响运行时 */
+  --color-text-1: transparent; /* 临时定义，不影响运行时 */
+}
+
 .arco-trigger-popup {
   z-index: 2001 !important;
+}
+
+.arco-checkbox-group-button {
+  padding: 1.5px;
+  line-height: 26px;
+  background-color: var(--color-fill-2);
+  border-radius: var(--border-radius-small);
+}
+
+.arco-checkbox-button {
+  padding-left: 0 !important;
+  margin: 1.5px !important;
+  line-height: 26px;
+  color: var(--color-text-2);
+  background-color: transparent;
+  border-radius: var(--border-radius-small);
+  transition: all 0.1s cubic-bezier(0, 0, 1, 1);
+}
+
+.arco-checkbox-button:hover {
+  color: var(--color-text-1);
+  background-color: var(--color-bg-5);
+}
+
+.arco-checkbox-button:not(:first-of-type)::before {
+  position: absolute;
+  top: 50%;
+  left: -2px;
+  display: block;
+  width: 1px;
+  height: 14px;
+  content: '';
+  background-color: var(--color-neutral-3);
+  transition: all 0.1s cubic-bezier(0, 0, 1, 1);
+  transform: translateY(-50%);
+}
+
+.arco-checkbox-button-checked {
+  color: rgb(var(--primary-6));
+  background-color: var(--color-bg-5);
+}
+
+.arco-checkbox-button-content {
+  position: relative;
+  display: block;
+  padding: 0 12px;
 }

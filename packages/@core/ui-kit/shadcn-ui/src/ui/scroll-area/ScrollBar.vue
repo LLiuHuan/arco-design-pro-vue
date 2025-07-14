@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 10:11:05
+ * @LastEditTime: 2025-07-02 10:46:48
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -33,7 +33,7 @@ const delegatedProps = computed(() => {
     v-bind="delegatedProps"
     :class="
       cn(
-        'flex touch-none transition-colors select-none',
+        'flex touch-none select-none transition-colors',
         orientation === 'vertical' &&
           'h-full w-2.5 border-l border-l-transparent p-px',
         orientation === 'horizontal' &&

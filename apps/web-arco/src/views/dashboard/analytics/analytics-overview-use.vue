@@ -13,43 +13,34 @@ onMounted(() => {
     grid: {
       left: 0,
       right: 0,
-      top: 10,
+      top: 0,
       bottom: 0,
     },
-    xAxis: {
-      type: 'category',
-      show: false,
-    },
-    yAxis: {
-      show: false,
+    legend: {
+      show: true,
+      top: 'center',
+      right: '0',
+      orient: 'vertical',
+      icon: 'circle',
+      itemWidth: 6,
+      itemHeight: 6,
     },
     tooltip: {
       show: true,
-      trigger: 'axis',
     },
     series: [
       {
-        name: '2001',
-        data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 100)),
-        type: 'line',
-        showSymbol: false,
-        smooth: true,
-        lineStyle: {
-          color: '#165DFF',
-          width: 3,
+        name: '总计',
+        type: 'pie',
+        radius: ['50%', '70%'],
+        label: {
+          show: false,
         },
-      },
-      {
-        name: '2002',
-        data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 100)),
-        type: 'line',
-        showSymbol: false,
-        smooth: true,
-        lineStyle: {
-          color: '#6AA1FF',
-          width: 3,
-          type: 'dashed',
-        },
+        data: [
+          { value: 1024, name: '微信' },
+          { value: 1024, name: '抖音' },
+          { value: 1024, name: '知乎' },
+        ],
       },
     ],
   });
@@ -57,5 +48,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <EchartsUI ref="chartRef" height="60px" width="100px" />
+  <EchartsUI ref="chartRef" height="70px" width="120px" />
 </template>

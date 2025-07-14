@@ -39,10 +39,10 @@
     "vite-plugin-vue-devtools": "catalog:"
   },
   "devDependencies": {
+    "@arco/node-utils": "workspace:*",
     "@pnpm/workspace.read-manifest": "catalog:",
     "@types/archiver": "catalog:",
     "@types/html-minifier-terser": "catalog:",
-    "@arco/node-utils": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "dayjs": "catalog:",
@@ -56,5 +56,10 @@
     "vite-plugin-dts": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-lazy-import": "catalog:"
+  },
+  "overrides": {
+    "vite-plugin-inspect": {
+      "vite": "$vite"
+    }
   }
 }

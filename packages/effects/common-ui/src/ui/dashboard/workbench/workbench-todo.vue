@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-05-27 11:56:22
@@ -41,14 +41,14 @@ withDefaults(defineProps<Props>(), {
           v-for="item in items"
           :key="item.title"
           :class="{
-            'line-through opacity-60 select-none': item.completed,
+            'select-none line-through opacity-60': item.completed,
           }"
           class="flex cursor-pointer justify-between gap-x-6 py-5"
         >
           <div class="flex min-w-0 items-center gap-x-4">
             <ArcoCheckbox v-model:checked="item.completed" name="completed" />
             <div class="min-w-0 flex-auto">
-              <p class="text-foreground text-sm leading-6 font-semibold">
+              <p class="text-foreground text-sm font-semibold leading-6">
                 {{ item.title }}
               </p>
               <!-- eslint-disable vue/no-v-html -->

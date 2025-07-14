@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
  * @LastEditTime: 2025-05-27 10:17:50
@@ -14,7 +14,7 @@ import type {
 
 import type { ClassType } from '@arco-core/typings';
 
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 
 import { useForwardPropsEmits } from 'reka-ui';
 
@@ -44,7 +44,7 @@ const delegatedProps = computed(() => {
     ...delegated
   } = props;
 
-  return delegated;
+  return reactive(delegated);
 });
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);

@@ -60,6 +60,7 @@ const shapes = computed(() => {
       rules: baseRules,
     });
   });
+  console.log('resultShapes', resultShapes);
   return resultShapes;
 });
 
@@ -110,6 +111,33 @@ const computedSchema = computed(
           ? keepIndex <= index
           : false;
 
+      console.log('hidden', {
+        colon,
+        disabled,
+        disabledOnChangeListener,
+        disabledOnInputListener,
+        emptyStateValue,
+        hideLabel,
+        hideRequiredMark,
+        labelWidth,
+        modelPropName,
+        wrapperClass,
+        ...schema,
+        commonComponentProps: componentProps,
+        componentProps: schema.componentProps,
+        controlClass: cn(controlClass, schema.controlClass),
+        formFieldProps: {
+          ...formFieldProps,
+          ...schema.formFieldProps,
+        },
+        formItemClass: cn(
+          'flex-shrink-0',
+          { hidden },
+          formItemClass,
+          schema.formItemClass,
+        ),
+        labelClass: cn(labelClass, schema.labelClass),
+      });
       return {
         colon,
         disabled,
@@ -146,20 +174,18 @@ const computedSchema = computed(
   <component :is="formComponent" v-bind="formComponentProps">
     <div ref="wrapperRef" :class="wrapperClass" class="grid">
       <template v-for="cSchema in computedSchema" :key="cSchema.fieldName">
-        <!-- <div v-if="$slots[cSchema.fieldName]" :class="cSchema.formItemClass">
-          <slot :definition="cSchema" :name="cSchema.fieldName"> </slot>
-        </div> -->
         <FormField
           v-bind="cSchema"
           :class="cSchema.formItemClass"
           :rules="cSchema.rules"
         >
           <template #default="slotProps">
+            <!--            {{ slotProps }}-->
             <slot v-bind="slotProps" :name="cSchema.fieldName"> </slot>
           </template>
         </FormField>
       </template>
-      <slot :shapes="shapes"></slot>
+      <!--      <slot :shapes="shapes"></slot>-->
     </div>
   </component>
 </template>

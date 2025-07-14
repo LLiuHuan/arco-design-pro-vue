@@ -27,7 +27,7 @@ withDefaults(defineProps<Props>(), {
 });
 
 declare global {
-  const __ARCO_ADMIN_METADATA__: {
+  const __ARCO_DESIGN_METADATA__: {
     authorEmail: string;
     authorName: string;
     authorUrl: string;
@@ -45,7 +45,7 @@ declare global {
 const renderLink = (href: string, text: string) =>
   h(
     'a',
-    { href, target: '_blank', class: 'arcoc-link' },
+    { href, target: '_blank', class: 'adp-link' },
     { default: () => text },
   );
 
@@ -60,7 +60,7 @@ const {
   license,
   version,
   // vite inject-metadata 插件注入的全局变量
-} = __ARCO_ADMIN_METADATA__ || {};
+} = __ARCO_DESIGN_METADATA__ || {};
 
 const arcoDescriptionItems: DescriptionItem[] = [
   {
@@ -115,7 +115,7 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
   <Page :title="title">
     <template #description>
       <p class="text-foreground mt-3 text-sm leading-6">
-        <a :href="ARCO_GITHUB_URL" class="arco-shadcn-link" target="_blank">
+        <a :href="ARCO_GITHUB_URL" class="adp-link" target="_blank">
           {{ name }}
         </a>
         {{ description }}
@@ -129,7 +129,7 @@ const devDependenciesItems = Object.keys(devDependencies).map((key) => ({
         <dl class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <template v-for="item in arcoDescriptionItems" :key="item.title">
             <div class="border-border border-t px-4 py-6 sm:col-span-1 sm:px-0">
-              <dt class="text-foreground text-sm leading-6 font-medium">
+              <dt class="text-foreground text-sm font-medium leading-6">
                 {{ item.title }}
               </dt>
               <dd class="text-foreground mt-1 text-sm leading-6 sm:mt-2">

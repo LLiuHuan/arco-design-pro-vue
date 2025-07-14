@@ -8,8 +8,6 @@ import type { AuthenticationProps } from './types';
 import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { $t } from '@arco/locales';
-
 import { useArcoForm } from '@arco-core/form-ui';
 import { ArcoButton, ArcoCheckbox } from '@arco-core/shadcn-ui';
 
@@ -126,7 +124,7 @@ defineExpose({
 
       <span
         v-if="showForgetPassword"
-        class="arco-shadcn-link text-sm font-normal"
+        class="adp-link text-sm font-normal"
         @click="handleGo(forgetPasswordPath)"
       >
         {{ $t('authentication.forgetPassword') }}
@@ -146,7 +144,7 @@ defineExpose({
 
     <div
       v-if="showCodeLogin || showQrcodeLogin"
-      class="mt-4 mb-2 flex items-center justify-between"
+      class="mb-2 mt-4 flex items-center justify-between"
     >
       <ArcoButton
         v-if="showCodeLogin"
@@ -175,7 +173,7 @@ defineExpose({
       <div v-if="showRegister" class="mt-3 text-center text-sm">
         {{ $t('authentication.accountTip') }}
         <span
-          class="arco-shadcn-link text-sm font-normal"
+          class="adp-link text-sm font-normal"
           @click="handleGo(registerPath)"
         >
           {{ $t('authentication.createAccount') }}

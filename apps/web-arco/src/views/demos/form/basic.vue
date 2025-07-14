@@ -117,7 +117,7 @@ const [Form, formApi] = useArcoForm({
         return {
           default: () => {
             return ['A', 'B', 'C', 'D'].map((v) =>
-              h(Checkbox, { label: v, value: v }),
+              h(Checkbox, { value: v }, () => `${v}`),
             );
           },
         };
@@ -181,11 +181,10 @@ function setFormValues() {
     <Drawer class="w-[600px]" title="基础表单示例">
       <Form />
     </Drawer>
-    <ACard>
-      <template #header>
+    <ACard title="基础表单演示">
+      <template #extra>
         <div class="flex items-center">
-          <span class="flex-auto">基础表单演示</span>
-          <AButton type="primary" @click="setFormValues">设置表单值</AButton>
+          <AButton type="text" @click="setFormValues">设置表单值</AButton>
         </div>
       </template>
       <a-button type="primary" @click="drawerApi.open"> 打开抽屉 </a-button>

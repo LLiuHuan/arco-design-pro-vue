@@ -16,7 +16,7 @@ defineOptions({
   inheritAttrs: false,
 });
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'arco-shadcn-tabs-content',
+  contentClass: 'adp-tabs-content',
   contextMenus: () => [],
   tabs: () => [],
 });
@@ -110,7 +110,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
           <div class="relative flex size-full items-center">
             <!-- extra -->
             <div
-              class="absolute top-1/2 right-1.5 z-[3] translate-y-[-50%] overflow-hidden"
+              class="absolute right-1.5 top-1/2 z-[3] translate-y-[-50%] overflow-hidden"
             >
               <!-- close-icon -->
               <X
@@ -136,7 +136,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
                 fallback
               />
 
-              <span class="flex-1 overflow-hidden text-sm whitespace-nowrap">
+              <span class="flex-1 overflow-hidden whitespace-nowrap text-sm">
                 {{ tab.title }}
               </span>
             </div>

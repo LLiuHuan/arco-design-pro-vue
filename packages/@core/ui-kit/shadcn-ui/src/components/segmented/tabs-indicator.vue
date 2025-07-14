@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
  * @LastEditTime: 2025-05-27 10:18:16
@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import type { TabsIndicatorProps } from 'reka-ui';
 
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 
 import { cn } from '@arco-core/shared/utils';
 
@@ -19,7 +19,7 @@ const props = defineProps<TabsIndicatorProps & { class?: any }>();
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;
 
-  return delegated;
+  return reactive(delegated);
 });
 
 const forwardedProps = useForwardProps(delegatedProps);

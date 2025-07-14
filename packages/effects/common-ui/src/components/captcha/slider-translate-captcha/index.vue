@@ -138,6 +138,15 @@ function resetCanvas() {
   pieceCanvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
+function validateUrl(src: string) {
+  try {
+    const url = new URL(src);
+    return { valid: true, url };
+  } catch {
+    return { valid: false };
+  }
+}
+
 function initCanvas() {
   const { canvasWidth, canvasHeight, squareLength, circleRadius, src } = props;
   const puzzleCanvas = unref(puzzleCanvasRef);
@@ -154,7 +163,17 @@ function initCanvas() {
   const img = new Image();
   // 解决跨域
   img.crossOrigin = 'Anonymous';
+  // Validate URL format
+  const { valid } = validateUrl(src);
+  if (!valid) {
+    console.error('Invalid URL:', src);
+    return;
+  }
   img.src = src;
+  img.addEventListener('error', () => {
+    console.error('Failed to load captcha image:', src);
+    // Optionally emit an error event or show a fallback UI
+  });
   img.addEventListener('load', () => {
     draw(puzzleCanvasCtx, pieceCanvasCtx);
     puzzleCanvasCtx.drawImage(img, 0, 0, canvasWidth, canvasHeight);

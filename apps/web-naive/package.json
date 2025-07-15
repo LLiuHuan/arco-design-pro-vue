@@ -1,0 +1,49 @@
+{
+  "name": "@arco/web-naive",
+  "version": "1.0.0",
+  "homepage": "https://arco.0x3.cn",
+  "bugs": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLiuHuan/arco-design-pro-vue.git",
+    "directory": "apps/web-arco"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "LLiuHuan",
+    "email": "liuhuan@0x3.cn",
+    "url": "https://github.com/lliuhuan"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@arco/access": "workspace:*",
+    "@arco/common-ui": "workspace:*",
+    "@arco/constants": "workspace:*",
+    "@arco/hooks": "workspace:*",
+    "@arco/icons": "workspace:*",
+    "@arco/layouts": "workspace:*",
+    "@arco/locales": "workspace:*",
+    "@arco/plugins": "workspace:*",
+    "@arco/preferences": "workspace:*",
+    "@arco/request": "workspace:*",
+    "@arco/stores": "workspace:*",
+    "@arco/styles": "workspace:*",
+    "@arco/types": "workspace:*",
+    "@arco/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "naive-ui": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  }
+}

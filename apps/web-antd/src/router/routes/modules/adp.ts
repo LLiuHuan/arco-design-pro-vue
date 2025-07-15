@@ -1,23 +1,24 @@
 /*
- * @Description:
+ * @Description: 
  * @Author: LLiuHuan
- * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-05-28 11:35:15
+ * @Date: 2025-05-27 09:37:08
+ * @LastEditTime: 2025-07-15 22:54:54
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
 
 import {
-  ARCO_ANT_PREVIEW_URL,
+  ARCO_DESIGN_PREVIEW_URL,
   ARCO_DOC_URL,
+  ARCO_ELE_PREVIEW_URL,
   ARCO_GITHUB_URL,
   ARCO_LOGO_URL,
   ARCO_NAIVE_PREVIEW_URL,
 } from '@arco/constants';
-import { SvgAntdvLogoIcon } from '@arco/icons';
 
 import { IFrameView } from '#/layouts';
 import { $t } from '#/locales';
+import { SvgArcoLogoIcon } from '@arco/icons';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,24 +26,24 @@ const routes: RouteRecordRaw[] = [
       badgeType: 'dot',
       icon: ARCO_LOGO_URL,
       order: 9998,
-      title: $t('demos.vben.title'),
+      title: $t('demos.adp.title'),
     },
     name: 'ArcoProject',
-    path: '/vben-admin',
+    path: '/arco',
     children: [
       {
         name: 'ArcoDocument',
-        path: '/vben-admin/document',
+        path: '/arco/document',
         component: IFrameView,
         meta: {
           icon: 'lucide:book-open-text',
           link: ARCO_DOC_URL,
-          title: $t('demos.vben.document'),
+          title: $t('demos.adp.document'),
         },
       },
       {
         name: 'ArcoGithub',
-        path: '/vben-admin/github',
+        path: '/arco/github',
         component: IFrameView,
         meta: {
           icon: 'mdi:github',
@@ -51,36 +52,47 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'ArcoAntd',
+        path: '/arco/arco',
+        component: IFrameView,
+        meta: {
+          badgeType: 'dot',
+          icon: SvgArcoLogoIcon,
+          link: ARCO_DESIGN_PREVIEW_URL,
+          title: $t('demos.adp.arco'),
+        },
+      },
+      {
+        name: 'ArcoElementPlus',
+        path: '/arco/ele',
+        component: IFrameView,
+        meta: {
+          badgeType: 'dot',
+          icon: 'logos:element',
+          link: ARCO_ELE_PREVIEW_URL,
+          title: $t('demos.adp.element-plus'),
+        },
+      },
+            {
         name: 'ArcoNaive',
-        path: '/vben-admin/naive',
+        path: '/arco/naive',
         component: IFrameView,
         meta: {
           badgeType: 'dot',
           icon: 'logos:naiveui',
           link: ARCO_NAIVE_PREVIEW_URL,
-          title: $t('demos.vben.naive-ui'),
-        },
-      },
-      {
-        name: 'ArcoAntd',
-        path: '/vben-admin/antd',
-        component: IFrameView,
-        meta: {
-          badgeType: 'dot',
-          icon: SvgAntdvLogoIcon,
-          link: ARCO_ANT_PREVIEW_URL,
-          title: $t('demos.vben.antdv'),
+          title: $t('demos.adp.naive-ui'),
         },
       },
     ],
   },
   {
     name: 'ArcoAbout',
-    path: '/vben-admin/about',
+    path: '/arco/about',
     component: () => import('#/views/_core/about/index.vue'),
     meta: {
       icon: 'lucide:copyright',
-      title: $t('demos.vben.about'),
+      title: $t('demos.adp.about'),
       order: 9999,
     },
   },

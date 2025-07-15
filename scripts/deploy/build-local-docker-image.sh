@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 LOG_FILE=${SCRIPT_DIR}/build-local-docker-image.log
 ERROR=""
-IMAGE_NAME="vben-admin-local"
+IMAGE_NAME="arco-admin-local"
 
 function stop_and_remove_container() {
     # Stop and remove the existing container
@@ -13,7 +13,7 @@ function stop_and_remove_container() {
 
 function remove_image() {
     # Remove the existing image
-    docker rmi vben-admin-pro >/dev/null 2>&1
+    docker rmi arco-admin-pro >/dev/null 2>&1
 }
 
 function install_dependencies() {

@@ -15,7 +15,7 @@ const defaultPreferences: Preferences = {
     contentPaddingLeft: 0,
     contentPaddingRight: 0,
     contentPaddingTop: 0,
-    defaultAvatar: 'https://unpkg.com/arco-static@0.0.3/source/avatar-v1.webp',
+    defaultAvatar: 'https://unpkg.com/arco-static@0.0.4/source/avatar-v2.webp',
     defaultHomePath: '/analytics',
     dynamicTitle: true,
     enableCheckUpdates: true,

@@ -2,7 +2,7 @@
  * @Description: 导出全部svg图标
  * @Author: LLiuHuan
  * @Date: 2025-05-22 17:22:12
- * @LastEditTime: 2025-05-22 17:23:12
+ * @LastEditTime: 2025-07-15 09:52:41
  * @LastEditors: LLiuHuan
  */
 import { createIconifyIcon } from '@arco-core/icons';
@@ -18,11 +18,11 @@ const SvgCardIcon = createIconifyIcon('svg:card');
 const SvgBellIcon = createIconifyIcon('svg:bell');
 const SvgCakeIcon = createIconifyIcon('svg:cake');
 const SvgAntdvLogoIcon = createIconifyIcon('svg:antdv-logo');
-const SvgUpIcon = createIconifyIcon('svg:up');
-const SvgDownIcon = createIconifyIcon('svg:down');
+const SvgArcoLogoIcon = createIconifyIcon('svg:arco-logo');
 
 export {
   SvgAntdvLogoIcon,
+  SvgArcoLogoIcon,
   SvgAvatar1Icon,
   SvgAvatar2Icon,
   SvgAvatar3Icon,
@@ -30,7 +30,5 @@ export {
   SvgBellIcon,
   SvgCakeIcon,
   SvgCardIcon,
-  SvgDownIcon,
   SvgDownloadIcon,
-  SvgUpIcon,
 };

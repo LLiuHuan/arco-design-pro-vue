@@ -21,7 +21,7 @@ function pwa(): PwaOptions {
     includeManifestIcons: false,
     manifest: {
       description:
-        'Vben Admin is a modern admin dashboard template based on Vue 3. ',
+        'Arco Admin is a modern admin dashboard template based on Vue 3. ',
       icons: [
         {
           sizes: '192x192',

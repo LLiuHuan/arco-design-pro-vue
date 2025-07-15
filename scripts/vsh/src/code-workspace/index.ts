@@ -20,7 +20,7 @@ import {
   toPosixPath,
 } from '@arco/node-utils';
 
-const CODE_WORKSPACE_FILE = join('vben-admin.code-workspace');
+const CODE_WORKSPACE_FILE = join('arco-admin.code-workspace');
 
 interface CodeWorkspaceCommandOptions {
   autoCommit?: boolean;

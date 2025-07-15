@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2025-07-14 20:09:29
+ * @LastEditTime: 2025-07-15 02:23:22
+ * @LastEditors: LLiuHuan
+-->
 <script lang="ts" setup>
 import {
   computed,
@@ -8,8 +15,8 @@ import {
   watch,
 } from 'vue';
 
-// import { useAntdDesignTokens } from '@vben/hooks';
-// import { initPreferences } from '@vben/preferences';
+// import { useAntdDesignTokens } from '@arco/hooks';
+// import { initPreferences } from '@arco/preferences';
 import { ConfigProvider, theme } from 'ant-design-vue';
 import mediumZoom from 'medium-zoom';
 import { useRoute } from 'vitepress';

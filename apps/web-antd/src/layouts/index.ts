@@ -1,0 +1,13 @@
+/*
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2025-05-27 09:37:08
+ * @LastEditTime: 2025-07-15 02:00:16
+ * @LastEditors: LLiuHuan
+ */
+const BasicLayout = () => import('./basic.vue');
+const AuthPageLayout = () => import('./auth.vue');
+
+const IFrameView = () => import('@arco/layouts').then((m) => m.IFrameView);
+
+export { AuthPageLayout, BasicLayout, IFrameView };

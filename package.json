@@ -15,8 +15,9 @@
   ],
   "homepage": "https://github.com/LLiuHuan/arco-design-pro-vue",
   "bugs": {
-    "url": "https://github.com/LLiuHuan/arco-design-pro-vue/issues",
-    "email": "184555556@qq.com"
+    "name": "LLiuHuan",
+    "email": "liuhuan@0x3.cn",
+    "url": "https://github.com/lliuhuan"
   },
   "repository": {
     "type": "git",
@@ -25,8 +26,8 @@
   "license": "MIT",
   "author": {
     "name": "LLiuHuan",
-    "email": "184555556@qq.com",
-    "url": "https://github.com/LLiuHuan/arco-design-pro-vue"
+    "email": "liuhuan@0x3.cn",
+    "url": "https://github.com/lliuhuan"
   },
   "type": "module",
   "website": "https://lliuhuan.github.io/arco-design-pro-vue",
@@ -35,6 +36,7 @@
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
     "build:antd": "pnpm run build --filter=@arco/web-antd",
+    "build:arco": "pnpm run build --filter=@arco/web-arco",
     "build:docker": "./scripts/deploy/build-local-docker-image.sh",
     "build:docs": "pnpm run build --filter=@arco/docs",
     "build:ele": "pnpm run build --filter=@arco/web-ele",

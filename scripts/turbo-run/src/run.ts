@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-06-04 17:40:06
- * @LastEditTime: 2025-06-04 17:40:57
+ * @LastEditTime: 2025-07-15 02:24:02
  * @LastEditors: LLiuHuan
  */
 import { execaCommand, getPackages } from '@arco/node-utils';
@@ -22,7 +22,7 @@ export async function run(options: RunOptions) {
   const { packages } = await getPackages();
   // const appPkgs = await findApps(process.cwd(), packages);
   // const websitePkg = packages.find(
-  //   (item) => item.packageJson.name === '@vben/website',
+  //   (item) => item.packageJson.name === '@arco/website',
   // );
 
   // 只显示有对应命令的包

@@ -159,17 +159,17 @@ function handleConfirm() {
       {{ index + 1 }}
     </div>
     <template #footer>
-      <img
-        v-if="hintImage"
-        :alt="$t('ui.captcha.alt')"
-        :src="hintImage"
-        class="border-border h-10 w-full rounded-sm border"
-      />
-      <div
-        v-else-if="hintText"
-        class="border-border flex-center h-10 w-full rounded-sm border"
-      >
-        {{ `${$t('ui.captcha.clickInOrder')}` + `【${hintText}】` }}
+      <div class="border-border flex-center h-10 w-full rounded-sm border">
+        {{ `${$t('ui.captcha.clickInOrder')}` }}
+        <img
+          v-if="hintImage"
+          :alt="$t('ui.captcha.alt')"
+          :src="hintImage"
+          class="border-border ml-2 h-10 rounded-sm border"
+        />
+        <template v-else-if="hintText">
+          {{ `【${hintText}】` }}
+        </template>
       </div>
     </template>
   </CaptchaCard>

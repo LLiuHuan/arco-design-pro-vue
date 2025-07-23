@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2025-07-15 02:02:13
+ * @LastEditTime: 2025-07-24 02:14:46
  * @LastEditors: LLiuHuan
  */
 import type {
@@ -15,7 +15,7 @@ import { preferences } from '@arco/preferences';
 
 import { message } from 'ant-design-vue';
 
-import { getAllMenusApi } from '#/api';
+import MenuAPI from '#/api/core/menu';
 import { BasicLayout, IFrameView } from '#/layouts';
 import { $t } from '#/locales';
 
@@ -36,7 +36,7 @@ async function generateAccess(options: GenerateMenuAndRoutesOptions) {
         content: `${$t('common.loadingMenu')}...`,
         duration: 1.5,
       });
-      return await getAllMenusApi();
+      return await MenuAPI.getMenusApi();
     },
     // 可以指定没有权限跳转403页面
     forbiddenComponent,

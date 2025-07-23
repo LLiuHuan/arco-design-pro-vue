@@ -6,7 +6,7 @@ import { Page, useArcoDrawer } from '@arco/common-ui';
 import { ElButton, ElCard, ElCheckbox, ElMessage } from 'element-plus';
 
 import { useArcoForm } from '#/adapter/form';
-import { getAllMenusApi } from '#/api';
+import MenuAPI from '#/api/core/menu';
 
 const [Form, formApi] = useArcoForm({
   commonConfig: {
@@ -40,7 +40,7 @@ const [Form, formApi] = useArcoForm({
           }));
         },
         // 菜单接口
-        api: getAllMenusApi,
+        api: MenuAPI.getMenusApi,
       },
       // 字段名
       fieldName: 'api',
@@ -52,7 +52,7 @@ const [Form, formApi] = useArcoForm({
       // 对应组件的参数
       componentProps: {
         // 菜单接口
-        api: getAllMenusApi,
+        api: MenuAPI.getMenusApi,
         childrenField: 'children',
         // 菜单接口转options格式
         labelField: 'name',

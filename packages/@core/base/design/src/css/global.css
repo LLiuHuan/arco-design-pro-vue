@@ -1,3 +1,5 @@
+@unocss;
+
 *,
 ::after,
 ::before {
@@ -191,5 +193,3 @@ h6 {
 input {
   outline: none;
 }
-
-@unocss;

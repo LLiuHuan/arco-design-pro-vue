@@ -10,7 +10,8 @@ import { resetAllStores, useAccessStore, useUserStore } from '@arco/stores';
 import { defineStore } from 'pinia';
 
 import { notification } from '#/adapter/naive';
-import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
+import AuthAPI from '#/api/core/auth';
+import UserAPI from '#/api/core/user';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -33,7 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
     let userInfo: null | UserInfo = null;
     try {
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
+      const { accessToken } = await AuthAPI.loginApi(params);
 
       // 如果成功获取到 accessToken
       if (accessToken) {
@@ -43,7 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
         // 获取用户信息并存储到 accessStore 中
         const [fetchUserInfoResult, accessCodes] = await Promise.all([
           fetchUserInfo(),
-          getAccessCodesApi(),
+          AuthAPI.getAccessCodesApi(),
         ]);
 
         userInfo = fetchUserInfoResult;
@@ -80,7 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout(redirect: boolean = true) {
     try {
-      await logoutApi();
+      await AuthAPI.logoutApi();
     } catch {
       // 不做任何处理
     }
@@ -100,7 +101,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function fetchUserInfo() {
     let userInfo: null | UserInfo = null;
-    userInfo = await getUserInfoApi();
+    userInfo = await UserAPI.getUserInfoApi();
     userStore.setUserInfo(userInfo);
     return userInfo;
   }

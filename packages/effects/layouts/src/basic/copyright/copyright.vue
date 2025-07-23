@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
  * @LastEditTime: 2025-05-27 12:20:09
@@ -19,7 +19,7 @@ defineOptions({
 });
 
 withDefaults(defineProps<Props>(), {
-  companyName: 'Arco Admin',
+  companyName: 'Arco Design Pro',
   companySiteLink: '',
   date: '2024',
   icp: '',

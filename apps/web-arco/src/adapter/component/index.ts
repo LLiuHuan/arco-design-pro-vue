@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:04:14
- * @LastEditTime: 2025-07-03 10:21:04
+ * @LastEditTime: 2025-07-24 00:18:39
  * @LastEditors: LLiuHuan
  */
 
@@ -24,8 +24,12 @@ import {
   Divider as ADivider,
   Input as AInput,
   InputNumber as AInputNumber,
+  InputPassword as AInputPassword,
+  Mention as AMention,
   Radio as ARadio,
   RadioGroup as ARadioGroup,
+  RangePicker as ARangePicker,
+  Rate as ARate,
   Select as ASelect,
   Space as ASpace,
   Switch as ASwitch,
@@ -47,7 +51,12 @@ export type ComponentType =
   | 'IconPicker'
   | 'Input'
   | 'InputNumber'
+  | 'InputPassword'
+  | 'Mention'
+  | 'Radio'
   | 'RadioGroup'
+  | 'RangePicker'
+  | 'Rate'
   | 'Select'
   | 'Space'
   | 'Switch'
@@ -187,6 +196,7 @@ async function initComponentAdapter() {
       return h(AButton, { ...props, attrs, type: 'primary' }, slots);
     },
     Divider: ADivider,
+    Mention: AMention,
     IconPicker: (props, { attrs, slots }) => {
       return h(
         IconPicker,
@@ -196,6 +206,8 @@ async function initComponentAdapter() {
     },
     Input: withDefaultPlaceholder(AInput, 'input'),
     InputNumber: withDefaultPlaceholder(AInputNumber, 'input'),
+    InputPassword: withDefaultPlaceholder(AInputPassword, 'input'),
+    Radio: ARadio,
     RadioGroup: (props, { attrs, slots }) => {
       let defaultSlot;
       if (Reflect.has(slots, 'default')) {
@@ -216,6 +228,8 @@ async function initComponentAdapter() {
         ? h(ASpace, { direction: 'vertical' }, () => groupRender)
         : groupRender;
     },
+    Rate: ARate,
+    RangePicker: ARangePicker,
     Select: withDefaultPlaceholder(ASelect, 'select'),
     Space: ASpace,
     Switch: ASwitch,

@@ -48,11 +48,11 @@ defineExpose({
   <div
     ref="actionRef"
     :class="{
-      'transition-width !left-0 duration-300': toLeft,
+      '!left-0 transition-all duration-300': toLeft,
       'rounded-md': isDragging,
     }"
     :style="style"
-    class="bg-background dark:bg-accent absolute top-0 left-0 flex h-full cursor-move items-center justify-center px-3.5 shadow-md"
+    class="bg-background dark:bg-accent absolute left-0 top-0 flex h-full cursor-move items-center justify-center px-3.5 shadow-md"
     name="captcha-action"
   >
     <Slot :is-passing="isPassing" class="text-foreground/60 size-4">

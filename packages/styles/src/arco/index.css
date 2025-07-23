@@ -58,3 +58,7 @@
   display: block;
   padding: 0 12px;
 }
+
+.arco-card {
+  background: hsl(var(--card)) !important;
+}

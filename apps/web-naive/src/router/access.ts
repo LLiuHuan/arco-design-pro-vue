@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2025-07-15 02:20:52
+ * @LastEditTime: 2025-07-24 02:19:13
  * @LastEditors: LLiuHuan
  */
 import type {
@@ -14,7 +14,7 @@ import { generateAccessible } from '@arco/access';
 import { preferences } from '@arco/preferences';
 
 import { message } from '#/adapter/naive';
-import { getAllMenusApi } from '#/api';
+import MenuAPI from '#/api/core/menu';
 import { BasicLayout, IFrameView } from '#/layouts';
 import { $t } from '#/locales';
 
@@ -34,7 +34,7 @@ async function generateAccess(options: GenerateMenuAndRoutesOptions) {
       message.loading(`${$t('common.loadingMenu')}...`, {
         duration: 1.5,
       });
-      return await getAllMenusApi();
+      return await MenuAPI.getMenusApi();
     },
     // 可以指定没有权限跳转403页面
     forbiddenComponent,

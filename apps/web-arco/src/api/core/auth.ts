@@ -1,51 +1,65 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-07-15 23:01:48
+ * @LastEditTime: 2025-07-24 01:24:58
+ * @LastEditors: LLiuHuan
+ */
 import { baseRequestClient, requestClient } from '#/api/request';
 
-export namespace AuthApi {
-  /** 登录接口参数 */
-  export interface LoginParams {
-    password?: string;
-    username?: string;
-  }
+const AUTH_BASE_URL = '/auth';
 
-  /** 登录接口返回值 */
-  export interface LoginResult {
-    accessToken: string;
-  }
+const AuthAPI = {
+  /**
+   * 登录
+   */
+  async loginApi(data: LoginParams) {
+    return requestClient.post<LoginResult>(`${AUTH_BASE_URL}/login`, data);
+  },
 
-  export interface RefreshTokenResult {
-    data: string;
-    status: number;
-  }
+  /**
+   * 刷新accessToken
+   */
+  async refreshTokenApi() {
+    return baseRequestClient.post<RefreshTokenResult>(
+      `${AUTH_BASE_URL}/refresh`,
+      {
+        withCredentials: true,
+      },
+    );
+  },
+
+  /**
+   * 退出登录
+   */
+  async logoutApi() {
+    return baseRequestClient.post(`${AUTH_BASE_URL}/logout`, {
+      withCredentials: true,
+    });
+  },
+
+  /**
+   * 获取用户权限码
+   */
+  async getAccessCodesApi() {
+    return requestClient.get<string[]>(`${AUTH_BASE_URL}/codes`);
+  },
+};
+
+export default AuthAPI;
+
+/** 登录接口参数 */
+export interface LoginParams {
+  password?: string;
+  username?: string;
 }
 
-/**
- * 登录
- */
-export async function loginApi(data: AuthApi.LoginParams) {
-  return requestClient.post<AuthApi.LoginResult>('/auth/login', data);
+/** 登录接口返回值 */
+export interface LoginResult {
+  accessToken: string;
 }
 
-/**
- * 刷新accessToken
- */
-export async function refreshTokenApi() {
-  return baseRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
-    withCredentials: true,
-  });
-}
-
-/**
- * 退出登录
- */
-export async function logoutApi() {
-  return baseRequestClient.post('/auth/logout', {
-    withCredentials: true,
-  });
-}
-
-/**
- * 获取用户权限码
- */
-export async function getAccessCodesApi() {
-  return requestClient.get<string[]>('/auth/codes');
+export interface RefreshTokenResult {
+  data: string;
+  status: number;
 }

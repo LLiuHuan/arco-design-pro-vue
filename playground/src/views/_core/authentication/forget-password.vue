@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-05-27 15:53:29
+ * @LastEditTime: 2025-07-24 10:13:49
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -36,8 +36,12 @@ const formSchema = computed((): ArcoFormSchema[] => {
 });
 
 function handleSubmit(value: Recordable<any>) {
+  loading.value = true;
   // eslint-disable-next-line no-console
   console.log('reset email:', value);
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000);
 }
 </script>
 

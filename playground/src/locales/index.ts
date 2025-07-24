@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-05-28 12:18:08
+ * @LastEditTime: 2025-07-24 09:55:11
  * @LastEditors: LLiuHuan
  */
 import type { LocaleSetupOptions, SupportedLanguagesType } from '@arco/locales';
@@ -29,8 +29,17 @@ const localesMap = loadLocalesMapFromDir(
  * @param lang
  */
 async function loadMessages(lang: SupportedLanguagesType) {
-  const appLocaleMessages = await localesMap[lang]?.();
-  return appLocaleMessages?.default;
+  if (!localesMap[lang]) {
+    console.warn(`Locale ${lang} is not supported, falling back to default`);
+    return;
+  }
+
+  try {
+    const appLocaleMessages = await localesMap[lang]?.();
+    return appLocaleMessages?.default;
+  } catch (error) {
+    console.error(`Failed to load locale messages for ${lang}:`, error);
+  }
 }
 
 async function setupI18n(app: App, options: LocaleSetupOptions = {}) {

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-22 15:11:19
+ * @LastEditTime: 2025-07-24 16:11:52
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -147,6 +147,16 @@ const routes: RouteRecordRaw[] = [
             },
           },
         ],
+      },
+      {
+        name: 'ModalExample',
+        path: '/examples/modal',
+        component: () => import('#/views/examples/modal/index.vue'),
+        meta: {
+          icon: 'system-uicons:window-content',
+          keepAlive: true,
+          title: $t('examples.modal.title'),
+        },
       },
     ],
   },

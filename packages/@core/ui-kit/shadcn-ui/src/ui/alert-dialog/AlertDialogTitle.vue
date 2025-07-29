@@ -2,7 +2,7 @@
  * @Description: dialog 标题
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 09:50:30
+ * @LastEditTime: 2025-07-24 16:24:31
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -29,7 +29,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   <AlertDialogTitle
     v-bind="forwardedProps"
     :class="
-      cn('text-lg font-semibold leading-none tracking-tight', props.class)
+      cn('flex text-lg font-semibold leading-none tracking-tight', props.class)
     "
   >
     <slot></slot>

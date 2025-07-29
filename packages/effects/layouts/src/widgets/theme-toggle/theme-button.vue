@@ -1,13 +1,30 @@
 <script lang="ts" setup>
-import { computed, nextTick } from 'vue';
+import { computed, nextTick, watch } from 'vue';
 
 import { ArcoButton } from '@arco-core/shadcn-ui';
+
+interface TransitionParams {
+  perspective: number;
+  distance: number;
+  duration: number;
+  ease: string;
+}
 
 interface Props {
   /**
    * 类型
    */
   type?: 'icon' | 'normal';
+
+  /**
+   * 动画类型
+   */
+  transition: '3d' | 'normal';
+
+  /**
+   * 动画参数
+   */
+  transitionParams: TransitionParams;
 }
 
 defineOptions({
@@ -48,17 +65,24 @@ function toggleTheme(event: MouseEvent) {
     isDark.value = !isDark.value;
     return;
   }
+
+  // @ts-ignore startViewTransition
+  const transition = document.startViewTransition(async () => {
+    isDark.value = !isDark.value;
+    await nextTick();
+  });
+
+  if (props.transition !== 'normal') {
+    return;
+  }
+
   const x = event.clientX;
   const y = event.clientY;
   const endRadius = Math.hypot(
     Math.max(x, innerWidth - x),
     Math.max(y, innerHeight - y),
   );
-  // @ts-ignore startViewTransition
-  const transition = document.startViewTransition(async () => {
-    isDark.value = !isDark.value;
-    await nextTick();
-  });
+
   transition.ready.then(() => {
     const clipPath = [
       `circle(0px at ${x}px ${y}px)`,
@@ -72,12 +96,30 @@ function toggleTheme(event: MouseEvent) {
         duration: 450,
         easing: 'ease-in',
         pseudoElement: isDark.value
-          ? '::view-transition-old(root)'
-          : '::view-transition-new(root)',
+          ? '::view-transition-old(theme)'
+          : '::view-transition-new(theme)',
       },
     );
   });
 }
+
+document.documentElement.dataset.themeTransition =
+  props.transition === '3d' ? '3d' : 'normal';
+
+watch(
+  () => props.transitionParams,
+  (val) => {
+    const root = document.documentElement;
+    root.style.setProperty('--perspective', `${val.perspective}vmax`);
+    root.style.setProperty('--distance', `-${val.distance}`);
+    root.style.setProperty('--duration', `${val.duration}s`);
+    // root.style.setProperty('--ease', val.ease);
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+);
 </script>
 
 <template>

@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: LLiuHuan
+ * @Date: 2025-07-15 23:01:48
+ * @LastEditTime: 2025-07-24 16:24:37
+ * @LastEditors: LLiuHuan
+-->
 <script setup lang="ts">
 import type { DialogTitleProps } from 'reka-ui';
 
@@ -22,7 +29,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   <DialogTitle
     v-bind="forwardedProps"
     :class="
-      cn('text-lg font-semibold leading-none tracking-tight', props.class)
+      cn('flex text-lg font-semibold leading-none tracking-tight', props.class)
     "
   >
     <slot></slot>

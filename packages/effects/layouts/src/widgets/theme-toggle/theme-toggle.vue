@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
  * @LastEditTime: 2025-05-27 12:23:55
@@ -28,9 +28,40 @@ defineOptions({
   name: 'ThemeToggle',
 });
 
-withDefaults(defineProps<{ shouldOnHover?: boolean }>(), {
+withDefaults(defineProps<Props>(), {
   shouldOnHover: false,
+  transition: 'normal',
+  transitionParams: () => ({
+    perspective: 400,
+    distance: 0.75,
+    duration: 1.2,
+    ease: 'ease-in-out',
+  }),
 });
+
+interface TransitionParams {
+  perspective: number;
+  distance: number;
+  duration: number;
+  ease: string;
+}
+
+interface Props {
+  /**
+   * 是否鼠标悬停时显示
+   */
+  shouldOnHover?: boolean;
+
+  /**
+   * 动画类型
+   */
+  transition?: '3d' | 'normal';
+
+  /**
+   * 动画参数
+   */
+  transitionParams?: TransitionParams;
+}
 
 function handleChange(isDark: boolean | undefined) {
   updatePreferences({
@@ -65,6 +96,8 @@ const PRESETS = [
         <ThemeButton
           :model-value="isDark"
           type="icon"
+          :transition="transition"
+          :transition-params="transitionParams"
           @update:model-value="handleChange"
         />
       </template>

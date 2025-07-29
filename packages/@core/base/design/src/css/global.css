@@ -54,24 +54,146 @@ a:visited {
   @apply no-underline;
 }
 
-::view-transition-new(root),
-::view-transition-old(root) {
+:root {
+  --perspective: 400vmax; /* 透视距离 */
+  --distance: -0.75; /* 3D距离 */
+  --duration: 1.2s; /* 动画时长 */
+  --ease: ease-in-out; /* 缓动函数 */
+}
+
+[data-theme-transition='3d'] {
+  view-transition-name: theme-3d; /* 视图过渡名称 */
+}
+
+[data-theme-transition='normal'] {
+  view-transition-name: theme; /* 视图过渡名称 */
+}
+
+/* 3D过渡动画（兼容webkit内核） */
+@keyframes travel {
+  0% {
+    /* 初始状态：根据深度计算位置和旋转 */
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-start))
+      )
+      rotateY(var(--rotation-start, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-start)));
+    animation-timing-function: ease-in;
+  }
+
+  25% {
+    /* 动画进行到25%：进入3D空间 */
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-start, 0deg)) translate3d(0, 0, 50vw);
+    animation-timing-function: var(--ease);
+  }
+
+  75% {
+    /* 动画进行到75%：完成旋转 */
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-end, -90deg)) translate3d(0, 0, 50vw);
+    animation-timing-function: var(--ease);
+  }
+
+  100% {
+    /* 动画结束：回到初始位置 */
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-end))
+      )
+      rotateY(var(--rotation-end, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-end)));
+    animation-timing-function: var(--ease);
+  }
+}
+
+/* 标准3D过渡动画 */
+@keyframes travel {
+  0% {
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-start))
+      )
+      rotateY(var(--rotation-start, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-start)));
+    animation-timing-function: ease-in;
+  }
+
+  25% {
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-start, 0deg)) translate3d(0, 0, 50vw);
+    animation-timing-function: var(--ease);
+  }
+
+  75% {
+    transform: perspective(var(--perspective))
+      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
+      rotateY(var(--rotation-end, -90deg)) translate3d(0, 0, 50vw);
+    animation-timing-function: var(--ease);
+  }
+
+  100% {
+    transform: perspective(var(--perspective))
+      translate3d(
+        0,
+        0,
+        calc((var(--perspective) * var(--distance)) * var(--depth-end))
+      )
+      rotateY(var(--rotation-end, 0deg))
+      translate3d(0, 0, calc(50vw * var(--depth-end)));
+    animation-timing-function: var(--ease);
+  }
+}
+
+::view-transition-new(theme-3d),
+::view-transition-old(theme-3d) {
+  transform: perspective(var(--perspective)) translate3d(0, 0, 0);
+  animation: travel var(--duration); /* 应用动画 */
+  backface-visibility: hidden; /* 隐藏背面 */
+}
+
+::view-transition-new(theme-3d) {
+  --rotation-start: 90deg; /* 初始旋转角度 */
+  --rotation-end: 0deg; /* 结束旋转角度 */
+  --depth-start: 1; /* 初始深度 */
+  --depth-end: 0; /* 结束深度 */
+}
+
+::view-transition-old(theme-3d) {
+  --depth-end: 1; /* 结束深度 */
+  --depth-start: 0; /* 初始深度 */
+  --rotation-start: 0deg; /* 初始旋转角度 */
+  --rotation-end: -90deg; /* 结束旋转角度 */
+}
+
+::view-transition-new(theme),
+::view-transition-old(theme) {
   @apply animate-none mix-blend-normal;
 }
 
-::view-transition-old(root) {
+::view-transition-old(theme) {
   @apply z-[1];
 }
 
-::view-transition-new(root) {
+::view-transition-new(theme) {
   @apply z-[2147483646];
 }
 
-html.dark::view-transition-old(root) {
+html.dark::view-transition-old(theme) {
   @apply z-[2147483646];
 }
 
-html.dark::view-transition-new(root) {
+html.dark::view-transition-new(theme) {
   @apply z-[1];
 }
 

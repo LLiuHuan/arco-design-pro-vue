@@ -11,5 +11,8 @@
     "arco": "Arco Design Vue Version",
     "naive-ui": "Naive UI Version",
     "element-plus": "Element Plus Version"
+  },
+  "fallback": {
+    "title": "Fallback Page"
   }
 }

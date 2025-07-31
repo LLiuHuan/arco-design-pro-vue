@@ -11,5 +11,8 @@
     "arco": "Arco Design Vue 版本",
     "naive-ui": "Naive UI 版本",
     "element-plus": "Element Plus 版本"
+  },
+  "fallback": {
+    "title": "缺省页"
   }
 }

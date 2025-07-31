@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:01:59
- * @LastEditTime: 2025-07-15 01:53:31
+ * @LastEditTime: 2025-07-31 12:10:13
  * @LastEditors: LLiuHuan
  */
 import type {
@@ -22,9 +22,23 @@ export function useAppConfig(
     ? window._ARCO_DESIGN_PRO_APP_CONF_
     : (env as ArcoDesignProAppConfigRaw);
 
-  const { VITE_GLOB_API_URL } = config;
+  const {
+    VITE_GLOB_API_URL,
+    VITE_GLOB_AUTH_DINGDING_CORP_ID,
+    VITE_GLOB_AUTH_DINGDING_CLIENT_ID,
+  } = config;
 
-  return {
+  const applicationConfig: ApplicationConfig = {
     apiURL: VITE_GLOB_API_URL,
+    auth: {},
   };
+
+  if (VITE_GLOB_AUTH_DINGDING_CORP_ID && VITE_GLOB_AUTH_DINGDING_CLIENT_ID) {
+    applicationConfig.auth.dingding = {
+      clientId: VITE_GLOB_AUTH_DINGDING_CLIENT_ID,
+      corpId: VITE_GLOB_AUTH_DINGDING_CORP_ID,
+    };
+  }
+
+  return applicationConfig;
 }

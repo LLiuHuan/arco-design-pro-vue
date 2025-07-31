@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-31 20:29:25
+ * @LastEditTime: 2025-07-31 20:30:43
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -184,6 +184,17 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'material-symbols:resize',
           title: $t('examples.resize.title'),
+        },
+      },
+      {
+        name: 'ColPageDemo',
+        path: '/examples/layout/col-page',
+        component: () => import('#/views/examples/layout/col-page.vue'),
+        meta: {
+          badge: 'Alpha',
+          badgeVariants: 'destructive',
+          icon: 'material-symbols:horizontal-distribute',
+          title: $t('examples.layout.col-page'),
         },
       },
     ],

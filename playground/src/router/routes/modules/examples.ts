@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-24 16:11:52
+ * @LastEditTime: 2025-07-31 20:22:42
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -156,6 +156,16 @@ const routes: RouteRecordRaw[] = [
           icon: 'system-uicons:window-content',
           keepAlive: true,
           title: $t('examples.modal.title'),
+        },
+      },
+      {
+        name: 'DrawerExample',
+        path: '/examples/drawer',
+        component: () => import('#/views/examples/drawer/index.vue'),
+        meta: {
+          icon: 'iconoir:drawer',
+          keepAlive: true,
+          title: $t('examples.drawer.title'),
         },
       },
     ],

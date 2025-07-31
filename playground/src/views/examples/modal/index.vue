@@ -12,7 +12,8 @@ import {
 
 import { Button, Card, Message, Space } from '@arco-design/web-vue';
 
-// import DocButton from '#/components/DocButton.vue';
+import DocButton from '#/components/DocButton/index.vue';
+
 import AutoHeightDemo from './auto-height-demo.vue';
 import BaseDemo from './base-demo.vue';
 import BlurDemo from './blur-demo.vue';
@@ -179,7 +180,7 @@ async function openPrompt() {
     title="弹窗组件示例"
   >
     <template #extra>
-      <DocButton path="/components/common-ui/vben-modal" />
+      <DocButton path="/components/common-ui/arco-modal" />
     </template>
     <BaseModal />
     <InContentModal />
@@ -264,7 +265,7 @@ async function openPrompt() {
       </Card>
       <Card class="w-[300px]" title="轻量提示弹窗">
         <template #extra>
-          <DocButton path="/components/common-ui/vben-alert" />
+          <DocButton path="/components/common-ui/arco-alert" />
         </template>
         <p>通过快捷方法创建动态提示弹窗，适合一些轻量的提示和确认、输入等</p>
         <template #actions>

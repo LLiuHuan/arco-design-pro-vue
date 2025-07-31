@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-31 20:22:42
+ * @LastEditTime: 2025-07-31 20:24:52
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -166,6 +166,15 @@ const routes: RouteRecordRaw[] = [
           icon: 'iconoir:drawer',
           keepAlive: true,
           title: $t('examples.drawer.title'),
+        },
+      },
+      {
+        name: 'EllipsisExample',
+        path: '/examples/ellipsis',
+        component: () => import('#/views/examples/ellipsis/index.vue'),
+        meta: {
+          icon: 'ion:ellipsis-horizontal',
+          title: $t('examples.ellipsis.title'),
         },
       },
     ],

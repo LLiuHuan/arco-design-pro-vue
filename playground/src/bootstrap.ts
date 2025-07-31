@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 11:47:26
- * @LastEditTime: 2025-07-22 14:43:35
+ * @LastEditTime: 2025-08-01 04:44:38
  * @LastEditors: LLiuHuan
  */
 import { createApp, watchEffect } from 'vue';
@@ -66,6 +66,10 @@ async function bootstrap(namespace: string) {
 
   // 配置路由及路由守卫
   app.use(router);
+
+  // 配置@tanstack/vue-query
+  const { VueQueryPlugin } = await import('@tanstack/vue-query');
+  app.use(VueQueryPlugin);
 
   // 配置Motion插件
   const { MotionPlugin } = await import('@arco/plugins/motion');

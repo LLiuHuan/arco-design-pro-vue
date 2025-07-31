@@ -1,7 +1,7 @@
 /**
  * 该文件可自行根据业务逻辑进行调整
  */
-import type { RequestClientOptions } from '@arco/request';
+import type { AxiosResponseHeaders, RequestClientOptions } from '@arco/request';
 
 import { useAppConfig } from '@arco/hooks';
 import { preferences } from '@arco/preferences';
@@ -12,8 +12,10 @@ import {
   RequestClient,
 } from '@arco/request';
 import { useAccessStore } from '@arco/stores';
+import { cloneDeep } from '@arco/utils';
 
 import { Message } from '@arco-design/web-vue';
+import JSONBigInt from 'json-bigint';
 
 import { useAuthStore } from '#/store';
 
@@ -25,6 +27,14 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   const client = new RequestClient({
     ...options,
     baseURL,
+    transformResponse: (data: any, header: AxiosResponseHeaders) => {
+      // storeAsString指示将BigInt存储为字符串，设为false则会存储为内置的BigInt类型
+      return header.getContentType()?.toString().includes('application/json')
+        ? cloneDeep(
+            JSONBigInt({ storeAsString: true, strict: true }).parse(data),
+          )
+        : data;
+    },
   });
 
   /**

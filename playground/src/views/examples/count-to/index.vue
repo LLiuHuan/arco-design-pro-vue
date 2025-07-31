@@ -98,7 +98,7 @@ function onFinished() {
           <Col :span="8">
             <FormItem label="当前值" name="endVal">
               <InputNumber
-                v-model:="props.endVal"
+                v-model="props.endVal"
                 class="w-full"
                 :precision="props.decimals"
               >
@@ -120,33 +120,33 @@ function onFinished() {
           </Col>
           <Col :span="8">
             <FormItem label="延迟动画" name="delay">
-              <InputNumber v-model:="props.delay" :min="0" />
+              <InputNumber v-model="props.delay" :min="0" />
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem label="持续时间" name="duration">
-              <InputNumber v-model:="props.duration" :min="0" />
+              <InputNumber v-model="props.duration" :min="0" />
             </FormItem>
           </Col>
 
           <Col :span="8">
             <FormItem label="小数位数" name="decimals">
-              <InputNumber v-model:="props.decimals" :min="0" :precision="0" />
+              <InputNumber v-model="props.decimals" :min="0" :precision="0" />
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem label="分隔符" name="separator">
-              <Input v-model:="props.separator" />
+              <Input v-model="props.separator" />
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem label="小数点" name="decimal">
-              <Input v-model:="props.decimal" />
+              <Input v-model="props.decimal" />
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem label="动画" name="transition">
-              <Select v-model:="props.transition">
+              <Select v-model="props.transition">
                 <Select.Option
                   v-for="preset in TransitionPresetsKeys"
                   :key="preset"
@@ -159,12 +159,12 @@ function onFinished() {
           </Col>
           <Col :span="8">
             <FormItem label="前缀" name="prefix">
-              <Input v-model:="props.prefix" />
+              <Input v-model="props.prefix" />
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem label="后缀" name="suffix">
-              <Input v-model:="props.suffix" />
+              <Input v-model="props.suffix" />
             </FormItem>
           </Col>
         </Row>

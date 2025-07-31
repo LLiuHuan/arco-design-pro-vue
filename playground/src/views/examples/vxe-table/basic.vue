@@ -6,8 +6,8 @@ import { Page } from '@arco/common-ui';
 import { Button, Message } from '@arco-design/web-vue';
 
 import { useArcoVxeGrid } from '#/adapter/vxe-table';
+import DocButton from '#/components/DocButton/index.vue';
 
-// import DocButton from '../doc-button.vue';
 import { MOCK_TABLE_DATA } from './table-data';
 
 interface RowType {
@@ -89,7 +89,7 @@ function changeLoading() {
     title="表格基础示例"
   >
     <template #extra>
-      <DocButton path="/components/common-ui/vben-vxe-table" />
+      <DocButton path="/components/common-ui/arco-vxe-table" />
     </template>
     <Grid table-title="基础列表" table-title-help="提示">
       <!-- <template #toolbar-actions>

@@ -5,7 +5,8 @@ import { Page, useArcoDrawer } from '@arco/common-ui';
 
 import { Button, Card } from '@arco-design/web-vue';
 
-// import DocButton from '../doc-button.vue';
+import DocButton from '#/components/DocButton/index.vue';
+
 import AutoHeightDemo from './auto-height-demo.vue';
 import BaseDemo from './base-demo.vue';
 import DynamicDemo from './dynamic-demo.vue';

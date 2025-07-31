@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-31 21:49:15
+ * @LastEditTime: 2025-07-31 21:52:08
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -231,6 +231,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'mdi:animation-play',
           title: 'CountTo',
+        },
+      },
+      {
+        name: 'Loading',
+        path: '/examples/loading',
+        component: () => import('#/views/examples/loading/index.vue'),
+        meta: {
+          icon: 'mdi:circle-double',
+          title: 'Loading',
         },
       },
     ],

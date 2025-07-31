@@ -63,6 +63,9 @@ catalogs:
     '@stylistic/stylelint-plugin':
       specifier: ^3.1.3
       version: 3.1.3
+    '@tanstack/vue-query':
+      specifier: ^5.81.5
+      version: 5.83.1
     '@tanstack/vue-store':
       specifier: ^0.7.3
       version: 0.7.3
@@ -75,6 +78,9 @@ catalogs:
     '@types/html-minifier-terser':
       specifier: ^7.0.2
       version: 7.0.2
+    '@types/json-bigint':
+      specifier: ^1.0.4
+      version: 1.0.4
     '@types/lodash.clonedeep':
       specifier: ^4.5.9
       version: 4.5.9
@@ -309,6 +315,9 @@ catalogs:
     lodash.set:
       specifier: ^4.3.2
       version: 4.3.2
+    lossless-json:
+      specifier: ^4.1.1
+      version: 4.1.1
     lucide-vue-next:
       specifier: ^0.511.0
       version: 0.511.0
@@ -1922,12 +1931,21 @@ importers:
       '@arco/utils':
         specifier: workspace:*
         version: link:../packages/utils
+      '@tanstack/vue-query':
+        specifier: 'catalog:'
+        version: 5.83.1(vue@3.5.17(typescript@5.8.3))
       '@vueuse/core':
         specifier: 'catalog:'
         version: 13.5.0(vue@3.5.17(typescript@5.8.3))
       dayjs:
         specifier: 'catalog:'
         version: 1.11.13
+      json-bigint:
+        specifier: 'catalog:'
+        version: 1.0.0
+      lossless-json:
+        specifier: 'catalog:'
+        version: 4.1.1
       pinia:
         specifier: 'catalog:'
         version: 3.0.3(typescript@5.8.3)(vue@3.5.17(typescript@5.8.3))
@@ -1937,6 +1955,10 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 4.5.1(vue@3.5.17(typescript@5.8.3))
+    devDependencies:
+      '@types/json-bigint':
+        specifier: 'catalog:'
+        version: 1.0.4
 
   scripts/turbo-run:
     dependencies:
@@ -4752,11 +4774,27 @@ packages:
   '@sxzz/popperjs-es@2.11.7':
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
+  '@tanstack/match-sorter-utils@8.19.4':
+    resolution: {integrity: sha512-Wo1iKt2b9OT7d+YGhvEPD3DXvPv2etTusIMhMUoG7fbhmxcXCtIjJDEygy91Y2JFlwGyjqiBPRozme7UD8hoqg==}
+    engines: {node: '>=12'}
+
+  '@tanstack/query-core@5.83.1':
+    resolution: {integrity: sha512-OG69LQgT7jSp+5pPuCfzltq/+7l2xoweggjme9vlbCPa/d7D7zaqv5vN/S82SzSYZ4EDLTxNO1PWrv49RAS64Q==}
+
   '@tanstack/store@0.7.2':
     resolution: {integrity: sha512-RP80Z30BYiPX2Pyo0Nyw4s1SJFH2jyM6f9i3HfX4pA+gm5jsnYryscdq2aIQLnL4TaGuQMO+zXmN9nh1Qck+Pg==}
 
   '@tanstack/virtual-core@3.13.9':
     resolution: {integrity: sha512-3jztt0jpaoJO5TARe2WIHC1UQC3VMLAFUW5mmMo0yrkwtDB2AQP0+sh10BVUpWrnvHjSLvzFizydtEGLCJKFoQ==}
+
+  '@tanstack/vue-query@5.83.1':
+    resolution: {integrity: sha512-Ss7LJGC2LZMZBsFFnrEfmQYcooDtJOjFZhmnXXUmlawk9EXHHDHUDaH2v7/r9jzyp2nOgABDQlDmjcBLXiyuvQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.2
+      vue: ^2.6.0 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   '@tanstack/vue-store@0.7.3':
     resolution: {integrity: sha512-UExSdMWnuMdOLoGO/1djkV0SS82OEr9iKjnwRyoeRy5UhRsLwKdvqWlin949n2K/KlZqLaws+/oYoxLv/CF7Mg==}
@@ -4818,6 +4856,9 @@ packages:
 
   '@types/html-minifier-terser@7.0.2':
     resolution: {integrity: sha512-mm2HqV22l8lFQh4r2oSsOEVea+m0qqxEmwpc9kC1p/XzmjLWrReR9D/GRs8Pex2NX/imyEH9c5IU/7tMBQCHOA==}
+
+  '@types/json-bigint@1.0.4':
+    resolution: {integrity: sha512-ydHooXLbOmxBbubnA7Eh+RpBzuaIiQjh8WGJYQB50JFGFrdxW7JzVlyEV7fAXw0T2sqJ1ysTneJbiyNLqZRAag==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -8382,6 +8423,9 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
+  lossless-json@4.1.1:
+    resolution: {integrity: sha512-HusN80C0ohtT9kOHQH7EuUaqzRQsnekpa+2ot8OzvW0iC08dq/YtM/7uKwwajldQsCrHyC8q9fz3t3L+TmDltA==}
+
   loupe@3.1.3:
     resolution: {integrity: sha512-kkIp7XSkP78ZxJEsSxW3712C6teJVoeHHwgo9zJ380de7IYyJ2ISlxojcH2pC5OFLewESmnRi/+XCDIEEVyoug==}
 
@@ -9882,6 +9926,9 @@ packages:
   relateurl@0.2.7:
     resolution: {integrity: sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==}
     engines: {node: '>= 0.10'}
+
+  remove-accents@0.5.0:
+    resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==}
 
   remove-trailing-separator@1.1.0:
     resolution: {integrity: sha512-/hS+Y0u3aOfIETiaiirUFwDBDzmXPvO+jAfKTitUngIPzdKc6Z0LoFjM/CK5PL4C+eKwHohlHAb6H0VFfmmUsw==}
@@ -14727,9 +14774,23 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.7': {}
 
+  '@tanstack/match-sorter-utils@8.19.4':
+    dependencies:
+      remove-accents: 0.5.0
+
+  '@tanstack/query-core@5.83.1': {}
+
   '@tanstack/store@0.7.2': {}
 
   '@tanstack/virtual-core@3.13.9': {}
+
+  '@tanstack/vue-query@5.83.1(vue@3.5.17(typescript@5.8.3))':
+    dependencies:
+      '@tanstack/match-sorter-utils': 8.19.4
+      '@tanstack/query-core': 5.83.1
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.17(typescript@5.8.3)
+      vue-demi: 0.14.10(vue@3.5.17(typescript@5.8.3))
 
   '@tanstack/vue-store@0.7.3(vue@3.5.17(typescript@5.8.3))':
     dependencies:
@@ -14785,6 +14846,8 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/html-minifier-terser@7.0.2': {}
+
+  '@types/json-bigint@1.0.4': {}
 
   '@types/json-schema@7.0.15': {}
 
@@ -18927,6 +18990,8 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
+  lossless-json@4.1.1: {}
+
   loupe@3.1.3: {}
 
   loupe@3.1.4: {}
@@ -20532,6 +20597,8 @@ snapshots:
       - typescript
 
   relateurl@0.2.7: {}
+
+  remove-accents@0.5.0: {}
 
   remove-trailing-separator@1.1.0: {}
 

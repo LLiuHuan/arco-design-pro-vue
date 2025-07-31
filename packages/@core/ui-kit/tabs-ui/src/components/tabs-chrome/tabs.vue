@@ -76,7 +76,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
     ref="contentRef"
     :class="contentClass"
     :style="style"
-    class="tabs-chrome !flex h-full w-max overflow-y-hidden pr-6"
+    class="tabs-chrome !flex h-full w-max overflow-hidden pr-6"
   >
     <TransitionGroup name="slide-left">
       <div

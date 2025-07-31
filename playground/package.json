@@ -43,10 +43,16 @@
     "@arco/styles": "workspace:*",
     "@arco/types": "workspace:*",
     "@arco/utils": "workspace:*",
+    "@tanstack/vue-query": "catalog:",
     "@vueuse/core": "catalog:",
     "dayjs": "catalog:",
+    "json-bigint": "catalog:",
+    "lossless-json": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/json-bigint": "catalog:"
   }
 }

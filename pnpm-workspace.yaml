@@ -127,6 +127,7 @@ catalog:
   lodash.get: ^4.4.2
   lodash.isequal: ^4.5.0
   lodash.set: ^4.3.2
+  lossless-json: ^4.1.1
   lucide-vue-next: ^0.511.0
   medium-zoom: ^1.1.0
   naive-ui: ^2.42.0

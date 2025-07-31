@@ -227,7 +227,7 @@ defineExpose({ toggleOpenState, open, close });
           />
           <ArcoIcon
             :icon="currentSelect || Grip"
-            class="absolute top-1 right-1 size-6"
+            class="absolute right-1 top-1 size-6"
             aria-hidden="true"
           />
         </div>

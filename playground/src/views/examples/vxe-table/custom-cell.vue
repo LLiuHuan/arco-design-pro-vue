@@ -14,6 +14,7 @@ interface RowType {
   color: string;
   id: string;
   imageUrl: string;
+  imageUrl2: string;
   open: boolean;
   price: string;
   productName: string;

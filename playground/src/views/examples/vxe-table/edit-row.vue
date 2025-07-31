@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-07-31 22:05:18
- * @LastEditTime: 2025-07-31 22:52:18
+ * @LastEditTime: 2025-07-31 23:22:19
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -71,12 +71,19 @@ async function saveRowEvent(row: RowType) {
   await gridApi.grid?.clearEdit();
 
   gridApi.setLoading(true);
-  setTimeout(() => {
+  try {
+    // Simulate async save operation
+    await new Promise((resolve) => setTimeout(resolve, 600));
     gridApi.setLoading(false);
     Message.success({
-      content: `保存成功！category=${row.category}`,
+      content: `保存成功！ category=${row.category}`,
     });
-  }, 600);
+  } catch {
+    gridApi.setLoading(false);
+    Message.error({
+      content: '保存失败！',
+    });
+  }
 }
 
 const cancelRowEvent = (_row: RowType) => {

@@ -236,7 +236,11 @@ const [Form] = useArcoForm({
 });
 
 function goDoc() {
-  window.open('https://atomiks.github.io/tippyjs/v6/all-props/');
+  window.open(
+    'https://atomiks.github.io/tippyjs/v6/all-props/',
+    '_blank',
+    'noopener,noreferrer',
+  );
 }
 </script>
 <template>

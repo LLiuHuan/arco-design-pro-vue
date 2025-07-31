@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-07-31 20:19:07
- * @LastEditTime: 2025-07-31 20:20:38
+ * @LastEditTime: 2025-07-31 23:18:59
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -42,8 +42,14 @@ const [Drawer, drawerApi] = useArcoDrawer({
     drawerApi.close();
   },
   onConfirm: async () => {
-    await formApi.submitForm();
-    drawerApi.close();
+    try {
+      await formApi.submitForm();
+      drawerApi.close();
+    } catch (error) {
+      // Form validation failed or submission error
+      // Don't close drawer on error
+      console.error('Form submission failed:', error);
+    }
   },
   onOpenChange(isOpen: boolean) {
     if (isOpen) {

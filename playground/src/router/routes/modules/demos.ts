@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-05-28 12:26:29
+ * @LastEditTime: 2025-07-31 23:27:17
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -20,22 +20,54 @@ const routes: RouteRecordRaw[] = [
     name: 'Demos',
     path: '/demos',
     children: [
-      // {
-      //   meta: {
-      //     title: $t('demos.naive'),
-      //   },
-      //   name: 'NaiveDemos',
-      //   path: '/demos/naive',
-      //   component: () => import('#/views/demos/naive/index.vue'),
-      // },
-      // {
-      //   meta: {
-      //     title: $t('demos.table'),
-      //   },
-      //   name: 'Table',
-      //   path: '/demos/table',
-      //   component: () => import('#/views/demos/table/index.vue'),
-      // },
+      // 缺省页
+      {
+        meta: {
+          icon: 'mdi:lightbulb-error-outline',
+          title: $t('demos.fallback.title'),
+        },
+        name: 'FallbackDemos',
+        path: '/demos/fallback',
+        children: [
+          {
+            name: 'Fallback403Demo',
+            path: '/demos/fallback/403',
+            component: () => import('#/views/_core/fallback/forbidden.vue'),
+            meta: {
+              icon: 'mdi:do-not-disturb-alt',
+              title: '403',
+            },
+          },
+          {
+            name: 'Fallback404Demo',
+            path: '/demos/fallback/404',
+            component: () => import('#/views/_core/fallback/not-found.vue'),
+            meta: {
+              icon: 'mdi:table-off',
+              title: '404',
+            },
+          },
+          {
+            name: 'Fallback500Demo',
+            path: '/demos/fallback/500',
+            component: () =>
+              import('#/views/_core/fallback/internal-error.vue'),
+            meta: {
+              icon: 'mdi:server-network-off',
+              title: '500',
+            },
+          },
+          {
+            name: 'FallbackOfflineDemo',
+            path: '/demos/fallback/offline',
+            component: () => import('#/views/_core/fallback/offline.vue'),
+            meta: {
+              icon: 'mdi:offline',
+              title: $t('ui.fallback.offline'),
+            },
+          },
+        ],
+      },
       {
         meta: {
           title: $t('demos.form'),

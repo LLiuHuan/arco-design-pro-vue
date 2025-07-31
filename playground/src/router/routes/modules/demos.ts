@@ -2,11 +2,12 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 02:04:15
+ * @LastEditTime: 2025-08-01 02:12:14
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
 
+import { IFrameView } from '#/layouts';
 import { $t } from '#/locales';
 
 const routes: RouteRecordRaw[] = [
@@ -131,6 +132,79 @@ const routes: RouteRecordRaw[] = [
               icon: 'bi:radioactive',
               title: $t('demos.activeIcon.children'),
             },
+          },
+        ],
+      },
+      // 外部链接
+      {
+        meta: {
+          icon: 'ic:round-settings-input-composite',
+          title: $t('demos.outside.title'),
+        },
+        name: 'OutsideDemos',
+        path: '/demos/outside',
+        children: [
+          {
+            name: 'IframeDemos',
+            path: '/demos/outside/iframe',
+            meta: {
+              icon: 'mdi:newspaper-variant-outline',
+              title: $t('demos.outside.embedded'),
+            },
+            children: [
+              {
+                name: 'VueDocumentDemo',
+                path: '/demos/outside/iframe/vue-document',
+                component: IFrameView,
+                meta: {
+                  icon: 'logos:vue',
+                  iframeSrc: 'https://cn.vuejs.org/',
+                  keepAlive: true,
+                  title: 'Vue',
+                },
+              },
+              {
+                name: 'UnoCSSDemo',
+                path: '/demos/outside/iframe/unocss',
+                component: IFrameView,
+                meta: {
+                  icon: 'logos:unocss',
+                  iframeSrc: 'https://unocss.dev/',
+                  // keepAlive: true,
+                  title: 'UnoCSS',
+                },
+              },
+            ],
+          },
+          {
+            name: 'ExternalLinkDemos',
+            path: '/demos/outside/external-link',
+            meta: {
+              icon: 'mdi:newspaper-variant-multiple-outline',
+              title: $t('demos.outside.externalLink'),
+            },
+            children: [
+              {
+                name: 'ViteDemo',
+                path: '/demos/outside/external-link/vite',
+                component: IFrameView,
+                meta: {
+                  icon: 'logos:vitejs',
+                  link: 'https://vitejs.dev/',
+                  title: 'Vite',
+                },
+              },
+              {
+                name: 'VueUseDemo',
+                path: '/demos/outside/external-link/vue-use',
+                component: IFrameView,
+                meta: {
+                  icon: 'logos:vueuse',
+                  link: 'https://vueuse.org',
+                  title: 'VueUse',
+                },
+              },
+            ],
           },
         ],
       },

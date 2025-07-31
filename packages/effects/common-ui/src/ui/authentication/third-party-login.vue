@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-07-31 12:07:50
@@ -11,6 +11,8 @@ import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@arco/icons';
 import { $t } from '@arco/locales';
 
 import { ArcoIconButton } from '@arco-core/shadcn-ui';
+
+import DingdingLogin from './dingding-login.vue';
 
 defineOptions({
   name: 'ThirdPartyLogin',

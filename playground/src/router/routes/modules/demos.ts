@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 02:15:43
+ * @LastEditTime: 2025-08-01 02:18:30
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -21,6 +21,77 @@ const routes: RouteRecordRaw[] = [
     name: 'Demos',
     path: '/demos',
     children: [
+      // 权限控制
+      {
+        meta: {
+          icon: 'mdi:shield-key-outline',
+          title: $t('demos.access.frontendPermissions'),
+        },
+        name: 'AccessDemos',
+        path: '/demos/access',
+        children: [
+          {
+            name: 'AccessPageControlDemo',
+            path: '/demos/access/page-control',
+            component: () => import('#/views/demos/access/index.vue'),
+            meta: {
+              icon: 'mdi:page-previous-outline',
+              title: $t('demos.access.pageAccess'),
+            },
+          },
+          {
+            name: 'AccessButtonControlDemo',
+            path: '/demos/access/button-control',
+            component: () => import('#/views/demos/access/button-control.vue'),
+            meta: {
+              icon: 'mdi:button-cursor',
+              title: $t('demos.access.buttonControl'),
+            },
+          },
+          {
+            name: 'AccessMenuVisible403Demo',
+            path: '/demos/access/menu-visible-403',
+            component: () =>
+              import('#/views/demos/access/menu-visible-403.vue'),
+            meta: {
+              authority: ['no-body'],
+              icon: 'mdi:button-cursor',
+              menuVisibleWithForbidden: true,
+              title: $t('demos.access.menuVisible403'),
+            },
+          },
+          {
+            name: 'AccessSuperVisibleDemo',
+            path: '/demos/access/super-visible',
+            component: () => import('#/views/demos/access/super-visible.vue'),
+            meta: {
+              authority: ['super'],
+              icon: 'mdi:button-cursor',
+              title: $t('demos.access.superVisible'),
+            },
+          },
+          {
+            name: 'AccessAdminVisibleDemo',
+            path: '/demos/access/admin-visible',
+            component: () => import('#/views/demos/access/admin-visible.vue'),
+            meta: {
+              authority: ['admin'],
+              icon: 'mdi:button-cursor',
+              title: $t('demos.access.adminVisible'),
+            },
+          },
+          {
+            name: 'AccessUserVisibleDemo',
+            path: '/demos/access/user-visible',
+            component: () => import('#/views/demos/access/user-visible.vue'),
+            meta: {
+              authority: ['user'],
+              icon: 'mdi:button-cursor',
+              title: $t('demos.access.userVisible'),
+            },
+          },
+        ],
+      },
       // 面包屑导航
       {
         name: 'BreadcrumbDemos',

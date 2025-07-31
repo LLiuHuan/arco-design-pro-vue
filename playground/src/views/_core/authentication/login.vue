@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-06-03 03:41:52
+ * @LastEditTime: 2025-08-01 02:24:04
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -33,7 +33,7 @@ const MOCK_USER_OPTIONS: BasicOption[] = [
   },
   {
     label: 'User',
-    value: 'jack',
+    value: 'user',
   },
 ];
 

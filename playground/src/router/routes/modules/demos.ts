@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 02:13:47
+ * @LastEditTime: 2025-08-01 02:15:43
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -21,6 +21,56 @@ const routes: RouteRecordRaw[] = [
     name: 'Demos',
     path: '/demos',
     children: [
+      // 面包屑导航
+      {
+        name: 'BreadcrumbDemos',
+        path: '/demos/breadcrumb',
+        meta: {
+          icon: 'lucide:navigation',
+          title: $t('demos.breadcrumb.navigation'),
+        },
+        children: [
+          {
+            name: 'BreadcrumbLateralDemo',
+            path: '/demos/breadcrumb/lateral',
+            component: () => import('#/views/demos/breadcrumb/lateral.vue'),
+            meta: {
+              icon: 'lucide:navigation',
+              title: $t('demos.breadcrumb.lateral'),
+            },
+          },
+          {
+            name: 'BreadcrumbLateralDetailDemo',
+            path: '/demos/breadcrumb/lateral-detail',
+            component: () =>
+              import('#/views/demos/breadcrumb/lateral-detail.vue'),
+            meta: {
+              activePath: '/demos/breadcrumb/lateral',
+              hideInMenu: true,
+              title: $t('demos.breadcrumb.lateralDetail'),
+            },
+          },
+          {
+            name: 'BreadcrumbLevelDemo',
+            path: '/demos/breadcrumb/level',
+            meta: {
+              icon: 'lucide:navigation',
+              title: $t('demos.breadcrumb.level'),
+            },
+            children: [
+              {
+                name: 'BreadcrumbLevelDetailDemo',
+                path: '/demos/breadcrumb/level/detail',
+                component: () =>
+                  import('#/views/demos/breadcrumb/level-detail.vue'),
+                meta: {
+                  title: $t('demos.breadcrumb.levelDetail'),
+                },
+              },
+            ],
+          },
+        ],
+      },
       // 缺省页
       {
         meta: {

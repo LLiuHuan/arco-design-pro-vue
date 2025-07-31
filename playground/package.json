@@ -26,6 +26,7 @@
     "#/*": "./src/*"
   },
   "dependencies": {
+    "@arco-core/menu-ui": "workspace:*",
     "@arco-design/web-vue": "catalog:",
     "@arco-plugins/vite-vue": "catalog:",
     "@arco/access": "workspace:*",

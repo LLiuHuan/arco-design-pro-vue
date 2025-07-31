@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-07-31 23:27:17
+ * @LastEditTime: 2025-08-01 01:57:06
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -68,13 +68,49 @@ const routes: RouteRecordRaw[] = [
           },
         ],
       },
+      // 菜单徽标
       {
         meta: {
-          title: $t('demos.form'),
+          badgeType: 'dot',
+          badgeVariants: 'destructive',
+          icon: 'lucide:circle-dot',
+          title: $t('demos.badge.title'),
         },
-        name: 'Form',
-        path: '/demos/form',
-        component: () => import('#/views/demos/form/basic.vue'),
+        name: 'BadgeDemos',
+        path: '/demos/badge',
+        children: [
+          {
+            name: 'BadgeDotDemo',
+            component: () => import('#/views/demos/badge/index.vue'),
+            path: '/demos/badge/dot',
+            meta: {
+              badgeType: 'dot',
+              icon: 'lucide:square-dot',
+              title: $t('demos.badge.dot'),
+            },
+          },
+          {
+            name: 'BadgeTextDemo',
+            component: () => import('#/views/demos/badge/index.vue'),
+            path: '/demos/badge/text',
+            meta: {
+              badge: '10',
+              icon: 'lucide:square-dot',
+              title: $t('demos.badge.text'),
+            },
+          },
+          {
+            name: 'BadgeColorDemo',
+            component: () => import('#/views/demos/badge/index.vue'),
+            path: '/demos/badge/color',
+            meta: {
+              badge: 'Hot',
+              badgeVariants: 'destructive',
+              icon: 'lucide:square-dot',
+              title: $t('demos.badge.color'),
+            },
+          },
+        ],
       },
     ],
   },

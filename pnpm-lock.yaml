@@ -1871,6 +1871,9 @@ importers:
 
   playground:
     dependencies:
+      '@arco-core/menu-ui':
+        specifier: workspace:*
+        version: link:../packages/@core/ui-kit/menu-ui
       '@arco-design/web-vue':
         specifier: 'catalog:'
         version: 2.57.0(vue@3.5.17(typescript@5.8.3))

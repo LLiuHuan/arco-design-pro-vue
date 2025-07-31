@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 02:12:14
+ * @LastEditTime: 2025-08-01 02:13:47
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -203,6 +203,89 @@ const routes: RouteRecordRaw[] = [
                   link: 'https://vueuse.org',
                   title: 'VueUse',
                 },
+              },
+            ],
+          },
+        ],
+      },
+      // 嵌套菜单
+      {
+        meta: {
+          icon: 'ic:round-menu',
+          title: $t('demos.nested.title'),
+        },
+        name: 'NestedDemos',
+        path: '/demos/nested',
+        children: [
+          {
+            name: 'Menu1Demo',
+            path: '/demos/nested/menu1',
+            component: () => import('#/views/demos/nested/menu-1.vue'),
+            meta: {
+              icon: 'ic:round-menu',
+              keepAlive: true,
+              title: $t('demos.nested.menu1'),
+            },
+          },
+          {
+            name: 'Menu2Demo',
+            path: '/demos/nested/menu2',
+            meta: {
+              icon: 'ic:round-menu',
+              keepAlive: true,
+              title: $t('demos.nested.menu2'),
+            },
+            children: [
+              {
+                name: 'Menu21Demo',
+                path: '/demos/nested/menu2/menu2-1',
+                component: () => import('#/views/demos/nested/menu-2-1.vue'),
+                meta: {
+                  icon: 'ic:round-menu',
+                  keepAlive: true,
+                  title: $t('demos.nested.menu2_1'),
+                },
+              },
+            ],
+          },
+          {
+            name: 'Menu3Demo',
+            path: '/demos/nested/menu3',
+            meta: {
+              icon: 'ic:round-menu',
+              title: $t('demos.nested.menu3'),
+            },
+            children: [
+              {
+                name: 'Menu31Demo',
+                path: '/demos/nested/menu3/menu3-1',
+                component: () => import('#/views/demos/nested/menu-3-1.vue'),
+                meta: {
+                  icon: 'ic:round-menu',
+                  keepAlive: true,
+                  title: $t('demos.nested.menu3_1'),
+                },
+              },
+              {
+                name: 'Menu32Demo',
+                path: '/demos/nested/menu3/menu3-2',
+                meta: {
+                  icon: 'ic:round-menu',
+                  title: $t('demos.nested.menu3_2'),
+                },
+                children: [
+                  {
+                    name: 'Menu321Demo',
+                    path: '/demos/nested/menu3/menu3-2/menu3-2-1',
+                    component: () =>
+                      import('#/views/demos/nested/menu-3-2-1.vue'),
+                    meta: {
+                      icon: 'ic:round-menu',
+                      keepAlive: true,
+                      title: $t('demos.nested.menu3_2_1'),
+                    },
+                  },
+                ],
               },
             ],
           },

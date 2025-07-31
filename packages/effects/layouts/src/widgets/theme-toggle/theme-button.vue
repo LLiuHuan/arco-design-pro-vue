@@ -5,6 +5,13 @@ import { computed, nextTick, onMounted, watch } from 'vue';
 
 import { ArcoButton } from '@arco-core/shadcn-ui';
 
+interface TransitionParams {
+  perspective: number;
+  distance: number;
+  duration: number;
+  ease: string;
+}
+
 interface Props {
   /**
    * 类型

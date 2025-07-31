@@ -69,51 +69,6 @@ a:visited {
   view-transition-name: theme; /* 视图过渡名称 */
 }
 
-/* 3D过渡动画（兼容webkit内核） */
-@keyframes travel {
-  0% {
-    /* 初始状态：根据深度计算位置和旋转 */
-    transform: perspective(var(--perspective))
-      translate3d(
-        0,
-        0,
-        calc((var(--perspective) * var(--distance)) * var(--depth-start))
-      )
-      rotateY(var(--rotation-start, 0deg))
-      translate3d(0, 0, calc(50vw * var(--depth-start)));
-    animation-timing-function: ease-in;
-  }
-
-  25% {
-    /* 动画进行到25%：进入3D空间 */
-    transform: perspective(var(--perspective))
-      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
-      rotateY(var(--rotation-start, 0deg)) translate3d(0, 0, 50vw);
-    animation-timing-function: var(--ease);
-  }
-
-  75% {
-    /* 动画进行到75%：完成旋转 */
-    transform: perspective(var(--perspective))
-      translate3d(0, 0, calc(var(--perspective) * var(--distance)))
-      rotateY(var(--rotation-end, -90deg)) translate3d(0, 0, 50vw);
-    animation-timing-function: var(--ease);
-  }
-
-  100% {
-    /* 动画结束：回到初始位置 */
-    transform: perspective(var(--perspective))
-      translate3d(
-        0,
-        0,
-        calc((var(--perspective) * var(--distance)) * var(--depth-end))
-      )
-      rotateY(var(--rotation-end, 0deg))
-      translate3d(0, 0, calc(50vw * var(--depth-end)));
-    animation-timing-function: var(--ease);
-  }
-}
-
 /* 标准3D过渡动画 */
 @keyframes travel {
   0% {

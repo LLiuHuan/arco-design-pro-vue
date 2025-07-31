@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-import { computed, nextTick, watch } from 'vue';
+import type { TransitionParams } from './types';
+
+import { computed, nextTick, onMounted, watch } from 'vue';
 
 import { ArcoButton } from '@arco-core/shadcn-ui';
-
-interface TransitionParams {
-  perspective: number;
-  distance: number;
-  duration: number;
-  ease: string;
-}
 
 interface Props {
   /**
@@ -103,8 +98,10 @@ function toggleTheme(event: MouseEvent) {
   });
 }
 
-document.documentElement.dataset.themeTransition =
-  props.transition === '3d' ? '3d' : 'normal';
+onMounted(() => {
+  document.documentElement.dataset.themeTransition =
+    props.transition === '3d' ? '3d' : 'normal';
+});
 
 watch(
   () => props.transitionParams,

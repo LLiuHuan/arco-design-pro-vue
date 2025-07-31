@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-31 21:52:08
+ * @LastEditTime: 2025-07-31 22:00:08
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -240,6 +240,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'mdi:circle-double',
           title: 'Loading',
+        },
+      },
+      {
+        name: 'ButtonGroup',
+        path: '/examples/button-group',
+        component: () => import('#/views/examples/button-group/index.vue'),
+        meta: {
+          icon: 'mdi:check-circle',
+          title: $t('examples.button-group.title'),
         },
       },
     ],

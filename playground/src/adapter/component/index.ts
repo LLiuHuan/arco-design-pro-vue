@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:04:14
- * @LastEditTime: 2025-07-24 09:47:05
+ * @LastEditTime: 2025-07-31 21:10:18
  * @LastEditors: LLiuHuan
  */
 
@@ -11,7 +11,7 @@ import type { Recordable } from '@arco/types';
 
 import type { Component, VNode } from 'vue';
 
-import { defineComponent, h, ref, watch } from 'vue';
+import { defineComponent, h, ref } from 'vue';
 
 import { ApiComponent, globalShareState, IconPicker } from '@arco/common-ui';
 import { $t } from '@arco/locales';
@@ -82,25 +82,15 @@ const withDefaultPlaceholder = <T extends Component>(
       // 透传组件暴露的方法
       const innerRef = ref();
 
-      // TODO：待定
-      const exposedMethods = ['render', 'focus', 'blur', 'select', 'clear'];
-      const exposed: Recordable<any> = {};
-
-      watch(
-        () => innerRef.value,
-        (value) => {
-          if (value) {
-            exposedMethods.forEach((method) => {
-              if (typeof value[method] === 'function') {
-                exposed[method] = value[method].bind(value);
-              }
-            });
-          }
-        },
-        { immediate: true },
+      expose(
+        new Proxy(
+          {},
+          {
+            get: (_target, key) => innerRef.value?.[key],
+            has: (_target, key) => key in (innerRef.value || {}),
+          },
+        ),
       );
-
-      expose(exposed);
 
       return () =>
         h(

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:04:14
- * @LastEditTime: 2025-07-24 00:18:39
+ * @LastEditTime: 2025-07-31 21:10:39
  * @LastEditors: LLiuHuan
  */
 
@@ -11,7 +11,7 @@ import type { Recordable } from '@arco/types';
 
 import type { Component, VNode } from 'vue';
 
-import { defineComponent, getCurrentInstance, h, ref } from 'vue';
+import { defineComponent, h, ref } from 'vue';
 
 import { ApiComponent, globalShareState, IconPicker } from '@arco/common-ui';
 import { $t } from '@arco/locales';
@@ -81,18 +81,17 @@ const withDefaultPlaceholder = <T extends Component>(
         $t(`ui.placeholder.${type}`);
       // 透传组件暴露的方法
       const innerRef = ref();
-      const publicApi: Recordable<any> = {};
-      expose(publicApi);
-      const instance = getCurrentInstance();
-      instance?.proxy?.$nextTick(() => {
-        // TODO: [Vue warn]: Avoid app logic that relies on enumerating keys on a component instance. The keys will be empty in production mode to avoid performance overhead.
-        // TODO: 暂时没想到怎么解决
-        for (const key in innerRef.value) {
-          if (typeof innerRef.value[key] === 'function') {
-            publicApi[key] = innerRef.value[key];
-          }
-        }
-      });
+
+      expose(
+        new Proxy(
+          {},
+          {
+            get: (_target, key) => innerRef.value?.[key],
+            has: (_target, key) => key in (innerRef.value || {}),
+          },
+        ),
+      );
+
       return () =>
         h(
           component,

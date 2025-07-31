@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-21 01:21:50
- * @LastEditTime: 2025-07-31 20:24:52
+ * @LastEditTime: 2025-07-31 20:29:25
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -175,6 +175,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'ion:ellipsis-horizontal',
           title: $t('examples.ellipsis.title'),
+        },
+      },
+      {
+        name: 'VueResizeDemo',
+        path: '/demos/resize/basic',
+        component: () => import('#/views/examples/resize/basic.vue'),
+        meta: {
+          icon: 'material-symbols:resize',
+          title: $t('examples.resize.title'),
         },
       },
     ],

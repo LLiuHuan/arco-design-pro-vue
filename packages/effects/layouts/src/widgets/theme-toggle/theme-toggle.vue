@@ -8,6 +8,8 @@
 <script lang="ts" setup>
 import type { ThemeModeType } from '@arco/types';
 
+import type { TransitionParams } from './types';
+
 import { MoonStar, Sun, SunMoon } from '@arco/icons';
 import { $t } from '@arco/locales';
 import {
@@ -38,13 +40,6 @@ withDefaults(defineProps<Props>(), {
     ease: 'ease-in-out',
   }),
 });
-
-interface TransitionParams {
-  perspective: number;
-  distance: number;
-  duration: number;
-  ease: string;
-}
 
 interface Props {
   /**

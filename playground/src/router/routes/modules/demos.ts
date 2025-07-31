@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 01:57:06
+ * @LastEditTime: 2025-08-01 02:04:15
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -108,6 +108,28 @@ const routes: RouteRecordRaw[] = [
               badgeVariants: 'destructive',
               icon: 'lucide:square-dot',
               title: $t('demos.badge.color'),
+            },
+          },
+        ],
+      },
+      // 菜单激活图标
+      {
+        meta: {
+          activeIcon: 'fluent-emoji:radioactive',
+          icon: 'bi:radioactive',
+          title: $t('demos.activeIcon.title'),
+        },
+        name: 'ActiveIconDemos',
+        path: '/demos/active-icon',
+        children: [
+          {
+            name: 'ActiveIconDemo',
+            component: () => import('#/views/demos/active-icon/index.vue'),
+            path: '/demos/active-icon/children',
+            meta: {
+              activeIcon: 'fluent-emoji:radioactive',
+              icon: 'bi:radioactive',
+              title: $t('demos.activeIcon.children'),
             },
           },
         ],

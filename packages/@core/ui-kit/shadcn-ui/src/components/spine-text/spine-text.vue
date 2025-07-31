@@ -28,6 +28,14 @@ const style = computed(() => {
   </div>
 </template>
 <style>
+.success {
+  .adp-spine-text {
+    background:
+      radial-gradient(circle at center, rgb(24 24 26 / 80%), transparent) -200%
+        50% / 200% 100% no-repeat,
+      #f4f4f4;
+  }
+}
 .adp-spine-text {
   background:
     radial-gradient(circle at center, rgb(255 255 255 / 80%), #f000) -200% 50% /

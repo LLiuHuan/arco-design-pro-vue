@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:47:53
  * @LastEditTime: 2025-05-27 12:01:07
@@ -41,9 +41,10 @@ defineExpose({
     ref="contentRef"
     :class="{
       [$style.success]: isPassing,
+      success: isPassing,
     }"
     :style="style"
-    class="absolute top-0 flex size-full items-center justify-center text-xs select-none"
+    class="absolute top-0 flex size-full select-none items-center justify-center text-xs"
   >
     <slot name="text">
       <ArcoSpineText class="flex h-full items-center">

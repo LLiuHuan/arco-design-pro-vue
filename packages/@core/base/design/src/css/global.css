@@ -270,3 +270,8 @@ h6 {
 input {
   outline: none;
 }
+
+img,video {
+    height: auto;
+    max-width: 100%;
+}

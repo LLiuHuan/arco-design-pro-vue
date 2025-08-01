@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-08-01 03:43:04
- * @LastEditTime: 2025-08-01 05:47:29
+ * @LastEditTime: 2025-08-01 09:12:01
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -15,10 +15,17 @@ import { Alert, Button, Card } from '@arco-design/web-vue';
 import BigIntAPI from '#/api/examples/json-bigint';
 
 const response = ref('');
+const error = ref('');
 function fetchData() {
-  BigIntAPI.bigint().then((res) => {
-    response.value = res;
-  });
+  error.value = '';
+  BigIntAPI.bigint()
+    .then((res) => {
+      response.value = res;
+    })
+    .catch((error_) => {
+      error.value = `请求失败: ${error_.message}`;
+      response.value = '';
+    });
 }
 </script>
 <template>
@@ -34,6 +41,9 @@ function fetchData() {
         下面的按钮点击后会发起请求，接口返回的JSON数据中的id字段是超出整数范围的数字，已自动将其解析为字符串
       </Alert>
       <Button class="mt-4" type="primary" @click="fetchData">发起请求</Button>
+      <Alert v-if="error" class="mt-4" type="error" :show-icon="false">
+        {{ error }}
+      </Alert>
       <div>
         <pre>{{ response }}</pre>
       </div>

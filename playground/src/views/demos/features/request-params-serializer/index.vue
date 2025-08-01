@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-08-01 03:43:04
- * @LastEditTime: 2025-08-01 04:50:09
+ * @LastEditTime: 2025-08-01 09:15:10
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -20,15 +20,31 @@ const paramsSerializer = ref<'brackets' | 'comma' | 'indices' | 'repeat'>(
 );
 const response = ref('');
 const paramsStr = computed(() => {
-  // 写一段代码，从完整的URL中提取参数部分
-  const url = response.value;
-  return new URL(url).searchParams.toString();
+  try {
+    if (!response.value) return '';
+    const url = response.value;
+    return new URL(url).searchParams.toString();
+  } catch (error) {
+    console.error('Invalid URL:', error);
+    return '';
+  }
 });
 
+const loading = ref(false);
+const error = ref<null | string>(null);
 watchEffect(() => {
-  StatusAPI.status1(params, paramsSerializer.value).then((res) => {
-    response.value = res.request.responseURL;
-  });
+  loading.value = true;
+  error.value = null;
+  StatusAPI.status1(params, paramsSerializer.value)
+    .then((res) => {
+      response.value = res.request.responseURL;
+    })
+    .catch((error_) => {
+      error.value = error_.message || 'Request failed';
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 });
 </script>
 <template>
@@ -49,6 +65,8 @@ watchEffect(() => {
           <div>{{ JSON.stringify(params, null, 2) }}</div>
         </div>
         <template v-if="response">
+          <div v-if="loading" class="text-blue-500">Loading...</div>
+          <div v-if="error" class="text-red-500">Error: {{ error }}</div>
           <div>
             <h3>访问地址</h3>
             <pre>{{ response }}</pre>

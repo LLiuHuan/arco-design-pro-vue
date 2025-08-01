@@ -18,15 +18,23 @@ import imageBase64 from './base64';
 const downloadResult = ref('');
 
 function getBlob() {
-  DownloadAPI.file1().then((res) => {
-    downloadResult.value = `获取Blob成功，长度：${res.size}`;
-  });
+  DownloadAPI.file1()
+    .then((res) => {
+      downloadResult.value = `获取Blob成功，长度：${res.size}`;
+    })
+    .catch((error) => {
+      downloadResult.value = `获取Blob失败：${error.message}`;
+    });
 }
 
 function getResponse() {
-  DownloadAPI.file2().then((res) => {
-    downloadResult.value = `获取Response成功，headers：${JSON.stringify(res.headers)},长度：${res.data.size}`;
-  });
+  DownloadAPI.file2()
+    .then((res) => {
+      downloadResult.value = `获取Response成功，headers：${JSON.stringify(res.headers)},长度：${res.data.size}`;
+    })
+    .catch((error) => {
+      downloadResult.value = `获取Response失败：${error.message}`;
+    });
 }
 </script>
 

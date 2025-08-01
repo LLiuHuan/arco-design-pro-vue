@@ -23,9 +23,11 @@ const route = useRoute();
 const accessStore = useAccessStore();
 const menu = accessStore.getMenuByPath(route.path);
 const badgeProps = reactive({
-  badge: menu?.badge as string,
-  badgeType: menu?.badge ? 'normal' : (menu?.badgeType as 'dot' | 'normal'),
-  badgeVariants: menu?.badgeVariants as string,
+  badge: (menu?.badge as string) || '',
+  badgeType: menu?.badge
+    ? 'normal'
+    : (menu?.badgeType as 'dot' | 'normal') || 'normal',
+  badgeVariants: (menu?.badgeVariants as string) || 'default',
 });
 
 const [Form] = useArcoForm({
@@ -76,6 +78,14 @@ const [Form] = useArcoForm({
 
 function updateMenuBadge() {
   if (menu) {
+    // Validate badge content length for 'normal' type
+    if (
+      badgeProps.badgeType === 'normal' &&
+      (!badgeProps.badge || badgeProps.badge.trim().length === 0)
+    ) {
+      // Could show a message or set a default value
+      return;
+    }
     menu.badge = badgeProps.badge;
     menu.badgeType = badgeProps.badgeType;
     menu.badgeVariants = badgeProps.badgeVariants;

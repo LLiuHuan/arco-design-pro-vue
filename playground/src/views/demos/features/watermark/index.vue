@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-08-01 03:43:04
- * @LastEditTime: 2025-08-01 03:54:27
+ * @LastEditTime: 2025-08-01 09:19:42
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -22,14 +22,8 @@ async function createWaterMark() {
   await updateWatermark({
     advancedStyle: {
       colorStops: [
-        {
-          color: 'red',
-          offset: 0,
-        },
-        {
-          color: 'blue',
-          offset: 1,
-        },
+        { color: 'red', offset: 0 },
+        { color: 'blue', offset: 1 },
       ],
       type: 'linear',
     },

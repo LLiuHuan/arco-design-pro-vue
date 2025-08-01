@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-08-01 02:16:49
- * @LastEditTime: 2025-08-01 02:30:47
+ * @LastEditTime: 2025-08-01 09:08:25
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -35,7 +35,7 @@ const accounts: Record<string, Recordable<any>> = {
 
 const { accessMode, toggleAccessMode } = useAccess();
 const userStore = useUserStore();
-const accessStore = useAuthStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 function roleButtonType(role: string) {
@@ -50,7 +50,7 @@ async function changeAccount(role: string) {
   const account = accounts[role];
   resetAllStores();
   if (account) {
-    await accessStore.authLogin(account, async () => {
+    await authStore.authLogin(account, async () => {
       router.go(0);
     });
   }
@@ -63,7 +63,7 @@ async function handleToggleAccessMode() {
   await toggleAccessMode();
   resetAllStores();
 
-  await accessStore.authLogin(accounts.super, async () => {
+  await authStore.authLogin(accounts.super, async () => {
     setTimeout(() => {
       router.go(0);
     }, 150);

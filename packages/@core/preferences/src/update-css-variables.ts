@@ -7,6 +7,7 @@ import { BUILT_IN_THEME_PRESETS } from './constants';
 
 /**
  * 更新主题的 CSS 变量以及其他 CSS 变量
+ * TODO: 后续改为根据主题色及是否暗色模式生成
  * @param preferences - 当前偏好设置对象，它的主题值将被用来设置文档的主题。
  */
 function updateCSSVariables(preferences: Preferences) {

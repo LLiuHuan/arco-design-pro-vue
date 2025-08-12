@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
- * @LastEditTime: 2025-08-01 02:24:04
+ * @LastEditTime: 2025-08-12 09:59:13
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -15,8 +15,6 @@ import { AuthenticationLogin, SliderCaptcha, z } from '@arco/common-ui';
 import { $t } from '@arco/locales';
 
 import { useAuthStore } from '#/store';
-
-import '@arco-design/web-vue/es/button/style/css.js';
 
 defineOptions({ name: 'Login' });
 

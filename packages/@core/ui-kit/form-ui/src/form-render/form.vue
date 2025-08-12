@@ -41,6 +41,16 @@ const emits = defineEmits<{
   submit: [event: any];
 }>();
 
+const wrapperClass = computed(() => {
+  const cls = [];
+  if (props.layout === 'vertical') {
+    cls.push(props.compact ? 'gap-x-2' : 'gap-x-4');
+  } else {
+    cls.push('gap-2');
+  }
+  return cn(...cls, props.wrapperClass);
+});
+
 provideFormRenderProps(props);
 
 const { isCalculated, keepFormItemIndex, wrapperRef } = useExpandable(props);
@@ -107,8 +117,9 @@ const computedSchema = computed(
       wrapperClass = '',
     } = mergeWithArrayOverride(props.commonConfig, props.globalCommonConfig);
     return (props.schema || []).map((schema, index) => {
+      console.log(schema, index)
       const keepIndex = keepFormItemIndex.value;
-
+      console.log(keepIndex)
       const hidden =
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
         props.showCollapseButton && !!formCollapsed.value && keepIndex

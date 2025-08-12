@@ -3,10 +3,10 @@
  * 可用于 arco-form、arco-modal、arco-drawer 等组件使用,
  */
 
-import type { Component } from 'vue';
-
 import type { BaseFormComponentType } from '@arco/common-ui';
 import type { Recordable } from '@arco/types';
+
+import type { Component } from 'vue';
 
 import { defineAsyncComponent, defineComponent, h, ref } from 'vue';
 

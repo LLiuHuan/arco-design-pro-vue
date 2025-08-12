@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-08 09:38:40
- * @LastEditTime: 2025-07-22 15:00:09
+ * @LastEditTime: 2025-08-11 17:11:54
  * @LastEditors: LLiuHuan
  */
 import { defineConfig } from '@arco/vite-config';
@@ -26,8 +26,8 @@ export default defineConfig(async () => {
       },
       plugins: [
         vitePluginForArco({
-          style: 'css',
-        }),
+          style: 'css'
+        })
       ],
     },
   };

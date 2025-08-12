@@ -1,0 +1,30 @@
+# 工作流名称：锁定讨论线程（自动锁定长期未活动的Issues和PR）
+name: Lock Threads
+
+# 触发条件：
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天凌晨0点自动运行（UTC时间，对应北京时间早上8点）
+  workflow_dispatch:     # 支持手动触发（在GitHub页面点击运行）
+
+# 权限设置：允许工作流操作Issues和PR（添加锁定状态）
+permissions:
+  issues: write        # 允许锁定/解锁Issues
+  pull-requests: write # 允许锁定/解锁PRs
+
+jobs:
+  # 任务：执行锁定操作
+  action:
+    # 仅在官方仓库执行（避免fork仓库误触发）
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue'
+    runs-on: ubuntu-latest  # 运行环境：Ubuntu最新版
+    steps:
+      # 步骤1：使用第三方工具自动锁定长期未活动的线程
+      - uses: dessant/lock-threads@v5  # 引用lock-threads工具（专门用于锁定议题）
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}  # 内置令牌，用于授权操作
+          issue-inactive-days: '14'  # Issues超过14天未活动则锁定
+          issue-lock-reason: ''      # 锁定Issues时不指定原因（留空表示无理由）
+          pr-inactive-days: '30'     # PRs超过30天未活动则锁定（PR通常需要更长时间处理）
+          pr-lock-reason: ''         # 锁定PRs时不指定原因
+          process-only: 'issues, prs' # 仅处理Issues和PRs（排除其他类型的讨论）

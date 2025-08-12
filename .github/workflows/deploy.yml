@@ -1,0 +1,208 @@
+# # 工作流名称：推送代码时部署网站
+# name: Deploy Website on push
+
+# # 触发条件：当代码推送到 main 分支时自动触发部署
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   # 任务1：部署 playground（示例/演示页面）到FTP
+#   deploy-playground-ftp:
+#     name: Deploy Push Playground Ftp  # 任务名称
+#     # 执行条件：
+#     # - 排除 dependabot 机器人提交（避免自动依赖更新触发部署）
+#     # - 提交信息不包含 [skip ci]（允许手动跳过部署）
+#     # - 仅在官方仓库执行
+#     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
+#     runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版
+#     steps:
+#       # 步骤1：拉取仓库代码
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0  # 拉取完整历史（确保构建时依赖完整）
+
+#       # 步骤2：修改 playground 生产环境配置（用 sed 命令替换.env文件内容）
+#       - name: Sed Config Base
+#         shell: bash
+#         run: |
+#           # 将 VITE_COMPRESS 配置改为 gzip（启用gzip压缩）
+#           sed -i  "s#VITE_COMPRESS\s*=.*#VITE_COMPRESS = gzip#g" ./playground/.env.production
+#           # 将 VITE_PWA 配置改为 true（启用PWA功能）
+#           sed -i  "s#VITE_PWA\s*=.*#VITE_PWA = true#g" ./playground/.env.production
+#           # 输出修改后的配置文件（验证是否生效）
+#           cat ./playground/.env.production
+
+#       # 步骤3：配置 Node 环境（复用项目自定义的 setup-node 动作）
+#       - name: Setup Node
+#         uses: ./.github/actions/setup-node
+
+#       # 步骤4：构建 playground 项目（执行 package.json 中的 build:play 脚本）
+#       - name: Build
+#         run: pnpm build:play
+
+#       # 步骤5：通过FTP同步构建产物到远程服务器
+#       - name: Sync Playground files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5  # 使用FTP部署工具
+#         with:
+#           server: ${{ secrets.PRO_FTP_HOST }}  # FTP服务器地址（从仓库密钥获取）
+#           username: ${{ secrets.WEB_PLAYGROUND_FTP_ACCOUNT }}  # playground的FTP账号
+#           password: ${{ secrets.WEB_PLAYGROUND_FTP_PWSSWORD }}  # playground的FTP密码
+#           local-dir: ./playground/dist/  # 本地构建产物目录（需同步的文件来源）
+
+#   # 任务2：部署文档（docs）到FTP
+#   deploy-docs-ftp:
+#     name: Deploy Push Docs Ftp
+#     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       - name: Setup Node
+#         uses: ./.github/actions/setup-node
+
+#       # 构建文档项目（执行 build:docs 脚本，生成静态文档）
+#       - name: Build
+#         run: pnpm build:docs
+
+#       # 同步文档构建产物到FTP
+#       - name: Sync Docs files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{ secrets.PRO_FTP_HOST }}
+#           username: ${{ secrets.WEBSITE_FTP_ACCOUNT }}  # 文档的FTP账号
+#           password: ${{ secrets.WEBSITE_FTP_PASSWORD }}  # 文档的FTP密码
+#           local-dir: ./docs/.vitepress/dist/  # 文档构建产物目录
+
+#   # 任务3：部署基于 Ant Design 的应用到FTP
+#   deploy-antd-ftp:
+#     name: Deploy Push Antd Ftp
+#     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       # 修改 Ant Design 应用的生产环境配置（启用gzip和PWA）
+#       - name: Sed Config Base
+#         shell: bash
+#         run: |
+#           sed -i  "s#VITE_COMPRESS\s*=.*#VITE_COMPRESS = gzip#g" ./apps/web-antd/.env.production
+#           sed -i  "s#VITE_PWA\s*=.*#VITE_PWA = true#g" ./apps/web-antd/.env.production
+#           cat ./apps/web-antd/.env.production
+
+#       - name: Setup Node
+#         uses: ./.github/actions/setup-node
+
+#       # 构建 Ant Design 应用（执行 build:antd 脚本）
+#       - name: Build
+#         run: pnpm run build:antd
+
+#       # 同步构建产物到FTP
+#       - name: Sync files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{ secrets.PRO_FTP_HOST }}
+#           username: ${{ secrets.WEB_ANTD_FTP_ACCOUNT }}  # Antd应用的FTP账号
+#           password: ${{ secrets.WEB_ANTD_FTP_PASSWORD }}  # Antd应用的FTP密码
+#           local-dir: ./apps/web-antd/dist/  # Antd应用构建产物目录
+
+#   # 任务4：部署基于 Element Plus 的应用到FTP
+#   deploy-ele-ftp:
+#     name: Deploy Push Element Ftp
+#     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       # 修改 Element Plus 应用的生产环境配置
+#       - name: Sed Config Base
+#         shell: bash
+#         run: |
+#           sed -i  "s#VITE_COMPRESS\s*=.*#VITE_COMPRESS = gzip#g" ./apps/web-ele/.env.production
+#           sed -i  "s#VITE_PWA\s*=.*#VITE_PWA = true#g" ./apps/web-ele/.env.production
+#           cat ./apps/web-ele/.env.production
+
+#       - name: Setup Node
+#         uses: ./.github/actions/setup-node
+
+#       # 构建 Element Plus 应用（执行 build:ele 脚本）
+#       - name: Build
+#         run: pnpm run build:ele
+
+#       # 同步构建产物到FTP
+#       - name: Sync files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{ secrets.PRO_FTP_HOST }}
+#           username: ${{ secrets.WEB_ELE_FTP_ACCOUNT }}  # Element应用的FTP账号
+#           password: ${{ secrets.WEB_ELE_FTP_PASSWORD }}  # Element应用的FTP密码
+#           local-dir: ./apps/web-ele/dist/  # Element应用构建产物目录
+
+#   # 任务5：部署基于 Naive UI 的应用到FTP
+#   deploy-naive-ftp:
+#     name: Deploy Push Naive Ftp
+#     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       # 修改 Naive UI 应用的生产环境配置
+#       - name: Sed Config Base
+#         shell: bash
+#         run: |
+#           sed -i  "s#VITE_COMPRESS\s*=.*#VITE_COMPRESS = gzip#g" ./apps/web-naive/.env.production
+#           sed -i  "s#VITE_PWA\s*=.*#VITE_PWA = true#g" ./apps/web-naive/.env.production
+#           cat ./apps/web-naive/.env.production
+
+#       - name: Setup Node
+#         uses: ./.github/actions/setup-node
+
+#       # 构建 Naive UI 应用（执行 build:naive 脚本）
+#       - name: Build
+#         run: pnpm run build:naive
+
+#       # 同步构建产物到FTP
+#       - name: Sync files
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{ secrets.PRO_FTP_HOST }}
+#           username: ${{ secrets.WEB_NAIVE_FTP_ACCOUNT }}  # Naive应用的FTP账号
+#           password: ${{ secrets.WEB_NAIVE_FTP_PASSWORD }}  # Naive应用的FTP密码
+#           local-dir: ./apps/web-naive/dist/  # Naive应用构建产物目录
+
+#   # 任务6：部署失败时自动重试
+#   rerun-on-failure:
+#     name: Rerun on failure  # 任务名称
+#     # 依赖前面5个部署任务，仅当它们中有失败时执行
+#     needs:
+#       - deploy-playground-ftp
+#       - deploy-docs-ftp
+#       - deploy-antd-ftp
+#       - deploy-ele-ftp
+#       - deploy-naive-ftp
+#     # 执行条件：部署失败，且重试次数小于10次
+#     if: failure() && fromJSON(github.run_attempt) < 10
+#     runs-on: ubuntu-latest
+#     steps:
+#       # 步骤1：重试部署（最多10次）
+#       - name: Retry ${{ fromJSON(github.run_attempt) }} of 10
+#         env:
+#           GH_REPO: ${{ github.repository }}  # 当前仓库信息
+#           GH_TOKEN: ${{ github.token }}  # 内置令牌，用于操作工作流
+#         run: |
+#           # 使用 GitHub CLI 重新运行当前工作流
+#           gh workflow run rerun.yml -F run_id=${{ github.run_id }}

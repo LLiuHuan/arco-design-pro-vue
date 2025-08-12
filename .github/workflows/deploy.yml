@@ -10,19 +10,19 @@ on:
 jobs:
   # 任务1：部署 playground（示例/演示页面）到FTP
   deploy-playground-ftp:
-    name: Deploy Push Playground Ftp  # 任务名称
+    name: Deploy Push Playground Ftp # 任务名称
     # 执行条件：
     # - 排除 dependabot 机器人提交（避免自动依赖更新触发部署）
     # - 提交信息不包含 [skip ci]（允许手动跳过部署）
     # - 仅在官方仓库执行
     if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
-    runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版
+    runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
     steps:
       # 步骤1：拉取仓库代码
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 拉取完整历史（确保构建时依赖完整）
+          fetch-depth: 0 # 拉取完整历史（确保构建时依赖完整）
 
       # 步骤2：修改 playground 生产环境配置（用 sed 命令替换.env文件内容）
       - name: Sed Config Base
@@ -186,7 +186,7 @@ jobs:
 
   # 任务6：部署失败时自动重试
   rerun-on-failure:
-    name: Rerun on failure  # 任务名称
+    name: Rerun on failure # 任务名称
     # 依赖前面5个部署任务，仅当它们中有失败时执行
     needs:
       - deploy-playground-ftp
@@ -201,8 +201,8 @@ jobs:
       # 步骤1：重试部署（最多10次）
       - name: Retry ${{ fromJSON(github.run_attempt) }} of 10
         env:
-          GH_REPO: ${{ github.repository }}  # 当前仓库信息
-          GH_TOKEN: ${{ github.token }}  # 内置令牌，用于操作工作流
+          GH_REPO: ${{ github.repository }} # 当前仓库信息
+          GH_TOKEN: ${{ github.token }} # 内置令牌，用于操作工作流
         run: |
           # 使用 GitHub CLI 重新运行当前工作流
           gh workflow run rerun.yml -F run_id=${{ github.run_id }}

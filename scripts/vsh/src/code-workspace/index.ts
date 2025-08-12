@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-06-04 17:40:06
- * @LastEditTime: 2025-06-04 17:41:26
+ * @LastEditTime: 2025-08-12 15:23:34
  * @LastEditors: LLiuHuan
  */
 import type { CAC } from 'cac';
@@ -33,7 +33,7 @@ async function createCodeWorkspace({
 }: CodeWorkspaceCommandOptions) {
   const { packages, rootDir } = await getPackages();
 
-  let folders = packages.map((pkg) => {
+  let folders = packages.map((pkg: any) => {
     const { dir, packageJson } = pkg;
     return {
       name: packageJson.name,

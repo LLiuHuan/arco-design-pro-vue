@@ -223,7 +223,7 @@ const getForceMount = computed(() => {
             v-if="closable && closeIconPlacement === 'left'"
             as-child
             :disabled="submitting"
-            class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-hidden disabled:pointer-events-none"
+            class="data-[state=open]:bg-secondary focus:outline-hidden ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 disabled:pointer-events-none"
           >
             <slot name="close-icon">
               <ArcoIconButton>
@@ -233,7 +233,7 @@ const getForceMount = computed(() => {
           </SheetClose>
           <Separator
             v-if="closable && closeIconPlacement === 'left'"
-            class="mr-2 ml-1 h-8"
+            class="ml-1 mr-2 h-8"
             decorative
             orientation="vertical"
           />
@@ -264,7 +264,7 @@ const getForceMount = computed(() => {
             v-if="closable && closeIconPlacement === 'right'"
             as-child
             :disabled="submitting"
-            class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-hidden disabled:pointer-events-none"
+            class="data-[state=open]:bg-secondary focus:outline-hidden ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 disabled:pointer-events-none"
           >
             <slot name="close-icon">
               <ArcoIconButton>

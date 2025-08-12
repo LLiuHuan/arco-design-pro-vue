@@ -14,8 +14,8 @@
     padding: 0 4px 2px;
     font-size: 0.9em;
     line-height: 0.9;
+    color: hsl(var(--secondary-foreground), 0);
     vertical-align: 2px;
-    color: hsl(var(--secondary-foreground));
     cursor: pointer;
     user-select: none;
     background-color: hsl(var(--secondary));

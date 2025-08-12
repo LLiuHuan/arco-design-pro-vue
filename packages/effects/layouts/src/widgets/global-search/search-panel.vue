@@ -98,7 +98,7 @@ async function handleEnter() {
   }
   const to = result[index];
   if (to) {
-    searchHistory.value = uniqueByField([...searchHistory.value, to], 'path')
+    searchHistory.value = uniqueByField([...searchHistory.value, to], 'path');
     handleClose();
     await nextTick();
     if (isHttpUrl(to.path)) {
@@ -230,7 +230,7 @@ onMounted(() => {
         class="text-muted-foreground text-center"
       >
         <SearchX class="mx-auto mt-4 size-12" />
-        <p class="mt-6 mb-10 text-xs">
+        <p class="mb-10 mt-6 text-xs">
           {{ $t('ui.widgets.search.noResults') }}
           <span class="text-foreground text-sm font-medium">
             "{{ keyword }}"

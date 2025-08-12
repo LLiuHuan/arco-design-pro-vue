@@ -2,13 +2,11 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-05-27 12:23:55
+ * @LastEditTime: 2025-08-12 21:57:18
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
 import type { ThemeModeType } from '@arco/types';
-
-import type { TransitionParams } from './types';
 
 import { MoonStar, Sun, SunMoon } from '@arco/icons';
 import { $t } from '@arco/locales';
@@ -25,6 +23,13 @@ import {
 } from '@arco-core/shadcn-ui';
 
 import ThemeButton from './theme-button.vue';
+
+interface TransitionParams {
+  distance: number;
+  duration: number;
+  ease: string;
+  perspective: number;
+}
 
 defineOptions({
   name: 'ThemeToggle',

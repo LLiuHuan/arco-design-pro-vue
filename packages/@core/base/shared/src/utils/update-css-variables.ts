@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-06-17 00:55:16
- * @LastEditTime: 2025-08-12 09:14:11
+ * @LastEditTime: 2025-08-12 15:15:08
  * @LastEditors: LLiuHuan
  */
 /**
@@ -12,7 +12,7 @@
 function updateCSSVariables(
   variables: { [key: string]: string },
   id = '__adp-styles__',
-  element = ':root'
+  element = ':root',
 ): void {
   // 获取或创建内联样式表元素
   const styleElement =
@@ -37,7 +37,7 @@ function updateCSSVariables(
   if (!document.querySelector(`#${id}`)) {
     setTimeout(() => {
       // document.head.append(styleElement);
-      document.head.appendChild(styleElement);
+      document.head.append(styleElement);
     });
   }
 }

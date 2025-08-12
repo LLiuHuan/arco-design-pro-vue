@@ -609,7 +609,7 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
     <div
       v-if="maskVisible"
       :style="maskStyle"
-      class="bg-overlay/40 fixed top-0 left-0 h-full w-full transition-[background-color] duration-200"
+      class="bg-overlay/40 fixed left-0 top-0 h-full w-full transition-[background-color] duration-200"
       @click="handleClickMask"
     ></div>
   </div>

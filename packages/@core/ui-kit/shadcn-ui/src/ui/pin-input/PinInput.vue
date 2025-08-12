@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-07-02 10:45:51
+ * @LastEditTime: 2025-08-12 16:28:37
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
@@ -14,7 +14,9 @@ import { cn } from '@arco-core/shared/utils';
 
 import { PinInputRoot, useForwardPropsEmits } from 'reka-ui';
 
-const props = defineProps<PinInputRootProps & { class?: any }>();
+const props = defineProps<
+  PinInputRootProps<'number' | 'text'> & { class?: any }
+>();
 const emits = defineEmits<PinInputRootEmits>();
 
 const delegatedProps = computed(() => {

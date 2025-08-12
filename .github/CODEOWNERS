@@ -1,0 +1,14 @@
+# 默认负责人
+* @LLiuHuan
+
+# 核心模块负责人
+/.github/ @LLiuHuan
+/.vscode/ @LLiuHuan
+/packages/ @LLiuHuan
+/packages/@core/ @LLiuHuan
+/internal/ @LLiuHuan
+/scripts/ @LLiuHuan
+
+# 团队模块负责人
+apps/ @LLiuHuan
+docs/ @LLiuHuan

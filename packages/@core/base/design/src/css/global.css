@@ -271,7 +271,8 @@ input {
   outline: none;
 }
 
-img,video {
-    height: auto;
-    max-width: 100%;
+img,
+video {
+  max-width: 100%;
+  height: auto;
 }

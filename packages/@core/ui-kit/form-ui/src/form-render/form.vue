@@ -117,9 +117,7 @@ const computedSchema = computed(
       wrapperClass = '',
     } = mergeWithArrayOverride(props.commonConfig, props.globalCommonConfig);
     return (props.schema || []).map((schema, index) => {
-      console.log(schema, index)
       const keepIndex = keepFormItemIndex.value;
-      console.log(keepIndex)
       const hidden =
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
         props.showCollapseButton && !!formCollapsed.value && keepIndex

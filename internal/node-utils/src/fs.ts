@@ -58,4 +58,3 @@ export async function readJSON(filePath: string) {
     throw error;
   }
 }
-

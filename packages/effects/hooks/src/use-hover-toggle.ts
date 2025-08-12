@@ -83,7 +83,7 @@ export function useHoverToggle(
     if (raw === null) return '';
     const elements = Array.isArray(raw) ? raw : [raw];
     // Create a key based on element count and identities
-    return `${elements.length}:${elements.map((el) => el?.id || '').join(',')}`;
+    return `${elements.length}:${elements.map((el: any) => el?.id || '').join(',')}`;
   });
 
   // 初始设置

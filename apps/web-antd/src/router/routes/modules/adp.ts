@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2025-07-15 22:54:54
+ * @LastEditTime: 2025-08-12 15:13:05
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -15,10 +15,10 @@ import {
   ARCO_LOGO_URL,
   ARCO_NAIVE_PREVIEW_URL,
 } from '@arco/constants';
+import { SvgArcoLogoIcon } from '@arco/icons';
 
 import { IFrameView } from '#/layouts';
 import { $t } from '#/locales';
-import { SvgArcoLogoIcon } from '@arco/icons';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -73,7 +73,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('demos.adp.element-plus'),
         },
       },
-            {
+      {
         name: 'ArcoNaive',
         path: '/arco/naive',
         component: IFrameView,

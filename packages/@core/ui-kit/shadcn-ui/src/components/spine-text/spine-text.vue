@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-06-15 17:18:03
+ * @LastEditTime: 2025-08-12 14:41:29
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -36,6 +36,7 @@ const style = computed(() => {
       #f4f4f4;
   }
 }
+
 .adp-spine-text {
   background:
     radial-gradient(circle at center, rgb(255 255 255 / 80%), #f000) -200% 50% /

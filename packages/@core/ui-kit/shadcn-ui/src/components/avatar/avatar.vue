@@ -76,7 +76,7 @@ const rootStyle = computed(() => {
     <span
       v-if="dot"
       :class="dotClass"
-      class="border-background absolute right-0 bottom-0 size-3 rounded-full border-2"
+      class="border-background absolute bottom-0 right-0 size-3 rounded-full border-2"
     >
     </span>
   </div>

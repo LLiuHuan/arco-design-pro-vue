@@ -1,0 +1,55 @@
+# 工作流名称：基于标签的动作（当Issue被添加标签时触发自动化操作）
+name: Label Based Actions
+
+# 触发条件：仅当 Issues 被添加标签时触发（PR的标签触发被注释掉，可按需启用）
+on:
+  issues:
+    types: [labeled] # 监听 Issue 的 "labeled" 事件（即标签被添加时）
+  # pull_request:
+  #   types: [labeled]  # 可选：若需要处理PR的标签，可取消注释
+
+# 权限设置：允许工作流操作 Issue、PR 和仓库内容
+permissions:
+  issues: write # 允许创建/编辑 Issue 评论、添加/移除标签
+  pull-requests: write # 允许操作 PR（当前未用到，为未来扩展预留）
+  contents: write # 允许修改仓库内容（当前未用到，为未来扩展预留）
+
+jobs:
+  # 任务：处理标签相关的自动化回复和标签管理
+  reply-labeled:
+    # 仅在官方仓库执行（避免 fork 仓库误触发）
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue'
+    runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
+    steps:
+      # 步骤1：当 Issue 被添加 "enhancement" 标签时，移除 "enhancement: pending triage" 标签
+      - name: remove enhancement pending
+        if: github.event.label.name == 'enhancement' # 条件：触发标签为 "enhancement"
+        uses: actions-cool/issues-helper@v3 # 使用第三方工具处理 Issue 操作
+        with:
+          actions: 'remove-labels' # 操作类型：移除标签
+          token: ${{ secrets.GITHUB_TOKEN }} # 授权令牌
+          issue-number: ${{ github.event.issue.number }} # 目标 Issue 编号
+          labels: 'enhancement: pending triage' # 需要移除的标签
+
+      # 步骤2：当 Issue 被添加 "bug" 标签时，移除 "bug: pending triage" 标签
+      - name: remove bug pending
+        if: github.event.label.name == 'bug' # 条件：触发标签为 "bug"
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'remove-labels'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          labels: 'bug: pending triage' # 需要移除的标签（表示从"待分类"状态转为确认状态）
+
+      # 步骤3：当 Issue 被添加 "needs reproduction" 标签时，自动回复并移除 "bug: pending triage" 标签
+      - name: needs reproduction
+        if: github.event.label.name == 'needs reproduction' # 条件：触发标签为 "needs reproduction"（需要复现步骤）
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment, remove-labels' # 操作类型：创建评论 + 移除标签
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          # 自动回复内容：提示用户提供完整复现步骤和代码，告知3天无活动将关闭
+          body: |
+            Hello @${{ github.event.issue.user.login }}. Please provide the complete reproduction steps and code. Issues labeled by `needs reproduction` will be closed if no activities in 3 days.
+          labels: 'bug: pending triage' # 同时移除 "bug: pending triage" 标签

@@ -69,7 +69,7 @@ function onTransitionEnd() {
   <div
     :class="
       cn(
-        'dark:bg-overlay/45 bg-overlay-content/40 dark:bg-overlay-content/45 absolute top-0 left-0 z-100 flex size-full flex-col items-center justify-center transition-all duration-500',
+        'dark:bg-overlay/45 bg-overlay-content/40 dark:bg-overlay-content/45 z-100 absolute left-0 top-0 flex size-full flex-col items-center justify-center transition-all duration-500',
         {
           'invisible opacity-0': !showSpinner,
         },

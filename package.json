@@ -76,8 +76,10 @@
     "@arco/prettier-config": "workspace:*",
     "@arco/stylelint-config": "workspace:*",
     "@arco/tsconfig": "workspace:*",
+    "@arco/turbo-run": "workspace:*",
     "@arco/uno-config": "workspace:*",
     "@arco/vite-config": "workspace:*",
+    "@arco/vsh": "workspace:*",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
     "@playwright/test": "catalog:",
@@ -116,25 +118,17 @@
         "eslint": "*"
       }
     },
-    "overrides": {},
+    "overrides": {
+      "@ast-grep/napi": "catalog:",
+      "@ctrl/tinycolor": "catalog:",
+      "clsx": "catalog:",
+      "esbuild": "0.25.3",
+      "pinia": "catalog:",
+      "vue": "catalog:"
+    },
     "neverBuiltDependencies": [
       "canvas",
       "node-gyp"
-    ]
-  },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.vue": [
-      "stylelint --fix",
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.{less,css}": [
-      "stylelint --fix",
-      "prettier --write"
     ]
   }
 }

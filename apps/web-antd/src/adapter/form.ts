@@ -1,13 +1,13 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2025-07-15 01:57:28
+ * @LastEditTime: 2025-08-12 15:12:52
  * @LastEditors: LLiuHuan
  */
 import type {
-  ArcoFormSchema as FormSchema,
   ArcoFormProps,
+  ArcoFormSchema as FormSchema,
 } from '@arco/common-ui';
 
 import type { ComponentType } from './component';

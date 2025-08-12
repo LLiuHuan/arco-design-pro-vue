@@ -36,7 +36,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     "
   >
     <div
-      class="bg-background text-foreground inline-flex h-full w-full items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+      class="bg-background text-foreground focus-visible:outline-hidden inline-flex h-full w-full items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
     >
       <slot></slot>
     </div>

@@ -1,0 +1,58 @@
+# 工作流名称，将显示在 GitHub Actions 界面中
+name: Semantic Pull Request
+
+# 触发条件：针对目标仓库的 PR 发生以下操作时触发
+on:
+  pull_request_target:  # 在 PR 目标仓库中运行，而非发起 PR 的仓库
+    types:
+      - opened         # 当 PR 被创建时
+      - edited         # 当 PR 信息（包括标题）被编辑时
+      - synchronize    # 当 PR 分支有新的提交同步时
+
+jobs:
+  # 定义一个名为 main 的任务
+  main:
+    name: Semantic Pull Request  # 任务显示名称
+    # 条件：仅当当前仓库是 'LLiuHuan/arco-design-pro-vue' 时才运行
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue'
+    runs-on: ubuntu-latest  # 运行环境：最新版 Ubuntu 系统
+    
+    steps:
+      # 步骤名称：验证 PR 标题
+      - name: Validate PR title
+        # 使用第三方 Action 进行语义化 PR 标题验证
+        uses: amannn/action-semantic-pull-request@v5
+        with:
+          # 允许标题包含 "WIP"（Work In Progress，工作进行中）标记
+          wip: true
+          
+          # 标题主题部分的正则模式：不能以大写字母开头
+          subjectPattern: ^(?![A-Z]).+$
+          
+          # 当标题不符合主题模式时显示的错误信息
+          subjectPatternError: |
+            The subject "{subject}" found in the pull request title "{title}"
+            didn't match the configured pattern. Please ensure that the subject
+            doesn't start with an uppercase character.
+          
+          # 是否要求标题包含作用域（scope），这里设置为不要求
+          requireScope: false
+          
+          # 允许的 PR 类型列表（符合 Conventional Commits 规范）
+          types: |
+            fix       # 修复 bug
+            feat      # 新增功能
+            docs      # 文档更新
+            style     # 代码格式调整（不影响代码运行的变动）
+            refactor  # 代码重构（既不是新增功能，也不是修改 bug 的代码变动）
+            perf      # 性能优化
+            test      # 添加或修改测试代码
+            build     # 构建相关配置变动
+            ci        # CI 配置文件和脚本变动
+            chore     # 其他不修改 src 或 test 的变动
+            revert    # 撤销之前的提交
+            types     # 类型定义文件修改
+            release   # 发布相关
+        # 环境变量：GitHub 提供的令牌，用于访问 GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

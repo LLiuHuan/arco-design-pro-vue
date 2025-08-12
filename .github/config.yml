@@ -1,0 +1,39 @@
+# GitHub 仓库交互配置
+# 用于设置 Issue、PR 的提交规则及社区互动信息
+
+# 禁止创建空白 Issue（必须使用模板）
+blank_issues_enabled: false
+
+# 检查 Issue 是否遵循模板格式
+checkIssueTemplate: true
+
+# 检查 PR 是否遵循模板格式
+checkPullRequestTemplate: true
+
+# 社区联系渠道（显示在 Issue 提交页面）
+contact_links:
+  - name: ❓ 问题与讨论
+    url: https://github.com/LLiuHuan/arco-design-pro-vue/discussions
+    about: 使用 GitHub 讨论区进行留言板式的问题交流
+
+# 首次提交 PR 时的欢迎评论
+newPRWelcomeComment: |
+  💖 感谢提交这个 pull request！💖
+  请耐心等待，我们会尽快回复你。
+
+# 首次合并 PR 时的感谢评论
+firstPRMergeComment: >
+  感谢你的贡献！🎉🎉🎉
+
+# 首次创建 Issue 时的欢迎评论
+newIssueWelcomeComment: >
+  感谢提交你的第一个 issue！请务必遵循 issue 模板，并提供所有信息以帮助开发者更好地理解问题！
+
+# 【可选】需要补充信息的默认标题（全小写，用于检测不够具体的标题）
+requestInfoDefaultTitles:
+  - update readme.md
+  - updates
+
+# 【必填】当需要用户补充信息时的回复评论
+requestInfoReplyComment: >
+  感谢提交这个 issue/PR！如果你能提供更多信息，我们将能更有效地结合上下文分析情况，非常感谢。

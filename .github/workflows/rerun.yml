@@ -1,0 +1,37 @@
+# 工作流名称，将显示在 GitHub Actions 界面中
+name: Rerun workflow
+
+# 触发条件：手动触发（通过 GitHub 界面或 API）
+on:
+  workflow_dispatch:
+    # 手动触发时需要提供的输入参数
+    inputs:
+      run_id:
+        # 参数描述，显示在输入界面
+        description: The workflow id to relanch
+        # 是否为必填参数
+        required: true
+
+# 定义工作流任务
+jobs:
+  # 任务名称
+  rerun:
+    # 运行此任务的环境：最新版 Ubuntu 系统
+    runs-on: ubuntu-latest
+    
+    # 任务步骤
+    steps:
+      # 步骤名称，显示为 "rerun [输入的run_id]"
+      - name: rerun ${{ inputs.run_id }}
+        # 环境变量设置
+        env:
+          # 当前 GitHub 仓库，格式为 "owner/repo"
+          GH_REPO: ${{ github.repository }}
+          # GitHub 提供的临时访问令牌，用于 API 调用
+          GH_TOKEN: ${{ github.token }}
+        # 要执行的命令
+        run: |
+          # 等待指定的工作流运行完成，输出重定向到空设备（不显示）
+          gh run watch ${{ inputs.run_id }} > /dev/null 2>&1
+          # 重新运行指定的工作流中失败的任务
+          gh run rerun ${{ inputs.run_id }} --failed

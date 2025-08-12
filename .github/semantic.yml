@@ -1,0 +1,20 @@
+# 语义化提交（Conventional Commits）配置
+# 用于规范 Git 提交信息格式，便于自动化版本管理和 CHANGELOG 生成
+
+# 是否要求提交信息包含标题和详细描述
+titleAndCommits: true
+
+# 允许的提交类型（对应语义化版本中的变更类型）
+types:
+  - feat        # 新功能（对应 minor 版本）
+  - fix         # 修复 bug（对应 patch 版本）
+  - docs        # 文档更新
+  - chore       # 构建过程或辅助工具的变动
+  - style       # 代码格式调整（不影响代码运行的变动）
+  - refactor    # 代码重构（既不是新功能也不是修复 bug）
+  - perf        # 性能优化
+  - test        # 添加或修改测试代码
+  - build       # 构建相关配置变动
+  - ci          # CI 配置文件和脚本的变动
+  - revert      # 撤销之前的提交
+

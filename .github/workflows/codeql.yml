@@ -7,28 +7,28 @@ name: 'CodeQL'
 # 触发条件：以下事件会触发安全扫描
 on:
   push:
-    branches: ['master']  # 当代码推送到 master 分支时触发
+    branches: ['master'] # 当代码推送到 master 分支时触发
   pull_request:
-    branches: ['master']  # 当 PR 提交到 master 分支时触发
+    branches: ['master'] # 当 PR 提交到 master 分支时触发
   schedule:
-    - cron: '35 0 * * 0'  # 每周日 00:35 自动执行（定期全量扫描）
+    - cron: '35 0 * * 0' # 每周日 00:35 自动执行（定期全量扫描）
 
 jobs:
   # 任务：分析代码（按语言分组）
   analyze:
-    name: Analyze (${{ matrix.language }})  # 任务名称，包含当前分析的语言
-    if: github.repository == 'LLiuHuan/arco-design-pro-vue'  # 仅在官方仓库执行
+    name: Analyze (${{ matrix.language }}) # 任务名称，包含当前分析的语言
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue' # 仅在官方仓库执行
     # 运行环境：根据语言选择（Swift 需 macOS，其他用 Ubuntu）
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}  # 超时时间（Swift 为 2 小时，其他为 6 小时）
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }} # 超时时间（Swift 为 2 小时，其他为 6 小时）
     permissions:
-      security-events: write  # 允许写入安全事件（如漏洞报告）
-      packages: read          # 允许读取私有 CodeQL 查询包
-      actions: read           # 私有仓库需读取工作流信息
-      contents: read          # 允许读取仓库代码
+      security-events: write # 允许写入安全事件（如漏洞报告）
+      packages: read # 允许读取私有 CodeQL 查询包
+      actions: read # 私有仓库需读取工作流信息
+      contents: read # 允许读取仓库代码
 
     strategy:
-      fail-fast: false  # 一个语言分析失败不影响其他语言
+      fail-fast: false # 一个语言分析失败不影响其他语言
       matrix:
         include:
           # 分析的语言及构建模式：这里指定为 JavaScript/TypeScript，无需构建（非编译型语言）
@@ -49,15 +49,15 @@ jobs:
 
       # 步骤2：初始化 CodeQL 工具（加载分析器和查询规则）
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3  # 使用官方 CodeQL 初始化动作
+        uses: github/codeql-action/init@v3 # 使用官方 CodeQL 初始化动作
         with:
-          languages: ${{ matrix.language }}  # 指定分析的语言
-          build-mode: ${{ matrix.build-mode }}  # 构建模式（none 表示无需构建，适用于 JS/TS）
+          languages: ${{ matrix.language }} # 指定分析的语言
+          build-mode: ${{ matrix.build-mode }} # 构建模式（none 表示无需构建，适用于 JS/TS）
           # 可选：指定自定义查询（默认使用官方安全规则）
           # queries: security-extended,security-and-quality  # 扩展安全规则和质量规则
 
       # 步骤3：手动构建代码（仅当 build-mode 为 manual 时执行，适用于编译型语言）
-      - if: matrix.build-mode == 'manual'  # 本配置中不会执行（因 build-mode 为 none）
+      - if: matrix.build-mode == 'manual' # 本配置中不会执行（因 build-mode 为 none）
         shell: bash
         run: |
           echo '如果使用 "manual" 构建模式，需替换为构建命令，例如：'
@@ -67,6 +67,6 @@ jobs:
 
       # 步骤4：执行 CodeQL 分析（检测漏洞并生成报告）
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3  # 使用官方分析动作
+        uses: github/codeql-action/analyze@v3 # 使用官方分析动作
         with:
-          category: '/language:${{matrix.language}}'  # 按语言分类报告结果
+          category: '/language:${{matrix.language}}' # 按语言分类报告结果

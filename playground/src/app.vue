@@ -2,21 +2,20 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 11:47:26
- * @LastEditTime: 2025-08-12 12:32:26
+ * @LastEditTime: 2025-08-12 15:19:00
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
 import { computed, watch } from 'vue';
 
+import { useArcoDesignTokens } from '@arco/hooks';
 import { preferences } from '@arco/preferences';
 
 import { ConfigProvider } from '@arco-design/web-vue';
 import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
 import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
-import { useArcoDesignTokens } from '@arco/hooks';
 
 defineOptions({ name: 'App' });
-
 
 const tokenLocale = computed(() =>
   preferences.app.locale === 'zh-CN' ? zhCN : enUS,
@@ -34,7 +33,7 @@ watch(
   { immediate: true },
 );
 
-  useArcoDesignTokens();
+useArcoDesignTokens();
 </script>
 
 <template>

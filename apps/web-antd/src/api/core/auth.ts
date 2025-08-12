@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-15 23:01:48
- * @LastEditTime: 2025-07-24 09:47:48
+ * @LastEditTime: 2025-08-12 22:02:41
  * @LastEditors: LLiuHuan
  */
 import { baseRequestClient, requestClient } from '#/api/request';
@@ -50,8 +50,8 @@ export default AuthAPI;
 
 /** 登录接口参数 */
 export interface LoginParams {
-  password: string;
-  username: string;
+  password?: string;
+  username?: string;
 }
 
 /** 登录接口返回值 */

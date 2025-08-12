@@ -70,7 +70,7 @@ withDefaults(defineProps<Props>(), {
       />
       <template v-if="!collapsed">
         <slot name="text">
-          <span class="truncate font-semibold text-nowrap">
+          <span class="truncate text-nowrap font-semibold">
             {{ text }}
           </span>
         </slot>

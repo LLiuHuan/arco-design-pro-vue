@@ -127,9 +127,7 @@ defineExpose({
 });
 </script>
 <template>
-  <div
-    :class="cn(actionWrapperClass)"
-  >
+  <div :class="cn(actionWrapperClass)">
     <template v-if="rootProps.actionButtonsReverse">
       <!-- 提交按钮前 -->
       <slot name="submit-before"></slot>

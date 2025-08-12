@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@arco/tsconfig/node.json",
-  "include": ["src"],
-  "exclude": ["node_modules"],
   "compilerOptions": {
-    "moduleResolution": "bundler", // 或 "node16"
-  }
+    "moduleResolution": "bundler" // 或 "node16"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

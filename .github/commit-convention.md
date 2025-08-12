@@ -1,10 +1,11 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-08-12 13:19:55
  * @LastEditTime: 2025-08-12 14:59:12
  * @LastEditors: LLiuHuan
 -->
+
 ## Git Commit Message Convention
 
 > This is adapted from [Angular's commit convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular).
@@ -14,7 +15,7 @@
 Messages must be matched by the following regex:
 
 ```js
-/^(revert: )?(feat|fix|docs|style|refactor|perf|test|workflow|build|ci|chore|types|wip): . 
+/^(revert: )?(feat|fix|docs|style|refactor|perf|test|workflow|build|ci|chore|types|wip): .
 {1,50}/;
 ```
 

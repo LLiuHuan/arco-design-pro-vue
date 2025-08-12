@@ -3,25 +3,25 @@ name: Build detection
 
 # 触发条件：针对 master 分支的 PR 发生以下事件时
 on:
-  pull_request_target:  # 使用 pull_request_target 而非 pull_request，增强安全性（尤其处理 fork 仓库的 PR）
-    types: [opened, synchronize, reopened]  # 触发事件：PR 创建、代码同步更新、PR 重新打开
+  pull_request_target: # 使用 pull_request_target 而非 pull_request，增强安全性（尤其处理 fork 仓库的 PR）
+    types: [opened, synchronize, reopened] # 触发事件：PR 创建、代码同步更新、PR 重新打开
     branches:
-      - master  # 仅对目标分支为 master 的 PR 生效
+      - master # 仅对目标分支为 master 的 PR 生效
 
 # 环境变量：全局生效的配置
 env:
-  HUSKY: '0'  # 禁用 Husky 提交钩子（CI 环境无需执行本地提交时的钩子操作，加速流程）
+  HUSKY: '0' # 禁用 Husky 提交钩子（CI 环境无需执行本地提交时的钩子操作，加速流程）
 
 # 并发控制：避免同一 PR 多次提交导致的资源浪费
 concurrency:
   # 分组标识：工作流名称 + PR 编号，确保同一 PR 的工作流唯一
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
-  cancel-in-progress: true  # 当同一 PR 有新提交时，自动取消正在运行的旧工作流
+  cancel-in-progress: true # 当同一 PR 有新提交时，自动取消正在运行的旧工作流
 
 # 权限设置：遵循最小权限原则，仅授予必要权限
 permissions:
-  contents: read  # 允许读取仓库代码
-  pull-requests: write  # 允许操作 PR（如添加检查结果、评论等）
+  contents: read # 允许读取仓库代码
+  pull-requests: write # 允许操作 PR（如添加检查结果、评论等）
 
 # 任务定义：工作流的具体执行步骤
 jobs:
@@ -34,27 +34,27 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest  # Linux 环境
+          - ubuntu-latest # Linux 环境
           # - macos-latest  # macOS 环境（注释掉，需要时可启用）
-          - windows-latest  # Windows 环境
+          - windows-latest # Windows 环境
     steps:
       # 步骤 1：拉取仓库代码
       - name: Checkout code
-        uses: actions/checkout@v4  # 使用官方 checkout 动作拉取代码
+        uses: actions/checkout@v4 # 使用官方 checkout 动作拉取代码
         with:
-          fetch-depth: 0  # 拉取完整历史记录（避免部分操作因历史不全失败）
+          fetch-depth: 0 # 拉取完整历史记录（避免部分操作因历史不全失败）
 
       # 步骤 2：切换到当前 PR 的分支
       - name: Checkout out pull request
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置令牌，用于操作 PR
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 内置令牌，用于操作 PR
         run: |
           # 使用 GitHub CLI（gh）切换到当前 PR 的代码分支
           gh pr checkout ${{ github.event.pull_request.number }}
 
       # 步骤 3：配置 Node.js 和 pnpm 环境
       - name: Setup Node
-        uses: ./.github/actions/setup-node  # 复用自定义的环境配置动作（安装 Node、pnpm 及依赖）
+        uses: ./.github/actions/setup-node # 复用自定义的环境配置动作（安装 Node、pnpm 及依赖）
 
       # 步骤 4：执行构建命令，验证代码可构建性
       - name: Build

@@ -1,8 +1,7 @@
+import type { LocaleSetupOptions, SupportedLanguagesType } from '@arco/locales';
 import type { Locale } from 'ant-design-vue/es/locale';
 
 import type { App } from 'vue';
-
-import type { LocaleSetupOptions, SupportedLanguagesType } from '@arco/locales';
 
 import { ref } from 'vue';
 

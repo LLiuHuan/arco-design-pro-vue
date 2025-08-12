@@ -1,10 +1,11 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:03:17
  * @LastEditTime: 2025-05-27 15:03:30
  * @LastEditors: LLiuHuan
 -->
+
 ## Effects 目录
 
 `effects` 目录专门用于存放与轻微耦合相关的代码和逻辑。如果你的包具有以下特点，建议将其放置在 `effects` 目录下：

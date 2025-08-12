@@ -14,11 +14,9 @@
 
 ---
 
-> I'm a front-end novice and I don't have much time. I just write and see how I can deal with it. If you like it, you
-> can click Start.
+> I'm a front-end novice and I don't have much time. I just write and see how I can deal with it. If you like it, you can click Start.
 
-> It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be
-> developed.
+> It is expected that everything will be completed within 24 years, and at least one front-end + one back-end will be developed.
 
 > In view of time constraints, after comprehensive consideration and analysis, this project has decided to make adjustments to the infrastructure and select vue-vben-admin as the basic framework. During the refactoring process, the latest technologies will be fully adopted to ensure that the project can keep up with the industry's forefront in terms of functionality implementation, performance optimization, and technical architecture, meeting the diverse needs of the project in different scenarios and improving the overall quality and maintainability of the project.
 
@@ -26,18 +24,15 @@
 
 ### 1.1 Project Introduction
 
-> It was originally planned to implement the vue version of arco-design-pro, but the official said that the vue version
-> will be launched in December 2021, so this project will not completely copy arco-design-pro.
-> It is envisioned to develop a mid- and back-end front-end project that can be used in a production environment, and
-> will develop multiple back-ends for everyone to choose from.
+> It was originally planned to implement the vue version of arco-design-pro, but the official said that the vue version will be launched in December 2021, so this project will not completely copy arco-design-pro. It is envisioned to develop a mid- and back-end front-end project that can be used in a production environment, and will develop multiple back-ends for everyone to choose from.
 
 - Old version
-    - [Online preview](http://arco_legacy.0x3.cn/)  
-      （Please use Chrome to open）
-    - [Github address](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
+  - [Online preview](http://arco_legacy.0x3.cn/)  
+    （Please use Chrome to open）
+  - [Github address](https://github.com/LLiuHuan/arco-design-pro-vue/tree/legacy)
 - New version
-    - [Online preview](http://arco.0x3.cn/)
-    - Document address Under development
+  - [Online preview](http://arco.0x3.cn/)
+  - Document address Under development
 
 ### 1.2 Do you have any good ideas? Issues can be raised
 
@@ -124,15 +119,15 @@ Develop in the following order
 - [ ] Table component
 - [ ] Form component
 - [x] Chart component
-    - [x] ECharts
-    - [ ] D3
+  - [x] ECharts
+  - [ ] D3
 - [ ] Map component
 - [ ] Video component
 - [ ] Editor component
-    - [ ] Rich text component
-    - [ ] Markdown
-    - [ ] Yarm
-    - [ ] Json component
+  - [ ] Rich text component
+  - [ ] Markdown
+  - [ ] Yarm
+  - [ ] Json component
 - [ ] Swiper component
 - [ ] Icon component
 - [ ] Avatar upload component
@@ -146,8 +141,8 @@ Develop in the following order
 - [ ] Popup component
 - [ ] Lazy loading component
 - [ ] Verification component
-    - [ ] Drag verification
-    - [ ] Picture restore
+  - [ ] Drag verification
+  - [ ] Picture restore
 - [ ] Loading component
 - [ ] Table selector component
 
@@ -174,13 +169,13 @@ Develop in the following order
 ##### 0x01.6 Permissions example
 
 - [x] Based on front-end permissions
-    - [x] Page level permissions
-    - [x] Button level permissions
-    - [x] Front-end permission test page
+  - [x] Page level permissions
+  - [x] Button level permissions
+  - [x] Front-end permission test page
 - [ ] Based on backend permissions
-    - [ ] Page level permissions
-    - [ ] Button level permissions
-    - [ ] Backend permission test page
+  - [ ] Page level permissions
+  - [ ] Button level permissions
+  - [ ] Backend permission test page
 
 ##### 0x01.7 System Management
 
@@ -204,28 +199,28 @@ Develop in the following order
 ##### 0x01.8 Page
 
 - [ ] Form page
-    - [ ] Basic form
-    - [ ] Stepping form
-    - [ ] Advanced form
+  - [ ] Basic form
+  - [ ] Stepping form
+  - [ ] Advanced form
 - [ ] Details page
-    - [ ] Basic details page
-    - [ ] Advanced detail page
+  - [ ] Basic details page
+  - [ ] Advanced detail page
 - [ ] Result page
-    - [ ] Successful page
-    - [ ] Failed page
+  - [ ] Successful page
+  - [ ] Failed page
 - [ ] Personal page
-    - [ ] Personal center
-    - [ ] Personal settings
+  - [ ] Personal center
+  - [ ] Personal settings
 - [ ] Abnormal pages
-    - [ ] 403
-    - [ ] 404
-    - [ ] 500
-    - [ ] Network Error
-    - [ ] No data
+  - [ ] 403
+  - [ ] 404
+  - [ ] 500
+  - [ ] Network Error
+  - [ ] No data
 - [ ] List page
-    - [ ] Standard list
-    - [ ] Card list
-    - [ ] Search list
+  - [ ] Standard list
+  - [ ] Card list
+  - [ ] Search list
 
 ##### 0x01.9 Graphic editor ?
 

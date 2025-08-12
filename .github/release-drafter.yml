@@ -23,41 +23,41 @@ template: |
 
 # 变更分类（根据 PR 标签将变更归类展示）
 categories:
-  - title: '🚀 Features'          # 新功能
+  - title: '🚀 Features' # 新功能
     labels:
       - 'feature'
-  - title: '🐞 Bug Fixes'          # Bug 修复
+  - title: '🐞 Bug Fixes' # Bug 修复
     labels:
       - 'bug'
-  - title: '📈 Performance & Enhancement'  # 性能优化和功能增强
+  - title: '📈 Performance & Enhancement' # 性能优化和功能增强
     labels:
       - 'perf'
       - 'enhancement'
-  - title: '📝 Documentation'      # 文档更新
+  - title: '📝 Documentation' # 文档更新
     labels:
       - 'documentation'
-  - title: '👻 Maintenance'        # 维护工作（依赖更新、代码清理等）
+  - title: '👻 Maintenance' # 维护工作（依赖更新、代码清理等）
     labels:
       - 'chore'
       - 'dependencies'
     # collapse-after: 12  # 超过 12 项时自动折叠该部分
-  - title: '🚦 Tests'              # 测试相关
+  - title: '🚦 Tests' # 测试相关
     labels:
       - 'tests'
-  - title: '💥 Breaking Changes'   # 破坏性变更（更醒目）
+  - title: '💥 Breaking Changes' # 破坏性变更（更醒目）
     labels:
       - 'breaking'
 
 # 版本号解析规则（根据 PR 标签自动确定主/次/补丁版本）
 version-resolver:
-  major:  # 触发主版本号递增的标签
+  major: # 触发主版本号递增的标签
     labels:
       - 'major'
       - 'breaking'
-  minor:  # 触发次版本号递增的标签
+  minor: # 触发次版本号递增的标签
     labels:
       - 'minor'
-  patch:  # 触发补丁版本号递增的标签
+  patch: # 触发补丁版本号递增的标签
     labels:
       - 'feature'
       - 'patch'
@@ -69,9 +69,9 @@ version-resolver:
 
 # 排除不需要显示在 Changelog 中的标签
 exclude-labels:
-  - 'skip-changelog'      # 明确跳过 Changelog
-  - 'no-changelog'        # 不显示在 Changelog 中
-  - 'changelog'           # 仅用于标记 Changelog 相关工作
-  - 'bump versions'       # 版本号更新操作本身
-  - 'reverted'            # 已被撤销的变更
-  - 'invalid'             # 无效的 PR
+  - 'skip-changelog' # 明确跳过 Changelog
+  - 'no-changelog' # 不显示在 Changelog 中
+  - 'changelog' # 仅用于标记 Changelog 相关工作
+  - 'bump versions' # 版本号更新操作本身
+  - 'reverted' # 已被撤销的变更
+  - 'invalid' # 无效的 PR

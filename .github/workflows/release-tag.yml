@@ -5,32 +5,32 @@ name: Create Release Tag
 on:
   push:
     tags:
-      - 'v*.*.*'  # 匹配语义化版本标签（主版本.次版本.补丁版本）
+      - 'v*.*.*' # 匹配语义化版本标签（主版本.次版本.补丁版本）
 
 # 环境变量：全局生效的配置
 env:
-  HUSKY: '0'  # 禁用 Husky 提交钩子（发布流程无需执行本地提交校验）
+  HUSKY: '0' # 禁用 Husky 提交钩子（发布流程无需执行本地提交校验）
 
 # 权限设置：允许操作 PR 和仓库内容（用于创建 Release 和推送标签）
 permissions:
-  pull-requests: write  # 允许操作 PR（当前主要用于 release-drafter 工具）
-  contents: write       # 允许创建 Release、推送标签等操作
+  pull-requests: write # 允许操作 PR（当前主要用于 release-drafter 工具）
+  contents: write # 允许创建 Release、推送标签等操作
 
 jobs:
   # 任务：执行发布流程，创建正式Release
   build:
-    name: Create Release  # 任务名称
-    if: github.repository == 'LLiuHuan/arco-design-pro-vue'  # 仅在官方仓库执行
-    runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版
+    name: Create Release # 任务名称
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue' # 仅在官方仓库执行
+    runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
     strategy:
       matrix:
-        node-version: [20]  # 指定 Node.js 版本为 20（用于环境一致性）
+        node-version: [20] # 指定 Node.js 版本为 20（用于环境一致性）
     steps:
       # 步骤1：拉取仓库代码（包含完整历史和标签）
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 拉取完整历史，确保标签和提交记录完整
+          fetch-depth: 0 # 拉取完整历史，确保标签和提交记录完整
 
       # 以下为注释掉的可选步骤（如需在发布前执行测试/构建，可取消注释）
       # - name: Install pnpm
@@ -52,7 +52,7 @@ jobs:
 
       # 步骤2：解析标签中的版本信息（提取主版本、完整版本号等）
       - name: version
-        id: version  # 步骤ID，用于后续引用输出结果
+        id: version # 步骤ID，用于后续引用输出结果
         run: |
           # 从触发事件中提取标签（如从 "refs/tags/v1.2.3" 中获取 "v1.2.3"）
           tag=${GITHUB_REF/refs\/tags\//}
@@ -66,12 +66,13 @@ jobs:
           echo "major=${major}" >> $GITHUB_OUTPUT
 
       # 步骤3：使用 release-drafter 生成并发布正式Release
-      - uses: release-drafter/release-drafter@v6  # 引用 release-drafter 工具
+      - uses: release-drafter/release-drafter@v6 # 引用 release-drafter 工具
         with:
-          version: ${{ steps.version.outputs.version }}  # 指定发布版本号（如 "1.2.3"）
-          publish: true  # 直接发布正式Release（而非草稿）
+          version: ${{ steps.version.outputs.version }} # 指定发布版本号（如 "1.2.3"）
+          publish: true # 直接发布正式Release（而非草稿）
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 授权令牌，用于创建Release
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 授权令牌，用于创建Release
+
 
       # 以下为注释掉的可选步骤（按需启用）
       # - name: force update major tag

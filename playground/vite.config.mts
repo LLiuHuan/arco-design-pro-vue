@@ -26,8 +26,8 @@ export default defineConfig(async () => {
       },
       plugins: [
         vitePluginForArco({
-          style: 'css'
-        })
+          style: 'css',
+        }),
       ],
     },
   };

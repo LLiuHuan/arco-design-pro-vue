@@ -9,6 +9,7 @@ CODEOWNERS
 .nitro
 .output
 
+docs
 
 **/*.svg
 **/*.sh

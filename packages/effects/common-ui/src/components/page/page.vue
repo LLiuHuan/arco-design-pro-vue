@@ -95,7 +95,7 @@ onMounted(() => {
       ref="footerRef"
       :class="
         cn(
-          'bg-card align-center absolute right-0 bottom-0 left-0 flex px-6 py-4',
+          'bg-card align-center absolute bottom-0 left-0 right-0 flex px-6 py-4',
           footerClass,
         )
       "

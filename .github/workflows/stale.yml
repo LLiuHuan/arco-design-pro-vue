@@ -24,21 +24,21 @@ jobs:
         with:
           # 用于访问 GitHub API 的令牌
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          
+
           # 给陈旧 issue 发送的提示消息
           stale-issue-message: 'This issue is stale because it has been open 60 days with no activity. Remove stale label or comment or this will be closed in 7 days'
           # 翻译：此 issue 已过期，因为它已开放 60 天且无活动。移除 stale 标签或评论，否则将在 7 天内关闭
-          
+
           # 给陈旧 PR 发送的提示消息
           stale-pr-message: 'This PR is stale because it has been open 60 days with no activity. Remove stale label or comment or this will be closed in 7 days'
           # 翻译：此 PR 已过期，因为它已开放 60 天且无活动。移除 stale 标签或评论，否则将在 7 天内关闭
-          
+
           # 不受过期规则影响的 issue 标签（带有这些标签的 issue 不会被标记为陈旧）
           exempt-issue-labels: 'bug,enhancement'
           # 说明：标记为 bug（bug 修复）和 enhancement（功能增强）的 issue 不会被自动处理
-          
+
           # 多少天无活动后标记为陈旧
           days-before-stale: 60
-          
+
           # 标记为陈旧后，多少天后自动关闭
           days-before-close: 7

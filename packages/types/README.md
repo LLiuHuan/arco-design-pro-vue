@@ -1,10 +1,11 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-22 17:00:46
  * @LastEditTime: 2025-05-22 17:02:11
  * @LastEditors: LLiuHuan
 -->
+
 # @arco/types
 
 用于多个 `app` 公用的工具类型，继承了 `@arco-core/typings` 的所有能力。业务上有通用的类型定义可以放在这里。

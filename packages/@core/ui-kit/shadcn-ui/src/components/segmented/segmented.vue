@@ -44,7 +44,7 @@ const tabsIndicatorStyle = computed(() => {
       <template v-for="tab in tabs" :key="tab.value">
         <TabsTrigger
           :value="tab.value"
-          class="z-20 inline-flex items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap disabled:pointer-events-none disabled:opacity-50"
+          class="z-20 inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
         >
           {{ tab.label }}
         </TabsTrigger>

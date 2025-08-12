@@ -4,17 +4,17 @@ name: Changeset version
 
 # 触发条件
 on:
-  workflow_dispatch:  # 支持手动触发（在 GitHub 页面点击运行）
-  pull_request:       # 当 PR 关闭时触发
+  workflow_dispatch: # 支持手动触发（在 GitHub 页面点击运行）
+  pull_request: # 当 PR 关闭时触发
     types:
-      - closed        # 仅监听 PR 关闭事件
+      - closed # 仅监听 PR 关闭事件
     branches:
-      - master          # 仅针对合并到 master 分支的 PR
+      - master # 仅针对合并到 master 分支的 PR
 
 # 权限设置：允许操作 PR 和仓库内容
 permissions:
-  pull-requests: write  # 允许创建和编辑 PR
-  contents: write       # 允许提交代码和创建标签
+  pull-requests: write # 允许创建和编辑 PR
+  contents: write # 允许提交代码和创建标签
 
 # 环境变量：标记当前为 CI 环境
 env:
@@ -34,16 +34,16 @@ jobs:
       !contains(github.event.head_commit.message, '[skip ci]') &&
       # 4. 仅在官方仓库执行（避免 fork 仓库误触发）
       github.repository == 'LLiuHuan/arco-design-pro-vue'
-    
-    timeout-minutes: 15  # 任务超时时间（15分钟）
-    runs-on: ubuntu-latest  # 运行环境：Ubuntu 最新版
+
+    timeout-minutes: 15 # 任务超时时间（15分钟）
+    runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
 
     steps:
       # 步骤1：拉取仓库代码
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 拉取完整历史记录（确保版本计算正确）
+          fetch-depth: 0 # 拉取完整历史记录（确保版本计算正确）
 
       # 步骤2：配置 Node 环境（复用项目自定义的 Node 配置动作）
       - name: Setup Node
@@ -51,10 +51,10 @@ jobs:
 
       # 步骤3：创建版本更新 PR
       - name: Create Release Pull Request
-        uses: changesets/action@v1  # 使用 changesets 官方动作处理版本
+        uses: changesets/action@v1 # 使用 changesets 官方动作处理版本
         with:
-          version: pnpm run version  # 执行版本更新的命令（项目中需定义该脚本）
-          commit: 'chore: bump versions'  # 版本更新的提交信息
-          title: 'chore: bump versions'   # 版本更新 PR 的标题
+          version: pnpm run version # 执行版本更新的命令（项目中需定义该脚本）
+          commit: 'chore: bump versions' # 版本更新的提交信息
+          title: 'chore: bump versions' # 版本更新 PR 的标题
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置令牌，用于授权操作 GitHub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 内置令牌，用于授权操作 GitHub

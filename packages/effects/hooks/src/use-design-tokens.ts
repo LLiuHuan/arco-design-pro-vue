@@ -170,7 +170,6 @@ export function useElementPlusDesignTokens() {
 
   const getCssVariableValue = (variable: string, isColor: boolean = true) => {
     const value = getCssVariableValueRaw(variable);
-        console.log(variable, value, convertToRgb(`hsl(${value})`));
     return isColor ? convertToRgb(`hsl(${value})`) : value;
   };
 
@@ -324,31 +323,28 @@ export function useElementPlusDesignTokens() {
 export function useArcoDesignTokens() {
   const { isDark } = usePreferences();
   const rootStyles = getComputedStyle(document.documentElement);
-  console.log(rootStyles)
 
   const getCssVariableValueRaw = (variable: string) => {
-    console.log('rootStyles.getPropertyValue(variable)', variable, rootStyles.getPropertyValue(variable))
     return rootStyles.getPropertyValue(variable);
   };
 
   const getCssVariableValue = (variable: string, isColor: boolean = true) => {
     const value = getCssVariableValueRaw(variable);
-    console.log(variable, value, convertToRgb(`hsl(${value})`));
     return isColor ? convertToRgb(`hsl(${value})`) : value;
   };
 
   const rgbToValues = (rgbStr: string): string => {
-      // 匹配括号内的内容（支持数值前后有空格的情况）
-      const regex = /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
-      const result = rgbStr.match(regex);
-      
-      if (!result) {
-          throw new Error("输入格式不正确，请使用 'rgb(r, g, b)' 格式");
-      }
-      
-      // 拼接三个数值为字符串
-      return `${result[1]},${result[2]},${result[3]}`;
-  }
+    // 匹配括号内的内容（支持数值前后有空格的情况）
+    const regex = /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
+    const result = rgbStr.match(regex);
+
+    if (!result) {
+      throw new Error("输入格式不正确，请使用 'rgb(r, g, b)' 格式");
+    }
+
+    // 拼接三个数值为字符串
+    return `${result[1]},${result[2]},${result[3]}`;
+  };
 
   watch(
     () => preferences.theme,
@@ -359,122 +355,120 @@ export function useArcoDesignTokens() {
       // document.body.style.setProperty('--arcoblue-6', '41, 37, 36');
       const variables: Record<string, string> = {
         '--arcoblue-6': rgbToValues(getCssVariableValue('--primary-500')),
-        '--arcoblue-5': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-600'))
-        : rgbToValues(getCssVariableValue('--primary-400')),
-        '--arcoblue-7': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-400'))
-        : rgbToValues(getCssVariableValue('--primary-700')),
-        '--arcoblue-4': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-700'))
-        : rgbToValues(getCssVariableValue('--primary-300')),
-        '--arcoblue-3': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-800'))
-        : rgbToValues(getCssVariableValue('--primary-200')),
-        '--arcoblue-2': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-900'))
-        : rgbToValues(getCssVariableValue('--primary-100')),
-        '--arcoblue-1': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-950'))
-        : rgbToValues(getCssVariableValue('--primary-50')),
-        '--arcoblue-8': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-300'))
-        : rgbToValues(getCssVariableValue('--primary-800')),
-        '--arcoblue-9': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-200'))
-        : rgbToValues(getCssVariableValue('--primary-900')),
-        '--arcoblue-10': isDark.value 
-        ? rgbToValues(getCssVariableValue('--primary-100'))
-        : rgbToValues(getCssVariableValue('--primary-950')),
+        '--arcoblue-5': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-600'))
+          : rgbToValues(getCssVariableValue('--primary-400')),
+        '--arcoblue-7': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-400'))
+          : rgbToValues(getCssVariableValue('--primary-700')),
+        '--arcoblue-4': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-700'))
+          : rgbToValues(getCssVariableValue('--primary-300')),
+        '--arcoblue-3': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-800'))
+          : rgbToValues(getCssVariableValue('--primary-200')),
+        '--arcoblue-2': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-900'))
+          : rgbToValues(getCssVariableValue('--primary-100')),
+        '--arcoblue-1': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-950'))
+          : rgbToValues(getCssVariableValue('--primary-50')),
+        '--arcoblue-8': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-300'))
+          : rgbToValues(getCssVariableValue('--primary-800')),
+        '--arcoblue-9': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-200'))
+          : rgbToValues(getCssVariableValue('--primary-900')),
+        '--arcoblue-10': isDark.value
+          ? rgbToValues(getCssVariableValue('--primary-100'))
+          : rgbToValues(getCssVariableValue('--primary-950')),
 
         '--green-6': rgbToValues(getCssVariableValue('--success-600')),
-        '--green-5': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-600'))
-        : rgbToValues(getCssVariableValue('--success-500')),
-        '--green-7': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-400'))
-        : rgbToValues(getCssVariableValue('--success-700')),
-        '--green-4': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-700'))
-        : rgbToValues(getCssVariableValue('--success-400')),
-        '--green-3': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-800'))
-        : rgbToValues(getCssVariableValue('--success-300')),
-        '--green-2': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-900'))
-        : rgbToValues(getCssVariableValue('--success-200')),
-        '--green-1': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-950'))
-        : rgbToValues(getCssVariableValue('--success-100')),
-        '--green-8': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-300'))
-        : rgbToValues(getCssVariableValue('--success-800')),
-        '--green-9': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-200'))
-        : rgbToValues(getCssVariableValue('--success-900')),
-        '--green-10': isDark.value 
-        ? rgbToValues(getCssVariableValue('--success-100'))
-        : rgbToValues(getCssVariableValue('--success-950')),
-
+        '--green-5': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-600'))
+          : rgbToValues(getCssVariableValue('--success-500')),
+        '--green-7': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-400'))
+          : rgbToValues(getCssVariableValue('--success-700')),
+        '--green-4': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-700'))
+          : rgbToValues(getCssVariableValue('--success-400')),
+        '--green-3': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-800'))
+          : rgbToValues(getCssVariableValue('--success-300')),
+        '--green-2': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-900'))
+          : rgbToValues(getCssVariableValue('--success-200')),
+        '--green-1': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-950'))
+          : rgbToValues(getCssVariableValue('--success-100')),
+        '--green-8': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-300'))
+          : rgbToValues(getCssVariableValue('--success-800')),
+        '--green-9': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-200'))
+          : rgbToValues(getCssVariableValue('--success-900')),
+        '--green-10': isDark.value
+          ? rgbToValues(getCssVariableValue('--success-100'))
+          : rgbToValues(getCssVariableValue('--success-950')),
 
         '--orange-6': rgbToValues(getCssVariableValue('--warning-500')),
-        '--orange-5': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-600'))
-        : rgbToValues(getCssVariableValue('--warning-400')),
-        '--orange-7': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-400'))
-        : rgbToValues(getCssVariableValue('--warning-600')),
-        '--orange-4': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-700'))
-        : rgbToValues(getCssVariableValue('--warning-300')),
-        '--orange-3': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-800'))
-        : rgbToValues(getCssVariableValue('--warning-200')),
-        '--orange-2': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-900'))
-        : rgbToValues(getCssVariableValue('--warning-100')),
-        '--orange-1': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-950'))
-        : rgbToValues(getCssVariableValue('--warning-50')),
-        '--orange-8': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-300'))
-        : rgbToValues(getCssVariableValue('--warning-700')),
-        '--orange-9': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-200'))
-        : rgbToValues(getCssVariableValue('--warning-800')),
-        '--orange-10': isDark.value 
-        ? rgbToValues(getCssVariableValue('--warning-100'))
-        : rgbToValues(getCssVariableValue('--warning-900')),
-
+        '--orange-5': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-600'))
+          : rgbToValues(getCssVariableValue('--warning-400')),
+        '--orange-7': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-400'))
+          : rgbToValues(getCssVariableValue('--warning-600')),
+        '--orange-4': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-700'))
+          : rgbToValues(getCssVariableValue('--warning-300')),
+        '--orange-3': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-800'))
+          : rgbToValues(getCssVariableValue('--warning-200')),
+        '--orange-2': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-900'))
+          : rgbToValues(getCssVariableValue('--warning-100')),
+        '--orange-1': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-950'))
+          : rgbToValues(getCssVariableValue('--warning-50')),
+        '--orange-8': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-300'))
+          : rgbToValues(getCssVariableValue('--warning-700')),
+        '--orange-9': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-200'))
+          : rgbToValues(getCssVariableValue('--warning-800')),
+        '--orange-10': isDark.value
+          ? rgbToValues(getCssVariableValue('--warning-100'))
+          : rgbToValues(getCssVariableValue('--warning-900')),
 
         '--red-6': rgbToValues(getCssVariableValue('--destructive-500')),
-        '--red-5': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-600'))
-        : rgbToValues(getCssVariableValue('--destructive-400')),
-        '--red-7': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-400'))
-        : rgbToValues(getCssVariableValue('--destructive-600')),
-        '--red-4': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-700'))
-        : rgbToValues(getCssVariableValue('--destructive-300')),
-        '--red-3': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-800'))
-        : rgbToValues(getCssVariableValue('--destructive-200')),
-        '--red-2': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-900'))
-        : rgbToValues(getCssVariableValue('--destructive-100')),
-        '--red-1': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-950'))
-        : rgbToValues(getCssVariableValue('--destructive-50')),
-        '--red-8': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-300'))
-        : rgbToValues(getCssVariableValue('--destructive-700')),
-        '--red-9': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-200'))
-        : rgbToValues(getCssVariableValue('--destructive-800')),
-        '--red-10': isDark.value 
-        ? rgbToValues(getCssVariableValue('--destructive-100'))
-        : rgbToValues(getCssVariableValue('--destructive-900')),
+        '--red-5': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-600'))
+          : rgbToValues(getCssVariableValue('--destructive-400')),
+        '--red-7': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-400'))
+          : rgbToValues(getCssVariableValue('--destructive-600')),
+        '--red-4': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-700'))
+          : rgbToValues(getCssVariableValue('--destructive-300')),
+        '--red-3': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-800'))
+          : rgbToValues(getCssVariableValue('--destructive-200')),
+        '--red-2': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-900'))
+          : rgbToValues(getCssVariableValue('--destructive-100')),
+        '--red-1': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-950'))
+          : rgbToValues(getCssVariableValue('--destructive-50')),
+        '--red-8': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-300'))
+          : rgbToValues(getCssVariableValue('--destructive-700')),
+        '--red-9': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-200'))
+          : rgbToValues(getCssVariableValue('--destructive-800')),
+        '--red-10': isDark.value
+          ? rgbToValues(getCssVariableValue('--destructive-100'))
+          : rgbToValues(getCssVariableValue('--destructive-900')),
 
         '--el-color-primary-dark-2': isDark.value
           ? getCssVariableValue('--primary-400')
@@ -508,11 +502,13 @@ export function useArcoDesignTokens() {
         '--el-border-color-hover': accent,
         '--el-border-color-light': border,
         '--el-border-color-lighter': border,
-
-
       };
 
-      updateCSSVariables(variables, `__arco_design_styles__`, isDark.value ? `body[arco-theme='dark'] ` : `body `);
+      updateCSSVariables(
+        variables,
+        `__arco_design_styles__`,
+        isDark.value ? `body[arco-theme='dark'] ` : `body `,
+      );
     },
     { immediate: true },
   );

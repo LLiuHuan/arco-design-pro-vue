@@ -3,26 +3,26 @@ name: CI
 
 # 触发条件：指定哪些事件会触发该工作流
 on:
-  pull_request:  # 当有 PR 提交时触发（无论目标分支）
-  push:          # 当代码推送到指定分支时触发
+  pull_request: # 当有 PR 提交时触发（无论目标分支）
+  push: # 当代码推送到指定分支时触发
     branches:
-      - master          # 主分支
-      - 'releases/*'  # 所有以 releases/ 开头的分支（如 releases/v1.0）
+      - master # 主分支
+      - 'releases/*' # 所有以 releases/ 开头的分支（如 releases/v1.0）
 
 # 权限设置：工作流运行时的权限范围（遵循最小权限原则）
 permissions:
-  contents: read  # 仅允许读取仓库内容（无写入权限，提升安全性）
+  contents: read # 仅允许读取仓库内容（无写入权限，提升安全性）
 
 # 环境变量：全局生效的配置
 env:
-  CI: true               # 标记当前为 CI 环境（部分工具会根据此变量调整行为）
-  TZ: Asia/Shanghai      # 设置时区为上海（确保日志时间与本地一致）
+  CI: true # 标记当前为 CI 环境（部分工具会根据此变量调整行为）
+  TZ: Asia/Shanghai # 设置时区为上海（确保日志时间与本地一致）
 
 # 任务定义：工作流包含的具体任务（jobs）
 jobs:
   # 任务1：运行单元测试
   test:
-    name: Test  # 任务名称
+    name: Test # 任务名称
     # 仅在官方仓库执行（避免 fork 仓库误触发，节省资源）
     if: github.repository == 'LLiuHuan/arco-design-pro-vue'
     # 运行环境：基于矩阵配置，在多个操作系统上执行（确保跨平台兼容性）
@@ -30,26 +30,26 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest   # Linux 环境（Ubuntu 最新版）
+          - ubuntu-latest # Linux 环境（Ubuntu 最新版）
           # - macos-latest  # macOS 环境（当前注释，需验证时可启用）
-          - windows-latest  # Windows 环境（最新版）
-    timeout-minutes: 20  # 任务超时时间（20分钟，防止无限等待）
+          - windows-latest # Windows 环境（最新版）
+    timeout-minutes: 20 # 任务超时时间（20分钟，防止无限等待）
     steps:
       # 步骤1：拉取仓库代码到 CI 环境
       - name: Checkout code
-        uses: actions/checkout@v4  # 使用官方 checkout 动作
+        uses: actions/checkout@v4 # 使用官方 checkout 动作
         with:
-          fetch-depth: 0  # 拉取完整的提交历史（避免部分测试因历史不全失败）
+          fetch-depth: 0 # 拉取完整的提交历史（避免部分测试因历史不全失败）
 
       # 步骤2：安装 pnpm 包管理器
       - name: Install pnpm
-        uses: pnpm/action-setup@v4  # 使用 pnpm 官方安装动作
+        uses: pnpm/action-setup@v4 # 使用 pnpm 官方安装动作
         with:
-          run_install: false  # 不自动安装依赖（后续步骤统一处理）
+          run_install: false # 不自动安装依赖（后续步骤统一处理）
 
       # 步骤3：配置 Node.js 环境（复用项目自定义的 setup-node 动作）
       - name: Setup Node
-        uses: ./.github/actions/setup-node  # 引用项目内的环境配置动作
+        uses: ./.github/actions/setup-node # 引用项目内的环境配置动作
 
       # 以下为可选步骤（注释掉，需调试时可启用）
       # - name: Check Git version
@@ -60,7 +60,7 @@ jobs:
 
       # 步骤4：运行单元测试（使用 Vitest 框架）
       - name: Vitest tests
-        run: pnpm run test:unit  # 执行 package.json 中定义的测试脚本
+        run: pnpm run test:unit # 执行 package.json 中定义的测试脚本
 
       # 可选步骤：上传测试覆盖率报告到 Codecov（当前注释）
       # - name: Upload coverage
@@ -70,9 +70,9 @@ jobs:
 
   # 任务2：代码风格检查（Lint）
   lint:
-    name: Lint  # 任务名称
-    if: github.repository == 'LLiuHuan/arco-design-pro-vue'  # 仅官方仓库执行
-    runs-on: ${{ matrix.os }}  # 多系统验证
+    name: Lint # 任务名称
+    if: github.repository == 'LLiuHuan/arco-design-pro-vue' # 仅官方仓库执行
+    runs-on: ${{ matrix.os }} # 多系统验证
     strategy:
       matrix:
         os:
@@ -93,11 +93,11 @@ jobs:
 
       # 步骤3：执行代码 lint 检查（如 ESLint 规则验证）
       - name: Lint
-        run: pnpm run lint  # 执行 package.json 中的 lint 脚本
+        run: pnpm run lint # 执行 package.json 中的 lint 脚本
 
   # 任务3：类型检查和工作流配置验证
   check:
-    name: Check  # 任务名称
+    name: Check # 任务名称
     if: github.repository == 'LLiuHuan/arco-design-pro-vue'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
@@ -120,11 +120,11 @@ jobs:
 
       # 步骤3：执行类型检查（如 TypeScript 类型验证）
       - name: Typecheck
-        run: pnpm check:type  # 执行类型检查脚本
+        run: pnpm check:type # 执行类型检查脚本
 
       # 步骤4：检查工作流配置文件是否合法（仅在 Linux 环境执行）
       - name: Check workflow files
-        if: runner.os == 'Linux'  # 仅 Linux 环境需要（actionlint 工具兼容性）
+        if: runner.os == 'Linux' # 仅 Linux 环境需要（actionlint 工具兼容性）
         run: |
           # 下载 actionlint 工具（用于验证 GitHub Actions 配置）
           bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
@@ -133,10 +133,10 @@ jobs:
 
   # 任务4：汇总所有任务结果，判断 CI 是否通过
   ci-ok:
-    name: CI OK  # 任务名称
+    name: CI OK # 任务名称
     if: github.repository == 'LLiuHuan/arco-design-pro-vue'
-    runs-on: ubuntu-latest  # 仅在 Linux 环境执行（结果汇总无需多系统）
-    needs: [test, check, lint]  # 依赖前面三个任务，必须等它们完成后才执行
+    runs-on: ubuntu-latest # 仅在 Linux 环境执行（结果汇总无需多系统）
+    needs: [test, check, lint] # 依赖前面三个任务，必须等它们完成后才执行
     env:
       # 检测前面任务是否有失败（将所有任务结果拼接后判断是否包含 'failure'）
       FAILURE: ${{ contains(join(needs.*.result, ','), 'failure') }}

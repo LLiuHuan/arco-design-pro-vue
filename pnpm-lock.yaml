@@ -40,8 +40,8 @@ catalogs:
       specifier: ^4.3.0
       version: 4.3.0
     '@intlify/core-base':
-      specifier: ^11.1.9
-      version: 11.1.9
+      specifier: ^11.1.10
+      version: 11.1.11
     '@intlify/unplugin-vue-i18n':
       specifier: ^6.0.8
       version: 6.0.8
@@ -1804,7 +1804,7 @@ importers:
         version: link:../@core/composables
       '@intlify/core-base':
         specifier: 'catalog:'
-        version: 11.1.9
+        version: 11.1.11
       vue:
         specifier: 'catalog:'
         version: 3.5.17(typescript@5.8.3)
@@ -3987,12 +3987,24 @@ packages:
       vue-i18n:
         optional: true
 
+  '@intlify/core-base@11.1.11':
+    resolution: {integrity: sha512-1Z0N8jTfkcD2Luq9HNZt+GmjpFe4/4PpZF3AOzoO1u5PTtSuXZcfhwBatywbfE2ieB/B5QHIoOFmCXY2jqVKEQ==}
+    engines: {node: '>= 16'}
+
   '@intlify/core-base@11.1.9':
     resolution: {integrity: sha512-Lrdi4wp3XnGhWmB/mMD/XtfGUw1Jt+PGpZI/M63X1ZqhTDjNHRVCs/i8vv8U1cwaj1A9fb0bkCQHLSL0SK+pIQ==}
     engines: {node: '>= 16'}
 
+  '@intlify/message-compiler@11.1.11':
+    resolution: {integrity: sha512-7PC6neomoc/z7a8JRjPBbu0T2TzR2MQuY5kn2e049MP7+o32Ve7O8husylkA7K9fQRe4iNXZWTPnDJ6vZdtS1Q==}
+    engines: {node: '>= 16'}
+
   '@intlify/message-compiler@11.1.9':
     resolution: {integrity: sha512-84SNs3Ikjg0rD1bOuchzb3iK1vR2/8nxrkyccIl5DjFTeMzE/Fxv6X+A7RN5ZXjEWelc1p5D4kHA6HEOhlKL5Q==}
+    engines: {node: '>= 16'}
+
+  '@intlify/shared@11.1.11':
+    resolution: {integrity: sha512-RIBFTIqxZSsxUqlcyoR7iiC632bq7kkOwYvZlvcVObHfrF4NhuKc4FKvu8iPCrEO+e3XsY7/UVpfgzg+M7ETzA==}
     engines: {node: '>= 16'}
 
   '@intlify/shared@11.1.9':
@@ -13880,15 +13892,27 @@ snapshots:
     optionalDependencies:
       vue-i18n: 11.1.9(vue@3.5.17(typescript@5.8.3))
 
+  '@intlify/core-base@11.1.11':
+    dependencies:
+      '@intlify/message-compiler': 11.1.11
+      '@intlify/shared': 11.1.11
+
   '@intlify/core-base@11.1.9':
     dependencies:
       '@intlify/message-compiler': 11.1.9
       '@intlify/shared': 11.1.9
 
+  '@intlify/message-compiler@11.1.11':
+    dependencies:
+      '@intlify/shared': 11.1.11
+      source-map-js: 1.2.1
+
   '@intlify/message-compiler@11.1.9':
     dependencies:
       '@intlify/shared': 11.1.9
       source-map-js: 1.2.1
+
+  '@intlify/shared@11.1.11': {}
 
   '@intlify/shared@11.1.9': {}
 

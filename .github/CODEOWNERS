@@ -1,14 +1,14 @@
 # 默认负责人
-* 184555556@qq.com
+* @LLiuHuan
 
 # 核心模块负责人
-/.github/ 184555556@qq.com
-/.vscode/ 184555556@qq.com
-/packages/ 184555556@qq.com
-/packages/@core/ 184555556@qq.com
-/internal/ 184555556@qq.com
-/scripts/ 184555556@qq.com
+/.github/ @LLiuHuan
+/.vscode/ @LLiuHuan
+/packages/ @LLiuHuan
+/packages/@core/ @LLiuHuan
+/internal/ @LLiuHuan
+/scripts/ @LLiuHuan
 
 # 团队模块负责人
-apps/ 184555556@qq.com
-docs/ 184555556@qq.com
+apps/ @LLiuHuan
+docs/ @LLiuHuan

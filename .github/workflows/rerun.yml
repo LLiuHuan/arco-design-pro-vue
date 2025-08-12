@@ -16,6 +16,9 @@ on:
 jobs:
   # 任务名称
   rerun:
+    permissions:
+      actions: write
+      contents: read
     # 运行此任务的环境：最新版 Ubuntu 系统
     runs-on: ubuntu-latest
     

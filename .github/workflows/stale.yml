@@ -7,6 +7,10 @@ on:
     # cron 表达式，定义执行时间：每天凌晨 1 点（UTC 时间）
     - cron: '0 1 * * *'
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   # 定义一个名为 stale 的任务
   stale:

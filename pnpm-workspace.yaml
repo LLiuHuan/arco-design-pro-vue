@@ -29,7 +29,7 @@ catalog:
   '@iconify/tailwind': ^1.2.0
   '@iconify/vue': ^4.3.0
   '@iconify-json/logos': ^1.2.4
-  '@intlify/core-base': ^11.1.9
+  '@intlify/core-base': ^11.1.11
   '@intlify/unplugin-vue-i18n': ^6.0.8
   '@jspm/generator': ^2.6.2
   '@manypkg/get-packages': ^3.0.0
@@ -192,7 +192,7 @@ catalog:
   vitest: ^3.2.4
   vue: ^3.5.17
   vue-eslint-parser: ^9.4.3
-  vue-i18n: ^11.1.9
+  vue-i18n: ^11.1.10
   vue-json-viewer: ^3.0.4
   vue-router: ^4.5.1
   vue-tippy: ^6.7.1

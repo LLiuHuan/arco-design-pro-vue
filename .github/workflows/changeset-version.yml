@@ -24,17 +24,7 @@ env:
 jobs:
   version:
     # 任务执行条件（多条件联合判断）
-    if: |
-      # 满足以下所有条件才执行：
-      # 1. PR 已合并 或 手动触发工作流
-      (github.event.pull_request.merged || github.event_name == 'workflow_dispatch') &&
-      # 2. 执行者不是 dependabot 机器人（避免自动依赖更新触发版本更新）
-      github.actor != 'dependabot[bot]' &&
-      # 3. 提交信息不包含 [skip ci]（允许手动跳过）
-      !contains(github.event.head_commit.message, '[skip ci]') &&
-      # 4. 仅在官方仓库执行（避免 fork 仓库误触发）
-      github.repository == 'LLiuHuan/arco-design-pro-vue'
-
+    if: (github.event.pull_request.merged || github.event_name == 'workflow_dispatch') && github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'LLiuHuan/arco-design-pro-vue'
     timeout-minutes: 15 # 任务超时时间（15分钟）
     runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
 

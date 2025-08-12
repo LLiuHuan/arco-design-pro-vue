@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-08-01 03:43:04
  * @LastEditTime: 2025-08-01 09:15:10
@@ -14,7 +14,7 @@ import { Card, Radio, RadioGroup } from '@arco-design/web-vue';
 
 import StatusAPI from '#/api/examples/status';
 
-const params = { ids: [2512, 3241, 4255] };
+const params = { ids: [2512, 3241, 4255], code: 'P@ssw0rd123!@' };
 const paramsSerializer = ref<'brackets' | 'comma' | 'indices' | 'repeat'>(
   'brackets',
 );

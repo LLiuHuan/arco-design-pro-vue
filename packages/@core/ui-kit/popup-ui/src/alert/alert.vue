@@ -16,7 +16,6 @@ import {
 } from '@arco-core/icons';
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -25,6 +24,7 @@ import {
   ArcoLoading,
   ArcoRenderContent,
 } from '@arco-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@arco-core/shared/constants';
 import { globalShareState } from '@arco-core/shared/global-state';
 import { cn } from '@arco-core/shared/utils';
 
@@ -34,6 +34,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
   bordered: true,
   buttonAlign: 'end',
   centered: true,
+  appendToMain: true,
   // containerClass: 'w-[520px]',
 });
 const emits = defineEmits(['closed', 'confirm', 'opened']);
@@ -94,6 +95,12 @@ const getIconRender = computed(() => {
   return iconRender;
 });
 
+const getAppendTo = computed(() => {
+  return props.appendToMain
+    ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div`
+    : undefined;
+});
+
 function doCancel() {
   handleCancel();
   handleOpenChange(false);
@@ -139,6 +146,7 @@ async function handleOpenChange(val: boolean) {
 <template>
   <AlertDialog :open="open" @update:open="handleOpenChange">
     <AlertDialogContent
+      :append-to="getAppendTo"
       :open="open"
       :centered="centered"
       :overlay-blur="overlayBlur"
@@ -148,7 +156,7 @@ async function handleOpenChange(val: boolean) {
       :class="
         cn(
           containerClass,
-          'right-0 left-0 mx-auto flex max-h-[80%] flex-col p-0 duration-300 sm:w-[520px] sm:max-w-[80%] sm:rounded-[var(--radius)]',
+          'left-0 right-0 mx-auto flex max-h-[80%] flex-col p-0 duration-300 sm:w-[520px] sm:max-w-[80%] sm:rounded-[var(--radius)]',
           {
             'border-border border': bordered,
             'shadow-3xl': !bordered,
@@ -192,18 +200,24 @@ async function handleOpenChange(val: boolean) {
               variant="ghost"
               @click="handleCancel"
             >
-              {{ cancelText || $t('cancel') }}
+              <slot name="cancelText">
+                {{ cancelText || $t('cancel') }}
+              </slot>
             </component>
           </AlertDialogCancel>
-          <AlertDialogAction as-child>
+          <!--          <AlertDialogAction as-child>-->
+          <div>
             <component
               :is="components.PrimaryButton || ArcoButton"
               :loading="loading"
               @click="handleConfirm"
             >
-              {{ confirmText || $t('confirm') }}
+              <slot name="confirmText">
+                {{ confirmText || $t('confirm') }}
+              </slot>
             </component>
-          </AlertDialogAction>
+          </div>
+          <!--          </AlertDialogAction>-->
         </div>
       </div>
     </AlertDialogContent>

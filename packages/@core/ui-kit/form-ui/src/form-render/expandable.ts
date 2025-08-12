@@ -22,12 +22,15 @@ export function useExpandable(props: FormRenderProps) {
 
   const keepFormItemIndex = computed(() => {
     const rows = props.collapsedRows ?? 1;
+    console.log("rows", rows);
     const mapping = rowMapping.value;
+    console.log("mapping", mapping);
     let maxItem = 0;
     for (let index = 1; index <= rows; index++) {
       maxItem += mapping?.[index] ?? 0;
     }
     // 保持一行
+    console.log("maxItem", maxItem);
     return maxItem - 1 || 1;
   });
 

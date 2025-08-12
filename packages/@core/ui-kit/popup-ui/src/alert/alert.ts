@@ -11,6 +11,11 @@ export type BeforeCloseScope = {
 };
 
 export type AlertProps = {
+  /**
+   * 是否要挂载到内容区域
+   * @default false
+   */
+  appendToMain?: boolean;
   /** 关闭前的回调，如果返回false，则终止关闭 */
   beforeClose?: (
     scope: BeforeCloseScope,
@@ -46,6 +51,7 @@ export type AlertProps = {
   overlayBlur?: number;
   /** 是否显示取消按钮 */
   showCancel?: boolean;
+
   /** 弹窗标题 */
   title?: string;
 };

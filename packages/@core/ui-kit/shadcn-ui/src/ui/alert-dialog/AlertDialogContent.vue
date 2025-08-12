@@ -25,6 +25,7 @@ import AlertDialogOverlay from './AlertDialogOverlay.vue';
 const props = withDefaults(
   defineProps<
     AlertDialogContentProps & {
+      appendTo?: HTMLElement | string;
       centered?: boolean;
       class?: ClassType;
       modal?: boolean;
@@ -33,7 +34,7 @@ const props = withDefaults(
       zIndex?: number;
     }
   >(),
-  { modal: true },
+  { appendTo: 'body', modal: true },
 );
 const emits = defineEmits<
   AlertDialogContentEmits & { close: []; closed: []; opened: [] }
@@ -64,7 +65,7 @@ defineExpose({
 </script>
 
 <template>
-  <AlertDialogPortal>
+  <AlertDialogPortal :to="appendTo">
     <Transition name="fade" appear>
       <AlertDialogOverlay
         v-if="open && modal"

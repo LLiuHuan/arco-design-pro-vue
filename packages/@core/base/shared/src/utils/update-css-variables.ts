@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-06-17 00:55:16
- * @LastEditTime: 2025-07-14 15:59:21
+ * @LastEditTime: 2025-08-12 09:14:11
  * @LastEditors: LLiuHuan
  */
 /**
@@ -12,6 +12,7 @@
 function updateCSSVariables(
   variables: { [key: string]: string },
   id = '__adp-styles__',
+  element = ':root'
 ): void {
   // 获取或创建内联样式表元素
   const styleElement =
@@ -20,7 +21,8 @@ function updateCSSVariables(
   styleElement.id = id;
 
   // 构建要更新的 CSS 变量的样式文本
-  let cssText = ':root {';
+  // let cssText = ':root {';
+  let cssText = `${element} {`;
   for (const key in variables) {
     if (Object.prototype.hasOwnProperty.call(variables, key)) {
       cssText += `${key}: ${variables[key]};`;
@@ -34,7 +36,8 @@ function updateCSSVariables(
   // 将内联样式表添加到文档头部
   if (!document.querySelector(`#${id}`)) {
     setTimeout(() => {
-      document.head.append(styleElement);
+      // document.head.append(styleElement);
+      document.head.appendChild(styleElement);
     });
   }
 }

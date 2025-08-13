@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: daily
     groups:
-      non-breaking-changes:
+      npm-non-breaking:
         update-types: [minor, patch]
 
   - package-ecosystem: github-actions
@@ -13,5 +13,5 @@ updates:
     schedule:
       interval: weekly
     groups:
-      non-breaking-changes:
+      actions-non-breaking:
         update-types: [minor, patch]

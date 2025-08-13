@@ -274,8 +274,8 @@ catalogs:
       specifier: ^7.1.0
       version: 7.1.0
     globals:
-      specifier: ^15.15.0
-      version: 15.15.0
+      specifier: ^16.3.0
+      version: 16.3.0
     happy-dom:
       specifier: ^18.0.1
       version: 18.0.1
@@ -1032,7 +1032,7 @@ importers:
         version: 9.33.0(eslint@9.33.0(jiti@2.5.1))
       globals:
         specifier: 'catalog:'
-        version: 15.15.0
+        version: 16.3.0
       jsonc-eslint-parser:
         specifier: 'catalog:'
         version: 2.4.0

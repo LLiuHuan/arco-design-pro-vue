@@ -508,11 +508,11 @@ catalogs:
       specifier: 3.0.5
       version: 3.0.5
     vxe-pc-ui:
-      specifier: ^4.8.13
-      version: 4.8.13
+      specifier: ^4.8.15
+      version: 4.8.15
     vxe-table:
-      specifier: ^4.15.6
-      version: 4.15.6
+      specifier: ^4.15.8
+      version: 4.15.8
     watermark-js-plus:
       specifier: ^1.6.3
       version: 1.6.3
@@ -1766,10 +1766,10 @@ importers:
         version: 3.5.18(typescript@5.9.2)
       vxe-pc-ui:
         specifier: 'catalog:'
-        version: 4.8.13(vue@3.5.18(typescript@5.9.2))
+        version: 4.8.15(vue@3.5.18(typescript@5.9.2))
       vxe-table:
         specifier: 'catalog:'
-        version: 4.15.6(vue@3.5.18(typescript@5.9.2))
+        version: 4.15.8(vue@3.5.18(typescript@5.9.2))
 
   packages/effects/request:
     dependencies:
@@ -11009,11 +11009,11 @@ packages:
     peerDependencies:
       vue: ^3.5.17
 
-  vxe-pc-ui@4.8.13:
-    resolution: {integrity: sha512-1lAuni9nhpsPIUlT17TGAH6FR0Jws8/CqX4D1ksyfqNP5CV/X530B8mdPbKbRsAVKAYWVGliLXpXhBMWEay/wg==}
+  vxe-pc-ui@4.8.15:
+    resolution: {integrity: sha512-wLHBg2D6v2PIm0u2l/b1xBQCsU+IX+d/1Tx2ZrxTjjO8JAMR5DRFABrdhKX6GcOMKmUsu06l3Ct+OzsIpp/H3w==}
 
-  vxe-table@4.15.6:
-    resolution: {integrity: sha512-nukG6ZdjkRy2pVNqXH0FbtS5yPAxfhUuNG1/Q8dJ6+SnvDcUem5lxLrpF9cREhuNvxRQKda6MaCPutgVRpo6zw==}
+  vxe-table@4.15.8:
+    resolution: {integrity: sha512-iy0taea9WlT5xR19G7ZUIJkYbTDegNhKMW5jvxM20/4rsi3W9C5xpbi/LnBiuZ59OW6BxAuF/3WBmCR68tnimg==}
 
   warning@4.0.3:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
@@ -21669,15 +21669,15 @@ snapshots:
       vooks: 0.2.12(vue@3.5.18(typescript@5.9.2))
       vue: 3.5.18(typescript@5.9.2)
 
-  vxe-pc-ui@4.8.13(vue@3.5.18(typescript@5.9.2)):
+  vxe-pc-ui@4.8.15(vue@3.5.18(typescript@5.9.2)):
     dependencies:
       '@vxe-ui/core': 4.2.9(vue@3.5.18(typescript@5.9.2))
     transitivePeerDependencies:
       - vue
 
-  vxe-table@4.15.6(vue@3.5.18(typescript@5.9.2)):
+  vxe-table@4.15.8(vue@3.5.18(typescript@5.9.2)):
     dependencies:
-      vxe-pc-ui: 4.8.13(vue@3.5.18(typescript@5.9.2))
+      vxe-pc-ui: 4.8.15(vue@3.5.18(typescript@5.9.2))
     transitivePeerDependencies:
       - vue
 

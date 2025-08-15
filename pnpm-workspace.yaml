@@ -36,10 +36,10 @@ catalog:
   '@nolebase/vitepress-plugin-git-changelog': ^2.18.1
   '@playwright/test': ^1.54.2
   '@pnpm/workspace.read-manifest': ^1000.2.2
-  '@stylistic/stylelint-plugin': ^3.1.3
+  '@stylistic/stylelint-plugin': ^4.0.0
   '@tailwindcss/nesting': 0.0.0-insiders.565cd3e
   '@tailwindcss/typography': ^0.5.16
-  '@tanstack/vue-query': ^5.81.5
+  '@tanstack/vue-query': ^5.85.3
   '@tanstack/vue-store': ^0.7.3
   '@types/archiver': ^6.0.3
   '@types/eslint': ^9.6.1
@@ -62,14 +62,14 @@ catalog:
   '@unocss/preset-wind4': ^66.4.2
   '@vee-validate/zod': ^4.15.1
   '@vite-pwa/vitepress': ^0.5.4
-  '@vitejs/plugin-vue': ^6.0.0
+  '@vitejs/plugin-vue': ^6.0.1
   '@vitejs/plugin-vue-jsx': ^5.0.1
   '@visactor/vchart': ^2.0.3
   '@visactor/vchart-theme': ^1.12.2
   '@vue/reactivity': ^3.5.17
   '@vue/shared': ^3.5.18
   '@vue/test-utils': ^2.4.6
-  '@vueuse/core': ^13.5.0
+  '@vueuse/core': ^13.6.0
   '@vueuse/motion': ^3.0.3
   '@vueuse/integrations': ^12.8.2
   ant-design-vue: ^4.2.6
@@ -98,10 +98,10 @@ catalog:
   element-plus: ^2.10.7
   eslint: ^9.33.0
   eslint-config-turbo: ^2.5.5
-  eslint-plugin-command: ^0.2.7
+  eslint-plugin-command: ^3.3.1
   eslint-plugin-eslint-comments: ^3.2.0
   eslint-plugin-import-x: ^4.16.1
-  eslint-plugin-jsdoc: ^50.8.0
+  eslint-plugin-jsdoc: ^54.0.0
   eslint-plugin-jsonc: ^2.20.1
   eslint-plugin-n: ^17.21.3
   eslint-plugin-no-only-tests: ^3.3.0
@@ -111,7 +111,7 @@ catalog:
   eslint-plugin-unicorn: ^60.0.0
   eslint-plugin-unused-imports: ^4.1.4
   eslint-plugin-vitest: ^0.5.4
-  eslint-plugin-vue: ^9.33.0
+  eslint-plugin-vue: ^10.4.0
   execa: ^9.6.0
   find-up: ^7.0.0
   get-port: ^7.1.0
@@ -164,7 +164,7 @@ catalog:
   stylelint: ^16.23.1
   stylelint-config-recess-order: ^5.1.1
   stylelint-config-recommended: ^14.0.1
-  stylelint-config-recommended-scss: ^14.1.0
+  stylelint-config-recommended-scss: ^16.0.0
   stylelint-config-recommended-vue: ^1.6.1
   stylelint-config-standard: ^36.0.1
   stylelint-order: ^7.0.0
@@ -200,9 +200,9 @@ catalog:
   vue-router: ^4.5.1
   vue-tippy: ^6.7.1
   vue-tsc: 3.0.5
-  vxe-pc-ui: ^4.8.13
-  vxe-table: ^4.15.6
+  vxe-pc-ui: ^4.8.17
+  vxe-table: ^4.15.8
   watermark-js-plus: ^1.6.3
   xgplayer: ^3.0.23
-  zod: ^3.25.76
+  zod: ^4.0.17
   zod-defaults: ^0.1.3

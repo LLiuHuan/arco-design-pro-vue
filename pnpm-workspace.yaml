@@ -96,7 +96,7 @@ catalog:
   element-plus: ^2.10.7
   eslint: ^9.33.0
   eslint-config-turbo: ^2.5.5
-  eslint-plugin-command: ^0.2.7
+  eslint-plugin-command: ^3.3.1
   eslint-plugin-eslint-comments: ^3.2.0
   eslint-plugin-import-x: ^4.16.1
   eslint-plugin-jsdoc: ^54.0.0

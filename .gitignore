@@ -22,7 +22,6 @@ yarn.lock
 package-lock.json
 .VSCodeCounter
 **/backend-mock/data
-pnpm-lock.yaml
 
 # local env files
 .env.local

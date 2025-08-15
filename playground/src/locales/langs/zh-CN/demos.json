@@ -71,5 +71,23 @@
     "level": "层级模式",
     "levelDetail": "层级模式详情",
     "lateralDetail": "平级模式详情"
+  },
+  "plugin": {
+    "title": "插件",
+    "barcode": {
+      "title": "条形码"
+    },
+    "charts": {
+      "title": "图表",
+      "echarts": {
+        "title": "ECharts"
+      },
+      "vchart": {
+        "title": "VChart"
+      }
+    },
+    "video": {
+      "title": "视频"
+    }
   }
 }

@@ -1,15 +1,8 @@
 <script lang="ts" setup>
-import type { EchartsUIType } from '@arco/plugins/echarts';
+import { useEcharts } from '@arco/plugins/echarts';
 
-import { onMounted, ref } from 'vue';
-
-import { EchartsUI, useEcharts } from '@arco/plugins/echarts';
-
-const chartRef = ref<EchartsUIType>();
-const { renderEcharts } = useEcharts(chartRef);
-
-onMounted(() => {
-  renderEcharts({
+const { domRef: chartRef } = useEcharts(() => {
+  return {
     grid: {
       left: 0,
       right: 0,
@@ -85,10 +78,10 @@ onMounted(() => {
         borderRadius: 2,
       },
     },
-  });
+  };
 });
 </script>
 
 <template>
-  <EchartsUI ref="chartRef" height="70px" width="120px" />
+  <div ref="chartRef" class="h-70px w-120px" />
 </template>

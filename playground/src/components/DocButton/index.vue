@@ -11,19 +11,22 @@ import { openWindow } from '@arco/utils';
 
 import { Button } from '@arco-design/web-vue';
 
-const props = defineProps<{ path: string }>();
+const props = defineProps<{ path: string; text?: string }>();
 
 function handleClick() {
-  // 如果没有.html，打开页面时可能会出现404
-  const path =
-    ARCO_DOC_URL +
-    (props.path.toLowerCase().endsWith('.html')
-      ? props.path
-      : `${props.path}.html`);
+  let path = props.path;
+  if (!path.toLowerCase().startsWith('http')) {
+    // 如果没有.html，打开页面时可能会出现404
+    path =
+      ARCO_DOC_URL +
+      (props.path.toLowerCase().endsWith('.html')
+        ? props.path
+        : `${props.path}.html`);
+  }
   openWindow(path);
 }
 </script>
 
 <template>
-  <Button @click="handleClick">查看组件文档</Button>
+  <Button @click="handleClick">{{ text ? text : '查看组件文档' }}</Button>
 </template>

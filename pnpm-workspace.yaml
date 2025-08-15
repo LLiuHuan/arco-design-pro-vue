@@ -64,6 +64,8 @@ catalog:
   '@vite-pwa/vitepress': ^0.5.4
   '@vitejs/plugin-vue': ^6.0.1
   '@vitejs/plugin-vue-jsx': ^5.0.1
+  '@visactor/vchart': ^2.0.3
+  '@visactor/vchart-theme': ^1.12.2
   '@vue/reactivity': ^3.5.17
   '@vue/shared': ^3.5.18
   '@vue/test-utils': ^2.4.6
@@ -119,6 +121,7 @@ catalog:
   html-minifier-terser: ^7.2.0
   husky: ^9.1.7
   is-ci: ^4.1.0
+  jsbarcode: ^3.12.1
   json-bigint: ^1.0.0
   jsonc-eslint-parser: ^2.4.0
   jsonwebtoken: ^9.0.2
@@ -200,5 +203,6 @@ catalog:
   vxe-pc-ui: ^4.8.17
   vxe-table: ^4.15.8
   watermark-js-plus: ^1.6.3
+  xgplayer: ^3.0.23
   zod: ^4.0.17
   zod-defaults: ^0.1.3

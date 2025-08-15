@@ -18,6 +18,10 @@
       "types": "./src/echarts/index.ts",
       "default": "./src/echarts/index.ts"
     },
+    "./vchart": {
+      "types": "./src/vchart/index.ts",
+      "default": "./src/vchart/index.ts"
+    },
     "./vxe-table": {
       "types": "./src/vxe-table/index.ts",
       "default": "./src/vxe-table/index.ts"
@@ -39,6 +43,8 @@
     "@arco/utils": "workspace:*",
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
+    "@visactor/vchart": "catalog:",
+    "@visactor/vchart-theme": "catalog:",
     "echarts": "catalog:",
     "vue": "catalog:",
     "vxe-pc-ui": "catalog:",

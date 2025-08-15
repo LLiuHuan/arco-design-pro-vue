@@ -47,17 +47,8 @@
   },
   "dependencies": {
     "@manypkg/get-packages": "catalog:",
-    "@unocss/postcss": "catalog:",
-    "autoprefixer": "catalog:",
-    "cssnano": "catalog:",
-    "postcss": "catalog:",
-    "postcss-antd-fixes": "catalog:",
-    "postcss-import": "catalog:",
-    "postcss-preset-env": "catalog:",
-    "postcss-pxtorem": "catalog:",
     "unocss": "catalog:",
-    "unocss-preset-animations": "catalog:",
-    "unocss-preset-shadcn": "catalog:"
+    "unocss-preset-animations": "catalog:"
   },
   "devDependencies": {
     "@types/postcss-import": "catalog:"

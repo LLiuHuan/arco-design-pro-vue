@@ -12,7 +12,6 @@ const { domRef: chartRef } = useEcharts(() => {
   return {
     grid: {
       bottom: 0,
-      outerBounds: true,
       left: '1%',
       right: '1%',
       top: '2 %',
@@ -51,5 +50,5 @@ const { domRef: chartRef } = useEcharts(() => {
 </script>
 
 <template>
-  <div ref="chartRef" class="h-300px" />
+  <div ref="chartRef" class="h-300px"></div>
 </template>

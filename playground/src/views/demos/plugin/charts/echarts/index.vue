@@ -6,14 +6,15 @@
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
-import { useEcharts } from '@arco/plugins/echarts';
-
 import { onMounted, onUnmounted } from 'vue';
 
 import { Page } from '@arco/common-ui';
-import DocButton from '#/components/DocButton/index.vue';
+import { useEcharts } from '@arco/plugins/echarts';
 
 import { Card, Grid, GridItem } from '@arco-design/web-vue';
+
+import DocButton from '#/components/DocButton/index.vue';
+
 import {
   barOptions,
   gaugeOptions,
@@ -65,7 +66,7 @@ function initGaugeChart() {
 }
 
 function clearGaugeChart() {
-  if (intervalId != null) clearInterval(intervalId);
+  if (intervalId !== null) clearInterval(intervalId);
 }
 
 onMounted(initGaugeChart);
@@ -87,32 +88,32 @@ onUnmounted(clearGaugeChart);
     >
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="lineRef" class="h-300px" />
+          <div ref="lineRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="barRef" class="h-300px" />
+          <div ref="barRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="pieRef" class="h-300px" />
+          <div ref="pieRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="scatterRef" class="h-300px" />
+          <div ref="scatterRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="treeRef" class="h-300px" />
+          <div ref="treeRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="gaugeRef" class="h-300px" />
+          <div ref="gaugeRef" class="h-300px"></div>
         </Card>
       </GridItem>
     </Grid>

@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import type { Options } from 'jsbarcode';
-import JsBarcode from 'jsbarcode';
 
 import { onMounted } from 'vue';
 
 import { Page } from '@arco/common-ui';
 
 import { Card, Grid, GridItem } from '@arco-design/web-vue';
+import JsBarcode from 'jsbarcode';
+
 import DocButton from '#/components/DocButton/index.vue';
 
 const text = 'Hello';

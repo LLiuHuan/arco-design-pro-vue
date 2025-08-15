@@ -1,9 +1,10 @@
 import type { ISpec, ITheme } from '@visactor/vchart';
-import VChart, { registerLiquidChart } from '@visactor/vchart';
 
 import { effectScope, onScopeDispose, ref, watch } from 'vue';
 
 import { usePreferences } from '@arco/preferences';
+
+import VChart, { registerLiquidChart } from '@visactor/vchart';
 import dark from '@visactor/vchart-theme/public/dark.json';
 import light from '@visactor/vchart-theme/public/light.json';
 import { useElementSize } from '@vueuse/core';

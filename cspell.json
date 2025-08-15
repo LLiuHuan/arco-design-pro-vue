@@ -52,7 +52,16 @@
     "vitepress",
     "vnode",
     "vueuse",
-    "yxxx"
+    "yxxx",
+    "huan",
+    "liuhuan",
+    "lliuhuan",
+    "liuhuanhuan",
+    "lhh",
+    "OSCS",
+    "vben",
+    "Actix",
+    "Yarm"
   ],
   "ignorePaths": [
     "**/node_modules/**",

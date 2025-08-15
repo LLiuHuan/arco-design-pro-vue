@@ -71,5 +71,5 @@ const { domRef: chartRef } = useEcharts(() => {
 </script>
 
 <template>
-  <div ref="chartRef" class="h-300px" />
+  <div ref="chartRef" class="h-300px"></div>
 </template>

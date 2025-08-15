@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import Player from 'xgplayer';
-import 'xgplayer/dist/index.min.css';
+
+import { Page } from '@arco/common-ui';
 
 import { Card } from '@arco-design/web-vue';
-import { Page } from '@arco/common-ui';
+import Player from 'xgplayer';
+
 import DocButton from '#/components/DocButton/index.vue';
+
+import 'xgplayer/dist/index.min.css';
 
 const domRef = ref<HTMLElement>();
 const player = ref<Player>();

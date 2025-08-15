@@ -32,7 +32,7 @@ const { domRef: gaugeRef, setOptions: setGaugeOptions } = useEcharts(
   () => gaugeOptions,
 );
 
-let intervalId: NodeJS.Timeout;
+let intervalId: ReturnType<typeof setInterval> | undefined;
 
 function initGaugeChart() {
   intervalId = setInterval(() => {
@@ -65,7 +65,7 @@ function initGaugeChart() {
 }
 
 function clearGaugeChart() {
-  clearInterval(intervalId);
+  if (intervalId != null) clearInterval(intervalId);
 }
 
 initGaugeChart();

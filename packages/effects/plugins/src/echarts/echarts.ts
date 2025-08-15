@@ -1,7 +1,17 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-07-15 23:01:48
+ * @LastEditTime: 2025-08-13 16:31:51
+ * @LastEditors: LLiuHuan
+ */
 import type {
   // 系列类型的定义后缀都为 SeriesOption
   BarSeriesOption,
+  GaugeSeriesOption,
   LineSeriesOption,
+  ScatterSeriesOption,
+  TreemapSeriesOption,
 } from 'echarts/charts';
 import type {
   DatasetComponentOption,
@@ -12,7 +22,15 @@ import type {
 } from 'echarts/components';
 import type { ComposeOption } from 'echarts/core';
 
-import { BarChart, LineChart, PieChart, RadarChart } from 'echarts/charts';
+import {
+  BarChart,
+  GaugeChart,
+  LineChart,
+  PieChart,
+  RadarChart,
+  ScatterChart,
+  TreemapChart,
+} from 'echarts/charts';
 import {
   // 数据集组件
   DatasetComponent,
@@ -32,10 +50,13 @@ import { CanvasRenderer } from 'echarts/renderers';
 export type ECOption = ComposeOption<
   | BarSeriesOption
   | DatasetComponentOption
+  | GaugeSeriesOption
   | GridComponentOption
   | LineSeriesOption
+  | ScatterSeriesOption
   | TitleComponentOption
   | TooltipComponentOption
+  | TreemapSeriesOption
 >;
 
 // 注册必须的组件
@@ -54,6 +75,9 @@ echarts.use([
   CanvasRenderer,
   LegendComponent,
   ToolboxComponent,
+  ScatterChart,
+  TreemapChart,
+  GaugeChart,
 ]);
 
 export default echarts;

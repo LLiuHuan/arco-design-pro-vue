@@ -90,7 +90,7 @@ function toggleTheme(event: MouseEvent) {
     ];
     document.documentElement.animate(
       {
-        clipPath: isDark.value ? [...clipPath].reverse() : clipPath,
+        clipPath: isDark.value ? clipPath.toReversed() : clipPath,
       },
       {
         duration: 450,

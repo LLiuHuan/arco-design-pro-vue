@@ -45,12 +45,16 @@
     "@arco/utils": "workspace:*",
     "@tanstack/vue-query": "catalog:",
     "@vueuse/core": "catalog:",
+    "@vueuse/integrations": "catalog:",
     "dayjs": "catalog:",
+    "jsbarcode": "catalog:",
     "json-bigint": "catalog:",
     "lossless-json": "catalog:",
     "pinia": "catalog:",
+    "qrcode": "catalog:",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "xgplayer": "catalog:"
   },
   "devDependencies": {
     "@types/json-bigint": "catalog:"

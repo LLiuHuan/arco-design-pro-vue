@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-08-01 03:42:53
+ * @LastEditTime: 2025-08-13 16:51:03
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -591,6 +591,70 @@ const routes: RouteRecordRaw[] = [
                 ],
               },
             ],
+          },
+        ],
+      },
+      // 插件
+      {
+        meta: {
+          icon: 'streamline-freehand-color:plugin-jigsaw-puzzle',
+          title: $t('demos.plugin.title'),
+        },
+        name: 'PluginDemos',
+        path: '/demos/plugin',
+        children: [
+          {
+            name: 'BarcodeDemo',
+            path: '/demos/plugin/barcode',
+            component: () => import('#/views/demos/plugin/barcode/index.vue'),
+            meta: {
+              icon: 'tabler:barcode',
+              keepAlive: true,
+              title: $t('demos.plugin.barcode.title'),
+            },
+          },
+          {
+            name: 'ChartsDemo',
+            path: '/demos/plugin/charts',
+            meta: {
+              icon: 'tabler:chart-line',
+              keepAlive: true,
+              title: $t('demos.plugin.charts.title'),
+            },
+            children: [
+              {
+                name: 'EChartsDemo',
+                path: '/demos/plugin/charts/echarts',
+                component: () =>
+                  import('#/views/demos/plugin/charts/echarts/index.vue'),
+                meta: {
+                  icon: 'simple-icons:apacheecharts',
+                  keepAlive: true,
+                  title: $t('demos.plugin.charts.echarts.title'),
+                },
+              },
+              {
+                name: 'VChartDemo',
+                path: '/demos/plugin/charts/vchart',
+                component: () =>
+                  import('#/views/demos/plugin/charts/vchart/index.vue'),
+                meta: {
+                  icon: 'oui:vis-pie',
+                  keepAlive: true,
+                  title: $t('demos.plugin.charts.vchart.title'),
+                },
+              },
+            ],
+          },
+          {
+            name: 'VideoDemo',
+            path: '/demos/plugin/vider',
+            component: () => import('#/views/demos/plugin/video/index.vue'),
+            meta: {
+              icon: 'icon-park-outline:xigua',
+              keepAlive: true,
+              title: $t('demos.plugin.video.title'),
+            },
           },
         ],
       },

@@ -70,5 +70,23 @@
     "lateralDetail": "Lateral Mode Detail",
     "level": "Level Mode",
     "levelDetail": "Level Mode Detail"
+  },
+  "plugin": {
+    "title": "Plugin",
+    "barcode": {
+      "title": "Barcode"
+    },
+    "charts": {
+      "title": "Chart",
+      "echarts": {
+        "title": "ECharts"
+      },
+      "vchart": {
+        "title": "VChart"
+      }
+    },
+    "video": {
+      "title": "Video"
+    }
   }
 }

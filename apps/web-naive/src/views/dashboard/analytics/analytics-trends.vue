@@ -1,25 +1,18 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 15:35:10
  * @LastEditTime: 2025-05-27 15:37:20
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
-import type { EchartsUIType } from '@arco/plugins/echarts';
+import { useEcharts } from '@arco/plugins/echarts';
 
-import { onMounted, ref } from 'vue';
-
-import { EchartsUI, useEcharts } from '@arco/plugins/echarts';
-
-const chartRef = ref<EchartsUIType>();
-const { renderEcharts } = useEcharts(chartRef);
-
-onMounted(() => {
-  renderEcharts({
+const { domRef: chartRef } = useEcharts(() => {
+  return {
     grid: {
       bottom: 0,
-      containLabel: true,
+      outerBound: true,
       left: '1%',
       right: '1%',
       top: '2 %',
@@ -96,10 +89,10 @@ onMounted(() => {
         type: 'value',
       },
     ],
-  });
+  };
 });
 </script>
 
 <template>
-  <EchartsUI ref="chartRef" />
+  <div ref="chartRef" class="h-300px" />
 </template>

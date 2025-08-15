@@ -62,7 +62,7 @@ catalog:
   '@unocss/preset-wind4': ^66.4.2
   '@vee-validate/zod': ^4.15.1
   '@vite-pwa/vitepress': ^0.5.4
-  '@vitejs/plugin-vue': ^6.0.0
+  '@vitejs/plugin-vue': ^6.0.1
   '@vitejs/plugin-vue-jsx': ^5.0.1
   '@vue/reactivity': ^3.5.17
   '@vue/shared': ^3.5.18

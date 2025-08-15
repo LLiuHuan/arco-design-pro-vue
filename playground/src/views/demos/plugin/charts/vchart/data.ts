@@ -419,7 +419,7 @@ export const rankingBarSpec: IBarChartSpec = {
     right: 100,
     bottom: 12,
   },
-  data: dataSpecs[0].data,
+  data: dataSpecs[0]?.data,
   direction: 'horizontal',
   yField: 'country',
   xField: 'value',
@@ -506,10 +506,12 @@ export const rankingBarSpec: IBarChartSpec = {
         fontWeight: 600,
         text: (datum: any) => datum.year,
         x: (_datum: any, ctx: any) => {
-          return ctx.vchart.getChart().getCanvasRect()?.width - 50;
+          const w = ctx.vchart.getChart().getCanvasRect()?.width ?? 0;
+          return Math.max(0, w - 50);
         },
         y: (_datum: any, ctx: any) => {
-          return ctx.vchart.getChart().getCanvasRect()?.height - 50;
+          const h = ctx.vchart.getChart().getCanvasRect()?.height ?? 0;
+          return Math.max(0, h - 50);
         },
         fill: 'grey',
         fillOpacity: 0.5,

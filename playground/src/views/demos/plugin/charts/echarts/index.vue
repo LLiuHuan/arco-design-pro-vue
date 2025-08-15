@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { useEcharts } from '@arco/plugins/echarts';
 
-import { onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 import { Page } from '@arco/common-ui';
 import DocButton from '#/components/DocButton/index.vue';
@@ -68,11 +68,9 @@ function clearGaugeChart() {
   if (intervalId != null) clearInterval(intervalId);
 }
 
-initGaugeChart();
+onMounted(initGaugeChart);
 
-onUnmounted(() => {
-  clearGaugeChart();
-});
+onUnmounted(clearGaugeChart);
 </script>
 
 <template>

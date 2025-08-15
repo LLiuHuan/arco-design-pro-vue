@@ -43,6 +43,7 @@
     "@arco/styles": "workspace:*",
     "@arco/types": "workspace:*",
     "@arco/utils": "workspace:*",
+    "@visactor/vchart": "catalog:",
     "@tanstack/vue-query": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/integrations": "catalog:",

@@ -1954,6 +1954,9 @@ importers:
       '@tanstack/vue-query':
         specifier: 'catalog:'
         version: 5.85.3(vue@3.5.18(typescript@5.9.2))
+      '@visactor/vchart':
+        specifier: 'catalog:'
+        version: 2.0.3
       '@vueuse/core':
         specifier: 'catalog:'
         version: 13.5.0(vue@3.5.18(typescript@5.9.2))

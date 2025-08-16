@@ -12,6 +12,7 @@ packages:
   - scripts/*
   - docs
   - playground
+
 catalog:
   '@arco-design/web-vue': ^2.57.0
   '@arco-plugins/vite-vue': ^1.4.5
@@ -50,7 +51,7 @@ catalog:
   '@types/lodash.get': ^4.4.9
   '@types/lodash.isequal': ^4.5.8
   '@types/lodash.set': ^4.3.9
-  '@types/node': ^24.0.13
+  '@types/node': ^24.3.0
   '@types/nprogress': ^0.2.3
   '@types/postcss-import': ^14.0.3
   '@types/qrcode': ^1.5.5
@@ -175,9 +176,9 @@ catalog:
   tailwindcss-animate: ^1.0.7
   theme-colors: ^0.1.0
   tippy.js: ^6.2.5
-  turbo: ^2.5.5
+  turbo: ^2.5.6
   typescript: ^5.9.2
-  unbuild: ^3.6.0
+  unbuild: ^3.6.1
   unocss: ^66.4.2
   unocss-preset-animations: ^1.2.1
   unocss-preset-shadcn: ^0.5.0
@@ -204,5 +205,5 @@ catalog:
   vxe-table: ^4.15.8
   watermark-js-plus: ^1.6.3
   xgplayer: ^3.0.23
-  zod: ^4.0.17
+  zod: ^3.25.76
   zod-defaults: ^0.1.3

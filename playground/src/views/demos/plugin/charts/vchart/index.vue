@@ -7,9 +7,11 @@
 -->
 <script lang="ts" setup>
 import { Page } from '@arco/common-ui';
+import { useVChart } from '@arco/plugins/vchart';
 
 import { Card, Grid, GridItem } from '@arco-design/web-vue';
-import { useVChart } from '@arco/plugins/vchart';
+
+import DocButton from '#/components/DocButton/index.vue';
 
 import {
   barMarkPointSpec,
@@ -20,7 +22,6 @@ import {
   shapeWordCloudSpec,
   stackedDashAreaSpec,
 } from './data';
-import DocButton from '#/components/DocButton/index.vue';
 
 const { domRef: stackedDashAreaRef } = useVChart(() => stackedDashAreaSpec);
 const { domRef: barMarkPointRef } = useVChart(() => barMarkPointSpec);
@@ -54,37 +55,37 @@ const { domRef: liquidChartSmartInvertRef } = useVChart(
     >
       <GridItem :span="3" class="grid-item">
         <Card class="shadow-sm">
-          <div ref="rankingBarRef" class="h-300px" />
+          <div ref="rankingBarRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="stackedDashAreaRef" class="h-300px" />
+          <div ref="stackedDashAreaRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="barMarkPointRef" class="h-300px" />
+          <div ref="barMarkPointRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="histogramDifferentBinRef" class="h-300px" />
+          <div ref="histogramDifferentBinRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="circularProgressTickRef" class="h-300px" />
+          <div ref="circularProgressTickRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="liquidChartSmartInvertRef" class="h-300px" />
+          <div ref="liquidChartSmartInvertRef" class="h-300px"></div>
         </Card>
       </GridItem>
       <GridItem class="grid-item">
         <Card class="shadow-sm">
-          <div ref="shapeWordCloudRef" class="h-300px" />
+          <div ref="shapeWordCloudRef" class="h-300px"></div>
         </Card>
       </GridItem>
     </Grid>

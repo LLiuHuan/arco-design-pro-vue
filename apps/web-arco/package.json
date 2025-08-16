@@ -43,7 +43,6 @@
     "@arco/types": "workspace:*",
     "@arco/utils": "workspace:*",
     "@vueuse/core": "catalog:",
-    "dayjs": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"

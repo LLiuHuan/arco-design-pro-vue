@@ -90,6 +90,8 @@ function toggleTheme(event: MouseEvent) {
     ];
     document.documentElement.animate(
       {
+        // TODO: 不知道什么情况，nodejs版本为20.19.0，但是还报错
+        // eslint-disable-next-line n/no-unsupported-features/es-syntax
         clipPath: isDark.value ? clipPath.toReversed() : clipPath,
       },
       {

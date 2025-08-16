@@ -1,20 +1,12 @@
-import {
-  BarChart,
-  type BarSeriesOption,
-  GaugeChart,
-  type GaugeSeriesOption,
-  LineChart,
-  type LineSeriesOption,
-  PictorialBarChart,
-  type PictorialBarSeriesOption,
-  PieChart,
-  type PieSeriesOption,
-  RadarChart,
-  type RadarSeriesOption,
-  ScatterChart,
-  type ScatterSeriesOption,
-  TreemapChart,
-  type TreemapSeriesOption,
+import type {
+  BarSeriesOption,
+  GaugeSeriesOption,
+  LineSeriesOption,
+  PictorialBarSeriesOption,
+  PieSeriesOption,
+  RadarSeriesOption,
+  ScatterSeriesOption,
+  TreemapSeriesOption,
 } from 'echarts/charts';
 import type {
   DatasetComponentOption,
@@ -24,6 +16,22 @@ import type {
   ToolboxComponentOption,
   TooltipComponentOption,
 } from 'echarts/components';
+
+import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue';
+
+import { usePreferences } from '@arco/preferences';
+
+import { useElementSize } from '@vueuse/core';
+import {
+  BarChart,
+  GaugeChart,
+  LineChart,
+  PictorialBarChart,
+  PieChart,
+  RadarChart,
+  ScatterChart,
+  TreemapChart,
+} from 'echarts/charts';
 import {
   DatasetComponent,
   GridComponent,
@@ -33,12 +41,6 @@ import {
   TooltipComponent,
   TransformComponent,
 } from 'echarts/components';
-
-import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue';
-
-import { usePreferences } from '@arco/preferences';
-
-import { useElementSize } from '@vueuse/core';
 import * as echarts from 'echarts/core';
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';

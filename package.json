@@ -38,7 +38,6 @@
     "build:antd": "pnpm run build --filter=@arco/web-antd",
     "build:arco": "pnpm run build --filter=@arco/web-arco",
     "build:docker": "./scripts/deploy/build-local-docker-image.sh",
-    "build:docs": "pnpm run build --filter=@arco/docs",
     "build:ele": "pnpm run build --filter=@arco/web-ele",
     "build:naive": "pnpm run build --filter=@arco/web-naive",
     "build:play": "pnpm run build --filter=@arco/playground",

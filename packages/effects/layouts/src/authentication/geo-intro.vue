@@ -136,13 +136,13 @@ function toggleTheme(event: MouseEvent) {
       <!-- 背景泡泡 -->
       <div
         class="geo-element bg-bubble w-360px h-360px rounded-50% animate-scale-in absolute top-[-120px] right-[-120px]"
-        style="animation-delay: 0.5"
+        style="animation-delay: 0.5s"
       ></div>
 
       <!-- 太阳/月亮 -->
       <div
         class="geo-element circle-top-right top-3% right-3% w-50px h-50px rounded-50% animate-fade-in-down absolute z-100 cursor-pointer"
-        style="animation-delay: 0.5"
+        style="animation-delay: 0.5s"
         @click="toggleTheme"
       ></div>
 
@@ -193,6 +193,17 @@ $main-bg: hsl(var(--border));
 $bg-mix-light-9: color-mix(in srgb, $primary-light-9 100%, $main-bg);
 $bg-mix-light-8: color-mix(in srgb, $primary-light-8 80%, $main-bg);
 $bg-mix-light-7: color-mix(in srgb, $primary-light-7 80%, $main-bg);
+
+$bg-dark-login-left-view: color-mix(in srgb, $primary-light-9 60%, #070707);
+
+$rgb-base-10: rgb(from $primary-base rgb / 10%);
+$rgb-base-15: rgb(from $primary-base rgb / 15%);
+$rgb-base-18: rgb(from $primary-base rgb / 18%);
+$rgb-base-20: rgb(from $primary-base rgb / 20%);
+$rgb-base-30: rgb(from $primary-base rgb / 30%);
+$rgb-base-45: rgb(from $primary-base rgb / 45%);
+
+$lg-light-8: linear-gradient(90deg, $primary-light-8, transparent);
 
 .login-left-view {
   background-color: $bg-mix-light-9;
@@ -542,15 +553,15 @@ $bg-mix-light-7: color-mix(in srgb, $primary-light-7 80%, $main-bg);
     .squares-group {
       .square {
         &.square-blue {
-          background-color: rgb(from $primary-base r g b / 30%);
+          background-color: $rgb-base-30;
         }
 
         &.square-pink {
-          background-color: rgb(from $primary-base r g b / 15%);
+          background-color: $rgb-base-15;
         }
 
         &.square-purple {
-          background-color: rgb(from $primary-base r g b / 45%);
+          background-color: $rgb-base-45;
         }
       }
 
@@ -578,7 +589,7 @@ $bg-mix-light-7: color-mix(in srgb, $primary-light-7 80%, $main-bg);
 
 // 暗色主题
 .dark .login-left-view {
-  background-color: color-mix(in srgb, $primary-light-9 60%, #070707);
+  background-color: $bg-dark-login-left-view;
 
   @media only screen and (width <= 1180px) {
     background: transparent;
@@ -647,20 +658,20 @@ $bg-mix-light-7: color-mix(in srgb, $primary-light-7 80%, $main-bg);
       box-shadow: none;
 
       &.square-blue {
-        background-color: rgb(from $primary-base r g b / 18%);
+        background-color: $rgb-base-18;
       }
 
       &.square-pink {
-        background-color: rgb(from $primary-base r g b / 10%);
+        background-color: $rgb-base-10;
       }
 
       &.square-purple {
-        background-color: rgb(from $primary-base r g b / 20%);
+        background-color: $rgb-base-20;
       }
     }
 
     &::after {
-      background: linear-gradient(90deg, $primary-light-8, transparent);
+      background: $lg-light-8;
     }
   }
 }

@@ -2,16 +2,17 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2026-01-08 18:59:04
+ * @LastEditTime: 2026-01-29 14:23:02
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
+import type { QinFormSchema } from '@qin/common-ui';
+import type { Recordable } from '@qin/types';
+
 import { computed, markRaw, ref } from 'vue';
 
-import type { QinFormSchema } from '@qin/common-ui';
 import { AuthenticationCodeLogin, z } from '@qin/common-ui';
 import { $t } from '@qin/locales';
-import type { Recordable } from '@qin/types';
 
 defineOptions({ name: 'CodeLogin' });
 

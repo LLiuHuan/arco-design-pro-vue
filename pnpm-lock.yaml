@@ -123,9 +123,6 @@ catalogs:
     '@unocss/preset-wind4':
       specifier: ^66.6.0
       version: 66.6.0
-    '@vee-validate/zod':
-      specifier: ^4.15.1
-      version: 4.15.1
     '@visactor/vchart':
       specifier: ^2.0.3
       version: 2.0.3
@@ -463,8 +460,8 @@ catalogs:
       specifier: ^0.11.2
       version: 0.11.2
     vee-validate:
-      specifier: ^4.15.1
-      version: 4.15.1
+      specifier: ^5.0.0-beta.0
+      version: 5.0.0-beta.0
     vite:
       specifier: ^7.3.1
       version: 7.3.1
@@ -1458,15 +1455,12 @@ importers:
       '@qin-core/typings':
         specifier: workspace:*
         version: link:../../base/typings
-      '@vee-validate/zod':
-        specifier: 'catalog:'
-        version: 4.15.1(vue@3.5.27(typescript@5.9.3))(zod@4.3.6)
       '@vueuse/core':
         specifier: 'catalog:'
         version: 14.1.0(vue@3.5.27(typescript@5.9.3))
       vee-validate:
         specifier: 'catalog:'
-        version: 4.15.1(vue@3.5.27(typescript@5.9.3))
+        version: 5.0.0-beta.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
@@ -1574,7 +1568,7 @@ importers:
         version: 2.8.0(vue@3.5.27(typescript@5.9.3))
       vee-validate:
         specifier: 'catalog:'
-        version: 4.15.1(vue@3.5.27(typescript@5.9.3))
+        version: 5.0.0-beta.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
@@ -4561,6 +4555,9 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
+
   '@stylistic/stylelint-plugin@4.0.0':
     resolution: {integrity: sha512-CFwt3K4Y/7bygNCLCQ8Sy4Hzgbhxq3BsNW0FIuYxl17HD3ywptm54ocyeiLVRrk5jtz1Zwks7Xr9eiZt8SWHAw==}
     engines: {node: ^18.12 || >=20.9}
@@ -5125,11 +5122,6 @@ packages:
     resolution: {integrity: sha512-YWOQ6myBVPs+mhNjfdWsQyMRWUlrDLMoaG7nvf/G6Y3GKZf8AyjFDjvvJ49XWQ+DaZOftGkHmF1uh/DBeGivJQ==}
     peerDependencies:
       '@uppy/core': ^2.3.3
-
-  '@vee-validate/zod@4.15.1':
-    resolution: {integrity: sha512-329Z4TDBE5Vx0FdbA8S4eR9iGCFFUNGbxjpQ20ff5b5wGueScjocUIx9JHPa79LTG06RnlUR4XogQsjN4tecKA==}
-    peerDependencies:
-      zod: ^3.24.0
 
   '@vercel/nft@0.29.4':
     resolution: {integrity: sha512-6lLqMNX3TuycBPABycx7A9F1bHQR7kiQln6abjFbPrf5C/05qHM9M5E4PeTE59c7z8g6vHnx1Ioihb2AQl7BTA==}
@@ -11253,8 +11245,8 @@ packages:
     peerDependencies:
       vue: ^3.5.27
 
-  vee-validate@4.15.1:
-    resolution: {integrity: sha512-DkFsiTwEKau8VIxyZBGdO6tOudD+QoUBPuHj3e6QFqmbfCRj1ArmYWue9lEp6jLSWBIw4XPlDLjFIZNLdRAMSg==}
+  vee-validate@5.0.0-beta.0:
+    resolution: {integrity: sha512-uGIRnODDMM0A8Weu8AJcZFFJceUpgbSX6G4UYZgWhBc90VcXDK+v7yO16G+sj+6vU1eML11M2BH4HxwoPE62rw==}
     peerDependencies:
       vue: ^3.5.27
 
@@ -14746,6 +14738,8 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
+  '@standard-schema/utils@0.3.0': {}
+
   '@stylistic/stylelint-plugin@4.0.0(stylelint@16.23.1(typescript@5.9.3))':
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
@@ -15402,14 +15396,6 @@ snapshots:
       '@uppy/core': 2.3.4
       '@uppy/utils': 4.1.3
       nanoid: 3.3.11
-
-  '@vee-validate/zod@4.15.1(vue@3.5.27(typescript@5.9.3))(zod@4.3.6)':
-    dependencies:
-      type-fest: 4.41.0
-      vee-validate: 4.15.1(vue@3.5.27(typescript@5.9.3))
-      zod: 4.3.6
-    transitivePeerDependencies:
-      - vue
 
   '@vercel/nft@0.29.4(encoding@0.1.13)(rollup@4.46.2)':
     dependencies:
@@ -22193,8 +22179,10 @@ snapshots:
       evtd: 0.2.4
       vue: 3.5.27(typescript@5.9.3)
 
-  vee-validate@4.15.1(vue@3.5.27(typescript@5.9.3)):
+  vee-validate@5.0.0-beta.0(vue@3.5.27(typescript@5.9.3)):
     dependencies:
+      '@standard-schema/spec': 1.1.0
+      '@standard-schema/utils': 0.3.0
       '@vue/devtools-api': 7.7.7
       type-fest: 4.41.0
       vue: 3.5.27(typescript@5.9.3)

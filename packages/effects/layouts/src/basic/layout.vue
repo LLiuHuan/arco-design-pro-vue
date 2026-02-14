@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import type { MenuRecordRaw } from '@qin/types';
-
+import { QinAdminLayout } from '@qin-core/layout-ui';
+import { QinBackTop, QinLogo } from '@qin-core/shadcn-ui';
 import type { SetupContext } from 'vue';
-import type { RouteLocationNormalizedLoaded } from 'vue-router';
-
 import { computed, onMounted, useSlots, watch } from 'vue';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 
 import { useRefresh } from '@qin/hooks';
@@ -14,11 +13,9 @@ import {
   updatePreferences,
   usePreferences,
 } from '@qin/preferences';
-import { useAccessStore } from '@qin/stores';
+import { useAccessStore, useTabbarStore, useTimezoneStore } from '@qin/stores';
+import type { MenuRecordRaw } from '@qin/types';
 import { cloneDeep, mapTree } from '@qin/utils';
-
-import { QinAdminLayout } from '@qin-core/layout-ui';
-import { QinBackTop, QinLogo } from '@qin-core/shadcn-ui';
 
 import { Breadcrumb, CheckUpdates, Preferences } from '../widgets';
 import { LayoutContent, LayoutContentSpinner } from './content';
@@ -52,6 +49,7 @@ const {
   theme,
 } = usePreferences();
 const accessStore = useAccessStore();
+const timezoneStore = useTimezoneStore();
 const { refresh } = useRefresh();
 
 const sidebarTheme = computed(() => {
@@ -191,9 +189,19 @@ watch(
   },
 );
 
+const tabbarStore = useTabbarStore();
+
+function refreshAll() {
+  tabbarStore.cachedTabs.clear();
+  refresh();
+}
+
 // 语言更新后，刷新页面
 // i18n.global.locale会在preference.app.locale变更之后才会更新，因此watchpreference.app.locale是不合适的，刷新页面时可能语言配置尚未完全加载完成
-watch(i18n.global.locale, refresh, { flush: 'post' });
+watch(i18n.global.locale, refreshAll, { flush: 'post' });
+
+// 时区更新后，刷新页面
+watch(() => timezoneStore.timezone, refreshAll, { flush: 'post' });
 
 const slots: SetupContext['slots'] = useSlots();
 const headerSlots = computed(() => {

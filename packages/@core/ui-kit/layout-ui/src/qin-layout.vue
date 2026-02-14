@@ -1,10 +1,5 @@
 <script lang="ts" setup>
-import type { CSSProperties } from 'vue';
-
 import type { QinLayoutProps } from './qin-layout';
-
-import { computed, ref, watch } from 'vue';
-
 import {
   SCROLL_FIXED_CLASS,
   useLayoutFooterStyle,
@@ -13,6 +8,8 @@ import {
 import { IconifyIcon } from '@qin-core/icons';
 import { QinIconButton } from '@qin-core/shadcn-ui';
 import { ELEMENT_ID_MAIN_CONTENT } from '@qin-core/shared/constants';
+import type { CSSProperties } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 
@@ -403,13 +400,10 @@ watch(
 );
 
 {
-  const mouseMove = () => {
-    mouseY.value > headerWrapperHeight.value
-      ? (headerIsHidden.value = true)
-      : (headerIsHidden.value = false);
-  };
+  const HEADER_TRIGGER_DISTANCE = 12;
+
   watch(
-    [() => props.headerMode, () => mouseY.value],
+    [() => props.headerMode, () => mouseY.value, () => headerIsHidden.value],
     () => {
       if (!isHeaderAutoMode.value || isMixedNav.value || isFullContent.value) {
         if (props.headerMode !== 'auto-scroll') {
@@ -417,8 +411,12 @@ watch(
         }
         return;
       }
-      headerIsHidden.value = true;
-      mouseMove();
+
+      const isInTriggerZone = mouseY.value <= HEADER_TRIGGER_DISTANCE;
+      const isInHeaderZone =
+        !headerIsHidden.value && mouseY.value <= headerWrapperHeight.value;
+
+      headerIsHidden.value = !(isInTriggerZone || isInHeaderZone);
     },
     {
       immediate: true,

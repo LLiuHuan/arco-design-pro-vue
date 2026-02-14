@@ -7,11 +7,9 @@
 -->
 <script lang="ts" setup>
 import type { GlobalConfigProvider } from 'tdesign-vue-next';
-
 import { watch } from 'vue';
 
 import { usePreferences } from '@qin/preferences';
-
 import { merge } from 'lodash-es';
 import { ConfigProvider } from 'tdesign-vue-next';
 import zhConfig from 'tdesign-vue-next/es/locale/zh_CN';

@@ -1,5 +1,5 @@
 import type { ExtendedModalApi, ModalApiOptions, ModalProps } from './modal';
-
+import { useStore } from '@qin-core/shared/store';
 import {
   defineComponent,
   h,
@@ -9,8 +9,6 @@ import {
   reactive,
   ref,
 } from 'vue';
-
-import { useStore } from '@qin-core/shared/store';
 
 import { ModalApi } from './modal-api';
 import QinModal from './modal.vue';

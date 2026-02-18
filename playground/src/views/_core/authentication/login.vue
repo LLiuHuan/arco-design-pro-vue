@@ -6,18 +6,13 @@
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
-import type { QinFormSchema } from '@qin/common-ui';
-import type { BasicOption } from '@qin/types';
-
 import { computed, markRaw } from 'vue';
-
-import { AuthenticationLogin, SliderCaptcha, z } from '@qin/common-ui';
-import { $t } from '@qin/locales';
 
 import { useAuthStore } from '#/store';
 import type { QinFormSchema } from '@qin/common-ui';
-import { AuthenticationLogin, ImageCaptcha, z } from '@qin/common-ui';
+import { AuthenticationLogin, SliderCaptcha, z } from '@qin/common-ui';
 import { $t } from '@qin/locales';
+import type { BasicOption } from '@qin/types';
 
 defineOptions({ name: 'Login' });
 

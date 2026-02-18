@@ -16,13 +16,10 @@ import type {
   ToolboxComponentOption,
   TooltipComponentOption,
 } from 'echarts/components';
-
 import type { ShallowRef } from 'vue';
-
 import { effectScope, nextTick, onScopeDispose, watch } from 'vue';
 
 import { usePreferences } from '@qin/preferences';
-
 import { useElementSize } from '@vueuse/core';
 import {
   BarChart,

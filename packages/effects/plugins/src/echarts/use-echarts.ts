@@ -1,14 +1,10 @@
-import type { Nullable } from '@qin/types';
-import type { EChartsOption } from 'echarts';
-
-import type { Ref } from 'vue';
-
 import type EchartsUI from './echarts-ui.vue';
-
+import type { EChartsOption } from 'echarts';
+import type { Ref } from 'vue';
 import { computed, nextTick, watch } from 'vue';
 
 import { usePreferences } from '@qin/preferences';
-
+import type { Nullable } from '@qin/types';
 import {
   tryOnUnmounted,
   useDebounceFn,
@@ -91,7 +87,8 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
           return;
         }
         useTimeoutFn(() => {
-          if (!chartInstance) {
+          if (!chartInstance || chartInstance?.getDom() !== el) {
+            chartInstance?.dispose();
             const instance = initCharts();
             if (!instance) return;
           }

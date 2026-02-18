@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:39:01
- * @LastEditTime: 2025-05-27 17:30:35
+ * @LastEditTime: 2026-02-19 01:11:13
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -40,5 +40,16 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 <style lang="scss" scoped>
 input {
   --ring: var(--primary);
+
+  &::-ms-reveal,
+  &::-ms-clear {
+    display: none;
+  }
+
+  &::-webkit-credentials-auto-fill-button,
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    display: none;
+  }
 }
 </style>

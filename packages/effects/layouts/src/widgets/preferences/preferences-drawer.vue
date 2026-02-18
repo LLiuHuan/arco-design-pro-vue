@@ -1,5 +1,19 @@
 <script lang="ts" setup>
+import { useQinDrawer } from '@qin-core/popup-ui';
+import type { SegmentedItem } from '@qin-core/shadcn-ui';
+import { QinButton, QinIconButton, QinSegmented } from '@qin-core/shadcn-ui';
+import { globalShareState } from '@qin-core/shared/global-state';
+import { computed, ref } from 'vue';
+
+import { Copy, Pin, PinOff, RotateCw } from '@qin/icons';
 import type { SupportedLanguagesType } from '@qin/locales';
+import { $t, loadLocaleMessages } from '@qin/locales';
+import {
+  clearCache,
+  preferences,
+  resetPreferences,
+  usePreferences,
+} from '@qin/preferences';
 import type {
   BreadcrumbStyleType,
   BuiltinThemeType,
@@ -11,24 +25,6 @@ import type {
   PreferencesButtonPositionType,
   ThemeModeType,
 } from '@qin/types';
-
-import type { SegmentedItem } from '@qin-core/shadcn-ui';
-
-import { computed, ref } from 'vue';
-
-import { Copy, Pin, PinOff, RotateCw } from '@qin/icons';
-import { $t, loadLocaleMessages } from '@qin/locales';
-import {
-  clearCache,
-  preferences,
-  resetPreferences,
-  usePreferences,
-} from '@qin/preferences';
-
-import { useQinDrawer } from '@qin-core/popup-ui';
-import { QinButton, QinIconButton, QinSegmented } from '@qin-core/shadcn-ui';
-import { globalShareState } from '@qin-core/shared/global-state';
-
 import { useClipboard } from '@vueuse/core';
 
 import {
@@ -117,6 +113,7 @@ const tabbarShowIcon = defineModel<boolean>('tabbarShowIcon');
 const tabbarShowMore = defineModel<boolean>('tabbarShowMore');
 const tabbarShowMaximize = defineModel<boolean>('tabbarShowMaximize');
 const tabbarPersist = defineModel<boolean>('tabbarPersist');
+const tabbarVisitHistory = defineModel<boolean>('tabbarVisitHistory');
 const tabbarDraggable = defineModel<boolean>('tabbarDraggable');
 const tabbarWheelable = defineModel<boolean>('tabbarWheelable');
 const tabbarStyleType = defineModel<string>('tabbarStyleType');
@@ -401,6 +398,7 @@ async function handleReset() {
                 v-model:tabbar-max-count="tabbarMaxCount"
                 v-model:tabbar-middle-click-to-close="tabbarMiddleClickToClose"
                 v-model:tabbar-persist="tabbarPersist"
+                v-model:tabbar-visit-history="tabbarVisitHistory"
                 v-model:tabbar-show-icon="tabbarShowIcon"
                 v-model:tabbar-show-maximize="tabbarShowMaximize"
                 v-model:tabbar-show-more="tabbarShowMore"

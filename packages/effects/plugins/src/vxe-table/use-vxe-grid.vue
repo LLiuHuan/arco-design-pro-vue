@@ -1,19 +1,8 @@
 <script lang="ts" setup>
-import type {
-  VxeGridDefines,
-  VxeGridInstance,
-  VxeGridListeners,
-  VxeGridPropTypes,
-  VxeGridProps as VxeTableGridProps,
-  VxeToolbarPropTypes,
-} from 'vxe-table';
-
-import type { SetupContext } from 'vue';
-
-import type { QinFormProps } from '@qin-core/form-ui';
-
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
-
+import type { QinFormProps } from '@qin-core/form-ui';
+import { QinHelpTooltip, QinLoading } from '@qin-core/shadcn-ui';
+import type { SetupContext } from 'vue';
 import {
   computed,
   nextTick,
@@ -24,6 +13,14 @@ import {
   useTemplateRef,
   watch,
 } from 'vue';
+import type {
+  VxeGridDefines,
+  VxeGridInstance,
+  VxeGridListeners,
+  VxeGridPropTypes,
+  VxeGridProps as VxeTableGridProps,
+  VxeToolbarPropTypes,
+} from 'vxe-table';
 
 import { usePriorityValues } from '@qin/hooks';
 import { EmptyIcon } from '@qin/icons';
@@ -36,9 +33,6 @@ import {
   isEqual,
   mergeWithArrayOverride,
 } from '@qin/utils';
-
-import { QinHelpTooltip, QinLoading } from '@qin-core/shadcn-ui';
-
 import { VxeButton } from 'vxe-pc-ui';
 import { VxeGrid, VxeUI } from 'vxe-table';
 
@@ -165,6 +159,7 @@ const toolbarOptions = computed(() => {
   }
 
   if (!showToolbar.value) {
+    toolbarConfig.enabled = false;
     return { toolbarConfig };
   }
 

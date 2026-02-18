@@ -7,7 +7,6 @@
 -->
 <script lang="ts" setup>
 import { Page } from '@qin/common-ui';
-
 import { Button, Card, message, notification, Space } from 'ant-design-vue';
 
 type NotificationType = 'error' | 'info' | 'success' | 'warning';

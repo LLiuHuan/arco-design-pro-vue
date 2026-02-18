@@ -3,10 +3,8 @@ import type {
   FormSchemaRuleType,
   MaybeComponentProps,
 } from '../types';
-
-import { computed, ref, watch } from 'vue';
-
 import { isBoolean, isFunction } from '@qin-core/shared/utils';
+import { computed, ref, watch } from 'vue';
 
 import { useFormValues } from 'vee-validate';
 
@@ -82,10 +80,10 @@ export default function useDependencies(
       // 2. 判断show，如果show为false，则隐藏
       if (isFunction(show)) {
         isShow.value = !!(await show(formValues, formApi));
-        if (!isShow.value) return;
+        // if (!isShow.value) return;
       } else if (isBoolean(show)) {
         isShow.value = show;
-        if (!isShow.value) return;
+        // if (!isShow.value) return;
       }
 
       if (isFunction(componentProps)) {

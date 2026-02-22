@@ -539,7 +539,7 @@ $namespace: qin;
       --menu-background-color: hsl(var(--menu));
       --menu-item-color: hsl(var(--accent-foreground));
       --menu-item-background-color: var(--menu-background-color);
-      --menu-item-hover-color: hsl(var(--menu-item-color));
+      --menu-item-hover-color: var(--menu-item-color);
       --menu-item-hover-background-color: hsl(var(--accent));
       --menu-item-active-color: hsl(var(--primary));
       --menu-item-active-background-color: hsl(var(--primary) / 15%);
@@ -874,16 +874,14 @@ $namespace: qin;
   }
 
   &:not(.is-active):hover {
-    &:hover {
-      //color: var(--menu-submenu-hover-color);
-      text-decoration: none;
-      cursor: pointer;
-      background: var(--menu-submenu-hover-background-color) !important;
+    //color: var(--menu-submenu-hover-color);
+    text-decoration: none;
+    cursor: pointer;
+    background: var(--menu-submenu-hover-background-color) !important;
 
-      // svg {
-      //   fill: var(--menu-submenu-hover-color);
-      // }
-    }
+    // svg {
+    //   fill: var(--menu-submenu-hover-color);
+    // }
   }
 }
 </style>

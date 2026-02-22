@@ -240,7 +240,7 @@ html.simple-mode {
     @apply shadow-none;
   }
 
-  header {
+  header:not(.dark) {
     --background-deep: var(--qin-gray-100);
     --foreground: var(--qin-gray-600);
 

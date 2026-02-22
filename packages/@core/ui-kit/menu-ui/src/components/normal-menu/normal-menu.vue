@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@qin-core/typings';
-
 import type { NormalMenuProps } from './normal-menu';
-
 import { useNamespace } from '@qin-core/composables';
 import { QinIcon } from '@qin-core/shadcn-ui';
+import type { MenuRecordRaw } from '@qin-core/typings';
 
 interface Props extends NormalMenuProps {}
 
@@ -151,10 +149,12 @@ $namespace: qin;
   }
 
   &__name {
+    width: 100%;
     margin-top: 8px;
     margin-bottom: 0;
     font-size: calc(var(--font-size-base, 16px) * 0.75);
     font-weight: 400;
+    text-align: center;
     transition: all 0.25s ease;
   }
 }

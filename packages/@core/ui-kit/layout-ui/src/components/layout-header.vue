@@ -2,12 +2,11 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:28:55
- * @LastEditTime: 2025-06-04 23:37:06
+ * @LastEditTime: 2026-02-23 01:14:53
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
-
 import { computed, useSlots } from 'vue';
 
 interface Props {
@@ -69,6 +68,7 @@ const logoStyle = computed((): CSSProperties => {
 
 <template>
   <header
+    :class="theme"
     :style="style"
     class="border-border bg-header top-0 flex w-full flex-[0_0_auto] items-center border-b pl-2 transition-[margin-top] duration-200"
   >

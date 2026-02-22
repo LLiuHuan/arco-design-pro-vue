@@ -2,16 +2,17 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-06-13 17:51:36
+ * @LastEditTime: 2026-02-23 00:56:32
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
-import type { ThemeModeType } from '@qin/types';
-
+import { watch } from 'vue';
 import type { Component } from 'vue';
 
 import { MoonStar, Sun, SunMoon } from '@qin/icons';
 import { $t } from '@qin/locales';
+import { usePreferences } from '@qin/preferences';
+import type { ThemeModeType } from '@qin/types';
 
 import SwitchItem from '../switch-item.vue';
 
@@ -21,7 +22,19 @@ defineOptions({
 
 const modelValue = defineModel<string>({ default: 'auto' });
 const themeSemiDarkSidebar = defineModel<boolean>('themeSemiDarkSidebar');
+const themeSemiDarkSidebarSub = defineModel<boolean>('themeSemiDarkSidebarSub');
 const themeSemiDarkHeader = defineModel<boolean>('themeSemiDarkHeader');
+
+const { layout } = usePreferences();
+
+watch(
+  () => themeSemiDarkSidebar.value,
+  () => {
+    if (!themeSemiDarkSidebar.value) {
+      themeSemiDarkSidebarSub.value = themeSemiDarkSidebar.value;
+    }
+  },
+);
 
 const THEME_PRESET: Array<{ icon: Component; name: ThemeModeType }> = [
   {
@@ -78,10 +91,26 @@ function nameView(name: string) {
 
     <SwitchItem
       v-model="themeSemiDarkSidebar"
-      :disabled="modelValue === 'dark'"
+      :disabled="
+        modelValue === 'dark' ||
+        layout === 'header-nav' ||
+        layout === 'full-content'
+      "
+      :tip="$t('preferences.theme.darkSidebarTip')"
       class="mt-6"
     >
       {{ $t('preferences.theme.darkSidebar') }}
+    </SwitchItem>
+    <SwitchItem
+      v-model="themeSemiDarkSidebarSub"
+      :disabled="
+        modelValue === 'dark' ||
+        (layout !== 'header-mixed-nav' && layout !== 'sidebar-mixed-nav') ||
+        !themeSemiDarkSidebar
+      "
+      :tip="$t('preferences.theme.darkSidebarSubTip')"
+    >
+      {{ $t('preferences.theme.darkSidebarSub') }}
     </SwitchItem>
     <SwitchItem v-model="themeSemiDarkHeader" :disabled="modelValue === 'dark'">
       {{ $t('preferences.theme.darkHeader') }}

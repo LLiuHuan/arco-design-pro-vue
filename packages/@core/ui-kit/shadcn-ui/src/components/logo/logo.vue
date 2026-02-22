@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:14:12
- * @LastEditTime: 2025-08-18 10:11:04
+ * @LastEditTime: 2026-02-23 01:05:42
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -89,7 +89,7 @@ const logoSrc = computed(() => {
       />
       <template v-if="!collapsed">
         <slot name="text">
-          <span class="truncate text-nowrap font-semibold">
+          <span class="text-foreground truncate text-nowrap font-semibold">
             {{ text }}
           </span>
         </slot>

@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
-
-import { computed, shallowRef, useSlots, watchEffect } from 'vue';
-
 import { QinScrollbar } from '@qin-core/shadcn-ui';
+import type { CSSProperties } from 'vue';
+import { computed, shallowRef, useSlots, watchEffect } from 'vue';
 
 import { useScrollLock } from '@vueuse/core';
 
@@ -77,6 +75,10 @@ interface Props {
    * 主题
    */
   theme: string;
+  /**
+   * 子主题
+   */
+  themeSub: string;
 
   /**
    * 宽度
@@ -288,35 +290,38 @@ function handleMouseleave() {
       v-if="showCollapseButton && !isSidebarMixed"
       v-model:collapsed="collapse"
     />
-    <div
-      v-if="isSidebarMixed"
-      ref="asideRef"
-      :class="{
-        'border-l': extraVisible,
-      }"
-      :style="extraStyle"
-      class="fixed top-0 h-full overflow-hidden border-r border-[hsl(var(--border))] bg-[hsl(var(--sidebar))] transition-all duration-200"
-    >
-      <SidebarCollapseButton
-        v-if="isSidebarMixed && expandOnHover"
-        v-model:collapsed="extraCollapse"
-      />
-
-      <SidebarFixedButton
-        v-if="!extraCollapse"
-        v-model:expand-on-hover="expandOnHover"
-      />
-      <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
-        <slot name="extra-title"></slot>
-      </div>
-      <QinScrollbar
-        :style="extraContentStyle"
-        class="border-border py-2"
-        shadow
-        shadow-border
-      >
-        <slot name="extra"></slot>
-      </QinScrollbar>
-    </div>
   </aside>
+  <div
+    v-if="isSidebarMixed"
+    ref="asideRef"
+    :class="[
+      themeSub,
+      {
+        'border-l': extraVisible,
+      },
+    ]"
+    :style="extraStyle"
+    class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
+  >
+    <SidebarCollapseButton
+      v-if="isSidebarMixed && expandOnHover"
+      v-model:collapsed="extraCollapse"
+    />
+
+    <SidebarFixedButton
+      v-if="!extraCollapse"
+      v-model:expand-on-hover="expandOnHover"
+    />
+    <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
+      <slot name="extra-title"></slot>
+    </div>
+    <QinScrollbar
+      :style="extraContentStyle"
+      class="border-border py-2"
+      shadow
+      shadow-border
+    >
+      <slot name="extra"></slot>
+    </QinScrollbar>
+  </div>
 </template>

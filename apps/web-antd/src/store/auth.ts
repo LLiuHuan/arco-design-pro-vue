@@ -1,18 +1,15 @@
-import type { Recordable, UserInfo } from '@qin/types';
-
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
-import { LOGIN_PATH } from '@qin/constants';
-import { preferences } from '@qin/preferences';
-import { resetAllStores, useAccessStore, useUserStore } from '@qin/stores';
-
-import { notification } from 'ant-design-vue';
-import { defineStore } from 'pinia';
 
 import AuthAPI from '#/api/core/auth';
 import UserAPI from '#/api/core/user';
 import { $t } from '#/locales';
+import { LOGIN_PATH } from '@qin/constants';
+import { preferences } from '@qin/preferences';
+import { resetAllStores, useAccessStore, useUserStore } from '@qin/stores';
+import type { Recordable, UserInfo } from '@qin/types';
+import { notification } from 'ant-design-vue';
+import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();

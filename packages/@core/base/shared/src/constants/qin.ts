@@ -2,7 +2,7 @@
  * @Description: 项目常量
  * @Author: LLiuHuan
  * @Date: 2025-05-16 16:37:12
- * @LastEditTime: 2025-11-20 16:15:02
+ * @LastEditTime: 2026-02-19 01:48:44
  * @LastEditors: LLiuHuan
  */
 /**
@@ -31,6 +31,8 @@ export const QIN_ELE_PREVIEW_URL = 'https://ele.demo.0x3.cn';
 export const QIN_NAIVE_PREVIEW_URL = 'https://naive.demo.0x3.cn';
 
 export const QIN_ANT_PREVIEW_URL = 'https://antd.demo.0x3.cn';
+
+export const QIN_ANTDV_NEXT_PREVIEW_URL = 'https://antdv-next.demo.0x3.cn';
 
 export const QIN_DESIGN_PREVIEW_URL = 'https://arco.demo.0x3.cn';
 

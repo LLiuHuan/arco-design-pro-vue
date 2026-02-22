@@ -2,12 +2,11 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-15 23:01:48
- * @LastEditTime: 2025-07-24 01:19:09
+ * @LastEditTime: 2026-02-22 17:59:27
  * @LastEditors: LLiuHuan
  */
-import type { UserInfo } from '@qin/types';
-
 import { requestClient } from '#/api/request';
+import type { UserInfo } from '@qin/types';
 
 const USER_BASE_URL = '/user';
 

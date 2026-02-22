@@ -52,6 +52,7 @@
     "commit": "czg",
     "dev": "turbo-run dev",
     "dev:antd": "pnpm -F @qin/web-antd run dev",
+    "dev:antdv-next": "pnpm -F @qin/web-antdv-next run dev",
     "dev:docs": "pnpm -F @qin/docs run dev",
     "dev:ele": "pnpm -F @qin/web-ele run dev",
     "dev:naive": "pnpm -F @qin/web-naive run dev",

@@ -2,12 +2,11 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-07-15 23:01:48
- * @LastEditTime: 2025-07-24 01:18:13
+ * @LastEditTime: 2026-02-22 17:59:53
  * @LastEditors: LLiuHuan
  */
-import type { RouteRecordStringComponent } from '@qin/types';
-
 import { requestClient } from '#/api/request';
+import type { RouteRecordStringComponent } from '@qin/types';
 
 const MENU_BASE_URL = '/menu';
 

@@ -107,6 +107,7 @@ const defaultPreferences: Preferences = {
     showMore: true,
     styleType: 'chrome',
     wheelable: true,
+    visitHistory: true,
   },
   theme: {
     builtinType: 'default',

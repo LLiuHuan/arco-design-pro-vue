@@ -75,6 +75,7 @@ catalog:
   '@wangeditor/editor-for-vue': 'next'
   alova: ^3.4.1
   ant-design-vue: ^4.2.6
+  antdv-next: ^1.0.2
   archiver: ^7.0.1
   autoprefixer: ^10.4.22
   axios: ^1.13.2

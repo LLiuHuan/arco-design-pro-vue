@@ -2,7 +2,7 @@
  * @Description: 导出全部svg图标
  * @Author: LLiuHuan
  * @Date: 2025-05-22 17:22:12
- * @LastEditTime: 2025-08-18 10:05:03
+ * @LastEditTime: 2026-02-19 01:50:02
  * @LastEditors: LLiuHuan
  */
 import { createIconifyIcon } from '@qin-core/icons';
@@ -25,9 +25,11 @@ const SvgQQChatIcon = createIconifyIcon('svg:qqchat');
 const SvgWeChatIcon = createIconifyIcon('svg:wechat');
 const SvgDingDingIcon = createIconifyIcon('svg:dingding');
 const SvgTDesignIcon = createIconifyIcon('svg:tdesign-logo');
+const SvgAntdvNextLogoIcon = createIconifyIcon('svg:antdv-next-logo');
 
 export {
   SvgAntdvLogoIcon,
+  SvgAntdvNextLogoIcon,
   SvgAvatar1Icon,
   SvgAvatar2Icon,
   SvgAvatar3Icon,

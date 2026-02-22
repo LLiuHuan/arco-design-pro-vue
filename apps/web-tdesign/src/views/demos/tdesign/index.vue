@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { Page } from '@qin/common-ui';
-
-import { Button, Card, Space } from 'tdesign-vue-next';
-
 import { message, notification } from '#/adapter/tdesign';
+import { Page } from '@qin/common-ui';
+import { Button, Card, Space } from 'tdesign-vue-next';
 
 type NotificationType = 'error' | 'info' | 'success' | 'warning';
 

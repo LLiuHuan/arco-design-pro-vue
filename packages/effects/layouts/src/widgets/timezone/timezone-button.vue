@@ -1,12 +1,11 @@
 <script lang="ts" setup>
+import { useQinModal } from '@qin-core/popup-ui';
+import { QinIconButton, RadioGroup, RadioGroupItem } from '@qin-core/shadcn-ui';
 import { ref, unref } from 'vue';
 
 import { createIconifyIcon } from '@qin/icons';
 import { $t } from '@qin/locales';
 import { useTimezoneStore } from '@qin/stores';
-
-import { useQinModal } from '@qin-core/popup-ui';
-import { QinIconButton, RadioGroup, RadioGroupItem } from '@qin-core/shadcn-ui';
 
 const TimezoneIcon = createIconifyIcon('fluent-mdl2:world-clock');
 

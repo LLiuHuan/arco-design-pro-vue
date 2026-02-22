@@ -105,8 +105,10 @@ const defaultPreferences: Preferences = {
     showIcon: true,
     showMaximize: true,
     showMore: true,
+    showRefresh: true,
     styleType: 'chrome',
     wheelable: true,
+    visitHistory: true,
   },
   theme: {
     builtinType: 'default',
@@ -119,6 +121,7 @@ const defaultPreferences: Preferences = {
     fontSize: 16,
     semiDarkHeader: false,
     semiDarkSidebar: false,
+    semiDarkSidebarSub: false,
   },
   transition: {
     enable: true,

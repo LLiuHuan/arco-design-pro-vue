@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
-
-import { computed, shallowRef, useSlots, watchEffect } from 'vue';
-
 import { QinScrollbar } from '@qin-core/shadcn-ui';
+import type { CSSProperties } from 'vue';
+import { computed, shallowRef, useSlots, watchEffect } from 'vue';
 
 import { useScrollLock } from '@vueuse/core';
 
@@ -77,6 +75,10 @@ interface Props {
    * 主题
    */
   theme: string;
+  /**
+   * 子主题
+   */
+  themeSub: string;
 
   /**
    * 宽度
@@ -260,42 +262,50 @@ function handleMouseleave() {
     class="h-full transition-all duration-150"
   ></div>
   <aside
-    :class="[
-      theme,
-      {
-        'bg-sidebar-deep': isSidebarMixed,
-        'bg-sidebar border-border border-r': !isSidebarMixed,
-      },
-    ]"
     :style="style"
     class="fixed top-0 left-0 h-full transition-all duration-150"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
-    <SidebarFixedButton
-      v-if="!collapse && !isSidebarMixed && showFixedButton"
-      v-model:expand-on-hover="expandOnHover"
-    />
-    <div v-if="slots.logo" :style="headerStyle">
-      <slot name="logo"></slot>
-    </div>
-    <QinScrollbar :style="contentStyle" shadow shadow-border>
-      <slot></slot>
-    </QinScrollbar>
+    <div
+      class="h-full"
+      :class="[
+        theme,
+        {
+          'bg-sidebar-deep': isSidebarMixed,
+          'bg-sidebar border-border border-r': !isSidebarMixed,
+        },
+      ]"
+      :style="{ width: `${width}px` }"
+    >
+      <SidebarFixedButton
+        v-if="!collapse && !isSidebarMixed && showFixedButton"
+        v-model:expand-on-hover="expandOnHover"
+      />
+      <div v-if="slots.logo" :style="headerStyle">
+        <slot name="logo"></slot>
+      </div>
+      <QinScrollbar :style="contentStyle" shadow shadow-border>
+        <slot></slot>
+      </QinScrollbar>
 
-    <div :style="collapseStyle"></div>
-    <SidebarCollapseButton
-      v-if="showCollapseButton && !isSidebarMixed"
-      v-model:collapsed="collapse"
-    />
+      <div :style="collapseStyle"></div>
+      <SidebarCollapseButton
+        v-if="showCollapseButton && !isSidebarMixed"
+        v-model:collapsed="collapse"
+      />
+    </div>
     <div
       v-if="isSidebarMixed"
       ref="asideRef"
-      :class="{
-        'border-l': extraVisible,
-      }"
+      :class="[
+        themeSub,
+        {
+          'border-l': extraVisible,
+        },
+      ]"
       :style="extraStyle"
-      class="fixed top-0 h-full overflow-hidden border-r border-[hsl(var(--border))] bg-[hsl(var(--sidebar))] transition-all duration-200"
+      class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
     >
       <SidebarCollapseButton
         v-if="isSidebarMixed && expandOnHover"

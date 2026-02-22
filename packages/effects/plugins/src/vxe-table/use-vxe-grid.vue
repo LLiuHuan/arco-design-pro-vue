@@ -1,19 +1,8 @@
 <script lang="ts" setup>
-import type {
-  VxeGridDefines,
-  VxeGridInstance,
-  VxeGridListeners,
-  VxeGridPropTypes,
-  VxeGridProps as VxeTableGridProps,
-  VxeToolbarPropTypes,
-} from 'vxe-table';
-
-import type { SetupContext } from 'vue';
-
-import type { QinFormProps } from '@qin-core/form-ui';
-
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
-
+import type { QinFormProps } from '@qin-core/form-ui';
+import { QinHelpTooltip, QinLoading } from '@qin-core/shadcn-ui';
+import type { SetupContext } from 'vue';
 import {
   computed,
   nextTick,
@@ -24,6 +13,14 @@ import {
   useTemplateRef,
   watch,
 } from 'vue';
+import type {
+  VxeGridDefines,
+  VxeGridInstance,
+  VxeGridListeners,
+  VxeGridPropTypes,
+  VxeGridProps as VxeTableGridProps,
+  VxeToolbarPropTypes,
+} from 'vxe-table';
 
 import { usePriorityValues } from '@qin/hooks';
 import { EmptyIcon } from '@qin/icons';
@@ -36,9 +33,6 @@ import {
   isEqual,
   mergeWithArrayOverride,
 } from '@qin/utils';
-
-import { QinHelpTooltip, QinLoading } from '@qin-core/shadcn-ui';
-
 import { VxeButton } from 'vxe-pc-ui';
 import { VxeGrid, VxeUI } from 'vxe-table';
 
@@ -165,6 +159,7 @@ const toolbarOptions = computed(() => {
   }
 
   if (!showToolbar.value) {
+    toolbarConfig.enabled = false;
     return { toolbarConfig };
   }
 
@@ -377,9 +372,11 @@ onUnmounted(() => {
       <!-- 左侧操作区域或者title -->
       <template v-if="showToolbar" #toolbar-actions="slotProps">
         <slot v-if="showTableTitle" name="table-title">
-          <div class="mr-1 pl-1 text-[1rem]">
+          <div
+            class="flex items-center justify-center gap-1 text-[1rem] font-bold"
+          >
             {{ tableTitle }}
-            <QinHelpTooltip v-if="tableTitleHelp" trigger-class="pb-1">
+            <QinHelpTooltip v-if="tableTitleHelp">
               {{ tableTitleHelp }}
             </QinHelpTooltip>
           </div>

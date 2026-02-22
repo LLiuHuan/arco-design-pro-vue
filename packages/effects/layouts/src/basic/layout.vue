@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import type { MenuRecordRaw } from '@qin/types';
-
+import { QinAdminLayout } from '@qin-core/layout-ui';
+import { QinBackTop, QinLogo } from '@qin-core/shadcn-ui';
 import type { SetupContext } from 'vue';
-import type { RouteLocationNormalizedLoaded } from 'vue-router';
-
 import { computed, onMounted, useSlots, watch } from 'vue';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 
 import { useRefresh } from '@qin/hooks';
@@ -14,11 +13,9 @@ import {
   updatePreferences,
   usePreferences,
 } from '@qin/preferences';
-import { useAccessStore } from '@qin/stores';
+import { useAccessStore, useTabbarStore, useTimezoneStore } from '@qin/stores';
+import type { MenuRecordRaw } from '@qin/types';
 import { cloneDeep, mapTree } from '@qin/utils';
-
-import { QinAdminLayout } from '@qin-core/layout-ui';
-import { QinBackTop, QinLogo } from '@qin-core/shadcn-ui';
 
 import { Breadcrumb, CheckUpdates, Preferences } from '../widgets';
 import { LayoutContent, LayoutContentSpinner } from './content';
@@ -52,10 +49,16 @@ const {
   theme,
 } = usePreferences();
 const accessStore = useAccessStore();
+const timezoneStore = useTimezoneStore();
 const { refresh } = useRefresh();
 
 const sidebarTheme = computed(() => {
   const dark = isDark.value || preferences.theme.semiDarkSidebar;
+  return dark ? 'dark' : 'light';
+});
+
+const sidebarThemeSub = computed(() => {
+  const dark = isDark.value || preferences.theme.semiDarkSidebarSub;
   return dark ? 'dark' : 'light';
 });
 
@@ -191,9 +194,19 @@ watch(
   },
 );
 
+const tabbarStore = useTabbarStore();
+
+function refreshAll() {
+  tabbarStore.cachedTabs.clear();
+  refresh();
+}
+
 // 语言更新后，刷新页面
 // i18n.global.locale会在preference.app.locale变更之后才会更新，因此watchpreference.app.locale是不合适的，刷新页面时可能语言配置尚未完全加载完成
-watch(i18n.global.locale, refresh, { flush: 'post' });
+watch(i18n.global.locale, refreshAll, { flush: 'post' });
+
+// 时区更新后，刷新页面
+watch(() => timezoneStore.timezone, refreshAll, { flush: 'post' });
 
 const slots: SetupContext['slots'] = useSlots();
 const headerSlots = computed(() => {
@@ -234,6 +247,7 @@ const headerSlots = computed(() => {
     :sidebar-hidden="preferences.sidebar.hidden"
     :sidebar-mixed-width="preferences.sidebar.mixedWidth"
     :sidebar-theme="sidebarTheme"
+    :sidebar-theme-sub="sidebarThemeSub"
     :sidebar-width="preferences.sidebar.width"
     :tabbar-enable="preferences.tabbar.enable"
     :tabbar-height="preferences.tabbar.height"
@@ -348,7 +362,7 @@ const headerSlots = computed(() => {
         :collapse="preferences.sidebar.extraCollapse"
         :menus="wrapperMenus(extraMenus)"
         :rounded="isMenuRounded"
-        :theme="sidebarTheme"
+        :theme="sidebarThemeSub"
       />
     </template>
     <template #side-extra-title>
@@ -404,7 +418,7 @@ const headerSlots = computed(() => {
 
       <template v-if="preferencesButtonPosition.fixed">
         <Preferences
-          class="fixed right-0 bottom-20 z-100"
+          class="fixed top-1/2 right-0 bottom-20 z-100 -translate-y-1/2 transform"
           @clear-preferences-and-logout="clearPreferencesAndLogout"
         />
       </template>

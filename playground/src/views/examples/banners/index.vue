@@ -123,7 +123,7 @@ const PresetBanners = {
 
             <template #subtitle>
               <div style="margin-top: 12px">
-                <p style="position: rative; z-index: 10; font-style: italic">
+                <p style="position: relative; z-index: 10; font-style: italic">
                   灵活配置，强大扩展，支持自定义插槽内容
                 </p>
               </div>

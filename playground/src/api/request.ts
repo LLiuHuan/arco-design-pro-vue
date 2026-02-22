@@ -1,3 +1,8 @@
+import { Message } from '@arco-design/web-vue';
+
+import { useAuthStore } from '#/store';
+import { useAppConfig } from '@qin/hooks';
+import { preferences } from '@qin/preferences';
 /*
  * @Description: 该文件可自行根据业务逻辑进行调整
  * @Author: LLiuHuan
@@ -6,9 +11,6 @@
  * @LastEditors: LLiuHuan
  */
 import type { AxiosResponseHeaders, RequestClientOptions } from '@qin/request';
-
-import { useAppConfig } from '@qin/hooks';
-import { preferences } from '@qin/preferences';
 import {
   authenticateResponseInterceptor,
   defaultResponseInterceptor,
@@ -17,11 +19,7 @@ import {
 } from '@qin/request';
 import { useAccessStore, useTimezoneStore } from '@qin/stores';
 import { cloneDeep } from '@qin/utils';
-
-import { Message } from '@arco-design/web-vue';
 import JSONBigInt from 'json-bigint';
-
-import { useAuthStore } from '#/store';
 
 import AuthAPI from './core/auth';
 

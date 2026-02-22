@@ -1,15 +1,11 @@
 <script lang="ts" setup>
-import type { Arrayable } from '@vueuse/core';
-import type { FlattenedItem } from 'reka-ui';
-
-import type { ClassType, Recordable } from '@qin-core/typings';
-
 import type { TreeProps } from './types';
-
-import { onMounted, ref, watchEffect } from 'vue';
-
 import { ChevronRight, IconifyIcon } from '@qin-core/icons';
 import { cn, get } from '@qin-core/shared/utils';
+import type { ClassType, Recordable } from '@qin-core/typings';
+import type { Arrayable } from '@vueuse/core';
+import type { FlattenedItem } from 'reka-ui';
+import { onMounted, ref, watchEffect } from 'vue';
 
 import { TreeItem, TreeRoot } from 'reka-ui';
 
@@ -65,16 +61,24 @@ const modelValue = defineModel<Arrayable<number | string>>();
 const expanded = ref<Array<number | string>>(props.defaultExpandedKeys ?? []);
 
 const treeValue = ref();
+let lastTreeData: any = null;
 
 onMounted(() => {
   watchEffect(() => {
     flattenData.value = flatten(props.treeData, props.childrenField);
     updateTreeValue();
-    if (
-      props.defaultExpandedLevel !== undefined &&
-      props.defaultExpandedLevel > 0
-    )
-      expandToLevel(props.defaultExpandedLevel);
+
+    // 只在 treeData 变化时执行展开
+    const currentTreeData = JSON.stringify(props.treeData);
+    if (lastTreeData !== currentTreeData) {
+      lastTreeData = currentTreeData;
+      if (
+        props.defaultExpandedLevel !== undefined &&
+        props.defaultExpandedLevel > 0
+      ) {
+        expandToLevel(props.defaultExpandedLevel);
+      }
+    }
   });
 });
 
@@ -87,9 +91,11 @@ function getItemByValue(value: number | string) {
 function updateTreeValue() {
   const val = modelValue.value;
   if (val === undefined) {
-    treeValue.value = undefined;
-  } else {
-    if (Array.isArray(val)) {
+    treeValue.value = props.multiple ? [] : undefined;
+  } else if (Array.isArray(val)) {
+    if (val.length === 0) {
+      treeValue.value = [];
+    } else {
       const filteredValues = val.filter((v) => {
         const item = getItemByValue(v);
         return item && !get(item, props.disabledField);
@@ -100,14 +106,14 @@ function updateTreeValue() {
       if (filteredValues.length !== val.length) {
         modelValue.value = filteredValues;
       }
+    }
+  } else {
+    const item = getItemByValue(val);
+    if (item && !get(item, props.disabledField)) {
+      treeValue.value = item;
     } else {
-      const item = getItemByValue(val);
-      if (item && !get(item, props.disabledField)) {
-        treeValue.value = item;
-      } else {
-        treeValue.value = undefined;
-        modelValue.value = undefined;
-      }
+      treeValue.value = props.multiple ? [] : undefined;
+      modelValue.value = props.multiple ? [] : undefined;
     }
   }
 }

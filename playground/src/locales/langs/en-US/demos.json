@@ -85,6 +85,7 @@
   "qin": {
     "about": "About",
     "antdv": "Ant Design Vue Version",
+    "antdv-next": "Antdv Next Version",
     "arco": "Arco Design Vue Version",
     "document": "Document",
     "element-plus": "Element Plus Version",

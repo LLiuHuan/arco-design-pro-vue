@@ -1,12 +1,11 @@
 import type { Router } from 'vue-router';
 
+import { accessRoutes, coreRouteNames } from '#/router/routes';
+import { useAuthStore } from '#/store';
 import { LOGIN_PATH } from '@qin/constants';
 import { preferences } from '@qin/preferences';
 import { useAccessStore, useUserStore } from '@qin/stores';
 import { startProgress, stopProgress } from '@qin/utils';
-
-import { accessRoutes, coreRouteNames } from '#/router/routes';
-import { useAuthStore } from '#/store';
 
 import { generateAccess } from './access';
 
@@ -107,7 +106,7 @@ function setupAccessGuard(router: Router) {
     accessStore.setAccessRoutes(accessibleRoutes);
     accessStore.setIsAccessChecked(true);
     const redirectPath = (from.query.redirect ??
-      (to.path === preferences.app.defaultHomePath
+      (to.fullPath === preferences.app.defaultHomePath
         ? userInfo.homePath || preferences.app.defaultHomePath
         : to.fullPath)) as string;
 

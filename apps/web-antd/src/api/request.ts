@@ -1,10 +1,10 @@
 /**
  * 该文件可自行根据业务逻辑进行调整
  */
-import type { RequestClientOptions } from '@qin/request';
-
+import { useAuthStore } from '#/store';
 import { useAppConfig } from '@qin/hooks';
 import { preferences } from '@qin/preferences';
+import type { RequestClientOptions } from '@qin/request';
 import {
   authenticateResponseInterceptor,
   defaultResponseInterceptor,
@@ -12,10 +12,7 @@ import {
   RequestClient,
 } from '@qin/request';
 import { useAccessStore, useTimezoneStore } from '@qin/stores';
-
 import { message } from 'ant-design-vue';
-
-import { useAuthStore } from '#/store';
 
 import AuthAPI from './core/auth';
 

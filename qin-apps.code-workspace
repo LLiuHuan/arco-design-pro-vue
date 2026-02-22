@@ -5,6 +5,10 @@
       "path": "apps/web-antd",
     },
     {
+      "name": "@qin/web-antdv-next",
+      "path": "apps/web-antdv-next",
+    },
+    {
       "name": "@qin/web-arco",
       "path": "apps/web-arco",
     },

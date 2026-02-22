@@ -2,14 +2,13 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 10:47:21
- * @LastEditTime: 2025-08-18 10:09:51
+ * @LastEditTime: 2026-02-23 00:30:22
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
 import type { TabsEmits, TabsProps } from './types';
-
 import { useForwardPropsEmits } from '@qin-core/composables';
-import { ChevronLeft, ChevronRight } from '@qin-core/icons';
+import { ChevronsLeft, ChevronsRight } from '@qin-core/icons';
 import { QinScrollbar } from '@qin-core/shadcn-ui';
 
 import { Tabs, TabsChrome } from './components';
@@ -66,7 +65,7 @@ useTabsDrag(props, emit);
       class="border-r px-2"
       @click="scrollDirection('left')"
     >
-      <ChevronLeft class="size-4 h-full" />
+      <ChevronsLeft class="size-4 h-full" />
     </span>
 
     <div
@@ -107,7 +106,7 @@ useTabsDrag(props, emit);
       class="hover:bg-muted text-muted-foreground cursor-pointer border-l px-2"
       @click="scrollDirection('right')"
     >
-      <ChevronRight class="size-4 h-full" />
+      <ChevronsRight class="size-4 h-full" />
     </span>
   </div>
 </template>

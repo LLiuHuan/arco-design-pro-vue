@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import type { UseResizeObserverReturn } from '@vueuse/core';
-
-import type { SetupContext, VNodeArrayChildren } from 'vue';
-
 import type {
   MenuItemClicked,
   MenuItemRegistered,
   MenuProps,
   MenuProvider,
 } from '../types';
-
+import { useNamespace } from '@qin-core/composables';
+import { Ellipsis } from '@qin-core/icons';
+import type { UseResizeObserverReturn } from '@vueuse/core';
+import type { SetupContext, VNodeArrayChildren } from 'vue';
 import {
   computed,
   nextTick,
@@ -20,9 +19,6 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-
-import { useNamespace } from '@qin-core/composables';
-import { Ellipsis } from '@qin-core/icons';
 
 import { useResizeObserver } from '@vueuse/core';
 
@@ -470,33 +466,33 @@ $namespace: qin;
   &.is-dark {
     --menu-background-color: hsl(var(--menu));
     // --menu-submenu-opened-background-color: hsl(var(--menu-opened-dark));
-    --menu-item-background-color: var(--menu-background-color);
     --menu-item-color: hsl(var(--foreground) / 80%);
+    --menu-item-background-color: var(--menu-background-color);
     --menu-item-hover-color: hsl(var(--accent-foreground));
     --menu-item-hover-background-color: hsl(var(--accent));
     --menu-item-active-color: hsl(var(--accent-foreground));
     --menu-item-active-background-color: hsl(var(--accent));
-    --menu-submenu-hover-color: hsl(var(--foreground));
-    --menu-submenu-hover-background-color: hsl(var(--accent));
-    --menu-submenu-active-color: hsl(var(--foreground));
-    --menu-submenu-active-background-color: transparent;
     --menu-submenu-background-color: var(--menu-background-color);
+    --menu-submenu-hover-color: hsl(var(--accent-foreground));
+    --menu-submenu-hover-background-color: hsl(var(--accent));
+    --menu-submenu-active-background-color: transparent;
+    --menu-submenu-active-color: hsl(var(--accent-foreground));
   }
 
   &.is-light {
     --menu-background-color: hsl(var(--menu));
     // --menu-submenu-opened-background-color: hsl(var(--menu-opened));
+    --menu-item-color: hsl(var(--accent-foreground));
     --menu-item-background-color: var(--menu-background-color);
-    --menu-item-color: hsl(var(--foreground));
     --menu-item-hover-color: var(--menu-item-color);
     --menu-item-hover-background-color: hsl(var(--accent));
     --menu-item-active-color: hsl(var(--primary));
     --menu-item-active-background-color: hsl(var(--primary-50));
+    --menu-submenu-background-color: var(--menu-background-color);
     --menu-submenu-hover-color: hsl(var(--primary));
     --menu-submenu-hover-background-color: hsl(var(--accent));
     --menu-submenu-active-color: hsl(var(--primary));
     --menu-submenu-active-background-color: transparent;
-    --menu-submenu-background-color: var(--menu-background-color);
   }
 
   &.is-rounded {
@@ -525,25 +521,33 @@ $namespace: qin;
     --menu-background-color: transparent;
 
     &.is-dark {
+      --menu-background-color: hsl(var(--menu));
+      --menu-item-color: hsl(var(--foreground) / 80%);
+      --menu-item-background-color: var(--menu-background-color);
       --menu-item-hover-color: hsl(var(--accent-foreground));
       --menu-item-hover-background-color: hsl(var(--accent));
       --menu-item-active-color: hsl(var(--accent-foreground));
       --menu-item-active-background-color: hsl(var(--accent));
-      --menu-submenu-active-color: hsl(var(--foreground));
-      --menu-submenu-active-background-color: hsl(var(--accent));
+      --menu-submenu-background-color: var(--menu-background-color);
       --menu-submenu-hover-color: hsl(var(--accent-foreground));
       --menu-submenu-hover-background-color: hsl(var(--accent));
+      --menu-submenu-active-color: hsl(var(--accent-foreground));
+      --menu-submenu-active-background-color: hsl(var(--accent));
     }
 
     &.is-light {
+      --menu-background-color: hsl(var(--menu));
+      --menu-item-color: hsl(var(--accent-foreground));
+      --menu-item-background-color: var(--menu-background-color);
+      --menu-item-hover-color: hsl(var(--menu-item-color));
+      --menu-item-hover-background-color: hsl(var(--accent));
       --menu-item-active-color: hsl(var(--primary));
       --menu-item-active-background-color: hsl(var(--primary) / 15%);
-      --menu-item-hover-background-color: hsl(var(--accent));
-      --menu-item-hover-color: hsl(var(--primary));
-      --menu-submenu-active-color: hsl(var(--primary));
-      --menu-submenu-active-background-color: hsl(var(--primary) / 15%);
+      --menu-submenu-background-color: var(--menu-background-color);
       --menu-submenu-hover-color: hsl(var(--primary));
       --menu-submenu-hover-background-color: hsl(var(--accent));
+      --menu-submenu-active-color: hsl(var(--primary));
+      --menu-submenu-active-background-color: hsl(var(--primary) / 15%);
     }
   }
 }
@@ -869,16 +873,17 @@ $namespace: qin;
     padding-right: 12px !important;
   }
 
-  // &:not(.is-active):hover {
-  &:hover {
-    color: var(--menu-submenu-hover-color);
-    text-decoration: none;
-    cursor: pointer;
-    background: var(--menu-submenu-hover-background-color) !important;
+  &:not(.is-active):hover {
+    &:hover {
+      //color: var(--menu-submenu-hover-color);
+      text-decoration: none;
+      cursor: pointer;
+      background: var(--menu-submenu-hover-background-color) !important;
 
-    // svg {
-    //   fill: var(--menu-submenu-hover-color);
-    // }
+      // svg {
+      //   fill: var(--menu-submenu-hover-color);
+      // }
+    }
   }
 }
 </style>

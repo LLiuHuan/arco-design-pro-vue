@@ -2,18 +2,22 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-12-26 14:41:06
+ * @LastEditTime: 2026-02-23 00:37:56
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
+import {
+  TabsToolMore,
+  TabsToolRefresh,
+  TabsToolScreen,
+  TabsView,
+} from '@qin-core/tabs-ui';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useContentMaximize, useTabs } from '@qin/hooks';
 import { preferences } from '@qin/preferences';
 import { useTabbarStore } from '@qin/stores';
-
-import { TabsToolMore, TabsToolScreen, TabsView } from '@qin-core/tabs-ui';
 
 import { useTabbar } from './use-tabbar';
 
@@ -26,7 +30,7 @@ defineProps<{ showIcon?: boolean; theme?: string }>();
 const route = useRoute();
 const tabbarStore = useTabbarStore();
 const { contentIsMaximize, toggleMaximize } = useContentMaximize();
-const { unpinTab } = useTabs();
+const { refreshTab, unpinTab } = useTabs();
 
 const {
   createContextMenus,
@@ -71,6 +75,10 @@ if (!preferences.tabbar.persist) {
   />
   <div class="flex-center h-full">
     <TabsToolMore v-if="preferences.tabbar.showMore" :menus="menus" />
+    <TabsToolRefresh
+      v-if="preferences.tabbar.showRefresh"
+      @refresh="refreshTab"
+    />
     <TabsToolScreen
       v-if="preferences.tabbar.showMaximize"
       :screen="contentIsMaximize"

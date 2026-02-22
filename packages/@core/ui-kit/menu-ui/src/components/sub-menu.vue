@@ -1,12 +1,9 @@
 <script lang="ts" setup>
-import type { HoverCardContentProps } from '@qin-core/shadcn-ui';
-
 import type { MenuItemRegistered, MenuProvider, SubMenuProps } from '../types';
-
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-
 import { useNamespace } from '@qin-core/composables';
+import type { HoverCardContentProps } from '@qin-core/shadcn-ui';
 import { QinHoverCard } from '@qin-core/shadcn-ui';
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import {
   createSubMenuContext,
@@ -210,6 +207,7 @@ onBeforeUnmount(() => {
           opened ? '' : 'hidden',
           'overflow-auto',
           'max-h-[calc(var(--reka-hover-card-content-available-height)-20px)]',
+          mode === 'horizontal' ? 'is-horizontal' : '',
         ]"
         :content-props="contentProps"
         :open="true"

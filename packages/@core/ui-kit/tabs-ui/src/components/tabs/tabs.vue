@@ -1,12 +1,9 @@
 <script lang="ts" setup>
-import type { TabDefinition } from '@qin-core/typings';
-
 import type { TabConfig, TabsProps } from '../../types';
-
-import { computed } from 'vue';
-
 import { Pin, X } from '@qin-core/icons';
 import { QinContextMenu, QinIcon } from '@qin-core/shadcn-ui';
+import type { TabDefinition } from '@qin-core/typings';
+import { computed } from 'vue';
 
 interface Props extends TabsProps {}
 
@@ -132,7 +129,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
               <QinIcon
                 v-if="showIcon"
                 :icon="tab.icon"
-                class="mr-2 flex size-4 items-center overflow-hidden"
+                class="mr-2 flex size-4 items-center overflow-hidden group-hover:animate-[shrink_0.3s_ease-in-out]"
                 fallback
               />
 

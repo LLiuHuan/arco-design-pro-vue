@@ -387,10 +387,16 @@ interface TabbarPreferences {
    */
   showMore: boolean;
   /**
+   * @zh_CN 显示刷新按钮
+   */
+  showRefresh: boolean;
+  /**
    * @zh_CN 标签页风格
    */
   styleType: TabsStyleType;
-  /** 是否开启访问历史记录 */
+  /**
+   * @zh_CN 是否开启访问历史记录
+   */
   visitHistory: boolean;
   /**
    * @zh_CN 是否开启鼠标滚轮响应
@@ -419,7 +425,9 @@ interface ThemePreferences {
    * @zh_CN 警告色
    */
   colorWarning: string;
-  /** 字体大小（单位：px） */
+  /**
+   * @zh_CN 字体大小（单位：px）
+   */
   fontSize: number;
   /**
    * @zh_CN 当前主题

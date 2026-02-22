@@ -262,66 +262,71 @@ function handleMouseleave() {
     class="h-full transition-all duration-150"
   ></div>
   <aside
-    :class="[
-      theme,
-      {
-        'bg-sidebar-deep': isSidebarMixed,
-        'bg-sidebar border-border border-r': !isSidebarMixed,
-      },
-    ]"
     :style="style"
     class="fixed top-0 left-0 h-full transition-all duration-150"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
-    <SidebarFixedButton
-      v-if="!collapse && !isSidebarMixed && showFixedButton"
-      v-model:expand-on-hover="expandOnHover"
-    />
-    <div v-if="slots.logo" :style="headerStyle">
-      <slot name="logo"></slot>
-    </div>
-    <QinScrollbar :style="contentStyle" shadow shadow-border>
-      <slot></slot>
-    </QinScrollbar>
-
-    <div :style="collapseStyle"></div>
-    <SidebarCollapseButton
-      v-if="showCollapseButton && !isSidebarMixed"
-      v-model:collapsed="collapse"
-    />
-  </aside>
-  <div
-    v-if="isSidebarMixed"
-    ref="asideRef"
-    :class="[
-      themeSub,
-      {
-        'border-l': extraVisible,
-      },
-    ]"
-    :style="extraStyle"
-    class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
-  >
-    <SidebarCollapseButton
-      v-if="isSidebarMixed && expandOnHover"
-      v-model:collapsed="extraCollapse"
-    />
-
-    <SidebarFixedButton
-      v-if="!extraCollapse"
-      v-model:expand-on-hover="expandOnHover"
-    />
-    <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
-      <slot name="extra-title"></slot>
-    </div>
-    <QinScrollbar
-      :style="extraContentStyle"
-      class="border-border py-2"
-      shadow
-      shadow-border
+    <div
+      class="h-full"
+      :class="[
+        theme,
+        {
+          'bg-sidebar-deep': isSidebarMixed,
+          'bg-sidebar border-border border-r': !isSidebarMixed,
+        },
+      ]"
+      :style="{ width: `${width}px` }"
     >
-      <slot name="extra"></slot>
-    </QinScrollbar>
-  </div>
+      <SidebarFixedButton
+        v-if="!collapse && !isSidebarMixed && showFixedButton"
+        v-model:expand-on-hover="expandOnHover"
+      />
+      <div v-if="slots.logo" :style="headerStyle">
+        <slot name="logo"></slot>
+      </div>
+      <QinScrollbar :style="contentStyle" shadow shadow-border>
+        <slot></slot>
+      </QinScrollbar>
+
+      <div :style="collapseStyle"></div>
+      <SidebarCollapseButton
+        v-if="showCollapseButton && !isSidebarMixed"
+        v-model:collapsed="collapse"
+      />
+    </div>
+    <div
+      v-if="isSidebarMixed"
+      ref="asideRef"
+      :class="[
+        themeSub,
+        {
+          'border-l': extraVisible,
+        },
+      ]"
+      :style="extraStyle"
+      class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
+    >
+      <SidebarCollapseButton
+        v-if="isSidebarMixed && expandOnHover"
+        v-model:collapsed="extraCollapse"
+      />
+
+      <SidebarFixedButton
+        v-if="!extraCollapse"
+        v-model:expand-on-hover="expandOnHover"
+      />
+      <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
+        <slot name="extra-title"></slot>
+      </div>
+      <QinScrollbar
+        :style="extraContentStyle"
+        class="border-border py-2"
+        shadow
+        shadow-border
+      >
+        <slot name="extra"></slot>
+      </QinScrollbar>
+    </div>
+  </aside>
 </template>

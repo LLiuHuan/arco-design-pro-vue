@@ -2,13 +2,16 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 09:37:08
- * @LastEditTime: 2025-08-18 10:04:02
+ * @LastEditTime: 2026-02-23 00:41:57
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
 
+import { IFrameView } from '#/layouts';
+import { $t } from '#/locales';
 import {
   QIN_ANT_PREVIEW_URL,
+  QIN_ANTDV_NEXT_PREVIEW_URL,
   QIN_DOC_URL,
   QIN_ELE_PREVIEW_URL,
   QIN_GITHUB_URL,
@@ -16,10 +19,11 @@ import {
   QIN_NAIVE_PREVIEW_URL,
   QIN_TD_PREVIEW_URL,
 } from '@qin/constants';
-import { SvgAntdvLogoIcon, SvgTDesignIcon } from '@qin/icons';
-
-import { IFrameView } from '#/layouts';
-import { $t } from '#/locales';
+import {
+  SvgAntdvLogoIcon,
+  SvgAntdvNextLogoIcon,
+  SvgTDesignIcon,
+} from '@qin/icons';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -61,6 +65,17 @@ const routes: RouteRecordRaw[] = [
           icon: SvgAntdvLogoIcon,
           link: QIN_ANT_PREVIEW_URL,
           title: $t('demos.qin.antdv'),
+        },
+      },
+      {
+        name: 'QinAntdVNext',
+        path: '/qin/antd-v-next',
+        component: IFrameView,
+        meta: {
+          badgeType: 'dot',
+          icon: SvgAntdvNextLogoIcon,
+          link: QIN_ANTDV_NEXT_PREVIEW_URL,
+          title: $t('demos.qin.antdv-next'),
         },
       },
       {

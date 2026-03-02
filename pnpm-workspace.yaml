@@ -139,12 +139,13 @@ catalog:
   lodash.isequal: ^4.5.8
   lodash.set: ^4.3.2
   lossless-json: ^4.1.1
-  lucide-vue-next: ^0.562.0
+  lucide-vue-next: ^0.575.0
   medium-zoom: ^1.1.0
   naive-ui: ^2.42.0
   nitropack: ^2.12.4
   nprogress: ^0.2.0
   ora: ^9.0.0
+  oxlint: ^1.50.0
   pinia: ^3.0.4
   pinia-plugin-persistedstate: ^4.5.0
   pkg-types: ^2.2.0

@@ -288,6 +288,8 @@ interface SidebarPreferences {
    * @zh_CN 侧边栏折叠宽度
    */
   collapseWidth: number;
+  /** 侧边栏菜单拖拽 */
+  draggable: boolean;
   /**
    * @zh_CN 侧边栏是否可见
    */

@@ -2,10 +2,10 @@ import { preferences } from '@qin-core/preferences';
 import {
   createStack,
   openRouteInNewWindow,
+  Stack,
   startProgress,
   stopProgress,
 } from '@qin-core/shared/utils';
-import type { Stack } from '@qin-core/shared/utils';
 import type { TabDefinition } from '@qin-core/typings';
 import type { ComputedRef } from 'vue';
 import { toRaw } from 'vue';

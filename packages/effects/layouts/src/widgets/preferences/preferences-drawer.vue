@@ -86,6 +86,7 @@ const themeSemiDarkHeader = defineModel<boolean>('themeSemiDarkHeader');
 
 const sidebarEnable = defineModel<boolean>('sidebarEnable');
 const sidebarWidth = defineModel<number>('sidebarWidth');
+const sidebarDraggable = defineModel<boolean>('sidebarDraggable');
 const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed');
 const sidebarCollapsedShowTitle = defineModel<boolean>(
   'sidebarCollapsedShowTitle',
@@ -348,6 +349,7 @@ async function handleReset() {
             <Block :title="$t('preferences.sidebar.title')">
               <Sidebar
                 v-model:sidebar-auto-activate-child="sidebarAutoActivateChild"
+                v-model:sidebar-draggable="sidebarDraggable"
                 v-model:sidebar-collapsed="sidebarCollapsed"
                 v-model:sidebar-collapsed-button="sidebarCollapsedButton"
                 v-model:sidebar-collapsed-show-title="sidebarCollapsedShowTitle"

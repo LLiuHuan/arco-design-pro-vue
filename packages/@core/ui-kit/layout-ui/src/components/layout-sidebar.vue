@@ -5,6 +5,7 @@ import { computed, shallowRef, useSlots, watchEffect } from 'vue';
 
 import { useScrollLock } from '@vueuse/core';
 
+import { useSidebarDrag } from '../hooks/use-sidebar-drag';
 import { SidebarCollapseButton, SidebarFixedButton } from './widgets';
 
 interface Props {
@@ -106,7 +107,8 @@ const props = withDefaults(defineProps<Props>(), {
   zIndex: 0,
 });
 
-const emit = defineEmits<{ leave: [] }>();
+const emit = defineEmits<{ leave: []; 'update:width': [value: number] }>();
+const draggable = defineModel<boolean>('draggable');
 const collapse = defineModel<boolean>('collapse');
 const extraCollapse = defineModel<boolean>('extraCollapse');
 const expandOnHovering = defineModel<boolean>('expandOnHovering');
@@ -116,7 +118,8 @@ const extraVisible = defineModel<boolean>('extraVisible');
 const isLocked = useScrollLock(document.body);
 const slots = useSlots();
 
-const asideRef = shallowRef<HTMLDivElement | null>();
+const asideRef = shallowRef<HTMLElement | null>(null);
+const dragBarRef = shallowRef<HTMLElement | null>(null);
 
 const hiddenSideStyle = computed((): CSSProperties => calcMenuWidthStyle(true));
 
@@ -252,6 +255,35 @@ function handleMouseleave() {
   collapse.value = true;
   extraVisible.value = false;
 }
+
+const { startDrag } = useSidebarDrag();
+
+const handleDragSidebar = (e: MouseEvent) => {
+  const { isSidebarMixed, collapseWidth, extraWidth, width } = props;
+  const minLimit = collapseWidth;
+  const maxLimit = 320;
+  const startWidth = isSidebarMixed ? extraWidth : width;
+  startDrag(
+    e,
+    {
+      min: minLimit,
+      max: maxLimit,
+      startWidth,
+    },
+    {
+      target: asideRef.value,
+      dragBar: dragBarRef.value,
+    },
+    (newWidth) => {
+      emit('update:width', newWidth);
+      if (isSidebarMixed) {
+        extraCollapse.value = newWidth <= collapseWidth;
+      } else {
+        collapse.value = newWidth <= collapseWidth;
+      }
+    },
+  );
+};
 </script>
 
 <template>
@@ -262,6 +294,7 @@ function handleMouseleave() {
     class="h-full transition-all duration-150"
   ></div>
   <aside
+    ref="asideRef"
     :style="style"
     class="fixed top-0 left-0 h-full transition-all duration-150"
     @mouseenter="handleMouseenter"
@@ -297,7 +330,6 @@ function handleMouseleave() {
     </div>
     <div
       v-if="isSidebarMixed"
-      ref="asideRef"
       :class="[
         themeSub,
         {
@@ -328,5 +360,11 @@ function handleMouseleave() {
         <slot name="extra"></slot>
       </QinScrollbar>
     </div>
+    <div
+      v-if="draggable"
+      ref="dragBarRef"
+      class="hover:bg-primary absolute inset-y-0 -right-[1px] z-1000 w-[2px] cursor-col-resize"
+      @mousedown="handleDragSidebar"
+    ></div>
   </aside>
 </template>

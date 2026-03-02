@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-28 12:17:56
- * @LastEditTime: 2025-11-26 09:52:14
+ * @LastEditTime: 2026-03-02 10:26:12
  * @LastEditors: LLiuHuan
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -37,6 +37,7 @@ const routes: RouteRecordRaw[] = [
             meta: {
               icon: 'mdi:page-previous-outline',
               title: $t('demos.access.pageAccess'),
+              domCached: true,
             },
           },
           {

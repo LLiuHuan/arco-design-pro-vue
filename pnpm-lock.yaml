@@ -328,8 +328,8 @@ catalogs:
       specifier: ^4.5.0
       version: 4.5.0
     lucide-vue-next:
-      specifier: ^0.562.0
-      version: 0.562.0
+      specifier: ^0.575.0
+      version: 0.575.0
     medium-zoom:
       specifier: ^1.1.0
       version: 1.1.0
@@ -1064,7 +1064,7 @@ importers:
         version: 4.2.6(vue@3.5.27(typescript@5.9.3))
       lucide-vue-next:
         specifier: 'catalog:'
-        version: 0.562.0(vue@3.5.27(typescript@5.9.3))
+        version: 0.575.0(vue@3.5.27(typescript@5.9.3))
       medium-zoom:
         specifier: 'catalog:'
         version: 1.1.0
@@ -1401,7 +1401,7 @@ importers:
         version: 5.0.0(vue@3.5.27(typescript@5.9.3))
       lucide-vue-next:
         specifier: 'catalog:'
-        version: 0.562.0(vue@3.5.27(typescript@5.9.3))
+        version: 0.575.0(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
@@ -1628,7 +1628,7 @@ importers:
         version: 0.7.1
       lucide-vue-next:
         specifier: 'catalog:'
-        version: 0.562.0(vue@3.5.27(typescript@5.9.3))
+        version: 0.575.0(vue@3.5.27(typescript@5.9.3))
       reka-ui:
         specifier: 'catalog:'
         version: 2.8.0(vue@3.5.27(typescript@5.9.3))
@@ -8936,8 +8936,8 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  lucide-vue-next@0.562.0:
-    resolution: {integrity: sha512-LN0BLGKMFulv0lnfK29r14DcngRUhIqdcaL0zXTt2o0oS9odlrjCGaU3/X9hIihOjjN8l8e+Y9G/famcNYaI7Q==}
+  lucide-vue-next@0.575.0:
+    resolution: {integrity: sha512-UHzA3cYMCgBLyGay5R9IQaidwV0NLocx7cIBnFt8vJ9Xhl6IM/oKD0fUhoCUuouFta15SX1rLXVoko9s3TzWMA==}
     peerDependencies:
       vue: ^3.5.27
 
@@ -20022,7 +20022,7 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-vue-next@0.562.0(vue@3.5.27(typescript@5.9.3)):
+  lucide-vue-next@0.575.0(vue@3.5.27(typescript@5.9.3)):
     dependencies:
       vue: 3.5.27(typescript@5.9.3)
 

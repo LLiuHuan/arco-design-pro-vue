@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-12-16 12:18:03
+ * @LastEditTime: 2026-03-02 10:16:23
+ * @LastEditors: LLiuHuan
+ */
 import type { RouteRecordRaw } from 'vue-router';
 
 import { $t } from '#/locales';
@@ -20,6 +27,7 @@ const routes: RouteRecordRaw[] = [
           affixTab: true,
           icon: 'lucide:area-chart',
           title: $t('page.dashboard.analytics'),
+          keepAlive: true,
         },
       },
       {

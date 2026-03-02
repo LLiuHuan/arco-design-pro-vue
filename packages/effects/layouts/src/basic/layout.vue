@@ -235,6 +235,7 @@ const headerSlots = computed(() => {
     :header-visible="preferences.header.enable"
     :is-mobile="preferences.app.isMobile"
     :layout="layout"
+    :sidebar-draggable="preferences.sidebar.draggable"
     :side-collapse-width="preferences.sidebar.collapseWidth"
     :sidebar-collapse="preferences.sidebar.collapsed"
     :sidebar-collapse-show-title="preferences.sidebar.collapsedShowTitle"
@@ -267,6 +268,9 @@ const headerSlots = computed(() => {
     @update:sidebar-extra-collapse="
       (value: boolean) =>
         updatePreferences({ sidebar: { extraCollapse: value } })
+    "
+    @update:sidebar-width="
+      (value: number) => updatePreferences({ sidebar: { width: value } })
     "
   >
     <!-- logo -->

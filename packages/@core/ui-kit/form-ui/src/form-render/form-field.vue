@@ -380,7 +380,7 @@ onUnmounted(() => {
             <QinRenderContent :content="suffix" />
           </div>
         </div>
-        <FormDescription v-if="description" class="ml-1">
+        <FormDescription v-if="description" class="text-xs">
           <QinRenderContent :content="description" />
         </FormDescription>
 

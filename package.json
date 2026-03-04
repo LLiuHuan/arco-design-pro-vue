@@ -11,7 +11,8 @@
     "admin",
     "arco-design",
     "arco-design-pro-vue",
-    "arco-design-pro"
+    "arco-design-pro",
+    "qin-admin"
   ],
   "homepage": "https://github.com/LLiuHuan/qin-admin",
   "bugs": {

@@ -20,7 +20,7 @@ jobs:
   # 任务：执行发布流程，创建正式Release
   build:
     name: Create Release # 任务名称
-    if: github.repository == 'LLiuHuan/arco-design-pro-vue' # 仅在官方仓库执行
+    if: github.repository == 'LLiuHuan/qin-admin' # 仅在官方仓库执行
     runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
     strategy:
       matrix:
@@ -88,4 +88,4 @@ jobs:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       #     generateReleaseNotes: "true"  # 自动生成发布说明
       #     body: |
-      #       > Please refer to [CHANGELOG.md](https://github.com/LLiuHuan/arco-design-pro-vue/blob/main/CHANGELOG.md) for details.  # 发布说明中引用CHANGELOG
+      #       > Please refer to [CHANGELOG.md](https://github.com/LLiuHuan/qin-admin/blob/main/CHANGELOG.md) for details.  # 发布说明中引用CHANGELOG

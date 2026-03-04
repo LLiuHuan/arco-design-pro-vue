@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2025-05-27 12:13:55
- * @LastEditTime: 2025-05-27 12:17:24
+ * @LastEditTime: 2026-03-04 10:51:32
  * @LastEditors: LLiuHuan
 -->
 <script lang="ts" setup>
@@ -22,6 +22,9 @@ const appDynamicTitle = defineModel<boolean>('appDynamicTitle');
 const appWatermark = defineModel<boolean>('appWatermark');
 const appWatermarkContent = defineModel<string>('appWatermarkContent');
 const appEnableCheckUpdates = defineModel<boolean>('appEnableCheckUpdates');
+const appEnableCopyPreferences = defineModel<boolean>(
+  'appEnableCopyPreferences',
+);
 </script>
 
 <template>
@@ -50,5 +53,8 @@ const appEnableCheckUpdates = defineModel<boolean>('appEnableCheckUpdates');
   </InputItem>
   <SwitchItem v-model="appEnableCheckUpdates">
     {{ $t('preferences.checkUpdates') }}
+  </SwitchItem>
+  <SwitchItem v-model="appEnableCopyPreferences">
+    {{ $t('preferences.enableCopyPreferences') }}
   </SwitchItem>
 </template>

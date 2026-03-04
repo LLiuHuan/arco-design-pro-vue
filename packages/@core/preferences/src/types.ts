@@ -92,6 +92,10 @@ interface AppPreferences {
    */
   enableCheckUpdates: boolean;
   /**
+   * @zh_CN 是否显示复制偏好设置按钮
+   */
+  enableCopyPreferences: boolean;
+  /**
    * @zh_CN 是否显示偏好设置
    */
   enablePreferences: boolean;

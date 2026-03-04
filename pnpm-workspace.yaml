@@ -17,7 +17,7 @@ catalog:
   '@alova/adapter-axios': '^2.0.17'
   '@arco-design/web-vue': ^2.57.0
   '@arco-plugins/vite-vue': ^1.4.6
-  '@ast-grep/napi': ^0.40.5
+  '@ast-grep/napi': ^0.41.0
   '@changesets/changelog-github': ^0.5.2
   '@changesets/cli': ^2.30.0
   '@changesets/git': ^3.0.4
@@ -40,7 +40,7 @@ catalog:
   '@pnpm/workspace.read-manifest': ^1000.2.10
   '@stylistic/stylelint-plugin': ^4.0.1
   '@tanstack/vue-query': ^5.92.9
-  '@tanstack/vue-store': ^0.8.1
+  '@tanstack/vue-store': ^0.9.1
   '@types/archiver': ^7.0.0
   '@types/eslint': ^9.6.1
   '@types/html-minifier-terser': ^7.0.2
@@ -139,7 +139,7 @@ catalog:
   lodash.isequal: ^4.5.8
   lodash.set: ^4.3.2
   lossless-json: ^4.3.0
-  lucide-vue-next: ^0.575.0
+  lucide-vue-next: ^0.576.0
   medium-zoom: ^1.1.0
   naive-ui: ^2.43.2
   nitropack: ^2.13.1
@@ -205,7 +205,7 @@ catalog:
   vitest: ^4.0.18
   vue: ^3.5.29
   vue-data-ui: ^3.15.9
-  vue-draggable-plus: 0.6.0
+  vue-draggable-plus: 0.6.1
   vue-eslint-parser: ^10.4.0
   vue-i18n: ^11.2.8
   vue-json-viewer: ^3.0.4

@@ -66,7 +66,7 @@ jobs:
           echo "major=${major}" >> $GITHUB_OUTPUT
 
       # 步骤3：使用 release-drafter 生成并发布正式Release
-      - uses: release-drafter/release-drafter@v6 # 引用 release-drafter 工具
+      - uses: release-drafter/release-drafter@v7 # 引用 release-drafter 工具
         with:
           version: ${{ steps.version.outputs.version }} # 指定发布版本号（如 "1.2.3"）
           publish: true # 直接发布正式Release（而非草稿）

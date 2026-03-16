@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest # 运行环境：Ubuntu 最新版
     steps:
       # 步骤1：使用 release-drafter 工具自动生成/更新发布草稿
-      - uses: release-drafter/release-drafter@v6 # 引用官方 release-drafter 动作
+      - uses: release-drafter/release-drafter@v7 # 引用官方 release-drafter 动作
         env:
           # 内置令牌，用于授权操作 GitHub（创建 Release、读取 PR 信息等）
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

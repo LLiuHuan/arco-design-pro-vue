@@ -26,7 +26,7 @@ const formSchema = computed((): QinFormSchema[] => {
       },
       fieldName: 'email',
       label: $t('authentication.email'),
-            rules: markRaw(
+      rules: markRaw(
         z
           .string()
           .min(1, { error: $t('authentication.emailTip') })

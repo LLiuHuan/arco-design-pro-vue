@@ -1,17 +1,13 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2026-02-19 01:29:54
- * @LastEditTime: 2026-02-19 01:38:52
+ * @LastEditTime: 2026-03-18 10:54:17
  * @LastEditors: LLiuHuan
  */
-import type {
-  QinFormSchema as FormSchema,
-  QinFormProps,
-} from '@qin/common-ui';
-
 import type { ComponentType } from './component';
 
+import type { QinFormSchema as FormSchema, QinFormProps } from '@qin/common-ui';
 import { setupQinForm, useQinForm as useForm, z } from '@qin/common-ui';
 import { $t } from '@qin/locales';
 

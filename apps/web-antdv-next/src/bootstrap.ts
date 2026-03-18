@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: LLiuHuan
  * @Date: 2026-02-19 01:29:54
  * @LastEditTime: 2026-02-22 23:59:25
@@ -7,16 +7,14 @@
  */
 import { createApp, watchEffect } from 'vue';
 
+import { $t, setupI18n } from '#/locales';
 import { registerAccessDirective } from '@qin/access';
 import { registerLoadingDirective } from '@qin/common-ui/es/loading';
 import { preferences } from '@qin/preferences';
 import { initStores } from '@qin/stores';
 import '@qin/styles';
 import '@qin/styles/antdv-next';
-
 import { useTitle } from '@vueuse/core';
-
-import { $t, setupI18n } from '#/locales';
 
 import { initComponentAdapter } from './adapter/component';
 import { initSetupQinForm } from './adapter/form';

@@ -43,6 +43,10 @@
     "@qin-core/shared": "workspace:*",
     "@qin-core/typings": "workspace:*",
     "@vueuse/core": "catalog:",
+    "qs": "catalog:",
     "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@types/qs": "catalog:"
   }
 }

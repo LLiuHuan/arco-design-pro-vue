@@ -2,12 +2,11 @@
  * @Description: 
  * @Author: LLiuHuan
  * @Date: 2025-05-27 11:11:10
- * @LastEditTime: 2025-05-27 11:12:37
+ * @LastEditTime: 2026-03-18 10:48:48
  * @LastEditors: LLiuHuan
 -->
 <script setup lang="ts">
 import type { MenuRecordRaw } from '@qin-core/typings';
-
 import { computed } from 'vue';
 
 import { MenuBadge, MenuItem, SubMenu as SubMenuComp } from './components';
@@ -48,6 +47,7 @@ const hasChildren = computed(() => {
     :badge-variants="menu.badgeVariants"
     :icon="menu.icon"
     :path="menu.path"
+    :query="menu.query"
   >
     <template #title>
       <span>{{ menu.name }}</span>

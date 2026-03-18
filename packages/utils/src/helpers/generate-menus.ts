@@ -2,18 +2,16 @@
  * @Description: 生成菜单列表
  * @Author: LLiuHuan
  * @Date: 2025-05-16 16:10:01
- * @LastEditTime: 2026-01-08 11:11:57
+ * @LastEditTime: 2026-03-18 10:49:20
  * @LastEditors: LLiuHuan
  */
-import type { Router, RouteRecordRaw } from 'vue-router';
-
+import { filterTree, mapTree, sortTree } from '@qin-core/shared/utils';
 import type {
   ExRouteRecordRaw,
   MenuRecordRaw,
   RouteMeta,
 } from '@qin-core/typings';
-
-import { filterTree, mapTree, sortTree } from '@qin-core/shared/utils';
+import type { Router, RouteRecordRaw } from 'vue-router';
 
 /**
  * 根据 routes 生成菜单列表
@@ -50,6 +48,7 @@ function generateMenus(
       link,
       order,
       title = '',
+      query,
     } = meta;
 
     // 确保菜单名称不为空
@@ -82,6 +81,7 @@ function generateMenus(
       parent: route.parent,
       parents: route.parents,
       path: resultPath,
+      query,
       show: !meta.hideInMenu,
       children: resultChildren,
     };

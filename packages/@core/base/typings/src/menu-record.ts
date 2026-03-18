@@ -1,3 +1,11 @@
+/*
+ * @Description:
+ * @Author: LLiuHuan
+ * @Date: 2025-12-16 12:18:03
+ * @LastEditTime: 2026-03-18 10:42:43
+ * @LastEditors: LLiuHuan
+ */
+import type { Recordable } from './helper';
 import type { Component } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -66,6 +74,10 @@ interface MenuRecordRaw extends MenuRecordBadgeRaw {
    * 菜单路径，唯一，可当作key
    */
   path: string;
+  /**
+   * 菜单参数
+   */
+  query?: Recordable<any>;
   /**
    * 是否显示菜单
    * @default true

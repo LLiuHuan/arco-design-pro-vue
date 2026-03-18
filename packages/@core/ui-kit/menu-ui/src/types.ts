@@ -1,6 +1,9 @@
+import type {
+  MenuRecordBadgeRaw,
+  Recordable,
+  ThemeModeType,
+} from '@qin-core/typings';
 import type { Component, Ref } from 'vue';
-
-import type { MenuRecordBadgeRaw, ThemeModeType } from '@qin-core/typings';
 
 interface MenuProps {
   /**
@@ -91,12 +94,17 @@ interface MenuItemProps extends MenuRecordBadgeRaw {
    * @zh_CN menuitem 名称
    */
   path: string;
+  /**
+   * @zh_CN 菜单所携带的参数
+   */
+  query?: Recordable<any>;
 }
 
 interface MenuItemRegistered {
   active: boolean;
   parentPaths: string[];
   path: string;
+  query?: Recordable<any>;
 }
 
 interface MenuItemClicked {

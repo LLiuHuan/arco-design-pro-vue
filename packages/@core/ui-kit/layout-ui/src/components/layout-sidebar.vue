@@ -306,13 +306,13 @@ const handleDragSidebar = (e: MouseEvent) => {
     ref="asideRef"
     :style="style"
     class="fixed top-0 left-0 h-full transition-all duration-150"
+    :class="theme"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
     <div
       class="h-full"
       :class="[
-        theme,
         {
           'bg-sidebar-deep': isSidebarMixed,
           'bg-sidebar border-border border-r': !isSidebarMixed,

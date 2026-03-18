@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { MenuItemProps, MenuItemRegistered } from '../types';
-
-import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
-
 import { useNamespace } from '@qin-core/composables';
 import { QinIcon, QinTooltip } from '@qin-core/shadcn-ui';
+import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
+
+import qs from 'qs';
 
 import { MenuBadge } from '../components';
 import { useMenu, useMenuContext, useSubMenuContext } from '../hooks';
@@ -54,6 +54,7 @@ const item: MenuItemRegistered = reactive({
   active,
   parentPaths: parentPaths.value,
   path: props.path || '',
+  query: props.query,
 });
 
 /**
@@ -81,42 +82,49 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
-  <li
-    :class="[
-      rootMenu.theme,
-      b(),
-      is('active', active),
-      is('disabled', disabled),
-      is('collapse-show-title', collapseShowTitle),
-    ]"
-    role="menuitem"
-    @click.stop="handleClick"
+  <a
+    :href="
+      (item.parentPaths.at(-1) ?? '') +
+      (item?.query ? `?${qs.stringify(item?.query)}` : '')
+    "
+    @click.prevent.stop="handleClick"
   >
-    <QinTooltip
-      v-if="showTooltip"
-      :content-class="[rootMenu.theme]"
-      side="right"
+    <li
+      :class="[
+        rootMenu.theme,
+        b(),
+        is('active', active),
+        is('disabled', disabled),
+        is('collapse-show-title', collapseShowTitle),
+      ]"
+      role="menuitem"
     >
-      <template #trigger>
-        <div :class="[nsMenu.be('tooltip', 'trigger')]">
-          <QinIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
-          <slot></slot>
-          <span v-if="collapseShowTitle" :class="nsMenu.e('name')">
-            <slot name="title"></slot>
-          </span>
-        </div>
-      </template>
-      <slot name="title"></slot>
-    </QinTooltip>
-    <div v-show="!showTooltip" :class="[e('content')]">
-      <MenuBadge
-        v-if="rootMenu.props.mode !== 'horizontal'"
-        class="right-2"
-        v-bind="props"
-      />
-      <QinIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
-      <slot></slot>
-      <slot name="title"></slot>
-    </div>
-  </li>
+      <QinTooltip
+        v-if="showTooltip"
+        :content-class="[rootMenu.theme]"
+        side="right"
+      >
+        <template #trigger>
+          <div :class="[nsMenu.be('tooltip', 'trigger')]">
+            <QinIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
+            <slot></slot>
+            <span v-if="collapseShowTitle" :class="nsMenu.e('name')">
+              <slot name="title"></slot>
+            </span>
+          </div>
+        </template>
+        <slot name="title"></slot>
+      </QinTooltip>
+      <div v-show="!showTooltip" :class="[e('content')]">
+        <MenuBadge
+          v-if="rootMenu.props.mode !== 'horizontal'"
+          class="right-2"
+          v-bind="props"
+        />
+        <QinIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
+        <slot></slot>
+        <slot name="title"></slot>
+      </div>
+    </li>
+  </a>
 </template>

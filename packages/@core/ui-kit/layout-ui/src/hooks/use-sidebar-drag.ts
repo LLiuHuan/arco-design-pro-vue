@@ -2,7 +2,7 @@
  * @Description:
  * @Author: LLiuHuan
  * @Date: 2026-03-02 09:36:01
- * @LastEditTime: 2026-03-18 11:04:06
+ * @LastEditTime: 2026-03-18 11:07:54
  * @LastEditors: LLiuHuan
  */
 import { onUnmounted, ref } from 'vue';
@@ -10,7 +10,6 @@ import { onUnmounted, ref } from 'vue';
 interface DragOptions {
   max: number;
   min: number;
-  startWidth: number;
 }
 
 interface DragElements {

@@ -95,7 +95,7 @@ catalog:
   cz-git: ^1.12.0
   czg: ^1.12.0
   dayjs: ^1.11.19
-  defu: ^6.1.4
+  defu: ^6.1.5
   depcheck: ^1.4.7
   dompurify: ^3.3.1
   dotenv: ^17.3.1
